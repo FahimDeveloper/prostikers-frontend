@@ -26,7 +26,7 @@ const MyBreadcrumb = (prop: any) => {
     },
   ];
 
-  function itemRender(currentRoute: any, params: any, items: any, paths: any) {
+  function itemRender(currentRoute: any, _: any, items: any, paths: any) {
     const isLast = currentRoute?.path === items[items.length - 1]?.path;
     return isLast ? (
       <span {...prop}>{currentRoute.title}</span>
