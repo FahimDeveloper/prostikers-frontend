@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Inter Tight", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-secondary;
+}
+
+.primary-btn {
+  @apply btn btn-primary text-white lg:text-xl text-lg font-bold px-10 rounded-full;
+}
+
+.membership-card {
+  @apply space-y-10 min-h-[590px] xl:w-auto lg:w-2/3 bg-white shadow-lg pt-8 pb-5 px-5 rounded-2xl flex flex-col justify-between;
+}
+
+.membership-btn {
+  @apply btn btn-primary hover:btn-secondary hover:text-white w-full text-white;
+}
+
+.banner-dot {
+  color: white;
+  opacity: 0.6;
+}
+
+.slick-active .banner-dot {
+  opacity: 1;
+}
+
+.journey-slider-dot {
+  color: black;
+  opacity: 0.3;
+}
+
+.slick-active .journey-slider-dot {
+  opacity: 1;
+}
+
+.journey-slider .slick-track {
+  height: 500px;
+}
+
+.journey-slide {
+  transform: scale(0.8);
+  transition: 0.7s;
+}
+
+.slick-current .journey-slide {
+  transform: scale(1);
+  transition: 0.7s;
+}
+
+.journey-slider .slick-arrow {
+  color: black;
+}
+
+.journey-slider .slick-arrow:hover {
+  color: black;
+}
+
+.inclueded-list li p {
+  @apply w-11/12;
+}
+
+.membership-list li p {
+  @apply w-11/12;
+}
+
+.become-member-list li p {
+  @apply w-11/12;
+}
+@media all and (max-width: 1280px) {
+  .journey-slider .slick-track {
+    height: 400px;
+  }
+}
+@media all and (min-width: 1280px) {
+  .journey-slider .slick-track {
+    height: 500px;
+  }
+}
+
+@media all and (max-width: 1023px) {
+  .journey-slider .slick-track {
+    height: 330px;
+  }
+  .journey-slide {
+    transform: scale(0.87);
+    transition: 0.7s;
+  }
+
+  .slick-current .journey-slide {
+    transform: scale(1);
+    transition: 0.7s;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .journey-slider .slick-track {
+    height: 300px;
+  }
+  .journey-slide {
+    transform: scale(0.87);
+    transition: 0.7s;
+  }
+
+  .slick-current .journey-slide {
+    transform: scale(1);
+    transition: 0.7s;
+  }
+}
