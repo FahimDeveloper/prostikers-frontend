@@ -5,7 +5,7 @@ const AboutProstrikersSection = () => {
   return (
     <div className="lg:py-16 md:py-12 py-10">
       <div
-        className="lg:h-[450px] md:h-[400px]"
+        className="lg:h-[450px] h-[400px]"
         style={{
           backgroundImage: `url(${banner})`,
           backgroundSize: "cover",
