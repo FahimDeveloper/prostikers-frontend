@@ -12,27 +12,27 @@ const AcademyProgramSection = () => {
     {
       title: "base ball",
       image: program1,
-      link: "#",
+      link: "/sport/baseball",
     },
     {
       title: "soft ball",
       image: program2,
-      link: "#",
+      link: "/sport/softball",
     },
     {
       title: "cricket",
       image: program3,
-      link: "#",
+      link: "/sport/cricket",
     },
     {
       title: "soccer",
       image: program4,
-      link: "#",
+      link: "/sport/soccer",
     },
     {
       title: "hocky",
       image: program5,
-      link: "#",
+      link: "/sport/hocky",
     },
   ];
   return (
@@ -45,7 +45,7 @@ const AcademyProgramSection = () => {
           <h2 className="lg:text-[56px] md:text-[45px] text-3xl font-semibold lg:leading-[67px] md:leading-[50px]">
             Explore Our Wide Range of Sports Offerings
           </h2>
-          <p className="text-[#929292] md:text-lg lg:leading-7 md:leading-6 leading-5 md:w-[1000px] w-full mx-auto">
+          <p className="text-[/sport/baseball929292] md:text-lg lg:leading-7 md:leading-6 leading-5 md:w-[1000px] w-full mx-auto">
             At ProStrikers, passion for sports knows no bounds. Explore our wide
             array of sports offerings, each with dedicated programs tailored to
             meet your goals. Whether it’s the precision of baseball, the
