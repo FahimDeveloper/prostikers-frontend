@@ -1,28 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Container from "../components/Container";
-import ProgramsCard from "./card/ProgramsCard";
+import TrainingCard from "./card/TrainingCard";
 
-const ProgramSection = ({ data }: any) => {
+const TrainingSection = ({ data }: any) => {
   return (
     <Container>
-      <div className="lg:py-14 md:py-12 py-10 space-y-10">
+      <div className="lg:py-14 md:py-12 py-10 space-y-8">
         <h2 className="font-semibold text-[56px] leading-[67px]">
           {data?.title}
         </h2>
         <p className="text-lg text-[#929292]">{data.description}</p>
         <div className="grid grid-cols-6 gap-7">
-          {data.programs.map((program: any, index: any) => {
+          {data.programs.map((program: any) => {
             return (
               <div
                 className={`${
-                  data?.programs.length > 5
-                    ? "col-span-2"
-                    : index < 3
-                    ? "col-span-2"
-                    : "col-span-3"
+                  data?.programs?.length > 2 ? "col-span-2" : "col-span-3"
                 }`}
               >
-                <ProgramsCard data={program} />
+                <TrainingCard data={program} />
               </div>
             );
           })}
@@ -32,4 +28,4 @@ const ProgramSection = ({ data }: any) => {
   );
 };
 
-export default ProgramSection;
+export default TrainingSection;

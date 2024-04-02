@@ -1,98 +1,25 @@
 import BannerSection from "../../common/BannerSection";
-import CoachesSection from "../../common/CoachesSection";
-import ProgramSection from "../../common/ProgramSection";
 import QuestionSection from "../../common/QuestionSection";
+import TrainingSection from "../../common/TrainingSection";
+import banner from "../../assets/images/academy/academy-banner.webp";
 import training1 from "../../assets/images/training/one-training.jpg";
 import training2 from "../../assets/images/training/group-training.jpg";
-import training3 from "../../assets/images/training/kids-training.jpg";
-import training4 from "../../assets/images/training/bootcamp-training.jpg";
-import training5 from "../../assets/images/training/private-training.jpg";
-import coach from "../../assets/images/training/coach.jpg";
-import cricketBanner from "../../assets/images/programsBanner/cricket-banner.jpg";
 
-const SportCricket = () => {
-  const programData = {
-    title: "Cricket Programs at ProStrikers",
+const TtenLeague = () => {
+  const trainingData = {
+    title: "Join the Thrilling T10 Cricket League",
     description:
-      "Bowl, bat, and field like a pro with ProStrikers' elite Cricket Programs. Our tailored cricket training includes individual coaching to refine your technique, group sessions for team dynamics, and kids' cricket programs designed to ignite a passion for the sport. Join our cricket bootcamps for a deep dive into the game, or opt for private cricket training for focused skill development.",
+      "Compete in the fast-paced and exhilarating T10 Cricket League at ProStrikers. This action-packed format promises high-energy matches and a platform to showcase your cricketing prowess. Join as an individual or as a team and revel in the thrill of short-form cricket at its finest.",
     programs: [
       {
-        title: "One on One Training",
+        title: "Join as Individual",
         image: training1,
         link: "#",
       },
       {
-        title: "Group Training",
+        title: "Join as team",
         image: training2,
         link: "#",
-      },
-      {
-        title: "Kids Training",
-        image: training3,
-        link: "#",
-      },
-      {
-        title: "Bootcamps",
-        image: training4,
-        link: "#",
-      },
-      {
-        title: "T10 League",
-        image: training5,
-        link: "#",
-      },
-      {
-        title: "Private Training",
-        image: training5,
-        link: "#",
-      },
-    ],
-  };
-  const coachesData = {
-    tag: "Baseball Coaching Panel",
-    title: "Coaches to Take You to the Goal",
-    description:
-      "Our cricket coaches are the strategic masterminds and technical experts dedicated to perfecting your pitch and refining your swing. They bring a wealth of experience from the major leagues down to developmental play.",
-    coaches: [
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
       },
     ],
   };
@@ -140,12 +67,11 @@ const SportCricket = () => {
   ];
   return (
     <>
-      <BannerSection title="Cricket Programs" image={cricketBanner} />
-      <ProgramSection data={programData} />
-      <CoachesSection data={coachesData} />
+      <BannerSection title="T10 League" image={banner} />
+      <TrainingSection data={trainingData} />
       <QuestionSection data={questionData} />
     </>
   );
 };
 
-export default SportCricket;
+export default TtenLeague;

@@ -9,9 +9,9 @@ type Tprop = {
 
 const TrainingCard = ({ data }: { data: Tprop }) => {
   return (
-    <div className="w-96 card border border-solid border-gray-300 p-2 hover:shadow-md">
-      <img src={data?.image} className="w-full rounded-2xl" />
-      <div className="p-5 space-y-5">
+    <div className="card border border-solid border-gray-300 p-2 hover:shadow-md">
+      <img src={data?.image} className="w-full h-52 rounded-2xl" />
+      <div className="p-4 space-y-5">
         <h3 className="text-neutral text-2xl font-bold leading-7 capitalize">
           {data?.title}
         </h3>
@@ -19,7 +19,7 @@ const TrainingCard = ({ data }: { data: Tprop }) => {
           <li>Lorem ipsum dolor sit amet.</li>
           <li>Lorem ipsum dolor sit amet.</li>
         </ul>
-        <Link to={data?.link} className="inline-block">
+        <Link to={data?.link} className="block">
           <button className="btn btn-primary text-white text-base w-full">
             See more
           </button>

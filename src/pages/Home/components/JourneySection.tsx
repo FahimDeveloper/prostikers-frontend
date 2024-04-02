@@ -15,27 +15,27 @@ const JourneySection = () => {
     {
       title: "Baseball",
       image: program1,
-      link: "/program-baseball",
+      link: "/sport/baseball",
     },
     {
       title: "Softball",
       image: program2,
-      link: "/program-softball",
+      link: "/sport/softball",
     },
     {
       title: "Cricket",
       image: program3,
-      link: "/program-cricket",
+      link: "/sport/cricket",
     },
     {
       title: "Soccer",
       image: program4,
-      link: "/program-soccer",
+      link: "/sport/soccer",
     },
     {
       title: "Hocky",
       image: program5,
-      link: "/program-hocky",
+      link: "/sport/hocky",
     },
   ];
   const settings = {

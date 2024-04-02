@@ -1,98 +1,31 @@
 import BannerSection from "../../common/BannerSection";
-import CoachesSection from "../../common/CoachesSection";
-import ProgramSection from "../../common/ProgramSection";
 import QuestionSection from "../../common/QuestionSection";
+import TrainingSection from "../../common/TrainingSection";
+import banner from "../../assets/images/academy/academy-banner.webp";
 import training1 from "../../assets/images/training/one-training.jpg";
 import training2 from "../../assets/images/training/group-training.jpg";
 import training3 from "../../assets/images/training/kids-training.jpg";
-import training4 from "../../assets/images/training/bootcamp-training.jpg";
-import training5 from "../../assets/images/training/private-training.jpg";
-import coach from "../../assets/images/training/coach.jpg";
-import cricketBanner from "../../assets/images/programsBanner/cricket-banner.jpg";
 
-const SportCricket = () => {
-  const programData = {
-    title: "Cricket Programs at ProStrikers",
+const KidsTraining = () => {
+  const trainingData = {
+    title: "Kids Training  Programs",
     description:
-      "Bowl, bat, and field like a pro with ProStrikers' elite Cricket Programs. Our tailored cricket training includes individual coaching to refine your technique, group sessions for team dynamics, and kids' cricket programs designed to ignite a passion for the sport. Join our cricket bootcamps for a deep dive into the game, or opt for private cricket training for focused skill development.",
+      "At ProStrikers, we believe in nurturing young talent with our specialized Kids Training Programs. These programs are designed to introduce the fundamentals of sports in a fun, engaging, and supportive environment. We focus on developing skills, sportsmanship, and a love for the game that will last a lifetime. Let's set the foundation for your child's sporting future together!",
     programs: [
       {
-        title: "One on One Training",
+        title: "Cricket Training",
         image: training1,
         link: "#",
       },
       {
-        title: "Group Training",
+        title: "Baseball Training",
         image: training2,
         link: "#",
       },
       {
-        title: "Kids Training",
+        title: "Soccer Training",
         image: training3,
         link: "#",
-      },
-      {
-        title: "Bootcamps",
-        image: training4,
-        link: "#",
-      },
-      {
-        title: "T10 League",
-        image: training5,
-        link: "#",
-      },
-      {
-        title: "Private Training",
-        image: training5,
-        link: "#",
-      },
-    ],
-  };
-  const coachesData = {
-    tag: "Baseball Coaching Panel",
-    title: "Coaches to Take You to the Goal",
-    description:
-      "Our cricket coaches are the strategic masterminds and technical experts dedicated to perfecting your pitch and refining your swing. They bring a wealth of experience from the major leagues down to developmental play.",
-    coaches: [
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
       },
     ],
   };
@@ -140,12 +73,11 @@ const SportCricket = () => {
   ];
   return (
     <>
-      <BannerSection title="Cricket Programs" image={cricketBanner} />
-      <ProgramSection data={programData} />
-      <CoachesSection data={coachesData} />
+      <BannerSection title="Kids Training Programs" image={banner} />
+      <TrainingSection data={trainingData} />
       <QuestionSection data={questionData} />
     </>
   );
 };
 
-export default SportCricket;
+export default KidsTraining;

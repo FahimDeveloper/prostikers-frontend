@@ -5,11 +5,17 @@ import Membership from "../pages/Membership/Membership";
 import Rental from "../pages/Rental/Rental";
 import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
+import Academy from "../pages/Academy/Academy";
 import SportBaseball from "../pages/SportBaseball/SportBaseball";
-import SportHocky from "../pages/SportHocky/SportHocky";
-import SportSoftball from "../pages/SportSoftball/SportSoftball";
-import SportCricket from "../pages/SportCricket/SportCricket";
 import SportSoccer from "../pages/SportSoccer/SportSoccer";
+import SportCricket from "../pages/SportCricket/SportCricket";
+import SportSoftball from "../pages/SportSoftball/SportSoftball";
+import SportHocky from "../pages/SportHocky/SportHocky";
+import OneTraining from "../pages/OneTraining/OneTraining";
+import GroupTraining from "../pages/GroupTraining/GroupTraining";
+import KidsTraining from "../pages/KidsTraining/KidsTraining";
+import BootcampTraining from "../pages/BootcampTraining/BootcampTraining";
+import TtenLeague from "../pages/TtenLeague/TtenLeague";
 
 export const router = createBrowserRouter([
   {
@@ -37,24 +43,48 @@ export const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/program-baseball",
+        path: "/academy",
+        element: <Academy />,
+      },
+      {
+        path: "/sport/baseball",
         element: <SportBaseball />,
       },
       {
-        path: "/program-soccer",
+        path: "/sport/soccer",
         element: <SportSoccer />,
       },
       {
-        path: "/program-cricket",
+        path: "/sport/cricket",
         element: <SportCricket />,
       },
       {
-        path: "/program-softball",
+        path: "/sport/softball",
         element: <SportSoftball />,
       },
       {
-        path: "/program-hocky",
+        path: "/sport/hocky",
         element: <SportHocky />,
+      },
+      {
+        path: "/program/one-training",
+        element: <OneTraining />,
+      },
+      {
+        path: "/program/group-training",
+        element: <GroupTraining />,
+      },
+      {
+        path: "/program/kids-training",
+        element: <KidsTraining />,
+      },
+      {
+        path: "/program/bootcamp-training",
+        element: <BootcampTraining />,
+      },
+      {
+        path: "/program/tten-league",
+        element: <TtenLeague />,
       },
     ],
   },
