@@ -53,7 +53,7 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" className="no-underline text-white px-1">
+                  <Link to="/academy" className="no-underline text-white px-1">
                     Academy
                   </Link>
                 </li>

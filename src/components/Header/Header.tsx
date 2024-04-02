@@ -39,7 +39,7 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  to="#"
+                  to="/academy"
                   className="no-underline text-[#1C1C1C] inline-block"
                 >
                   Academy
