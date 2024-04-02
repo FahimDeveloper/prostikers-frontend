@@ -7,7 +7,7 @@ import banner4 from "../../../assets/images/home/banners/banner4.webp";
 import banner5 from "../../../assets/images/home/banners/banner5.webp";
 import { Link } from "react-router-dom";
 import { GoDotFill } from "react-icons/go";
-const BannerSection = () => {
+const TopSliderSection = () => {
   const bannerData = [
     {
       title: "Elevate Your Game to Major League Standards",
@@ -113,4 +113,4 @@ const BannerSection = () => {
   );
 };
 
-export default BannerSection;
+export default TopSliderSection;

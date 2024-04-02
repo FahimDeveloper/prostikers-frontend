@@ -216,9 +216,12 @@ const MembershipCardSection = () => {
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                           <p>
                             For each additional player, there is a small $10 fee
-                            per hour Inclusive of a complimentary pitching
-                            machine
+                            per hour
                           </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>Inclusive of a complimentary pitching machine</p>
                         </li>
                       </ul>
                     </div>
@@ -436,6 +439,13 @@ const MembershipCardSection = () => {
                         <li className="flex gap-2">
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                           <p>
+                            Save $300 with our special yearly membership for
+                            only $1500!
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
                             Enjoy 4 hours of net sessions for just $150 per
                             month.
                           </p>
@@ -448,9 +458,12 @@ const MembershipCardSection = () => {
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                           <p>
                             For each additional player, there is a small $10 fee
-                            per hour Inclusive of a complimentary pitching
-                            machine
+                            per hour
                           </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>Inclusive of a complimentary pitching machine</p>
                         </li>
                       </ul>
                     </div>
@@ -482,7 +495,7 @@ const MembershipCardSection = () => {
                       <ul className="text-sm membership-list font-medium list-none space-y-3">
                         <li className="flex gap-2">
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <p>Get a monthly membership for only $450</p>
+                          <p>Annual membership $5000</p>
                         </li>
                         <li className="flex gap-2">
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />

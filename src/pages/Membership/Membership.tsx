@@ -1,7 +1,8 @@
 import MembershipCardSection from "../../common/MembershipCardSection";
+import banner from "../../assets/images/membership/membership-banner.webp";
 import QuestionSection from "../../common/QuestionSection";
-import MembershipBannerSection from "./components/MembershipBannerSection";
 import MembershipFamilySection from "./components/MembershipFamilySection";
+import BannerSection from "../../common/BannerSection";
 
 const Membership = () => {
   const questionData = [
@@ -48,7 +49,7 @@ const Membership = () => {
   ];
   return (
     <div className="lg:pt-16 pt-14 lg:mt-10 mt-9 mx-auto">
-      <MembershipBannerSection />
+      <BannerSection image={banner} title="memership" />
       <MembershipFamilySection />
       <MembershipCardSection />
       <QuestionSection data={questionData} />

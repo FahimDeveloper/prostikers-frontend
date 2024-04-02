@@ -13,29 +13,29 @@ import Container from "../../../components/Container";
 const JourneySection = () => {
   const programsData = [
     {
-      title: "Softball",
+      title: "Baseball",
       image: program1,
-      link: "#",
+      link: "/program-baseball",
     },
     {
-      title: "Soccer",
+      title: "Softball",
       image: program2,
-      link: "#",
+      link: "/program-softball",
     },
     {
       title: "Cricket",
       image: program3,
-      link: "#",
+      link: "/program-cricket",
     },
     {
-      title: "Football",
+      title: "Soccer",
       image: program4,
-      link: "#",
+      link: "/program-soccer",
     },
     {
       title: "Hocky",
       image: program5,
-      link: "#",
+      link: "/program-hocky",
     },
   ];
   const settings = {

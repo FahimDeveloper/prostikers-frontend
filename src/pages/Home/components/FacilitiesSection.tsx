@@ -5,6 +5,36 @@ import cardImgThird from "../../../assets/images/home/facilities/platform-card-3
 import cardImgFourth from "../../../assets/images/home/facilities/platform-card-4.webp";
 
 const FacilitiesSection = () => {
+  const facilityData = [
+    {
+      tag: "Indoor Cages & Field",
+      title: "Unlock Your Game in Our Premier Indoor Arenas",
+      image: cardImgFirst,
+      description:
+        "Step inside ProStrikers’ premier indoor arenas where every athlete has the space to shine. Our top-of-the-line facilities are meticulously designed to simulate real-world conditions, providing you with the perfect backdrop to train, play, and unlock your true potential. With cutting-edge technology and surfaces engineered for peak performance, there's no better place to elevate your game.",
+    },
+    {
+      tag: "Professional Coaching",
+      title: "Elevate Your Skills with Elite Coaching",
+      image: cardImgSecond,
+      description:
+        "Transform your talent into triumph with guidance from ProStrikers' elite coaches. Our handpicked experts bring a wealth of experience and personalized strategies to every session, helping you refine your techniques and amplify your strengths. Whether you're a beginner or a seasoned pro, our coaches are committed to elevating your skills to the next level.",
+    },
+    {
+      tag: "Indoor Cricket League",
+      title: "Experience the Thrill of the T10 Cricket League",
+      image: cardImgThird,
+      description:
+        "Immerse yourself in the electric atmosphere of the T10 Cricket League at ProStrikers, where speed meets strategy, and every ball counts. Join the league that’s taking cricket by storm, offering a fast-paced, adrenaline-fueled experience for players and spectators alike. With high-octane matches and a passionate community, the T10 Cricket League is where you'll forge unforgettable memories and thrilling victories.",
+    },
+    {
+      tag: "Hosting Indoor Events",
+      title: "Indoor Event Hosting's are Unforgettable",
+      image: cardImgFourth,
+      description:
+        "Make your next event a grand slam at ProStrikers. From corporate team-building to unforgettable birthday parties, our indoor venues offer a unique setting that combines the thrill of sports with custom catering and state-of-the-art amenities. Let us take the helm to ensure your event is memorable, delivering an experience that scores with all your guests.",
+    },
+  ];
   return (
     <Container>
       <div className="lg:py-16 md:py-12 py-10 space-y-10">
@@ -23,140 +53,70 @@ const FacilitiesSection = () => {
           </p>
         </div>
         <div className="space-y-5">
-          <div className="bg-[#F9FBFF] sticky top-24 xl:p-14 sm:p-10 p-8 space-y-7 rounded-3xl">
-            <span className="bg-[#EDF3FF] font-semibold sm:text-lg text-[#152F3F] sm:leading-7 leading-5 p-4 rounded-full">
-              Indoor Cages & Field
-            </span>
-            <div className="grid lg:grid-cols-2 items-center gap-5">
-              <img
-                src={cardImgFirst}
-                className="w-full lg:h-auto max-h-80 object-fill rounded-2xl lg:order-2 md:order-1"
-                alt="facility image"
-              />
-              <div className="xl:space-y-9 lg:order-1 md:order-2 sm:space-y-6 space-y-4">
-                <h3 className="text-bold xl:text-[40px] md:text-4xl text-2xl md:leading-[48px] leading-6 text-[#152F3F]">
-                  Unlock Your Game in Our Premier Indoor Arenas
-                </h3>
-                <article className="sm:text-lg text-base xl:leading-7 sm:leading-6 leading-5 space-y-4 text-[#596B77]">
-                  <p>
-                    Whether you're perfecting your pitch, mastering your swing,
-                    or just playing for the love of the game, our versatile
-                    spaces are your playground.
-                  </p>
-                  <p>
-                    Tailored to support{" "}
-                    <strong>
-                      Baseball, Softball, Cricket, Soccer, and Field Hockey,
-                    </strong>
-                    our facilities are designed with professional standard turf
-                    and equipped with all the amenities you need to bring your
-                    best game. Book your space. Own your moment. This is where
-                    champions train in the making.
-                  </p>
-                </article>
+          {facilityData.map((facilty, index) => {
+            return (
+              <div
+                className={`${
+                  index == 0
+                    ? "bg-[#EBFAFE] top-24"
+                    : index == 1
+                    ? "bg-[#FFF2FC] top-32"
+                    : index == 2
+                    ? "bg-[#073742] top-40"
+                    : "bg-[#FFCFB4] top-48"
+                } sticky xl:p-14 sm:p-10 p-8 space-y-7 rounded-3xl`}
+              >
+                <span
+                  className={`${
+                    index == 0
+                      ? "bg-[#D1F5FF] text-[#125566]"
+                      : index == 1
+                      ? "bg-[#FFEAFA] text-[#3E0B33]"
+                      : index == 2
+                      ? "bg-[#81AAB3] text-[#FFFFFF]"
+                      : "bg-[#FFDFCE] text-[#152F3F]"
+                  } font-semibold sm:text-lg sm:leading-7 leading-5 p-4 rounded-full`}
+                >
+                  {facilty.tag}
+                </span>
+                <div className="grid lg:grid-cols-2 items-center gap-5">
+                  <img
+                    src={facilty.image}
+                    className="w-full lg:h-full h-96 object-fill rounded-2xl lg:order-2 md:order-1"
+                    alt="facility image"
+                  />
+                  <div className="xl:space-y-9 lg:order-1 md:order-2 sm:space-y-6 space-y-4">
+                    <h3
+                      className={`${
+                        index == 0
+                          ? "text-[#0E524D]"
+                          : index == 1
+                          ? "text-[#2D0724]"
+                          : index == 2
+                          ? "text-[#FFFFFF]"
+                          : "text-[#351A0A]"
+                      } text-bold xl:text-[40px] md:text-4xl text-2xl md:leading-[48px] leading-6`}
+                    >
+                      {facilty.title}
+                    </h3>
+                    <article
+                      className={`${
+                        index == 0
+                          ? "text-[#25635E]"
+                          : index == 1
+                          ? "text-[#596B77]"
+                          : index == 2
+                          ? "text-[#DEDEDE]"
+                          : "text-[#6C4A37]"
+                      } sm:text-lg text-base xl:leading-7 sm:leading-6 leading-5 space-y-4`}
+                    >
+                      <p>{facilty.description}</p>
+                    </article>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="bg-[#F9F9FF] sticky top-24 xl:p-14 sm:p-10 p-8 space-y-7 rounded-3xl">
-            <span className="bg-[#EDEDFF] font-semibold sm:text-lg text-[#1A1A52] sm:leading-7 leading-5 p-4 rounded-full">
-              Professional Coaching
-            </span>
-            <div className="grid lg:grid-cols-2 items-center gap-5">
-              <img
-                src={cardImgSecond}
-                className="w-full lg:h-auto max-h-80 object-fill rounded-2xl lg:order-2 md:order-1"
-                alt="facility image"
-              />
-              <div className="xl:space-y-9 lg:order-1 md:order-2 sm:space-y-6 space-y-4">
-                <h3 className="text-bold xl:text-[40px] md:text-4xl text-2xl md:leading-[48px] leading-6 text-[#152F3F]">
-                  Elevate Your Skills with Elite Coaching
-                </h3>
-                <article className="sm:text-lg text-base xl:leading-7 sm:leading-6 leading-5 space-y-4 text-[#596B77]">
-                  <p>
-                    Whether you're perfecting your pitch, mastering your swing,
-                    or just playing for the love of the game, our versatile
-                    spaces are your playground.
-                  </p>
-                  <p>
-                    Tailored to support{" "}
-                    <strong>
-                      Baseball, Softball, Cricket, Soccer, and Field Hockey,
-                    </strong>
-                    our facilities are designed with professional standard turf
-                    and equipped with all the amenities you need to bring your
-                    best game. Book your space. Own your moment. This is where
-                    champions train in the making.
-                  </p>
-                </article>
-              </div>
-            </div>
-          </div>
-          <div className="bg-[#F9FFFF] sticky top-24 xl:p-14 sm:p-10 p-8 space-y-7 rounded-3xl">
-            <span className="bg-[#E5FBFB] font-semibold sm:text-lg text-[#1B5B5B] sm:leading-7 leading-5 p-4 rounded-full">
-              Indoor Cricket League
-            </span>
-            <div className="grid lg:grid-cols-2 items-center gap-5">
-              <img
-                src={cardImgThird}
-                className="w-full lg:h-auto max-h-80 object-fill rounded-2xl lg:order-2 md:order-1"
-                alt="facility image"
-              />
-              <div className="xl:space-y-9 lg:order-1 md:order-2 sm:space-y-6 space-y-4">
-                <h3 className="text-bold xl:text-[40px] md:text-4xl text-2xl md:leading-[48px] leading-6 text-[#152F3F]">
-                  Experience the Thrill of the T10 Cricket League
-                </h3>
-                <article className="sm:text-lg text-base xl:leading-7 sm:leading-6 leading-5 space-y-4 text-[#596B77]">
-                  <p>
-                    A dynamic, explosive format where every ball counts, our T10
-                    league brings together cricket enthusiasts to compete,
-                    celebrate, and cherish the spirit of the game. Featuring
-                    top-tier talent and intense matches, the league is a
-                    crucible of competition and camaraderie.
-                  </p>
-                  <p>
-                    Join us under the lights, where every run is a story, and
-                    every match is a memory. It's not just cricket; it's a
-                    festival of runs and wickets. Be part of the action. Be part
-                    of the legacy.
-                  </p>
-                </article>
-              </div>
-            </div>
-          </div>
-          <div className="bg-[#F9FFF9] sticky top-24 xl:p-14 sm:p-10 p-6 space-y-7 rounded-3xl">
-            <span className="bg-[#EFFFEF] font-semibold sm:text-lg text-[#144D14] sm:leading-7 leading-5 p-4 rounded-full">
-              Indoor Cages & Field
-            </span>
-            <div className="grid lg:grid-cols-2 items-center gap-5">
-              <img
-                src={cardImgFourth}
-                className="w-full lg:h-auto max-h-80 object-fill rounded-2xl lg:order-2 md:order-1"
-                alt="facility image"
-              />
-              <div className="xl:space-y-9 lg:order-1 md:order-2 sm:space-y-6 space-y-4">
-                <h3 className="text-bold xl:text-[40px] md:text-4xl text-2xl md:leading-[48px] leading-6 text-[#152F3F]">
-                  Indoor Event Hosting's are Unforgettable
-                </h3>
-                <article className="sm:text-lg text-base xl:leading-7 sm:leading-6 leading-5 space-y-4 text-[#596B77]">
-                  <p>
-                    Whether you're perfecting your pitch, mastering your swing,
-                    or just playing for the love of the game, our versatile
-                    spaces are your playground.
-                  </p>
-                  <p>
-                    Tailored to support{" "}
-                    <strong>
-                      Baseball, Softball, Cricket, Soccer, and Field Hockey,
-                    </strong>
-                    our facilities are designed with professional standard turf
-                    and equipped with all the amenities you need to bring your
-                    best game. Book your space. Own your moment. This is where
-                    champions train in the making.
-                  </p>
-                </article>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </Container>

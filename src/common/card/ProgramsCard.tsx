@@ -9,7 +9,7 @@ type Tprop = {
 const ProgramsCard = ({ data }: { data: Tprop }) => {
   return (
     <div
-      className="rounded-md flex w-auto items-end pb-5 h-96 px-3"
+      className="rounded-md flex w-auto items-end pb-5 h-72 px-3"
       style={{
         backgroundImage: `url(${data?.image})`,
         backgroundSize: "cover",
