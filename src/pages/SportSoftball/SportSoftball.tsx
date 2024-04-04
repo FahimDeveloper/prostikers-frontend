@@ -6,8 +6,10 @@ import training1 from "../../assets/images/training/one-training.jpg";
 import training2 from "../../assets/images/training/group-training.jpg";
 import training3 from "../../assets/images/training/kids-training.jpg";
 import training4 from "../../assets/images/training/bootcamp-training.jpg";
-import training5 from "../../assets/images/training/private-training.jpg";
-import coach from "../../assets/images/training/coach.jpg";
+import coach1 from "../../assets/images/coaches/coach1.jpg";
+import coach2 from "../../assets/images/coaches/coach2.jpg";
+import coach3 from "../../assets/images/coaches/coach3.jpg";
+import coach4 from "../../assets/images/coaches/coach4.jpg";
 import softballBanner from "../../assets/images/programsBanner/softball-banner.jpg";
 
 const SportSoftball = () => {
@@ -19,27 +21,22 @@ const SportSoftball = () => {
       {
         title: "One on One Training",
         image: training1,
-        link: "#",
+        link: "/programs/one-training/softball",
       },
       {
         title: "Group Training",
         image: training2,
-        link: "#",
+        link: "/programs/Group-training/softball",
       },
       {
         title: "Kids Training",
         image: training3,
-        link: "#",
+        link: "/programs/kids-training/softball",
       },
       {
         title: "Bootcamps",
         image: training4,
-        link: "#",
-      },
-      {
-        title: "Private Training",
-        image: training5,
-        link: "#",
+        link: "/programs/bootcamp-training/softball",
       },
     ],
   };
@@ -47,47 +44,47 @@ const SportSoftball = () => {
     tag: "Baseball Coaching Panel",
     title: "Coaches to Take You to the Goal",
     description:
-      "Our softball coaches are the strategic masterminds and technical experts dedicated to perfecting your pitch and refining your swing. They bring a wealth of experience from the major leagues down to developmental play.",
+      "Our baseball coaches are the strategic masterminds and technical experts dedicated to perfecting your pitch and refining your swing. They bring a wealth of experience from the major leagues down to developmental play.",
     coaches: [
       {
         name: "Brandon Shaw",
         designation: "Batting Coach",
-        image: coach,
+        image: coach1,
+      },
+      {
+        name: "Floyd Stephens",
+        designation: "Batting Coach",
+        image: coach2,
+      },
+      {
+        name: "Kate Clark",
+        designation: "Batting Coach",
+        image: coach3,
+      },
+      {
+        name: "Eunice Doyle",
+        designation: "Batting Coach",
+        image: coach4,
+      },
+      {
+        name: "Kate Clark",
+        designation: "Batting Coach",
+        image: coach3,
+      },
+      {
+        name: "Floyd Stephens",
+        designation: "Batting Coach",
+        image: coach2,
+      },
+      {
+        name: "Eunice Doyle",
+        designation: "Batting Coach",
+        image: coach4,
       },
       {
         name: "Brandon Shaw",
         designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
-      },
-      {
-        name: "Brandon Shaw",
-        designation: "Batting Coach",
-        image: coach,
+        image: coach1,
       },
     ],
   };

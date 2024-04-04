@@ -5,40 +5,30 @@ import training1 from "../../../assets/images/training/one-training.jpg";
 import training2 from "../../../assets/images/training/group-training.jpg";
 import training3 from "../../../assets/images/training/kids-training.jpg";
 import training4 from "../../../assets/images/training/bootcamp-training.jpg";
-import training5 from "../../../assets/images/training/private-training.jpg";
-import training6 from "../../../assets/images/training/private-training.jpg";
 
 const AcademyTrainingSection = () => {
-  const trainingData = [
+  const personaltrainingData = [
     {
       title: "One on One Training",
       image: training1,
-      link: "/program/one-training",
+      link: "/programs/one-training",
     },
     {
       title: "Group Training",
       image: training2,
-      link: "/program/group-training",
+      link: "/programs/group-training",
     },
+  ];
+  const youthTrainingData = [
     {
       title: "Kids Training",
       image: training3,
-      link: "/program/kids-training",
+      link: "/programs/kids-training",
     },
     {
       title: "Bootcamps",
       image: training4,
-      link: "/program/bootcamp-training",
-    },
-    {
-      title: "t10 league",
-      image: training5,
-      link: "/program/tten-league",
-    },
-    {
-      title: "Private Training",
-      image: training6,
-      link: "/program/privet-training",
+      link: "/programs/bootcamp-training",
     },
   ];
   return (
@@ -59,10 +49,25 @@ const AcademyTrainingSection = () => {
             challenge, inspire, and elevate your sporting prowess.
           </p>
         </div>
-        <div className="grid grid-cols-3 gap-7">
-          {trainingData.map((training: any) => {
-            return <ProgramsCard data={training} />;
-          })}
+        <div className="space-y-5">
+          <h3 className="text-center font-bold text-4xl leading-[48px]">
+            Personal Training
+          </h3>
+          <div className="grid grid-cols-2 gap-7">
+            {personaltrainingData.map((training: any) => {
+              return <ProgramsCard data={training} />;
+            })}
+          </div>
+        </div>
+        <div className="space-y-5">
+          <h3 className="text-center font-bold text-4xl leading-[48px]">
+            Youth Training
+          </h3>
+          <div className="grid grid-cols-2 gap-7">
+            {youthTrainingData.map((training: any) => {
+              return <ProgramsCard data={training} />;
+            })}
+          </div>
         </div>
       </div>
     </Container>

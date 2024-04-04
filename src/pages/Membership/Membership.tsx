@@ -1,5 +1,5 @@
 import MembershipCardSection from "../../common/MembershipCardSection";
-import banner from "../../assets/images/membership/membership-banner.webp";
+import banner from "../../assets/images/membership/membership-banner.jpg";
 import QuestionSection from "../../common/QuestionSection";
 import MembershipFamilySection from "./components/MembershipFamilySection";
 import BannerSection from "../../common/BannerSection";

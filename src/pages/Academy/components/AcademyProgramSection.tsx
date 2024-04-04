@@ -4,7 +4,7 @@ import Container from "../../../components/Container";
 import program1 from "../../../assets/images/programs/base-ball.jpg";
 import program2 from "../../../assets/images/programs/soft-ball.jpg";
 import program3 from "../../../assets/images/programs/cricket.jpg";
-import program4 from "../../../assets/images/programs/hockey.jpg";
+import program4 from "../../../assets/images/programs/soccer.jpg";
 import program5 from "../../../assets/images/programs/hockey.jpg";
 
 const AcademyProgramSection = () => {
@@ -32,7 +32,7 @@ const AcademyProgramSection = () => {
     {
       title: "hocky",
       image: program5,
-      link: "/sport/hocky",
+      link: "/sport/hockey",
     },
   ];
   return (

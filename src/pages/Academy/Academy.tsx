@@ -1,5 +1,5 @@
 import BannerSection from "../../common/BannerSection";
-import academyBanner from "../../assets/images/academy/academy-banner.webp";
+import academyBanner from "../../assets/images/academy/academy-banner.jpg";
 import AcademyChampionSection from "./components/AcademyChampionSection";
 import AcademyTrainingSection from "./components/AcademyTrainingSection";
 import AcademyProgramSection from "./components/AcademyProgramSection";
@@ -49,13 +49,13 @@ const Academy = () => {
     },
   ];
   return (
-    <>
+    <div className="lg:pt-16 pt-14 lg:mt-10 mt-9 mx-auto">
       <BannerSection title="academy" image={academyBanner} />
       <AcademyChampionSection />
       <AcademyTrainingSection />
       <AcademyProgramSection />
       <QuestionSection data={questionData} />
-    </>
+    </div>
   );
 };
 

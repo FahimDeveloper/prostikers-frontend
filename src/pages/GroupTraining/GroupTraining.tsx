@@ -1,11 +1,12 @@
 import BannerSection from "../../common/BannerSection";
 import QuestionSection from "../../common/QuestionSection";
 import TrainingSection from "../../common/TrainingSection";
-import banner from "../../assets/images/academy/academy-banner.webp";
-import training1 from "../../assets/images/training/one-training.jpg";
-import training2 from "../../assets/images/training/group-training.jpg";
-import training3 from "../../assets/images/training/kids-training.jpg";
-import training4 from "../../assets/images/training/bootcamp-training.jpg";
+import banner from "../../assets/images/trainingsBanner/group-training-programs.jpg";
+import training1 from "../../assets/images/training/cricket-training.jpg";
+import training2 from "../../assets/images/training/baseball-training.jpg";
+import training3 from "../../assets/images/training/soccer-training.jpg";
+import training4 from "../../assets/images/training/hocky-training.jpg";
+import training5 from "../../assets/images/training/soft-training.jpg";
 
 const GroupTraining = () => {
   const trainingData = {
@@ -16,22 +17,27 @@ const GroupTraining = () => {
       {
         title: "Cricket Training",
         image: training1,
-        link: "#",
+        link: "cricket",
       },
       {
         title: "Baseball Training",
         image: training2,
-        link: "#",
+        link: "baseball",
       },
       {
         title: "Soccer Training",
         image: training3,
-        link: "#",
+        link: "soccer",
       },
       {
-        title: "Hocky Training",
+        title: "Hockey Training",
         image: training4,
-        link: "#",
+        link: "hockey",
+      },
+      {
+        title: "Softball Training",
+        image: training5,
+        link: "softball",
       },
     ],
   };

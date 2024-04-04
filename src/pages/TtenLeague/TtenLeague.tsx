@@ -1,9 +1,9 @@
 import BannerSection from "../../common/BannerSection";
 import QuestionSection from "../../common/QuestionSection";
 import TrainingSection from "../../common/TrainingSection";
-import banner from "../../assets/images/academy/academy-banner.webp";
-import training1 from "../../assets/images/training/one-training.jpg";
-import training2 from "../../assets/images/training/group-training.jpg";
+import banner from "../../assets/images/programsBanner/tten-league-banner.jpg";
+import training1 from "../../assets/images/t10-league/individual.jpg";
+import training2 from "../../assets/images/t10-league/as-team.jpg";
 
 const TtenLeague = () => {
   const trainingData = {

@@ -16,6 +16,22 @@ import GroupTraining from "../pages/GroupTraining/GroupTraining";
 import KidsTraining from "../pages/KidsTraining/KidsTraining";
 import BootcampTraining from "../pages/BootcampTraining/BootcampTraining";
 import TtenLeague from "../pages/TtenLeague/TtenLeague";
+import BaseBallOneTraining from "../pages/OneTrainingManagment/BaseBallOneTraining/BaseBallOneTraining";
+import CricketOneTraining from "../pages/OneTrainingManagment/CricketOneTraining/CricketOneTraining";
+import SoccerOneTraining from "../pages/OneTrainingManagment/SoccerOneTraining/SoccerOneTraining";
+import HockyOneTraining from "../pages/OneTrainingManagment/HockyOneTraining/HockyOneTraining";
+import SoftballOneTraining from "../pages/OneTrainingManagment/SoftballOneTraining/SoftballOneTraining";
+import CricketGroupTraining from "../pages/GroupTrainingManagement/CricketGroupTraining/CricketGroupTraining";
+import SoccerGroupTraining from "../pages/GroupTrainingManagement/SoccerGroupTraining/SoccerGroupTraining";
+import HockyGroupTraining from "../pages/GroupTrainingManagement/HockyGroupTraining/HockyGroupTraining";
+import SoftballGroupTraining from "../pages/GroupTrainingManagement/SoftballGroupTraining/SoftballGroupTraining";
+import CricketKidsTraining from "../pages/KidsTrainingManagement/CricketKidsTraining/CricketKidsTraining";
+import SoccerKidsTraining from "../pages/KidsTrainingManagement/SoccerKidsTraining/SoccerKidsTraining";
+import SoftballKidsTraining from "../pages/KidsTrainingManagement/SoftballKidsTraining/SoftballKidsTraining";
+import CricketBootcampTraining from "../pages/BootcampTrainingManagement/CricketBootcampTraining/CricketBootcampTraining";
+import SoccerBootcampTraining from "../pages/BootcampTrainingManagement/SoccerBootcampTraining/SoccerBootcampTraining";
+import HockyBootcampTraining from "../pages/BootcampTrainingManagement/HockyBootcampTraining/HockyBootcampTraining";
+import SoftballBootcampTraining from "../pages/BootcampTrainingManagement/SoftballBootcampTraining/SoftballBootcampTraining";
 
 export const router = createBrowserRouter([
   {
@@ -63,27 +79,115 @@ export const router = createBrowserRouter([
         element: <SportSoftball />,
       },
       {
-        path: "/sport/hocky",
+        path: "/sport/hockey",
         element: <SportHocky />,
       },
       {
-        path: "/program/one-training",
-        element: <OneTraining />,
+        path: "/programs/one-training",
+        element: <App />,
+        children: [
+          {
+            path: "/programs/one-training",
+            element: <OneTraining />,
+          },
+          {
+            path: "baseball",
+            element: <BaseBallOneTraining />,
+          },
+          {
+            path: "cricket",
+            element: <CricketOneTraining />,
+          },
+          {
+            path: "soccer",
+            element: <SoccerOneTraining />,
+          },
+          {
+            path: "hockey",
+            element: <HockyOneTraining />,
+          },
+          {
+            path: "softball",
+            element: <SoftballOneTraining />,
+          },
+        ],
       },
       {
-        path: "/program/group-training",
-        element: <GroupTraining />,
+        path: "/programs/group-training",
+        element: <App />,
+        children: [
+          {
+            path: "/programs/group-training",
+            element: <GroupTraining />,
+          },
+          {
+            path: "cricket",
+            element: <CricketGroupTraining />,
+          },
+          {
+            path: "soccer",
+            element: <SoccerGroupTraining />,
+          },
+          {
+            path: "hocky",
+            element: <HockyGroupTraining />,
+          },
+          {
+            path: "softball",
+            element: <SoftballGroupTraining />,
+          },
+        ],
       },
       {
-        path: "/program/kids-training",
-        element: <KidsTraining />,
+        path: "/programs/kids-training",
+        element: <App />,
+        children: [
+          {
+            path: "/programs/kids-training",
+            element: <KidsTraining />,
+          },
+          {
+            path: "cricket",
+            element: <CricketKidsTraining />,
+          },
+          {
+            path: "soccer",
+            element: <SoccerKidsTraining />,
+          },
+          {
+            path: "softball",
+            element: <SoftballKidsTraining />,
+          },
+        ],
       },
       {
-        path: "/program/bootcamp-training",
-        element: <BootcampTraining />,
+        path: "/programs/bootcamp-training",
+        element: <App />,
+        children: [
+          {
+            path: "/programs/bootcamp-training",
+            element: <BootcampTraining />,
+          },
+          {
+            path: "cricket",
+            element: <CricketBootcampTraining />,
+          },
+          {
+            path: "soccer",
+            element: <SoccerBootcampTraining />,
+          },
+          {
+            path: "hocky",
+            element: <HockyBootcampTraining />,
+          },
+          {
+            path: "softball",
+            element: <SoftballBootcampTraining />,
+          },
+        ],
       },
       {
-        path: "/program/tten-league",
+        path: "/programs/tten-league",
         element: <TtenLeague />,
       },
     ],
