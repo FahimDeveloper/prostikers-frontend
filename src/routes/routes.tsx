@@ -32,6 +32,9 @@ import CricketBootcampTraining from "../pages/BootcampTrainingManagement/Cricket
 import SoccerBootcampTraining from "../pages/BootcampTrainingManagement/SoccerBootcampTraining/SoccerBootcampTraining";
 import HockyBootcampTraining from "../pages/BootcampTrainingManagement/HockyBootcampTraining/HockyBootcampTraining";
 import SoftballBootcampTraining from "../pages/BootcampTrainingManagement/SoftballBootcampTraining/SoftballBootcampTraining";
+import BaseBallGroupTraining from "../pages/GroupTrainingManagement/BaseBallGroupTraining/BaseBallGroupTraining";
+import BaseBallKidsTraining from "../pages/KidsTrainingManagement/BaseBallKidsTraining/BaseBallKidsTraining";
+import BaseBallBootcampTraining from "../pages/BootcampTrainingManagement/BaseBallBootcampTraining/BaseBallBootcampTraining";
 
 export const router = createBrowserRouter([
   {
@@ -121,6 +124,10 @@ export const router = createBrowserRouter([
             element: <GroupTraining />,
           },
           {
+            path: "baseball",
+            element: <BaseBallGroupTraining />,
+          },
+          {
             path: "cricket",
             element: <CricketGroupTraining />,
           },
@@ -129,7 +136,7 @@ export const router = createBrowserRouter([
             element: <SoccerGroupTraining />,
           },
           {
-            path: "hocky",
+            path: "hockey",
             element: <HockyGroupTraining />,
           },
           {
@@ -145,6 +152,10 @@ export const router = createBrowserRouter([
           {
             path: "/programs/kids-training",
             element: <KidsTraining />,
+          },
+          {
+            path: "baseball",
+            element: <BaseBallKidsTraining />,
           },
           {
             path: "cricket",
@@ -169,6 +180,10 @@ export const router = createBrowserRouter([
             element: <BootcampTraining />,
           },
           {
+            path: "baseball",
+            element: <BaseBallBootcampTraining />,
+          },
+          {
             path: "cricket",
             element: <CricketBootcampTraining />,
           },
@@ -177,7 +192,7 @@ export const router = createBrowserRouter([
             element: <SoccerBootcampTraining />,
           },
           {
-            path: "hocky",
+            path: "hockey",
             element: <HockyBootcampTraining />,
           },
           {
