@@ -1,4 +1,4 @@
-const RentalGeneralBooking = () => {
+const RentalBooking = () => {
   return (
     <>
       <iframe
@@ -11,4 +11,4 @@ const RentalGeneralBooking = () => {
   );
 };
 
-export default RentalGeneralBooking;
+export default RentalBooking;
