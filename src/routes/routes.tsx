@@ -35,6 +35,8 @@ import SoftballBootcampTraining from "../pages/BootcampTrainingManagement/Softba
 import BaseBallGroupTraining from "../pages/GroupTrainingManagement/BaseBallGroupTraining/BaseBallGroupTraining";
 import BaseBallKidsTraining from "../pages/KidsTrainingManagement/BaseBallKidsTraining/BaseBallKidsTraining";
 import BaseBallBootcampTraining from "../pages/BootcampTrainingManagement/BaseBallBootcampTraining/BaseBallBootcampTraining";
+import Affiliate from "../pages/Affiliate/Affiliate";
+import Franchise from "../pages/Franchise/Franchise";
 
 export const router = createBrowserRouter([
   {
@@ -204,6 +206,14 @@ export const router = createBrowserRouter([
       {
         path: "/programs/tten-league",
         element: <TtenLeague />,
+      },
+      {
+        path: "/franchise",
+        element: <Franchise />,
+      },
+      {
+        path: "/affiliate",
+        element: <Affiliate />,
       },
     ],
   },

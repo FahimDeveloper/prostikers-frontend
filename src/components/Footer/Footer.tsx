@@ -117,10 +117,10 @@ const Footer = () => {
               </ul>
               <ul className="list-none space-y-2">
                 <li className="text-white font-medium text-lg">Partnership</li>
-                <Link to="#" className="no-underline block">
+                <Link to="/franchise" className="no-underline block">
                   <li className="text-[#7C7C7C]">Franchise with Us</li>
                 </Link>
-                <Link to="#" className="no-underline block">
+                <Link to="/affiliate" className="no-underline block">
                   <li className="text-[#7C7C7C]">Affiliation</li>
                 </Link>
               </ul>
