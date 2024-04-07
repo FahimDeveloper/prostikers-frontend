@@ -1,7 +1,7 @@
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { IoCartOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/icons/logo.svg";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { Modal } from "antd";
 import { useState } from "react";
@@ -17,7 +17,7 @@ const Header = () => {
           className="flex items-center justify-between py-2 px-4 border border-solid border-gray-200 rounded-full"
         >
           <Link to="/">
-            <img src={logo} className="w-full" alt="logo" />
+            <img src={logo} className="w-32" alt="logo" />
           </Link>
           <nav className="lg:block hidden">
             <ul className="list-none flex justify-center text-lg font-medium items-center gap-7">
@@ -55,7 +55,7 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  to="#"
+                  to="/programs/tten-league"
                   className="no-underline text-[#1C1C1C] inline-block"
                 >
                   League

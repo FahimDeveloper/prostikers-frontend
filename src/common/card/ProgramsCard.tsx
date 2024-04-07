@@ -17,9 +17,7 @@ const ProgramsCard = ({ data }: { data: Tprop }) => {
       }}
     >
       <Link to={data?.link} className="inline-block w-full">
-        <button className="btn text-sm w-full btn-info uppercase">
-          {data?.title}
-        </button>
+        <button className="btn w-full btn-info uppercase">{data?.title}</button>
       </Link>
     </div>
   );

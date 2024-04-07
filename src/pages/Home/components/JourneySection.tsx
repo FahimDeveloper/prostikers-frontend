@@ -33,9 +33,9 @@ const JourneySection = () => {
       link: "/sport/soccer",
     },
     {
-      title: "Hocky",
+      title: "Hockey",
       image: program5,
-      link: "/sport/hocky",
+      link: "/sport/hockey",
     },
   ];
   const settings = {
@@ -103,7 +103,7 @@ const JourneySection = () => {
                     }}
                   >
                     <Link to={program?.link} className="inline-block w-full">
-                      <button className="btn text-sm w-full btn-info uppercase">
+                      <button className="btn w-full btn-info uppercase">
                         {program?.title}
                       </button>
                     </Link>

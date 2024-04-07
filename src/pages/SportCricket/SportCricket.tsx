@@ -22,27 +22,27 @@ const SportCricket = () => {
       {
         title: "One on One Training",
         image: training1,
-        link: "#",
+        link: "/programs/one-training/cricket",
       },
       {
         title: "Group Training",
         image: training2,
-        link: "#",
+        link: "/programs/Group-training/cricket",
       },
       {
         title: "Kids Training",
         image: training3,
-        link: "#",
+        link: "/programs/kids-training/cricket",
       },
       {
         title: "Bootcamps",
         image: training4,
-        link: "#",
+        link: "/programs/bootcamp-training/cricket",
       },
       {
         title: "T10 League",
         image: training5,
-        link: "#",
+        link: "/programs/tten-league",
       },
     ],
   };

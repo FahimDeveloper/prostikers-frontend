@@ -30,7 +30,7 @@ h6 {
 }
 
 .membership-card {
-  @apply space-y-10 min-h-[590px] xl:w-auto lg:w-2/3 bg-white shadow-lg pt-8 pb-5 px-5 rounded-2xl flex flex-col justify-between;
+  @apply space-y-10 min-h-[590px] bg-white shadow-lg pt-8 pb-5 px-5 rounded-2xl flex flex-col justify-between;
 }
 
 .membership-btn {

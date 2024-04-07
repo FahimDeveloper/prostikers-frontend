@@ -10,12 +10,12 @@ import program5 from "../../../assets/images/programs/hockey.jpg";
 const AcademyProgramSection = () => {
   const programsData = [
     {
-      title: "base ball",
+      title: "baseball",
       image: program1,
       link: "/sport/baseball",
     },
     {
-      title: "soft ball",
+      title: "softball",
       image: program2,
       link: "/sport/softball",
     },

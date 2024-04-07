@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Container from "../components/Container";
-import RentalGeneralBooking from "../components/Rental/RentalGeneralBooking";
 import RentalSidebar from "../components/Rental/RentalSidebar";
 
-const BootcampRentalSection = ({ title, description }: any) => {
+const OneTrainingSection = ({ title, description }: any) => {
   return (
     <Container>
       <div className="lg:py-14 md:py-12 py-10 space-y-10">
@@ -17,7 +16,11 @@ const BootcampRentalSection = ({ title, description }: any) => {
         </div>
         <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-5 gap-y-5">
           <div className="col-span-2 space-y-5">
-            <RentalGeneralBooking />
+            <iframe
+              src="https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/classes-day-view?filters_classes=661273e8607e43d14f0af304&filters_facilities=66126e84d0d70839d7097d03&header=classes"
+              width="100%"
+              height="1780"
+            ></iframe>
           </div>
           <RentalSidebar />
         </div>
@@ -26,4 +29,4 @@ const BootcampRentalSection = ({ title, description }: any) => {
   );
 };
 
-export default BootcampRentalSection;
+export default OneTrainingSection;

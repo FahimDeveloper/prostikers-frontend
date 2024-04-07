@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Container from "../components/Container";
-import RentalGeneralBooking from "../components/Rental/RentalGeneralBooking";
 import RentalSidebar from "../components/Rental/RentalSidebar";
 
-const GeneralRentalSection = ({ title, description }: any) => {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const GroupTrainingSection = ({ title, description }: any) => {
   return (
     <Container>
       <div className="lg:py-14 md:py-12 py-10 space-y-10">
@@ -17,7 +16,7 @@ const GeneralRentalSection = ({ title, description }: any) => {
         </div>
         <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-5 gap-y-5">
           <div className="col-span-2 space-y-5">
-            <RentalGeneralBooking />
+            {/* <RentalGeneralBooking /> */}
           </div>
           <RentalSidebar />
         </div>
@@ -26,4 +25,4 @@ const GeneralRentalSection = ({ title, description }: any) => {
   );
 };
 
-export default GeneralRentalSection;
+export default GroupTrainingSection;

@@ -63,7 +63,10 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" className="no-underline text-white px-1">
+                  <Link
+                    to="/programs/tten-league"
+                    className="no-underline text-white px-1"
+                  >
                     League
                   </Link>
                 </li>
