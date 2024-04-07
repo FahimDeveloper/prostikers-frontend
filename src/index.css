@@ -88,6 +88,12 @@ h6 {
 .become-member-list li p {
   @apply w-11/12;
 }
+
+.collapse-header {
+  font-size: 20px;
+  text-align: center;
+}
+
 @media all and (max-width: 1280px) {
   .journey-slider .slick-track {
     height: 400px;

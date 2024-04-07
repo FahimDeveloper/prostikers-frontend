@@ -37,6 +37,7 @@ import BaseBallKidsTraining from "../pages/KidsTrainingManagement/BaseBallKidsTr
 import BaseBallBootcampTraining from "../pages/BootcampTrainingManagement/BaseBallBootcampTraining/BaseBallBootcampTraining";
 import Affiliate from "../pages/Affiliate/Affiliate";
 import Franchise from "../pages/Franchise/Franchise";
+import ComingSoon from "../common/ComingSoon";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/coming-soon",
+        element: <ComingSoon />,
       },
       {
         path: "/membership",

@@ -1,4 +1,4 @@
-import { Modal } from "antd";
+import { Collapse, Modal } from "antd";
 import { useState } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import Container from "../components/Container";
@@ -31,8 +31,14 @@ const MembershipCardSection = () => {
           "https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/memberships/6605a4608b02e889f80917cb/plan/1711645772121/buy"
         );
       }
+    } else {
+      setFrameLink("http://localhost:5173/coming-soon");
     }
     setOpen(true);
+  };
+  const panelStyle: React.CSSProperties = {
+    backgroundColor: "#EDFFFF",
+    borderColor: "#ACDFDF",
   };
   return (
     <div className="bg-[#F9FBFF]">
@@ -80,70 +86,6 @@ const MembershipCardSection = () => {
             </div>
             {packageName === "month" ? (
               <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
-                {/* <div className="membership-card ml-auto">
-                  <div className=" space-y-10">
-                    <div className="space-y-5 h-24 text-center">
-                      <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
-                        Cricket Youth Membership
-                      </h3>
-                      <p className="text-mde text-primary">
-                        <span className="text-2xl leading-6 font-bold me-1">
-                          $ 125
-                        </span>
-                        /month
-                      </p>
-                    </div>
-                    <div className="space-y-5">
-                      <h5 className="font-bold leading-4 text-lg">
-                        Benifits of membership
-                      </h5>
-                      <ul className="text-sm membership-list font-medium list-none space-y-4">
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <p>
-                            Includes 4 group training sessions (set weekly
-                            training dates)
-                          </p>
-                        </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <p>
-                            Basic membership for coaching sessions and 1
-                            off-peak training session only
-                          </p>
-                        </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <p>
-                            Can upgrade to "Youth Plus" membership for
-                            discounted net booking membership at $100 (50% off
-                            student discount) for additional net sessions
-                          </p>
-                        </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <p>
-                            Age limit of 19 years for any additional player or
-                            member
-                          </p>
-                        </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <p>
-                            Guardian counts as the free additional player,
-                            additional players pay $5 fee per player
-                          </p>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => handleMembership('individual_pro')}
-                    className="membership-btn"
-                  >
-                    Choose Plan
-                  </button>
-                </div> */}
                 <div className="membership-card">
                   <div className=" space-y-10">
                     <div className="space-y-5 h-24 text-center">
@@ -299,79 +241,89 @@ const MembershipCardSection = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => setOpen(true)}
+                    onClick={() => handleMembership("up_coming")}
                     className="membership-btn"
                   >
                     Choose Plan
                   </button>
                 </div>
+                <div className="col-span-3">
+                  <Collapse
+                    style={panelStyle}
+                    items={[
+                      {
+                        key: "1",
+                        headerClass: "collapse-header",
+                        showArrow: false,
+                        label: "Parents, Your Child’s Champion Training Awaits",
+                        children: (
+                          <div className="grid grid-cols-2 gap-10 items-center py-5">
+                            <div className="space-y-5 text-center">
+                              <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
+                                Youth Training Membership
+                              </h3>
+                              <p className="text-mde membershi-list text-primary">
+                                <span className="text-2xl leading-6 font-bold me-1">
+                                  $ 160
+                                </span>
+                                /month
+                              </p>
+                              <button
+                                onClick={() => handleMembership("up_coming")}
+                                className="membership-btn"
+                              >
+                                Choose Plan
+                              </button>
+                            </div>
+                            <div className="space-y-5">
+                              <h5 className="font-bold leading-4 text-lg">
+                                Benifits of membership
+                              </h5>
+                              <ul className="text-sm membership-list list-none font-medium space-y-4">
+                                <li className="flex gap-2">
+                                  <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                  <p>
+                                    Easily book your preferred time slots with
+                                    adjustable options
+                                  </p>
+                                </li>
+                                <li className="flex gap-2">
+                                  <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                  <p>Enjoy exclusive discounts and perks</p>
+                                </li>
+                                <li className="flex gap-2">
+                                  <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                  <p>
+                                    Get discounted rates on specialized training
+                                    sessions
+                                  </p>
+                                </li>
+                                <li className="flex gap-2">
+                                  <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                  <p>
+                                    Choose between monthly or annual billing
+                                    options for maximum flexibility
+                                  </p>
+                                </li>
+                                <li className="flex gap-2">
+                                  <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                  <p>
+                                    Host your next corporate event with us,
+                                    offering your team a unique and dynamic
+                                    experience
+                                  </p>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        ),
+                      },
+                    ]}
+                  />
+                </div>
               </div>
             ) : (
               <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
-                {/* <div className="membership-card ml-auto">
-                  <div className=" space-y-10">
-                    <div className="space-y-5 h-24 text-center">
-                      <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
-                        Cricket Youth Membership
-                      </h3>
-                      <p className="text-mde text-primary">
-                        <span className="text-2xl leading-6 font-bold me-1">
-                          $ 125
-                        </span>
-                        /month
-                      </p>
-                    </div>
-                    <div className="space-y-5">
-                      <h5 className="font-bold leading-4 text-lg">
-                        Benifits of membership
-                      </h5>
-                      <ul className="text-sm membership-list font-medium list-none space-y-4">
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <p>
-                            Includes 4 group training sessions (set weekly
-                            training dates)
-                          </p>
-                        </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <p>
-                            Basic membership for coaching sessions and 1
-                            off-peak training session only
-                          </p>
-                        </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <p>
-                            Can upgrade to "Youth Plus" membership for
-                            discounted net booking membership at $100 (50% off
-                            student discount) for additional net sessions
-                          </p>
-                        </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <p>
-                            Age limit of 19 years for any additional player or
-                            member
-                          </p>
-                        </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <p>
-                            Guardian counts as the free additional player,
-                            additional players pay $5 fee per player
-                          </p>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => handleMembership('individual_pro')}
-                    className="membership-btn"
-                  >
-                    Choose Plan
-                  </button>
-                </div> */}
                 <div className="membership-card">
                   <div className=" space-y-10">
                     <div className="space-y-5 h-24 text-center">
@@ -534,11 +486,85 @@ const MembershipCardSection = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => setOpen(true)}
+                    onClick={() => handleMembership("up_coming")}
                     className="membership-btn"
                   >
                     Choose Plan
                   </button>
+                </div>
+                <div className="col-span-3">
+                  <Collapse
+                    style={panelStyle}
+                    items={[
+                      {
+                        key: "1",
+                        headerClass: "collapse-header",
+                        showArrow: false,
+                        label: "Parents, Your Child’s Champion Training Awaits",
+                        children: (
+                          <div className="grid grid-cols-2 gap-10 items-center">
+                            <div className="space-y-5 text-center">
+                              <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
+                                Youth Training Membership
+                              </h3>
+                              <p className="text-mde membershi-list text-primary">
+                                <span className="text-2xl leading-6 font-bold me-1">
+                                  $ 1600
+                                </span>
+                                /year
+                              </p>
+                              <button
+                                onClick={() => handleMembership("up_coming")}
+                                className="membership-btn"
+                              >
+                                Choose Plan
+                              </button>
+                            </div>
+                            <div className="space-y-5">
+                              <h5 className="font-bold leading-4 text-lg">
+                                Benifits of membership
+                              </h5>
+                              <ul className="text-sm membership-list list-none font-medium space-y-4">
+                                <li className="flex gap-2">
+                                  <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                  <p>
+                                    Easily book your preferred time slots with
+                                    adjustable options
+                                  </p>
+                                </li>
+                                <li className="flex gap-2">
+                                  <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                  <p>Enjoy exclusive discounts and perks</p>
+                                </li>
+                                <li className="flex gap-2">
+                                  <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                  <p>
+                                    Get discounted rates on specialized training
+                                    sessions
+                                  </p>
+                                </li>
+                                <li className="flex gap-2">
+                                  <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                  <p>
+                                    Choose between monthly or annual billing
+                                    options for maximum flexibility
+                                  </p>
+                                </li>
+                                <li className="flex gap-2">
+                                  <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                  <p>
+                                    Host your next corporate event with us,
+                                    offering your team a unique and dynamic
+                                    experience
+                                  </p>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        ),
+                      },
+                    ]}
+                  />
                 </div>
               </div>
             )}
@@ -551,7 +577,9 @@ const MembershipCardSection = () => {
           maskClosable={false}
           footer={false}
           open={open}
-          onCancel={() => setOpen(false)}
+          onCancel={() => {
+            setOpen(false), setFrameLink("");
+          }}
         >
           <iframe
             src={frameLink}

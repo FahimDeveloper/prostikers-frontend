@@ -8,7 +8,6 @@ type TProp = {
 const QuestionAccordion = ({ data }: { data: TProp[] }) => {
   const panelStyle: React.CSSProperties = {
     marginBottom: 10,
-    // background: "#F9FBFF",
     borderColor: "#F5F5F5",
     fontSize: 18,
   };
