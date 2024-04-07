@@ -31,7 +31,7 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  to="#"
+                  to="/shop"
                   className="no-underline text-[#1C1C1C] inline-block"
                 >
                   Shop

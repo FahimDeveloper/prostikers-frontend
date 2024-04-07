@@ -48,7 +48,7 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" className="no-underline text-white px-1">
+                  <Link to="/shop" className="no-underline text-white px-1">
                     Shop
                   </Link>
                 </li>

@@ -1,46 +1,8 @@
-import BannerSection from "../../common/BannerSection";
-import banner from "../../assets/images/trainingsBanner/one-training.jpg";
-import TrainingSection from "../../common/TrainingSection";
 import QuestionSection from "../../common/QuestionSection";
-import training1 from "../../assets/images/training/cricket-training.jpg";
-import training2 from "../../assets/images/training/baseball-training.jpg";
-import training3 from "../../assets/images/training/soccer-training.jpg";
-import training4 from "../../assets/images/training/hocky-training.jpg";
-import training5 from "../../assets/images/training/cricket-wordshop-training.jpg";
+import ShopBannerSection from "./components/ShopBannerSection/ShopBannerSection";
+import ShopCategorySection from "./components/ShopCategorySection/ShopCategorySection";
 
-const OneTraining = () => {
-  const trainingData = {
-    title: "Exclusive One on One Training Program",
-    description:
-      "Experience the ultimate personalized coaching with ProStrikers’ One on One Training Programs. Our dedicated experts offer bespoke sessions across a range of sports, meticulously tailored to your ambitions, skill level, and pace. This focused approach ensures rapid improvement, precise technique correction, and a deeper understanding of your sport.",
-    programs: [
-      {
-        title: "Cricket Training",
-        image: training1,
-        link: "cricket",
-      },
-      {
-        title: "Baseball Training",
-        image: training2,
-        link: "baseball",
-      },
-      {
-        title: "Soccer Training",
-        image: training3,
-        link: "soccer",
-      },
-      {
-        title: "Hockey Training",
-        image: training4,
-        link: "hockey",
-      },
-      {
-        title: "Cricket Workshops",
-        image: training5,
-        link: "/coming-soon",
-      },
-    ],
-  };
+const Shop = () => {
   const questionData = [
     {
       title: "What are the hours of operation for ProStrikers?",
@@ -85,11 +47,11 @@ const OneTraining = () => {
   ];
   return (
     <>
-      <BannerSection title="One on One Training" image={banner} />
-      <TrainingSection data={trainingData} />
+      <ShopBannerSection />
+      <ShopCategorySection />
       <QuestionSection data={questionData} />
     </>
   );
 };
 
-export default OneTraining;
+export default Shop;

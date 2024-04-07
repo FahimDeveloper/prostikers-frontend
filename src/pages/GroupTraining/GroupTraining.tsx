@@ -17,27 +17,27 @@ const GroupTraining = () => {
       {
         title: "Cricket Training",
         image: training1,
-        link: "cricket",
+        link: "/coming-soon",
       },
       {
         title: "Baseball Training",
         image: training2,
-        link: "baseball",
+        link: "/coming-soon",
       },
       {
         title: "Soccer Training",
         image: training3,
-        link: "soccer",
+        link: "/coming-soon",
       },
       {
         title: "Hockey Training",
         image: training4,
-        link: "hockey",
+        link: "/coming-soon",
       },
       {
         title: "Softball Training",
         image: training5,
-        link: "softball",
+        link: "/coming-soon",
       },
     ],
   };

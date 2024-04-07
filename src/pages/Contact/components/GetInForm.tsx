@@ -1,54 +1,65 @@
-import { Form, Input } from "antd";
-
-type FormValues = {
-  name: string;
-  email: string;
-  message: string;
-};
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import emailjs from "@emailjs/browser";
+import { notification } from "antd";
+import { useRef } from "react";
 
 const GetInForm = () => {
-  const onFinish = (values: FormValues) => {
-    console.log(values);
+  const form = useRef();
+  const [api, contextHolder] = notification.useNotification();
+  const onFinish = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    emailjs
+      .sendForm("service_jkuw3ih", "template_6ldcbc8", form.current!, {
+        publicKey: "qoM52FAyh2RY8OxzT",
+      })
+      .then(
+        () => {
+          api["success"]({
+            message: "Success",
+            description: "Successfully submitted your information",
+          });
+        },
+        (err: any) => {
+          api["error"]({
+            message: "Failed",
+            description: "Failed to submitted your information",
+          });
+        }
+      );
   };
   return (
-    <Form onFinish={onFinish} layout="vertical">
-      <Form.Item
-        name="name"
-        rules={[{ required: true, message: "Please enter your name" }]}
-      >
-        <Input
-          placeholder="Your Name"
-          className="bg-[#FAFFFF] text-[#215757] h-14 text-lg"
+    <>
+      {contextHolder}
+      <form ref={form} onSubmit={onFinish} className="space-y-5">
+        <input
+          placeholder="Your name"
+          className="bg-[#FAFFFF] placeholder-[#215757] text-base w-full border-[1px] border-[#D4D4D4] p-4 rounded-md"
+          type="text"
+          name="user_name"
+          required
         />
-      </Form.Item>
-      <Form.Item
-        name="email"
-        rules={[{ required: true, message: "Please enter your email" }]}
-      >
-        <Input
-          placeholder="Your Email"
-          className="bg-[#FAFFFF] text-[#215757] h-14 text-lg"
+        <input
+          placeholder="Your email"
+          className="bg-[#FAFFFF] placeholder-[#215757] text-base w-full border-[1px] border-[#D4D4D4] p-4 rounded-md"
+          type="email"
+          name="user_email"
+          required
         />
-      </Form.Item>
-      <Form.Item
-        name="message"
-        rules={[{ required: true, message: "Please enter your message" }]}
-      >
-        <Input.TextArea
-          rows={7}
+        <textarea
           placeholder="Message"
-          className="bg-[#FAFFFF] text-[#215757] text-lg"
+          rows={7}
+          className="bg-[#FAFFFF] placeholder-[#215757] text-lg w-full border-[1px] border-[#D4D4D4] p-4 rounded-md"
+          name="message"
+          required
         />
-      </Form.Item>
-      <Form.Item>
-        <button
-          className="btn btn-primary hover:btn-secondary text-white"
+        <input
           type="submit"
-        >
-          Send message
-        </button>
-      </Form.Item>
-    </Form>
+          value="Send message"
+          className="btn btn-primary hover:btn-secondary text-white"
+        />
+      </form>
+    </>
   );
 };
 

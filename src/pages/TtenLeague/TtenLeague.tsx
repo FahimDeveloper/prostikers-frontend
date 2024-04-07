@@ -14,12 +14,12 @@ const TtenLeague = () => {
       {
         title: "Join as Individual",
         image: training1,
-        link: "#",
+        link: "/coming-soon",
       },
       {
         title: "Join as team",
         image: training2,
-        link: "#",
+        link: "/coming-soon",
       },
     ],
   };

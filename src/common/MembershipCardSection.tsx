@@ -2,6 +2,7 @@ import { Collapse, Modal } from "antd";
 import { useState } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import Container from "../components/Container";
+import { GiClick } from "react-icons/gi";
 
 const MembershipCardSection = () => {
   const [open, setOpen] = useState(false);
@@ -85,7 +86,7 @@ const MembershipCardSection = () => {
               </div>
             </div>
             {packageName === "month" ? (
-              <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
+              <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
                 <div className="membership-card">
                   <div className=" space-y-10">
                     <div className="space-y-5 h-24 text-center">
@@ -247,7 +248,7 @@ const MembershipCardSection = () => {
                     Choose Plan
                   </button>
                 </div>
-                <div className="col-span-3">
+                <div className="lg:col-span-3 lg:block hidden">
                   <Collapse
                     style={panelStyle}
                     items={[
@@ -255,7 +256,12 @@ const MembershipCardSection = () => {
                         key: "1",
                         headerClass: "collapse-header",
                         showArrow: false,
-                        label: "Parents, Your Child’s Champion Training Awaits",
+                        label: `Parents, Your Child’s Champion Training Awaits`,
+                        extra: (
+                          <>
+                            <GiClick />
+                          </>
+                        ),
                         children: (
                           <div className="grid grid-cols-2 gap-10 items-center py-5">
                             <div className="space-y-5 text-center">
@@ -320,6 +326,66 @@ const MembershipCardSection = () => {
                       },
                     ]}
                   />
+                </div>
+                <div className="membership-card lg:hidden block">
+                  <div className=" space-y-10">
+                    <div className="space-y-5 h-24 text-center">
+                      <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
+                        Youth Training Membership
+                      </h3>
+                      <p className="text-mde membershi-list text-primary">
+                        <span className="text-2xl leading-6 font-bold me-1">
+                          $ 160
+                        </span>
+                        /month
+                      </p>
+                    </div>
+                    <div className="space-y-5">
+                      <h5 className="font-bold leading-4 text-lg">
+                        Benifits of membership
+                      </h5>
+                      <ul className="text-sm membership-list list-none font-medium space-y-4">
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Easily book your preferred time slots with
+                            adjustable options
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>Enjoy exclusive discounts and perks</p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Get discounted rates on specialized training
+                            sessions
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Choose between monthly or annual billing options for
+                            maximum flexibility
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Host your next corporate event with us, offering
+                            your team a unique and dynamic experience
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => handleMembership("up_coming")}
+                    className="membership-btn"
+                  >
+                    Choose Plan
+                  </button>
                 </div>
               </div>
             ) : (
