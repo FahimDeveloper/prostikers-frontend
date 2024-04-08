@@ -1,8 +1,8 @@
 import { IoCheckmark } from "react-icons/io5";
 import Container from "../../../../components/Container";
-import affiliate1 from "../../../../assets/images/affiliate/affiliate-benifit.jpg";
-import affiliate2 from "../../../../assets/images/affiliate/affiliate-programs.jpg";
-import affiliate3 from "../../../../assets/images/affiliate/become-affiliate.jpg";
+import affiliate1 from "../../../../assets/images/affiliate/affiliate-benifit.webp";
+import affiliate2 from "../../../../assets/images/affiliate/affiliate-programs.webp";
+import affiliate3 from "../../../../assets/images/affiliate/become-affiliate.webp";
 
 const AffiliateProgramSection = () => {
   return (

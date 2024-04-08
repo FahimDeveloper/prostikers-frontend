@@ -1,6 +1,6 @@
 import { IoCheckmark } from "react-icons/io5";
 import Container from "../../../components/Container";
-import champion from "../../../assets/images/academy/champion.jpg";
+import champion from "../../../assets/images/academy/champion.webp";
 
 const AcademyChampionSection = () => {
   return (

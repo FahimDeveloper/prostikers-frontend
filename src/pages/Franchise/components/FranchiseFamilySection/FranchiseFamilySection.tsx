@@ -1,6 +1,6 @@
 import { IoCheckmark } from "react-icons/io5";
-import franchise1 from "../../../../assets/images/franchise/franchise-prostrikers.jpg";
-import franchise2 from "../../../../assets/images/franchise/franchise-benifits.jpg";
+import franchise1 from "../../../../assets/images/franchise/franchise-prostrikers.webp";
+import franchise2 from "../../../../assets/images/franchise/franchise-benifits.webp";
 import Container from "../../../../components/Container";
 
 const FranchiseFamilySection = () => {

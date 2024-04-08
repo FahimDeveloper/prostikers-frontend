@@ -1,12 +1,12 @@
 import BannerSection from "../../common/BannerSection";
-import banner from "../../assets/images/trainingsBanner/one-training.jpg";
+import banner from "../../assets/images/trainingsBanner/one-training.webp";
 import TrainingSection from "../../common/TrainingSection";
 import QuestionSection from "../../common/QuestionSection";
-import training1 from "../../assets/images/training/cricket-training.jpg";
-import training2 from "../../assets/images/training/baseball-training.jpg";
-import training3 from "../../assets/images/training/soccer-training.jpg";
-import training4 from "../../assets/images/training/hocky-training.jpg";
-import training5 from "../../assets/images/training/cricket-wordshop-training.jpg";
+import training1 from "../../assets/images/training/cricket-training.webp";
+import training2 from "../../assets/images/training/baseball-training.webp";
+import training3 from "../../assets/images/training/soccer-training.webp";
+import training4 from "../../assets/images/training/hocky-training.webp";
+import training5 from "../../assets/images/training/cricket-wordshop-training.webp";
 
 const OneTraining = () => {
   const trainingData = {

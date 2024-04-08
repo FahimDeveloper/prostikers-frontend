@@ -1,5 +1,5 @@
 import BannerSection from "../../../common/BannerSection";
-import banner from "../../../assets/images/programsBanner/hocky-banner.jpg";
+import banner from "../../../assets/images/programsBanner/hocky-banner.webp";
 import GroupTrainingSection from "../../../common/GroupTrainingSection";
 
 const HockyGroupTraining = () => {

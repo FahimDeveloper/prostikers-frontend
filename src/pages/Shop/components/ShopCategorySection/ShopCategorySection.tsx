@@ -1,10 +1,10 @@
 import Container from "../../../../components/Container";
-import category1 from "../../../../assets/images/shop/category-bat.jpg";
-import category2 from "../../../../assets/images/shop/category-gloves.jpg";
-import category3 from "../../../../assets/images/shop/category-wearables.jpg";
-import category4 from "../../../../assets/images/shop/category-soccer.jpg";
-import category5 from "../../../../assets/images/shop/category-helmet.jpg";
-import category6 from "../../../../assets/images/shop/category-sports-bag.jpg";
+import category1 from "../../../../assets/images/shop/category-bat.webp";
+import category2 from "../../../../assets/images/shop/category-gloves.webp";
+import category3 from "../../../../assets/images/shop/category-wearables.webp";
+import category4 from "../../../../assets/images/shop/category-soccer.webp";
+import category5 from "../../../../assets/images/shop/category-helmet.webp";
+import category6 from "../../../../assets/images/shop/category-sports-bag.webp";
 import { Link } from "react-router-dom";
 
 const ShopCategorySection = () => {

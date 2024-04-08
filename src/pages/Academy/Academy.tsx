@@ -1,5 +1,5 @@
 import BannerSection from "../../common/BannerSection";
-import academyBanner from "../../assets/images/academy/academy-banner.jpg";
+import academyBanner from "../../assets/images/academy/academy-banner.webp";
 import AcademyChampionSection from "./components/AcademyChampionSection";
 import AcademyTrainingSection from "./components/AcademyTrainingSection";
 import AcademyProgramSection from "./components/AcademyProgramSection";

@@ -1,16 +1,16 @@
 import CoachesSection from "../../common/CoachesSection";
 import ProgramSection from "../../common/ProgramSection";
-import training1 from "../../assets/images/training/one-training.jpg";
-import training2 from "../../assets/images/training/group-training.jpg";
-import training3 from "../../assets/images/training/kids-training.jpg";
-import training4 from "../../assets/images/training/bootcamp-training.jpg";
-import coach1 from "../../assets/images/coaches/coach1.jpg";
-import coach2 from "../../assets/images/coaches/coach2.jpg";
-import coach3 from "../../assets/images/coaches/coach3.jpg";
-import coach4 from "../../assets/images/coaches/coach4.jpg";
+import training1 from "../../assets/images/training/one-training.webp";
+import training2 from "../../assets/images/training/group-training.webp";
+import training3 from "../../assets/images/training/kids-training.webp";
+import training4 from "../../assets/images/training/bootcamp-training.webp";
+import coach1 from "../../assets/images/coaches/coach1.webp";
+import coach2 from "../../assets/images/coaches/coach2.webp";
+import coach3 from "../../assets/images/coaches/coach3.webp";
+import coach4 from "../../assets/images/coaches/coach4.webp";
 import BannerSection from "../../common/BannerSection";
 import QuestionSection from "../../common/QuestionSection";
-import baseballBanner from "../..//assets/images/programsBanner/baseball-banner.jpg";
+import baseballBanner from "../..//assets/images/programsBanner/baseball-banner.webp";
 
 const SportBaseball = () => {
   const programData = {

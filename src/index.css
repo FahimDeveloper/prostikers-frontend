@@ -133,4 +133,8 @@ h6 {
     transform: scale(1);
     transition: 0.7s;
   }
+  .collapse-header {
+    font-size: 18px;
+    text-align: center;
+  }
 }

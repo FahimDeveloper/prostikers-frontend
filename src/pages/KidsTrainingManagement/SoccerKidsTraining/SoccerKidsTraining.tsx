@@ -1,5 +1,5 @@
 import BannerSection from "../../../common/BannerSection";
-import banner from "../../../assets/images/programsBanner/soccer-banner.jpg";
+import banner from "../../../assets/images/programsBanner/soccer-banner.webp";
 import KidsTrainingSection from "../../../common/KidsTrainingSection";
 
 const SoccerKidsTraining = () => {

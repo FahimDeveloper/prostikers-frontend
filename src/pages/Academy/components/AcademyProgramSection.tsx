@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ProgramsCard from "../../../common/card/ProgramsCard";
 import Container from "../../../components/Container";
-import program1 from "../../../assets/images/programs/base-ball.jpg";
-import program2 from "../../../assets/images/programs/soft-ball.jpg";
-import program3 from "../../../assets/images/programs/cricket.jpg";
-import program4 from "../../../assets/images/programs/soccer.jpg";
-import program5 from "../../../assets/images/programs/hockey.jpg";
+import program1 from "../../../assets/images/programs/base-ball.webp";
+import program2 from "../../../assets/images/programs/soft-ball.webp";
+import program3 from "../../../assets/images/programs/cricket.webp";
+import program4 from "../../../assets/images/programs/soccer.webp";
+import program5 from "../../../assets/images/programs/hockey.webp";
 
 const AcademyProgramSection = () => {
   const programsData = [

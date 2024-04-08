@@ -5,7 +5,7 @@ import { notification } from "antd";
 import { useRef } from "react";
 
 const GetInForm = () => {
-  const form = useRef();
+  const form = useRef(null);
   const [api, contextHolder] = notification.useNotification();
   const onFinish = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -21,6 +21,7 @@ const GetInForm = () => {
           });
         },
         (err: any) => {
+          console.log(err);
           api["error"]({
             message: "Failed",
             description: "Failed to submitted your information",

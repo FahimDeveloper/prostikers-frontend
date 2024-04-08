@@ -1,5 +1,5 @@
 import BannerSection from "../../../common/BannerSection";
-import banner from "../../../assets/images/programsBanner/cricket-workshop-banner.jpg";
+import banner from "../../../assets/images/programsBanner/cricket-workshop-banner.webp";
 import OneTrainingSection from "../../../common/OneTrainingSection";
 
 const CricketWorkShops = () => {

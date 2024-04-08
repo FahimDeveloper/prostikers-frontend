@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ProgramsCard from "../../../common/card/ProgramsCard";
 import Container from "../../../components/Container";
-import training1 from "../../../assets/images/training/one-training.jpg";
-import training2 from "../../../assets/images/training/group-training.jpg";
-import training3 from "../../../assets/images/training/kids-training.jpg";
-import training4 from "../../../assets/images/training/bootcamp-training.jpg";
+import training1 from "../../../assets/images/training/one-training.webp";
+import training2 from "../../../assets/images/training/group-training.webp";
+import training3 from "../../../assets/images/training/kids-training.webp";
+import training4 from "../../../assets/images/training/bootcamp-training.webp";
 
 const AcademyTrainingSection = () => {
   const personaltrainingData = [

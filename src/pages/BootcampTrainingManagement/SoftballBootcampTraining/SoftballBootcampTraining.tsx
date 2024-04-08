@@ -1,5 +1,5 @@
 import BannerSection from "../../../common/BannerSection";
-import banner from "../../../assets/images/programsBanner/softball-banner.jpg";
+import banner from "../../../assets/images/programsBanner/softball-banner.webp";
 import BootcampTrainingSection from "../../../common/BootcampTrainingSection";
 
 const SoftballBootcampTraining = () => {
