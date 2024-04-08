@@ -21,8 +21,8 @@ const FranchiseFamilySection = () => {
             disciplines – Baseball, Softball, Cricket, Soccer, and Hockey.
           </p>
         </div>
-        <div className="space-y-5">
-          <div className="grid md:grid-cols-2 grid-cols-1 lg:gap-10 gap-5 items-center">
+        <div className="space-y-10">
+          <div className="grid sm:grid-cols-2 grid-cols-1 lg:gap-10 gap-5 items-center">
             <img
               src={franchise1}
               className="lg:size-96 w-full md:h-96 object-fill rounded-2xl"
@@ -57,8 +57,8 @@ const FranchiseFamilySection = () => {
               </ul>
             </div>
           </div>
-          <div className="grid md:grid-cols-2 grid-cols-1 lg:gap-10 gap-5 items-center">
-            <div className="space-y-5">
+          <div className="grid sm:grid-cols-2 grid-cols-1 lg:gap-10 gap-5 items-center">
+            <div className="space-y-5 sm:order-1 order-2">
               <h3 className="font-semibold lg:text-[40px] md:text-3xl text-xl md:leading-[48px] leading-9">
                 Franchisee Benefits
               </h3>
@@ -85,7 +85,7 @@ const FranchiseFamilySection = () => {
             </div>
             <img
               src={franchise2}
-              className="lg:size-96 w-full md:h-96 ml-auto object-fill rounded-2xl"
+              className="lg:size-96 w-full sm:order-2 order-1 md:h-96 ml-auto object-fill rounded-2xl"
               alt="membership family image"
             />
           </div>

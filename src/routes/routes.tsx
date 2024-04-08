@@ -37,8 +37,11 @@ import BaseBallKidsTraining from "../pages/KidsTrainingManagement/BaseBallKidsTr
 import BaseBallBootcampTraining from "../pages/BootcampTrainingManagement/BaseBallBootcampTraining/BaseBallBootcampTraining";
 import Affiliate from "../pages/Affiliate/Affiliate";
 import Franchise from "../pages/Franchise/Franchise";
-import ComingSoon from "../common/ComingSoon";
+import ComingSoon from "../pages/ComingSoon/ComingSoon";
 import Shop from "../pages/Shop/Shop";
+import OneTrainingOutlet from "../pages/OneTraining/components/OneTrainingOutlet";
+import GroupTrainingOutlet from "../pages/GroupTraining/components/GroupTrainingOutlet";
+import BootcampTrainingOutlet from "../pages/BootcampTraining/components/BootcampTrainingOutlet";
 
 export const router = createBrowserRouter([
   {
@@ -99,7 +102,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/programs/one-training",
-        element: <App />,
+        element: <OneTrainingOutlet />,
         children: [
           {
             path: "/programs/one-training",
@@ -129,7 +132,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/programs/group-training",
-        element: <App />,
+        element: <GroupTrainingOutlet />,
         children: [
           {
             path: "/programs/group-training",
@@ -185,7 +188,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/programs/bootcamp-training",
-        element: <App />,
+        element: <BootcampTrainingOutlet />,
         children: [
           {
             path: "/programs/bootcamp-training",

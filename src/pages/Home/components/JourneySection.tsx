@@ -91,9 +91,9 @@ const JourneySection = () => {
         </div>
         <div className="journey-slider">
           <Slider {...settings}>
-            {programsData.map((program) => {
+            {programsData.map((program, index) => {
               return (
-                <div>
+                <div key={index}>
                   <div
                     className="rounded-md flex items-end pb-5 px-3 xl:min-h-[450px] lg:min-h-[360px] md:min-h-[260px] sm:min-h-[300px] min-h-[240px] journey-slide"
                     style={{

@@ -77,9 +77,9 @@ const TopSliderSection = () => {
   return (
     <div className="overflow-hidden">
       <Slider {...settings}>
-        {bannerData.map((slide) => {
+        {bannerData.map((slide, index) => {
           return (
-            <div>
+            <div key={index}>
               <div
                 className="h-svh flex items-end rounded-b-3xl"
                 style={{

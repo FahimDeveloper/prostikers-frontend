@@ -10,7 +10,7 @@ type Tprop = {
 const TrainingCard = ({ data }: { data: Tprop }) => {
   return (
     <div className="card border border-solid border-gray-300 p-2 hover:shadow-md">
-      <img src={data?.image} className="w-full h-52 rounded-2xl" />
+      <img src={data?.image} className="w-full h-52 object-cover rounded-2xl" />
       <div className="p-4 space-y-5">
         <h3 className="text-neutral text-2xl font-bold leading-7 capitalize">
           {data?.title}

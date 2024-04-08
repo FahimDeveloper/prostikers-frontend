@@ -28,8 +28,8 @@ const FeaturedSection = () => {
           </p>
         </div>
         <Marquee>
-          {marqueeData.map((img) => {
-            return <img src={img} className="w-48" alt="slide" />;
+          {marqueeData.map((img, index) => {
+            return <img key={index} src={img} className="w-48" alt="slide" />;
           })}
         </Marquee>
       </div>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import Container from "../components/Container";
 import { GiClick } from "react-icons/gi";
+import UpComing from "../components/UpComing";
 
 const MembershipCardSection = () => {
   const [open, setOpen] = useState(false);
@@ -33,7 +34,7 @@ const MembershipCardSection = () => {
         );
       }
     } else {
-      setFrameLink("http://localhost:5173/coming-soon");
+      setFrameLink("up-coming");
     }
     setOpen(true);
   };
@@ -577,11 +578,15 @@ const MembershipCardSection = () => {
             setOpen(false), setFrameLink("");
           }}
         >
-          <iframe
-            src={frameLink}
-            width="100%"
-            style={{ height: "90vh" }}
-          ></iframe>
+          {frameLink !== "up-coming" ? (
+            <iframe
+              src={frameLink}
+              width="100%"
+              style={{ height: "90vh" }}
+            ></iframe>
+          ) : (
+            <UpComing />
+          )}
         </Modal>
       </Container>
     </div>

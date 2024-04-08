@@ -16,13 +16,13 @@ const CoachesSection = ({ data }: any) => {
             {data?.description}
           </p>
         </div>
-        <div className="grid grid-cols-4 gap-5">
-          {data?.coaches?.map((coach: any) => {
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
+          {data?.coaches?.map((coach: any, index: any) => {
             return (
-              <div className="space-y-1">
+              <div key={index} className="space-y-1">
                 <img
                   src={coach?.image}
-                  className="w-full h-96 rounded-lg"
+                  className="w-full h-96 rounded-lg object-cover"
                   alt="coach image"
                 />
                 <h4 className="font-bold text-2xl leading-7">{coach?.name}</h4>

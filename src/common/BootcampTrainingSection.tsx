@@ -19,7 +19,7 @@ const BootcampTrainingSection = ({ title, description }: any) => {
             <iframe
               src="https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/courses?header=courses"
               width="100%"
-              height="1780"
+              className="lg:h-[1780px] h-[1000px]"
             ></iframe>
           </div>
           <RentalSidebar />

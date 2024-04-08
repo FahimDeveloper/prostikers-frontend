@@ -17,6 +17,7 @@ const TermsCondition = ({ children }: any) => {
             Close
           </div>,
         ]}
+        onCancel={() => setOpen(false)}
         maskClosable={false}
         title="Terms & Conditions"
         centered

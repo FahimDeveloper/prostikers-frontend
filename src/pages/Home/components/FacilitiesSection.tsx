@@ -56,6 +56,7 @@ const FacilitiesSection = () => {
           {facilityData.map((facilty, index) => {
             return (
               <div
+                key={index}
                 className={`${
                   index == 0
                     ? "bg-[#EBFAFE] top-24"

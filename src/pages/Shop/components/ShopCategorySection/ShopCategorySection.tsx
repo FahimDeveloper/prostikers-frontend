@@ -44,7 +44,7 @@ const ShopCategorySection = () => {
     <Container>
       <div className="lg:py-16 md:py-12 py-10 space-y-14">
         <div className="space-y-5">
-          <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
+          <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-3xl lg:leading-[68px] md:leading-[50px] leading-9">
             Gear Up at ProStrikers Shop: <br /> Your Ultimate Sports Arsenal
           </h2>
           <article className="md:text-lg text-base md:leading-7 sm:leading-6 leading-5 text-[#929292] space-y-4 text-justify">
@@ -64,14 +64,14 @@ const ShopCategorySection = () => {
             </p>
           </article>
         </div>
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
           {categoryData.map((category, index) => {
             return (
               <div
                 className={`${
                   index === 1 || index === 2 || index === 5
-                    ? "col-span-2"
-                    : "col-span-1"
+                    ? "lg:col-span-2"
+                    : "lg:col-span-1"
                 }`}
               >
                 <Link key={index} to={category.link} className="no-underline">
@@ -79,9 +79,10 @@ const ShopCategorySection = () => {
                     style={{
                       backgroundImage: `url(${category.image})`,
                       backgroundSize: "cover",
+                      backgroundPosition: "center",
                       backgroundRepeat: "no-repeat",
                     }}
-                    className={`h-72 rounded-xl`}
+                    className={`sm:h-80 h-72 rounded-xl p-2`}
                   >
                     <h3
                       className={`font-semibold text-4xl m-5 ${

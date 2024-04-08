@@ -13,6 +13,7 @@ const ProgramsCard = ({ data }: { data: Tprop }) => {
       style={{
         backgroundImage: `url(${data?.image})`,
         backgroundSize: "cover",
+        backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
       }}
     >

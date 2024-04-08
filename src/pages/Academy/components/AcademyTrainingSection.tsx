@@ -53,9 +53,9 @@ const AcademyTrainingSection = () => {
           <h3 className="text-center font-bold text-4xl leading-[48px]">
             Personal Training
           </h3>
-          <div className="grid grid-cols-2 gap-7">
-            {personaltrainingData.map((training: any) => {
-              return <ProgramsCard data={training} />;
+          <div className="grid md:grid-cols-2 gap-7">
+            {personaltrainingData.map((training: any, index) => {
+              return <ProgramsCard data={training} key={index} />;
             })}
           </div>
         </div>
@@ -63,9 +63,9 @@ const AcademyTrainingSection = () => {
           <h3 className="text-center font-bold text-4xl leading-[48px]">
             Youth Training
           </h3>
-          <div className="grid grid-cols-2 gap-7">
-            {youthTrainingData.map((training: any) => {
-              return <ProgramsCard data={training} />;
+          <div className="grid md:grid-cols-2 gap-7">
+            {youthTrainingData.map((training: any, index) => {
+              return <ProgramsCard data={training} key={index} />;
             })}
           </div>
         </div>

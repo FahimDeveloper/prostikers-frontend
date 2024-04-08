@@ -102,7 +102,7 @@ const Header = () => {
                   <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3">
                     <Link
                       onClick={() => setOpen(false)}
-                      to="#"
+                      to="/shop"
                       className="no-underline text-[#1C1C1C] flex justify-between items-center"
                     >
                       Shop
@@ -112,7 +112,7 @@ const Header = () => {
                   <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3">
                     <Link
                       onClick={() => setOpen(false)}
-                      to="#"
+                      to="/academy"
                       className="no-underline text-[#1C1C1C] flex justify-between items-center"
                     >
                       Academy
@@ -132,7 +132,7 @@ const Header = () => {
                   <li className="py-3">
                     <Link
                       onClick={() => setOpen(false)}
-                      to="#"
+                      to="/programs/tten-league"
                       className="no-underline text-[#1C1C1C] flex justify-between items-center"
                     >
                       League

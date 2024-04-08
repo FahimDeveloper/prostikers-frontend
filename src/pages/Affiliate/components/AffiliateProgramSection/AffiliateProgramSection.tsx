@@ -8,7 +8,7 @@ const AffiliateProgramSection = () => {
   return (
     <Container>
       <div className="py-10 space-y-10">
-        <div className="space-y-5">
+        <div className="sm:space-y-5 space-y-2">
           <h2 className="text-center lg:text-[64px] md:text-5xl text-3xl font-semibold lg:leading-[74px] md:leading-[50px] leading-9">
             <span className="block text-[#787878]">
               Empower Your Institution:
@@ -22,14 +22,14 @@ const AffiliateProgramSection = () => {
             disciplines – Baseball, Softball, Cricket, Soccer, and Hockey.
           </p>
         </div>
-        <div className="space-y-5">
-          <div className="grid md:grid-cols-2 grid-cols-1 lg:gap-10 gap-5 items-center">
+        <div className="space-y-10">
+          <div className="grid sm:grid-cols-2 grid-cols-1 lg:gap-10 gap-5 items-center">
             <img
               src={affiliate1}
               className="lg:size-96 w-full md:h-96 object-fill rounded-2xl"
               alt="membership family image"
             />
-            <div className="space-y-5">
+            <div className="sm:space-y-5 space-y-2">
               <h3 className="font-semibold lg:text-[40px] md:text-3xl text-xl md:leading-[48px] leading-9">
                 Benefits of Affiliation
               </h3>
@@ -60,8 +60,8 @@ const AffiliateProgramSection = () => {
               </ul>
             </div>
           </div>
-          <div className="grid md:grid-cols-2 grid-cols-1 lg:gap-10 gap-5 items-center">
-            <div className="space-y-5">
+          <div className="grid sm:grid-cols-2 grid-cols-1 lg:gap-10 gap-5 items-center">
+            <div className="sm:space-y-5 space-y-2 sm:order-1 order-2">
               <h3 className="font-semibold lg:text-[40px] md:text-3xl text-xl md:leading-[48px] leading-9">
                 Affiliation Programs
               </h3>
@@ -73,17 +73,17 @@ const AffiliateProgramSection = () => {
             </div>
             <img
               src={affiliate2}
-              className="lg:size-96 w-full md:h-96 ml-auto object-fill rounded-2xl"
+              className="lg:size-96 w-full sm:order-2 order-1 md:h-96 ml-auto object-fill rounded-2xl"
               alt="membership family image"
             />
           </div>
-          <div className="grid md:grid-cols-2 grid-cols-1 lg:gap-10 gap-5 items-center">
+          <div className="grid sm:grid-cols-2 grid-cols-1 lg:gap-10 gap-5 items-center">
             <img
               src={affiliate3}
               className="lg:size-96 w-full md:h-96 object-fill rounded-2xl"
               alt="membership family image"
             />
-            <div className="space-y-5">
+            <div className="sm:space-y-5 space-y-2">
               <h3 className="font-semibold lg:text-[40px] md:text-3xl text-xl md:leading-[48px] leading-9">
                 How to Become an Affiliate
               </h3>

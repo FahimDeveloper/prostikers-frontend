@@ -1,5 +1,5 @@
 import Lottie from "lottie-react";
-import animation from "../assets/animation/coming-soon.json";
+import animation from "../../assets/animation/coming-soon.json";
 
 const ComingSoon = () => {
   return (

@@ -20,6 +20,7 @@ const PrivacyPolicy = ({ children }: any) => {
         maskClosable={false}
         title="Terms & Conditions"
         centered
+        onCancel={() => setOpen(false)}
         open={open}
       >
         <div className="text-[#6B6B6B] leading-6 space-y-6">

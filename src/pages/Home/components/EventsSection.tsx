@@ -42,7 +42,10 @@ const EventsSection = () => {
           <div className="space-y-8">
             {eventsData.map((event, index) => {
               return (
-                <div className="grid md:grid-cols-2 xl:gap-20 lg:gap-10 gap-6 md:max-h-[420px] xl:p-8 p-7 items-center justify-between bg-[#F9FBFF] rounded-2xl">
+                <div
+                  key={index}
+                  className="grid md:grid-cols-2 xl:gap-20 lg:gap-10 gap-6 md:max-h-[420px] xl:p-8 p-7 items-center justify-between bg-[#F9FBFF] rounded-2xl"
+                >
                   <img
                     src={event.image}
                     alt="event image"
