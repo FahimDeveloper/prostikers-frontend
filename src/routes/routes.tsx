@@ -42,11 +42,13 @@ import Shop from "../pages/Shop/Shop";
 import OneTrainingOutlet from "../pages/OneTraining/components/OneTrainingOutlet";
 import GroupTrainingOutlet from "../pages/GroupTraining/components/GroupTrainingOutlet";
 import BootcampTrainingOutlet from "../pages/BootcampTraining/components/BootcampTrainingOutlet";
+import Error from "../pages/Error/Error";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
