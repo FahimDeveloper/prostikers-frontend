@@ -427,7 +427,7 @@ const MembershipCardSection = () => {
               items={[
                 {
                   key: "1",
-                  headerClass: "collapse-header",
+                  headerClass: "membership-collapse-header",
                   showArrow: false,
                   label:
                     "Parents, Your Child's Champion Training Awaits Sign up for youth training sessions",

@@ -65,7 +65,7 @@ const FacilitiesSection = () => {
                     : index == 2
                     ? "bg-[#073742] top-40"
                     : "bg-[#FFCFB4] top-48"
-                } sticky xl:p-14 sm:p-10 p-8 space-y-7 rounded-3xl`}
+                } sticky xl:p-14 sm:p-10 p-6 pt-8 space-y-7 rounded-3xl`}
               >
                 <span
                   className={`${
@@ -83,7 +83,7 @@ const FacilitiesSection = () => {
                 <div className="grid lg:grid-cols-2 items-center gap-5">
                   <img
                     src={facilty.image}
-                    className="w-full lg:h-full h-96 object-fill rounded-2xl lg:order-2 md:order-1"
+                    className="w-full lg:h-full max-h-[400px] min-h-80 object-fill rounded-2xl lg:order-2 md:order-1"
                     alt="facility image"
                   />
                   <div className="xl:space-y-9 lg:order-1 md:order-2 sm:space-y-6 space-y-4">

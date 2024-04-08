@@ -89,7 +89,7 @@ const TopSliderSection = () => {
                   backgroundSize: "cover",
                 }}
               >
-                <div className="lg:w-[800px] w-full sm:space-y-10 space-y-7 px-16 pb-24">
+                <div className="lg:w-[800px] w-full sm:space-y-10 space-y-7 md:px-16 px-10 pb-24">
                   <div className="space-y-3">
                     <h2 className="font-extrabold text-white lg:text-[56px] sm:text-[44px] [0.5px] text-3xl lg:leading-[67px] sm:leading-[45px] leading-8">
                       {slide.title}
