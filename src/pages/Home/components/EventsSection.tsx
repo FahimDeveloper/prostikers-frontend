@@ -15,7 +15,7 @@ const EventsSection = () => {
     {
       title: "Youth Indoor Sports Festival",
       description:
-        "A day of fun, learning, and competition! Our Youth Indoor Sports Festival is perfect for kids aged 6-12 looking to explore various sports, including Futsal, Field Hockey, and Cricket.",
+        "A day of fun, learning, and competition! Our Youth Indoor Sports Festival is perfect for kids aged 6-12 looking to explore various sports, including Soccer, Field Hockey, and Cricket.",
       image: event2,
       date: "July 15th - July 29th, 2024",
       link: "#",

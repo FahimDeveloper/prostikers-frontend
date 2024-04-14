@@ -8,7 +8,7 @@ const FacilitiesSection = () => {
   const facilityData = [
     {
       tag: "Indoor Cages & Field",
-      title: "Unlock Your Game in Our Premier Indoor Arenas",
+      title: "Unlock Your Game in Our Premier Indoor Arena",
       image: cardImgFirst,
       description:
         "Step inside ProStrikers’ premier indoor arenas where every athlete has the space to shine. Our top-of-the-line facilities are meticulously designed to simulate real-world conditions, providing you with the perfect backdrop to train, play, and unlock your true potential. With cutting-edge technology and surfaces engineered for peak performance, there's no better place to elevate your game.",

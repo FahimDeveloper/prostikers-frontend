@@ -36,7 +36,7 @@ const Franchise = () => {
         "Absolutely! ProStrikers prides itself on fostering young talent with programs for children as young as three years old, all the way up to young adults. Our youth programs are designed to build foundational skills and love for the game in a fun, supportive environment.",
     },
     {
-      title: "Can I purchase gear at ProStrikers?",
+      title: "Can I purchase sporting gear at ProStrikers?",
       description:
         "Yes, our Pro Shop stocks a wide selection of gear for all the sports we support. From beginner equipment to professional-grade gear, we have what you need to play and train at your best.",
     },

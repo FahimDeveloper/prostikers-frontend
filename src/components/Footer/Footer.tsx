@@ -2,12 +2,11 @@ import { Link } from "react-router-dom";
 import footer from "../../assets/images/footer.png";
 import { FiFacebook } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa";
-import { SlSocialLinkedin } from "react-icons/sl";
-import { FaXTwitter } from "react-icons/fa6";
 import footerLogo from "../../assets/images/footer-logo.png";
 import TermsCondition from "../TermsCondition";
 import PrivacyPolicy from "../PrivacyPolicy";
 import Container from "../Container";
+import { PiTiktokLogoLight } from "react-icons/pi";
 const Footer = () => {
   return (
     <div
@@ -85,14 +84,31 @@ const Footer = () => {
               />
               <p className="text-sm leading-5">
                 The only indoor sports facility and training center in
-                Sacramento CA, specializing in Baseball, Softball, Futsal and
+                Sacramento CA, specializing in Baseball, Softball, Soccer and
                 Cricket. Book now for an action-packed fun and learning.
               </p>
               <div className="flex items-center gap-3">
-                <FiFacebook className="size-6" />
-                <FaInstagram className="size-6" />
-                <FaXTwitter className="size-6" />
-                <SlSocialLinkedin className="size-6" />
+                <a
+                  className="text-white"
+                  target="_blank"
+                  href="https://www.facebook.com/profile.php?id=100087607805111"
+                >
+                  <FiFacebook className="size-6" />
+                </a>
+                <a
+                  className="text-white"
+                  target="_blank"
+                  href="https://www.instagram.com/pro_strikers_sacramento?igsh=MTl1OHE0bWNvdDcxbg=="
+                >
+                  <FaInstagram className="size-6" />
+                </a>
+                <a
+                  className="text-white"
+                  target="_blank"
+                  href="https://www.tiktok.com/@prostrikers"
+                >
+                  <PiTiktokLogoLight className="size-6" />
+                </a>
               </div>
             </div>
             <div className="sm:flex items-end sm:gap-10 space-y-5">

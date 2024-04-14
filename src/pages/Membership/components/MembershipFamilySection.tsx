@@ -7,10 +7,10 @@ const MembershipFamilySection = () => {
       <div className="lg:py-16 md:py-12 py-10 space-y-14">
         <div className="space-y-5">
           <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
-            Join the Pro Strikers Family
+            Join the ProStrikers Family
           </h2>
           <p className="md:text-lg text-base md:leading-7 sm:leading-6 leading-5 text-[#929292] text-justify">
-            At Pro Strikers, we’re more than just an indoor sports facility;
+            At ProStrikers, we’re more than just an indoor sports facility;
             we're a community of athletes, coaches, and sports enthusiasts
             dedicated to elevating your game. Our memberships are designed to
             provide unparalleled access to our state-of-the-art facilities and

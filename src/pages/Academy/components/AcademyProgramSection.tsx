@@ -30,7 +30,7 @@ const AcademyProgramSection = () => {
       link: "/sport/soccer",
     },
     {
-      title: "hocky",
+      title: "field hocky",
       image: program5,
       link: "/sport/hockey",
     },

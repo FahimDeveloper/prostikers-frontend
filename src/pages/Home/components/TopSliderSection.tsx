@@ -17,7 +17,7 @@ const TopSliderSection = () => {
       link: "/rental",
     },
     {
-      title: "Softball Success Starts Here: Power, Precision, Play",
+      title: "Softball Success Starts Here: Power, Precision & Play",
       description:
         "Experience a breakthrough in your softball career with tailored coaching that focuses on enhancing your power hitting and defensive skills. ProStrikers' expert-led training gives you the competitive edge you need to shine.",
       image: banner2,

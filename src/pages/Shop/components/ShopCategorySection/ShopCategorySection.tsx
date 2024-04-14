@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const ShopCategorySection = () => {
   const categoryData = [
     {
-      title: "Bat",
+      title: "Bats",
       image: category1,
       link: "/coming-soon",
     },
@@ -30,12 +30,12 @@ const ShopCategorySection = () => {
       link: "/coming-soon",
     },
     {
-      title: "Helmet",
+      title: "Helmets",
       image: category5,
       link: "/coming-soon",
     },
     {
-      title: "Sports Bag",
+      title: "Sports Bags",
       image: category6,
       link: "/coming-soon",
     },
@@ -45,13 +45,13 @@ const ShopCategorySection = () => {
       <div className="lg:py-16 md:py-12 py-10 space-y-14">
         <div className="space-y-5">
           <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-3xl lg:leading-[68px] md:leading-[50px] leading-9">
-            Gear Up at ProStrikers Shop: <br /> Your Ultimate Sports Arsenal
+            Gear Up at Pro-shop: <br /> Your Ultimate Sports Arsenal
           </h2>
           <article className="md:text-lg text-base md:leading-7 sm:leading-6 leading-5 text-[#929292] space-y-4 text-justify">
             <p>
-              Welcome to the ProStrikers Shop, where every item is a
-              game-changer! Our curated collection of sports gear is designed to
-              meet the demands of athletes who settle for nothing but the best.
+              Welcome to the Pro-shop, where every item is a game-changer! Our
+              curated collection of sports gear is designed to meet the demands
+              of athletes who settle for nothing but the best.
             </p>
             <p>
               Whether you're on the hunt for the latest baseball mitts, the

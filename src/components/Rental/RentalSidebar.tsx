@@ -50,10 +50,6 @@ const RentalSidebar = () => {
           </li>
           <li className="flex gap-5 items-center">
             <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
-            <p>Free bowling machines with no additional charge</p>
-          </li>
-          <li className="flex gap-5 items-center">
-            <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
             <p>Emergency first aid</p>
           </li>
           <li className="flex gap-5 items-center">
@@ -90,31 +86,31 @@ const RentalSidebar = () => {
         <ul className="list-none text-[#063232] text-base font-medium space-y-2">
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>Sa</p>
-            <p>10:00 AM - 9:30 PM</p>
+            <p>9:00 AM - 10:00 PM</p>
           </li>
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>Su</p>
-            <p>10:00 AM - 9:30 PM</p>
+            <p>9:00 AM - 10:00 PM</p>
           </li>
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>Mo</p>
-            <p>10:00 AM - 9:30 PM</p>
+            <p>9:00 AM - 10:00 PM</p>
           </li>
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>Tu</p>
-            <p>10:00 AM - 9:30 PM</p>
+            <p>9:00 AM - 10:00 PM</p>
           </li>
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>We</p>
-            <p>10:00 AM - 9:30 PM</p>
+            <p>9:00 AM - 10:00 PM</p>
           </li>
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>Th</p>
-            <p>10:00 AM - 9:30 PM</p>
+            <p>9:00 AM - 10:00 PM</p>
           </li>
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>Fr</p>
-            <p>10:00 AM - 9:30 PM</p>
+            <p>9:00 AM - 10:00 PM</p>
           </li>
         </ul>
       </div>

@@ -33,7 +33,7 @@ const JourneySection = () => {
       link: "/sport/soccer",
     },
     {
-      title: "Hockey",
+      title: "Field Hockey",
       image: program5,
       link: "/sport/hockey",
     },
