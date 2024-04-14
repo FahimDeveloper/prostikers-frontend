@@ -23,18 +23,18 @@ const Header = () => {
             <ul className="list-none flex justify-center text-lg font-medium items-center gap-7">
               <li>
                 <Link
-                  to="/membership"
+                  to="/rental"
                   className="no-underline text-[#1C1C1C] inline-block"
                 >
-                  Membership
+                  Rental
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/shop"
+                  to="/membership"
                   className="no-underline text-[#1C1C1C] inline-block"
                 >
-                  Shop
+                  Membership
                 </Link>
               </li>
               <li>
@@ -47,18 +47,18 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  to="/rental"
-                  className="no-underline text-[#1C1C1C] inline-block"
-                >
-                  Rental
-                </Link>
-              </li>
-              <li>
-                <Link
                   to="/programs/tten-league"
                   className="no-underline text-[#1C1C1C] inline-block"
                 >
                   League
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/shop"
+                  className="no-underline text-[#1C1C1C] inline-block"
+                >
+                  Shop
                 </Link>
               </li>
             </ul>
@@ -89,6 +89,16 @@ const Header = () => {
               </Link>
               <nav className="py-5">
                 <ul className="list-none flex flex-col gap-2 text-lg font-medium">
+                  <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3 \">
+                    <Link
+                      onClick={() => setOpen(false)}
+                      to="/rental"
+                      className="no-underline text-[#1C1C1C] flex justify-between items-center"
+                    >
+                      Rental
+                      <IoIosArrowForward className="size-4" />
+                    </Link>
+                  </li>
                   <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3">
                     <Link
                       onClick={() => setOpen(false)}
@@ -102,30 +112,10 @@ const Header = () => {
                   <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3">
                     <Link
                       onClick={() => setOpen(false)}
-                      to="/shop"
-                      className="no-underline text-[#1C1C1C] flex justify-between items-center"
-                    >
-                      Shop
-                      <IoIosArrowForward className="size-4" />
-                    </Link>
-                  </li>
-                  <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3">
-                    <Link
-                      onClick={() => setOpen(false)}
                       to="/academy"
                       className="no-underline text-[#1C1C1C] flex justify-between items-center"
                     >
                       Academy
-                      <IoIosArrowForward className="size-4" />
-                    </Link>
-                  </li>
-                  <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3 \">
-                    <Link
-                      onClick={() => setOpen(false)}
-                      to="/rental"
-                      className="no-underline text-[#1C1C1C] flex justify-between items-center"
-                    >
-                      Rental
                       <IoIosArrowForward className="size-4" />
                     </Link>
                   </li>
@@ -137,6 +127,16 @@ const Header = () => {
                     >
                       League
                       <IoIosArrowForward className="size-5" />
+                    </Link>
+                  </li>
+                  <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3">
+                    <Link
+                      onClick={() => setOpen(false)}
+                      to="/shop"
+                      className="no-underline text-[#1C1C1C] flex justify-between items-center"
+                    >
+                      Shop
+                      <IoIosArrowForward className="size-4" />
                     </Link>
                   </li>
                 </ul>
