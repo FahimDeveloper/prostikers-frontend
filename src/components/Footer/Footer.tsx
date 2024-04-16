@@ -39,6 +39,11 @@ const Footer = () => {
             <nav>
               <ul className="list-none flex md:flex-nowrap flex-wrap justify-center text-lg font-medium items-center md:gap-7 gap-3">
                 <li>
+                  <Link to="/rental" className="no-underline text-white px-1">
+                    Rental
+                  </Link>
+                </li>
+                <li>
                   <Link
                     to="/membership"
                     className="no-underline text-white px-1"
@@ -47,18 +52,8 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/shop" className="no-underline text-white px-1">
-                    Shop
-                  </Link>
-                </li>
-                <li>
                   <Link to="/academy" className="no-underline text-white px-1">
                     Academy
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/rental" className="no-underline text-white px-1">
-                    Rental
                   </Link>
                 </li>
                 <li>
@@ -67,6 +62,11 @@ const Footer = () => {
                     className="no-underline text-white px-1"
                   >
                     League
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/shop" className="no-underline text-white px-1">
+                    Shop
                   </Link>
                 </li>
               </ul>

@@ -46,7 +46,7 @@ const FacilitiesSection = () => {
             Tailored Training & Top-Tier Facilities
           </h2>
           <p className="text-[#929292] md:text-lg lg:leading-7 md:leading-6 leading-5 md:w-[600px] w-full mx-auto">
-            At ProStrikers, we offer more than just practice grounds. From
+            At ProStrikers, we offer more than just practice sessions. From
             professional coaching and custom training programs to our
             state-of-the-art facilities, we provide everything you need to excel
             in your sport of choice.

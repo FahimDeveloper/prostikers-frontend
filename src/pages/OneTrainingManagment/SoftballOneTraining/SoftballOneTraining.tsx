@@ -1,16 +1,28 @@
-import BannerSection from "../../../common/BannerSection";
-import banner from "../../../assets/images/programsBanner/softball-banner.webp";
-import OneTrainingSection from "../../../common/OneTrainingSection";
+import GeneralTrainingBookingSection from "../../../common/GeneralTrainingBookingSection";
+import gallery1 from "../../../assets/images/booking/facility-gallery-1.webp";
+import gallery2 from "../../../assets/images/booking/facility-gallery-2.webp";
+import gallery3 from "../../../assets/images/booking/facility-gallery-3.webp";
+import gallery4 from "../../../assets/images/booking/facility-gallery-4.webp";
+import gallery5 from "../../../assets/images/booking/facility-gallery-5.webp";
+import gallery6 from "../../../assets/images/booking/facility-gallery-6.webp";
+import Container from "../../../components/Container";
+import GallerySection from "../../../common/GallerySection";
 
 const SoftballOneTraining = () => {
+  const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5, gallery6];
   return (
-    <div className="lg:pt-16 pt-14 lg:mt-10 mt-9 mx-auto">
-      <BannerSection title="Softball One on One Training" image={banner} />
-      <OneTrainingSection
-        title="Customized Softball Training"
-        description="Unlock your potential on the diamond with our personalized Softball Training sessions. Work on your pitching, improve your batting average, or sharpen your fielding skills with coaches who understand the intricacies of the game and how to bring out your best."
-      />
-    </div>
+    <Container>
+      <div className="lg:pt-16 pt-14 lg:mt-10 mt-9 mx-auto">
+        <GallerySection
+          title="Softball One on One Training"
+          gallery={gallery}
+        />
+        <GeneralTrainingBookingSection
+          title="Customized Softball Training"
+          description="Unlock your potential on the diamond with our personalized Softball Training sessions. Work on your pitching, improve your batting average, or sharpen your fielding skills with coaches who understand the intricacies of the game and how to bring out your best."
+        />
+      </div>
+    </Container>
   );
 };
 

@@ -5,7 +5,7 @@ import FacilitiesSection from "./components/FacilitiesSection";
 import FeaturedSection from "./components/FeaturedSection";
 import JourneySection from "./components/JourneySection";
 import TopSliderSection from "./components/TopSliderSection";
-import TrustedSection from "./components/TrustedSection";
+import TestimonialSection from "./components/TestimonialSection";
 
 const Home = () => {
   const questionData = [
@@ -58,7 +58,7 @@ const Home = () => {
       <FacilitiesSection />
       <MembershipCardSection />
       <EventsSection />
-      <TrustedSection />
+      <TestimonialSection />
       <QuestionSection data={questionData} />
     </>
   );

@@ -1,7 +1,7 @@
 import Marquee from "react-fast-marquee";
 import Container from "../../../components/Container";
 
-const TrustedSection = () => {
+const TestimonialSection = () => {
   const trustedData = [
     {
       image:
@@ -16,7 +16,7 @@ const TrustedSection = () => {
         "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg",
       name: "Samantha K.",
       review:
-        "From the moment I stepped onto the courts, I felt welcomed by both the staff and the regular players.",
+        "Pro Strikers is my go-to spot for futsal! The indoor leagues are competitive, and the facilities are well-maintained. Whether you’re a seasoned player or a beginner, you’ll love the energy here.",
       member: "Casey D., Baseball Prospect",
     },
     {
@@ -24,7 +24,7 @@ const TrustedSection = () => {
         "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg",
       name: "Samantha K.",
       review:
-        "From the moment I stepped onto the courts, I felt welcomed by both the staff and the regular players.",
+        "Finally, a dedicated indoor cricket space in Sacramento! Pro Strikers hosts exciting events, and their coaching sessions have helped me fine-tune my technique. If you’re passionate about cricket, this is the place to be!",
       member: "Casey D., Baseball Prospect",
     },
     {
@@ -32,7 +32,7 @@ const TrustedSection = () => {
         "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg",
       name: "Samantha K.",
       review:
-        "From the moment I stepped onto the courts, I felt welcomed by both the staff and the regular players.",
+        "ProStrikers has transformed my game! The indoor batting cages are top-notch, and the coaching sessions are personalized and effective. I’ve seen remarkable improvement in my swing and overall performance. Highly recommended!",
       member: "Casey D., Baseball Prospect",
     },
     {
@@ -40,7 +40,15 @@ const TrustedSection = () => {
         "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg",
       name: "Samantha K.",
       review:
-        "From the moment I stepped onto the courts, I felt welcomed by both the staff and the regular players.",
+        "Prostrikers Sacramento completely transformed our weekly soccer games! We were a casual group of friends looking to improve our skills and have some fun. The coaches were fantastic – they kept the sessions engaging, provided clear instructions, and helped us all see improvement in our game. We highly recommend Prostrikers to anyone looking for a fun and effective way to learn or improve their soccer skills.",
+      member: "Casey D., Baseball Prospect",
+    },
+    {
+      image:
+        "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg",
+      name: "Samantha K.",
+      review:
+        "We recently hosted a corporate team-building event at Prostrikers Sacramento, and it was a huge success! The staff was incredibly professional and organized, handling everything from equipment rental to scheduling. The coaches led fun and inclusive drills that got everyone involved, regardless of skill level. It was a great way to promote teamwork and camaraderie within our company. We'll definitely be back for future events.",
       member: "Casey D., Baseball Prospect",
     },
   ];
@@ -63,7 +71,7 @@ const TrustedSection = () => {
             </p>
           </div>
           <div className="space-y-7">
-            <Marquee>
+            <Marquee pauseOnHover={true}>
               {trustedData.map((review, index) => {
                 return (
                   <div
@@ -77,9 +85,7 @@ const TrustedSection = () => {
                         </div>
                       </div>
                       <h4 className="card-title">{review.name}</h4>
-                      <p className="card-text text-[#474747]">
-                        {review.review}
-                      </p>
+                      <p className="text-[#474747] text-sm">{review.review}</p>
                       <p className="font-medium italic mt-3 text-[#151531] leading-5">
                         {review.member}
                       </p>
@@ -100,4 +106,4 @@ const TrustedSection = () => {
   );
 };
 
-export default TrustedSection;
+export default TestimonialSection;
