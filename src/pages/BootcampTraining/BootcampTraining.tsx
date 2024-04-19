@@ -18,26 +18,46 @@ const BootcampTraining = () => {
         title: "Cricket Training",
         image: training1,
         link: "cricket",
+        description: [
+          "Elite Coaching: Receive unparalleled training from top-tier coaches at our annual boot camp, ensuring you're equipped with the skills to excel in cricket.",
+          "Professional Development: Our intensive 4-day boot camp is designed to propel participants towards professional cricket careers, promising a pathway to success on the field.",
+        ],
       },
       {
         title: "Baseball Training",
         image: training2,
         link: "baseball",
+        description: [
+          "Intensive Baseball Training: This point highlights the focused and potentially demanding nature of the bootcamp's baseball training program.",
+          "Learn from the Best Coaches: This point emphasizes the quality of instruction participants can expect at the Prostrikers bootcamp.",
+        ],
       },
       {
         title: "Soccer Training",
         image: training3,
         link: "soccer",
+        description: [
+          "Pro Coaching for Future Champions: Train alongside Prostrikers' elite coaches and develop the skills needed to reach your full potential.",
+          "Action-Packed Sessions for Rapid Improvement: Immerse yourself in intensive training designed to push your limits and accelerate your soccer development.",
+        ],
       },
       {
         title: "Hokey Training",
         image: training4,
         link: "hockey",
+        description: [
+          "Intensify Your Field Hockey Skills: Join Prostrikers' Action-Packed Boot Camp",
+          "Elevate Your Field Hockey Game: Expert Coaching at Prostrikers' Annual Boot Camp",
+        ],
       },
       {
         title: "Softball Training",
         image: training5,
         link: "softball",
+        description: [
+          "Pro Development: Train with the Best Softball Coaches",
+          "Fast-Track Your Skills: Action-Packed Softball Training",
+        ],
       },
     ],
   };

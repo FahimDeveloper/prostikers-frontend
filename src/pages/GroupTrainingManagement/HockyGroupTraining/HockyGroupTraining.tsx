@@ -1,14 +1,13 @@
 import GeneralTrainingBookingSection from "../../../common/GeneralTrainingBookingSection";
-import gallery1 from "../../../assets/images/booking/facility-gallery-1.webp";
-import gallery2 from "../../../assets/images/booking/facility-gallery-2.webp";
-import gallery3 from "../../../assets/images/booking/facility-gallery-3.webp";
-import gallery4 from "../../../assets/images/booking/facility-gallery-4.webp";
-import gallery5 from "../../../assets/images/booking/facility-gallery-5.webp";
-import gallery6 from "../../../assets/images/booking/facility-gallery-6.webp";
+import gallery1 from "../../../assets/images/gallery/hockey/hockey-gallery-1-min.webp";
+import gallery2 from "../../../assets/images/gallery/hockey/hockey-gallery-2-min.webp";
+import gallery3 from "../../../assets/images/gallery/hockey/hockey-gallery-3-min.webp";
+import gallery4 from "../../../assets/images/gallery/hockey/hockey-gallery-4-min.webp";
+import gallery5 from "../../../assets/images/gallery/hockey/hockey-gallery-5-min.webp";
 import Container from "../../../components/Container";
 import GallerySection from "../../../common/GallerySection";
 const HockyGroupTraining = () => {
-  const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5, gallery6];
+  const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   return (
     <Container>
       <div className="lg:pt-16 pt-14 lg:mt-10 mt-9 mx-auto">

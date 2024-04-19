@@ -18,26 +18,46 @@ const OneTraining = () => {
         title: "Cricket Training",
         image: training1,
         link: "cricket",
+        description: [
+          "Personalized Coaching: Get individualized attention from our professional trainers to maximize your cricket skills.",
+          "Fast-Track Improvement: Gain a competitive edge with one-on-one training plans designed for rapid development.",
+        ],
       },
       {
         title: "Baseball Training",
         image: training2,
         link: "baseball",
+        description: [
+          "Personalized Baseball Training: Enhance Your Skills & Gain a Competitive Edge.",
+          "Reach Your Baseball Potential: One-on-One Training with Pro Trainers",
+        ],
       },
       {
         title: "Soccer Training",
         image: training3,
         link: "soccer",
+        description: [
+          "Personalized Training: Get individualized attention from our qualified trainers to enhance your soccer skills and gain a competitive edge.",
+          "Fast Track Your Progress: Our one-on-one soccer training provides customized plans for players of all levels, helping you reach your goals quickly.",
+        ],
       },
       {
         title: "Field Hockey Training",
         image: training4,
         link: "hockey",
+        description: [
+          "Elevate Your Game: Personalized Field Hockey Training Tailored to Your Goals",
+          "Gain the Competitive Edge: Individualized Coaching to Enhance Your Field Hockey Skills",
+        ],
       },
       {
         title: "Cricket Workshops",
         image: training5,
         link: "/coming-soon",
+        description: [
+          "Tailored Excellence: Elevate Your Cricket Skills with Personalized One-on-One Workshops",
+          "Precision Coaching: Unlock Your Potential with Individualized Cricket Training Sessions",
+        ],
       },
     ],
   };

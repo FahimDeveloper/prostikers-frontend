@@ -98,7 +98,7 @@ const Footer = () => {
                 <a
                   className="text-white"
                   target="_blank"
-                  href="https://www.instagram.com/pro_strikers_sacramento?igsh=MTl1OHE0bWNvdDcxbg=="
+                  href="https://www.instagram.com/pro_strikers_sacramento/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D"
                 >
                   <FaInstagram className="size-6" />
                 </a>
