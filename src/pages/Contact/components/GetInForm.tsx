@@ -10,8 +10,8 @@ const GetInForm = () => {
   const onFinish = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     emailjs
-      .sendForm("service_jkuw3ih", "template_6ldcbc8", form.current!, {
-        publicKey: "qoM52FAyh2RY8OxzT",
+      .sendForm("service_dd58m4n", "template_kpa2o79", form.current!, {
+        publicKey: "28PV-Qqkr8-hRQrtG",
       })
       .then(
         () => {

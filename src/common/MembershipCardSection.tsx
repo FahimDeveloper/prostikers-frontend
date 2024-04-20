@@ -4,6 +4,8 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 import Container from "../components/Container";
 import { GiClick } from "react-icons/gi";
 import UpComing from "../components/UpComing";
+import GetInMap from "../pages/Contact/components/GetInMap";
+import GetInForm from "../pages/Contact/components/GetInForm";
 
 const MembershipCardSection = () => {
   const [open, setOpen] = useState(false);
@@ -33,6 +35,8 @@ const MembershipCardSection = () => {
           "https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/memberships/6605a4608b02e889f80917cb/plan/1711645772121/buy"
         );
       }
+    } else if (membership === "contact-support") {
+      setFrameLink("contact-support");
     } else {
       setFrameLink("up-coming");
     }
@@ -243,7 +247,7 @@ const MembershipCardSection = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => handleMembership("up_coming")}
+                    onClick={() => handleMembership("contact-support")}
                     className="membership-btn"
                   >
                     Choose Plan
@@ -414,7 +418,7 @@ const MembershipCardSection = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => handleMembership("up_coming")}
+                    onClick={() => handleMembership("contact-support")}
                     className="membership-btn"
                   >
                     Choose Plan
@@ -554,7 +558,7 @@ const MembershipCardSection = () => {
                           </div>
                         </div>
                         <button
-                          onClick={() => handleMembership("up_coming")}
+                          onClick={() => handleMembership("up-coming")}
                           className="membership-btn"
                         >
                           Choose Plan
@@ -578,7 +582,19 @@ const MembershipCardSection = () => {
             setOpen(false), setFrameLink("");
           }}
         >
-          {frameLink !== "up-coming" ? (
+          {frameLink === "contact-support" ? (
+            <Container>
+              <div className="lg:py-16 md:py-12 py-10 mt-16 lg:space-y-10 md:space-y-7 space-y-5">
+                <h2 className="font-semibold lg:text-[64px] md:text-5xl text-3xl lg:leading-[74px] md:leading-[50px] leading-9 lg:w-[650px] w-full">
+                  Get in touch with our lovely team
+                </h2>
+                <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 items-center">
+                  <GetInMap />
+                  <GetInForm />
+                </div>
+              </div>
+            </Container>
+          ) : frameLink !== "up-coming" ? (
             <iframe
               src={frameLink}
               width="100%"
