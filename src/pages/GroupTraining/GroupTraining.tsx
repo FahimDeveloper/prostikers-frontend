@@ -17,7 +17,7 @@ const GroupTraining = () => {
       {
         title: "Cricket Training",
         image: training1,
-        link: "/coming-soon",
+        link: "/programs/group-training/cricket",
         description: [
           "Build Team Camaraderie & Skills: Master the game and bond with teammates in our group cricket training.",
           "Expert Coaching for Groups: Benefit from professional coaches specializing in team training, with full lane booking available",
@@ -26,7 +26,7 @@ const GroupTraining = () => {
       {
         title: "Baseball Training",
         image: training2,
-        link: "/coming-soon",
+        link: "/programs/group-training/basball",
         description: [
           "Boost Teamwork & Skills: Group Baseball Training",
           "Expert Coaches, Elevated Game: Baseball Group Sessions",
@@ -35,7 +35,7 @@ const GroupTraining = () => {
       {
         title: "Soccer Training",
         image: training3,
-        link: "/coming-soon",
+        link: "/programs/group-training/soccer",
         description: [
           "Elevate Your Squad's Game: Hone soccer skills and teamwork with expert coaching in our dedicated indoor facility.",
           "Group Training for Champions: Master soccer strategies, build team spirit, and dominate the competition with our experienced coaches.",
@@ -44,7 +44,7 @@ const GroupTraining = () => {
       {
         title: "Field Hockey Training",
         image: training4,
-        link: "/coming-soon",
+        link: "/programs/group-training/hockey",
         description: [
           "Master Field Hockey Skills Together: Group Training for Refined Technique & Teamwork",
           "Elevate Your Field Hockey Game: Expert Group Training Led by Pro-Level Coaches",
@@ -53,7 +53,7 @@ const GroupTraining = () => {
       {
         title: "Softball Training",
         image: training5,
-        link: "/coming-soon",
+        link: "/programs/group-training/softball",
         description: [
           "Build Teamwork & Skills: Strengthen camaraderie and technical proficiency with expert coaches",
           "Group Training - Maximize Results: Dedicated lanes & professional coaches for teams & friend groups",

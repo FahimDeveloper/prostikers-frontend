@@ -12,6 +12,7 @@ import coach5 from "../../assets/images/coaches/gayan.webp";
 import coach6 from "../../assets/images/coaches/mario.webp";
 import coach7 from "../../assets/images/coaches/Kavindu.webp";
 import coach8 from "../../assets/images/coaches/pasindu.webp";
+import coach9 from "../../assets/images/coaches/zia-shahzad-min.webp";
 import BannerSection from "../../common/BannerSection";
 import QuestionSection from "../../common/QuestionSection";
 import baseballBanner from "../..//assets/images/programsBanner/baseball-banner.webp";
@@ -89,6 +90,11 @@ const SportBaseball = () => {
         name: "Pasindu Wanigasooriya",
         designation: "Hockey Coach",
         image: coach8,
+      },
+      {
+        name: "Zia Shahzad",
+        designation: "Elite Coach / US major league player",
+        image: coach9,
       },
     ],
   };
