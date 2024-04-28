@@ -43,6 +43,7 @@ const TogetherSection = () => {
             </div>
           </div>
           <img
+            loading="lazy"
             src={proStrikers}
             className="w-full h-full xl:col-span-4 lg:col-span-5"
             alt="proStrikers"

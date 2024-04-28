@@ -47,6 +47,7 @@ const EventsSection = () => {
                   className="grid md:grid-cols-2 xl:gap-20 lg:gap-10 gap-6 md:max-h-[420px] xl:p-8 p-7 items-center justify-between bg-[#F9FBFF] rounded-2xl"
                 >
                   <img
+                    loading="lazy"
                     src={event.image}
                     alt="event image"
                     className="rounded-2xl w-full"

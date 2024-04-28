@@ -23,6 +23,7 @@ const Footer = () => {
           <div className="text-white w-full md:hidden block space-y-4">
             <img
               src={footerLogo}
+              loading="lazy"
               alt="logo"
               className="w-28 h-auto object-contain"
             />
@@ -78,6 +79,7 @@ const Footer = () => {
           <div className="flex items-center justify-between">
             <div className="text-white w-80 space-y-4 hidden md:block">
               <img
+                loading="lazy"
                 src={footerLogo}
                 alt="logo"
                 className="w-28 h-auto object-contain"

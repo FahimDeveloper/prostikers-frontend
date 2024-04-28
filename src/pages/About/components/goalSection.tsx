@@ -17,7 +17,7 @@ const GoalSection = () => {
             <div className="md:flex items-center gap-5 hidden">
               <div className="avatar">
                 <div className="w-14 rounded-full">
-                  <img src={avater} />
+                  <img loading="lazy" src={avater} />
                 </div>
               </div>
               <div className="text-white space-y-1">
@@ -28,6 +28,7 @@ const GoalSection = () => {
           </div>
           <div className="text-center sm:col-span-2 space-y-5 overflow-hidden">
             <img
+              loading="lazy"
               src={founder}
               alt="founder image"
               className="rounded-2xl w-full max-h-[600px] object-cover"
@@ -35,7 +36,7 @@ const GoalSection = () => {
             <div className="md:hidden items-center gap-5 flex">
               <div className="avatar">
                 <div className="w-14 rounded-full">
-                  <img src={avater} />
+                  <img loading="lazy" src={avater} />
                 </div>
               </div>
               <div className="text-white space-y-1">

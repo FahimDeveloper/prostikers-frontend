@@ -82,6 +82,7 @@ const FacilitiesSection = () => {
                 </span>
                 <div className="grid lg:grid-cols-2 items-center gap-5">
                   <img
+                    loading="lazy"
                     src={facilty.image}
                     className="w-full lg:h-full max-h-[400px] min-h-80 object-fill rounded-2xl lg:order-2 md:order-1"
                     alt="facility image"

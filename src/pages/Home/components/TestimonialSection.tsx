@@ -75,7 +75,7 @@ const TestimonialSection = () => {
                     <div className="card-body">
                       <div className="avatar">
                         <div className="w-16 rounded-full">
-                          <img src={review.image} />
+                          <img loading="lazy" src={review.image} />
                         </div>
                       </div>
                       <h4 className="card-title">{review.title}</h4>

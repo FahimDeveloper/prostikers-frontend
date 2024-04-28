@@ -22,6 +22,7 @@ const CoachesSection = ({ data }: any) => {
               <div key={index} className="space-y-1">
                 <img
                   src={coach?.image}
+                  loading="lazy"
                   className="w-full h-96 rounded-lg object-cover"
                   alt="coach image"
                 />

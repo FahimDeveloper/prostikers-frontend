@@ -17,7 +17,7 @@ const Header = () => {
           className="flex items-center justify-between py-2 px-4 border border-solid border-gray-200 rounded-full"
         >
           <Link to="/">
-            <img src={logo} className="w-32" alt="logo" />
+            <img loading="lazy" src={logo} className="w-32" alt="logo" />
           </Link>
           <nav className="lg:block hidden">
             <ul className="list-none flex justify-center text-lg font-medium items-center gap-7">
@@ -85,7 +85,7 @@ const Header = () => {
               onCancel={() => setOpen(false)}
             >
               <Link to="/" onClick={() => setOpen(false)}>
-                <img src={logo} className="w-24" alt="logo" />
+                <img loading="lazy" src={logo} className="w-24" alt="logo" />
               </Link>
               <nav className="py-5">
                 <ul className="list-none flex flex-col gap-2 text-lg font-medium">

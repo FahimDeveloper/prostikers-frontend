@@ -25,6 +25,7 @@ const AffiliateProgramSection = () => {
         <div className="space-y-10">
           <div className="grid sm:grid-cols-2 grid-cols-1 lg:gap-10 gap-5 items-center">
             <img
+              loading="lazy"
               src={affiliate1}
               className="lg:size-96 w-full md:h-96 object-fill rounded-2xl"
               alt="membership family image"
@@ -72,6 +73,7 @@ const AffiliateProgramSection = () => {
               </p>
             </div>
             <img
+              loading="lazy"
               src={affiliate2}
               className="lg:size-96 w-full sm:order-2 order-1 md:h-96 ml-auto object-fill rounded-2xl"
               alt="membership family image"
@@ -79,6 +81,7 @@ const AffiliateProgramSection = () => {
           </div>
           <div className="grid sm:grid-cols-2 grid-cols-1 lg:gap-10 gap-5 items-center">
             <img
+              loading="lazy"
               src={affiliate3}
               className="lg:size-96 w-full md:h-96 object-fill rounded-2xl"
               alt="membership family image"

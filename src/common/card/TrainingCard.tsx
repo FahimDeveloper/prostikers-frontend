@@ -12,6 +12,7 @@ const TrainingCard = ({ data }: { data: Tprop }) => {
     <div className="card border border-solid border-gray-300 p-2 h-full flex flex-col justify-between hover:shadow-md">
       <div className="space-y-4">
         <img
+          loading="lazy"
           src={data?.image}
           className="w-full h-60 object-cover rounded-2xl"
         />

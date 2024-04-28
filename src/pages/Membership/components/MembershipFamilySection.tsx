@@ -21,6 +21,7 @@ const MembershipFamilySection = () => {
         </div>
         <div className="grid md:grid-cols-2 grid-cols-1 lg:gap-10 gap-5 items-center">
           <img
+            loading="lazy"
             src={familyImage}
             className="lg:size-96 w-full md:h-96 object-fill rounded-2xl"
             alt="membership family image"
