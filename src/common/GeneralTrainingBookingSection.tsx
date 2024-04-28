@@ -17,6 +17,7 @@ const GeneralTrainingBookingSection = ({ title, description }: any) => {
           <iframe
             src="https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/classes-day-view?header=classes-day-view"
             width="100%"
+            loading="lazy"
             className="lg:h-[1710px] h-[1000px]"
           ></iframe>
         </div>

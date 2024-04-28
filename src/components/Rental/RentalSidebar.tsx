@@ -128,7 +128,6 @@ const RentalSidebar = () => {
           style={{ border: "0px", borderRadius: "10px" }}
           allowFullScreen={true}
           loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
     </div>

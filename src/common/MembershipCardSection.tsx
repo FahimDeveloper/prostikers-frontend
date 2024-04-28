@@ -596,6 +596,7 @@ const MembershipCardSection = () => {
             </Container>
           ) : frameLink !== "up-coming" ? (
             <iframe
+              loading="lazy"
               src={frameLink}
               width="100%"
               style={{ height: "90vh" }}

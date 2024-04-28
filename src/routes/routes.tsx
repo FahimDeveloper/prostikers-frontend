@@ -1,48 +1,214 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import Home from "../pages/Home/Home";
-import Membership from "../pages/Membership/Membership";
-import Rental from "../pages/Rental/Rental";
-import About from "../pages/About/About";
-import Contact from "../pages/Contact/Contact";
-import Academy from "../pages/Academy/Academy";
-import SportBaseball from "../pages/SportBaseball/SportBaseball";
-import SportSoccer from "../pages/SportSoccer/SportSoccer";
-import SportCricket from "../pages/SportCricket/SportCricket";
-import SportSoftball from "../pages/SportSoftball/SportSoftball";
-import SportHocky from "../pages/SportHocky/SportHocky";
-import OneTraining from "../pages/OneTraining/OneTraining";
-import GroupTraining from "../pages/GroupTraining/GroupTraining";
-import KidsTraining from "../pages/KidsTraining/KidsTraining";
-import BootcampTraining from "../pages/BootcampTraining/BootcampTraining";
-import TtenLeague from "../pages/TtenLeague/TtenLeague";
-import BaseBallOneTraining from "../pages/OneTrainingManagment/BaseBallOneTraining/BaseBallOneTraining";
-import CricketOneTraining from "../pages/OneTrainingManagment/CricketOneTraining/CricketOneTraining";
-import SoccerOneTraining from "../pages/OneTrainingManagment/SoccerOneTraining/SoccerOneTraining";
-import HockyOneTraining from "../pages/OneTrainingManagment/HockyOneTraining/HockyOneTraining";
-import SoftballOneTraining from "../pages/OneTrainingManagment/SoftballOneTraining/SoftballOneTraining";
-import CricketGroupTraining from "../pages/GroupTrainingManagement/CricketGroupTraining/CricketGroupTraining";
-import SoccerGroupTraining from "../pages/GroupTrainingManagement/SoccerGroupTraining/SoccerGroupTraining";
-import HockyGroupTraining from "../pages/GroupTrainingManagement/HockyGroupTraining/HockyGroupTraining";
-import SoftballGroupTraining from "../pages/GroupTrainingManagement/SoftballGroupTraining/SoftballGroupTraining";
-import CricketKidsTraining from "../pages/KidsTrainingManagement/CricketKidsTraining/CricketKidsTraining";
-import SoccerKidsTraining from "../pages/KidsTrainingManagement/SoccerKidsTraining/SoccerKidsTraining";
-import SoftballKidsTraining from "../pages/KidsTrainingManagement/SoftballKidsTraining/SoftballKidsTraining";
-import CricketBootcampTraining from "../pages/BootcampTrainingManagement/CricketBootcampTraining/CricketBootcampTraining";
-import SoccerBootcampTraining from "../pages/BootcampTrainingManagement/SoccerBootcampTraining/SoccerBootcampTraining";
-import HockyBootcampTraining from "../pages/BootcampTrainingManagement/HockyBootcampTraining/HockyBootcampTraining";
-import SoftballBootcampTraining from "../pages/BootcampTrainingManagement/SoftballBootcampTraining/SoftballBootcampTraining";
-import BaseBallGroupTraining from "../pages/GroupTrainingManagement/BaseBallGroupTraining/BaseBallGroupTraining";
-import BaseBallKidsTraining from "../pages/KidsTrainingManagement/BaseBallKidsTraining/BaseBallKidsTraining";
-import BaseBallBootcampTraining from "../pages/BootcampTrainingManagement/BaseBallBootcampTraining/BaseBallBootcampTraining";
-import Affiliate from "../pages/Affiliate/Affiliate";
-import Franchise from "../pages/Franchise/Franchise";
-import ComingSoon from "../pages/ComingSoon/ComingSoon";
-import Shop from "../pages/Shop/Shop";
-import OneTrainingOutlet from "../pages/OneTraining/components/OneTrainingOutlet";
-import GroupTrainingOutlet from "../pages/GroupTraining/components/GroupTrainingOutlet";
-import BootcampTrainingOutlet from "../pages/BootcampTraining/components/BootcampTrainingOutlet";
-import Error from "../pages/Error/Error";
+import LazyLoad from "../components/LazyLoad";
+import { lazy } from "react";
+const App = LazyLoad(lazy(() => import("../App")));
+const Home = LazyLoad(lazy(() => import("../pages/Home/Home")));
+const Membership = LazyLoad(
+  lazy(() => import("../pages/Membership/Membership"))
+);
+const Rental = LazyLoad(lazy(() => import("../pages/Rental/Rental")));
+const About = LazyLoad(lazy(() => import("../pages/About/About")));
+const Contact = LazyLoad(lazy(() => import("../pages/Contact/Contact")));
+const Academy = LazyLoad(lazy(() => import("../pages/Academy/Academy")));
+const SportBaseball = LazyLoad(
+  lazy(() => import("../pages/SportBaseball/SportBaseball"))
+);
+const SportSoccer = LazyLoad(
+  lazy(() => import("../pages/SportSoccer/SportSoccer"))
+);
+const SportCricket = LazyLoad(
+  lazy(() => import("../pages/SportCricket/SportCricket"))
+);
+const SportSoftball = LazyLoad(
+  lazy(() => import("../pages/SportSoftball/SportSoftball"))
+);
+const SportHocky = LazyLoad(
+  lazy(() => import("../pages/SportHocky/SportHocky"))
+);
+const OneTraining = LazyLoad(
+  lazy(() => import("../pages/OneTraining/OneTraining"))
+);
+const GroupTraining = LazyLoad(
+  lazy(() => import("../pages/GroupTraining/GroupTraining"))
+);
+const KidsTraining = LazyLoad(
+  lazy(() => import("../pages/KidsTraining/KidsTraining"))
+);
+const BootcampTraining = LazyLoad(
+  lazy(() => import("../pages/BootcampTraining/BootcampTraining"))
+);
+const TtenLeague = LazyLoad(
+  lazy(() => import("../pages/TtenLeague/TtenLeague"))
+);
+const BaseBallOneTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/OneTrainingManagment/BaseBallOneTraining/BaseBallOneTraining"
+      )
+  )
+);
+const CricketOneTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/OneTrainingManagment/CricketOneTraining/CricketOneTraining"
+      )
+  )
+);
+const SoccerOneTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/OneTrainingManagment/SoccerOneTraining/SoccerOneTraining"
+      )
+  )
+);
+const HockyOneTraining = LazyLoad(
+  lazy(
+    () =>
+      import("../pages/OneTrainingManagment/HockyOneTraining/HockyOneTraining")
+  )
+);
+const SoftballOneTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/OneTrainingManagment/SoftballOneTraining/SoftballOneTraining"
+      )
+  )
+);
+const CricketGroupTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/CricketGroupTraining/CricketGroupTraining"
+      )
+  )
+);
+const SoccerGroupTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/SoccerGroupTraining/SoccerGroupTraining"
+      )
+  )
+);
+const HockyGroupTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/HockyGroupTraining/HockyGroupTraining"
+      )
+  )
+);
+const SoftballGroupTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/SoftballGroupTraining/SoftballGroupTraining"
+      )
+  )
+);
+const CricketKidsTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/CricketKidsTraining/CricketKidsTraining"
+      )
+  )
+);
+const SoccerKidsTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/SoccerKidsTraining/SoccerKidsTraining"
+      )
+  )
+);
+const SoftballKidsTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/SoftballKidsTraining/SoftballKidsTraining"
+      )
+  )
+);
+const CricketBootcampTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/CricketBootcampTraining/CricketBootcampTraining"
+      )
+  )
+);
+const SoccerBootcampTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/SoccerBootcampTraining/SoccerBootcampTraining"
+      )
+  )
+);
+const HockyBootcampTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/HockyBootcampTraining/HockyBootcampTraining"
+      )
+  )
+);
+const SoftballBootcampTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/SoftballBootcampTraining/SoftballBootcampTraining"
+      )
+  )
+);
+const BaseBallGroupTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/BaseBallGroupTraining/BaseBallGroupTraining"
+      )
+  )
+);
+const BaseBallKidsTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/BaseBallKidsTraining/BaseBallKidsTraining"
+      )
+  )
+);
+const BaseBallBootcampTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/BaseBallBootcampTraining/BaseBallBootcampTraining"
+      )
+  )
+);
+const Affiliate = LazyLoad(lazy(() => import("../pages/Affiliate/Affiliate")));
+const Franchise = LazyLoad(lazy(() => import("../pages/Franchise/Franchise")));
+const ComingSoon = LazyLoad(
+  lazy(() => import("../pages/ComingSoon/ComingSoon"))
+);
+const Shop = LazyLoad(lazy(() => import("../pages/Shop/Shop")));
+const OneTrainingOutlet = LazyLoad(
+  lazy(() => import("../pages/OneTraining/components/OneTrainingOutlet"))
+);
+const GroupTrainingOutlet = LazyLoad(
+  lazy(() => import("../pages/GroupTraining/components/GroupTrainingOutlet"))
+);
+const BootcampTrainingOutlet = LazyLoad(
+  lazy(
+    () => import("../pages/BootcampTraining/components/BootcampTrainingOutlet")
+  )
+);
+const Error = LazyLoad(lazy(() => import("../pages/Error/Error")));
 
 export const router = createBrowserRouter([
   {
