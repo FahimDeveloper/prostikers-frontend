@@ -23,6 +23,7 @@ const GallerySection = ({ title, gallery }: any) => {
                 src={item}
                 className="w-full rounded-2xl"
                 alt="galler image"
+                loading="lazy"
               />
             );
           })}
@@ -32,6 +33,7 @@ const GallerySection = ({ title, gallery }: any) => {
               .map((item: any, index: number) => {
                 return (
                   <Image
+                    loading="lazy"
                     key={index}
                     src={item}
                     className={`w-full rounded-2xl ${
