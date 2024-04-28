@@ -5,10 +5,10 @@ import Footer from "./components/Footer/Footer";
 const App = () => {
   return (
     <>
+      <ScrollRestoration />
       <Header />
       <Outlet />
       <Footer />
-      <ScrollRestoration />
     </>
   );
 };
