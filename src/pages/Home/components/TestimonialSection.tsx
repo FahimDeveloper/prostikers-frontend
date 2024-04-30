@@ -1,51 +1,50 @@
-import Marquee from "react-fast-marquee";
 import Container from "../../../components/Container";
 
 const TestimonialSection = () => {
-  const trustedData = [
-    {
-      image: "https://avatar.iran.liara.run/public",
-      title: "Transformative Training!",
-      review:
-        "From the moment I stepped onto the courts, I felt welcomed by both the staff and the regular players.",
-      member: "Jordan M., Soccer Enthusiast",
-    },
-    {
-      image: "https://avatar.iran.liara.run/public",
-      title: "Top-Notch Facilities",
-      review:
-        "Pro Strikers is my go-to spot for futsal! The indoor leagues are competitive, and the facilities are well-maintained. Whether you’re a seasoned player or a beginner, you’ll love the energy here.",
-      member: "Priya S., Amateur Cricketer",
-    },
-    {
-      image: "https://avatar.iran.liara.run/public",
-      title: "Unbeatable Atmosphere",
-      review:
-        "Finally, a dedicated indoor cricket space in Sacramento! Pro Strikers hosts exciting events, and their coaching sessions have helped me fine-tune my technique. If you’re passionate about cricket, this is the place to be!",
-      member: "Maria T., Proud Parent",
-    },
-    {
-      image: "https://avatar.iran.liara.run/public",
-      title: "Expert Coaching",
-      review:
-        "ProStrikers has transformed my game! The indoor batting cages are top-notch, and the coaching sessions are personalized and effective. I’ve seen remarkable improvement in my swing and overall performance. Highly recommended!",
-      member: "Casey D., Baseball Prospect",
-    },
-    {
-      image: "https://avatar.iran.liara.run/public",
-      title: "Family-Friendly Programs",
-      review:
-        "Prostrikers Sacramento completely transformed our weekly soccer games! We were a casual group of friends looking to improve our skills and have some fun. The coaches were fantastic – they kept the sessions engaging, provided clear instructions, and helped us all see improvement in our game. We highly recommend Prostrikers to anyone looking for a fun and effective way to learn or improve their soccer skills.",
-      member: "Liam G., Field Hockey Player",
-    },
-    {
-      image: "https://avatar.iran.liara.run/public",
-      title: "Inclusive and Welcoming",
-      review:
-        "We recently hosted a corporate team-building event at Prostrikers Sacramento, and it was a huge success! The staff was incredibly professional and organized, handling everything from equipment rental to scheduling. The coaches led fun and inclusive drills that got everyone involved, regardless of skill level. It was a great way to promote teamwork and camaraderie within our company. We'll definitely be back for future events.",
-      member: "Alex P., Softball Newbie",
-    },
-  ];
+  // const trustedData = [
+  //   {
+  //     image: "https://avatar.iran.liara.run/public",
+  //     title: "Transformative Training!",
+  //     review:
+  //       "From the moment I stepped onto the courts, I felt welcomed by both the staff and the regular players.",
+  //     member: "Jordan M., Soccer Enthusiast",
+  //   },
+  //   {
+  //     image: "https://avatar.iran.liara.run/public",
+  //     title: "Top-Notch Facilities",
+  //     review:
+  //       "Pro Strikers is my go-to spot for futsal! The indoor leagues are competitive, and the facilities are well-maintained. Whether you’re a seasoned player or a beginner, you’ll love the energy here.",
+  //     member: "Priya S., Amateur Cricketer",
+  //   },
+  //   {
+  //     image: "https://avatar.iran.liara.run/public",
+  //     title: "Unbeatable Atmosphere",
+  //     review:
+  //       "Finally, a dedicated indoor cricket space in Sacramento! Pro Strikers hosts exciting events, and their coaching sessions have helped me fine-tune my technique. If you’re passionate about cricket, this is the place to be!",
+  //     member: "Maria T., Proud Parent",
+  //   },
+  //   {
+  //     image: "https://avatar.iran.liara.run/public",
+  //     title: "Expert Coaching",
+  //     review:
+  //       "ProStrikers has transformed my game! The indoor batting cages are top-notch, and the coaching sessions are personalized and effective. I’ve seen remarkable improvement in my swing and overall performance. Highly recommended!",
+  //     member: "Casey D., Baseball Prospect",
+  //   },
+  //   {
+  //     image: "https://avatar.iran.liara.run/public",
+  //     title: "Family-Friendly Programs",
+  //     review:
+  //       "Prostrikers Sacramento completely transformed our weekly soccer games! We were a casual group of friends looking to improve our skills and have some fun. The coaches were fantastic – they kept the sessions engaging, provided clear instructions, and helped us all see improvement in our game. We highly recommend Prostrikers to anyone looking for a fun and effective way to learn or improve their soccer skills.",
+  //     member: "Liam G., Field Hockey Player",
+  //   },
+  //   {
+  //     image: "https://avatar.iran.liara.run/public",
+  //     title: "Inclusive and Welcoming",
+  //     review:
+  //       "We recently hosted a corporate team-building event at Prostrikers Sacramento, and it was a huge success! The staff was incredibly professional and organized, handling everything from equipment rental to scheduling. The coaches led fun and inclusive drills that got everyone involved, regardless of skill level. It was a great way to promote teamwork and camaraderie within our company. We'll definitely be back for future events.",
+  //     member: "Alex P., Softball Newbie",
+  //   },
+  // ];
   return (
     <div className="bg-[#F9FBFF]">
       <Container>
@@ -64,7 +63,8 @@ const TestimonialSection = () => {
               performance.
             </p>
           </div>
-          <div className="space-y-7">
+          <div className="nj-stories"></div>
+          {/* <div className="space-y-7">
             <Marquee pauseOnHover={true}>
               {trustedData.map((review, index) => {
                 return (
@@ -93,7 +93,7 @@ const TestimonialSection = () => {
                 View More Stories
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </Container>
     </div>

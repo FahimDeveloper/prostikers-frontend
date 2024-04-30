@@ -38,42 +38,40 @@ const EventsSection = () => {
             athletes.
           </p>
         </div>
-        <div>
-          <div className="space-y-8">
-            {eventsData.map((event, index) => {
-              return (
+        <div className="space-y-8">
+          {eventsData.map((event, index) => {
+            return (
+              <div
+                key={index}
+                className="grid md:grid-cols-2 xl:gap-20 lg:gap-10 gap-6 md:max-h-[420px] xl:p-8 lg:p-7 sm:p-4 p-2 items-center justify-between bg-[#F9FBFF] rounded-2xl"
+              >
+                <img
+                  loading="lazy"
+                  src={event.image}
+                  alt="event image"
+                  className="rounded-2xl w-full"
+                />
                 <div
-                  key={index}
-                  className="grid md:grid-cols-2 xl:gap-20 lg:gap-10 gap-6 md:max-h-[420px] xl:p-8 p-7 items-center justify-between bg-[#F9FBFF] rounded-2xl"
+                  className={`${
+                    index % 2 == 0 ? "md:order-first" : "md:order-last"
+                  } space-y-4`}
                 >
-                  <img
-                    loading="lazy"
-                    src={event.image}
-                    alt="event image"
-                    className="rounded-2xl w-full"
-                  />
-                  <div
-                    className={`${
-                      index % 2 == 0 ? "md:order-first" : "md:order-last"
-                    } space-y-4`}
-                  >
-                    <p className="text-[#595E69] text-base">{event.date}</p>
-                    <div className="lg:space-y-6 space-y-4">
-                      <h3 className="lg:text-[34px] sm:text-[26px] leading-8 text-2xl font-bold lg:leading-10">
-                        {event.title}
-                      </h3>
-                      <p className="text-[#787878] lg:text-lg leading-6">
-                        {event.description}
-                      </p>
-                      <button className="primary-btn md:w-auto w-full">
-                        Register now
-                      </button>
-                    </div>
+                  <p className="text-[#595E69] text-base">{event.date}</p>
+                  <div className="lg:space-y-6 space-y-4">
+                    <h3 className="lg:text-[34px] sm:text-[26px] leading-8 text-2xl font-bold lg:leading-10">
+                      {event.title}
+                    </h3>
+                    <p className="text-[#787878] lg:text-lg leading-6">
+                      {event.description}
+                    </p>
+                    <button className="primary-btn md:w-auto w-full">
+                      Register now
+                    </button>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </Container>

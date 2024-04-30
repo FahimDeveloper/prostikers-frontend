@@ -9,7 +9,7 @@ const Membership = () => {
     {
       title: "What are the hours of operation for ProStrikers?",
       description:
-        "ProStrikers is open for your sporting needs seven days a week. Monday to Friday from 6 AM to 11 PM, and weekends from 8 AM to 10 PM. Please note that holiday hours may vary and will be posted on our website and social media channels.",
+        "ProStrikers is open for your sporting needs seven days a week. Monday to Friday from 11 AM to 9 PM, Saturdays from 9 AM to 9 PM and Sundays 9 AM to 7 PM. Please note that holiday hours may vary and will be posted on our website and social media channels.",
     },
     {
       title: "Do I need to be a member to book a training session or facility?",
@@ -19,32 +19,42 @@ const Membership = () => {
     {
       title: "How can I book a facility or training session?",
       description:
-        "Booking is easy with our online reservation system. Simply choose your sport, select the facility, pick a time, and add a coaching session if desired. You can also call our front desk or book in person. For one-on-one coaching sessions, we recommend booking in advance to ensure coach availability.",
+        "Booking is easy with our online reservation system. Simply choose your sport, select the facility, pick a time, and add a coaching session if desired. To secure your spot, please contact our front desk at least one hour in advance of your booking time for confirmation. For one-on-one coaching sessions, we recommend booking in advance to ensure coach availability.",
+    },
+    {
+      title: "Can I book a training with my personal coach?",
+      description:
+        "Absolutely, you can book a training session with your personal coach.",
+    },
+    {
+      title:
+        "Can I reserve one on one or group training with Prostrikers coaches?",
+      description:
+        "Absolutely! You don’t necessarily need a personal coach. Based on availability, we can set up one-on-one or group training sessions with our Prostrikers coaches. We’re here to provide the support you need for your training.",
     },
     {
       title: "What should I bring to my first training session?",
       description:
-        "Come prepared with the appropriate sportswear for your activity, including proper shoes and any protective gear you might need. If you're unsure, contact us ahead of your session. Remember, our Pro Shop has all the essentials you may need.",
+        "Sure! Remember to wear the right sportswear and shoes for your activity. If you’re unsure or need gear, contact us, or visit our Pro Shop. You can also rent gear from us, but please check availability first. We’re here to help you have a great session!",
     },
     {
-      title: "Are group bookings available for corporate events or parties?",
+      title: "Do you allow corporate events or parties at your location?",
       description:
-        "Yes, ProStrikers is the perfect venue for your next event. We offer group bookings for corporate teams, birthday parties, or any group looking for an active outing. Contact our events coordinator for more information and to tailor the experience to your group's needs.",
+        "Absolutely! We’re excited to help you. For a more personalized experience, please feel free to connect with us directly. To ensure a seamless process, we kindly request a notice of at least 24 hours before events or parties. Reach out to our dedicated staff at your earliest convenience to confirm availability and finalize your reservation. We’re eager to make your experience memorable! Contact us - +19168905834",
+    },
+    {
+      title: "What is your cancellation policy for bookings?",
+      description: `We understand that plans can change. You can cancel or reschedule your booking up to 24 hours in advance without a fee. Cancellations made within 24 hours of the booking time may incur a charge. <a href="/coming-soon">Click here</a>`,
     },
     {
       title: "Do you offer programs for children and young athletes?",
       description:
-        "Absolutely! ProStrikers prides itself on fostering young talent with programs for children as young as three years old, all the way up to young adults. Our youth programs are designed to build foundational skills and love for the game in a fun, supportive environment.",
+        "Absolutely! At ProStrikers, we’re passionate about nurturing young talent. We offer sports programs for ages two and up, in Cricket, Baseball, Softball, Soccer, and Hockey. You can choose one sport or multiple at a discount. Join us and let’s foster a love for the game together.",
     },
     {
       title: "Can I purchase sporting gear at ProStrikers?",
       description:
         "Yes, our Pro Shop stocks a wide selection of gear for all the sports we support. From beginner equipment to professional-grade gear, we have what you need to play and train at your best.",
-    },
-    {
-      title: "What is your cancellation policy for bookings?",
-      description:
-        "We understand that plans can change. You can cancel or reschedule your booking up to 24 hours in advance without a fee. Cancellations made within 24 hours of the booking time may incur a charge. Members may have different cancellation privileges, detailed in their membership agreement.",
     },
   ];
   return (

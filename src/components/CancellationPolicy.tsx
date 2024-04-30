@@ -2,7 +2,7 @@
 import { Modal } from "antd";
 import { useState } from "react";
 
-const PrivacyPolicy = ({ children }: any) => {
+const CancellationPolicy = ({ children }: any) => {
   const [open, setOpen] = useState(false);
   return (
     <div>
@@ -18,16 +18,14 @@ const PrivacyPolicy = ({ children }: any) => {
           </div>,
         ]}
         maskClosable={false}
-        title="Cancellation policy"
+        title="Terms & Conditions"
         centered
         onCancel={() => setOpen(false)}
         open={open}
       >
         <div className="text-[#6B6B6B] leading-6 space-y-6">
           <div className="space-y-2">
-            <h4 className="font-bold text-[#6B6B6B] text-lg">
-              Cancellation policy
-            </h4>
+            <h4 className="font-bold text-[#6B6B6B] text-lg">Privacy Policy</h4>
             <p className="leading-5 font-medium">
               This Privacy Policy governs the manner in which Prostrikers
               collects, uses, maintains and discloses information collected from
@@ -198,4 +196,4 @@ const PrivacyPolicy = ({ children }: any) => {
   );
 };
 
-export default PrivacyPolicy;
+export default CancellationPolicy;

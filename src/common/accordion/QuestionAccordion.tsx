@@ -13,17 +13,23 @@ const QuestionAccordion = ({ data }: { data: TProp[] }) => {
     fontWeight: 500,
   };
   const accordionItems: CollapseProps["items"] = data.map((item, index) => {
+    const isLinkDescription = item.description.includes(
+      '<a href="/coming-soon">Click here</a>'
+    );
     return {
       key: index,
       label: item.title,
-      children: item.description,
+      children: isLinkDescription ? (
+        <div dangerouslySetInnerHTML={{ __html: item.description }} />
+      ) : (
+        item.description
+      ),
       style: panelStyle,
     };
   });
   return (
     <Collapse
       style={{ border: "1px solid #f1f1f1" }}
-      defaultActiveKey={["0"]}
       expandIconPosition={"end"}
       items={accordionItems}
     />
