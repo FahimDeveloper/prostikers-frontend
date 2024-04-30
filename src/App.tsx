@@ -9,6 +9,8 @@ const App = () => {
       <Header />
       <Outlet />
       <Footer />
+      {/* nice job reviews popup */}
+      <div className="nj-engage" data-position="left"></div>
     </>
   );
 };

@@ -1,4 +1,5 @@
 import { Collapse, CollapseProps } from "antd";
+import CancellationPolicy from "../../components/CancellationPolicy";
 
 type TProp = {
   title: string;
@@ -13,14 +14,17 @@ const QuestionAccordion = ({ data }: { data: TProp[] }) => {
     fontWeight: 500,
   };
   const accordionItems: CollapseProps["items"] = data.map((item, index) => {
-    const isLinkDescription = item.description.includes(
-      '<a href="/coming-soon">Click here</a>'
-    );
+    const isLinkDescription = item.description.includes("**Click here**");
     return {
       key: index,
       label: item.title,
       children: isLinkDescription ? (
-        <div dangerouslySetInnerHTML={{ __html: item.description }} />
+        <div>
+          {item.description.replace("**Click here**", "")}
+          <CancellationPolicy>
+            <span className="text-primary cursor-pointer">Click here</span>
+          </CancellationPolicy>
+        </div>
       ) : (
         item.description
       ),

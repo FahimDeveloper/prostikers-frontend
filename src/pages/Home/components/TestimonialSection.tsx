@@ -63,6 +63,7 @@ const TestimonialSection = () => {
               performance.
             </p>
           </div>
+          {/* nice job reviews */}
           <div className="nj-stories"></div>
           {/* <div className="space-y-7">
             <Marquee pauseOnHover={true}>

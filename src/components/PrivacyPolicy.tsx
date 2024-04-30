@@ -18,7 +18,7 @@ const PrivacyPolicy = ({ children }: any) => {
           </div>,
         ]}
         maskClosable={false}
-        title="Cancellation policy"
+        title="Privacy & Policy"
         centered
         onCancel={() => setOpen(false)}
         open={open}

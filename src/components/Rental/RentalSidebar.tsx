@@ -3,6 +3,8 @@ import { GiElectric } from "react-icons/gi";
 import { IoCalendarOutline } from "react-icons/io5";
 import { PiClockCountdownLight } from "react-icons/pi";
 import { IoIosCheckmarkCircle } from "react-icons/io";
+import { MdOutlineInfo } from "react-icons/md";
+import CancellationPolicy from "../CancellationPolicy";
 
 const RentalSidebar = () => {
   return (
@@ -23,9 +25,9 @@ const RentalSidebar = () => {
           <li className="flex items-center gap-4">
             <GiElectric className="size-7" />
             <p className="font-medium text-[#4B4B4B]">No cancellation</p>
-            {/* <Tooltip title="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia, distinctio.">
+            <CancellationPolicy>
               <MdOutlineInfo className="size-6 text-sky-400 cursor-pointer" />
-            </Tooltip> */}
+            </CancellationPolicy>
           </li>
           <li className="flex items-center gap-4">
             <PiClockCountdownLight className="size-7" />

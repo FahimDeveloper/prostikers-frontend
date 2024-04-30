@@ -44,7 +44,7 @@ const Membership = () => {
     },
     {
       title: "What is your cancellation policy for bookings?",
-      description: `We understand that plans can change. You can cancel or reschedule your booking up to 24 hours in advance without a fee. Cancellations made within 24 hours of the booking time may incur a charge. <a href="/coming-soon">Click here</a>`,
+      description: `We understand that plans can change. You can cancel or reschedule your booking up to 24 hours in advance without a fee. Cancellations made within 24 hours of the booking time may incur a charge. **Click here**`,
     },
     {
       title: "Do you offer programs for children and young athletes?",
