@@ -37,6 +37,10 @@ const MembershipCardSection = () => {
       }
     } else if (membership === "contact-support") {
       setFrameLink("contact-support");
+    } else if (membership === "youth_training_membership") {
+      setFrameLink(
+        "https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/classes-day-view"
+      );
     } else {
       setFrameLink("up-coming");
     }
@@ -558,7 +562,9 @@ const MembershipCardSection = () => {
                           </div>
                         </div>
                         <button
-                          onClick={() => handleMembership("up-coming")}
+                          onClick={() =>
+                            handleMembership("youth_training_membership")
+                          }
                           className="membership-btn"
                         >
                           Choose Plan
