@@ -459,7 +459,9 @@ const MembershipCardSection = () => {
                               /month
                             </p>
                             <button
-                              onClick={() => handleMembership("up_coming")}
+                              onClick={() =>
+                                handleMembership("youth_training_membership")
+                              }
                               className="membership-btn"
                             >
                               Choose Plan
