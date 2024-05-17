@@ -21,13 +21,13 @@ const GallerySection = ({ title, gallery }: any) => {
               <Image
                 key={index}
                 src={item}
-                className="w-full rounded-2xl"
+                className="w-full h-full rounded-2xl"
                 alt="galler image"
                 loading="lazy"
               />
             );
           })}
-          <div className="grid grid-cols-2 lg:gap-5 gap-3">
+          <div className="grid grid-cols-2 h-full lg:gap-5 gap-3">
             {gallery
               .slice(1, gallery.length)
               .map((item: any, index: number) => {
@@ -36,7 +36,7 @@ const GallerySection = ({ title, gallery }: any) => {
                     loading="lazy"
                     key={index}
                     src={item}
-                    className={`w-full rounded-2xl ${
+                    className={`w-full h-full rounded-2xl ${
                       index > 3 ? "hidden" : "visible"
                     }`}
                     alt="galler image"

@@ -1,15 +1,49 @@
 import Marquee from "react-fast-marquee";
-import slide1 from "../../../assets/images/featured/slide1.png";
-import slide2 from "../../../assets/images/featured/slide2.png";
-import slide3 from "../../../assets/images/featured/slide3.png";
-import slide4 from "../../../assets/images/featured/slide4.png";
-import slide5 from "../../../assets/images/featured/slide5.png";
-import slide6 from "../../../assets/images/featured/slide6.png";
-import slide7 from "../../../assets/images/featured/slide7.png";
+import slider1 from "../../../assets/images/featured/featured-logo.webp";
+import slider2 from "../../../assets/images/featured/featured-logo-2.png";
+import slider3 from "../../../assets/images/featured/featured-logo-3.jpg";
+import slider4 from "../../../assets/images/featured/featured-logo-4.jpg";
+import slider5 from "../../../assets/images/featured/featured-logo-15.png";
+import slider6 from "../../../assets/images/featured/featured-logo-6.jpg";
+import slider7 from "../../../assets/images/featured/featured-logo-7.jpg";
+import slider8 from "../../../assets/images/featured/featured-logo-8.png";
+import slider9 from "../../../assets/images/featured/featured-logo-9.jpg";
+import slider10 from "../../../assets/images/featured/featured-logo-10.jpg";
+import slider11 from "../../../assets/images/featured/featured-logo-11.png";
+import slider12 from "../../../assets/images/featured/featured-logo-12.jpg";
+import slider13 from "../../../assets/images/featured/featured-logo-13.png";
+import slider14 from "../../../assets/images/featured/featured-logo-14.jpg";
+import slider15 from "../../../assets/images/featured/featured-logo-15.png";
+import slider16 from "../../../assets/images/featured/featured-logo-16.jpg";
+import slider17 from "../../../assets/images/featured/featured-logo-17.jpg";
+import slider18 from "../../../assets/images/featured/featured-logo-18.jpeg";
+import slider19 from "../../../assets/images/featured/featured-logo-19.jpg";
+import slider20 from "../../../assets/images/featured/featured-logo-20.jpg";
 import Container from "../../../components/Container";
 
 const FeaturedSection = () => {
-  const marqueeData = [slide1, slide2, slide3, slide4, slide5, slide6, slide7];
+  const marqueeData = [
+    slider1,
+    slider2,
+    slider3,
+    slider4,
+    slider5,
+    slider6,
+    slider7,
+    slider8,
+    slider9,
+    slider10,
+    slider11,
+    slider12,
+    slider13,
+    slider14,
+    slider15,
+    slider16,
+    slider17,
+    slider18,
+    slider19,
+    slider20,
+  ];
   return (
     <Container>
       <div className="lg:py-14 md:py-12 py-10 text-center space-y-10">
@@ -27,14 +61,14 @@ const FeaturedSection = () => {
             of the town.
           </p>
         </div>
-        <Marquee>
+        <Marquee speed={30} pauseOnHover>
           {marqueeData.map((img, index) => {
             return (
               <img
                 loading="lazy"
                 key={index}
                 src={img}
-                className="w-48"
+                className="w-auto mx-4 h-24 object-cover"
                 alt="slide"
               />
             );

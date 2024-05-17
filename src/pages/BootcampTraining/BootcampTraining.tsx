@@ -42,7 +42,7 @@ const BootcampTraining = () => {
         ],
       },
       {
-        title: "Hokey Training",
+        title: "Hockey Training",
         image: training4,
         link: "hockey",
         description: [

@@ -4,7 +4,7 @@ const GetInMap = () => {
       <div className="space-y-1">
         <p className="md:text-lg text-base leading-6">Prostrikers</p>
         <p className="md:text-lg text-base leading-7 text-[#404040]">
-          22023 Teuku Umar, Kartini, NG 95006, USA
+          2230 16th St, Sacramento, CA 95818, United States
         </p>
       </div>
       <div>

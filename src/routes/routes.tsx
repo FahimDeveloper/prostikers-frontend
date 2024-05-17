@@ -2,6 +2,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
+import KidsTrainingOutlet from "../pages/KidsTraining/components/KidsTrainingOutlet";
 const App = LazyLoad(lazy(() => import("../App")));
 const Home = LazyLoad(lazy(() => import("../pages/Home/Home")));
 const Membership = LazyLoad(
@@ -330,7 +331,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/programs/kids-training",
-        element: <App />,
+        element: <KidsTrainingOutlet />,
         children: [
           {
             path: "/programs/kids-training",

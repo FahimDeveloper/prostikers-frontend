@@ -25,9 +25,7 @@ const PrivacyPolicy = ({ children }: any) => {
       >
         <div className="text-[#6B6B6B] leading-6 space-y-6">
           <div className="space-y-2">
-            <h4 className="font-bold text-[#6B6B6B] text-lg">
-              Cancellation policy
-            </h4>
+            <h4 className="font-bold text-[#6B6B6B] text-lg">Privacy policy</h4>
             <p className="leading-5 font-medium">
               This Privacy Policy governs the manner in which Prostrikers
               collects, uses, maintains and discloses information collected from

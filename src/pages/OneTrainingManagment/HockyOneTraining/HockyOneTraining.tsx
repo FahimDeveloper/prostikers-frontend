@@ -13,7 +13,7 @@ const HockyOneTraining = () => {
     <Container>
       <div className="lg:pt-16 pt-14 lg:mt-10 mt-9 mx-auto">
         <GallerySection
-          title="Field Hokey One on One Training"
+          title="Field Hockey One on One Training"
           gallery={gallery}
         />
         <GeneralTrainingBookingSection

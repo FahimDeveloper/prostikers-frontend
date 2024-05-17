@@ -11,7 +11,7 @@ const HockyGroupTraining = () => {
   return (
     <Container>
       <div className="lg:pt-16 pt-14 lg:mt-10 mt-9 mx-auto">
-        <GallerySection title="Hokey Group Training" gallery={gallery} />
+        <GallerySection title="Hockey Group Training" gallery={gallery} />
         <GeneralTrainingBookingSection
           title="Engaging Group Hockey Training"
           description="Get ready for competitive play with our Group Hockey Training. Focused on strategic team plays and skill enhancement, our sessions help players make swift decisions and coordinate effectively on the field."
