@@ -8,8 +8,6 @@ import training3 from "../../assets/images/training/kids-training.webp";
 import training4 from "../../assets/images/training/bootcamp-training.webp";
 import coach2 from "../../assets/images/coaches/mark-fields.webp";
 import coach3 from "../../assets/images/coaches/shehan.webp";
-import coach7 from "../../assets/images/coaches/Kavindu.webp";
-import coach9 from "../../assets/images/coaches/zia-shahzad-min.webp";
 import softballBanner from "../../assets/images/programsBanner/softball-banner.webp";
 
 const SportSoftball = () => {
@@ -55,16 +53,6 @@ const SportSoftball = () => {
         name: "Shehan Jayasooriya",
         designation: "Batting Consultant",
         image: coach3,
-      },
-      {
-        name: "Kavindu Dhanapala",
-        designation: "Head Coach",
-        image: coach7,
-      },
-      {
-        name: "Zia Shahzad",
-        designation: "Elite Coach / US major league player",
-        image: coach9,
       },
     ],
   };

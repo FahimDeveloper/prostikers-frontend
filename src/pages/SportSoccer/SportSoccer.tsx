@@ -2,12 +2,11 @@ import training1 from "../../assets/images/training/one-training.webp";
 import training2 from "../../assets/images/training/group-training.webp";
 import training3 from "../../assets/images/training/kids-training.webp";
 import training4 from "../../assets/images/training/bootcamp-training.webp";
-import coach7 from "../../assets/images/coaches/Kavindu.webp";
-import coach9 from "../../assets/images/coaches/zia-shahzad-min.webp";
+// import coach7 from "../../assets/images/coaches/Kavindu.webp";
+// import coach9 from "../../assets/images/coaches/zia-shahzad-min.webp";
 import soccerBanner from "../../assets/images/programsBanner/soccer-banner.webp";
 import BannerSection from "../../common/BannerSection";
 import ProgramSection from "../../common/ProgramSection";
-import CoachesSection from "../../common/CoachesSection";
 import QuestionSection from "../../common/QuestionSection";
 const SportSoccer = () => {
   const programData = {
@@ -37,24 +36,24 @@ const SportSoccer = () => {
       },
     ],
   };
-  const coachesData = {
-    tag: "Soccer Coaching Panel",
-    title: "Coaches to Take You to the Goal",
-    description:
-      "Our soccer coaches are the strategic masterminds and technical experts dedicated to perfecting your pitch and refining your swing. They bring a wealth of experience from the major leagues down to developmental play.",
-    coaches: [
-      {
-        name: "Kavindu Dhanapala",
-        designation: "Head Coach",
-        image: coach7,
-      },
-      {
-        name: "Zia Shahzad",
-        designation: "Elite Coach / US major league player",
-        image: coach9,
-      },
-    ],
-  };
+  // const coachesData = {
+  //   tag: "Soccer Coaching Panel",
+  //   title: "Coaches to Take You to the Goal",
+  //   description:
+  //     "Our soccer coaches are the strategic masterminds and technical experts dedicated to perfecting your pitch and refining your swing. They bring a wealth of experience from the major leagues down to developmental play.",
+  //   coaches: [
+  //     {
+  //       name: "Kavindu Dhanapala",
+  //       designation: "Head Coach",
+  //       image: coach7,
+  //     },
+  //     {
+  //       name: "Zia Shahzad",
+  //       designation: "Elite Coach / US major league player",
+  //       image: coach9,
+  //     },
+  //   ],
+  // };
   const questionData = [
     {
       title: "What are the hours of operation for ProStrikers?",
@@ -111,7 +110,7 @@ const SportSoccer = () => {
     <>
       <BannerSection title="Soccer Programs" image={soccerBanner} />
       <ProgramSection data={programData} />
-      <CoachesSection data={coachesData} />
+      {/* <CoachesSection data={coachesData} /> */}
       <QuestionSection data={questionData} />
     </>
   );

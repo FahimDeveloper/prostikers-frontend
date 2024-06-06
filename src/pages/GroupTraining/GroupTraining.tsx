@@ -26,7 +26,7 @@ const GroupTraining = () => {
       {
         title: "Baseball Training",
         image: training2,
-        link: "/programs/group-training/basball",
+        link: "/programs/group-training/baseball",
         description: [
           "Boost Teamwork & Skills: Group Baseball Training",
           "Expert Coaches, Elevated Game: Baseball Group Sessions",
