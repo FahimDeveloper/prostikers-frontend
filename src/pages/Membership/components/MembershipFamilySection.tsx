@@ -48,8 +48,9 @@ const MembershipFamilySection = () => {
               <li className="flex gap-3">
                 <IoCheckmark className="lg:size-6 size-5 text-[#00CC61]" />
                 <p>
-                  Unbeatable Value: Enjoy significant savings on sessions,
-                  rentals, and purchases from our Pro Shop.
+                  Community and Networking: Connect with fellow athletes, attend
+                  members-only events, and become part of our thriving sports
+                  community.
                 </p>
               </li>
             </ul>

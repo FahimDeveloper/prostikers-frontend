@@ -166,7 +166,10 @@ const MembershipCardSection = () => {
                       <ul className="text-sm membership-list font-medium list-none space-y-4">
                         <li className="flex gap-2">
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <p>Get a monthly membership for only $450</p>
+                          <p>
+                            Get an unlimited monthly membership for only $450
+                            per month
+                          </p>
                         </li>
                         <li className="flex gap-2">
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />

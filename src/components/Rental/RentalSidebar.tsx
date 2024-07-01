@@ -1,4 +1,3 @@
-import { CiDollar } from "react-icons/ci";
 import { GiElectric } from "react-icons/gi";
 import { IoCalendarOutline } from "react-icons/io5";
 import { PiClockCountdownLight } from "react-icons/pi";
@@ -16,73 +15,97 @@ const RentalSidebar = () => {
         <ul className="list-none space-y-4">
           <li className="flex items-center gap-4">
             <IoCalendarOutline className="size-7" />
-            <p className="font-medium text-[#4B4B4B]">Booking for tomorrow</p>
+            <p className="font-medium text-[#4B4B4B]"> Same day Bookings</p>
           </li>
           <li className="flex items-center gap-4">
             <GiElectric className="size-7" />
-            <p className="font-medium text-[#4B4B4B]">Instant Confirmation</p>
-          </li>
-          <li className="flex items-center gap-4">
-            <GiElectric className="size-7" />
-            <p className="font-medium text-[#4B4B4B]">No cancellation</p>
+            <p className="font-medium text-[#4B4B4B]">Flexible Cancellation</p>
             <CancellationPolicy>
               <MdOutlineInfo className="size-6 text-sky-400 cursor-pointer" />
             </CancellationPolicy>
           </li>
           <li className="flex items-center gap-4">
             <PiClockCountdownLight className="size-7" />
-            <p className="font-medium text-[#4B4B4B]">Hourly booking rates</p>
+            <p className="font-medium text-[#4B4B4B]">
+              Hourly cage rental starts at $60
+            </p>
           </li>
           <li className="flex items-center gap-4">
-            <CiDollar className="size-7" />
-            <p className="font-medium text-[#4B4B4B]">$60/hrs</p>
+            <PiClockCountdownLight className="size-7" />
+            <p className="font-medium text-[#4B4B4B]">
+              Minimum time slot: 30 minutes for $40
+            </p>
           </li>
         </ul>
       </div>
       <div className="space-y-5">
         <h3 className="font-semibold text-xl leading-5">What’s Included</h3>
         <ul className="list-none inclueded-list space-y-5 text-base text-[#4B4B4B] font-medium">
-          <li className="flex gap-5 items-center">
+          <li className="flex gap-5">
             <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
-            <p>Field Size 2: 90 X 36</p>
+            <div>
+              <p>Field Size</p>
+              <ul>
+                <li>Indoor Open Cage – 90 x 36</li>
+                <li>Individual Cage – 90 x 12</li>
+              </ul>
+            </div>
           </li>
-          <li className="flex gap-5 items-center">
+          <li className="flex gap-5">
+            <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
+            <p>
+              Book the entire field or all three batting cages for $180 per
+              hour, with inclusive all machines
+            </p>
+          </li>
+          <li className="flex gap-5">
+            <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
+            <p>
+              Pitching mats, hitting mats, machine balls, training balls, tee
+              stands, and I-screens are included
+            </p>
+          </li>
+          <li className="flex gap-5">
+            <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
+            <p>Key goals for soccer and field hockey are included</p>
+          </li>
+          <li className="flex gap-5">
+            <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
+            <p>Gear rentals are available starting at $10 per hour</p>
+          </li>
+          <li className="flex gap-5">
             <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
             <p>
               Professional turf with pace, bounce and spin including three full
               batting length lanes
             </p>
           </li>
-          <li className="flex gap-5 items-center">
-            <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
-            <p>Emergency first aid</p>
-          </li>
-          <li className="flex gap-5 items-center">
+          <li className="flex gap-5">
             <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
             <p>Certified trainers if required (available on prior booking)</p>
           </li>
-          <li className="flex gap-5 items-center">
+          <li className="flex gap-5">
             <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
             <p>Online streaming for activities and games</p>
           </li>
-          <li className="flex gap-5 items-center">
+          <li className="flex gap-5">
             <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
             <p>Inbuilt nets to prevent injuries for players</p>
           </li>
-          <li className="flex gap-5 items-center">
+          <li className="flex gap-5">
             <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
             <p>
               Field training kits available for other sports on rent (Baseball,
               Soft Ball and Cricket)
             </p>
           </li>
-          <li className="flex gap-5 items-center">
+          <li className="flex gap-5">
             <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
-            <p>Rental packages for practice, leagues and tournaments.</p>
+            <p>Rental packages for practice, leagues, and tournaments.</p>
           </li>
-          <li className="flex gap-5 items-center">
+          <li className="flex gap-5">
             <IoIosCheckmarkCircle className="size-7 text-[#87D98B]" />
-            <p>Exclusive membership offers</p>
+            <p> Exclusive membership offers</p>
           </li>
         </ul>
       </div>
