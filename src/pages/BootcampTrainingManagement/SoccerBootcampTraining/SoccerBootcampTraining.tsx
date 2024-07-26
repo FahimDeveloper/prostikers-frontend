@@ -16,6 +16,7 @@ const SoccerBootcampTraining = () => {
         <GeneralTrainingBookingSection
           title="Soccer Training Bootcamps: Elevate Your Game"
           description="Transform your soccer skills at ProStrikers’ Soccer Training Bootcamps. Concentrated sessions will enhance your footwork, control, and strategy, all while fostering the physical and mental toughness needed to succeed on the pitch. Join and become a part of soccer excellence."
+          glofox="https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/classes-week-view?filters_classes=667b23f544d83233cd087731&header=classes"
         />
       </div>
     </Container>

@@ -16,6 +16,7 @@ const HockyBootcampTraining = () => {
         <GeneralTrainingBookingSection
           title="Specialized Hockey Skill Development"
           description="Master the art of field hockey with our specialized one-on-one coaching. ProStrikers offers personalized guidance to refine your stick work, tactical play, and game sense, ensuring you dominate the field with skill and strategy."
+          glofox="https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/classes-week-view?filters_classes=667b229cc156bad942055aa7&header=classes"
         />
       </div>
     </Container>

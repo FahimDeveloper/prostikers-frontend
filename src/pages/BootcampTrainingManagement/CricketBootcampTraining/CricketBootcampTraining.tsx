@@ -16,6 +16,7 @@ const CricketBootcampTraining = () => {
         <GeneralTrainingBookingSection
           title="Cricket Training Bootcamps: Fast-Track Your Mastery"
           description="Experience cricket like never before in our immersive Cricket Training Bootcamps. Engage in intense sessions focusing on all facets of the game, from technical batting drills to advanced bowling techniques, and fielding strategies that create agile, tactically aware players ready for any challenge."
+          glofox="https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/classes-week-view?filters_classes=667b229cc156bad942055aa7&header=classes"
         />
       </div>
     </Container>

@@ -16,6 +16,7 @@ const BaseBallBootcampTraining = () => {
         <GeneralTrainingBookingSection
           title="Baseball Training Bootcamps: Perfect Your Play"
           description="Step into the batter's box with confidence after attending ProStrikers' Baseball Training Bootcamps. Our comprehensive program includes high-velocity pitching clinics, strategic hitting workshops, and defensive play simulations designed to refine your instincts and elevate your game."
+          glofox="https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/classes-week-view?filters_classes=667b22ecd25ab721ea0ea7b6&header=classes"
         />
       </div>
     </Container>

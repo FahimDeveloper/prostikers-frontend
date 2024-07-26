@@ -16,6 +16,7 @@ const SoftballBootcampTraining = () => {
         <GeneralTrainingBookingSection
           title="Customized Softball Training"
           description="Unlock your potential on the diamond with our personalized Softball Training sessions. Work on your pitching, improve your batting average, or sharpen your fielding skills with coaches who understand the intricacies of the game and how to bring out your best."
+          glofox="https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/classes-week-view?filters_classes=667b232469f36a0f8008f86a&header=classes"
         />
       </div>
     </Container>

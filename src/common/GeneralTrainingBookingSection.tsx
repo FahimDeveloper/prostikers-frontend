@@ -1,7 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import RentalSidebar from "../components/Rental/RentalSidebar";
 
-const GeneralTrainingBookingSection = ({ title, description }: any) => {
+const GeneralTrainingBookingSection = ({
+  title,
+  description,
+  glofox,
+}: {
+  title: string;
+  description: string;
+  glofox?: string;
+}) => {
   return (
     <div className="md:py-10 py-6 space-y-10">
       <div className="space-y-5">
@@ -14,12 +22,21 @@ const GeneralTrainingBookingSection = ({ title, description }: any) => {
       </div>
       <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-5 gap-y-5">
         <div className="col-span-2 space-y-5">
-          <iframe
-            src="https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/classes-day-view?header=classes-day-view"
-            width="100%"
-            loading="lazy"
-            className="lg:h-[1710px] h-[1000px]"
-          ></iframe>
+          {!glofox ? (
+            <iframe
+              src="https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/classes-day-view?header=classes-day-view"
+              width="100%"
+              loading="lazy"
+              className="lg:h-[1710px] h-[1000px]"
+            ></iframe>
+          ) : (
+            <iframe
+              src={glofox}
+              width="100%"
+              loading="lazy"
+              className="lg:h-[1710px] h-[1000px]"
+            ></iframe>
+          )}
         </div>
         <RentalSidebar />
       </div>
