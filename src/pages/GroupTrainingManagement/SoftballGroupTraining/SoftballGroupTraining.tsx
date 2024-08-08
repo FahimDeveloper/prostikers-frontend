@@ -14,7 +14,7 @@ const SoftballGroupTraining = () => {
       <div className="lg:pt-16 pt-14 lg:mt-10 mt-9 mx-auto">
         <GallerySection title="Softball Group Training" gallery={gallery} />
         <GeneralTrainingBookingSection
-          title="Customized Softball Training"
+          title="Level Up: Softball Group Training"
           description="Unlock your potential on the diamond with our personalized Softball Training sessions. Work on your pitching, improve your batting average, or sharpen your fielding skills with coaches who understand the intricacies of the game and how to bring out your best."
         />
       </div>

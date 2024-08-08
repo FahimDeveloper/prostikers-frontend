@@ -4,6 +4,7 @@ import ProgramSection from "../../common/ProgramSection";
 import QuestionSection from "../../common/QuestionSection";
 import training1 from "../../assets/images/training/one-training.webp";
 import training2 from "../../assets/images/training/group-training.webp";
+import training3 from "../../assets/images/training/kids-training.webp";
 import training4 from "../../assets/images/training/bootcamp-training.webp";
 import coach8 from "../../assets/images/coaches/pasindu.webp";
 import hockyBanner from "../../assets/images/programsBanner/hocky-banner.webp";
@@ -22,7 +23,12 @@ const SportHocky = () => {
       {
         title: "Group Training",
         image: training2,
-        link: "/programs/Group-training/hockey",
+        link: "/programs/group-training/hockey",
+      },
+      {
+        title: "Kids Training",
+        image: training3,
+        link: "/programs/kids-training/hockey",
       },
       {
         title: "Bootcamps",

@@ -2,7 +2,17 @@
 import { createBrowserRouter } from "react-router-dom";
 import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
-import KidsTrainingOutlet from "../pages/KidsTraining/components/KidsTrainingOutlet";
+const KidsTrainingOutlet = LazyLoad(
+  lazy(() => import("../pages/KidsTraining/components/KidsTrainingOutlet"))
+);
+const HockeyKidsTraining = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/HockeyKidsTraining/HockeyKidsTraining"
+      )
+  )
+);
 const App = LazyLoad(lazy(() => import("../App")));
 const Home = LazyLoad(lazy(() => import("../pages/Home/Home")));
 const Membership = LazyLoad(
@@ -348,6 +358,10 @@ export const router = createBrowserRouter([
           {
             path: "soccer",
             element: <SoccerKidsTraining />,
+          },
+          {
+            path: "hockey",
+            element: <HockeyKidsTraining />,
           },
           {
             path: "softball",
