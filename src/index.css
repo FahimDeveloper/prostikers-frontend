@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 
 @import "tailwindcss/base";
 @import "tailwindcss/components";
@@ -27,6 +28,10 @@ h6 {
 
 .primary-btn {
   @apply btn btn-primary text-white lg:text-xl text-lg font-bold px-10 rounded-full;
+}
+
+.primary-btn-2 {
+  @apply btn bg-primary font-[Manrope] hover:bg-primary text-white font-bold text-base;
 }
 
 .membership-card {

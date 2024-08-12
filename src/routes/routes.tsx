@@ -2,6 +2,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
+import Login from "../pages/Login/Login";
+import Registration from "../pages/Registration/Registration";
 const KidsTrainingOutlet = LazyLoad(
   lazy(() => import("../pages/KidsTraining/components/KidsTrainingOutlet"))
 );
@@ -230,6 +232,14 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/registration",
+        element: <Registration />,
       },
       {
         path: "/coming-soon",
