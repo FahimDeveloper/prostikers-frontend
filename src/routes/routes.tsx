@@ -4,6 +4,9 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import Login from "../pages/Login/Login";
 import Registration from "../pages/Registration/Registration";
+import TtenLeagueOutlet from "../pages/TtenLeague/components/TtenLeagueOutlet";
+import JoinAsIndividual from "../pages/TtenLeagueManagement/JoinAsIndividual/JoinAsIndividual";
+import JoinAsTeam from "../pages/TtenLeagueManagement/JoinAsTeam/JoinAsTeam";
 const KidsTrainingOutlet = LazyLoad(
   lazy(() => import("../pages/KidsTraining/components/KidsTrainingOutlet"))
 );
@@ -411,7 +414,21 @@ export const router = createBrowserRouter([
       },
       {
         path: "/programs/tten-league",
-        element: <TtenLeague />,
+        element: <TtenLeagueOutlet />,
+        children: [
+          {
+            path: "/programs/tten-league",
+            element: <TtenLeague />,
+          },
+          {
+            path: "individual",
+            element: <JoinAsIndividual />,
+          },
+          {
+            path: "team",
+            element: <JoinAsTeam />,
+          },
+        ],
       },
       {
         path: "/franchise",

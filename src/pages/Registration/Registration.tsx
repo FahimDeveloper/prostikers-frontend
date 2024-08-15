@@ -1,38 +1,42 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import logo from "../../assets/icons/login-logo.svg";
-import { AiOutlineLock, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineLock, AiOutlinePhone, AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
+import { useAppDispatch } from "../../hooks/useAppHooks";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
+import { loggedInUser } from "../../redux/features/auth/authSlice";
+import { useRegistrationMutation } from "../../redux/features/auth/authApi";
 const Registration = () => {
-  //   const dispatch = useAppDispatch();
-  //   const [login, { data, isLoading, isError, isSuccess, error }] =
-  //     useLoginMutation();
-  //   useEffect(() => {
-  //     if (isSuccess) {
-  //       Swal.fire({
-  //         title: "Success",
-  //         text: `${data?.message}`,
-  //         icon: "success",
-  //         showConfirmButton: false,
-  //         timer: 1500,
-  //         iconColor: "#0ABAC3",
-  //       });
-  //       dispatch(loggedInUser(data?.results));
-  //     }
-  //     if (isError) {
-  //       Swal.fire({
-  //         title: "Oops..",
-  //         text: `${(error as any)?.data?.message}`,
-  //         icon: "error",
-  //         confirmButtonColor: "#0ABAC3",
-  //       });
-  //     }
-  //   }, [isError, isSuccess, error, data, dispatch]);
+  const dispatch = useAppDispatch();
+  const [registration, { data, isLoading, isError, isSuccess, error }] =
+    useRegistrationMutation();
+  useEffect(() => {
+    if (isSuccess) {
+      Swal.fire({
+        title: "Success",
+        text: `${data?.message}`,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+        iconColor: "#0ABAC3",
+      });
+      dispatch(loggedInUser(data?.results));
+    }
+    if (isError) {
+      Swal.fire({
+        title: "Oops..",
+        text: `${(error as any)?.data?.message}`,
+        icon: "error",
+        confirmButtonColor: "#0ABAC3",
+      });
+    }
+  }, [isError, isSuccess, error, data, dispatch]);
   const onFinish = (values: any) => {
-    // login(values);
-    console.log(values);
+    registration(values);
   };
   return (
     <div className="flex">
@@ -45,40 +49,79 @@ const Registration = () => {
         </h2>
         <div className="w-[480px] space-y-3">
           <h3 className="text-center font-poppins text-2xl font-medium text-[#022B2D]">
-            Login first to your account
+            Create your account
           </h3>
           <Form onFinish={onFinish} layout="vertical" className="space-y-4">
-            <Form.Item
-              name="first_name"
-              rules={[
-                { required: true, message: "Please input your first name!" },
-              ]}
-              label="First Name"
-              className="m-0"
-            >
-              <Input
-                className="h-10"
-                prefix={<AiOutlineUser className="size-5" />}
-                placeholder="First name"
-              />
-            </Form.Item>
-            <Form.Item
-              name="last_name"
-              rules={[
-                { required: true, message: "Please input your last name!" },
-              ]}
-              label="Last Name"
-              className="m-0"
-            >
-              <Input
-                className="h-10"
-                prefix={<AiOutlineUser className="size-5" />}
-                placeholder="Last name"
-              />
-            </Form.Item>
+            <div className="grid grid-cols-2 gap-3">
+              <Form.Item
+                name="first_name"
+                rules={[
+                  { required: true, message: "Please enter your first name!" },
+                ]}
+                label="First Name"
+                className="m-0"
+              >
+                <Input
+                  className="h-10"
+                  prefix={<AiOutlineUser className="size-5" />}
+                  placeholder="First name"
+                />
+              </Form.Item>
+              <Form.Item
+                name="last_name"
+                rules={[
+                  { required: true, message: "Please enter your last name!" },
+                ]}
+                label="Last Name"
+                className="m-0"
+              >
+                <Input
+                  className="h-10"
+                  prefix={<AiOutlineUser className="size-5" />}
+                  placeholder="Last name"
+                />
+              </Form.Item>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <Form.Item
+                name="phone"
+                rules={[{ required: true, message: "Please " }]}
+                label="Phone"
+                className="m-0"
+              >
+                <Input
+                  prefix={<AiOutlinePhone className="size-5" />}
+                  className="h-10"
+                  placeholder="Phone"
+                />
+              </Form.Item>
+              <Form.Item
+                name="gender"
+                rules={[
+                  { required: true, message: "Please select your gender" },
+                ]}
+                label="Gender"
+                className="m-0"
+              >
+                <Select
+                  className="h-10"
+                  placeholder="select gender"
+                  options={[
+                    {
+                      value: "male",
+                      label: "Male",
+                    },
+                    {
+                      value: "female",
+                      label: "Female",
+                    },
+                  ]}
+                />
+              </Form.Item>
+            </div>
             <Form.Item
               name="email"
-              rules={[{ required: true, message: "Please input your email!" }]}
+              rules={[{ required: true, message: "Please enter your email!" }]}
               label="Email"
               className="m-0"
             >
@@ -91,7 +134,7 @@ const Registration = () => {
             <Form.Item
               name="password"
               rules={[
-                { required: true, message: "Please input your Password!" },
+                { required: true, message: "Please enter your Password!" },
               ]}
               label="Password"
               className="m-0"
@@ -102,23 +145,26 @@ const Registration = () => {
                 placeholder="Password"
               />
             </Form.Item>
-            <div className="flex justify-between">
-              <Form.Item
-                name="remember"
-                valuePropName="checked"
-                className="m-0"
-              >
-                <Checkbox>Remember me</Checkbox>
-              </Form.Item>
-              <Link to="/forget-password">
-                <span className="font-poppins text-primary">
-                  Forgot Password?
-                </span>
-              </Link>
-            </div>
+            <Form.Item
+              name="confirm_password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter your confirm password!",
+                },
+              ]}
+              label="Confirm Password"
+              className="m-0"
+            >
+              <Input.Password
+                className="h-10"
+                prefix={<AiOutlineLock className="size-5" />}
+                placeholder="Password"
+              />
+            </Form.Item>
             <Form.Item>
               <Button
-                // loading={isLoading}
+                loading={isLoading}
                 className="primary-btn-2 w-full"
                 htmlType="submit"
               >

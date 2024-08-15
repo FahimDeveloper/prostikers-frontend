@@ -5,34 +5,38 @@ import { AiOutlineLock, AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
+import { useAppDispatch } from "../../hooks/useAppHooks";
+import { useLoginMutation } from "../../redux/features/auth/authApi";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
+import { loggedInUser } from "../../redux/features/auth/authSlice";
 const Login = () => {
-  //   const dispatch = useAppDispatch();
-  //   const [login, { data, isLoading, isError, isSuccess, error }] =
-  //     useLoginMutation();
-  //   useEffect(() => {
-  //     if (isSuccess) {
-  //       Swal.fire({
-  //         title: "Success",
-  //         text: `${data?.message}`,
-  //         icon: "success",
-  //         showConfirmButton: false,
-  //         timer: 1500,
-  //         iconColor: "#0ABAC3",
-  //       });
-  //       dispatch(loggedInUser(data?.results));
-  //     }
-  //     if (isError) {
-  //       Swal.fire({
-  //         title: "Oops..",
-  //         text: `${(error as any)?.data?.message}`,
-  //         icon: "error",
-  //         confirmButtonColor: "#0ABAC3",
-  //       });
-  //     }
-  //   }, [isError, isSuccess, error, data, dispatch]);
+  const dispatch = useAppDispatch();
+  const [login, { data, isLoading, isError, isSuccess, error }] =
+    useLoginMutation();
+  useEffect(() => {
+    if (isSuccess) {
+      Swal.fire({
+        title: "Success",
+        text: `${data?.message}`,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+        iconColor: "#0ABAC3",
+      });
+      dispatch(loggedInUser(data?.results));
+    }
+    if (isError) {
+      Swal.fire({
+        title: "Oops..",
+        text: `${(error as any)?.data?.message}`,
+        icon: "error",
+        confirmButtonColor: "#0ABAC3",
+      });
+    }
+  }, [isError, isSuccess, error, data, dispatch]);
   const onFinish = (values: any) => {
-    console.log(values);
-    // login(values);
+    login(values);
   };
   return (
     <div className="flex">
@@ -90,7 +94,7 @@ const Login = () => {
             </div>
             <Form.Item>
               <Button
-                // loading={isLoading}
+                loading={isLoading}
                 className="primary-btn-2 w-full"
                 htmlType="submit"
               >
@@ -101,7 +105,7 @@ const Login = () => {
           <p className="flex gap-1 justify-center">
             New here?
             <Link
-              to="/login"
+              to="/registration"
               className="no-underline font-medium block text-primary"
             >
               Create your account

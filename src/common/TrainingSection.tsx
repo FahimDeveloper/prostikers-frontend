@@ -15,7 +15,9 @@ const TrainingSection = ({ data }: any) => {
             return (
               <div
                 key={index}
-                className={`lg:col-span-2 sm:col-span-3 col-span-6`}
+                className={`${
+                  data.programs.length > 2 ? "lg:col-span-2" : "lg:col-span-3"
+                } sm:col-span-3 col-span-6`}
               >
                 <TrainingCard data={program} />
               </div>

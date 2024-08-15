@@ -6,8 +6,9 @@ import "slick-carousel/slick/slick-theme.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/routes";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import store, { persistor } from "./redux/store";
 import { ConfigProvider } from "antd";
+import { PersistGate } from "redux-persist/integration/react";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -19,10 +20,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           },
         }}
       >
-        {/* <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={null} persistor={persistor}>
           <RouterProvider router={router} />
-        </PersistGate> */}
-        <RouterProvider router={router} />
+        </PersistGate>
       </ConfigProvider>
     </Provider>
   </React.StrictMode>

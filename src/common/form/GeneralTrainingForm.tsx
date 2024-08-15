@@ -4,7 +4,13 @@ import TermsCondition from "../../components/TermsCondition";
 import PrivacyPolicy from "../../components/PrivacyPolicy";
 import Container from "../../components/Container";
 
-const GeneralTrainingForm = ({ form, onFinish }: any) => {
+const GeneralTrainingForm = ({
+  form,
+  onFinish,
+}: {
+  form: any;
+  onFinish: any;
+}) => {
   return (
     <Container>
       <div className="bg-[#F9FBFF] p-5">

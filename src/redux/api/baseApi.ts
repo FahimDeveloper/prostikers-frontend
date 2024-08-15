@@ -4,7 +4,6 @@ import {
   BaseQueryFn,
   DefinitionType,
   FetchArgs,
-  createApi,
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
@@ -23,7 +22,7 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithRefreshToken: BaseQueryFn<
+export const baseQueryWithRefreshToken: BaseQueryFn<
   FetchArgs,
   BaseQueryApi,
   DefinitionType
@@ -36,13 +35,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     });
     const data = await res.json();
     if (data.success) {
-      const user = (api.getState() as RootState).auth.user;
-      api.dispatch(
-        loggedInUser({
-          user,
-          token: data.data.accessToken,
-        })
-      );
+      api.dispatch(loggedInUser(data.results));
       result = await baseQuery(args, api, extraOptions);
     } else {
       api.dispatch(loggedOutUser());
@@ -50,9 +43,3 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   }
   return result;
 };
-
-export const baseApi = createApi({
-  reducerPath: "baseApi",
-  baseQuery: baseQueryWithRefreshToken,
-  endpoints: () => ({}),
-});

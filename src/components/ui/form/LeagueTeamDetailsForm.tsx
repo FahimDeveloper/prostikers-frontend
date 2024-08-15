@@ -1,0 +1,118 @@
+import { Button, DatePicker, Form, Input } from "antd";
+import { AiOutlineMinusCircle } from "react-icons/ai";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const LeagueTeamDetailsForm = ({ form }: { form: any }) => {
+  return (
+    <div className="space-y-5">
+      <div className="space-y-2">
+        <h3 className="text-2xl font-bold text-[#07133D]">General Details</h3>
+        <p className="text-[#929292] text-base">
+          Fill out this form to regester for upcoming trainings
+        </p>
+      </div>
+      <Form form={form} layout="vertical">
+        <Form.Item label="Team Name">
+          <Input
+            placeholder="Enter your team name"
+            className="w-1/2 rounded-full p-2"
+          />
+        </Form.Item>
+        <Form.List name="users">
+          {(fields, { add, remove }) => (
+            <>
+              {fields.map(({ key, name, ...restField }, index) => (
+                <div className="space-y-2">
+                  <h4 className="font-medium text-lg text-[#7B7B7B]">
+                    Player
+                    {index == 0 ? ` ${index + 1} (Team Lead)` : ` ${index + 1}`}
+                  </h4>
+                  <div
+                    key={key}
+                    className="grid grid-cols-5 gap-3 items-center"
+                  >
+                    <Form.Item
+                      label="First Name"
+                      {...restField}
+                      name={[name, "firstName"]}
+                      rules={[
+                        { required: true, message: "Missing first name" },
+                      ]}
+                    >
+                      <Input
+                        placeholder="Type here..."
+                        className="w-full rounded-full p-2"
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Last Name"
+                      {...restField}
+                      name={[name, "lastName"]}
+                      rules={[{ required: true, message: "Missing last name" }]}
+                    >
+                      <Input
+                        placeholder="Type here..."
+                        className="w-full rounded-full p-2"
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Date of Birth"
+                      {...restField}
+                      name={[name, "date_of_birth"]}
+                      rules={[
+                        { required: true, message: "Missing date of birth" },
+                      ]}
+                    >
+                      <DatePicker
+                        placeholder="Select date"
+                        className="w-full rounded-full p-2"
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      label="Email"
+                      {...restField}
+                      name={[name, "email"]}
+                      rules={[{ required: true, message: "Missing email" }]}
+                    >
+                      <Input
+                        placeholder="Type here..."
+                        className="w-full rounded-full p-2"
+                      />
+                    </Form.Item>
+                    <div className="flex items-center gap-2">
+                      <Form.Item
+                        label="Contact"
+                        {...restField}
+                        name={[name, "contact"]}
+                        rules={[{ required: true, message: "Missing contact" }]}
+                      >
+                        <Input
+                          placeholder="Type here..."
+                          className="w-full rounded-full p-2"
+                        />
+                      </Form.Item>
+                      <AiOutlineMinusCircle
+                        className="size-4 cursor-pointer"
+                        onClick={() => remove(name)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <Form.Item>
+                <Button
+                  className="btn bg-[#07133D] hover:bg-[#07133D] text-white text-base font-medium px-5 rounded-full"
+                  onClick={() => add()}
+                >
+                  Add Member
+                </Button>
+              </Form.Item>
+            </>
+          )}
+        </Form.List>
+      </Form>
+    </div>
+  );
+};
+
+export default LeagueTeamDetailsForm;
