@@ -8,13 +8,16 @@ const LeagueTeamSteps = ({
   form,
   onSubmit,
   loading,
+  current,
+  setCurrent,
 }: {
   form: any;
   onSubmit: any;
   loading: boolean;
+  current: number;
+  setCurrent: any;
 }) => {
   const [formData, setFormData] = useState<any>({});
-  const [current, setCurrent] = useState(0);
   const steps = [
     {
       title: "General Details",

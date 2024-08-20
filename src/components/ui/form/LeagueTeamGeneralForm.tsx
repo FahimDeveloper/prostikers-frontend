@@ -1,4 +1,4 @@
-import { DatePicker, Form, Input, Select } from "antd";
+import { DatePicker, Form, Input, InputNumber, Select } from "antd";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const LeagueTeamGeneralForm = ({ form }: { form: any }) => {
@@ -11,10 +11,11 @@ const LeagueTeamGeneralForm = ({ form }: { form: any }) => {
         </p>
       </div>
       <Form form={form} layout="vertical">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           <Form.Item
             label="First Name"
-            name="firstName"
+            name="first_name"
+            className="m-0"
             rules={[{ required: true }]}
           >
             <Input
@@ -24,7 +25,8 @@ const LeagueTeamGeneralForm = ({ form }: { form: any }) => {
           </Form.Item>
           <Form.Item
             label="Last Name"
-            name="lastName"
+            name="last_name"
+            className="m-0"
             rules={[{ required: true }]}
           >
             <Input
@@ -33,49 +35,56 @@ const LeagueTeamGeneralForm = ({ form }: { form: any }) => {
             />
           </Form.Item>
           <Form.Item
-            label="Skill Lavel"
-            name="skill_lavel"
+            label="Email"
+            name="email"
+            className="m-0"
             rules={[{ required: true }]}
           >
-            <Select
-              className=""
-              placeholder="Select skill"
-              options={[
-                { value: "8:00 am", label: "8:00 am " },
-                { value: "10:00 am", label: "10:00 am" },
-                { value: "12:00 pm", label: "12:00 pm" },
-              ]}
-            />
-          </Form.Item>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <Form.Item label="Email" name="email" rules={[{ required: true }]}>
             <Input
               className="w-full rounded-full p-2"
               placeholder="Type here.."
             />
           </Form.Item>
-          <Form.Item label="Phone" name="phone" rules={[{ required: true }]}>
-            <Input
-              className="w-full rounded-full p-2"
-              placeholder="Type here.."
-            />
-          </Form.Item>
-        </div>
-        <div className="grid grid-cols-3 gap-4">
           <Form.Item
-            label="Date of birth"
-            name="date_of_birth"
+            label="Phone"
+            name="phone"
+            className="m-0"
             rules={[{ required: true }]}
           >
-            <DatePicker
+            <Input
               className="w-full rounded-full p-2"
               placeholder="Type here.."
+            />
+          </Form.Item>
+          <Form.Item
+            label="Age"
+            name="age"
+            className="m-0"
+            rules={[{ required: true }]}
+          >
+            <InputNumber
+              className="w-full rounded-full p-1"
+              placeholder="Type here.."
+              min={0}
+              max={99}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Sport"
+            name="sport"
+            className="m-0"
+            rules={[{ required: true }]}
+          >
+            <Input
+              className="w-full rounded-full p-2 capitalize"
+              placeholder="Type here.."
+              readOnly
             />
           </Form.Item>
           <Form.Item
             label="Training preferred time"
             name="preferred_time"
+            className="m-0"
             rules={[{ required: true }]}
           >
             <Select
@@ -93,6 +102,7 @@ const LeagueTeamGeneralForm = ({ form }: { form: any }) => {
           <Form.Item
             label="Training preferred date"
             name="preferred_date"
+            className="m-0"
             rules={[{ required: true }]}
           >
             <DatePicker
@@ -100,11 +110,10 @@ const LeagueTeamGeneralForm = ({ form }: { form: any }) => {
               placeholder="select date"
             />
           </Form.Item>
-        </div>
-        <div className="grid grid-cols-2 gap-x-5">
           <Form.Item
             label="Street Address"
-            name="address"
+            name="street_address"
+            className="m-0"
             rules={[{ required: true }]}
           >
             <Input
@@ -115,6 +124,7 @@ const LeagueTeamGeneralForm = ({ form }: { form: any }) => {
           <Form.Item
             label="City"
             name="city"
+            className="m-0"
             rules={[{ required: true, message: "Enter your city" }]}
           >
             <Input
@@ -125,6 +135,7 @@ const LeagueTeamGeneralForm = ({ form }: { form: any }) => {
           <Form.Item
             label="State/Province"
             name="state"
+            className="m-0"
             rules={[{ required: true }]}
           >
             <Input
@@ -134,7 +145,8 @@ const LeagueTeamGeneralForm = ({ form }: { form: any }) => {
           </Form.Item>
           <Form.Item
             label="Zip/Postal Code"
-            name="zip"
+            name="zip_code"
+            className="m-0"
             rules={[{ required: true }]}
           >
             <Input

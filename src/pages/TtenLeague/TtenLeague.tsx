@@ -14,7 +14,7 @@ const TtenLeague = () => {
       {
         title: "Join as Individual",
         image: training1,
-        link: "/coming-soon",
+        link: "individual",
         description: [
           "Play without needing a full team: Register as an individual and we'll find you a team!",
           "Test Your Skills in the Fast-Paced T10 League: This point emphasizes the action and challenge of the T10 format, appealing to cricketers who want to push their abilities.",
@@ -24,7 +24,7 @@ const TtenLeague = () => {
       {
         title: "Join as team",
         image: training2,
-        link: "/coming-soon",
+        link: "team",
         description: [
           "Team Up with Friends: Gather a group of six and register together to play alongside your cricket buddies.",
           "Unleash Team Spirit: Join forces with friends or fellow enthusiasts to experience the adrenaline rush of T10 cricket. Participate as a team and immerse yourselves in the high- energy matches, where every moment counts towards victory and glory.",

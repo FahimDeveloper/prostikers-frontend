@@ -10,7 +10,7 @@ import coach7 from "../../assets/images/coaches/Kavindu.webp";
 import coach9 from "../../assets/images/coaches/zia-shahzad-min.webp";
 import BannerSection from "../../common/BannerSection";
 import QuestionSection from "../../common/QuestionSection";
-import baseballBanner from "../..//assets/images/programsBanner/baseball-banner.webp";
+import baseballBanner from "../../assets/images/programsBanner/baseball-banner.webp";
 
 const SportBaseball = () => {
   const programData = {

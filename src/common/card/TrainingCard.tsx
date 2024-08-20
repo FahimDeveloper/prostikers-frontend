@@ -21,8 +21,12 @@ const TrainingCard = ({ data }: { data: Tprop }) => {
             {data?.title}
           </h3>
           <ul className="ms-6 text-[#777777] space-y-2">
-            {data?.description?.map((des) => {
-              return <li className="leading-6">{des}</li>;
+            {data?.description?.map((des, index) => {
+              return (
+                <li key={index} className="leading-6">
+                  {des}
+                </li>
+              );
             })}
           </ul>
         </div>

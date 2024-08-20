@@ -2,11 +2,78 @@
 import { createBrowserRouter } from "react-router-dom";
 import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
-import Login from "../pages/Login/Login";
-import Registration from "../pages/Registration/Registration";
-import TtenLeagueOutlet from "../pages/TtenLeague/components/TtenLeagueOutlet";
-import JoinAsIndividual from "../pages/TtenLeagueManagement/JoinAsIndividual/JoinAsIndividual";
-import JoinAsTeam from "../pages/TtenLeagueManagement/JoinAsTeam/JoinAsTeam";
+const Login = LazyLoad(lazy(() => import("../pages/Login/Login")));
+const Registration = LazyLoad(
+  lazy(() => import("../pages/Registration/Registration"))
+);
+const TtenLeagueOutlet = LazyLoad(
+  lazy(() => import("../pages/TtenLeague/components/TtenLeagueOutlet"))
+);
+const JoinAsIndividual = LazyLoad(
+  lazy(
+    () =>
+      import("../pages/TtenLeagueManagement/JoinAsIndividual/JoinAsIndividual")
+  )
+);
+const JoinAsTeam = LazyLoad(
+  lazy(() => import("../pages/TtenLeagueManagement/JoinAsTeam/JoinAsTeam"))
+);
+const JoinAsIndividualRegistration = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/TtenLeagueManagement/JoinAsIndividualRegistration/JoinAsIndividualRegistration"
+      )
+  )
+);
+const JoinAsTeamRegistration = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/TtenLeagueManagement/JoinAsTeamRegistration/JoinAsTeamRegistration"
+      )
+  )
+);
+const BaseBallBootcampTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/BaseBallBootcampTrainingReservation/BaseBallBootcampTrainingReservation"
+      )
+  )
+);
+const CricketBootcampTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/CricketBootcampTrainingReservation/CricketBootcampTrainingReservation"
+      )
+  )
+);
+const SoccerBootcampTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/SoccerBootcampTrainingReservation/SoccerBootcampTrainingReservation"
+      )
+  )
+);
+const HockeyBootcampTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/HockeyBootcampTrainingReservation/HockeyBootcampTrainingReservation"
+      )
+  )
+);
+const SoftballBootcampTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/SoftballBootcampTrainingReservation/SoftballBootcampTrainingReservation"
+      )
+  )
+);
 const KidsTrainingOutlet = LazyLoad(
   lazy(() => import("../pages/KidsTraining/components/KidsTrainingOutlet"))
 );
@@ -410,6 +477,26 @@ export const router = createBrowserRouter([
             path: "softball",
             element: <SoftballBootcampTraining />,
           },
+          {
+            path: "baseball/:id",
+            element: <BaseBallBootcampTrainingReservation />,
+          },
+          {
+            path: "cricket/:id",
+            element: <CricketBootcampTrainingReservation />,
+          },
+          {
+            path: "soccer/:id",
+            element: <SoccerBootcampTrainingReservation />,
+          },
+          {
+            path: "hockey/:id",
+            element: <HockeyBootcampTrainingReservation />,
+          },
+          {
+            path: "softball/:id",
+            element: <SoftballBootcampTrainingReservation />,
+          },
         ],
       },
       {
@@ -427,6 +514,14 @@ export const router = createBrowserRouter([
           {
             path: "team",
             element: <JoinAsTeam />,
+          },
+          {
+            path: "individual/:id",
+            element: <JoinAsIndividualRegistration />,
+          },
+          {
+            path: "team/:id",
+            element: <JoinAsTeamRegistration />,
           },
         ],
       },

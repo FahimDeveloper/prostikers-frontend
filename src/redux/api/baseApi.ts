@@ -16,7 +16,7 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
     if (token) {
-      headers.set("Authorization", token);
+      headers.set("Authorization", `Bearer ${token}`);
     }
     return headers;
   },
@@ -34,7 +34,7 @@ export const baseQueryWithRefreshToken: BaseQueryFn<
       credentials: "include",
     });
     const data = await res.json();
-    if (data.success) {
+    if (data.results) {
       api.dispatch(loggedInUser(data.results));
       result = await baseQuery(args, api, extraOptions);
     } else {

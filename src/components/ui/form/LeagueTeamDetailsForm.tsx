@@ -1,7 +1,7 @@
-import { Button, DatePicker, Form, Input } from "antd";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Button, Form, Input, InputNumber } from "antd";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const LeagueTeamDetailsForm = ({ form }: { form: any }) => {
   return (
     <div className="space-y-5">
@@ -12,13 +12,17 @@ const LeagueTeamDetailsForm = ({ form }: { form: any }) => {
         </p>
       </div>
       <Form form={form} layout="vertical">
-        <Form.Item label="Team Name">
+        <Form.Item
+          label="Team Name"
+          name="team_name"
+          rules={[{ required: true }]}
+        >
           <Input
             placeholder="Enter your team name"
             className="w-1/2 rounded-full p-2"
           />
         </Form.Item>
-        <Form.List name="users">
+        <Form.List name="team">
           {(fields, { add, remove }) => (
             <>
               {fields.map(({ key, name, ...restField }, index) => (
@@ -34,7 +38,7 @@ const LeagueTeamDetailsForm = ({ form }: { form: any }) => {
                     <Form.Item
                       label="First Name"
                       {...restField}
-                      name={[name, "firstName"]}
+                      name={[name, "first_name"]}
                       rules={[
                         { required: true, message: "Missing first name" },
                       ]}
@@ -47,7 +51,7 @@ const LeagueTeamDetailsForm = ({ form }: { form: any }) => {
                     <Form.Item
                       label="Last Name"
                       {...restField}
-                      name={[name, "lastName"]}
+                      name={[name, "last_name"]}
                       rules={[{ required: true, message: "Missing last name" }]}
                     >
                       <Input
@@ -56,16 +60,18 @@ const LeagueTeamDetailsForm = ({ form }: { form: any }) => {
                       />
                     </Form.Item>
                     <Form.Item
-                      label="Date of Birth"
+                      label="Age"
                       {...restField}
-                      name={[name, "date_of_birth"]}
+                      name={[name, "age"]}
                       rules={[
                         { required: true, message: "Missing date of birth" },
                       ]}
                     >
-                      <DatePicker
-                        placeholder="Select date"
-                        className="w-full rounded-full p-2"
+                      <InputNumber
+                        placeholder="Type here..."
+                        className="w-full rounded-full p-1"
+                        min={0}
+                        max={99}
                       />
                     </Form.Item>
                     <Form.Item

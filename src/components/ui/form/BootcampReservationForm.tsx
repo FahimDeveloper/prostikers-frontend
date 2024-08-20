@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, Input, InputNumber, Select } from "antd";
 
-const LeagueIndividualForm = ({
+const BootcampReservationForm = ({
   form,
   onFinish,
   loading,
@@ -145,4 +145,4 @@ const LeagueIndividualForm = ({
   );
 };
 
-export default LeagueIndividualForm;
+export default BootcampReservationForm;
