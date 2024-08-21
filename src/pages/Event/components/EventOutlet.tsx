@@ -1,6 +1,6 @@
 import { Outlet, ScrollRestoration } from "react-router-dom";
 
-const TtenLeagueOutlet = () => {
+const EventOutlet = () => {
   return (
     <>
       <Outlet />
@@ -9,4 +9,4 @@ const TtenLeagueOutlet = () => {
   );
 };
 
-export default TtenLeagueOutlet;
+export default EventOutlet;

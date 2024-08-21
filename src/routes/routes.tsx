@@ -2,27 +2,28 @@
 import { createBrowserRouter } from "react-router-dom";
 import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
+import PrivetRoute from "./PrivetRoute";
+import ProtectAuthRoute from "./ProtectAuthRoute";
 const Login = LazyLoad(lazy(() => import("../pages/Login/Login")));
 const Registration = LazyLoad(
   lazy(() => import("../pages/Registration/Registration"))
 );
-const TtenLeagueOutlet = LazyLoad(
-  lazy(() => import("../pages/TtenLeague/components/TtenLeagueOutlet"))
+const EventOutlet = LazyLoad(
+  lazy(() => import("../pages/Event/components/EventOutlet"))
 );
 const JoinAsIndividual = LazyLoad(
   lazy(
-    () =>
-      import("../pages/TtenLeagueManagement/JoinAsIndividual/JoinAsIndividual")
+    () => import("../pages/EventManagement/JoinAsIndividual/JoinAsIndividual")
   )
 );
 const JoinAsTeam = LazyLoad(
-  lazy(() => import("../pages/TtenLeagueManagement/JoinAsTeam/JoinAsTeam"))
+  lazy(() => import("../pages/EventManagement/JoinAsTeam/JoinAsTeam"))
 );
 const JoinAsIndividualRegistration = LazyLoad(
   lazy(
     () =>
       import(
-        "../pages/TtenLeagueManagement/JoinAsIndividualRegistration/JoinAsIndividualRegistration"
+        "../pages/EventManagement/JoinAsIndividualRegistration/JoinAsIndividualRegistration"
       )
   )
 );
@@ -30,7 +31,7 @@ const JoinAsTeamRegistration = LazyLoad(
   lazy(
     () =>
       import(
-        "../pages/TtenLeagueManagement/JoinAsTeamRegistration/JoinAsTeamRegistration"
+        "../pages/EventManagement/JoinAsTeamRegistration/JoinAsTeamRegistration"
       )
   )
 );
@@ -121,9 +122,7 @@ const KidsTraining = LazyLoad(
 const BootcampTraining = LazyLoad(
   lazy(() => import("../pages/BootcampTraining/BootcampTraining"))
 );
-const TtenLeague = LazyLoad(
-  lazy(() => import("../pages/TtenLeague/TtenLeague"))
-);
+const Event = LazyLoad(lazy(() => import("../pages/Event/Event")));
 const BaseBallOneTraining = LazyLoad(
   lazy(
     () =>
@@ -305,11 +304,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <ProtectAuthRoute>
+            <Login />
+          </ProtectAuthRoute>
+        ),
       },
       {
         path: "/registration",
-        element: <Registration />,
+        element: (
+          <ProtectAuthRoute>
+            <Registration />
+          </ProtectAuthRoute>
+        ),
       },
       {
         path: "/coming-soon",
@@ -479,33 +486,53 @@ export const router = createBrowserRouter([
           },
           {
             path: "baseball/:id",
-            element: <BaseBallBootcampTrainingReservation />,
+            element: (
+              <PrivetRoute>
+                <BaseBallBootcampTrainingReservation />
+              </PrivetRoute>
+            ),
           },
           {
             path: "cricket/:id",
-            element: <CricketBootcampTrainingReservation />,
+            element: (
+              <PrivetRoute>
+                <CricketBootcampTrainingReservation />
+              </PrivetRoute>
+            ),
           },
           {
             path: "soccer/:id",
-            element: <SoccerBootcampTrainingReservation />,
+            element: (
+              <PrivetRoute>
+                <SoccerBootcampTrainingReservation />
+              </PrivetRoute>
+            ),
           },
           {
             path: "hockey/:id",
-            element: <HockeyBootcampTrainingReservation />,
+            element: (
+              <PrivetRoute>
+                <HockeyBootcampTrainingReservation />
+              </PrivetRoute>
+            ),
           },
           {
             path: "softball/:id",
-            element: <SoftballBootcampTrainingReservation />,
+            element: (
+              <PrivetRoute>
+                <SoftballBootcampTrainingReservation />
+              </PrivetRoute>
+            ),
           },
         ],
       },
       {
-        path: "/programs/tten-league",
-        element: <TtenLeagueOutlet />,
+        path: "/programs/events",
+        element: <EventOutlet />,
         children: [
           {
-            path: "/programs/tten-league",
-            element: <TtenLeague />,
+            path: "/programs/events",
+            element: <Event />,
           },
           {
             path: "individual",
@@ -517,11 +544,19 @@ export const router = createBrowserRouter([
           },
           {
             path: "individual/:id",
-            element: <JoinAsIndividualRegistration />,
+            element: (
+              <PrivetRoute>
+                <JoinAsIndividualRegistration />
+              </PrivetRoute>
+            ),
           },
           {
             path: "team/:id",
-            element: <JoinAsTeamRegistration />,
+            element: (
+              <PrivetRoute>
+                <JoinAsTeamRegistration />
+              </PrivetRoute>
+            ),
           },
         ],
       },

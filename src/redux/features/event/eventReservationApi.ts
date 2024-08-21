@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { eventReservationApiSlice } from "../../api/httpsSlice";
 
 const eventReservationApi = eventReservationApiSlice.injectEndpoints({

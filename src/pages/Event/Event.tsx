@@ -5,11 +5,11 @@ import banner from "../../assets/images/programsBanner/tten-league-banner.webp";
 import training1 from "../../assets/images/t10-league/individual.webp";
 import training2 from "../../assets/images/t10-league/as-team.webp";
 
-const TtenLeague = () => {
+const Event = () => {
   const trainingData = {
-    title: "Join the Thrilling T10 Cricket League",
+    title: "Join the Thrilling Events",
     description:
-      "Compete in the fast-paced and exhilarating T10 Cricket League at ProStrikers. This action-packed format promises high-energy matches and a platform to showcase your cricketing prowess. Join as an individual or as a team and revel in the thrill of short-form cricket at its finest.",
+      "Compete in the fast-paced and exhilarating Events at ProStrikers. This action-packed format promises high-energy matches and a platform to showcase your cricketing prowess. Join as an individual or as a team and revel in the thrill of short-form cricket at its finest.",
     programs: [
       {
         title: "Join as Individual",
@@ -87,11 +87,11 @@ const TtenLeague = () => {
   ];
   return (
     <>
-      <BannerSection title="T10 League" image={banner} />
+      <BannerSection title="Events" image={banner} />
       <TrainingSection data={trainingData} />
       <QuestionSection data={questionData} />
     </>
   );
 };
 
-export default TtenLeague;
+export default Event;

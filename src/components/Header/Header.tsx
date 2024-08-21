@@ -6,9 +6,12 @@ import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { Modal } from "antd";
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const user = useSelector(selectCurrentUser);
   return (
     <div className="fixed w-full z-50 lg:top-5 top-4">
       <div className="sm:px-14 px-5">
@@ -47,10 +50,10 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  to="/programs/tten-league"
+                  to="/programs/events"
                   className="no-underline text-[#1C1C1C] inline-block"
                 >
-                  League
+                  Events
                 </Link>
               </li>
               <li>
@@ -63,15 +66,24 @@ const Header = () => {
               </li>
             </ul>
           </nav>
-          <div className="lg:flex items-center gap-5 hidden">
-            <div className="flex items-center gap-2 text-md cursor-pointer">
-              <IoCartOutline className="size-6" /> Cart
+          {!user ? (
+            <Link to="/login" className="block no-underline">
+              <div className="bg-[#EAFFFF] cursor-pointer border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-center gap-3 py-2 px-5">
+                Login
+              </div>
+            </Link>
+          ) : (
+            <div className="lg:flex items-center gap-5 hidden">
+              <div className="flex items-center gap-2 text-md cursor-pointer">
+                <IoCartOutline className="size-6" /> Cart
+              </div>
+              <div className="bg-[#EAFFFF] cursor-pointer border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-center gap-3 py-2 px-5">
+                <HiOutlineUserCircle className="size-7" />
+                Account
+              </div>
             </div>
-            <div className="bg-[#EAFFFF] cursor-pointer border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-center gap-3 py-2 px-5">
-              <HiOutlineUserCircle className="size-7" />
-              Account
-            </div>
-          </div>
+          )}
+
           <div className="flex gap-5 lg:hidden">
             <IoCartOutline className="size-7" />
             <HiOutlineBars3BottomRight
@@ -122,10 +134,10 @@ const Header = () => {
                   <li className="py-3">
                     <Link
                       onClick={() => setOpen(false)}
-                      to="/programs/tten-league"
+                      to="/programs/events"
                       className="no-underline text-[#1C1C1C] flex justify-between items-center"
                     >
-                      League
+                      Events
                       <IoIosArrowForward className="size-5" />
                     </Link>
                   </li>

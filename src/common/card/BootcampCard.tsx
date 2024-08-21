@@ -1,13 +1,42 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "antd";
 import moment from "moment";
 import { CiBadgeDollar, CiCalendar } from "react-icons/ci";
 import { FaUserGraduate } from "react-icons/fa";
 import { IoTimeOutline } from "react-icons/io5";
 import { TbUsers } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  selectCurrentToken,
+  selectCurrentUser,
+} from "../../redux/features/auth/authSlice";
+import Swal from "sweetalert2";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const BootcampCard = ({ image, data }: { image: any; data: any }) => {
+  const user = useSelector(selectCurrentUser);
+  const location = useLocation();
+  const token = useSelector(selectCurrentToken);
+  const navigate = useNavigate();
+  const onClick = () => {
+    if (!user && !token) {
+      Swal.fire({
+        title: "Login First",
+        text: "You need to login for bootcamp registration",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#0ABAC3",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Go for login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    } else {
+      navigate(`${data._id}`, { state: { sport: data.sport } });
+    }
+  };
   return (
     <div className="space-y-3 p-2 border border-solid border-[#F8F8F8] rounded-md shadow-md">
       <div className="relative">
@@ -91,9 +120,9 @@ const BootcampCard = ({ image, data }: { image: any; data: any }) => {
           </div>
         </div>
       </div>
-      <Link to={data?._id} state={{ sport: data?.sport }} className="block">
-        <Button className="primary-btn-2 w-full">Enroll now</Button>
-      </Link>
+      <Button onClick={onClick} className="primary-btn-2 w-full">
+        Enroll now
+      </Button>
     </div>
   );
 };

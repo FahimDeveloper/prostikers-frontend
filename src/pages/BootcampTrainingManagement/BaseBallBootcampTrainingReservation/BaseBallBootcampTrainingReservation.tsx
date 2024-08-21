@@ -18,7 +18,6 @@ const BaseBallBootcampTrainingReservation = () => {
   const onFinish = (values: any) => {
     values.course = id;
     values.sport = state.sport;
-    values.trainer = state.trainer;
     create(values);
   };
   useEffect(() => {
