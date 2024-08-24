@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useBootcampsQuery } from "../../../redux/features/bootcamp/bootcampApi";
 import { useTrainersQuery } from "../../../redux/features/tainer/trainerApi";
 import { Select } from "antd";
-import RentalSidebar from "../../../components/Rental/RentalSidebar";
+import BookingSidebar from "../../../components/BookingSidebar/BookingSidebar";
 import BootcampCard from "../../../common/card/BootcampCard";
 
 const HockyBootcampTraining = () => {
@@ -25,7 +25,7 @@ const HockyBootcampTraining = () => {
   const { data: trainerData } = useTrainersQuery(undefined);
   const options = trainerData?.results?.map((trainer: any) => {
     return {
-      value: `${trainer.first_name} ${trainer.last_name}`,
+      value: trainer._id,
       label: `${trainer.first_name} ${trainer.last_name}`,
     };
   });
@@ -52,7 +52,7 @@ const HockyBootcampTraining = () => {
   };
   return (
     <Container>
-      <div className="lg:pt-16 pt-14 lg:mt-10 mt-9 mx-auto space-y-10">
+      <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto space-y-10">
         <GallerySection title="Hockey Training Bootcamps" gallery={gallery} />
         <div className="space-y-5">
           <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
@@ -97,7 +97,7 @@ const HockyBootcampTraining = () => {
                 </div>
               )}
             </div>
-            <RentalSidebar />
+            <BookingSidebar />
           </div>
         </div>
       </div>

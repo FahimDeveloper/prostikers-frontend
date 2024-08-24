@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import RentalSidebar from "../components/Rental/RentalSidebar";
+import BookingSidebar from "../components/BookingSidebar/BookingSidebar";
 
 const GeneralTrainingBookingSection = ({
   title,
@@ -38,7 +38,7 @@ const GeneralTrainingBookingSection = ({
             ></iframe>
           )}
         </div>
-        <RentalSidebar />
+        <BookingSidebar />
       </div>
     </div>
   );

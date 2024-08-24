@@ -44,3 +44,26 @@ export const trainerApiSlice = createApi({
   }),
   endpoints: () => ({}),
 });
+
+export const facilityApiSlice = createApi({
+  reducerPath: "facilityApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: baseUrl.BASE_URL,
+  }),
+  endpoints: () => ({}),
+});
+
+export const facilityReservationCartApiSlice = createApi({
+  reducerPath: "facilityReservatioCartApi",
+  baseQuery: baseQueryWithRefreshToken,
+  tagTypes: ["carts"],
+  endpoints: () => ({}),
+});
+
+export const appointmentApiSlice = createApi({
+  reducerPath: "appointmentApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: baseUrl.BASE_URL,
+  }),
+  endpoints: () => ({}),
+});

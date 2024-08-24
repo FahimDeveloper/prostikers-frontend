@@ -1,7 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 
-const initialState = {
+type IState = {
+  user: null | {
+    _id: string;
+    first_name: string;
+    last_name: string;
+    image: string;
+    email: string;
+    role: string;
+  };
+  token: null | string;
+};
+
+const initialState: IState = {
   user: null,
   token: null,
 };

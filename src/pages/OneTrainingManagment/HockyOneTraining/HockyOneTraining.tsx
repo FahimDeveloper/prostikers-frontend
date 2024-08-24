@@ -11,7 +11,7 @@ const HockyOneTraining = () => {
   const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   return (
     <Container>
-      <div className="lg:pt-16 pt-14 lg:mt-10 mt-9 mx-auto">
+      <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto">
         <GallerySection
           title="Field Hockey One on One Training"
           gallery={gallery}

@@ -91,7 +91,9 @@ const Home = LazyLoad(lazy(() => import("../pages/Home/Home")));
 const Membership = LazyLoad(
   lazy(() => import("../pages/Membership/Membership"))
 );
-const Rental = LazyLoad(lazy(() => import("../pages/Rental/Rental")));
+const RentalFacility = LazyLoad(
+  lazy(() => import("../pages/RentalFacility/RentalFacility"))
+);
 const About = LazyLoad(lazy(() => import("../pages/About/About")));
 const Contact = LazyLoad(lazy(() => import("../pages/Contact/Contact")));
 const Academy = LazyLoad(lazy(() => import("../pages/Academy/Academy")));
@@ -331,8 +333,8 @@ export const router = createBrowserRouter([
         element: <Shop />,
       },
       {
-        path: "/rental",
-        element: <Rental />,
+        path: "/rental-facility",
+        element: <RentalFacility />,
       },
       {
         path: "/about",

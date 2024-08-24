@@ -58,7 +58,7 @@ const Membership = () => {
     },
   ];
   return (
-    <div className="lg:pt-16 pt-14 lg:mt-10 mt-9 mx-auto">
+    <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto">
       <BannerSection image={banner} title="membership" />
       <MembershipFamilySection />
       <MembershipCardSection />

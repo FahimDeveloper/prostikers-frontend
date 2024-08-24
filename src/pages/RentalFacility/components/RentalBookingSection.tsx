@@ -1,4 +1,4 @@
-import RentalSidebar from "../../../components/Rental/RentalSidebar";
+import BookingSidebar from "../../../components/BookingSidebar/BookingSidebar";
 import RentalBooking from "./RentalBooking";
 import RentalDetailSection from "./RentalDetailSection";
 
@@ -8,7 +8,7 @@ const RentalBookingSection = () => {
       <div className="col-span-2 space-y-5">
         <RentalBooking />
       </div>
-      <RentalSidebar />
+      <BookingSidebar />
       <div className="col-span-2">
         <RentalDetailSection />
       </div>

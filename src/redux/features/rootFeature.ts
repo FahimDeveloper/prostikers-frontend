@@ -3,11 +3,14 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/authSlice";
 import { combineReducers } from "@reduxjs/toolkit";
 import {
+  appointmentApiSlice,
   authApiSlice,
   bootcampApiSlice,
   bootcampReservationApiSlice,
   eventApiSlice,
   eventReservationApiSlice,
+  facilityApiSlice,
+  facilityReservationCartApiSlice,
   trainerApiSlice,
 } from "../api/httpsSlice";
 
@@ -27,6 +30,10 @@ export const rootReducers = combineReducers({
   [eventReservationApiSlice.reducerPath]: eventReservationApiSlice.reducer,
   [bootcampReservationApiSlice.reducerPath]:
     bootcampReservationApiSlice.reducer,
+  [facilityApiSlice.reducerPath]: facilityApiSlice.reducer,
+  [facilityReservationCartApiSlice.reducerPath]:
+    facilityReservationCartApiSlice.reducer,
+  [appointmentApiSlice.reducerPath]: appointmentApiSlice.reducer,
 });
 
 export const rootMiddlewares = [
@@ -36,4 +43,7 @@ export const rootMiddlewares = [
   trainerApiSlice.middleware,
   eventReservationApiSlice.middleware,
   bootcampReservationApiSlice.middleware,
+  facilityApiSlice.middleware,
+  facilityReservationCartApiSlice.middleware,
+  appointmentApiSlice.middleware,
 ];

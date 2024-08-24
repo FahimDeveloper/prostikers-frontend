@@ -26,10 +26,10 @@ const Header = () => {
             <ul className="list-none flex justify-center text-lg font-medium items-center gap-7">
               <li>
                 <Link
-                  to="/rental"
+                  to="/rental-facility"
                   className="no-underline text-[#1C1C1C] inline-block"
                 >
-                  Rental
+                  Rental Facility
                 </Link>
               </li>
               <li>
@@ -104,10 +104,10 @@ const Header = () => {
                   <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3 \">
                     <Link
                       onClick={() => setOpen(false)}
-                      to="/rental"
+                      to="/rental-facility"
                       className="no-underline text-[#1C1C1C] flex justify-between items-center"
                     >
-                      Rental
+                      Rental Facility
                       <IoIosArrowForward className="size-4" />
                     </Link>
                   </li>

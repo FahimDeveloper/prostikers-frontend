@@ -5,7 +5,7 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 import { MdOutlineInfo } from "react-icons/md";
 import CancellationPolicy from "../CancellationPolicy";
 
-const RentalSidebar = () => {
+const BookingSidebar = () => {
   return (
     <div className="lg:space-y-9 space-y-8 border border-solid border-gray-300 lg:p-5 p-4 rounded-2xl">
       <div className="space-y-5">
@@ -157,4 +157,4 @@ const RentalSidebar = () => {
   );
 };
 
-export default RentalSidebar;
+export default BookingSidebar;
