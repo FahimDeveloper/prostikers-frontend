@@ -1,25 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import BannerSection from "../../../common/BannerSection";
-import soccerBanner from "../../../assets/images/programsBanner/soccer-banner.webp";
 import Container from "../../../components/Container";
-import BootcampReservationForm from "../../../components/ui/form/BootcampReservationForm";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import soccerBanner from "../../../assets/images/programsBanner/soccer-banner.webp";
+import { useLocation, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useForm } from "antd/es/form/Form";
-import { useEffect } from "react";
+import { useCreateGroupEventReservationMutation } from "../../../redux/features/event/eventApi";
 import Swal from "sweetalert2";
-import { useCreateBootcampReservationMutation } from "../../../redux/features/bootcamp/bootcampApi";
+import GroupTrainingSteps from "../../../components/ui/steps/GroupTrainingSteps";
 
-const SoccerBootcampTrainingReservation = () => {
-  const [create, { data, isError, isSuccess, error }] =
-    useCreateBootcampReservationMutation();
-  const { state } = useLocation();
-  const navigate = useNavigate();
-  const location = state?.from.pathname || "/";
+const SoccerGroupTrainingReservation = () => {
   const { id } = useParams();
+  const [current, setCurrent] = useState(0);
   const [form] = useForm();
-  const onFinish = (values: any) => {
-    values.course = id;
-    values.sport = state.sport;
+  const { state } = useLocation();
+  const [create, { data, isLoading, isSuccess, isError, error }] =
+    useCreateGroupEventReservationMutation();
+  const onSubmit = (values: any) => {
+    values.event = id;
     create(values);
   };
   useEffect(() => {
@@ -33,7 +31,7 @@ const SoccerBootcampTrainingReservation = () => {
         iconColor: "#0ABAC3",
       });
       form.resetFields();
-      navigate(location);
+      setCurrent(0);
     }
     if (isError) {
       Swal.fire({
@@ -49,25 +47,26 @@ const SoccerBootcampTrainingReservation = () => {
   }, [data, isSuccess, isError, error, state]);
   return (
     <>
-      <BannerSection title="Soccer Bootcamp" image={soccerBanner} />
+      <BannerSection title="Soccer Group Traiing" image={soccerBanner} />
       <Container>
         <div className="lg:py-16 py-14 space-y-10">
           <div className="space-y-5">
             <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
-              Soccer Training Bootcamps: Elevate Your Game
+              Dynamic Soccer Group Training
             </h2>
             <p className="md:text-lg text-base md:leading-7 sm:leading-6 leading-5 text-[#929292] text-justify">
-              Transform your soccer skills at ProStrikers’ Soccer Training
-              Bootcamps. Concentrated sessions will enhance your footwork,
-              control, and strategy, all while fostering the physical and mental
-              toughness needed to succeed on the pitch. Join and become a part
-              of soccer excellence.
+              Take to the pitch with ProStrikers' Group Soccer Training. Develop
+              your soccer skills in a team setting, where cooperative play and
+              group strategies lay the groundwork for on-field success and
+              sportsmanship.
             </p>
           </div>
-          <BootcampReservationForm
+          <GroupTrainingSteps
+            current={current}
+            setCurrent={setCurrent}
+            onSubmit={onSubmit}
             form={form}
-            onFinish={onFinish}
-            loading={false}
+            loading={isLoading}
           />
         </div>
       </Container>
@@ -75,4 +74,4 @@ const SoccerBootcampTrainingReservation = () => {
   );
 };
 
-export default SoccerBootcampTrainingReservation;
+export default SoccerGroupTrainingReservation;

@@ -18,7 +18,13 @@ const appointmentApi = appointmentApiSlice.injectEndpoints({
         params,
       }),
     }),
+    appointment: builder.query({
+      query: (id) => ({
+        url: `/schedule/appointments/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useAppointmentsQuery } = appointmentApi;
+export const { useAppointmentsQuery, useAppointmentQuery } = appointmentApi;

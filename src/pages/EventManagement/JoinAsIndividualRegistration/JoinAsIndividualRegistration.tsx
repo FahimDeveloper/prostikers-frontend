@@ -7,7 +7,7 @@ import LeagueIndividualForm from "../../../components/ui/form/LeagueIndividualFo
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
-import { useCreateIndividualEventReservationMutation } from "../../../redux/features/event/eventReservationApi";
+import { useCreateIndividualEventReservationMutation } from "../../../redux/features/event/eventApi";
 
 const JoinAsIndividualRegistration = () => {
   const { id } = useParams();

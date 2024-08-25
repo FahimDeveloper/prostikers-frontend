@@ -55,16 +55,16 @@ const SoftballGroupTraining = () => {
   return (
     <Container>
       <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto space-y-10">
-        <GallerySection title="Baseball Group Training" gallery={gallery} />
+        <GallerySection title="Soccer Group Training" gallery={gallery} />
         <div className="space-y-5">
           <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
-            Team-Oriented Baseball Training
+            Level Up: Softball Group Training
           </h2>
           <p className="md:text-lg text-base md:leading-7 sm:leading-6 leading-5 text-[#929292] text-justify">
-            Experience the camaraderie of our Group Baseball Training. Perfect
-            your pitches, swings, and slides with collective exercises and
-            team-building challenges. Our training encourages mutual growth and
-            shared passion for every inning.
+            Unlock your potential on the diamond with our personalized Softball
+            Training sessions. Work on your pitching, improve your batting
+            average, or sharpen your fielding skills with coaches who understand
+            the intricacies of the game and how to bring out your best.
           </p>
         </div>
         <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-5 gap-y-5">

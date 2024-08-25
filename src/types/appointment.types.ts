@@ -4,7 +4,7 @@ export type IAppointment = {
   appointment_name: string;
   appointment_type: string;
   sport: string;
-  appointment_duration: number;
+  duration: number;
   trainer: any;
   description: string;
   price: number;

@@ -54,16 +54,16 @@ const HockyGroupTraining = () => {
   return (
     <Container>
       <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto space-y-10">
-        <GallerySection title="Baseball Group Training" gallery={gallery} />
+        <GallerySection title="Feild Hockey Group Training" gallery={gallery} />
         <div className="space-y-5">
           <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
-            Team-Oriented Baseball Training
+            Engaging Group Hockey Training
           </h2>
           <p className="md:text-lg text-base md:leading-7 sm:leading-6 leading-5 text-[#929292] text-justify">
-            Experience the camaraderie of our Group Baseball Training. Perfect
-            your pitches, swings, and slides with collective exercises and
-            team-building challenges. Our training encourages mutual growth and
-            shared passion for every inning.
+            Get ready for competitive play with our Group Hockey Training.
+            Focused on strategic team plays and skill enhancement, our sessions
+            help players make swift decisions and coordinate effectively on the
+            field.
           </p>
         </div>
         <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-5 gap-y-5">

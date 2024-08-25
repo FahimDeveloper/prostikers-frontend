@@ -11,8 +11,29 @@ const eventApi = eventApiSlice.injectEndpoints({
         method: "GET",
         params,
       }),
+      providesTags: ["events"],
+    }),
+    createIndividualEventReservation: builder.mutation<any, any>({
+      query: (payload) => ({
+        url: "/reservations/events/individual/create",
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["events"],
+    }),
+    createGroupEventReservation: builder.mutation<any, any>({
+      query: (payload) => ({
+        url: "/reservations/events/group/create",
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["events"],
     }),
   }),
 });
 
-export const { useGetEventsQuery } = eventApi;
+export const {
+  useGetEventsQuery,
+  useCreateGroupEventReservationMutation,
+  useCreateIndividualEventReservationMutation,
+} = eventApi;

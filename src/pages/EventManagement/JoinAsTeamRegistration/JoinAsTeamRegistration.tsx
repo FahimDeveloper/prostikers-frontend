@@ -7,7 +7,7 @@ import banner from "../../../assets/images/programsBanner/tten-league-banner.web
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import { useCreateGroupEventReservationMutation } from "../../../redux/features/event/eventReservationApi";
+import { useCreateGroupEventReservationMutation } from "../../../redux/features/event/eventApi";
 
 const JoinAsTeamRegistration = () => {
   const [current, setCurrent] = useState(0);
@@ -40,7 +40,7 @@ const JoinAsTeamRegistration = () => {
     form.setFieldsValue({
       sport: state?.sport,
     });
-  }, [data, isSuccess, isError, form, error, state]);
+  }, [data, isSuccess, isError, error, state]);
   const onSubmit = (values: any) => {
     values.event = id;
     create(values);

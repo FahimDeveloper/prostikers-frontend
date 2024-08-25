@@ -5,14 +5,16 @@ import Container from "../../../components/Container";
 import BootcampReservationForm from "../../../components/ui/form/BootcampReservationForm";
 import { useEffect } from "react";
 import { useForm } from "antd/es/form/Form";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useCreateBootcampReservationMutation } from "../../../redux/features/bootcamp/bootcampReservationApi";
+import { useCreateBootcampReservationMutation } from "../../../redux/features/bootcamp/bootcampApi";
 
 const SoftballBootcampTrainingReservation = () => {
   const [create, { data, isError, isSuccess, error }] =
     useCreateBootcampReservationMutation();
   const { state } = useLocation();
+  const navigate = useNavigate();
+  const location = state?.from.pathname || "/";
   const { id } = useParams();
   const [form] = useForm();
   const onFinish = (values: any) => {
@@ -31,6 +33,7 @@ const SoftballBootcampTrainingReservation = () => {
         iconColor: "#0ABAC3",
       });
       form.resetFields();
+      navigate(location);
     }
     if (isError) {
       Swal.fire({
@@ -43,7 +46,7 @@ const SoftballBootcampTrainingReservation = () => {
     form.setFieldsValue({
       sport: state?.sport,
     });
-  }, [data, isSuccess, isError, form, error, state]);
+  }, [data, isSuccess, isError, error, state]);
   return (
     <div>
       <BannerSection title="Cricket Programs" image={softballBanner} />

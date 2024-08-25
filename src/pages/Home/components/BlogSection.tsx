@@ -1,34 +1,12 @@
 import BlogCard from "../../../common/card/BlogCard";
 import Container from "../../../components/Container";
-import image1 from "../../../assets/images/gallery/soccer/soccer-gallery-1.webp";
-import image2 from "../../../assets/images/gallery/soccer/soccer-gallery-2.webp";
-import image3 from "../../../assets/images/gallery/soccer/soccer-gallery-3.webp";
 import { Link } from "react-router-dom";
+import { usePostsQuery } from "../../../redux/features/post/postApi";
 
 const BlogSection = () => {
-  const blogData = [
-    {
-      title: "Sell to Businesses",
-      link: "/coming-soon",
-      image: image1,
-      description:
-        "Launch a B2B business and collect one-time or recurring payments from customers.",
-    },
-    {
-      title: "Validate Your Idea",
-      link: "/coming-soon",
-      image: image2,
-      description:
-        "Test your product idea by launching payments with little to no code.",
-    },
-    {
-      title: "Sell to Consumer",
-      link: "/coming-soon",
-      image: image3,
-      description:
-        "Launch a B2C business with a prebuilt payment page that’s optimized for conversion.",
-    },
-  ];
+  const { data } = usePostsQuery({
+    limit: 3,
+  });
   return (
     <Container>
       <div className="lg:py-14 md:py-12 py-10 space-y-10">
@@ -48,12 +26,12 @@ const BlogSection = () => {
         </div>
         <div className="space-y-10">
           <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
-            {blogData?.map((blog, index) => {
+            {data?.results.map((blog, index) => {
               return <BlogCard key={index} blog={blog} />;
             })}
           </div>
           <div className="text-center">
-            <Link to="/coming-soon" className="text-black">
+            <Link to="/blogs" className="text-black">
               <button className="btn bg-white border border-solid hover:border-gray-300 hover:bg-white border-gray-200 text-base px-10 rounded-full">
                 View More Blogs
               </button>

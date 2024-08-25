@@ -4,27 +4,27 @@ import { useState } from "react";
 import DateSlider from "../../../components/DateSlider";
 import { useRentalFacilityQuery } from "../../../redux/features/facility/facilityApi";
 import BookingTimeSlots from "../../../components/BookingTimeSlots";
-import {
-  useAddToCartFacilityMutation,
-  useDeleteCartFacilityMutation,
-  useGetFacilityReservationCartQuery,
-} from "../../../redux/features/facility/facilityReservationCartApi";
 import moment from "moment";
 import { IoCalendarOutline } from "react-icons/io5";
 import { MdDeleteOutline } from "react-icons/md";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import {
+  useAddToCartSlotMutation,
+  useDeleteBookingSlotMutation,
+  useGetBookingSlotsQuery,
+} from "../../../redux/features/slotBooking/slotBookingApi";
 
 const RentalBooking = () => {
-  const createCartBooking = useAddToCartFacilityMutation();
-  const [deleteSlot] = useDeleteCartFacilityMutation();
+  const createCartBooking = useAddToCartSlotMutation();
+  const [deleteSlot] = useDeleteBookingSlotMutation();
   const [facility, setFacility] = useState<string | undefined>(undefined);
   const { data: rentalfacility } = useRentalFacilityQuery(
     { facility },
     { skip: facility ? false : true }
   );
   const [activeDate, setActiveDate] = useState(new Date());
-  const reservationCartsQuery = useGetFacilityReservationCartQuery(
+  const reservationCartsQuery = useGetBookingSlotsQuery(
     {
       facility: rentalfacility?._id,
       date: activeDate.toISOString().split("T")[0],
@@ -145,7 +145,7 @@ const RentalBooking = () => {
           </div>
           <BookingTimeSlots
             activeDate={activeDate}
-            facility={rentalfacility?.results}
+            training={rentalfacility?.results}
             cartsQuery={reservationCartsQuery}
             addToCart={createCartBooking}
             selectSlots={selectSlots}

@@ -64,6 +64,14 @@ const Header = () => {
                   Shop
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/blogs"
+                  className="no-underline text-[#1C1C1C] inline-block"
+                >
+                  Blogs
+                </Link>
+              </li>
             </ul>
           </nav>
           {!user ? (
@@ -148,6 +156,16 @@ const Header = () => {
                       className="no-underline text-[#1C1C1C] flex justify-between items-center"
                     >
                       Shop
+                      <IoIosArrowForward className="size-4" />
+                    </Link>
+                  </li>
+                  <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3">
+                    <Link
+                      onClick={() => setOpen(false)}
+                      to="/blogs"
+                      className="no-underline text-[#1C1C1C] flex justify-between items-center"
+                    >
+                      Blogs
                       <IoIosArrowForward className="size-4" />
                     </Link>
                   </li>

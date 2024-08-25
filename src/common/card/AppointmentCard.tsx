@@ -40,7 +40,9 @@ const AppointmentCard = ({
         }
       });
     } else {
-      navigate(`${data._id}`, { state: { sport: data.sport } });
+      navigate(`${data._id}`, {
+        state: { sport: data.sport, trainer: data.trainer },
+      });
     }
   };
   return (
@@ -56,7 +58,7 @@ const AppointmentCard = ({
       </h3>
       <div className="space-y-3 px-2">
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-40">
+          <div className="flex items-center gap-2 min-w-28">
             <FaPeopleGroup className="size-5" />
             <p className="text-base">Appointment Type :</p>
           </div>
@@ -65,16 +67,14 @@ const AppointmentCard = ({
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-40">
+          <div className="flex items-center gap-2 min-w-28">
             <IoTimeOutline className="size-5" />
             <p className="text-base">Duration :</p>
           </div>
-          <p className="text-base font-medium">
-            {data?.appointment_duration} minutes
-          </p>
+          <p className="text-base font-medium">{data?.duration} minutes</p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-40">
+          <div className="flex items-center gap-2 min-w-28">
             <FaUserGraduate className="size-5" />
             <p className="text-base">Trainer :</p>
           </div>
@@ -83,7 +83,7 @@ const AppointmentCard = ({
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-40">
+          <div className="flex items-center gap-2 min-w-28">
             <CiBadgeDollar className="size-5" />
             <p className="text-base">Fee :</p>
           </div>

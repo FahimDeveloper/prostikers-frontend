@@ -6,11 +6,11 @@ import {
   appointmentApiSlice,
   authApiSlice,
   bootcampApiSlice,
-  bootcampReservationApiSlice,
   eventApiSlice,
-  eventReservationApiSlice,
   facilityApiSlice,
   facilityReservationCartApiSlice,
+  postApiSlice,
+  slotBookingApiSlice,
   trainerApiSlice,
 } from "../api/httpsSlice";
 
@@ -27,13 +27,12 @@ export const rootReducers = combineReducers({
   [eventApiSlice.reducerPath]: eventApiSlice.reducer,
   [bootcampApiSlice.reducerPath]: bootcampApiSlice.reducer,
   [trainerApiSlice.reducerPath]: trainerApiSlice.reducer,
-  [eventReservationApiSlice.reducerPath]: eventReservationApiSlice.reducer,
-  [bootcampReservationApiSlice.reducerPath]:
-    bootcampReservationApiSlice.reducer,
   [facilityApiSlice.reducerPath]: facilityApiSlice.reducer,
   [facilityReservationCartApiSlice.reducerPath]:
     facilityReservationCartApiSlice.reducer,
   [appointmentApiSlice.reducerPath]: appointmentApiSlice.reducer,
+  [postApiSlice.reducerPath]: postApiSlice.reducer,
+  [slotBookingApiSlice.reducerPath]: slotBookingApiSlice.reducer,
 });
 
 export const rootMiddlewares = [
@@ -41,9 +40,9 @@ export const rootMiddlewares = [
   eventApiSlice.middleware,
   bootcampApiSlice.middleware,
   trainerApiSlice.middleware,
-  eventReservationApiSlice.middleware,
-  bootcampReservationApiSlice.middleware,
   facilityApiSlice.middleware,
   facilityReservationCartApiSlice.middleware,
   appointmentApiSlice.middleware,
+  postApiSlice.middleware,
+  slotBookingApiSlice.middleware,
 ];

@@ -4,6 +4,13 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+import Blogs from "../pages/Blogs/Blogs";
+import SingleBlog from "../pages/SingleBlog/SingleBlog";
+import BaseballGroupTrainingReservation from "../pages/GroupTrainingManagement/BaseballGroupTrainingReservation/BaseballGroupTrainingReservation";
+import SoccerGroupTrainingReservation from "../pages/GroupTrainingManagement/SoccerGroupTrainingReservation/SoccerGroupTrainingReservation";
+import HockeyGroupTrainingReservation from "../pages/GroupTrainingManagement/HockeyGroupTrainingReservation/HockeyGroupTrainingReservation";
+import SoftballGroupTrainingReservation from "../pages/GroupTrainingManagement/SoftballGroupTrainingReservation/SoftballGroupTrainingReservation";
+import CricketGroupTrainingReservation from "../pages/GroupTrainingManagement/CricketGroupTrainingReservation/CricketGroupTrainingReservation";
 const Login = LazyLoad(lazy(() => import("../pages/Login/Login")));
 const Registration = LazyLoad(
   lazy(() => import("../pages/Registration/Registration"))
@@ -349,6 +356,14 @@ export const router = createBrowserRouter([
         element: <Academy />,
       },
       {
+        path: "/blogs",
+        element: <Blogs />,
+      },
+      {
+        path: "/blogs/:id",
+        element: <SingleBlog />,
+      },
+      {
         path: "/sport/baseball",
         element: <SportBaseball />,
       },
@@ -425,6 +440,46 @@ export const router = createBrowserRouter([
           {
             path: "softball",
             element: <SoftballGroupTraining />,
+          },
+          {
+            path: "baseball/:id",
+            element: (
+              <PrivetRoute>
+                <BaseballGroupTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "cricket/:id",
+            element: (
+              <PrivetRoute>
+                <CricketGroupTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "soccer/:id",
+            element: (
+              <PrivetRoute>
+                <SoccerGroupTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "hockey/:id",
+            element: (
+              <PrivetRoute>
+                <HockeyGroupTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "softball/:id",
+            element: (
+              <PrivetRoute>
+                <SoftballGroupTrainingReservation />
+              </PrivetRoute>
+            ),
           },
         ],
       },

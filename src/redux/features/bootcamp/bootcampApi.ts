@@ -11,8 +11,18 @@ const boocampApi = bootcampApiSlice.injectEndpoints({
         method: "GET",
         params,
       }),
+      providesTags: ["bootcamps"],
+    }),
+    createBootcampReservation: builder.mutation<any, IBootcamp>({
+      query: (payload) => ({
+        url: "/reservations/courses/create",
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["bootcamps"],
     }),
   }),
 });
 
-export const { useBootcampsQuery } = boocampApi;
+export const { useBootcampsQuery, useCreateBootcampReservationMutation } =
+  boocampApi;

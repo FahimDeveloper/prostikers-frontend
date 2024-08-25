@@ -34,7 +34,7 @@ const BootcampCard = ({ image, data }: { image: any; data: any }) => {
         }
       });
     } else {
-      navigate(`${data._id}`, { state: { sport: data.sport } });
+      navigate(`${data._id}`, { state: { sport: data.sport, from: location } });
     }
   };
   return (
@@ -109,7 +109,9 @@ const BootcampCard = ({ image, data }: { image: any; data: any }) => {
               <FaUserGraduate className="size-5" />
               <p className="text-base">Trainer :</p>
             </div>
-            <p className="text-base font-medium">{data?.trainer}</p>
+            <p className="text-base font-medium">
+              {data?.trainer.first_name} {data?.trainer.last_name}
+            </p>
           </div>
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2 min-w-28">
@@ -120,9 +122,15 @@ const BootcampCard = ({ image, data }: { image: any; data: any }) => {
           </div>
         </div>
       </div>
-      <Button onClick={onClick} className="primary-btn-2 w-full">
-        Enroll now
-      </Button>
+      {data?.capacity > data?.enrolled ? (
+        <Button onClick={onClick} className="primary-btn-2 w-full">
+          Enroll now
+        </Button>
+      ) : (
+        <Button disabled className="primary-btn-2 w-full">
+          Fully Booked
+        </Button>
+      )}
     </div>
   );
 };
