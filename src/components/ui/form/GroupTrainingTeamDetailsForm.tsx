@@ -26,7 +26,7 @@ const GroupTrainingTeamDetailsForm = ({ form }: any) => {
           {(fields, { add, remove }) => (
             <>
               {fields.map(({ key, name, ...restField }, index) => (
-                <div className="space-y-2">
+                <div className="space-y-2" key={index}>
                   <div className="flex items-center gap-3">
                     <h4 className="font-medium text-lg text-[#7B7B7B]">
                       Player

@@ -49,7 +49,7 @@ const RentalBooking = () => {
           (carts: any) => carts.time_slot === slot
         );
         if (timeSlot) {
-          deleteSlot(timeSlot._id)
+          deleteSlot(`${date}${slot}`)
             .unwrap()
             .then(() => {
               toast.success("Deleted successfully");

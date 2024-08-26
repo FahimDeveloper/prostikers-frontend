@@ -41,7 +41,7 @@ const AppointmentCard = ({
       });
     } else {
       navigate(`${data._id}`, {
-        state: { sport: data.sport, trainer: data.trainer },
+        state: { sport: data.sport, trainer: data.trainer, from: location },
       });
     }
   };

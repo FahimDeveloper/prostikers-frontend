@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { IncomingQueryType } from "../../../types/index.types";
 import { slotBookingApiSlice } from "../../api/httpsSlice";
 
 const slotBookingApi = slotBookingApiSlice.injectEndpoints({
@@ -9,7 +10,7 @@ const slotBookingApi = slotBookingApiSlice.injectEndpoints({
         method: "POST",
         body: payload,
       }),
-      invalidatesTags: ["carts"],
+      invalidatesTags: ["carts", "booked"],
     }),
     getBookingSlots: builder.query<any, any>({
       query: (params) => ({
@@ -26,12 +27,20 @@ const slotBookingApi = slotBookingApiSlice.injectEndpoints({
       }),
       invalidatesTags: ["carts"],
     }),
-    deleteBookingSlots: builder.mutation({
-      query: (payload) => ({
-        url: `/reservations/slot-bookings/delete/slots`,
-        method: "DELETE",
-        body: payload,
+    groupTraingBookedSlots: builder.query<
+      IncomingQueryType<{
+        date: string;
+        training: string;
+        time_slot: string;
+      }>,
+      { date: string; training: string }
+    >({
+      query: (params) => ({
+        url: "/reservations/appointments/group/slots",
+        method: "GET",
+        params,
       }),
+      providesTags: ["booked"],
     }),
   }),
 });
@@ -40,5 +49,5 @@ export const {
   useAddToCartSlotMutation,
   useDeleteBookingSlotMutation,
   useGetBookingSlotsQuery,
-  useDeleteBookingSlotsMutation,
+  useGroupTraingBookedSlotsQuery,
 } = slotBookingApi;

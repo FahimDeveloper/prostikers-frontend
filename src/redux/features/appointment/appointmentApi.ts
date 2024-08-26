@@ -24,7 +24,18 @@ const appointmentApi = appointmentApiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    createAppointmentReservation: builder.mutation({
+      query: ({ id, payload }) => ({
+        url: `/reservations/appointments/group/create/${id}`,
+        method: "POST",
+        body: payload,
+      }),
+    }),
   }),
 });
 
-export const { useAppointmentsQuery, useAppointmentQuery } = appointmentApi;
+export const {
+  useAppointmentsQuery,
+  useAppointmentQuery,
+  useCreateAppointmentReservationMutation,
+} = appointmentApi;

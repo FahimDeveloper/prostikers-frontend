@@ -16,21 +16,25 @@ import toast from "react-hot-toast";
 const BookingTimeSlots = ({
   activeDate,
   training,
-  cartsQuery,
+  slotsCartQuery,
   addToCart,
   selectSlots,
   setSelectSlots,
+  slotsBookedQuery,
 }: {
   activeDate: Date;
   training: any;
-  cartsQuery: any;
+  slotsCartQuery: any;
+  slotsBookedQuery: any;
   addToCart: any;
   selectSlots: any;
   setSelectSlots: any;
 }) => {
   const [create, { isLoading: createLoading, isSuccess, isError, error }] =
     addToCart;
-  const { data: cartsData, isLoading: cartsLoading } = cartsQuery;
+  const { data: slotsCartData, isLoading: slotsCartLoading } = slotsCartQuery;
+  const { data: slotsBookedData, isLoading: slotsBookedLoading } =
+    slotsBookedQuery;
   const [timeSlot, setTimeSlot] = useState("");
   const [slotIndex, setSlotIndex] = useState<number | null>(null);
   const user = useSelector(selectCurrentUser);
@@ -70,12 +74,14 @@ const BookingTimeSlots = ({
         }
       });
     } else {
+      const date = activeDate.toISOString().split("T")[0];
       setTimeSlot(value);
       setSlotIndex(index);
       create({
+        id: `${training._id}${date}${value.split(" ").join("")}`,
         training: training._id,
         user: user?._id,
-        date: activeDate.toISOString().split("T")[0],
+        date,
         time_slot: value,
       });
     }
@@ -111,7 +117,9 @@ const BookingTimeSlots = ({
     }
   }, [isSuccess, isError, error]);
 
-  const unavailableSlots = collectTimeSlots(cartsData?.results);
+  const cartSlots = collectTimeSlots(slotsCartData?.results);
+  const bookedSlots = collectTimeSlots(slotsBookedData?.results);
+  const unavailableSlots = [...cartSlots, ...bookedSlots];
 
   return (
     <>
@@ -121,7 +129,8 @@ const BookingTimeSlots = ({
             <button
               disabled={
                 createLoading ||
-                cartsLoading ||
+                slotsCartLoading ||
+                slotsBookedLoading ||
                 unavailableSlots.includes(slot) ||
                 selectSlots.find(
                   (slots: any) =>
@@ -133,7 +142,7 @@ const BookingTimeSlots = ({
               key={index}
               onClick={() => onSelect(slot, index)}
               className={`border border-solid rounded-md border-gray-200 h-12 px-1 disabled:cursor-not-allowed text-center ${
-                createLoading || cartsLoading
+                createLoading || slotsCartLoading || slotsBookedLoading
                   ? "cursor-not-allowed"
                   : "cursor-pointer"
               } ${
@@ -149,7 +158,8 @@ const BookingTimeSlots = ({
                   : "bg-white"
               }`}
             >
-              {(createLoading || cartsLoading) && index === slotIndex ? (
+              {(createLoading || slotsCartLoading || slotsBookedLoading) &&
+              index === slotIndex ? (
                 <FaSpinner className="animate-spin size-5 text-primary" />
               ) : (
                 <p className="text-xs font-medium">

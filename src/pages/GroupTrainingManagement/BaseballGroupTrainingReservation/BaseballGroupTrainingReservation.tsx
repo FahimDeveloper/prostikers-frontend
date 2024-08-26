@@ -3,10 +3,9 @@
 import BannerSection from "../../../common/BannerSection";
 import Container from "../../../components/Container";
 import baseballBanner from "../../../assets/images/programsBanner/baseball-banner.webp";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useForm } from "antd/es/form/Form";
-import { useCreateGroupEventReservationMutation } from "../../../redux/features/event/eventApi";
 import Swal from "sweetalert2";
 import GroupTrainingSteps from "../../../components/ui/steps/GroupTrainingSteps";
 import toast from "react-hot-toast";
@@ -18,42 +17,55 @@ import { MdDeleteOutline } from "react-icons/md";
 import {
   useAddToCartSlotMutation,
   useDeleteBookingSlotMutation,
-  useDeleteBookingSlotsMutation,
   useGetBookingSlotsQuery,
+  useGroupTraingBookedSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
-import { useAppointmentQuery } from "../../../redux/features/appointment/appointmentApi";
+import {
+  useAppointmentQuery,
+  useCreateAppointmentReservationMutation,
+} from "../../../redux/features/appointment/appointmentApi";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 
 const BaseballGroupTrainingReservation = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
   const createCartBooking = useAddToCartSlotMutation();
   const [deleteSlot] = useDeleteBookingSlotMutation();
-  const [deleteSlots, { isLoading: deleteLoading }] =
-    useDeleteBookingSlotsMutation();
-  const { data: appointment } = useAppointmentQuery(id, {
-    skip: id ? false : true,
-  });
-
   const [activeDate, setActiveDate] = useState(new Date());
-  const reservationCartsQuery = useGetBookingSlotsQuery(
-    {
-      training: appointment?.results._id,
-      date: activeDate.toISOString().split("T")[0],
-    },
-    { skip: appointment ? false : true }
-  );
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
   const [current, setCurrent] = useState(0);
   const [form] = useForm();
   const { state } = useLocation();
-  const [create, { isLoading: createLoading }] =
-    useCreateGroupEventReservationMutation();
+  const lastLocation = state?.from?.pathname || "/";
+  const [
+    create,
+    { data, isSuccess, isError, error, isLoading: createLoading },
+  ] = useCreateAppointmentReservationMutation();
+  const { data: appointment } = useAppointmentQuery(id, {
+    skip: id ? false : true,
+  });
+  const slotsCartQuery = useGetBookingSlotsQuery(
+    {
+      training: id,
+      date: activeDate.toISOString().split("T")[0],
+    },
+    { skip: appointment ? false : true }
+  );
+  const slotsBookedQuery = useGroupTraingBookedSlotsQuery(
+    {
+      training: id!,
+      date: activeDate.toISOString().split("T")[0],
+    },
+    { skip: appointment ? false : true }
+  );
+
   const onSubmit = (values: any) => {
+    values.trainer = state.trainer;
     values.appointment = id;
     const bookings: any = [];
-    selectSlots.forEach((dateSlots) =>
+    selectSlots?.forEach((dateSlots) =>
       dateSlots.slots.forEach((slot: string) =>
         bookings.push({
           date: dateSlots.date.toISOString().split("T")[0],
@@ -63,42 +75,9 @@ const BaseballGroupTrainingReservation = () => {
       )
     );
     values.bookings = bookings;
-    console.log(values);
-    create(values)
-      .unwrap()
-      .then(() => {
-        deleteSlots({ id: user?._id })
-          .unwrap()
-          .then(() => {
-            Swal.fire({
-              title: "Success",
-              icon: "success",
-              text: `Booking Successfully`,
-              showConfirmButton: false,
-              timer: 1500,
-              iconColor: "#0ABAC3",
-            });
-            form.resetFields();
-            setCurrent(0);
-          })
-          .catch((error) => {
-            Swal.fire({
-              title: "Oops!..",
-              icon: "error",
-              text: `${(error as any)?.data?.message}`,
-              confirmButtonColor: "#0ABAC3",
-            });
-          });
-      })
-      .catch((error) => {
-        Swal.fire({
-          title: "Oops!..",
-          icon: "error",
-          text: `${(error as any)?.data?.message}`,
-          confirmButtonColor: "#0ABAC3",
-        });
-      });
+    create({ id: user?._id, payload: values });
   };
+
   const onDelete = (date: any, slot: any) => {
     Swal.fire({
       title: "Are you sure?",
@@ -108,41 +87,63 @@ const BaseballGroupTrainingReservation = () => {
       cancelButtonColor: "#d33",
     }).then((result) => {
       if (result.isConfirmed) {
-        const timeSlot = reservationCartsQuery.data?.results?.find(
-          (carts: any) => carts.time_slot === slot
-        );
-        if (timeSlot) {
-          deleteSlot(timeSlot._id)
-            .unwrap()
-            .then(() => {
-              toast.success("Deleted successfully");
-              const updatedSlots = selectSlots
-                .map((slots: any) => {
-                  if (slots.date === date && slots.slots.length > 1) {
-                    return {
-                      ...slots,
-                      slots: slots.slots.filter(
-                        (oldSlot: string) => oldSlot !== slot
-                      ),
-                    };
-                  } else if (slots.date === date && slots.slots.length == 1) {
-                    return null;
-                  }
-                  return slots;
-                })
-                .filter(Boolean);
-              setSelectSlots(updatedSlots);
-            })
-            .catch((error) => toast.success(`${error.data.message}`));
-        }
+        const slotId = `${id}${date.toISOString().split("T")[0]}${slot
+          .split(" ")
+          .join("")}`;
+        deleteSlot(slotId)
+          .unwrap()
+          .then(() => {
+            toast.success("Deleted successfully");
+            const updatedSlots = selectSlots
+              ?.map((slots: any) => {
+                if (slots.date === date && slots.slots.length > 1) {
+                  return {
+                    ...slots,
+                    slots: slots.slots.filter(
+                      (oldSlot: string) => oldSlot !== slot
+                    ),
+                  };
+                } else if (slots.date === date && slots.slots.length == 1) {
+                  return null;
+                }
+                return slots;
+              })
+              .filter(Boolean);
+            setSelectSlots(updatedSlots);
+          })
+          .catch((error) => toast.error(`${error.data.message}`));
       }
     });
   };
+
   useEffect(() => {
+    if (isSuccess) {
+      Swal.fire({
+        title: "Success",
+        icon: "success",
+        text: `${data?.message}`,
+        showConfirmButton: false,
+        timer: 1500,
+        iconColor: "#0ABAC3",
+      });
+      form.resetFields();
+      setCurrent(0);
+      setSelectSlots([]);
+      navigate(lastLocation);
+    }
+    if (isError) {
+      Swal.fire({
+        title: "Oops!..",
+        icon: "error",
+        text: `${(error as any)?.data?.message}`,
+        confirmButtonColor: "#0ABAC3",
+      });
+    }
     form.setFieldsValue({
       sport: state?.sport,
     });
-  }, [state]);
+  }, [state, isSuccess, isError, error]);
+
   return (
     <>
       <BannerSection title="Baseball Group Traiing" image={baseballBanner} />
@@ -169,7 +170,8 @@ const BaseballGroupTrainingReservation = () => {
             <BookingTimeSlots
               activeDate={activeDate}
               training={appointment?.results}
-              cartsQuery={reservationCartsQuery}
+              slotsCartQuery={slotsCartQuery}
+              slotsBookedQuery={slotsBookedQuery}
               addToCart={createCartBooking}
               selectSlots={selectSlots}
               setSelectSlots={setSelectSlots}
@@ -217,7 +219,7 @@ const BaseballGroupTrainingReservation = () => {
               setCurrent={setCurrent}
               onSubmit={onSubmit}
               form={form}
-              loading={createLoading || deleteLoading}
+              loading={createLoading}
             />
           )}
         </div>
