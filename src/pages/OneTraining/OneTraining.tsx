@@ -6,7 +6,6 @@ import training1 from "../../assets/images/training/cricket-training.webp";
 import training2 from "../../assets/images/training/baseball-training.webp";
 import training3 from "../../assets/images/training/soccer-training.webp";
 import training4 from "../../assets/images/training/hocky-training.webp";
-import training5 from "../../assets/images/training/cricket-wordshop-training.webp";
 
 const OneTraining = () => {
   const trainingData = {
@@ -48,15 +47,6 @@ const OneTraining = () => {
         description: [
           "Elevate Your Game: Personalized Field Hockey Training Tailored to Your Goals",
           "Gain the Competitive Edge: Individualized Coaching to Enhance Your Field Hockey Skills",
-        ],
-      },
-      {
-        title: "Cricket Workshops",
-        image: training5,
-        link: "/coming-soon",
-        description: [
-          "Tailored Excellence: Elevate Your Cricket Skills with Personalized One-on-One Workshops",
-          "Precision Coaching: Unlock Your Potential with Individualized Cricket Training Sessions",
         ],
       },
     ],

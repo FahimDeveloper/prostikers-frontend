@@ -86,7 +86,7 @@ const BaseBallGroupTraining = () => {
               {appointments?.results.length === 0 ? (
                 <div className="h-40 flex justify-center items-center">
                   <p className="text-2xl text-secondary">
-                    No baseball bootcamp found.
+                    No baseball training found.
                   </p>
                 </div>
               ) : (

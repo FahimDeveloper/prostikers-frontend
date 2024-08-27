@@ -14,11 +14,11 @@ import {
   useAddToCartSlotMutation,
   useDeleteBookingSlotMutation,
   useGetBookingSlotsQuery,
-  useGroupTraingBookedSlotsQuery,
+  useGroupTrainingBookedSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
 import {
   useAppointmentQuery,
-  useCreateAppointmentReservationMutation,
+  useCreateAppointmentGroupReservationMutation,
 } from "../../../redux/features/appointment/appointmentApi";
 import toast from "react-hot-toast";
 import { IoCalendarOutline } from "react-icons/io5";
@@ -42,7 +42,7 @@ const CricketGroupTrainingReservation = () => {
   const [
     create,
     { data, isSuccess, isError, error, isLoading: createLoading },
-  ] = useCreateAppointmentReservationMutation();
+  ] = useCreateAppointmentGroupReservationMutation();
   const { data: appointment } = useAppointmentQuery(id, {
     skip: id ? false : true,
   });
@@ -53,7 +53,7 @@ const CricketGroupTrainingReservation = () => {
     },
     { skip: appointment ? false : true }
   );
-  const slotsBookedQuery = useGroupTraingBookedSlotsQuery(
+  const slotsBookedQuery = useGroupTrainingBookedSlotsQuery(
     {
       training: id!,
       date: activeDate.toISOString().split("T")[0],

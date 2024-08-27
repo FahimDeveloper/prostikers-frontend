@@ -1,16 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Form, Input, InputNumber } from "antd";
+import { Button, Form, Input, InputNumber } from "antd";
 
-const GroupTrainingGeneralForm = ({ form }: any) => {
+const TrainingGeneralForm = ({
+  form,
+  onFinish,
+  loading,
+}: {
+  form: any;
+  onFinish: any;
+  loading: boolean;
+}) => {
   return (
     <div className="space-y-5">
       <div className="space-y-2">
         <h3 className="text-2xl font-bold text-[#07133D]">General Details</h3>
         <p className="text-[#929292] text-base">
-          Fill out this form to regester for upcoming trainings
+          Fill out this form to regester
         </p>
       </div>
-      <Form form={form} layout="vertical">
+      <Form onFinish={onFinish} form={form} layout="vertical">
         <div className="grid grid-cols-2 gap-4">
           <Form.Item
             label="First Name"
@@ -126,9 +134,16 @@ const GroupTrainingGeneralForm = ({ form }: any) => {
             />
           </Form.Item>
         </div>
+        <div className="flex justify-end mt-5">
+          <Form.Item>
+            <Button className="primary-btn" loading={loading} htmlType="submit">
+              Procced
+            </Button>
+          </Form.Item>
+        </div>
       </Form>
     </div>
   );
 };
 
-export default GroupTrainingGeneralForm;
+export default TrainingGeneralForm;

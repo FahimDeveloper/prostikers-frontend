@@ -60,7 +60,7 @@ const AppointmentCard = ({
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 min-w-28">
             <FaPeopleGroup className="size-5" />
-            <p className="text-base">Appointment Type :</p>
+            <p className="text-base">Training :</p>
           </div>
           <p className="text-base font-medium capitalize">
             {data?.appointment_type}

@@ -1,33 +1,33 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import BannerSection from "../../../common/BannerSection";
 import Container from "../../../components/Container";
-import soccerBanner from "../../../assets/images/programsBanner/soccer-banner.webp";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import cricketBanner from "../../../assets/images/programsBanner/cricket-banner.webp";
 import { useEffect, useState } from "react";
 import { useForm } from "antd/es/form/Form";
 import Swal from "sweetalert2";
-import GroupTrainingSteps from "../../../components/ui/steps/GroupTrainingSteps";
-import { MdDeleteOutline } from "react-icons/md";
-import { IoCalendarOutline } from "react-icons/io5";
-import moment from "moment";
-import BookingTimeSlots from "../../../components/BookingTimeSlots";
-import DateSlider from "../../../components/DateSlider";
-import toast from "react-hot-toast";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import {
   useAddToCartSlotMutation,
   useDeleteBookingSlotMutation,
   useGetBookingSlotsQuery,
-  useGroupTrainingBookedSlotsQuery,
+  useOneTrainingBookedSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
 import {
   useAppointmentQuery,
-  useCreateAppointmentGroupReservationMutation,
+  useCreateAppointmentOneOnOneReservationMutation,
 } from "../../../redux/features/appointment/appointmentApi";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
+import toast from "react-hot-toast";
+import { IoCalendarOutline } from "react-icons/io5";
+import moment from "moment";
+import { MdDeleteOutline } from "react-icons/md";
+import BookingTimeSlots from "../../../components/BookingTimeSlots";
+import DateSlider from "../../../components/DateSlider";
+import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm";
 
-const SoccerGroupTrainingReservation = () => {
+const CricketOneTrainingReservation = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
@@ -35,14 +35,13 @@ const SoccerGroupTrainingReservation = () => {
   const [deleteSlot] = useDeleteBookingSlotMutation();
   const [activeDate, setActiveDate] = useState(new Date());
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
-  const [current, setCurrent] = useState(0);
   const [form] = useForm();
   const { state } = useLocation();
   const lastLocation = state?.from?.pathname || "/";
   const [
     create,
     { data, isSuccess, isError, error, isLoading: createLoading },
-  ] = useCreateAppointmentGroupReservationMutation();
+  ] = useCreateAppointmentOneOnOneReservationMutation();
   const { data: appointment } = useAppointmentQuery(id, {
     skip: id ? false : true,
   });
@@ -53,7 +52,7 @@ const SoccerGroupTrainingReservation = () => {
     },
     { skip: appointment ? false : true }
   );
-  const slotsBookedQuery = useGroupTrainingBookedSlotsQuery(
+  const slotsBookedQuery = useOneTrainingBookedSlotsQuery(
     {
       training: id!,
       date: activeDate.toISOString().split("T")[0],
@@ -61,8 +60,8 @@ const SoccerGroupTrainingReservation = () => {
     { skip: appointment ? false : true }
   );
 
-  const onSubmit = (values: any) => {
-    values.trainer = state.trainer;
+  const onFinish = (values: any) => {
+    values.trainer = state.trainer._id;
     values.appointment = id;
     const bookings: any = [];
     selectSlots?.forEach((dateSlots) =>
@@ -127,7 +126,6 @@ const SoccerGroupTrainingReservation = () => {
         iconColor: "#0ABAC3",
       });
       form.resetFields();
-      setCurrent(0);
       setSelectSlots([]);
       navigate(lastLocation);
     }
@@ -143,20 +141,25 @@ const SoccerGroupTrainingReservation = () => {
       sport: state?.sport,
     });
   }, [state, isSuccess, isError, error]);
+
   return (
     <>
-      <BannerSection title="Soccer Group Traiing" image={soccerBanner} />
+      <BannerSection
+        title="Cricket One on One Training"
+        image={cricketBanner}
+      />
       <Container>
         <div className="lg:py-16 py-14 space-y-10">
           <div className="space-y-5">
             <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
-              Dynamic Soccer Group Training
+              CPersonalized Cricket Coaching
             </h2>
             <p className="md:text-lg text-base md:leading-7 sm:leading-6 leading-5 text-[#929292] text-justify">
-              Take to the pitch with ProStrikers' Group Soccer Training. Develop
-              your soccer skills in a team setting, where cooperative play and
-              group strategies lay the groundwork for on-field success and
-              sportsmanship.
+              Elevate your cricket game with individualized attention from
+              seasoned professionals. Our One on One Cricket Training targets
+              your specific needs - whether it's mastering the sweep shot or
+              perfecting your seam bowling. Each session is a step towards
+              becoming the cricketer you aspire to be.
             </p>
           </div>
           <div className="space-y-2">
@@ -213,11 +216,9 @@ const SoccerGroupTrainingReservation = () => {
             </div>
           )}
           {selectSlots.length > 0 && (
-            <GroupTrainingSteps
-              current={current}
-              setCurrent={setCurrent}
-              onSubmit={onSubmit}
+            <TrainingGeneralForm
               form={form}
+              onFinish={onFinish}
               loading={createLoading}
             />
           )}
@@ -227,4 +228,4 @@ const SoccerGroupTrainingReservation = () => {
   );
 };
 
-export default SoccerGroupTrainingReservation;
+export default CricketOneTrainingReservation;

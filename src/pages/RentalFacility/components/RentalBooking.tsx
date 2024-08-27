@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Select } from "antd";
+import { Button, Select } from "antd";
 import { useState } from "react";
 import DateSlider from "../../../components/DateSlider";
 import { useRentalFacilityQuery } from "../../../redux/features/facility/facilityApi";
@@ -12,28 +12,42 @@ import toast from "react-hot-toast";
 import {
   useAddToCartSlotMutation,
   useDeleteBookingSlotMutation,
+  useFacilityBookedSlotsQuery,
   useGetBookingSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
+import { Link } from "react-router-dom";
 
 const RentalBooking = () => {
-  const createCartBooking = useAddToCartSlotMutation();
+  const user = useSelector(selectCurrentUser);
   const [deleteSlot] = useDeleteBookingSlotMutation();
-  const [facility, setFacility] = useState<string | undefined>(undefined);
-  const { data: rentalfacility } = useRentalFacilityQuery(
-    { facility },
-    { skip: facility ? false : true }
-  );
   const [activeDate, setActiveDate] = useState(new Date());
-  const reservationCartsQuery = useGetBookingSlotsQuery(
+  const [selectSlots, setSelectSlots] = useState<any[]>([]);
+  const createCartBooking = useAddToCartSlotMutation();
+  const [facilityCage, setFacilityCage] = useState<string | undefined>(
+    undefined
+  );
+  const { data: facility } = useRentalFacilityQuery(
+    { facility: facilityCage },
+    { skip: facilityCage ? false : true }
+  );
+  const slotsCartQuery = useGetBookingSlotsQuery(
     {
-      facility: rentalfacility?._id,
+      training: facility?.results._id,
       date: activeDate.toISOString().split("T")[0],
     },
-    { skip: rentalfacility?.results ? false : true }
+    { skip: user && facility ? false : true }
   );
-  const [selectSlots, setSelectSlots] = useState<any[]>([]);
+  const slotsBookedQuery = useFacilityBookedSlotsQuery(
+    {
+      training: facility?.results._id,
+      date: activeDate.toISOString().split("T")[0],
+    },
+    { skip: user && facility ? false : true }
+  );
   const onChange = (value: string) => {
-    setFacility(value);
+    setFacilityCage(value);
   };
 
   const onDelete = (date: any, slot: any) => {
@@ -45,36 +59,37 @@ const RentalBooking = () => {
       cancelButtonColor: "#d33",
     }).then((result) => {
       if (result.isConfirmed) {
-        const timeSlot = reservationCartsQuery.data?.results?.find(
-          (carts: any) => carts.time_slot === slot
-        );
-        if (timeSlot) {
-          deleteSlot(`${date}${slot}`)
-            .unwrap()
-            .then(() => {
-              toast.success("Deleted successfully");
-              const updatedSlots = selectSlots
-                .map((slots: any) => {
-                  if (slots.date === date && slots.slots.length > 1) {
-                    return {
-                      ...slots,
-                      slots: slots.slots.filter(
-                        (oldSlot: string) => oldSlot !== slot
-                      ),
-                    };
-                  } else if (slots.date === date && slots.slots.length == 1) {
-                    return null;
-                  }
-                  return slots;
-                })
-                .filter(Boolean);
-              setSelectSlots(updatedSlots);
-            })
-            .catch((error) => toast.success(`${error.data.message}`));
-        }
+        const slotId = `${facility?.results._id}${
+          date.toISOString().split("T")[0]
+        }${slot.split(" ").join("")}`;
+        deleteSlot(slotId)
+          .unwrap()
+          .then(() => {
+            toast.success("Deleted successfully");
+            const updatedSlots = selectSlots
+              ?.map((slots: any) => {
+                if (slots.date === date && slots.slots.length > 1) {
+                  return {
+                    ...slots,
+                    slots: slots.slots.filter(
+                      (oldSlot: string) => oldSlot !== slot
+                    ),
+                  };
+                } else if (slots.date === date && slots.slots.length == 1) {
+                  return null;
+                }
+                return slots;
+              })
+              .filter(Boolean);
+            setSelectSlots(updatedSlots);
+          })
+          .catch((error) => toast.error(`${error.data.message}`));
       }
     });
   };
+  const totalPrice = selectSlots.reduce((total, appointment) => {
+    return total + appointment.slots.length * facility?.results.price;
+  }, 0);
   return (
     <div className="bg-[#F9FAFB] py-10 rounded-2xl space-y-6 px-5">
       <div className="space-y-3">
@@ -109,7 +124,7 @@ const RentalBooking = () => {
           ]}
         />
       </div>
-      {rentalfacility?.results && (
+      {facility?.results && (
         <div className="space-y-4">
           <h3 className="text-xl font-semibold text-[#07133D]">
             Booking Date and Time
@@ -129,12 +144,10 @@ const RentalBooking = () => {
                 Unavailable
               </div>
             </div>
-            <div>Facility lane: {rentalfacility.results.lane}</div>
-            <div>
+            <div>Facility lane: {facility.results.lane}</div>
+            <div className="flex gap-1">
               Per slot fee:
-              <span className="font-medium">
-                ${rentalfacility.results.price}
-              </span>
+              <span className="font-medium">${facility.results.price}</span>
             </div>
           </div>
           <div className="space-y-2">
@@ -143,21 +156,30 @@ const RentalBooking = () => {
             </p>
             <DateSlider activeDate={activeDate} setActiveDate={setActiveDate} />
           </div>
-          <BookingTimeSlots
-            activeDate={activeDate}
-            training={rentalfacility?.results}
-            cartsQuery={reservationCartsQuery}
-            addToCart={createCartBooking}
-            selectSlots={selectSlots}
-            setSelectSlots={setSelectSlots}
-          />
+          {facility?.results && (
+            <BookingTimeSlots
+              activeDate={activeDate}
+              training={facility?.results}
+              slotsCartQuery={slotsCartQuery}
+              slotsBookedQuery={slotsBookedQuery}
+              addToCart={createCartBooking}
+              selectSlots={selectSlots}
+              setSelectSlots={setSelectSlots}
+            />
+          )}
         </div>
       )}
       {selectSlots.length > 0 && (
-        <div className="space-y-4">
-          <h3 className="text-xl font-semibold text-secondary">
-            Booking Details
-          </h3>
+        <div className="space-y-5">
+          <div className="flex justify-between">
+            <h3 className="text-xl font-semibold text-secondary">
+              Booking Details
+            </h3>
+            <div className="flex gap-1">
+              <p>Total Price:</p>
+              <p>${totalPrice}</p>
+            </div>
+          </div>
           <div className="space-y-2">
             {selectSlots.map((dateSlots, index) => (
               <div className="space-y-2" key={index}>
@@ -176,7 +198,7 @@ const RentalBooking = () => {
                       {slot}
                     </div>
                     <div className="text-sm font-medium text-secondary">
-                      ${rentalfacility?.results?.price}
+                      ${facility?.results?.price}
                     </div>
                     <MdDeleteOutline
                       className="size-5 cursor-pointer"
@@ -186,6 +208,23 @@ const RentalBooking = () => {
                 ))}
               </div>
             ))}
+          </div>
+          <div className="flex justify-between">
+            <p className="text-2xl font-bold">US${totalPrice}</p>
+            <Link
+              to="/rental-membership"
+              state={{
+                slotsData: {
+                  training: facility?.results._id,
+                  slots: selectSlots,
+                  price: facility?.results.price,
+                  sport: facility?.results.sport,
+                },
+              }}
+              className="block"
+            >
+              <Button className="primary-btn-2">Book now</Button>
+            </Link>
           </div>
         </div>
       )}

@@ -1,58 +1,54 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Steps } from "antd";
-import { useState } from "react";
+import RentalBookingReviewPart from "../../../pages/RentalBookingPage/components/RentalBookingReviewPart";
 import GroupTrainingGeneralForm from "../form/GroupTrainingGeneralForm";
-import GroupTrainingTeamDetailsForm from "../form/GroupTrainingTeamDetailsForm";
 
-const GroupTrainingSteps = ({
+const RentalBookingSteps = ({
   form,
-  onSubmit,
+  onFinish,
   loading,
   current,
   setCurrent,
+  addons,
+  setAddons,
+  bookingData,
+  membershipData,
 }: {
   form: any;
-  onSubmit: any;
+  onFinish: any;
   loading: boolean;
   current: number;
   setCurrent: any;
+  addons: any;
+  setAddons: any;
+  bookingData: any;
+  membershipData: any;
 }) => {
-  const [formData, setFormData] = useState<any>({});
   const steps = [
     {
-      title: "General Details",
-      content: <GroupTrainingGeneralForm form={form} />,
+      title: "Review Booking",
+      content: (
+        <RentalBookingReviewPart
+          addons={addons}
+          setAddons={setAddons}
+          bookingData={bookingData}
+          membershipData={membershipData}
+        />
+      ),
     },
     {
-      title: "Group Details",
-      content: <GroupTrainingTeamDetailsForm form={form} />,
+      title: "Booking Details",
+      content: <GroupTrainingGeneralForm form={form} />,
     },
   ];
   const next = () => {
-    form.validateFields().then((values: any) => {
-      setFormData({ ...formData, ...values });
-      setCurrent(current + 1);
-    });
+    setCurrent(current + 1);
   };
-
-  const onFinish = () => {
-    form.validateFields().then((values: any) => {
-      onSubmit({ ...formData, ...values });
-    });
-  };
-
   const prev = () => {
     setCurrent(current - 1);
   };
   const onChange = (value: number) => {
-    if (value < current) {
-      setCurrent(value);
-    } else {
-      form.validateFields().then((values: any) => {
-        setFormData({ ...formData, ...values });
-        setCurrent(value);
-      });
-    }
+    setCurrent(value);
   };
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
   return (
@@ -89,4 +85,4 @@ const GroupTrainingSteps = ({
   );
 };
 
-export default GroupTrainingSteps;
+export default RentalBookingSteps;

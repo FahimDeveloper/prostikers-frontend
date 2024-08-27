@@ -10,7 +10,11 @@ const slotBookingApi = slotBookingApiSlice.injectEndpoints({
         method: "POST",
         body: payload,
       }),
-      invalidatesTags: ["carts", "booked"],
+      invalidatesTags: [
+        "carts",
+        "group-training-booked",
+        "one-training-booked",
+      ],
     }),
     getBookingSlots: builder.query<any, any>({
       query: (params) => ({
@@ -27,7 +31,7 @@ const slotBookingApi = slotBookingApiSlice.injectEndpoints({
       }),
       invalidatesTags: ["carts"],
     }),
-    groupTraingBookedSlots: builder.query<
+    groupTrainingBookedSlots: builder.query<
       IncomingQueryType<{
         date: string;
         training: string;
@@ -40,7 +44,37 @@ const slotBookingApi = slotBookingApiSlice.injectEndpoints({
         method: "GET",
         params,
       }),
-      providesTags: ["booked"],
+      providesTags: ["group-training-booked"],
+    }),
+    facilityBookedSlots: builder.query<
+      IncomingQueryType<{
+        date: string;
+        training: string;
+        time_slot: string;
+      }>,
+      { date: string; training: string }
+    >({
+      query: (params) => ({
+        url: "/reservations/facilities/slots",
+        method: "GET",
+        params,
+      }),
+      providesTags: ["facility-booked"],
+    }),
+    oneTrainingBookedSlots: builder.query<
+      IncomingQueryType<{
+        date: string;
+        training: string;
+        time_slot: string;
+      }>,
+      { date: string; training: string }
+    >({
+      query: (params) => ({
+        url: "/reservations/appointments/one-on-one/slots",
+        method: "GET",
+        params,
+      }),
+      providesTags: ["one-training-booked"],
     }),
   }),
 });
@@ -49,5 +83,7 @@ export const {
   useAddToCartSlotMutation,
   useDeleteBookingSlotMutation,
   useGetBookingSlotsQuery,
-  useGroupTraingBookedSlotsQuery,
+  useGroupTrainingBookedSlotsQuery,
+  useFacilityBookedSlotsQuery,
+  useOneTrainingBookedSlotsQuery,
 } = slotBookingApi;

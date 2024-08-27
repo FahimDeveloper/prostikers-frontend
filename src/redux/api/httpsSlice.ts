@@ -55,6 +55,11 @@ export const appointmentApiSlice = createApi({
 export const slotBookingApiSlice = createApi({
   reducerPath: "slotBookingApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["carts", "booked"],
+  tagTypes: [
+    "carts",
+    "group-training-booked",
+    "one-training-booked",
+    "facility-booked",
+  ],
   endpoints: () => ({}),
 });
