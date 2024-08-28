@@ -1,8 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, Input, InputNumber } from "antd";
+import { useEffect } from "react";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 
-const LeagueTeamDetailsForm = ({ form }: { form: any }) => {
+const LeagueTeamDetailsForm = ({
+  form,
+  formData,
+}: {
+  form: any;
+  formData: any;
+}) => {
+  useEffect(() => {
+    if (formData) {
+      form.setFieldsValue({
+        team: [
+          {
+            first_name: formData.first_name,
+            last_name: formData.last_name,
+            age: formData.age,
+            email: formData.email,
+            contact: formData.phone,
+          },
+        ],
+      });
+    }
+  }, [formData]);
   return (
     <div className="space-y-5">
       <div className="space-y-2">
@@ -27,10 +49,20 @@ const LeagueTeamDetailsForm = ({ form }: { form: any }) => {
             <>
               {fields.map(({ key, name, ...restField }, index) => (
                 <div className="space-y-2">
-                  <h4 className="font-medium text-lg text-[#7B7B7B]">
-                    Player
-                    {index == 0 ? ` ${index + 1} (Team Lead)` : ` ${index + 1}`}
-                  </h4>
+                  <div className="flex items-center gap-3">
+                    <h4 className="font-medium text-lg text-[#7B7B7B]">
+                      Player
+                      {index == 0
+                        ? ` ${index + 1} (Team Lead)`
+                        : ` ${index + 1}`}
+                    </h4>
+                    {index > 0 && (
+                      <AiOutlineMinusCircle
+                        className="size-4 cursor-pointer"
+                        onClick={() => remove(name)}
+                      />
+                    )}
+                  </div>
                   <div
                     key={key}
                     className="grid grid-cols-5 gap-3 items-center"
@@ -44,6 +76,7 @@ const LeagueTeamDetailsForm = ({ form }: { form: any }) => {
                       ]}
                     >
                       <Input
+                        readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
                         className="w-full rounded-full p-2"
                       />
@@ -55,6 +88,7 @@ const LeagueTeamDetailsForm = ({ form }: { form: any }) => {
                       rules={[{ required: true, message: "Missing last name" }]}
                     >
                       <Input
+                        readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
                         className="w-full rounded-full p-2"
                       />
@@ -68,6 +102,7 @@ const LeagueTeamDetailsForm = ({ form }: { form: any }) => {
                       ]}
                     >
                       <InputNumber
+                        readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
                         className="w-full rounded-full p-1"
                         min={0}
@@ -81,27 +116,23 @@ const LeagueTeamDetailsForm = ({ form }: { form: any }) => {
                       rules={[{ required: true, message: "Missing email" }]}
                     >
                       <Input
+                        readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
                         className="w-full rounded-full p-2"
                       />
                     </Form.Item>
-                    <div className="flex items-center gap-2">
-                      <Form.Item
-                        label="Contact"
-                        {...restField}
-                        name={[name, "contact"]}
-                        rules={[{ required: true, message: "Missing contact" }]}
-                      >
-                        <Input
-                          placeholder="Type here..."
-                          className="w-full rounded-full p-2"
-                        />
-                      </Form.Item>
-                      <AiOutlineMinusCircle
-                        className="size-4 cursor-pointer"
-                        onClick={() => remove(name)}
+                    <Form.Item
+                      label="Contact"
+                      {...restField}
+                      name={[name, "contact"]}
+                      rules={[{ required: true, message: "Missing contact" }]}
+                    >
+                      <Input
+                        readOnly={index < 1 ? true : false}
+                        placeholder="Type here..."
+                        className="w-full rounded-full p-2"
                       />
-                    </div>
+                    </Form.Item>
                   </div>
                 </div>
               ))}

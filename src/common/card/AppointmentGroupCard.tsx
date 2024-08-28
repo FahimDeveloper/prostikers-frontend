@@ -11,13 +11,16 @@ import { Button } from "antd";
 import { CiBadgeDollar } from "react-icons/ci";
 import { FaUserGraduate } from "react-icons/fa";
 import { IoTimeOutline } from "react-icons/io5";
+import { FaPeopleGroup } from "react-icons/fa6";
 
-const AppointmentCard = ({
+const AppointmentGroupCard = ({
   image,
   data,
+  activeDate,
 }: {
   image: any;
   data: IAppointment;
+  activeDate: Date;
 }) => {
   const user = useSelector(selectCurrentUser);
   const location = useLocation();
@@ -45,6 +48,7 @@ const AppointmentCard = ({
           trainer: data.trainer,
           data: data,
           from: location,
+          date: activeDate?.toISOString(),
         },
       });
     }
@@ -61,6 +65,21 @@ const AppointmentCard = ({
         {data?.appointment_name}
       </h3>
       <div className="space-y-3 px-2">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 min-w-28">
+            <FaPeopleGroup className="size-5" />
+            <p className="text-base">Capacity :</p>
+          </div>
+          <p className="text-base font-medium capitalize">{data?.capacity}</p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 min-w-28">
+            <FaPeopleGroup className="size-5" />
+            <p className="text-base">Enrolled :</p>
+          </div>
+          <p className="text-base font-medium capitalize">{data?.enrolled}</p>
+        </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 min-w-28">
             <IoTimeOutline className="size-5" />
@@ -92,4 +111,4 @@ const AppointmentCard = ({
   );
 };
 
-export default AppointmentCard;
+export default AppointmentGroupCard;

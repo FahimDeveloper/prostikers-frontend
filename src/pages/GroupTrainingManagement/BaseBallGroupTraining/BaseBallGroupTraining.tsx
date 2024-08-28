@@ -10,18 +10,20 @@ import { Select } from "antd";
 import { useTrainersQuery } from "../../../redux/features/tainer/trainerApi";
 import { useState } from "react";
 import BookingSidebar from "../../../components/BookingSidebar/BookingSidebar";
-import { useAppointmentsQuery } from "../../../redux/features/appointment/appointmentApi";
-import AppointmentCard from "../../../common/card/AppointmentCard";
 import baseball from "../../../assets/images/training/baseball-training.webp";
+import { useGroupAppointmentsQuery } from "../../../redux/features/appointment/appointmentApi";
+import DateSlider from "../../../components/DateSlider";
+import AppointmentGroupCard from "../../../common/card/AppointmentGroupCard";
 
 const BaseBallGroupTraining = () => {
   const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   const [trainer, setTrainer] = useState<string | undefined>(undefined);
+  const [activeDate, setActiveDate] = useState(new Date());
   const { data: trainerData } = useTrainersQuery(undefined);
-  const { data: appointments } = useAppointmentsQuery({
+  const { data: appointments } = useGroupAppointmentsQuery({
     trainer,
     sport: "baseball",
-    appointment_type: "group training",
+    date: activeDate.toISOString(),
   });
   const options = trainerData?.results?.map((trainer: any) => {
     return {
@@ -68,20 +70,34 @@ const BaseBallGroupTraining = () => {
           </p>
         </div>
         <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-5 gap-y-5">
-          <div className="col-span-2 space-y-3">
-            <h3 className="text-xl font-semibold text-[#07133D]">
-              Select Trainer
-            </h3>
-            <Select
-              className="w-full h-9"
-              showSearch
-              optionFilterProp="children"
-              placeholder="Select trainer"
-              defaultValue={"all"}
-              onChange={onChange}
-              filterOption={filterOption}
-              options={trainerOptions}
-            />
+          <div className="col-span-2 space-y-7">
+            <div className="space-y-2">
+              <h3 className="text-xl font-semibold text-[#07133D]">
+                Select Trainer
+              </h3>
+              <Select
+                className="w-full h-9"
+                showSearch
+                optionFilterProp="children"
+                placeholder="Select trainer"
+                defaultValue={"all"}
+                onChange={onChange}
+                filterOption={filterOption}
+                options={trainerOptions}
+              />
+            </div>
+            <div className="space-y-2">
+              <p className="text-lg text-[#07133D] font-medium text-center">
+                {activeDate.toLocaleDateString("en-US", {
+                  month: "long",
+                  year: "numeric",
+                })}
+              </p>
+              <DateSlider
+                activeDate={activeDate}
+                setActiveDate={setActiveDate}
+              />
+            </div>
             <div className="col-span-2 space-y-5">
               {appointments?.results.length === 0 ? (
                 <div className="h-40 flex justify-center items-center">
@@ -93,10 +109,11 @@ const BaseBallGroupTraining = () => {
                 <div className="grid grid-cols-2 gap-5">
                   {appointments?.results.map((bootcamp, index) => {
                     return (
-                      <AppointmentCard
+                      <AppointmentGroupCard
                         data={bootcamp}
                         key={index}
                         image={baseball}
+                        activeDate={activeDate}
                       />
                     );
                   })}

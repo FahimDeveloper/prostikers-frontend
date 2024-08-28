@@ -8,6 +8,8 @@ export type IAppointment = {
   trainer: any;
   description: string;
   price: number;
+  enrolled?: number;
+  capacity?: number;
   schedules: IAppointmentDaySchedule[];
 };
 
@@ -19,7 +21,6 @@ type IAppointmentDaySchedule = {
 };
 
 export type IAppointmentParams = {
-  appointment_type: string | undefined;
   trainer?: string | undefined;
   sport: string | undefined;
 };

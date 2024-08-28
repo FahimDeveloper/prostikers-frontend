@@ -20,8 +20,8 @@ import {
   useOneTrainingBookedSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
 import {
-  useAppointmentQuery,
   useCreateAppointmentOneOnOneReservationMutation,
+  useOneAppointmentQuery,
 } from "../../../redux/features/appointment/appointmentApi";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { useSelector } from "react-redux";
@@ -42,7 +42,7 @@ const SoftballOneTrainingReservation = () => {
     create,
     { data, isSuccess, isError, error, isLoading: createLoading },
   ] = useCreateAppointmentOneOnOneReservationMutation();
-  const { data: appointment } = useAppointmentQuery(id, {
+  const { data: appointment } = useOneAppointmentQuery(id, {
     skip: id ? false : true,
   });
   const slotsCartQuery = useGetBookingSlotsQuery(

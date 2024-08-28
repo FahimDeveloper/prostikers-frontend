@@ -4,116 +4,26 @@ import BannerSection from "../../../common/BannerSection";
 import Container from "../../../components/Container";
 import baseballBanner from "../../../assets/images/programsBanner/baseball-banner.webp";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "antd/es/form/Form";
 import Swal from "sweetalert2";
-import GroupTrainingSteps from "../../../components/ui/steps/GroupTrainingSteps";
-import toast from "react-hot-toast";
-import DateSlider from "../../../components/DateSlider";
-import BookingTimeSlots from "../../../components/BookingTimeSlots";
-import { IoCalendarOutline } from "react-icons/io5";
-import moment from "moment";
-import { MdDeleteOutline } from "react-icons/md";
-import {
-  useAddToCartSlotMutation,
-  useDeleteBookingSlotMutation,
-  useGetBookingSlotsQuery,
-  useGroupTrainingBookedSlotsQuery,
-} from "../../../redux/features/slotBooking/slotBookingApi";
-import {
-  useAppointmentQuery,
-  useCreateAppointmentGroupReservationMutation,
-} from "../../../redux/features/appointment/appointmentApi";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
+import { useCreateAppointmentGroupReservationMutation } from "../../../redux/features/appointment/appointmentApi";
+import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm";
 
 const BaseballGroupTrainingReservation = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const user = useSelector(selectCurrentUser);
-  const createCartBooking = useAddToCartSlotMutation();
-  const [deleteSlot] = useDeleteBookingSlotMutation();
-  const [activeDate, setActiveDate] = useState(new Date());
-  const [selectSlots, setSelectSlots] = useState<any[]>([]);
-  const [current, setCurrent] = useState(0);
   const [form] = useForm();
   const { state } = useLocation();
   const lastLocation = state?.from?.pathname || "/";
-  const [
-    create,
-    { data, isSuccess, isError, error, isLoading: createLoading },
-  ] = useCreateAppointmentGroupReservationMutation();
-  const { data: appointment } = useAppointmentQuery(id, {
-    skip: id ? false : true,
-  });
-  const slotsCartQuery = useGetBookingSlotsQuery(
-    {
-      training: id,
-      date: activeDate.toISOString().split("T")[0],
-    },
-    { skip: appointment ? false : true }
-  );
-  const slotsBookedQuery = useGroupTrainingBookedSlotsQuery(
-    {
-      training: id!,
-      date: activeDate.toISOString().split("T")[0],
-    },
-    { skip: appointment ? false : true }
-  );
+  const [create, { data, isSuccess, isError, error, isLoading }] =
+    useCreateAppointmentGroupReservationMutation();
 
-  const onSubmit = (values: any) => {
-    values.trainer = state.trainer;
+  const onFinish = (values: any) => {
+    values.trainer = state.trainer._id;
     values.appointment = id;
-    const bookings: any = [];
-    selectSlots?.forEach((dateSlots) =>
-      dateSlots.slots.forEach((slot: string) =>
-        bookings.push({
-          date: dateSlots.date.toISOString().split("T")[0],
-          time_slot: slot,
-          training: appointment?.results._id,
-        })
-      )
-    );
-    values.bookings = bookings;
-    create({ id: user?._id, payload: values });
-  };
-
-  const onDelete = (date: any, slot: any) => {
-    Swal.fire({
-      title: "Are you sure?",
-      icon: "info",
-      showCancelButton: true,
-      confirmButtonColor: "#0ABAC3",
-      cancelButtonColor: "#d33",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const slotId = `${id}${date.toISOString().split("T")[0]}${slot
-          .split(" ")
-          .join("")}`;
-        deleteSlot(slotId)
-          .unwrap()
-          .then(() => {
-            toast.success("Deleted successfully");
-            const updatedSlots = selectSlots
-              ?.map((slots: any) => {
-                if (slots.date === date && slots.slots.length > 1) {
-                  return {
-                    ...slots,
-                    slots: slots.slots.filter(
-                      (oldSlot: string) => oldSlot !== slot
-                    ),
-                  };
-                } else if (slots.date === date && slots.slots.length == 1) {
-                  return null;
-                }
-                return slots;
-              })
-              .filter(Boolean);
-            setSelectSlots(updatedSlots);
-          })
-          .catch((error) => toast.error(`${error.data.message}`));
-      }
-    });
+    values.date = state.date;
+    create(values);
   };
 
   useEffect(() => {
@@ -127,8 +37,6 @@ const BaseballGroupTrainingReservation = () => {
         iconColor: "#0ABAC3",
       });
       form.resetFields();
-      setCurrent(0);
-      setSelectSlots([]);
       navigate(lastLocation);
     }
     if (isError) {
@@ -160,68 +68,11 @@ const BaseballGroupTrainingReservation = () => {
               and shared passion for every inning.
             </p>
           </div>
-          <div className="space-y-2">
-            <p className="text-lg text-[#07133D] font-medium text-center">
-              {activeDate.toLocaleDateString("en-US", { month: "long" })}
-            </p>
-            <DateSlider activeDate={activeDate} setActiveDate={setActiveDate} />
-          </div>
-          {appointment?.results && (
-            <BookingTimeSlots
-              activeDate={activeDate}
-              training={appointment?.results}
-              slotsCartQuery={slotsCartQuery}
-              slotsBookedQuery={slotsBookedQuery}
-              addToCart={createCartBooking}
-              selectSlots={selectSlots}
-              setSelectSlots={setSelectSlots}
-            />
-          )}
-          {selectSlots.length > 0 && (
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-secondary">
-                Booking Details
-              </h3>
-              <div className="space-y-2">
-                {selectSlots.map((dateSlots, index) => (
-                  <div className="space-y-2" key={index}>
-                    {dateSlots.slots.map((slot: string, index: number) => (
-                      <div
-                        key={index}
-                        className="flex justify-between items-center bg-white p-3"
-                      >
-                        <div className="flex gap-5 items-center">
-                          <IoCalendarOutline className="size-4" />
-                          <span className="text-sm font-medium text-secondary">
-                            {moment(dateSlots.date).format("D-MMM-YYYY")}
-                          </span>
-                        </div>
-                        <div className="text-sm font-medium text-secondary">
-                          {slot}
-                        </div>
-                        <div className="text-sm font-medium text-secondary">
-                          ${appointment?.results?.price}
-                        </div>
-                        <MdDeleteOutline
-                          className="size-5 cursor-pointer"
-                          onClick={() => onDelete(dateSlots.date, slot)}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          {selectSlots.length > 0 && (
-            <GroupTrainingSteps
-              current={current}
-              setCurrent={setCurrent}
-              onSubmit={onSubmit}
-              form={form}
-              loading={createLoading}
-            />
-          )}
+          <TrainingGeneralForm
+            form={form}
+            loading={isLoading}
+            onFinish={onFinish}
+          />
         </div>
       </Container>
     </>

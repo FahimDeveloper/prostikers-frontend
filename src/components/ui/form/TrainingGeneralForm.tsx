@@ -15,7 +15,7 @@ const TrainingGeneralForm = ({
       <div className="space-y-2">
         <h3 className="text-2xl font-bold text-[#07133D]">General Details</h3>
         <p className="text-[#929292] text-base">
-          Fill out this form to regester
+          Fill out this form for group training reservation
         </p>
       </div>
       <Form onFinish={onFinish} form={form} layout="vertical">

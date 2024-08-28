@@ -17,8 +17,8 @@ import {
   useGroupTrainingBookedSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
 import {
-  useAppointmentQuery,
   useCreateAppointmentGroupReservationMutation,
+  useGroupAppointmentQuery,
 } from "../../../redux/features/appointment/appointmentApi";
 import toast from "react-hot-toast";
 import { IoCalendarOutline } from "react-icons/io5";
@@ -43,7 +43,7 @@ const CricketGroupTrainingReservation = () => {
     create,
     { data, isSuccess, isError, error, isLoading: createLoading },
   ] = useCreateAppointmentGroupReservationMutation();
-  const { data: appointment } = useAppointmentQuery(id, {
+  const { data: appointment } = useGroupAppointmentQuery(id, {
     skip: id ? false : true,
   });
   const slotsCartQuery = useGetBookingSlotsQuery(

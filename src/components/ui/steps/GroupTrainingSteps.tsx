@@ -25,7 +25,7 @@ const GroupTrainingSteps = ({
     },
     {
       title: "Group Details",
-      content: <GroupTrainingTeamDetailsForm form={form} />,
+      content: <GroupTrainingTeamDetailsForm formData={formData} form={form} />,
     },
   ];
   const next = () => {

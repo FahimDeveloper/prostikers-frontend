@@ -1,8 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, Input, InputNumber } from "antd";
+import { useEffect } from "react";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 
-const GroupTrainingTeamDetailsForm = ({ form }: any) => {
+const GroupTrainingTeamDetailsForm = ({ form, formData }: any) => {
+  useEffect(() => {
+    if (formData) {
+      form.setFieldsValue({
+        team: [
+          {
+            first_name: formData.first_name,
+            last_name: formData.last_name,
+            age: formData.age,
+            email: formData.email,
+            contact: formData.phone,
+          },
+        ],
+      });
+    }
+  }, [formData]);
   return (
     <div className="space-y-5">
       <div className="space-y-2">

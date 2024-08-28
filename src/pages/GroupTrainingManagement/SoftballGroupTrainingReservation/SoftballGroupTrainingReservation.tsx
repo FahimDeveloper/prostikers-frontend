@@ -21,8 +21,8 @@ import {
   useGroupTrainingBookedSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
 import {
-  useAppointmentQuery,
   useCreateAppointmentGroupReservationMutation,
+  useGroupAppointmentQuery,
 } from "../../../redux/features/appointment/appointmentApi";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { useSelector } from "react-redux";
@@ -43,7 +43,7 @@ const SoftballGroupTrainingReservation = () => {
     create,
     { data, isSuccess, isError, error, isLoading: createLoading },
   ] = useCreateAppointmentGroupReservationMutation();
-  const { data: appointment } = useAppointmentQuery(id, {
+  const { data: appointment } = useGroupAppointmentQuery(id, {
     skip: id ? false : true,
   });
   const slotsCartQuery = useGetBookingSlotsQuery(

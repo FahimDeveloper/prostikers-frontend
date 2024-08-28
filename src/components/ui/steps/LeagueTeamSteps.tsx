@@ -25,7 +25,7 @@ const LeagueTeamSteps = ({
     },
     {
       title: "Team Details",
-      content: <LeagueTeamDetailsForm form={form} />,
+      content: <LeagueTeamDetailsForm formData={formData} form={form} />,
     },
   ];
   const next = () => {

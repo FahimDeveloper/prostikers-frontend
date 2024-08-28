@@ -16,8 +16,8 @@ import {
   useOneTrainingBookedSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
 import {
-  useAppointmentQuery,
   useCreateAppointmentOneOnOneReservationMutation,
+  useOneAppointmentQuery,
 } from "../../../redux/features/appointment/appointmentApi";
 import toast from "react-hot-toast";
 import { IoCalendarOutline } from "react-icons/io5";
@@ -42,7 +42,7 @@ const CricketOneTrainingReservation = () => {
     create,
     { data, isSuccess, isError, error, isLoading: createLoading },
   ] = useCreateAppointmentOneOnOneReservationMutation();
-  const { data: appointment } = useAppointmentQuery(id, {
+  const { data: appointment } = useOneAppointmentQuery(id, {
     skip: id ? false : true,
   });
   const slotsCartQuery = useGetBookingSlotsQuery(

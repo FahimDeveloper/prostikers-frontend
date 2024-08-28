@@ -1,4 +1,4 @@
-import { DatePicker, Form, Input, InputNumber, Select } from "antd";
+import { Form, Input, InputNumber } from "antd";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const LeagueTeamGeneralForm = ({ form }: { form: any }) => {
@@ -79,35 +79,6 @@ const LeagueTeamGeneralForm = ({ form }: { form: any }) => {
               className="w-full rounded-full p-2 capitalize"
               placeholder="Type here.."
               readOnly
-            />
-          </Form.Item>
-          <Form.Item
-            label="Training preferred time"
-            name="preferred_time"
-            className="m-0"
-            rules={[{ required: true }]}
-          >
-            <Select
-              className=""
-              placeholder="Select time"
-              options={[
-                { value: "8:00 am", label: "8:00 am " },
-                { value: "10:00 am", label: "10:00 am" },
-                { value: "12:00 pm", label: "12:00 pm" },
-                { value: "2:00 pm", label: "2:00 pm" },
-                { value: "4:00 pm", label: "4:00 pm" },
-              ]}
-            />
-          </Form.Item>
-          <Form.Item
-            label="Training preferred date"
-            name="preferred_date"
-            className="m-0"
-            rules={[{ required: true }]}
-          >
-            <DatePicker
-              className="w-full rounded-full p-2"
-              placeholder="select date"
             />
           </Form.Item>
           <Form.Item
