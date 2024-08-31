@@ -4,46 +4,26 @@ import BannerSection from "../../../common/BannerSection";
 import Container from "../../../components/Container";
 import LeagueTeamSteps from "../../../components/ui/steps/LeagueTeamSteps";
 import banner from "../../../assets/images/programsBanner/tten-league-banner.webp";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
-import { useCreateGroupEventReservationMutation } from "../../../redux/features/event/eventApi";
 
 const JoinAsTeamRegistration = () => {
   const [current, setCurrent] = useState(0);
   const { id } = useParams();
   const [form] = useForm();
   const { state } = useLocation();
-  const [create, { data, isLoading, isSuccess, isError, error }] =
-    useCreateGroupEventReservationMutation();
+  const location = state.from.pathname || "/";
+  const navigate = useNavigate();
   useEffect(() => {
-    if (isSuccess) {
-      Swal.fire({
-        title: "Success",
-        icon: "success",
-        text: `${data?.message}`,
-        showConfirmButton: false,
-        timer: 1500,
-        iconColor: "#0ABAC3",
-      });
-      form.resetFields();
-      setCurrent(0);
-    }
-    if (isError) {
-      Swal.fire({
-        title: "Oops!..",
-        icon: "error",
-        text: `${(error as any)?.data?.message}`,
-        confirmButtonColor: "#0ABAC3",
-      });
-    }
     form.setFieldsValue({
       sport: state?.sport,
     });
-  }, [data, isSuccess, isError, error, state]);
+  }, [form, state]);
   const onSubmit = (values: any) => {
     values.event = id;
-    create(values);
+    navigate("/event-group-payment", {
+      state: { data: values, location: location, amount: state.amount },
+    });
   };
   return (
     <>
@@ -63,7 +43,6 @@ const JoinAsTeamRegistration = () => {
           <LeagueTeamSteps
             form={form}
             onSubmit={onSubmit}
-            loading={isLoading}
             current={current}
             setCurrent={setCurrent}
           />

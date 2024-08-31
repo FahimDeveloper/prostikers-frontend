@@ -7,13 +7,11 @@ import LeagueTeamDetailsForm from "../form/LeagueTeamDetailsForm";
 const LeagueTeamSteps = ({
   form,
   onSubmit,
-  loading,
   current,
   setCurrent,
 }: {
   form: any;
   onSubmit: any;
-  loading: boolean;
   current: number;
   setCurrent: any;
 }) => {
@@ -71,11 +69,7 @@ const LeagueTeamSteps = ({
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button
-            className="primary-btn"
-            loading={loading}
-            onClick={() => onFinish()}
-          >
+          <Button className="primary-btn" onClick={() => onFinish()}>
             Proceed
           </Button>
         )}

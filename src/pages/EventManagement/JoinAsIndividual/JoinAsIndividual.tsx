@@ -37,9 +37,9 @@ const JoinAsIndividual = () => {
             team that matches your skill level and competitive spirit.
           </p>
           <div className="space-y-3">
-            <div className="flex justify-end">
+            <div className="flex justify-start">
               <Select
-                className="w-40"
+                className="w-56"
                 defaultValue={"all"}
                 optionFilterProp="children"
                 onChange={onChange}

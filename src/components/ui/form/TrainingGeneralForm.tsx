@@ -8,7 +8,7 @@ const TrainingGeneralForm = ({
 }: {
   form: any;
   onFinish: any;
-  loading: boolean;
+  loading?: boolean;
 }) => {
   return (
     <div className="space-y-5">

@@ -34,7 +34,14 @@ const BootcampCard = ({ image, data }: { image: any; data: any }) => {
         }
       });
     } else {
-      navigate(`${data._id}`, { state: { sport: data.sport, from: location } });
+      navigate(`${data._id}`, {
+        state: {
+          amount: data?.price,
+          sport: data?.sport,
+          from: location,
+          trainer: data?.trainer,
+        },
+      });
     }
   };
   return (
@@ -118,7 +125,7 @@ const BootcampCard = ({ image, data }: { image: any; data: any }) => {
               <CiBadgeDollar className="size-5" />
               <p className="text-base">Fee :</p>
             </div>
-            <p className="text-base font-medium">{data?.price}</p>
+            <p className="text-base font-medium">$ {data?.price}</p>
           </div>
         </div>
       </div>

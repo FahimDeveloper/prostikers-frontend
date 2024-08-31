@@ -10,7 +10,7 @@ export type IAppointment = {
   price: number;
   enrolled?: number;
   capacity?: number;
-  schedules: IAppointmentDaySchedule[];
+  schedules: IAppointmentDaySchedule;
 };
 
 type IAppointmentDaySchedule = {

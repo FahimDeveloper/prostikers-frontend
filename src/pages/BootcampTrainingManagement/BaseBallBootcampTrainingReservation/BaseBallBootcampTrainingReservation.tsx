@@ -6,12 +6,8 @@ import { useForm } from "antd/es/form/Form";
 import BootcampReservationForm from "../../../components/ui/form/BootcampReservationForm";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import Swal from "sweetalert2";
-import { useCreateBootcampReservationMutation } from "../../../redux/features/bootcamp/bootcampApi";
 
 const BaseBallBootcampTrainingReservation = () => {
-  const [create, { data, isError, isSuccess, error }] =
-    useCreateBootcampReservationMutation();
   const { state } = useLocation();
   const navigate = useNavigate();
   const location = state?.from.pathname || "/";
@@ -20,33 +16,16 @@ const BaseBallBootcampTrainingReservation = () => {
   const onFinish = (values: any) => {
     values.course = id;
     values.sport = state.sport;
-    create(values);
+    values.trainer = state.trainer;
+    navigate("/bootcamp-payment", {
+      state: { amount: state?.amount, data: values, location: location },
+    });
   };
   useEffect(() => {
-    if (isSuccess) {
-      Swal.fire({
-        title: "Success",
-        icon: "success",
-        text: `${data?.message}`,
-        showConfirmButton: false,
-        timer: 1500,
-        iconColor: "#0ABAC3",
-      });
-      form.resetFields();
-      navigate(location);
-    }
-    if (isError) {
-      Swal.fire({
-        title: "Oops!..",
-        icon: "error",
-        text: `${(error as any)?.data?.message}`,
-        confirmButtonColor: "#0ABAC3",
-      });
-    }
     form.setFieldsValue({
       sport: state?.sport,
     });
-  }, [data, isSuccess, isError, error, state]);
+  }, [form, state]);
   return (
     <>
       <BannerSection title="Baseball Bootcamp" image={baseballBanner} />
@@ -64,11 +43,7 @@ const BaseBallBootcampTrainingReservation = () => {
               instincts and elevate your game.
             </p>
           </div>
-          <BootcampReservationForm
-            form={form}
-            onFinish={onFinish}
-            loading={false}
-          />
+          <BootcampReservationForm form={form} onFinish={onFinish} />
         </div>
       </Container>
     </>

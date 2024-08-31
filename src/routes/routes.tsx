@@ -17,6 +17,15 @@ import BaseballOneTrainingReservation from "../pages/OneTrainingManagment/Baseba
 import CricketOneTrainingReservation from "../pages/OneTrainingManagment/CricketOneTrainingReservation/CricketOneTrainingReservation";
 import SoccerOneTrainingReservation from "../pages/OneTrainingManagment/SoccerOneTrainingReservation/SoccerOneTrainingReservation";
 import HockeyOneTrainingReservation from "../pages/OneTrainingManagment/HockeyOneTrainingReservation/HockeyOneTrainingReservation";
+import ResetPassword from "../pages/ResetPassword/ResetPassword";
+import VerifyCode from "../pages/VerifyCode/VerifyCode";
+import ForgetPassword from "../pages/FogetPassword/ForgetPassword";
+import BootcampPayment from "../pages/BootcampPayment/BootcampPayment";
+import GroupAppointmentPayment from "../pages/GroupAppointmentPayment/GroupAppointmentPayment";
+import OneOnOneAppointmentPayment from "../pages/OneOnOneAppointmentPayment/OneOnOneAppointmentPayment";
+import FacilityPayment from "../pages/FacilityPayment/FacilityPayment";
+import EventGroupPayment from "../pages/EventGroupPayment/EventGroupPayment";
+import EventIndividualPayment from "../pages/EventIndividualPayment/EventIndividualPayment";
 const Login = LazyLoad(lazy(() => import("../pages/Login/Login")));
 const Registration = LazyLoad(
   lazy(() => import("../pages/Registration/Registration"))
@@ -326,11 +335,83 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/forget-password",
+        element: (
+          <ProtectAuthRoute>
+            <ForgetPassword />
+          </ProtectAuthRoute>
+        ),
+      },
+      {
+        path: "/reset-password/:id/:token",
+        element: (
+          <ProtectAuthRoute>
+            <ResetPassword />
+          </ProtectAuthRoute>
+        ),
+      },
+      {
+        path: "/reset-password/:id/:token/verify",
+        element: (
+          <ProtectAuthRoute>
+            <VerifyCode />
+          </ProtectAuthRoute>
+        ),
+      },
+      {
         path: "/registration",
         element: (
           <ProtectAuthRoute>
             <Registration />
           </ProtectAuthRoute>
+        ),
+      },
+      {
+        path: "/facility-payment",
+        element: (
+          <PrivetRoute>
+            <FacilityPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/event-group-payment",
+        element: (
+          <PrivetRoute>
+            <EventGroupPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/event-individual-payment",
+        element: (
+          <PrivetRoute>
+            <EventIndividualPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/bootcamp-payment",
+        element: (
+          <PrivetRoute>
+            <BootcampPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/group-appointment-payment",
+        element: (
+          <PrivetRoute>
+            <GroupAppointmentPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/one-appointment-payment",
+        element: (
+          <PrivetRoute>
+            <OneOnOneAppointmentPayment />
+          </PrivetRoute>
         ),
       },
       {

@@ -63,3 +63,9 @@ export const slotBookingApiSlice = createApi({
   ],
   endpoints: () => ({}),
 });
+
+export const paymentApiSlice = createApi({
+  reducerPath: "paymentApi",
+  baseQuery: baseQueryWithRefreshToken,
+  endpoints: () => ({}),
+});

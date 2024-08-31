@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Form, Input, InputNumber, Select } from "antd";
+import { Button, Form, Input, InputNumber } from "antd";
 
 const BootcampReservationForm = ({
   form,
   onFinish,
-  loading,
 }: {
   form: any;
   onFinish: any;
-  loading: boolean;
 }) => {
   return (
     <div className="bg-[#F9FBFF] p-16 border border-solid border-[#F9FBFF] rounded-2xl space-y-6">
@@ -21,8 +19,19 @@ const BootcampReservationForm = ({
       <Form form={form} onFinish={onFinish} layout="vertical">
         <div className="grid grid-cols-2 gap-4">
           <Form.Item
-            label="Player Name"
-            name="player_name"
+            label="First Name"
+            name="first_name"
+            className="m-0"
+            rules={[{ required: true }]}
+          >
+            <Input
+              className="w-full rounded-full p-2"
+              placeholder="Type here.."
+            />
+          </Form.Item>
+          <Form.Item
+            label="Last Name"
+            name="last_name"
             className="m-0"
             rules={[{ required: true }]}
           >
@@ -42,56 +51,41 @@ const BootcampReservationForm = ({
               placeholder="Type here.."
             />
           </Form.Item>
-          <div className="col-span-2 grid grid-cols-3 gap-4">
-            <Form.Item
-              label="Phone"
-              name="phone"
-              className="m-0"
-              rules={[{ required: true }]}
-            >
-              <Input
-                className="w-full rounded-full p-2"
-                placeholder="Type here.."
-              />
-            </Form.Item>
-            <Form.Item
-              rules={[{ required: true }]}
-              name="skill_level"
-              className="m-0"
-              label="Skill Level"
-            >
-              <Select
-                placeholder="Select level"
-                options={[
-                  {
-                    label: "Basic",
-                    value: "basic",
-                  },
-                  {
-                    label: "Intermediate",
-                    value: "intermediate",
-                  },
-                  {
-                    label: "Advanced",
-                    value: "advanced",
-                  },
-                ]}
-              />
-            </Form.Item>
-            <Form.Item
-              label="Age"
-              name="age"
-              className="m-0"
-              rules={[{ required: true }]}
-            >
-              <InputNumber
-                className="w-full rounded-full p-1"
-                placeholder="Type here.."
-                min={0}
-                max={99}
-              />
-            </Form.Item>
-          </div>
+          <Form.Item
+            label="Phone"
+            name="phone"
+            className="m-0"
+            rules={[{ required: true }]}
+          >
+            <Input
+              className="w-full rounded-full p-2"
+              placeholder="Type here.."
+            />
+          </Form.Item>
+          <Form.Item
+            label="Age"
+            name="age"
+            className="m-0"
+            rules={[{ required: true }]}
+          >
+            <InputNumber
+              className="w-full rounded-full p-1"
+              placeholder="Type here.."
+              min={0}
+              max={99}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Sport"
+            name="sport"
+            className="m-0"
+            rules={[{ required: true }]}
+          >
+            <Input
+              className="w-full rounded-full p-2"
+              placeholder="Type here.."
+            />
+          </Form.Item>
           <Form.Item
             label="Street Address"
             name="street_address"
@@ -136,7 +130,7 @@ const BootcampReservationForm = ({
           </Form.Item>
         </div>
         <Form.Item className="flex justify-end">
-          <Button htmlType="submit" loading={loading} className="primary-btn">
+          <Button htmlType="submit" className="primary-btn">
             Proceed
           </Button>
         </Form.Item>

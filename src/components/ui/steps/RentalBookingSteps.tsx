@@ -6,23 +6,25 @@ import GroupTrainingGeneralForm from "../form/GroupTrainingGeneralForm";
 const RentalBookingSteps = ({
   form,
   onFinish,
-  loading,
   current,
   setCurrent,
   addons,
   setAddons,
   bookingData,
   membershipData,
+  setTotalPrice,
+  totalPrice,
 }: {
   form: any;
   onFinish: any;
-  loading: boolean;
   current: number;
   setCurrent: any;
   addons: any;
   setAddons: any;
   bookingData: any;
   membershipData: any;
+  setTotalPrice: any;
+  totalPrice: any;
 }) => {
   const steps = [
     {
@@ -33,6 +35,8 @@ const RentalBookingSteps = ({
           setAddons={setAddons}
           bookingData={bookingData}
           membershipData={membershipData}
+          setTotalPrice={setTotalPrice}
+          totalPrice={totalPrice}
         />
       ),
     },
@@ -67,11 +71,7 @@ const RentalBookingSteps = ({
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button
-            className="primary-btn"
-            loading={loading}
-            onClick={() => onFinish()}
-          >
+          <Button className="primary-btn" onClick={() => onFinish()}>
             Proceed
           </Button>
         )}

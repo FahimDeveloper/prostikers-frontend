@@ -14,11 +14,15 @@ const RentalBookingReviewPart = ({
   setAddons,
   bookingData,
   membershipData,
+  setTotalPrice,
+  totalPrice,
 }: {
   addons: any;
   setAddons: any;
   bookingData: any;
   membershipData: any;
+  setTotalPrice: any;
+  totalPrice: any;
 }) => {
   const [rentalData, setRentalData] = useState(bookingData);
   const [membership, setMemberhips] = useState(membershipData);
@@ -86,6 +90,11 @@ const RentalBookingReviewPart = ({
   const addonsPrice = addons.reduce((total: number, addon: any) => {
     return total + addon.price;
   }, 0);
+  if (membership?.price) {
+    setTotalPrice(slotsPrice + addonsPrice + membership?.price);
+  } else {
+    setTotalPrice(slotsPrice + addonsPrice);
+  }
   return (
     <div className="grid grid-cols-5 gap-7">
       <div className="col-span-3 p-7 rounded-2xl border border-solid border-[#F2F2F2] space-y-7">
@@ -180,9 +189,7 @@ const RentalBookingReviewPart = ({
         ))}
         <div className="flex justify-between py-5">
           <p className="text-secondary text-base font-medium">Total Price</p>
-          <p className="text-secondary text-lg font-medium">
-            ${slotsPrice + addonsPrice}
-          </p>
+          <p className="text-secondary text-lg font-medium">${totalPrice}</p>
         </div>
       </div>
     </div>

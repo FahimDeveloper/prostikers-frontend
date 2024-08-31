@@ -6,8 +6,6 @@ import baseballBanner from "../../../assets/images/programsBanner/baseball-banne
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useForm } from "antd/es/form/Form";
-import Swal from "sweetalert2";
-import { useCreateAppointmentGroupReservationMutation } from "../../../redux/features/appointment/appointmentApi";
 import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm";
 
 const BaseballGroupTrainingReservation = () => {
@@ -15,42 +13,22 @@ const BaseballGroupTrainingReservation = () => {
   const navigate = useNavigate();
   const [form] = useForm();
   const { state } = useLocation();
-  const lastLocation = state?.from?.pathname || "/";
-  const [create, { data, isSuccess, isError, error, isLoading }] =
-    useCreateAppointmentGroupReservationMutation();
+  const location = state?.from?.pathname || "/";
 
   const onFinish = (values: any) => {
     values.trainer = state.trainer._id;
     values.appointment = id;
     values.date = state.date;
-    create(values);
+    navigate("/group-appointment-payment", {
+      state: { data: values, location: location, amount: state?.data?.price },
+    });
   };
 
   useEffect(() => {
-    if (isSuccess) {
-      Swal.fire({
-        title: "Success",
-        icon: "success",
-        text: `${data?.message}`,
-        showConfirmButton: false,
-        timer: 1500,
-        iconColor: "#0ABAC3",
-      });
-      form.resetFields();
-      navigate(lastLocation);
-    }
-    if (isError) {
-      Swal.fire({
-        title: "Oops!..",
-        icon: "error",
-        text: `${(error as any)?.data?.message}`,
-        confirmButtonColor: "#0ABAC3",
-      });
-    }
     form.setFieldsValue({
       sport: state?.sport,
     });
-  }, [state, isSuccess, isError, error]);
+  }, [state]);
 
   return (
     <>
@@ -68,11 +46,7 @@ const BaseballGroupTrainingReservation = () => {
               and shared passion for every inning.
             </p>
           </div>
-          <TrainingGeneralForm
-            form={form}
-            loading={isLoading}
-            onFinish={onFinish}
-          />
+          <TrainingGeneralForm form={form} onFinish={onFinish} />
         </div>
       </Container>
     </>

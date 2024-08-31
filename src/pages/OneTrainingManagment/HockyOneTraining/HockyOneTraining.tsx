@@ -11,17 +11,16 @@ import AppointmentCard from "../../../common/card/AppointmentCard";
 import BookingSidebar from "../../../components/BookingSidebar/BookingSidebar";
 import { useState } from "react";
 import { useTrainersQuery } from "../../../redux/features/tainer/trainerApi";
-import { useAppointmentsQuery } from "../../../redux/features/appointment/appointmentApi";
+import { useOneAppointmentsQuery } from "../../../redux/features/appointment/appointmentApi";
 import { Select } from "antd";
 
 const HockyOneTraining = () => {
   const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   const [trainer, setTrainer] = useState<string | undefined>(undefined);
   const { data: trainerData } = useTrainersQuery(undefined);
-  const { data: appointments } = useAppointmentsQuery({
+  const { data: appointments } = useOneAppointmentsQuery({
     trainer,
-    sport: "baseball",
-    appointment_type: "one on one",
+    sport: "hockey",
   });
   const options = trainerData?.results?.map((trainer: any) => {
     return {

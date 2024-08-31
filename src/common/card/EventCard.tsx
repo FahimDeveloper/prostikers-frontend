@@ -30,7 +30,9 @@ const EventCard = ({ event, index }: { event: any; index: number }) => {
         }
       });
     } else {
-      navigate(`${event._id}`, { state: { sport: event.sport } });
+      navigate(`${event._id}`, {
+        state: { sport: event.sport, from: location, amount: event.price },
+      });
     }
   };
   return (

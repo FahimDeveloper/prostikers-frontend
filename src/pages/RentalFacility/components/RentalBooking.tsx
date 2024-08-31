@@ -37,14 +37,14 @@ const RentalBooking = () => {
       training: facility?.results._id,
       date: activeDate.toISOString().split("T")[0],
     },
-    { skip: user && facility ? false : true }
+    { skip: user && facility?.results?._id ? false : true }
   );
   const slotsBookedQuery = useFacilityBookedSlotsQuery(
     {
       training: facility?.results._id,
       date: activeDate.toISOString().split("T")[0],
     },
-    { skip: user && facility ? false : true }
+    { skip: user && facility?.results?._id ? false : true }
   );
   const onChange = (value: string) => {
     setFacilityCage(value);
@@ -87,8 +87,8 @@ const RentalBooking = () => {
       }
     });
   };
-  const totalPrice = selectSlots.reduce((total, appointment) => {
-    return total + appointment.slots.length * facility?.results.price;
+  const totalPrice = selectSlots.reduce((total, facility) => {
+    return total + facility.slots.length * facility?.results.price;
   }, 0);
   return (
     <div className="bg-[#F9FAFB] py-10 rounded-2xl space-y-6 px-5">
@@ -124,7 +124,7 @@ const RentalBooking = () => {
           ]}
         />
       </div>
-      {facility?.results && (
+      {facility?.results._id && (
         <div className="space-y-4">
           <h3 className="text-xl font-semibold text-[#07133D]">
             Booking Date and Time
@@ -167,6 +167,11 @@ const RentalBooking = () => {
               setSelectSlots={setSelectSlots}
             />
           )}
+        </div>
+      )}
+      {facility && !facility?.results._id && (
+        <div className="text-center h-40 flex items-center justify-center">
+          <h3 className="font-medium">Facility not found</h3>
         </div>
       )}
       {selectSlots.length > 0 && (

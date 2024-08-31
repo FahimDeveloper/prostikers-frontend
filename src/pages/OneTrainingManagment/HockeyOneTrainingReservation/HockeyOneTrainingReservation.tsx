@@ -16,10 +16,7 @@ import {
   useGetBookingSlotsQuery,
   useOneTrainingBookedSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
-import {
-  useCreateAppointmentOneOnOneReservationMutation,
-  useOneAppointmentQuery,
-} from "../../../redux/features/appointment/appointmentApi";
+import { useOneAppointmentQuery } from "../../../redux/features/appointment/appointmentApi";
 import toast from "react-hot-toast";
 import DateSlider from "../../../components/DateSlider";
 import BookingTimeSlots from "../../../components/BookingTimeSlots";
@@ -38,11 +35,7 @@ const HockeyOneTrainingReservation = () => {
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
   const [form] = useForm();
   const { state } = useLocation();
-  const lastLocation = state?.from?.pathname || "/";
-  const [
-    create,
-    { data, isSuccess, isError, error, isLoading: createLoading },
-  ] = useCreateAppointmentOneOnOneReservationMutation();
+  const location = state?.from?.pathname || "/";
   const { data: appointment } = useOneAppointmentQuery(id, {
     skip: id ? false : true,
   });
@@ -61,6 +54,10 @@ const HockeyOneTrainingReservation = () => {
     { skip: appointment ? false : true }
   );
 
+  const totalPrice = selectSlots.reduce((total, selectSlots) => {
+    return total + selectSlots.slots.length * appointment?.results.price;
+  }, 0);
+
   const onFinish = (values: any) => {
     values.trainer = state.trainer._id;
     values.appointment = id;
@@ -75,7 +72,13 @@ const HockeyOneTrainingReservation = () => {
       )
     );
     values.bookings = bookings;
-    create({ id: user?._id, payload: values });
+    navigate("/one-appointment-payment", {
+      state: {
+        data: { id: user?._id, payload: values },
+        location: location,
+        amount: totalPrice,
+      },
+    });
   };
 
   const onDelete = (date: any, slot: any) => {
@@ -117,31 +120,11 @@ const HockeyOneTrainingReservation = () => {
   };
 
   useEffect(() => {
-    if (isSuccess) {
-      Swal.fire({
-        title: "Success",
-        icon: "success",
-        text: `${data?.message}`,
-        showConfirmButton: false,
-        timer: 1500,
-        iconColor: "#0ABAC3",
-      });
-      form.resetFields();
-      setSelectSlots([]);
-      navigate(lastLocation);
-    }
-    if (isError) {
-      Swal.fire({
-        title: "Oops!..",
-        icon: "error",
-        text: `${(error as any)?.data?.message}`,
-        confirmButtonColor: "#0ABAC3",
-      });
-    }
     form.setFieldsValue({
       sport: state?.sport,
     });
-  }, [state, isSuccess, isError, error]);
+  }, [state]);
+
   return (
     <>
       <BannerSection
@@ -180,9 +163,15 @@ const HockeyOneTrainingReservation = () => {
           )}
           {selectSlots.length > 0 && (
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-secondary">
-                Booking Details
-              </h3>
+              <div className="flex justify-between">
+                <h3 className="text-xl font-semibold text-secondary">
+                  Booking Details
+                </h3>
+                <div className="flex gap-1">
+                  <p>Total Price:</p>
+                  <p>${totalPrice}</p>
+                </div>
+              </div>
               <div className="space-y-2">
                 {selectSlots.map((dateSlots, index) => (
                   <div className="space-y-2" key={index}>
@@ -215,11 +204,7 @@ const HockeyOneTrainingReservation = () => {
             </div>
           )}
           {selectSlots.length > 0 && (
-            <TrainingGeneralForm
-              form={form}
-              onFinish={onFinish}
-              loading={createLoading}
-            />
+            <TrainingGeneralForm form={form} onFinish={onFinish} />
           )}
         </div>
       </Container>

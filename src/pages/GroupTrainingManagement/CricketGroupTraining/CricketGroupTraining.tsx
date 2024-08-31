@@ -22,7 +22,7 @@ const CricketGroupTraining = () => {
   const { data: trainerData } = useTrainersQuery(undefined);
   const { data: appointments } = useGroupAppointmentsQuery({
     trainer,
-    sport: "baseball",
+    sport: "cricket",
     date: activeDate.toISOString(),
   });
   const options = trainerData?.results?.map((trainer: any) => {
