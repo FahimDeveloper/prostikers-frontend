@@ -1,27 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   selectCurrentToken,
   selectCurrentUser,
 } from "../../redux/features/auth/authSlice";
-import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { IAppointment } from "../../types/appointment.types";
-import { Button } from "antd";
-import { CiBadgeDollar } from "react-icons/ci";
-import { FaUserGraduate } from "react-icons/fa";
-import { IoTimeOutline } from "react-icons/io5";
 import { FaPeopleGroup } from "react-icons/fa6";
-import { collecTimeDuration } from "../../utils/collectTimeDuration";
+import { IoTimeOutline } from "react-icons/io5";
 import moment from "moment";
+import { collecTimeDuration } from "../../utils/collectTimeDuration";
+import { FaUserGraduate } from "react-icons/fa";
+import { CiBadgeDollar } from "react-icons/ci";
+import { Button } from "antd";
 
-const AppointmentGroupCard = ({
+const KidsTrainingCard = ({
   image,
   data,
   activeDate,
 }: {
   image: any;
-  data: IAppointment;
+  data: any;
   activeDate: Date;
 }) => {
   const user = useSelector(selectCurrentUser);
@@ -126,11 +125,19 @@ const AppointmentGroupCard = ({
           <p className="text-base font-medium">${data?.price}</p>
         </div>
       </div>
-      <Button onClick={onClick} className="primary-btn-2 w-full">
-        Book now
-      </Button>
+      <div className="grid grid-cols-2 gap-2">
+        <Button onClick={onClick} className="primary-btn-2 w-full">
+          Day Pass
+        </Button>
+        <Button
+          onClick={() => navigate("/membership")}
+          className="bg-secondary btn text-base text-white w-full"
+        >
+          Monthly Subscription
+        </Button>
+      </div>
     </div>
   );
 };
 
-export default AppointmentGroupCard;
+export default KidsTrainingCard;

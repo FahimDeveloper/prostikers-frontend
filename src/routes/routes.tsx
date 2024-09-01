@@ -4,28 +4,159 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
-import Blogs from "../pages/Blogs/Blogs";
-import SingleBlog from "../pages/SingleBlog/SingleBlog";
-import BaseballGroupTrainingReservation from "../pages/GroupTrainingManagement/BaseballGroupTrainingReservation/BaseballGroupTrainingReservation";
-import SoccerGroupTrainingReservation from "../pages/GroupTrainingManagement/SoccerGroupTrainingReservation/SoccerGroupTrainingReservation";
-import HockeyGroupTrainingReservation from "../pages/GroupTrainingManagement/HockeyGroupTrainingReservation/HockeyGroupTrainingReservation";
-import SoftballGroupTrainingReservation from "../pages/GroupTrainingManagement/SoftballGroupTrainingReservation/SoftballGroupTrainingReservation";
-import CricketGroupTrainingReservation from "../pages/GroupTrainingManagement/CricketGroupTrainingReservation/CricketGroupTrainingReservation";
-import RentalMembership from "../pages/RentalMembership/RentalMembership";
-import RentalBookingPage from "../pages/RentalBookingPage/RentalBookingPage";
-import BaseballOneTrainingReservation from "../pages/OneTrainingManagment/BaseballOneTrainingReservation/BaseballOneTrainingReservation";
-import CricketOneTrainingReservation from "../pages/OneTrainingManagment/CricketOneTrainingReservation/CricketOneTrainingReservation";
-import SoccerOneTrainingReservation from "../pages/OneTrainingManagment/SoccerOneTrainingReservation/SoccerOneTrainingReservation";
-import HockeyOneTrainingReservation from "../pages/OneTrainingManagment/HockeyOneTrainingReservation/HockeyOneTrainingReservation";
-import ResetPassword from "../pages/ResetPassword/ResetPassword";
-import VerifyCode from "../pages/VerifyCode/VerifyCode";
-import ForgetPassword from "../pages/FogetPassword/ForgetPassword";
-import BootcampPayment from "../pages/BootcampPayment/BootcampPayment";
-import GroupAppointmentPayment from "../pages/GroupAppointmentPayment/GroupAppointmentPayment";
-import OneOnOneAppointmentPayment from "../pages/OneOnOneAppointmentPayment/OneOnOneAppointmentPayment";
-import FacilityPayment from "../pages/FacilityPayment/FacilityPayment";
-import EventGroupPayment from "../pages/EventGroupPayment/EventGroupPayment";
-import EventIndividualPayment from "../pages/EventIndividualPayment/EventIndividualPayment";
+import KidsTrainingPayment from "../pages/KidsTrainingPayment/KidsTrainingPayment";
+const Blogs = LazyLoad(lazy(() => import("../pages/Blogs/Blogs")));
+const SingleBlog = LazyLoad(
+  lazy(() => import("../pages/SingleBlog/SingleBlog"))
+);
+const BaseballGroupTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/BaseballGroupTrainingReservation/BaseballGroupTrainingReservation"
+      )
+  )
+);
+const SoccerGroupTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/SoccerGroupTrainingReservation/SoccerGroupTrainingReservation"
+      )
+  )
+);
+const HockeyGroupTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/HockeyGroupTrainingReservation/HockeyGroupTrainingReservation"
+      )
+  )
+);
+const SoftballGroupTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/SoftballGroupTrainingReservation/SoftballGroupTrainingReservation"
+      )
+  )
+);
+const CricketGroupTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/CricketGroupTrainingReservation/CricketGroupTrainingReservation"
+      )
+  )
+);
+const RentalMembership = LazyLoad(
+  lazy(() => import("../pages/RentalMembership/RentalMembership"))
+);
+const RentalBookingPage = LazyLoad(
+  lazy(() => import("../pages/RentalBookingPage/RentalBookingPage"))
+);
+const BaseballOneTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/OneTrainingManagment/BaseballOneTrainingReservation/BaseballOneTrainingReservation"
+      )
+  )
+);
+const CricketOneTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/OneTrainingManagment/CricketOneTrainingReservation/CricketOneTrainingReservation"
+      )
+  )
+);
+const SoccerOneTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/OneTrainingManagment/SoccerOneTrainingReservation/SoccerOneTrainingReservation"
+      )
+  )
+);
+const HockeyOneTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/OneTrainingManagment/HockeyOneTrainingReservation/HockeyOneTrainingReservation"
+      )
+  )
+);
+const ResetPassword = LazyLoad(
+  lazy(() => import("../pages/ResetPassword/ResetPassword"))
+);
+const VerifyCode = LazyLoad(
+  lazy(() => import("../pages/VerifyCode/VerifyCode"))
+);
+const ForgetPassword = LazyLoad(
+  lazy(() => import("../pages/FogetPassword/ForgetPassword"))
+);
+const BootcampPayment = LazyLoad(
+  lazy(() => import("../pages/BootcampPayment/BootcampPayment"))
+);
+const GroupAppointmentPayment = LazyLoad(
+  lazy(() => import("../pages/GroupAppointmentPayment/GroupAppointmentPayment"))
+);
+const OneOnOneAppointmentPayment = LazyLoad(
+  lazy(
+    () =>
+      import("../pages/OneOnOneAppointmentPayment/OneOnOneAppointmentPayment")
+  )
+);
+const FacilityPayment = LazyLoad(
+  lazy(() => import("../pages/FacilityPayment/FacilityPayment"))
+);
+const EventGroupPayment = LazyLoad(
+  lazy(() => import("../pages/EventGroupPayment/EventGroupPayment"))
+);
+const EventIndividualPayment = LazyLoad(
+  lazy(() => import("../pages/EventIndividualPayment/EventIndividualPayment"))
+);
+const BaseballKidsTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/BaseballKidsTrainingReservation/BaseballKidsTrainingReservation"
+      )
+  )
+);
+const CricketKidsTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/CricketKidsTrainingReservation/CricketKidsTrainingReservation"
+      )
+  )
+);
+const SoccerKidsTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/SoccerKidsTrainingReservation/SoccerKidsTrainingReservation"
+      )
+  )
+);
+const HockeyKidsTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/HockeyKidsTrainingReservation/HockeyKidsTrainingReservation"
+      )
+  )
+);
+const SoftballKidsTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/SoftballKidsTrainingReservation/SoftballKidsTrainingReservation"
+      )
+  )
+);
 const Login = LazyLoad(lazy(() => import("../pages/Login/Login")));
 const Registration = LazyLoad(
   lazy(() => import("../pages/Registration/Registration"))
@@ -415,6 +546,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/class-payment",
+        element: (
+          <PrivetRoute>
+            <KidsTrainingPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
         path: "/coming-soon",
         element: <ComingSoon />,
       },
@@ -653,6 +792,46 @@ export const router = createBrowserRouter([
           {
             path: "softball",
             element: <SoftballKidsTraining />,
+          },
+          {
+            path: "baseball/:id",
+            element: (
+              <PrivetRoute>
+                <BaseballKidsTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "cricket/:id",
+            element: (
+              <PrivetRoute>
+                <CricketKidsTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "soccer/:id",
+            element: (
+              <PrivetRoute>
+                <SoccerKidsTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "hockey/:id",
+            element: (
+              <PrivetRoute>
+                <HockeyKidsTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "softball/:id",
+            element: (
+              <PrivetRoute>
+                <SoftballKidsTrainingReservation />
+              </PrivetRoute>
+            ),
           },
         ],
       },

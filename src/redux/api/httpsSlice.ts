@@ -49,6 +49,12 @@ export const facilityReservationCartApiSlice = createApi({
 export const appointmentApiSlice = createApi({
   reducerPath: "appointmentApi",
   baseQuery: baseQueryWithRefreshToken,
+  tagTypes: [
+    "group-appointments",
+    "group-appointment",
+    "one-appointments",
+    "one-appointment",
+  ],
   endpoints: () => ({}),
 });
 
@@ -68,4 +74,11 @@ export const paymentApiSlice = createApi({
   reducerPath: "paymentApi",
   baseQuery: baseQueryWithRefreshToken,
   endpoints: () => ({}),
+});
+
+export const classApiSlice = createApi({
+  reducerPath: "classApi",
+  baseQuery: baseQueryWithRefreshToken,
+  endpoints: () => ({}),
+  tagTypes: ["classes", "class"],
 });

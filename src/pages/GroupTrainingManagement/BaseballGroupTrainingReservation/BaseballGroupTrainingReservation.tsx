@@ -18,7 +18,7 @@ const BaseballGroupTrainingReservation = () => {
   const onFinish = (values: any) => {
     values.trainer = state.trainer._id;
     values.appointment = id;
-    values.date = state.date;
+    values.appointment_date = state.date;
     navigate("/group-appointment-payment", {
       state: { data: values, location: location, amount: state?.data?.price },
     });
@@ -32,7 +32,7 @@ const BaseballGroupTrainingReservation = () => {
 
   return (
     <>
-      <BannerSection title="Baseball Group Traiing" image={baseballBanner} />
+      <BannerSection title="Baseball Group Training" image={baseballBanner} />
       <Container>
         <div className="lg:py-16 py-14 space-y-10">
           <div className="space-y-5">

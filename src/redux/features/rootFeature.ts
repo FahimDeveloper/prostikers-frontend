@@ -6,6 +6,7 @@ import {
   appointmentApiSlice,
   authApiSlice,
   bootcampApiSlice,
+  classApiSlice,
   eventApiSlice,
   facilityApiSlice,
   facilityReservationCartApiSlice,
@@ -35,6 +36,7 @@ export const rootReducers = combineReducers({
   [postApiSlice.reducerPath]: postApiSlice.reducer,
   [slotBookingApiSlice.reducerPath]: slotBookingApiSlice.reducer,
   [paymentApiSlice.reducerPath]: paymentApiSlice.reducer,
+  [classApiSlice.reducerPath]: classApiSlice.reducer,
 });
 
 export const rootMiddlewares = [
@@ -48,4 +50,5 @@ export const rootMiddlewares = [
   postApiSlice.middleware,
   slotBookingApiSlice.middleware,
   paymentApiSlice.middleware,
+  classApiSlice.middleware,
 ];
