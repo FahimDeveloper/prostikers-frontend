@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import GeneralTrainingBookingSection from "../../../common/GeneralTrainingBookingSection";
+
 import gallery1 from "../../../assets/images/gallery/hockey/hockey-gallery-1-min.webp";
 import gallery2 from "../../../assets/images/gallery/hockey/hockey-gallery-2-min.webp";
 import gallery3 from "../../../assets/images/gallery/hockey/hockey-gallery-3-min.webp";
