@@ -82,3 +82,10 @@ export const classApiSlice = createApi({
   endpoints: () => ({}),
   tagTypes: ["classes", "class"],
 });
+
+export const clientApiSlice = createApi({
+  reducerPath: "clientApi",
+  baseQuery: baseQueryWithRefreshToken,
+  endpoints: () => ({}),
+  tagTypes: ["client"],
+});

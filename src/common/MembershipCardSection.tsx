@@ -6,9 +6,11 @@ import { GiClick } from "react-icons/gi";
 import GetInMap from "../pages/Contact/components/GetInMap";
 import GetInForm from "../pages/Contact/components/GetInForm";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const MembershipCardSection = () => {
   const [plan, setPlan] = useState("monthly");
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const panelStyle: React.CSSProperties = {
     backgroundColor: "#EDFFFF",
@@ -18,70 +20,114 @@ const MembershipCardSection = () => {
     setPlan(value);
   };
   const handleMembership = (membership: string, price?: number) => {
-    console.log(price);
     if (membership === "individual_pro") {
       if (plan === "monthly") {
-        // const membershipData = {
-        //   package: "individual pro",
-        //   plan: plan,
-        //   price: price,
-        // };
+        const membershipData = {
+          membership: true,
+          package_name: "individual pro",
+          plan: plan,
+        };
         Swal.fire({
-          title: "Progressing",
-          text: "We are currently working on it",
+          title: `Membership Proccess $${price}`,
+          text: `Are you want to be members of individual pro ${plan}?`,
           icon: "info",
-          confirmButtonColor: "#0ABAC3",
+          showCancelButton: true,
+          confirmButtonColor: "#0EBBBC",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/membership-payment", {
+              state: { data: membershipData, amount: price },
+            });
+          }
         });
       } else if (plan === "yearly") {
-        // const membershipData = {
-        //   package: "individual pro",
-        //   plan: plan,
-        //   price: price,
-        // };
+        const membershipData = {
+          membership: true,
+          package_name: "individual pro",
+          plan: plan,
+        };
         Swal.fire({
-          title: "Progressing",
-          text: "We are currently working on it",
+          title: `Membership Proccess $${price}`,
+          text: `Are you want to be members of individual pro ${plan}?`,
           icon: "info",
-          confirmButtonColor: "#0ABAC3",
+          showCancelButton: true,
+          confirmButtonColor: "#0EBBBC",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/membership-payment", {
+              state: { data: membershipData, amount: price },
+            });
+          }
         });
       }
     } else if (membership === "individual_pro_unlimited") {
       if (plan === "monthly") {
-        // const membershipData = {
-        //   package: "individual pro unlimited",
-        //   plan: plan,
-        //   price: price,
-        // };
+        const membershipData = {
+          membership: true,
+          package_name: "individual pro unlimited",
+          plan: plan,
+        };
         Swal.fire({
-          title: "Progressing",
-          text: "We are currently working on it",
+          title: `Membership Proccess $${price}`,
+          text: `Are you want to be members of individual pro unlimited ${plan}?`,
           icon: "info",
-          confirmButtonColor: "#0ABAC3",
+          showCancelButton: true,
+          confirmButtonColor: "#0EBBBC",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/membership-payment", {
+              state: { data: membershipData, amount: price },
+            });
+          }
         });
       } else if (plan === "yearly") {
-        // const membershipData = {
-        //   package: "individual pro unlimited",
-        //   plan: plan,
-        //   price: price,
-        // };
+        const membershipData = {
+          membership: true,
+          package_name: "individual pro unlimited",
+          plan: plan,
+        };
         Swal.fire({
-          title: "Progressing",
-          text: "We are currently working on it",
+          title: `Membership Proccess $${price}`,
+          text: `Are you want to be members of individual pro unlimited ${plan}?`,
           icon: "info",
-          confirmButtonColor: "#0ABAC3",
+          showCancelButton: true,
+          confirmButtonColor: "#0EBBBC",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/membership-payment", {
+              state: { data: membershipData, amount: price },
+            });
+          }
         });
       }
     } else if (membership === "youth_training_membership") {
-      // const membershipData = {
-      //   package: "youth training membership",
-      //   plan: "monthly",
-      //   price: price,
-      // };
+      const membershipData = {
+        membership: true,
+        package_name: "youth training membership",
+        plan: plan,
+      };
       Swal.fire({
-        title: "Progressing",
-        text: "We are currently working on it",
+        title: `Membership Proccess $${price}`,
+        text: `Are you want to be members of youth training membership ${plan}?`,
         icon: "info",
-        confirmButtonColor: "#0ABAC3",
+        showCancelButton: true,
+        confirmButtonColor: "#0EBBBC",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/membership-payment", {
+            state: { data: membershipData, amount: price },
+          });
+        }
       });
     }
   };

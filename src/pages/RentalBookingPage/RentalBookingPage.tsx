@@ -31,8 +31,13 @@ const RentalBookingPage = () => {
     form.validateFields().then((values: any) => {
       values.bookings = bookings;
       values.facility = state?.slotsData.training;
+      values.addons = addons;
       navigate("/facility-payment", {
-        state: { data: { id: user?._id, payload: values }, amount: totalPrice },
+        state: {
+          data: { id: user?._id, payload: values },
+          amount: totalPrice,
+          membershipData: state?.membershipData,
+        },
       });
     });
   };

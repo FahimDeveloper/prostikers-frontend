@@ -87,8 +87,8 @@ const RentalBooking = () => {
       }
     });
   };
-  const totalPrice = selectSlots.reduce((total, facility) => {
-    return total + facility.slots.length * facility?.results.price;
+  const totalPrice = selectSlots.reduce((total, facilitySlots) => {
+    return total + facilitySlots.slots.length * facility?.results.price;
   }, 0);
   return (
     <div className="bg-[#F9FAFB] py-10 rounded-2xl space-y-6 px-5">
