@@ -1,15 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Form, Input, Select } from "antd";
+import { Button, Checkbox, Form, Input, Select } from "antd";
 import { AiOutlineLock, AiOutlinePhone, AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { FaApple } from "react-icons/fa";
+import { FaFacebookSquare } from "react-icons/fa";
 import { useAppDispatch } from "../../hooks/useAppHooks";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { loggedInUser } from "../../redux/features/auth/authSlice";
 import { useRegistrationMutation } from "../../redux/features/auth/authApi";
+import TermsCondition from "../../components/TermsCondition";
+import PrivacyPolicy from "../../components/PrivacyPolicy";
 const Registration = () => {
+  const [agree, setAgree] = useState(false);
   const dispatch = useAppDispatch();
   const [registration, { data, isLoading, isError, isSuccess, error }] =
     useRegistrationMutation();
@@ -35,7 +38,25 @@ const Registration = () => {
     }
   }, [isError, isSuccess, error, data, dispatch]);
   const onFinish = (values: any) => {
+    if (values.password !== values.confirm_password) {
+      Swal.fire({
+        title: "Oops..",
+        text: "Password does not match",
+        icon: "error",
+        confirmButtonColor: "#0ABAC3",
+      });
+      return;
+    }
+    delete values.confirm_password;
     registration(values);
+  };
+  const onSocialLogin = () => {
+    Swal.fire({
+      title: "Progress",
+      text: `We are currently working on it`,
+      icon: "info",
+      confirmButtonColor: "#0ABAC3",
+    });
   };
   return (
     <div className="w-full min-h-svh py-10 flex flex-col justify-center gap-5 items-center">
@@ -154,8 +175,25 @@ const Registration = () => {
             />
           </Form.Item>
           <Form.Item>
+            <Checkbox onChange={() => setAgree(!agree)}>
+              <div className="flex gap-2">
+                <p className="text-sm text-secondary">I agree with</p>
+                <TermsCondition>
+                  <p className="text-primary cursor-pointer">
+                    Terms of service
+                  </p>
+                </TermsCondition>
+                <p>&</p>
+                <PrivacyPolicy>
+                  <p className="text-primary cursor-pointer">Privacy policy</p>
+                </PrivacyPolicy>
+              </div>
+            </Checkbox>
+          </Form.Item>
+          <Form.Item>
             <Button
               loading={isLoading}
+              disabled={!agree}
               className="primary-btn-2 w-full"
               htmlType="submit"
             >
@@ -176,13 +214,21 @@ const Registration = () => {
           Or continue with
         </p>
         <div className="flex justify-center gap-5">
-          <div className="flex gap-2 items-center justify-center border border-[#A2A8A0] border-solid rounded-md py-2 w-full cursor-pointer">
+          <div
+            onClick={onSocialLogin}
+            className="flex gap-2 items-center justify-center border border-[#A2A8A0] border-solid rounded-md py-2 w-full cursor-pointer"
+          >
             <FcGoogle className="size-7" />
             <span className="text-base font-medium text-[#111827]">Google</span>
           </div>
-          <div className="flex gap-2 items-center justify-center border border-[#A2A8A0] border-solid rounded-md py-2 w-full cursor-pointer">
-            <FaApple className="size-7" />
-            <span className="text-base font-medium text-[#111827]">Apple</span>
+          <div
+            onClick={onSocialLogin}
+            className="flex gap-2 items-center justify-center border border-[#A2A8A0] border-solid rounded-md py-2 w-full cursor-pointer"
+          >
+            <FaFacebookSquare className="size-7 text-blue-600" />
+            <span className="text-base font-medium text-[#111827]">
+              Facebook
+            </span>
           </div>
         </div>
       </div>

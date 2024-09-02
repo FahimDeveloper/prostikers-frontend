@@ -3,57 +3,92 @@ import { useState } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import Container from "../components/Container";
 import { GiClick } from "react-icons/gi";
-import UpComing from "../components/UpComing";
 import GetInMap from "../pages/Contact/components/GetInMap";
 import GetInForm from "../pages/Contact/components/GetInForm";
+import Swal from "sweetalert2";
 
 const MembershipCardSection = () => {
+  const [plan, setPlan] = useState("monthly");
   const [open, setOpen] = useState(false);
-  const [packageName, setPackageName] = useState("month");
-  const [frameLink, setFrameLink] = useState("");
-  const handleChangePackage = (value: string) => {
-    setPackageName(value);
-  };
-  const handleMembership = (membership: string) => {
-    if (membership === "individual_pro") {
-      if (packageName === "month") {
-        setFrameLink(
-          "https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/memberships/6605a35c0e3d5576150df6b2/plan/1711645316638/buy"
-        );
-      } else if (packageName === "year") {
-        setFrameLink(
-          "https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/memberships/6605a3bd10aa1f924509317f/plan/1711645559487/buy"
-        );
-      }
-    } else if (membership === "individual_pro_unlimited") {
-      if (packageName === "month") {
-        setFrameLink(
-          "https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/memberships/6605a3f7202ed8c30e0cf8cf/plan/1711645664474/buy"
-        );
-      } else if (packageName === "year") {
-        setFrameLink(
-          "https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/memberships/6605a4608b02e889f80917cb/plan/1711645772121/buy"
-        );
-      }
-    } else if (membership === "contact-support") {
-      setFrameLink("contact-support");
-    } else if (membership === "youth_training_membership") {
-      setFrameLink(
-        "https://app.glofox.com/portal/#/branch/6602d2195caae7e89503f729/classes-day-view"
-      );
-    } else {
-      setFrameLink("up-coming");
-    }
-    setOpen(true);
-  };
   const panelStyle: React.CSSProperties = {
     backgroundColor: "#EDFFFF",
     borderColor: "#ACDFDF",
   };
+  const handleChangePackage = (value: string) => {
+    setPlan(value);
+  };
+  const handleMembership = (membership: string, price?: number) => {
+    console.log(price);
+    if (membership === "individual_pro") {
+      if (plan === "monthly") {
+        // const membershipData = {
+        //   package: "individual pro",
+        //   plan: plan,
+        //   price: price,
+        // };
+        Swal.fire({
+          title: "Progressing",
+          text: "We are currently working on it",
+          icon: "info",
+          confirmButtonColor: "#0ABAC3",
+        });
+      } else if (plan === "yearly") {
+        // const membershipData = {
+        //   package: "individual pro",
+        //   plan: plan,
+        //   price: price,
+        // };
+        Swal.fire({
+          title: "Progressing",
+          text: "We are currently working on it",
+          icon: "info",
+          confirmButtonColor: "#0ABAC3",
+        });
+      }
+    } else if (membership === "individual_pro_unlimited") {
+      if (plan === "monthly") {
+        // const membershipData = {
+        //   package: "individual pro unlimited",
+        //   plan: plan,
+        //   price: price,
+        // };
+        Swal.fire({
+          title: "Progressing",
+          text: "We are currently working on it",
+          icon: "info",
+          confirmButtonColor: "#0ABAC3",
+        });
+      } else if (plan === "yearly") {
+        // const membershipData = {
+        //   package: "individual pro unlimited",
+        //   plan: plan,
+        //   price: price,
+        // };
+        Swal.fire({
+          title: "Progressing",
+          text: "We are currently working on it",
+          icon: "info",
+          confirmButtonColor: "#0ABAC3",
+        });
+      }
+    } else if (membership === "youth_training_membership") {
+      // const membershipData = {
+      //   package: "youth training membership",
+      //   plan: "monthly",
+      //   price: price,
+      // };
+      Swal.fire({
+        title: "Progressing",
+        text: "We are currently working on it",
+        icon: "info",
+        confirmButtonColor: "#0ABAC3",
+      });
+    }
+  };
   return (
     <div className="bg-[#F9FBFF]">
       <Container>
-        <div className="lg:py-14 md:py-12 py-10 space-y-10">
+        <div className="lg:py-14 md:py-12 py-10 mt-10 space-y-10">
           <div className="space-y-4 mx-auto text-center">
             <h4 className="capitalize text-primary lg:text-2xl text-xl font-semibold leading-7">
               Join the Elite
@@ -71,9 +106,9 @@ const MembershipCardSection = () => {
           <div className="space-y-8">
             <div className="w-[295px] mx-auto bg-[#07133D] p-3 rounded-full flex items-center justify-between">
               <div
-                onClick={() => handleChangePackage("month")}
+                onClick={() => handleChangePackage("monthly")}
                 className={`${
-                  packageName === "month"
+                  plan === "monthly"
                     ? "bg-[#F6FFFF]"
                     : "text-white hover:text-black"
                 } px-10 btn rounded-full hover:bg-[#F6FFFF]`}
@@ -81,9 +116,9 @@ const MembershipCardSection = () => {
                 Monthly
               </div>
               <div
-                onClick={() => handleChangePackage("year")}
+                onClick={() => handleChangePackage("yearly")}
                 className={`${
-                  packageName === "year"
+                  plan === "yearly"
                     ? "bg-[#F6FFFF]"
                     : "text-white hover:text-black"
                 } btn rounded-full px-5 hover:bg-[#F6FFFF]`}
@@ -94,7 +129,7 @@ const MembershipCardSection = () => {
                 </div>
               </div>
             </div>
-            {packageName === "month" ? (
+            {plan === "monthly" ? (
               <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
                 <div className="membership-card">
                   <div className=" space-y-10">
@@ -140,7 +175,7 @@ const MembershipCardSection = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => handleMembership("individual_pro")}
+                    onClick={() => handleMembership("individual_pro", 150)}
                     className="membership-btn"
                   >
                     Choose Plan
@@ -197,7 +232,9 @@ const MembershipCardSection = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => handleMembership("individual_pro_unlimited")}
+                    onClick={() =>
+                      handleMembership("individual_pro_unlimited", 450)
+                    }
                     className="membership-btn"
                   >
                     Choose Plan
@@ -254,7 +291,7 @@ const MembershipCardSection = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => handleMembership("contact-support")}
+                    onClick={() => setOpen(true)}
                     className="membership-btn"
                   >
                     Choose Plan
@@ -314,7 +351,7 @@ const MembershipCardSection = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => handleMembership("individual_pro")}
+                    onClick={() => handleMembership("individual_pro", 1500)}
                     className="membership-btn"
                   >
                     Choose Plan
@@ -368,7 +405,9 @@ const MembershipCardSection = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => handleMembership("individual_pro_unlimited")}
+                    onClick={() =>
+                      handleMembership("individual_pro_unlimited", 4500)
+                    }
                     className="membership-btn"
                   >
                     Choose Plan
@@ -425,7 +464,7 @@ const MembershipCardSection = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => handleMembership("contact-support")}
+                    onClick={() => setOpen(true)}
                     className="membership-btn"
                   >
                     Choose Plan
@@ -463,7 +502,10 @@ const MembershipCardSection = () => {
                             </p>
                             <button
                               onClick={() =>
-                                handleMembership("youth_training_membership")
+                                handleMembership(
+                                  "youth_training_membership",
+                                  160
+                                )
                               }
                               className="membership-btn"
                             >
@@ -568,7 +610,7 @@ const MembershipCardSection = () => {
                         </div>
                         <button
                           onClick={() =>
-                            handleMembership("youth_training_membership")
+                            handleMembership("youth_training_membership", 160)
                           }
                           className="membership-btn"
                         >
@@ -584,37 +626,24 @@ const MembershipCardSection = () => {
         </div>
         <Modal
           width={1500}
-          title="Welcome to membership module"
+          title="Contact Us"
           centered
           maskClosable={false}
           footer={false}
           open={open}
-          onCancel={() => {
-            setOpen(false), setFrameLink("");
-          }}
+          onCancel={() => setOpen(false)}
         >
-          {frameLink === "contact-support" ? (
-            <Container>
-              <div className="lg:py-16 md:py-12 py-10 mt-16 lg:space-y-10 md:space-y-7 space-y-5">
-                <h2 className="font-semibold lg:text-[64px] md:text-5xl text-3xl lg:leading-[74px] md:leading-[50px] leading-9 lg:w-[650px] w-full">
-                  Get in touch with our lovely team
-                </h2>
-                <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 items-center">
-                  <GetInMap />
-                  <GetInForm />
-                </div>
+          <Container>
+            <div className="py-10 lg:space-y-10 md:space-y-7 space-y-5">
+              <h2 className="font-semibold lg:text-[64px] md:text-5 l text-3xl lg:leading-[74px] md:leading-[50px] leading-9 lg:w-[650px] w-full">
+                Get in touch with our lovely team
+              </h2>
+              <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 items-center">
+                <GetInMap />
+                <GetInForm />
               </div>
-            </Container>
-          ) : frameLink !== "up-coming" ? (
-            <iframe
-              loading="lazy"
-              src={frameLink}
-              width="100%"
-              style={{ height: "90vh" }}
-            ></iframe>
-          ) : (
-            <UpComing />
-          )}
+            </div>
+          </Container>
         </Modal>
       </Container>
     </div>
