@@ -4,7 +4,9 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
-import MembershipPayment from "../pages/MembershipPayment/MembershipPayment";
+const MembershipPayment = LazyLoad(
+  lazy(() => import("../pages/MembershipPayment/MembershipPayment"))
+);
 const KidsTrainingPayment = LazyLoad(
   lazy(() => import("../pages/KidsTrainingPayment/KidsTrainingPayment"))
 );
