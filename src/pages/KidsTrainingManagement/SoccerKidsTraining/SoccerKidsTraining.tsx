@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import GeneralTrainingBookingSection from "../../../common/GeneralTrainingBookingSection";
 import gallery1 from "../../../assets/images/gallery/soccer/soccer-gallery-1.webp";
 import gallery2 from "../../../assets/images/gallery/soccer/soccer-gallery-2.webp";
 import gallery3 from "../../../assets/images/gallery/soccer/soccer-gallery-3.webp";
@@ -58,10 +57,6 @@ const SoccerKidsTraining = () => {
     <Container>
       <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto">
         <GallerySection title="Kids Soccer Training" gallery={gallery} />
-        <GeneralTrainingBookingSection
-          title="Future Goal Scorers: Kids Soccer Training"
-          description="Let your child bend it like the pros with ProStrikers' Kids Soccer Training. Our program is crafted to spark a love for soccer while teaching the essentials of dribbling, passing, and scoring goals. We emphasize fun, fitness, and fair play, ensuring every child feels like a part of our soccer family."
-        />
         <div className="space-y-5">
           <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
             Future Goal Scorers: Kids Soccer Training

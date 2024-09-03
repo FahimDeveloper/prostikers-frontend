@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import soccer from "../../../assets/images/training/soccer-training.webp";
-import GeneralTrainingBookingSection from "../../../common/GeneralTrainingBookingSection";
 import gallery1 from "../../../assets/images/gallery/soccer/soccer-gallery-1.webp";
 import gallery2 from "../../../assets/images/gallery/soccer/soccer-gallery-2.webp";
 import gallery3 from "../../../assets/images/gallery/soccer/soccer-gallery-3.webp";
@@ -55,10 +54,6 @@ const SoccerOneTraining = () => {
     <Container>
       <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto">
         <GallerySection title="Soccer One on One Training" gallery={gallery} />
-        <GeneralTrainingBookingSection
-          title="Tailored Soccer Training Sessions"
-          description="Take your place on the pitch with confidence after our One on One Soccer Training. From dribbling past defenders to striking the ball with precision, our bespoke training is your path to excelling in every position on the field."
-        />
         <div className="space-y-5">
           <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
             Tailored Soccer Training Sessions

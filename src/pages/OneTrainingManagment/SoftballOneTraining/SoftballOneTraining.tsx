@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import softball from "../../../assets/images/training/soft-training.webp";
-import GeneralTrainingBookingSection from "../../../common/GeneralTrainingBookingSection";
 import gallery1 from "../../../assets/images/gallery/softball/softball-gallery-1-min.webp";
 import gallery2 from "../../../assets/images/gallery/softball/softball-gallery-2-min.webp";
 import gallery3 from "../../../assets/images/gallery/softball/softball-gallery-3-min.webp";
@@ -57,10 +56,6 @@ const SoftballOneTraining = () => {
         <GallerySection
           title="Softball One on One Training"
           gallery={gallery}
-        />
-        <GeneralTrainingBookingSection
-          title="Customized Softball Training"
-          description="Unlock your potential on the diamond with our personalized Softball Training sessions. Work on your pitching, improve your batting average, or sharpen your fielding skills with coaches who understand the intricacies of the game and how to bring out your best."
         />
         <div className="space-y-5">
           <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
