@@ -30,18 +30,18 @@ const EventCard = ({ event, index }: { event: any; index: number }) => {
         }
       });
     } else {
-      navigate(`${event._id}`, {
+      navigate(`/program/events/${event.event_type}/${event._id}`, {
         state: { sport: event.sport, from: location, amount: event.price },
       });
     }
   };
   return (
-    <div className="grid md:grid-cols-2 xl:gap-20 lg:gap-10 gap-6 md:max-h-[420px] xl:p-8 lg:p-7 sm:p-4 p-2 items-center justify-between bg-[#F9FBFF] rounded-2xl">
+    <div className="grid md:grid-cols-2 xl:gap-20 lg:gap-10 overflow-hidden gap-6 md:max-h-96 xl:p-8 lg:p-7 sm:p-4 p-2 items-center justify-between bg-[#F9FBFF] rounded-2xl">
       <img
         loading="lazy"
         src={event.image}
         alt="event image"
-        className="rounded-2xl w-full"
+        className="rounded-2xl h-96 w-full object-cover"
       />
       <div
         className={`${

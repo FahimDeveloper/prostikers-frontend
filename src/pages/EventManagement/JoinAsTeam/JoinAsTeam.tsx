@@ -77,7 +77,7 @@ const JoinAsTeam = () => {
               </div>
             ) : (
               <div className="space-y-8">
-                {data?.results.map((event, index) => {
+                {data?.results?.map((event, index) => {
                   return <EventCard key={index} event={event} index={index} />;
                 })}
               </div>

@@ -24,7 +24,7 @@ const Event = () => {
       {
         title: "Join as team",
         image: training2,
-        link: "team",
+        link: "group",
         description: [
           "Team Up with Friends: Gather a group of six and register together to play alongside your cricket buddies.",
           "Unleash Team Spirit: Join forces with friends or fellow enthusiasts to experience the adrenaline rush of T10 cricket. Participate as a team and immerse yourselves in the high- energy matches, where every moment counts towards victory and glory.",

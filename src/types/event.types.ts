@@ -17,6 +17,6 @@ export type IEvent = {
 
 export type IEventParams = {
   limit: number | undefined;
-  event_type: string | undefined;
-  sport: string | undefined;
+  event_type?: string | undefined;
+  sport?: string | undefined;
 };

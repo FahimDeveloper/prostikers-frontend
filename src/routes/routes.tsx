@@ -931,7 +931,7 @@ export const router = createBrowserRouter([
             element: <JoinAsIndividual />,
           },
           {
-            path: "team",
+            path: "group",
             element: <JoinAsTeam />,
           },
           {
@@ -943,7 +943,7 @@ export const router = createBrowserRouter([
             ),
           },
           {
-            path: "team/:id",
+            path: "group/:id",
             element: (
               <PrivetRoute>
                 <JoinAsTeamRegistration />
