@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { AiOutlineLock, AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { FaApple } from "react-icons/fa";
+import { FaFacebookSquare } from "react-icons/fa";
 import { useAppDispatch } from "../../hooks/useAppHooks";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
 import { useEffect } from "react";
@@ -36,6 +36,14 @@ const Login = () => {
   }, [isError, isSuccess, error, data, dispatch]);
   const onFinish = (values: any) => {
     login(values);
+  };
+  const onSocialLogin = () => {
+    Swal.fire({
+      title: "Progress",
+      text: `We are currently working on it`,
+      icon: "info",
+      confirmButtonColor: "#0ABAC3",
+    });
   };
   return (
     <div className="w-full min-h-svh py-10 flex flex-col justify-center gap-5 items-center">
@@ -104,13 +112,21 @@ const Login = () => {
           Or continue with
         </p>
         <div className="flex justify-center gap-5">
-          <div className="flex gap-2 items-center justify-center border border-[#A2A8A0] border-solid rounded-md py-2 w-full cursor-pointer">
+          <div
+            onClick={onSocialLogin}
+            className="flex gap-2 items-center justify-center border border-[#A2A8A0] border-solid rounded-md py-2 w-full cursor-pointer"
+          >
             <FcGoogle className="size-7" />
             <span className="text-base font-medium text-[#111827]">Google</span>
           </div>
-          <div className="flex gap-2 items-center justify-center border border-[#A2A8A0] border-solid rounded-md py-2 w-full cursor-pointer">
-            <FaApple className="size-7" />
-            <span className="text-base font-medium text-[#111827]">Apple</span>
+          <div
+            onClick={onSocialLogin}
+            className="flex gap-2 items-center justify-center border border-[#A2A8A0] border-solid rounded-md py-2 w-full cursor-pointer"
+          >
+            <FaFacebookSquare className="size-7 text-blue-600" />
+            <span className="text-base font-medium text-[#111827]">
+              Facebook
+            </span>
           </div>
         </div>
       </div>
