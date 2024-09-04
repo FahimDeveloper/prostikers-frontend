@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   useLinkVerifyQuery,
   useResetPasswordMutation,
-  useSendVerifyCodeMutation,
+  useVerifyCodeMutation,
 } from "../../redux/features/auth/authApi";
 import { FaSpinner } from "react-icons/fa";
 import { useForm } from "antd/es/form/Form";
@@ -32,7 +32,7 @@ const VerifyCode = () => {
       isError: isOtpVerfiyError,
       error: otpVerifyError,
     },
-  ] = useSendVerifyCodeMutation();
+  ] = useVerifyCodeMutation();
   const [resetPass, { data, isLoading, isSuccess, isError, error }] =
     useResetPasswordMutation();
   const onFinish = (values: any) => {

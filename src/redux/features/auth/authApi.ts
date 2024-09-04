@@ -36,6 +36,13 @@ const authApi = authApiSlice.injectEndpoints({
         body: credentials,
       }),
     }),
+    verifyCode: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/forgot-password/code-verify",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
     ResetPassword: builder.mutation({
       query: (credentials) => ({
         url: "/auth/user/reset-password",
@@ -53,4 +60,5 @@ export const {
   useSendVerifyCodeMutation,
   useRegistrationMutation,
   useResetPasswordMutation,
+  useVerifyCodeMutation,
 } = authApi;
