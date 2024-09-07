@@ -17,30 +17,45 @@ const FacilityPayment = () => {
   const [create, { data: createData, isLoading, isSuccess, isError, error }] =
     useCreateFacilityReservationMutation();
   const onSubmit = () => {
-    const membership = { ...membershipData };
-    delete membership.price;
-    membership.status = true;
-    membership.membership = true;
-    const issueDate = new Date();
-    membership.issue_date = issueDate.toISOString();
-    const expiryDate = new Date(issueDate);
-    expiryDate.setFullYear(expiryDate.getFullYear() + 1);
-    membership.expiry_date = expiryDate.toISOString();
-    const payload = {
-      facility_data: { ...data },
-      membership_info: {
-        user_id: user?._id,
-        membership: membership,
-      },
-      payment_info: {
-        transaction_id: transactionId,
-        user: user?._id,
-        email: user?.email,
-        amount: amount,
-        service: "event",
-      },
-    };
-    create({ id: user?._id, payload: payload });
+    let payload: any;
+    if (membershipData) {
+      const membership = { ...membershipData };
+      delete membership.price;
+      membership.status = true;
+      membership.membership = true;
+      const issueDate = new Date();
+      membership.issue_date = issueDate.toISOString();
+      const expiryDate = new Date(issueDate);
+      expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+      membership.expiry_date = expiryDate.toISOString();
+      payload = {
+        facility_data: { ...data },
+        membership_info: {
+          user_id: user?._id,
+          membership: membership,
+        },
+        payment_info: {
+          transaction_id: transactionId,
+          user: user?._id,
+          email: user?.email,
+          amount: amount,
+          service: "event",
+        },
+      };
+      create({ id: user?._id, payload: payload });
+    } else {
+      payload = {
+        facility_data: { ...data },
+        payment_info: {
+          transaction_id: transactionId,
+          user: user?._id,
+          email: user?.email,
+          amount: amount,
+          service: "event",
+        },
+      };
+      create({ id: user?._id, payload: payload });
+    }
   };
   useEffect(() => {
     if (isSuccess) {
