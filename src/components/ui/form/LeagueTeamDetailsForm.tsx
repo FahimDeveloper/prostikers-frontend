@@ -24,7 +24,7 @@ const LeagueTeamDetailsForm = ({
         ],
       });
     }
-  }, [formData]);
+  }, [formData, form]);
   return (
     <div className="space-y-5">
       <div className="space-y-2">
@@ -136,14 +136,16 @@ const LeagueTeamDetailsForm = ({
                   </div>
                 </div>
               ))}
-              <Form.Item>
-                <Button
-                  className="btn bg-[#07133D] hover:bg-[#07133D] text-white text-base font-medium px-5 rounded-full"
-                  onClick={() => add()}
-                >
-                  Add Member
-                </Button>
-              </Form.Item>
+              {fields.length <= 5 && (
+                <Form.Item>
+                  <Button
+                    className="btn bg-[#07133D] hover:bg-[#07133D] text-white text-base font-medium px-5 rounded-full"
+                    onClick={() => add()}
+                  >
+                    Add Member
+                  </Button>
+                </Form.Item>
+              )}
             </>
           )}
         </Form.List>

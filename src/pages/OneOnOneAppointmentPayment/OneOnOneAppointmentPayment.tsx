@@ -3,12 +3,16 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Checkout from "../../components/Checkout";
 import { useCreateAppointmentOneOnOneReservationMutation } from "../../redux/features/appointment/appointmentApi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 
 const OneOnOneAppointmentPayment = () => {
   const { state } = useLocation();
   const { amount, data, location } = state;
+  const user = useSelector(selectCurrentUser);
+  const [transactionId, setTransactionId] = useState("");
   const navigate = useNavigate();
   const [create, { data: createData, isError, isLoading, isSuccess, error }] =
     useCreateAppointmentOneOnOneReservationMutation();
@@ -27,18 +31,33 @@ const OneOnOneAppointmentPayment = () => {
       Swal.fire({
         title: "Oops!..",
         icon: "error",
-        text: `${(error as any)?.createData?.message}`,
+        text: `${(error as any)?.data?.message || "something went wrong"}`,
         confirmButtonColor: "#0ABAC3",
       });
     }
   }, [isSuccess, isError, error]);
   const onSubmit = () => {
-    create(data);
+    const payload = {
+      appointment_data: { ...data },
+      payment_info: {
+        transaction_id: transactionId,
+        user: user?._id,
+        email: user?.email,
+        amount: amount,
+        service: "appointment",
+      },
+    };
+    create({ id: user?._id, payload });
   };
   return (
     <div className="min-h-svh py-16 flex justify-center items-center">
       {amount && data && location && (
-        <Checkout isLoading={isLoading} amount={amount} onSubmit={onSubmit} />
+        <Checkout
+          setTransactionId={setTransactionId}
+          isLoading={isLoading}
+          amount={amount}
+          onSubmit={onSubmit}
+        />
       )}
     </div>
   );

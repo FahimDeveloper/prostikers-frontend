@@ -6,16 +6,16 @@ import { useCreateFacilityReservationMutation } from "../../redux/features/facil
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/features/auth/authSlice";
-import { useUpdateClientMutation } from "../../redux/features/client/clientApi";
+import { useEffect, useState } from "react";
 
 const FacilityPayment = () => {
   const { state } = useLocation();
+  const [transactionId, setTransactionId] = useState("");
   const { amount, data, membershipData } = state;
   const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
-  const [create, { isLoading: createLoading }] =
+  const [create, { data: createData, isLoading, isSuccess, isError, error }] =
     useCreateFacilityReservationMutation();
-  const [update, { isLoading: updateLoading }] = useUpdateClientMutation();
   const onSubmit = () => {
     const membership = { ...membershipData };
     delete membership.price;
@@ -26,47 +26,48 @@ const FacilityPayment = () => {
     const expiryDate = new Date(issueDate);
     expiryDate.setFullYear(expiryDate.getFullYear() + 1);
     membership.expiry_date = expiryDate.toISOString();
-    create(data)
-      .unwrap()
-      .then(() => {
-        update({ id: user?._id, payload: membership })
-          .unwrap()
-          .then(() => {
-            Swal.fire({
-              iconColor: "#0ABAC3",
-              title: "Success",
-              icon: "success",
-              text: `Reservation Success`,
-              showConfirmButton: true,
-              confirmButtonColor: "#0ABAC3",
-            });
-            navigate("/");
-          })
-          .catch((err) => {
-            console.log(err);
-            Swal.fire({
-              title: "Oops!..",
-              icon: "error",
-              text: `Something went wrong`,
-              confirmButtonColor: "#0ABAC3",
-            });
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-        Swal.fire({
-          title: "Oops!..",
-          icon: "error",
-          text: `Something went wrong`,
-          confirmButtonColor: "#0ABAC3",
-        });
-      });
+    const payload = {
+      facility_data: { ...data },
+      membership_info: {
+        user_id: user?._id,
+        membership: membership,
+      },
+      payment_info: {
+        transaction_id: transactionId,
+        user: user?._id,
+        email: user?.email,
+        amount: amount,
+        service: "event",
+      },
+    };
+    create(payload);
   };
+  useEffect(() => {
+    if (isSuccess) {
+      Swal.fire({
+        title: "Success",
+        icon: "success",
+        text: `${createData?.message}`,
+        confirmButtonColor: "#0ABAC3",
+        iconColor: "#0ABAC3",
+      });
+      navigate(location);
+    }
+    if (isError) {
+      Swal.fire({
+        title: "Oops!..",
+        icon: "error",
+        text: `${(error as any)?.data?.message || "something went wrong"}`,
+        confirmButtonColor: "#0ABAC3",
+      });
+    }
+  }, [isSuccess, isError, error]);
   return (
     <div className="min-h-svh py-16 flex justify-center items-center">
       {amount && data && (
         <Checkout
-          isLoading={createLoading || updateLoading}
+          setTransactionId={setTransactionId}
+          isLoading={isLoading}
           amount={amount}
           onSubmit={onSubmit}
         />

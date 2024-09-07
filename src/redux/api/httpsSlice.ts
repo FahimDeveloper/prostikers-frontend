@@ -17,7 +17,7 @@ export const eventApiSlice = createApi({
 export const bootcampApiSlice = createApi({
   reducerPath: "bootcampApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["bootcamps"],
+  tagTypes: ["bootcamps", "bootcamp-reservation-list"],
   endpoints: () => ({}),
 });
 
@@ -80,7 +80,7 @@ export const classApiSlice = createApi({
   reducerPath: "classApi",
   baseQuery: baseQueryWithRefreshToken,
   endpoints: () => ({}),
-  tagTypes: ["classes", "class"],
+  tagTypes: ["classes", "class-reservation-list"],
 });
 
 export const clientApiSlice = createApi({
@@ -88,4 +88,16 @@ export const clientApiSlice = createApi({
   baseQuery: baseQueryWithRefreshToken,
   endpoints: () => ({}),
   tagTypes: ["client"],
+});
+
+export const voucherApiSlice = createApi({
+  reducerPath: "voucherApi",
+  baseQuery: baseQueryWithRefreshToken,
+  endpoints: () => ({}),
+});
+
+export const userApiSlice = createApi({
+  reducerPath: "userApi",
+  baseQuery: baseQueryWithRefreshToken,
+  endpoints: () => ({}),
 });

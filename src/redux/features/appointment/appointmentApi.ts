@@ -41,9 +41,21 @@ const appointmentApi = appointmentApiSlice.injectEndpoints({
       }),
       providesTags: ["one-appointment"],
     }),
+    getAppointmentGroupReservations: builder.query({
+      query: (email: string) => ({
+        url: `/reservations/appointments/group/user/${email}`,
+        method: "GET",
+      }),
+    }),
+    getAppointmentOneReservations: builder.query({
+      query: (email: string) => ({
+        url: `/reservations/appointments/one-on-one/user/${email}`,
+        method: "GET",
+      }),
+    }),
     createAppointmentGroupReservation: builder.mutation({
       query: (payload) => ({
-        url: `/reservations/appointments/group/create`,
+        url: `/reservations/appointments/group/user/create`,
         method: "POST",
         body: payload,
       }),
@@ -51,7 +63,7 @@ const appointmentApi = appointmentApiSlice.injectEndpoints({
     }),
     createAppointmentOneOnOneReservation: builder.mutation({
       query: ({ id, payload }) => ({
-        url: `/reservations/appointments/one-on-one/create/${id}`,
+        url: `/reservations/appointments/one-on-one/user/create/${id}`,
         method: "POST",
         body: payload,
       }),

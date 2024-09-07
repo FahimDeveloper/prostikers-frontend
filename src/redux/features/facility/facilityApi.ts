@@ -12,7 +12,7 @@ const facilityApi = facilityApiSlice.injectEndpoints({
     }),
     createFacilityReservation: builder.mutation<any, any>({
       query: ({ id, payload }) => ({
-        url: `/reservations/facilities/create/${id}`,
+        url: `/reservations/facilities/user/create/${id}`,
         method: "POST",
         body: payload,
       }),

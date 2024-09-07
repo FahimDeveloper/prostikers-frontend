@@ -13,26 +13,26 @@ const classApi = classApiSlice.injectEndpoints({
       }),
       providesTags: ["classes"],
     }),
-    class: builder.query({
-      query: (id) => ({
-        url: `/schedule/classes/${id}`,
+    classReservationList: builder.query({
+      query: (email) => ({
+        url: `/reservations/classes/user/${email}`,
         method: "GET",
       }),
-      providesTags: ["class"],
+      providesTags: ["class-reservation-list"],
     }),
     createClassReservation: builder.mutation({
       query: (payload) => ({
-        url: `/reservations/classes/create`,
+        url: `/reservations/classes/user/create`,
         method: "POST",
         body: payload,
       }),
-      invalidatesTags: ["classes", "class"],
+      invalidatesTags: ["classes", "class-reservation-list"],
     }),
   }),
 });
 
 export const {
-  useClassQuery,
+  useClassReservationListQuery,
   useCreateClassReservationMutation,
   useClassesQuery,
 } = classApi;

@@ -9,6 +9,13 @@ const authApi = authApiSlice.injectEndpoints({
         body: credentials,
       }),
     }),
+    continueWithSocial: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/user/continue-social-login",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
     registration: builder.mutation({
       query: (credentials) => ({
         url: "/auth/user/registration",
@@ -61,4 +68,5 @@ export const {
   useRegistrationMutation,
   useResetPasswordMutation,
   useVerifyCodeMutation,
+  useContinueWithSocialMutation,
 } = authApi;

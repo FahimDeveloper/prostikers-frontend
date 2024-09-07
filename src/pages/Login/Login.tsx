@@ -2,13 +2,12 @@
 import { Button, Checkbox, Form, Input } from "antd";
 import { AiOutlineLock, AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebookSquare } from "react-icons/fa";
 import { useAppDispatch } from "../../hooks/useAppHooks";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 import { loggedInUser } from "../../redux/features/auth/authSlice";
+import SocialLogin from "../../components/SocialLogin";
 const Login = () => {
   const dispatch = useAppDispatch();
   const [login, { data, isLoading, isError, isSuccess, error }] =
@@ -28,7 +27,7 @@ const Login = () => {
     if (isError) {
       Swal.fire({
         title: "Oops..",
-        text: `${(error as any)?.data?.message}`,
+        text: `${(error as any)?.data?.message || "something went wrong"}`,
         icon: "error",
         confirmButtonColor: "#0ABAC3",
       });
@@ -36,14 +35,6 @@ const Login = () => {
   }, [isError, isSuccess, error, data, dispatch]);
   const onFinish = (values: any) => {
     login(values);
-  };
-  const onSocialLogin = () => {
-    Swal.fire({
-      title: "Progress",
-      text: `We are currently working on it`,
-      icon: "info",
-      confirmButtonColor: "#0ABAC3",
-    });
   };
   return (
     <div className="w-full min-h-svh py-10 flex flex-col justify-center gap-5 items-center">
@@ -111,24 +102,7 @@ const Login = () => {
         <p className="text-center text-[#687588] font-medium text-sm">
           Or continue with
         </p>
-        <div className="flex justify-center gap-5">
-          <div
-            onClick={onSocialLogin}
-            className="flex gap-2 items-center justify-center border border-[#A2A8A0] border-solid rounded-md py-2 w-full cursor-pointer"
-          >
-            <FcGoogle className="size-7" />
-            <span className="text-base font-medium text-[#111827]">Google</span>
-          </div>
-          <div
-            onClick={onSocialLogin}
-            className="flex gap-2 items-center justify-center border border-[#A2A8A0] border-solid rounded-md py-2 w-full cursor-pointer"
-          >
-            <FaFacebookSquare className="size-7 text-blue-600" />
-            <span className="text-base font-medium text-[#111827]">
-              Facebook
-            </span>
-          </div>
-        </div>
+        <SocialLogin />
       </div>
     </div>
   );

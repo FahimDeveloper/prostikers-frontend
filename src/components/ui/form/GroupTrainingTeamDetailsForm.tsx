@@ -18,7 +18,7 @@ const GroupTrainingTeamDetailsForm = ({ form, formData }: any) => {
         ],
       });
     }
-  }, [formData]);
+  }, [formData, form]);
   return (
     <div className="space-y-5">
       <div className="space-y-2">

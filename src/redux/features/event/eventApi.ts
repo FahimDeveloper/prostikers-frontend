@@ -13,9 +13,24 @@ const eventApi = eventApiSlice.injectEndpoints({
       }),
       providesTags: ["events"],
     }),
+    getUserIndividualEventReservation: builder.query({
+      query: (email) => ({
+        url: `/reservations/events/individual/user/${email}`,
+        method: "GET",
+      }),
+      providesTags: ["events"],
+    }),
+
+    getUserGroupEventReservation: builder.query({
+      query: (email) => ({
+        url: `/reservations/events/individual/user/${email}`,
+        method: "GET",
+      }),
+      providesTags: ["events"],
+    }),
     createIndividualEventReservation: builder.mutation<any, any>({
       query: (payload) => ({
-        url: "/reservations/events/individual/create",
+        url: "/reservations/events/individual/user/create",
         method: "POST",
         body: payload,
       }),
@@ -23,7 +38,7 @@ const eventApi = eventApiSlice.injectEndpoints({
     }),
     createGroupEventReservation: builder.mutation<any, any>({
       query: (payload) => ({
-        url: "/reservations/events/group/create",
+        url: "/reservations/events/group/user/create",
         method: "POST",
         body: payload,
       }),

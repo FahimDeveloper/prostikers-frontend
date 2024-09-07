@@ -24,12 +24,17 @@ import { IoCalendarOutline } from "react-icons/io5";
 import moment from "moment";
 import { MdDeleteOutline } from "react-icons/md";
 import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm";
+import { Button, Form, Input } from "antd";
+import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
 
 const HockeyOneTrainingReservation = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [voucherApplied, setVoucherApplied] = useState(false);
   const user = useSelector(selectCurrentUser);
   const createCartBooking = useAddToCartSlotMutation();
+  const [use, { data, isLoading, isError, error, isSuccess }] =
+    useVoucherMutation();
   const [deleteSlot] = useDeleteBookingSlotMutation();
   const [activeDate, setActiveDate] = useState(new Date());
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
@@ -54,9 +59,23 @@ const HockeyOneTrainingReservation = () => {
     { skip: appointment ? false : true }
   );
 
-  const totalPrice = selectSlots.reduce((total, selectSlots) => {
+  const price = selectSlots.reduce((total, selectSlots) => {
     return total + selectSlots.slots.length * appointment?.results.price;
   }, 0);
+
+  let totalPrice = 0;
+
+  if (data) {
+    const { discount_type, discount_value } = data.results;
+    if (discount_type === "amount") {
+      totalPrice = price - discount_value;
+    } else if (discount_type === "percentage") {
+      const decimal = parseFloat(discount_value) / 100;
+      totalPrice = price - price * decimal;
+    }
+  } else {
+    totalPrice = price;
+  }
 
   const onFinish = (values: any) => {
     values.trainer = state.trainer._id;
@@ -72,6 +91,7 @@ const HockeyOneTrainingReservation = () => {
       )
     );
     values.bookings = bookings;
+    values.voucher_applied = voucherApplied;
     navigate("/one-appointment-payment", {
       state: {
         data: { id: user?._id, payload: values },
@@ -79,6 +99,10 @@ const HockeyOneTrainingReservation = () => {
         amount: totalPrice,
       },
     });
+  };
+
+  const onVoucherFinish = (values: any) => {
+    (values.voucher_type = "appointment"), use(values);
   };
 
   const onDelete = (date: any, slot: any) => {
@@ -125,6 +149,27 @@ const HockeyOneTrainingReservation = () => {
     });
   }, [state]);
 
+  useEffect(() => {
+    if (isSuccess) {
+      setVoucherApplied(true);
+      Swal.fire({
+        title: "Success",
+        text: `${data?.message}`,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+    if (isError) {
+      Swal.fire({
+        title: "Oops..",
+        text: `${(error as any)?.data?.message || "something went wrong"}`,
+        icon: "error",
+        confirmButtonColor: "#0ABAC3",
+      });
+    }
+  }, [isSuccess, isError]);
+
   return (
     <>
       <BannerSection
@@ -169,7 +214,7 @@ const HockeyOneTrainingReservation = () => {
                 </h3>
                 <div className="flex gap-1">
                   <p>Total Price:</p>
-                  <p>${totalPrice}</p>
+                  <p>${price}</p>
                 </div>
               </div>
               <div className="space-y-2">
@@ -202,6 +247,62 @@ const HockeyOneTrainingReservation = () => {
                 ))}
               </div>
             </div>
+          )}
+          {selectSlots.length > 0 && (
+            <div className="space-y-2">
+              {data?.results && (
+                <div className="flex justify-end gap-5">
+                  <p className="text-secondary text-base">Voucher Applied</p>
+                  <p className="text-secondary text-base capitalize">
+                    {data?.results.discount_type}
+                  </p>
+                  {data?.results.discount_type === "amount" ? (
+                    <p className="text-secondary text-lg">
+                      -${data?.results.discount_value}
+                    </p>
+                  ) : (
+                    <p className="text-secondary text-lg">
+                      -{data?.results.discount_value}%
+                    </p>
+                  )}
+                </div>
+              )}
+              <div className="flex justify-end">
+                <div className="flex gap-2 items-center">
+                  <p className="font-medium">Total Price:</p>
+                  <p className="text-lg font-medium">${totalPrice}</p>
+                </div>
+              </div>
+            </div>
+          )}
+          {selectSlots.length > 0 && (
+            <Form
+              onFinish={onVoucherFinish}
+              layout="vertical"
+              className="flex items-end gap-1"
+            >
+              <Form.Item
+                label="Apply Voucher"
+                name="voucher_code"
+                className="m-0"
+              >
+                <Input
+                  readOnly={data ? true : false}
+                  className="py-3 rounded-full w-96"
+                  placeholder="Enter your voucher code"
+                />
+              </Form.Item>
+              <Form.Item className="m-0">
+                <Button
+                  disabled={data}
+                  loading={isLoading}
+                  htmlType="submit"
+                  className="primary-btn"
+                >
+                  Apply
+                </Button>
+              </Form.Item>
+            </Form>
           )}
           {selectSlots.length > 0 && (
             <TrainingGeneralForm form={form} onFinish={onFinish} />

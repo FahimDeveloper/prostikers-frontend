@@ -13,7 +13,7 @@ const BootcampReservationForm = ({
       <div className="space-y-2">
         <h3 className="text-2xl font-bold text-[#07133D]">General Details</h3>
         <p className="text-[#929292] text-base">
-          Fill out this form to regester for upcoming trainings
+          Fill out this form to regester
         </p>
       </div>
       <Form form={form} onFinish={onFinish} layout="vertical">
@@ -82,8 +82,9 @@ const BootcampReservationForm = ({
             rules={[{ required: true }]}
           >
             <Input
-              className="w-full rounded-full p-2"
+              className="w-full rounded-full p-2 capitalize"
               placeholder="Type here.."
+              readOnly
             />
           </Form.Item>
           <Form.Item

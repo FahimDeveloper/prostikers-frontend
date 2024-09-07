@@ -1,19 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, InputNumber } from "antd";
+import { Button, Form, Input, InputNumber } from "antd";
 import coach from "../../../assets/images/coaches/coach_addon.png";
 import { IoCalendarOutline } from "react-icons/io5";
 import moment from "moment";
 import { MdDeleteOutline } from "react-icons/md";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDeleteBookingSlotMutation } from "../../../redux/features/slotBooking/slotBookingApi";
+import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
 
 const RentalBookingReviewPart = ({
   addons,
   setAddons,
   bookingData,
   membershipData,
+  setVoucherApplied,
   setTotalPrice,
   totalPrice,
 }: {
@@ -22,11 +25,15 @@ const RentalBookingReviewPart = ({
   bookingData: any;
   membershipData: any;
   setTotalPrice: any;
+  setVoucherApplied: any;
   totalPrice: any;
 }) => {
   const [rentalData, setRentalData] = useState(bookingData);
   const [membership, setMemberhips] = useState(membershipData);
+  const [use, { data, isLoading, isSuccess, isError, error }] =
+    useVoucherMutation();
   const [deleteSlot] = useDeleteBookingSlotMutation();
+
   const onSlotDelete = (date: any, slot: any) => {
     Swal.fire({
       title: "Are you sure?",
@@ -64,6 +71,12 @@ const RentalBookingReviewPart = ({
       }
     });
   };
+
+  const onFinish = (values: any) => {
+    values.voucher_type = "facility";
+    use(values);
+  };
+
   const onClick = () => {
     setAddons([
       {
@@ -74,6 +87,7 @@ const RentalBookingReviewPart = ({
       },
     ]);
   };
+
   const onChange = (value: number) => {
     setAddons([
       {
@@ -84,113 +98,204 @@ const RentalBookingReviewPart = ({
       },
     ]);
   };
+
   const slotsPrice = rentalData?.slots.reduce((total: number, booking: any) => {
     return total + booking.slots.length * rentalData?.price;
   }, 0);
   const addonsPrice = addons.reduce((total: number, addon: any) => {
     return total + addon.price;
   }, 0);
+
   if (membership?.price) {
-    setTotalPrice(slotsPrice + addonsPrice + membership?.price);
+    const some = slotsPrice + addonsPrice + membership?.price;
+    if (data) {
+      const { discount_type, discount_value } = data.results;
+      if (discount_type === "amount") {
+        setTotalPrice(some - discount_value);
+      } else if (discount_type === "percentage") {
+        const decimal = parseFloat(discount_value) / 100;
+        setTotalPrice(some - some * decimal);
+      }
+    } else {
+      setTotalPrice(some);
+    }
   } else {
-    setTotalPrice(slotsPrice + addonsPrice);
+    const some = slotsPrice + addonsPrice;
+    if (data) {
+      const { discount_type, discount_value } = data.results;
+      if (discount_type === "amount") {
+        setTotalPrice(some - discount_value);
+      } else if (discount_type === "percentage") {
+        const decimal = parseFloat(discount_value) / 100;
+        setTotalPrice(some - some * decimal);
+      }
+    } else {
+      setTotalPrice(some);
+    }
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      setVoucherApplied(true);
+      Swal.fire({
+        title: "Success",
+        text: `${data?.message}`,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+    if (isError) {
+      Swal.fire({
+        title: "Oops..",
+        text: `${(error as any)?.data?.message || "something went wrong"}`,
+        icon: "error",
+        confirmButtonColor: "#0ABAC3",
+      });
+    }
+  }, [isSuccess, isError]);
   return (
-    <div className="grid grid-cols-5 gap-7">
-      <div className="col-span-3 p-7 rounded-2xl border border-solid border-[#F2F2F2] space-y-7">
-        <div className="space-y-2">
-          <h2 className="text-2xl text-secondary font-semibold">
-            Customize Your Practice Session
-          </h2>
-          <p className="text-base text-[#4B4B4B]">
-            Enhance your practice with our range of add-ons. Click on any add-on
-            for more details and to add it to your booking.
-          </p>
-        </div>
-        <div className="grid grid-cols-3 items-end">
-          <div className="flex gap-5 col-span-2 items-center">
-            <img src={coach} className="size-16 rounded-xl" alt="coach" />
-            <div className="space-y-2">
-              <h4 className="text-lg text-secondary font-medium">
-                Professional Coaching
-              </h4>
-              <p className="text-sm text-primary font-semibold">+$50/hour</p>
+    <div className="space-y-5">
+      <div className="grid grid-cols-5 gap-7">
+        <div className="col-span-3 p-7 rounded-2xl border border-solid border-[#F2F2F2] space-y-7">
+          <div className="space-y-2">
+            <h2 className="text-2xl text-secondary font-semibold">
+              Customize Your Practice Session
+            </h2>
+            <p className="text-base text-[#4B4B4B]">
+              Enhance your practice with our range of add-ons. Click on any
+              add-on for more details and to add it to your booking.
+            </p>
+          </div>
+          <div className="grid grid-cols-3 items-end">
+            <div className="flex gap-5 col-span-2 items-center">
+              <img src={coach} className="size-16 rounded-xl" alt="coach" />
+              <div className="space-y-2">
+                <h4 className="text-lg text-secondary font-medium">
+                  Professional Coaching
+                </h4>
+                <p className="text-sm text-primary font-semibold">+$50/hour</p>
+              </div>
+            </div>
+            <div className="text-end">
+              <Button
+                onClick={onClick}
+                disabled={addons?.length > 0 ? true : false}
+                className="bg-secondary px-4 h-8 text-white"
+              >
+                + Add
+              </Button>
             </div>
           </div>
-          <div className="text-end">
-            <Button
-              onClick={onClick}
-              disabled={addons?.length > 0 ? true : false}
-              className="bg-secondary px-4 h-8 text-white"
-            >
-              + Add
-            </Button>
+        </div>
+        <div className="col-span-2 p-7 rounded-2xl border border-solid border-[#F2F2F2] space-y-5">
+          <h3 className="text-[#063232] text-lg font-medium text-center p-5 bg-[#F6FFFF]">
+            Booking Summary
+          </h3>
+          <p>Per slot price: ${rentalData?.price}</p>
+          {rentalData?.slots.map((dateSlots: any, index: number) => (
+            <div className="space-y-2" key={index}>
+              {dateSlots.slots.map((slot: string, index: number) => (
+                <div
+                  key={index}
+                  className="flex justify-between items-center bg-white py-3 px-2"
+                >
+                  <div className="flex gap-5 items-center">
+                    <IoCalendarOutline className="size-4" />
+                    <span className="text-sm font-medium text-secondary">
+                      {moment(dateSlots.date).format("D-MMM-YYYY")}
+                    </span>
+                  </div>
+                  <div className="text-sm font-medium text-secondary">
+                    {slot}
+                  </div>
+                  <MdDeleteOutline
+                    className="size-5 cursor-pointer"
+                    onClick={() => onSlotDelete(dateSlots.date, slot)}
+                  />
+                </div>
+              ))}
+            </div>
+          ))}
+          {membership?.price && (
+            <div className="flex justify-between items-start px-2">
+              <div className="space-y-2">
+                <p className="capitalize">{membership?.package}</p>
+                <p className="capitalize">{membership?.plan}</p>
+              </div>
+              <p>price: ${membership?.price}</p>
+              <MdDeleteOutline
+                onClick={() => setMemberhips({})}
+                className="size-5 cursor-pointer"
+              />
+            </div>
+          )}
+          {addons?.map((addons: any) => (
+            <div className="flex justify-between items-center px-2">
+              <p>{addons.name}</p>
+              <p>
+                Hour:{" "}
+                <InputNumber
+                  value={addons.hour}
+                  min={1}
+                  onChange={(value) => onChange(value)}
+                  className="w-16"
+                />
+              </p>
+              <p>${addons.price}</p>
+              <MdDeleteOutline
+                onClick={() => setAddons([])}
+                className="size-5 cursor-pointer"
+              />
+            </div>
+          ))}
+          {data?.results && (
+            <div className="flex justify-between">
+              <p className="text-secondary text-base">Voucher Applied</p>
+              <p className="text-secondary text-base capitalize">
+                {data?.results.discount_type}
+              </p>
+              {data?.results.discount_type === "amount" ? (
+                <p className="text-secondary text-lg">
+                  -${data?.results.discount_value}
+                </p>
+              ) : (
+                <p className="text-secondary text-lg">
+                  -{data?.results.discount_value}%
+                </p>
+              )}
+            </div>
+          )}
+          <div className="flex justify-between">
+            <p className="text-secondary text-base font-medium">Total Price</p>
+            <p className="text-secondary text-lg font-medium">${totalPrice}</p>
           </div>
         </div>
       </div>
-      <div className="col-span-2 p-7 rounded-2xl border border-solid border-[#F2F2F2] space-y-5">
-        <h3 className="text-[#063232] text-lg font-medium text-center p-5 bg-[#F6FFFF]">
-          Booking Summary
-        </h3>
-        <p>Per slot price: ${rentalData?.price}</p>
-        {rentalData?.slots.map((dateSlots: any, index: number) => (
-          <div className="space-y-2" key={index}>
-            {dateSlots.slots.map((slot: string, index: number) => (
-              <div
-                key={index}
-                className="flex justify-between items-center bg-white py-3 px-2"
-              >
-                <div className="flex gap-5 items-center">
-                  <IoCalendarOutline className="size-4" />
-                  <span className="text-sm font-medium text-secondary">
-                    {moment(dateSlots.date).format("D-MMM-YYYY")}
-                  </span>
-                </div>
-                <div className="text-sm font-medium text-secondary">{slot}</div>
-                <MdDeleteOutline
-                  className="size-5 cursor-pointer"
-                  onClick={() => onSlotDelete(dateSlots.date, slot)}
-                />
-              </div>
-            ))}
-          </div>
-        ))}
-        {membership?.price && (
-          <div className="flex justify-between items-start px-2">
-            <div className="space-y-2">
-              <p className="capitalize">{membership?.package}</p>
-              <p className="capitalize">{membership?.plan}</p>
-            </div>
-            <p>price: ${membership?.price}</p>
-            <MdDeleteOutline
-              onClick={() => setMemberhips({})}
-              className="size-5 cursor-pointer"
+      <div>
+        <Form
+          onFinish={onFinish}
+          layout="vertical"
+          className="flex items-end gap-1"
+        >
+          <Form.Item label="Apply Voucher" name="voucher_code" className="m-0">
+            <Input
+              readOnly={data ? true : false}
+              className="py-3 rounded-full w-96"
+              placeholder="Enter your voucher code"
             />
-          </div>
-        )}
-        {addons?.map((addons: any) => (
-          <div className="flex justify-between items-center px-2">
-            <p>{addons.name}</p>
-            <p>
-              Hour:{" "}
-              <InputNumber
-                value={addons.hour}
-                min={1}
-                onChange={(value) => onChange(value)}
-                className="w-16"
-              />
-            </p>
-            <p>${addons.price}</p>
-            <MdDeleteOutline
-              onClick={() => setAddons([])}
-              className="size-5 cursor-pointer"
-            />
-          </div>
-        ))}
-        <div className="flex justify-between py-5">
-          <p className="text-secondary text-base font-medium">Total Price</p>
-          <p className="text-secondary text-lg font-medium">${totalPrice}</p>
-        </div>
+          </Form.Item>
+          <Form.Item className="m-0">
+            <Button
+              disabled={data}
+              loading={isLoading}
+              htmlType="submit"
+              className="primary-btn"
+            >
+              Apply
+            </Button>
+          </Form.Item>
+        </Form>
       </div>
     </div>
   );

@@ -13,13 +13,23 @@ const boocampApi = bootcampApiSlice.injectEndpoints({
       }),
       providesTags: ["bootcamps"],
     }),
-    createBootcampReservation: builder.mutation<any, IBootcamp>({
+    bootcampReservationList: builder.query<
+      IncomingQueryType<IBootcamp>,
+      IBootcampParams
+    >({
+      query: (email) => ({
+        url: `/reservations/courses/user/${email}`,
+        method: "GET",
+      }),
+      providesTags: ["bootcamp-reservation-list"],
+    }),
+    createBootcampReservation: builder.mutation({
       query: (payload) => ({
-        url: "/reservations/courses/create",
+        url: "/reservations/courses/user/create",
         method: "POST",
         body: payload,
       }),
-      invalidatesTags: ["bootcamps"],
+      invalidatesTags: ["bootcamp-reservation-list", "bootcamps"],
     }),
   }),
 });

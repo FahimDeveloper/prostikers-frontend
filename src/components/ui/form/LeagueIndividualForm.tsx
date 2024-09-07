@@ -19,8 +19,19 @@ const LeagueIndividualForm = ({
       <Form form={form} onFinish={onFinish} layout="vertical">
         <div className="grid grid-cols-2 gap-4">
           <Form.Item
-            label="Player Name"
-            name="player_name"
+            label="First Name"
+            name="first_name"
+            className="m-0"
+            rules={[{ required: true }]}
+          >
+            <Input
+              className="w-full rounded-full p-2"
+              placeholder="Type here.."
+            />
+          </Form.Item>
+          <Form.Item
+            label="Last Name"
+            name="last_name"
             className="m-0"
             rules={[{ required: true }]}
           >
@@ -40,7 +51,6 @@ const LeagueIndividualForm = ({
               placeholder="Type here.."
             />
           </Form.Item>
-
           <Form.Item
             label="Phone"
             name="phone"
@@ -63,6 +73,18 @@ const LeagueIndividualForm = ({
               placeholder="Type here.."
               min={0}
               max={99}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Sport"
+            name="sport"
+            className="m-0"
+            rules={[{ required: true }]}
+          >
+            <Input
+              className="w-full rounded-full p-2 capitalize"
+              placeholder="Type here.."
+              readOnly
             />
           </Form.Item>
           <Form.Item

@@ -13,6 +13,7 @@ const RentalBookingSteps = ({
   bookingData,
   membershipData,
   setTotalPrice,
+  setVoucherApplied,
   totalPrice,
 }: {
   form: any;
@@ -24,6 +25,7 @@ const RentalBookingSteps = ({
   bookingData: any;
   membershipData: any;
   setTotalPrice: any;
+  setVoucherApplied: any;
   totalPrice: any;
 }) => {
   const steps = [
@@ -35,6 +37,7 @@ const RentalBookingSteps = ({
           setAddons={setAddons}
           bookingData={bookingData}
           membershipData={membershipData}
+          setVoucherApplied={setVoucherApplied}
           setTotalPrice={setTotalPrice}
           totalPrice={totalPrice}
         />

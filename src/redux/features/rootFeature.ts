@@ -15,6 +15,8 @@ import {
   postApiSlice,
   slotBookingApiSlice,
   trainerApiSlice,
+  userApiSlice,
+  voucherApiSlice,
 } from "../api/httpsSlice";
 
 const persistConfig = {
@@ -39,6 +41,8 @@ export const rootReducers = combineReducers({
   [paymentApiSlice.reducerPath]: paymentApiSlice.reducer,
   [classApiSlice.reducerPath]: classApiSlice.reducer,
   [clientApiSlice.reducerPath]: clientApiSlice.reducer,
+  [voucherApiSlice.reducerPath]: voucherApiSlice.reducer,
+  [userApiSlice.reducerPath]: userApiSlice.reducer,
 });
 
 export const rootMiddlewares = [
@@ -54,4 +58,6 @@ export const rootMiddlewares = [
   paymentApiSlice.middleware,
   classApiSlice.middleware,
   clientApiSlice.middleware,
+  voucherApiSlice.middleware,
+  userApiSlice.middleware,
 ];

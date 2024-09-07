@@ -14,10 +14,12 @@ const Checkout = ({
   amount,
   isLoading,
   onSubmit,
+  setTransactionId,
 }: {
   amount: number;
   isLoading: boolean;
   onSubmit: any;
+  setTransactionId: any;
 }) => {
   const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
   const [clientSecret, setClientSecret] = useState("");
@@ -26,7 +28,8 @@ const Checkout = ({
     create({ amount: amount })
       .unwrap()
       .then((data) => {
-        setClientSecret(data.clientSecret);
+        setClientSecret(data.results.clientSecret);
+        setTransactionId(data.results.transection_id);
       })
       .catch((err) => {
         Swal.fire({

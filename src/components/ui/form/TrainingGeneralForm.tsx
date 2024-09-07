@@ -4,21 +4,19 @@ import { Button, Form, Input, InputNumber } from "antd";
 const TrainingGeneralForm = ({
   form,
   onFinish,
-  loading,
 }: {
   form: any;
   onFinish: any;
-  loading?: boolean;
 }) => {
   return (
-    <div className="space-y-5">
+    <div className="bg-[#F9FBFF] p-16 border border-solid border-[#F9FBFF] rounded-2xl space-y-6">
       <div className="space-y-2">
         <h3 className="text-2xl font-bold text-[#07133D]">General Details</h3>
         <p className="text-[#929292] text-base">
-          Fill out this form for group training reservation
+          Fill out this form to regester
         </p>
       </div>
-      <Form onFinish={onFinish} form={form} layout="vertical">
+      <Form form={form} onFinish={onFinish} layout="vertical">
         <div className="grid grid-cols-2 gap-4">
           <Form.Item
             label="First Name"
@@ -27,8 +25,8 @@ const TrainingGeneralForm = ({
             rules={[{ required: true }]}
           >
             <Input
-              placeholder="Type here..."
               className="w-full rounded-full p-2"
+              placeholder="Type here.."
             />
           </Form.Item>
           <Form.Item
@@ -38,8 +36,8 @@ const TrainingGeneralForm = ({
             rules={[{ required: true }]}
           >
             <Input
-              placeholder="Type here..."
               className="w-full rounded-full p-2"
+              placeholder="Type here.."
             />
           </Form.Item>
           <Form.Item
@@ -104,7 +102,7 @@ const TrainingGeneralForm = ({
             label="City"
             name="city"
             className="m-0"
-            rules={[{ required: true, message: "Enter your city" }]}
+            rules={[{ required: true }]}
           >
             <Input
               className="w-full rounded-full p-2"
@@ -114,7 +112,6 @@ const TrainingGeneralForm = ({
           <Form.Item
             label="State/Province"
             name="state"
-            className="m-0"
             rules={[{ required: true }]}
           >
             <Input
@@ -125,7 +122,6 @@ const TrainingGeneralForm = ({
           <Form.Item
             label="Zip/Postal Code"
             name="zip_code"
-            className="m-0"
             rules={[{ required: true }]}
           >
             <Input
@@ -134,13 +130,11 @@ const TrainingGeneralForm = ({
             />
           </Form.Item>
         </div>
-        <div className="flex justify-end mt-5">
-          <Form.Item>
-            <Button className="primary-btn" loading={loading} htmlType="submit">
-              Procced
-            </Button>
-          </Form.Item>
-        </div>
+        <Form.Item className="flex justify-end">
+          <Button htmlType="submit" className="primary-btn">
+            Proceed
+          </Button>
+        </Form.Item>
       </Form>
     </div>
   );

@@ -10,6 +10,7 @@ import { useCreateFacilityReservationMutation } from "../../redux/features/facil
 
 const RentalBookingPage = () => {
   const [totalPrice, setTotalPrice] = useState(0);
+  const [voucherApplied, setVoucherApplied] = useState(false);
   const navigate = useNavigate();
   const [current, setCurrent] = useState(0);
   const user = useSelector(selectCurrentUser);
@@ -32,6 +33,7 @@ const RentalBookingPage = () => {
       values.bookings = bookings;
       values.facility = state?.slotsData.training;
       values.addons = addons;
+      values.voucher_applied = voucherApplied;
       navigate("/facility-payment", {
         state: {
           data: { id: user?._id, payload: values },
@@ -53,6 +55,7 @@ const RentalBookingPage = () => {
         <RentalBookingSteps
           onFinish={onFinish}
           form={form}
+          setVoucherApplied={setVoucherApplied}
           addons={addons}
           setAddons={setAddons}
           current={current}

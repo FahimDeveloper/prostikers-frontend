@@ -36,7 +36,7 @@ const BootcampCard = ({ image, data }: { image: any; data: any }) => {
     } else {
       navigate(`${data._id}`, {
         state: {
-          amount: data?.price,
+          data: data,
           sport: data?.sport,
           from: location,
           trainer: data?.trainer,

@@ -3,10 +3,13 @@
 import BannerSection from "../../../common/BannerSection";
 import Container from "../../../components/Container";
 import cricketBanner from "../../../assets/images/programsBanner/cricket-banner.webp";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "antd/es/form/Form";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm";
+import { Button, Form, Input } from "antd";
+import Swal from "sweetalert2";
+import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
 
 const CricketGroupTrainingReservation = () => {
   const { id } = useParams();
@@ -14,13 +17,32 @@ const CricketGroupTrainingReservation = () => {
   const [form] = useForm();
   const { state } = useLocation();
   const location = state?.from?.pathname || "/";
+  const [voucherApplied, setVoucherApplied] = useState(false);
+  const [use, { data, isLoading, isError, error, isSuccess }] =
+    useVoucherMutation();
+
+  const price = state.data.price;
+  let totalPrice = 0;
+
+  if (data) {
+    const { discount_type, discount_value } = data.results;
+    if (discount_type === "amount") {
+      totalPrice = price - discount_value;
+    } else if (discount_type === "percentage") {
+      const decimal = parseFloat(discount_value) / 100;
+      totalPrice = price - price * decimal;
+    }
+  } else {
+    totalPrice = price;
+  }
 
   const onFinish = (values: any) => {
     values.trainer = state.trainer._id;
     values.appointment = id;
     values.appointment_date = state.date;
+    values.voucher_applied = voucherApplied;
     navigate("/group-appointment-payment", {
-      state: { data: values, location: location, amount: state?.data?.price },
+      state: { data: values, location: location, amount: totalPrice },
     });
   };
 
@@ -29,6 +51,31 @@ const CricketGroupTrainingReservation = () => {
       sport: state?.sport,
     });
   }, [state]);
+
+  const onVoucherFinish = (values: any) => {
+    (values.voucher_type = "appointment"), use(values);
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setVoucherApplied(true);
+      Swal.fire({
+        title: "Success",
+        text: `${data?.message}`,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+    if (isError) {
+      Swal.fire({
+        title: "Oops..",
+        text: `${(error as any)?.data?.message || "something went wrong"}`,
+        icon: "error",
+        confirmButtonColor: "#0ABAC3",
+      });
+    }
+  }, [isSuccess, isError]);
 
   return (
     <>
@@ -48,6 +95,60 @@ const CricketGroupTrainingReservation = () => {
               excellence.
             </p>
           </div>
+          <div className="space-y-2">
+            {data?.results && (
+              <div className="flex justify-end gap-5">
+                <p className="text-secondary text-base">Voucher Applied</p>
+                <p className="text-secondary text-base capitalize">
+                  {data?.results.discount_type}
+                </p>
+                {data?.results.discount_type === "amount" ? (
+                  <p className="text-secondary text-lg">
+                    -${data?.results.discount_value}
+                  </p>
+                ) : (
+                  <p className="text-secondary text-lg">
+                    -{data?.results.discount_value}%
+                  </p>
+                )}
+              </div>
+            )}
+            <div className="flex justify-end">
+              <div className="flex gap-2 items-center">
+                <p className="font-medium">Total Price:</p>
+                <p className="text-lg font-medium">${totalPrice}</p>
+              </div>
+            </div>
+          </div>
+          {state?.data && (
+            <Form
+              onFinish={onVoucherFinish}
+              layout="vertical"
+              className="flex items-end gap-1"
+            >
+              <Form.Item
+                label="Apply Voucher"
+                name="voucher_code"
+                className="m-0"
+              >
+                <Input
+                  readOnly={data ? true : false}
+                  className="py-3 rounded-full w-96"
+                  placeholder="Enter your voucher code"
+                />
+              </Form.Item>
+              <Form.Item className="m-0">
+                <Button
+                  disabled={data}
+                  loading={isLoading}
+                  htmlType="submit"
+                  className="primary-btn"
+                >
+                  Apply
+                </Button>
+              </Form.Item>
+            </Form>
+          )}
           <TrainingGeneralForm form={form} onFinish={onFinish} />
         </div>
       </Container>

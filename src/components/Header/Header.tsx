@@ -6,12 +6,20 @@ import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { Modal } from "antd";
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import { selectCurrentUser } from "../../redux/features/auth/authSlice";
+import {
+  loggedOutUser,
+  selectCurrentUser,
+} from "../../redux/features/auth/authSlice";
 import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../hooks/useAppHooks";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const user = useSelector(selectCurrentUser);
+  const dispatch = useAppDispatch();
+  const logout = () => {
+    dispatch(loggedOutUser());
+  };
   return (
     <div className="fixed w-full z-50 lg:top-5 top-4">
       <div className="sm:px-14 px-5">
@@ -85,9 +93,12 @@ const Header = () => {
               <div className="flex items-center gap-2 text-md cursor-pointer">
                 <IoCartOutline className="size-6" /> Cart
               </div>
-              <div className="bg-[#EAFFFF] cursor-pointer border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-center gap-3 py-2 px-5">
-                <HiOutlineUserCircle className="size-7" />
-                Account
+              <div
+                onClick={logout}
+                className="bg-[#EAFFFF] cursor-pointer border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-center gap-3 py-2 px-5"
+              >
+                {/* <HiOutlineUserCircle className="size-7" /> */}
+                Logout
               </div>
             </div>
           )}
