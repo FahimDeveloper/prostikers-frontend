@@ -23,7 +23,7 @@ const RentalMembership = () => {
     if (membership === "individual_pro") {
       if (plan === "monthly") {
         const membershipData = {
-          package: "individual pro",
+          package_name: "individual pro",
           plan: plan,
           price: price,
         };
@@ -32,7 +32,7 @@ const RentalMembership = () => {
         });
       } else if (plan === "yearly") {
         const membershipData = {
-          package: "individual pro",
+          package_name: "individual pro",
           plan: plan,
           price: price,
         };
@@ -43,7 +43,7 @@ const RentalMembership = () => {
     } else if (membership === "individual_pro_unlimited") {
       if (plan === "monthly") {
         const membershipData = {
-          package: "individual pro unlimited",
+          package_name: "individual pro unlimited",
           plan: plan,
           price: price,
         };
@@ -52,7 +52,7 @@ const RentalMembership = () => {
         });
       } else if (plan === "yearly") {
         const membershipData = {
-          package: "individual pro unlimited",
+          package_name: "individual pro unlimited",
           plan: plan,
           price: price,
         };
@@ -62,7 +62,7 @@ const RentalMembership = () => {
       }
     } else if (membership === "youth_training_membership") {
       const membershipData = {
-        package: "youth training membership",
+        package_name: "youth training membership",
         plan: "monthly",
         price: price,
       };

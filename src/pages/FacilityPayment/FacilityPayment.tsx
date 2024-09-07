@@ -66,7 +66,7 @@ const FacilityPayment = () => {
         confirmButtonColor: "#0ABAC3",
         iconColor: "#0ABAC3",
       });
-      navigate(location);
+      navigate("/");
     }
     if (isError) {
       Swal.fire({

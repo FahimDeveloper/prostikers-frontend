@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -20,7 +21,7 @@ const MembershipPayment = () => {
       Swal.fire({
         title: "Success",
         icon: "success",
-        text: `Membership proccess success`,
+        text: `${data?.message}`,
         iconColor: "#0ABAC3",
         confirmButtonColor: "#0ABAC3",
       });
@@ -34,7 +35,7 @@ const MembershipPayment = () => {
         confirmButtonColor: "#0ABAC3",
       });
     }
-  }, [isSuccess, isError, error, navigate]);
+  }, [isSuccess, isError]);
   const onSubmit = () => {
     data.status = true;
     const issueDate = new Date();
