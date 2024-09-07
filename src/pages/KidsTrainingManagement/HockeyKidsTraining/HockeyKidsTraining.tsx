@@ -7,21 +7,21 @@ import gallery4 from "../../../assets/images/gallery/hockey/hockey-gallery-4-min
 import gallery5 from "../../../assets/images/gallery/hockey/hockey-gallery-5-min.webp";
 import Container from "../../../components/Container";
 import GallerySection from "../../../common/GallerySection";
-import AppointmentGroupCard from "../../../common/card/AppointmentGroupCard";
 import BookingSidebar from "../../../components/BookingSidebar/BookingSidebar";
 import { useState } from "react";
 import { useTrainersQuery } from "../../../redux/features/tainer/trainerApi";
-import { useGroupAppointmentsQuery } from "../../../redux/features/appointment/appointmentApi";
 import { Select } from "antd";
 import DateSlider from "../../../components/DateSlider";
 import hockey from "../../../assets/images/training/hocky-training.webp";
+import { useClassesQuery } from "../../../redux/features/class/classApi";
+import KidsTrainingCard from "../../../common/card/KidsTrainingCard";
 
 const HockeyKidsTraining = () => {
   const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   const [trainer, setTrainer] = useState<string | undefined>(undefined);
   const [activeDate, setActiveDate] = useState(new Date());
   const { data: trainerData } = useTrainersQuery(undefined);
-  const { data: appointments } = useGroupAppointmentsQuery({
+  const { data: classData } = useClassesQuery({
     trainer,
     sport: "cricket",
     date: activeDate.toISOString(),
@@ -99,7 +99,7 @@ const HockeyKidsTraining = () => {
               />
             </div>
             <div className="col-span-2 space-y-5">
-              {appointments?.results.length === 0 ? (
+              {classData?.results.length === 0 ? (
                 <div className="h-40 flex justify-center items-center">
                   <p className="text-2xl text-secondary">
                     No cricket training found.
@@ -107,10 +107,10 @@ const HockeyKidsTraining = () => {
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-5">
-                  {appointments?.results.map((bootcamp, index) => {
+                  {classData?.results.map((training, index) => {
                     return (
-                      <AppointmentGroupCard
-                        data={bootcamp}
+                      <KidsTrainingCard
+                        data={training}
                         key={index}
                         image={hockey}
                         activeDate={activeDate}

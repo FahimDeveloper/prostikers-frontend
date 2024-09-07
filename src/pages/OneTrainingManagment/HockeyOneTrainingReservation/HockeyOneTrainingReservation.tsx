@@ -7,9 +7,6 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useForm } from "antd/es/form/Form";
 import Swal from "sweetalert2";
-
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import {
   useAddToCartSlotMutation,
   useDeleteBookingSlotMutation,
@@ -31,7 +28,6 @@ const HockeyOneTrainingReservation = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [voucherApplied, setVoucherApplied] = useState(false);
-  const user = useSelector(selectCurrentUser);
   const createCartBooking = useAddToCartSlotMutation();
   const [use, { data, isLoading, isError, error, isSuccess }] =
     useVoucherMutation();
@@ -94,7 +90,7 @@ const HockeyOneTrainingReservation = () => {
     values.voucher_applied = voucherApplied;
     navigate("/one-appointment-payment", {
       state: {
-        data: { id: user?._id, payload: values },
+        data: values,
         location: location,
         amount: totalPrice,
       },

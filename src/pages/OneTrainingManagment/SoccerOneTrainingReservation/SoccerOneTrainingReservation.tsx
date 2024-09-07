@@ -20,8 +20,6 @@ import {
   useOneTrainingBookedSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
 import { useOneAppointmentQuery } from "../../../redux/features/appointment/appointmentApi";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm";
 import { Button, Form, Input } from "antd";
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
@@ -30,7 +28,6 @@ const SoccerOneTrainingReservation = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [voucherApplied, setVoucherApplied] = useState(false);
-  const user = useSelector(selectCurrentUser);
   const createCartBooking = useAddToCartSlotMutation();
   const [deleteSlot] = useDeleteBookingSlotMutation();
   const [use, { data, isLoading, isError, error, isSuccess }] =
@@ -93,7 +90,7 @@ const SoccerOneTrainingReservation = () => {
     values.voucher_applied = voucherApplied;
     navigate("/one-appointment-payment", {
       state: {
-        data: { id: user?._id, payload: values },
+        data: values,
         location: location,
         amount: totalPrice,
       },

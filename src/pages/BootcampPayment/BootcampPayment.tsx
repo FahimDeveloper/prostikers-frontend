@@ -38,7 +38,7 @@ const BootcampPayment = () => {
   }, [isSuccess, isError, error]);
   const onSubmit = () => {
     const payload = {
-      class_data: { ...data },
+      course_data: { ...data },
       payment_info: {
         transaction_id: transactionId,
         user: user?._id,

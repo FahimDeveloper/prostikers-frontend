@@ -40,7 +40,7 @@ const FacilityPayment = () => {
         service: "event",
       },
     };
-    create(payload);
+    create({ id: user?._id, payload: payload });
   };
   useEffect(() => {
     if (isSuccess) {

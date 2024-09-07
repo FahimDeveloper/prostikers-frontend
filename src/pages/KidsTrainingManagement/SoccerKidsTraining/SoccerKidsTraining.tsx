@@ -6,21 +6,21 @@ import gallery4 from "../../../assets/images/gallery/soccer/soccer-gallery-4.web
 import gallery5 from "../../../assets/images/gallery/soccer/soccer-gallery-5.webp";
 import GallerySection from "../../../common/GallerySection";
 import Container from "../../../components/Container";
-import AppointmentGroupCard from "../../../common/card/AppointmentGroupCard";
 import DateSlider from "../../../components/DateSlider";
 import BookingSidebar from "../../../components/BookingSidebar/BookingSidebar";
 import { useState } from "react";
 import { useTrainersQuery } from "../../../redux/features/tainer/trainerApi";
-import { useGroupAppointmentsQuery } from "../../../redux/features/appointment/appointmentApi";
 import { Select } from "antd";
 import soccer from "../../../assets/images/training/soccer-training.webp";
+import { useClassesQuery } from "../../../redux/features/class/classApi";
+import KidsTrainingCard from "../../../common/card/KidsTrainingCard";
 
 const SoccerKidsTraining = () => {
   const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   const [trainer, setTrainer] = useState<string | undefined>(undefined);
   const [activeDate, setActiveDate] = useState(new Date());
   const { data: trainerData } = useTrainersQuery(undefined);
-  const { data: appointments } = useGroupAppointmentsQuery({
+  const { data: appointments } = useClassesQuery({
     trainer,
     sport: "cricket",
     date: activeDate.toISOString(),
@@ -107,10 +107,10 @@ const SoccerKidsTraining = () => {
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-5">
-                  {appointments?.results.map((bootcamp, index) => {
+                  {appointments?.results.map((training, index) => {
                     return (
-                      <AppointmentGroupCard
-                        data={bootcamp}
+                      <KidsTrainingCard
+                        data={training}
                         key={index}
                         image={soccer}
                         activeDate={activeDate}

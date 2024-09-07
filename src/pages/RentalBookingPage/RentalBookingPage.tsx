@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import Container from "../../components/Container";
 import RentalBookingSteps from "../../components/ui/steps/RentalBookingSteps";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 import { useCreateFacilityReservationMutation } from "../../redux/features/facility/facilityApi";
 
 const RentalBookingPage = () => {
@@ -13,7 +11,6 @@ const RentalBookingPage = () => {
   const [voucherApplied, setVoucherApplied] = useState(false);
   const navigate = useNavigate();
   const [current, setCurrent] = useState(0);
-  const user = useSelector(selectCurrentUser);
   useCreateFacilityReservationMutation();
   const { state } = useLocation();
   const [addons, setAddons] = useState([]);
@@ -36,7 +33,7 @@ const RentalBookingPage = () => {
       values.voucher_applied = voucherApplied;
       navigate("/facility-payment", {
         state: {
-          data: { id: user?._id, payload: values },
+          data: values,
           amount: totalPrice,
           membershipData: state?.membershipData,
         },

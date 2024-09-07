@@ -4,7 +4,7 @@ const paymentApi = paymentApiSlice.injectEndpoints({
   endpoints: (builder) => ({
     payment: builder.mutation({
       query: (body) => ({
-        url: "/payments/create-payment-intent",
+        url: "/stripe-payment/create-payment-intent",
         method: "POST",
         body,
       }),
