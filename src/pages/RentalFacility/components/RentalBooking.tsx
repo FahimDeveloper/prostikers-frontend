@@ -18,6 +18,7 @@ import {
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { Link } from "react-router-dom";
+import { ImSpinner } from "react-icons/im";
 
 const RentalBooking = () => {
   const user = useSelector(selectCurrentUser);
@@ -28,7 +29,7 @@ const RentalBooking = () => {
   const [facilityCage, setFacilityCage] = useState<string | undefined>(
     undefined
   );
-  const { data: facility } = useRentalFacilityQuery(
+  const { data: facility, isFetching } = useRentalFacilityQuery(
     { facility: facilityCage },
     { skip: facilityCage ? false : true }
   );
@@ -169,11 +170,18 @@ const RentalBooking = () => {
           )}
         </div>
       )}
-      {facility && !facility?.results._id && (
-        <div className="text-center h-40 flex items-center justify-center">
-          <h3 className="font-medium">Facility not found</h3>
-        </div>
-      )}
+      <div className="text-center h-96 flex items-center justify-center">
+        {isFetching ? (
+          <ImSpinner className="size-9 animate-spin text-primary" />
+        ) : (
+          <>
+            {facility && !facility?.results._id && (
+              <h3 className="font-medium">Facility not found</h3>
+            )}
+          </>
+        )}
+      </div>
+
       {selectSlots.length > 0 && (
         <div className="space-y-5">
           <div className="flex justify-between">

@@ -13,12 +13,13 @@ import BookingSidebar from "../../../components/BookingSidebar/BookingSidebar";
 import { useState } from "react";
 import { useTrainersQuery } from "../../../redux/features/tainer/trainerApi";
 import { useOneAppointmentsQuery } from "../../../redux/features/appointment/appointmentApi";
+import { ImSpinner } from "react-icons/im";
 
 const SoccerOneTraining = () => {
   const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   const [trainer, setTrainer] = useState<string | undefined>(undefined);
   const { data: trainerData } = useTrainersQuery(undefined);
-  const { data: appointments } = useOneAppointmentsQuery({
+  const { data: appointments, isFetching } = useOneAppointmentsQuery({
     trainer,
     sport: "soccer",
   });
@@ -81,25 +82,35 @@ const SoccerOneTraining = () => {
               options={trainerOptions}
             />
             <div className="col-span-2 space-y-5">
-              {appointments?.results.length === 0 ? (
-                <div className="h-40 flex justify-center items-center">
-                  <p className="text-2xl text-secondary">
-                    No baseball training found.
-                  </p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-2 gap-5">
-                  {appointments?.results.map((bootcamp, index) => {
-                    return (
-                      <AppointmentCard
-                        data={bootcamp}
-                        key={index}
-                        image={soccer}
-                      />
-                    );
-                  })}
-                </div>
-              )}
+              <>
+                {isFetching ? (
+                  <div className="h-96 flex justify-center items-center">
+                    <ImSpinner className="size-9 animate-spin text-primary" />
+                  </div>
+                ) : (
+                  <>
+                    {appointments?.results.length === 0 ? (
+                      <div className="h-96 flex justify-center items-center">
+                        <p className="text-2xl text-secondary">
+                          No soccer training found.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 gap-5">
+                        {appointments?.results.map((bootcamp, index) => {
+                          return (
+                            <AppointmentCard
+                              data={bootcamp}
+                              key={index}
+                              image={soccer}
+                            />
+                          );
+                        })}
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
             </div>
           </div>
           <BookingSidebar />

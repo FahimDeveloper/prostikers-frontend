@@ -13,11 +13,12 @@ import { useTrainersQuery } from "../../../redux/features/tainer/trainerApi";
 import { Select } from "antd";
 import BookingSidebar from "../../../components/BookingSidebar/BookingSidebar";
 import BootcampCard from "../../../common/card/BootcampCard";
+import { ImSpinner } from "react-icons/im";
 
 const HockyBootcampTraining = () => {
   const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   const [trainer, setTrainer] = useState<string | undefined>(undefined);
-  const { data } = useBootcampsQuery({
+  const { data, isFetching } = useBootcampsQuery({
     limit: 10,
     trainer,
     sport: "field hockey",
@@ -77,25 +78,35 @@ const HockyBootcampTraining = () => {
           />
           <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-5 gap-y-5">
             <div className="col-span-2 space-y-5">
-              {data?.results.length === 0 ? (
-                <div className="h-40 flex justify-center items-center">
-                  <p className="text-2xl text-secondary">
-                    No Field Hockey Bootcamp found.
-                  </p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-2 gap-5">
-                  {data?.results.map((bootcamp, index) => {
-                    return (
-                      <BootcampCard
-                        data={bootcamp}
-                        key={index}
-                        image={hockey}
-                      />
-                    );
-                  })}
-                </div>
-              )}
+              <>
+                {isFetching ? (
+                  <div className="h-96 flex justify-center items-center">
+                    <ImSpinner className="size-9 animate-spin text-primary" />
+                  </div>
+                ) : (
+                  <>
+                    {data?.results.length === 0 ? (
+                      <div className="h-96 flex justify-center items-center">
+                        <p className="text-2xl text-secondary">
+                          No field hockey bootcamp found.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 gap-5">
+                        {data?.results.map((bootcamp, index) => {
+                          return (
+                            <BootcampCard
+                              data={bootcamp}
+                              key={index}
+                              image={hockey}
+                            />
+                          );
+                        })}
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
             </div>
             <BookingSidebar />
           </div>

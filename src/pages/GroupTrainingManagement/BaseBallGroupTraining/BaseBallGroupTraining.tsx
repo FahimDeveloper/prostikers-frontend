@@ -14,13 +14,14 @@ import baseball from "../../../assets/images/training/baseball-training.webp";
 import { useGroupAppointmentsQuery } from "../../../redux/features/appointment/appointmentApi";
 import DateSlider from "../../../components/DateSlider";
 import AppointmentGroupCard from "../../../common/card/AppointmentGroupCard";
+import { ImSpinner } from "react-icons/im";
 
 const BaseBallGroupTraining = () => {
   const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   const [trainer, setTrainer] = useState<string | undefined>(undefined);
   const [activeDate, setActiveDate] = useState(new Date());
   const { data: trainerData } = useTrainersQuery(undefined);
-  const { data: appointments } = useGroupAppointmentsQuery({
+  const { data: appointments, isFetching } = useGroupAppointmentsQuery({
     trainer,
     sport: "baseball",
     date: activeDate.toISOString(),
@@ -99,26 +100,36 @@ const BaseBallGroupTraining = () => {
               />
             </div>
             <div className="col-span-2 space-y-5">
-              {appointments?.results.length === 0 ? (
-                <div className="h-40 flex justify-center items-center">
-                  <p className="text-2xl text-secondary">
-                    No baseball training found.
-                  </p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-2 gap-5">
-                  {appointments?.results.map((bootcamp, index) => {
-                    return (
-                      <AppointmentGroupCard
-                        data={bootcamp}
-                        key={index}
-                        image={baseball}
-                        activeDate={activeDate}
-                      />
-                    );
-                  })}
-                </div>
-              )}
+              <>
+                {isFetching ? (
+                  <div className="h-96 flex justify-center items-center">
+                    <ImSpinner className="size-9 animate-spin text-primary" />
+                  </div>
+                ) : (
+                  <>
+                    {appointments?.results.length === 0 ? (
+                      <div className="h-96 flex justify-center items-center">
+                        <p className="text-2xl text-secondary">
+                          No baseball training found.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 gap-5">
+                        {appointments?.results.map((bootcamp, index) => {
+                          return (
+                            <AppointmentGroupCard
+                              activeDate={activeDate}
+                              data={bootcamp}
+                              key={index}
+                              image={baseball}
+                            />
+                          );
+                        })}
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
             </div>
           </div>
           <BookingSidebar />

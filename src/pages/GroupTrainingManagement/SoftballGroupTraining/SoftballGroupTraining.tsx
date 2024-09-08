@@ -12,15 +12,16 @@ import { Select } from "antd";
 import { useState } from "react";
 import { useTrainersQuery } from "../../../redux/features/tainer/trainerApi";
 import DateSlider from "../../../components/DateSlider";
-import KidsTrainingCard from "../../../common/card/KidsTrainingCard";
 import { useGroupAppointmentsQuery } from "../../../redux/features/appointment/appointmentApi";
+import AppointmentGroupCard from "../../../common/card/AppointmentGroupCard";
+import { ImSpinner } from "react-icons/im";
 
 const SoftballGroupTraining = () => {
   const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   const [trainer, setTrainer] = useState<string | undefined>(undefined);
   const [activeDate, setActiveDate] = useState(new Date());
   const { data: trainerData } = useTrainersQuery(undefined);
-  const { data: appointments } = useGroupAppointmentsQuery({
+  const { data: appointments, isFetching } = useGroupAppointmentsQuery({
     trainer,
     sport: "softball",
     date: activeDate.toISOString(),
@@ -99,26 +100,36 @@ const SoftballGroupTraining = () => {
               />
             </div>
             <div className="col-span-2 space-y-5">
-              {appointments?.results.length === 0 ? (
-                <div className="h-40 flex justify-center items-center">
-                  <p className="text-2xl text-secondary">
-                    No softball training found.
-                  </p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-2 gap-5">
-                  {appointments?.results.map((appointment, index) => {
-                    return (
-                      <KidsTrainingCard
-                        data={appointment}
-                        key={index}
-                        image={softball}
-                        activeDate={activeDate}
-                      />
-                    );
-                  })}
-                </div>
-              )}
+              <>
+                {isFetching ? (
+                  <div className="h-96 flex justify-center items-center">
+                    <ImSpinner className="size-9 animate-spin text-primary" />
+                  </div>
+                ) : (
+                  <>
+                    {appointments?.results.length === 0 ? (
+                      <div className="h-96 flex justify-center items-center">
+                        <p className="text-2xl text-secondary">
+                          No softball training found.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 gap-5">
+                        {appointments?.results.map((bootcamp, index) => {
+                          return (
+                            <AppointmentGroupCard
+                              activeDate={activeDate}
+                              data={bootcamp}
+                              key={index}
+                              image={softball}
+                            />
+                          );
+                        })}
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
             </div>
           </div>
           <BookingSidebar />

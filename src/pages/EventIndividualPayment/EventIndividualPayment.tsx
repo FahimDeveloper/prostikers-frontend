@@ -31,7 +31,6 @@ const EventIndividualPayment = () => {
       Swal.fire({
         title: "Oops!..",
         icon: "error",
-        text: `${(error as any)?.data?.message || "something went wrong"}`,
         confirmButtonColor: "#0ABAC3",
       });
     }

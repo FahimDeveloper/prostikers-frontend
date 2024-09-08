@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import softball from "../../../assets/images/training/soft-training.webp";
 import gallery1 from "../../../assets/images/gallery/softball/softball-gallery-1-min.webp";
 import gallery2 from "../../../assets/images/gallery/softball/softball-gallery-2-min.webp";
 import gallery3 from "../../../assets/images/gallery/softball/softball-gallery-3-min.webp";
@@ -11,16 +12,16 @@ import { Select } from "antd";
 import DateSlider from "../../../components/DateSlider";
 import { useState } from "react";
 import { useTrainersQuery } from "../../../redux/features/tainer/trainerApi";
-import softball from "../../../assets/images/training/soft-training.webp";
 import { useClassesQuery } from "../../../redux/features/class/classApi";
 import KidsTrainingCard from "../../../common/card/KidsTrainingCard";
+import { ImSpinner } from "react-icons/im";
 
 const SoftballKidsTraining = () => {
   const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   const [trainer, setTrainer] = useState<string | undefined>(undefined);
   const [activeDate, setActiveDate] = useState(new Date());
   const { data: trainerData } = useTrainersQuery(undefined);
-  const { data: classData } = useClassesQuery({
+  const { data: classes, isFetching } = useClassesQuery({
     trainer,
     sport: "cricket",
     date: activeDate.toISOString(),
@@ -98,26 +99,36 @@ const SoftballKidsTraining = () => {
               />
             </div>
             <div className="col-span-2 space-y-5">
-              {classData?.results.length === 0 ? (
-                <div className="h-40 flex justify-center items-center">
-                  <p className="text-2xl text-secondary">
-                    No cricket training found.
-                  </p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-2 gap-5">
-                  {classData?.results.map((training, index) => {
-                    return (
-                      <KidsTrainingCard
-                        data={training}
-                        key={index}
-                        image={softball}
-                        activeDate={activeDate}
-                      />
-                    );
-                  })}
-                </div>
-              )}
+              <>
+                {isFetching ? (
+                  <div className="h-96 flex justify-center items-center">
+                    <ImSpinner className="size-9 animate-spin text-primary" />
+                  </div>
+                ) : (
+                  <>
+                    {classes?.results.length === 0 ? (
+                      <div className="h-96 flex justify-center items-center">
+                        <p className="text-2xl text-secondary">
+                          No softball training found.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 gap-5">
+                        {classes?.results.map((training, index) => {
+                          return (
+                            <KidsTrainingCard
+                              activeDate={activeDate}
+                              data={training}
+                              key={index}
+                              image={softball}
+                            />
+                          );
+                        })}
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
             </div>
           </div>
           <BookingSidebar />

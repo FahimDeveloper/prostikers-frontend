@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useTrainersQuery } from "../../../redux/features/tainer/trainerApi";
 import baseball from "../../../assets/images/training/baseball-training.webp";
 import { useClassesQuery } from "../../../redux/features/class/classApi";
+import { ImSpinner } from "react-icons/im";
 import KidsTrainingCard from "../../../common/card/KidsTrainingCard";
 
 const BaseBallKidsTraining = () => {
@@ -20,7 +21,7 @@ const BaseBallKidsTraining = () => {
   const [trainer, setTrainer] = useState<string | undefined>(undefined);
   const [activeDate, setActiveDate] = useState(new Date());
   const { data: trainerData } = useTrainersQuery(undefined);
-  const { data: classes } = useClassesQuery({
+  const { data: classes, isFetching } = useClassesQuery({
     trainer,
     sport: "baseball",
     date: activeDate.toISOString(),
@@ -100,26 +101,36 @@ const BaseBallKidsTraining = () => {
               />
             </div>
             <div className="col-span-2 space-y-5">
-              {classes?.results.length === 0 ? (
-                <div className="h-40 flex justify-center items-center">
-                  <p className="text-2xl text-secondary">
-                    No baseball training found.
-                  </p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-2 gap-5">
-                  {classes?.results.map((training, index) => {
-                    return (
-                      <KidsTrainingCard
-                        data={training}
-                        key={index}
-                        image={baseball}
-                        activeDate={activeDate}
-                      />
-                    );
-                  })}
-                </div>
-              )}
+              <>
+                {isFetching ? (
+                  <div className="h-96 flex justify-center items-center">
+                    <ImSpinner className="size-9 animate-spin text-primary" />
+                  </div>
+                ) : (
+                  <>
+                    {classes?.results.length === 0 ? (
+                      <div className="h-96 flex justify-center items-center">
+                        <p className="text-2xl text-secondary">
+                          No baseball training found.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 gap-5">
+                        {classes?.results.map((training, index) => {
+                          return (
+                            <KidsTrainingCard
+                              activeDate={activeDate}
+                              data={training}
+                              key={index}
+                              image={baseball}
+                            />
+                          );
+                        })}
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
             </div>
           </div>
           <BookingSidebar />

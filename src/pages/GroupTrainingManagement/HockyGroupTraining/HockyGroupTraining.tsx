@@ -14,12 +14,13 @@ import { useTrainersQuery } from "../../../redux/features/tainer/trainerApi";
 import { useGroupAppointmentsQuery } from "../../../redux/features/appointment/appointmentApi";
 import DateSlider from "../../../components/DateSlider";
 import AppointmentGroupCard from "../../../common/card/AppointmentGroupCard";
+import { ImSpinner } from "react-icons/im";
 const HockyGroupTraining = () => {
   const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   const [trainer, setTrainer] = useState<string | undefined>(undefined);
   const [activeDate, setActiveDate] = useState(new Date());
   const { data: trainerData } = useTrainersQuery(undefined);
-  const { data: appointments } = useGroupAppointmentsQuery({
+  const { data: appointments, isFetching } = useGroupAppointmentsQuery({
     trainer,
     sport: "field hockey",
     date: activeDate.toISOString(),
@@ -105,17 +106,37 @@ const HockyGroupTraining = () => {
                   </p>
                 </div>
               ) : (
-                <div className="grid grid-cols-2 gap-5">
-                  {appointments?.results.map((appointment, index) => {
-                    return (
-                      <AppointmentGroupCard
-                        data={appointment}
-                        key={index}
-                        image={hockey}
-                        activeDate={activeDate}
-                      />
-                    );
-                  })}
+                <div className="col-span-2 space-y-5">
+                  <>
+                    {isFetching ? (
+                      <div className="h-96 flex justify-center items-center">
+                        <ImSpinner className="size-9 animate-spin text-primary" />
+                      </div>
+                    ) : (
+                      <>
+                        {appointments?.results.length === 0 ? (
+                          <div className="h-96 flex justify-center items-center">
+                            <p className="text-2xl text-secondary">
+                              No field hockey training found.
+                            </p>
+                          </div>
+                        ) : (
+                          <div className="grid grid-cols-2 gap-5">
+                            {appointments?.results.map((bootcamp, index) => {
+                              return (
+                                <AppointmentGroupCard
+                                  activeDate={activeDate}
+                                  data={bootcamp}
+                                  key={index}
+                                  image={hockey}
+                                />
+                              );
+                            })}
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </>
                 </div>
               )}
             </div>

@@ -35,7 +35,7 @@ const Checkout = ({
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: `${err.message}`,
+          text: `${err.message || "Something went wrong"}`,
         });
       });
   }, []);
