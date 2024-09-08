@@ -39,7 +39,7 @@ const FacilityPayment = () => {
           user: user?._id,
           email: user?.email,
           amount: amount,
-          service: "event",
+          service: "facility",
         },
       };
       create({ id: user?._id, payload: payload });
@@ -51,7 +51,7 @@ const FacilityPayment = () => {
           user: user?._id,
           email: user?.email,
           amount: amount,
-          service: "event",
+          service: "facility",
         },
       };
       create({ id: user?._id, payload: payload });

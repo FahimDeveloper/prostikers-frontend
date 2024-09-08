@@ -4,7 +4,7 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup } from "firebase/auth";
 import Swal from "sweetalert2";
-import { auth, googleProvider } from "../../firebase.config";
+import { auth, facebookProvider, googleProvider } from "../../firebase.config";
 import { useContinueWithSocialMutation } from "../redux/features/auth/authApi";
 import { useEffect } from "react";
 import { loggedInUser } from "../redux/features/auth/authSlice";
@@ -29,11 +29,25 @@ const SocialLogin = () => {
     });
   };
   const onFacebookLogin = () => {
-    Swal.fire({
-      title: "Progress",
-      text: `We are currently working on it`,
-      icon: "info",
-      confirmButtonColor: "#0ABAC3",
+    signInWithPopup(auth, facebookProvider).then((data) => {
+      if (!data.user.email) {
+        Swal.fire({
+          title: "Oops!..",
+          icon: "error",
+          text: "Facebook account does not have an email address. We need email address",
+        });
+        return;
+      } else {
+        const userData = {
+          first_name: data.user.displayName,
+          last_name: " ",
+          email: data.user.email,
+          image: data.user.photoURL || undefined,
+          phone: data.user.phoneNumber || undefined,
+          provider: "facebook",
+        };
+        create(userData);
+      }
     });
   };
   useEffect(() => {

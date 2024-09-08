@@ -137,33 +137,36 @@ const BaseballKidsTrainingReservation = () => {
             </div>
           </div>
           {state?.data && (
-            <Form
-              onFinish={onVoucherFinish}
-              layout="vertical"
-              className="flex items-end gap-1"
-            >
-              <Form.Item
-                label="Apply Voucher"
-                name="voucher_code"
-                className="m-0"
+            <div className="space-y-2">
+              <p className="text-base">Apply voucher</p>
+              <Form
+                onFinish={onVoucherFinish}
+                layout="vertical"
+                className="flex gap-1"
               >
-                <Input
-                  readOnly={data ? true : false}
-                  className="py-3 rounded-full w-96"
-                  placeholder="Enter your voucher code"
-                />
-              </Form.Item>
-              <Form.Item className="m-0">
-                <Button
-                  disabled={data}
-                  loading={isLoading}
-                  htmlType="submit"
-                  className="primary-btn"
+                <Form.Item
+                  name="voucher_code"
+                  className="m-0"
+                  rules={[{ required: true }]}
                 >
-                  Apply
-                </Button>
-              </Form.Item>
-            </Form>
+                  <Input
+                    readOnly={data ? true : false}
+                    className="py-[7px] rounded-full w-96"
+                    placeholder="Enter your voucher code"
+                  />
+                </Form.Item>
+                <Form.Item className="m-0">
+                  <Button
+                    disabled={data}
+                    loading={isLoading}
+                    htmlType="submit"
+                    className="text-white bg-primary h-full lg:text-lg text-base font-bold px-10 rounded-full"
+                  >
+                    Apply
+                  </Button>
+                </Form.Item>
+              </Form>
+            </div>
           )}
           <TrainingGeneralForm form={form} onFinish={onFinish} />
         </div>
