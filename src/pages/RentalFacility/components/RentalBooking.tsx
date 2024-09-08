@@ -170,17 +170,21 @@ const RentalBooking = () => {
           )}
         </div>
       )}
-      <div className="text-center h-96 flex items-center justify-center">
+      <>
         {isFetching ? (
-          <ImSpinner className="size-9 animate-spin text-primary" />
+          <div className="text-center h-96 flex items-center justify-center">
+            <ImSpinner className="size-9 animate-spin text-primary" />
+          </div>
         ) : (
           <>
             {facility && !facility?.results._id && (
-              <h3 className="font-medium">Facility not found</h3>
+              <div className="text-center h-96 flex items-center justify-center">
+                <h3 className="font-medium">Facility not found</h3>
+              </div>
             )}
           </>
         )}
-      </div>
+      </>
 
       {selectSlots.length > 0 && (
         <div className="space-y-5">
