@@ -23,7 +23,7 @@ const SoftballKidsTraining = () => {
   const { data: trainerData } = useTrainersQuery(undefined);
   const { data: classes, isFetching } = useClassesQuery({
     trainer,
-    sport: "cricket",
+    sport: "softball",
     date: activeDate.toISOString(),
   });
   const options = trainerData?.results?.map((trainer: any) => {
