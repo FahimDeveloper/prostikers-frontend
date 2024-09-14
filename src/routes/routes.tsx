@@ -4,6 +4,53 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+const Dashboard = LazyLoad(
+  lazy(() => import("../pages/DashboardManagement/Dashboard/Dashboard"))
+);
+const Profile = LazyLoad(
+  lazy(() => import("../pages/DashboardManagement/Profile/Profile"))
+);
+const MyClasses = LazyLoad(
+  lazy(() => import("../pages/DashboardManagement/MyClasses/MyClasses"))
+);
+const MyRentalFacilities = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/DashboardManagement/MyRentalFacilities/MyRentalFacilities"
+      )
+  )
+);
+const MyBootcamps = LazyLoad(
+  lazy(() => import("../pages/DashboardManagement/MyBootcamps/MyBootcamps"))
+);
+const MyGroupAppointments = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/DashboardManagement/MyGroupAppointments/MyGroupAppointments"
+      )
+  )
+);
+const MyOneOnOneAppointments = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/DashboardManagement/MyOneOnOneAppointments/MyOneOnOneAppointments"
+      )
+  )
+);
+const MyGroupEvents = LazyLoad(
+  lazy(() => import("../pages/DashboardManagement/MyGroupEvents/MyGroupEvents"))
+);
+const MyIndividualEvents = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/DashboardManagement/MyIndividualEvents/MyIndividualEvents"
+      )
+  )
+);
 const MembershipPayment = LazyLoad(
   lazy(() => import("../pages/MembershipPayment/MembershipPayment"))
 );
@@ -947,6 +994,80 @@ export const router = createBrowserRouter([
             element: (
               <PrivetRoute>
                 <JoinAsTeamRegistration />
+              </PrivetRoute>
+            ),
+          },
+        ],
+      },
+      {
+        path: "/dashboard",
+        element: (
+          <PrivetRoute>
+            <Dashboard />
+          </PrivetRoute>
+        ),
+        children: [
+          {
+            path: "/dashboard",
+            element: (
+              <PrivetRoute>
+                <Profile />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-classes",
+            element: (
+              <PrivetRoute>
+                <MyClasses />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-group-appointments",
+            element: (
+              <PrivetRoute>
+                <MyGroupAppointments />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-one-on-one-appointments",
+            element: (
+              <PrivetRoute>
+                <MyOneOnOneAppointments />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-rental-facilities",
+            element: (
+              <PrivetRoute>
+                <MyRentalFacilities />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-bootcamps",
+            element: (
+              <PrivetRoute>
+                <MyBootcamps />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-individual-events",
+            element: (
+              <PrivetRoute>
+                <MyIndividualEvents />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-team-events",
+            element: (
+              <PrivetRoute>
+                <MyGroupEvents />
               </PrivetRoute>
             ),
           },

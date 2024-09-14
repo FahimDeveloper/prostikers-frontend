@@ -7,8 +7,24 @@ type IState = {
     first_name: string;
     last_name: string;
     image: string;
+    gender?: string;
     email: string;
+    password: string;
     role: string;
+    phone?: string;
+    provider: string;
+    street_address?: string;
+    city?: string;
+    state?: string;
+    country?: string;
+    nationality?: string;
+    date_of_birth?: string;
+    membership?: boolean;
+    status?: boolean;
+    issue_date?: string;
+    expiry_date?: string;
+    package_name?: string;
+    plan?: string;
   };
   token: null | string;
 };
@@ -23,17 +39,21 @@ const authSlice = createSlice({
   reducers: {
     loggedInUser: (state, action) => {
       const { user, accessToken } = action.payload;
-      state.user = user;
       state.token = accessToken;
+      state.user = user;
     },
     loggedOutUser: (state) => {
       state.user = null;
       state.token = null;
     },
+    updateUserInfo: (state, action) => {
+      state.user = action.payload;
+    },
   },
 });
 
-export const { loggedInUser, loggedOutUser } = authSlice.actions;
+export const { loggedInUser, loggedOutUser, updateUserInfo } =
+  authSlice.actions;
 export default authSlice.reducer;
 export const selectCurrentUser = (state: RootState) => state.auth.user;
 export const selectCurrentToken = (state: RootState) => state.auth.token;

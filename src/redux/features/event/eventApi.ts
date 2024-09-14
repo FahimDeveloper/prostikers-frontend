@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IEvent, IEventParams } from "../../../types/event.types";
+import {
+  IEvent,
+  IEventIndividualReservation,
+  IEventParams,
+  IEventReservationParams,
+  IEventTeamReservation,
+} from "../../../types/event.types";
 import { IncomingQueryType } from "../../../types/index.types";
 import { eventApiSlice } from "../../api/httpsSlice";
 
@@ -13,20 +19,28 @@ const eventApi = eventApiSlice.injectEndpoints({
       }),
       providesTags: ["events"],
     }),
-    getUserIndividualEventReservation: builder.query({
-      query: (email) => ({
-        url: `/reservations/events/individual/user/${email}`,
+    getUserIndividualEventReservation: builder.query<
+      IncomingQueryType<IEventIndividualReservation>,
+      IEventReservationParams
+    >({
+      query: (params) => ({
+        url: `/reservations/events/individual/user`,
         method: "GET",
+        params,
       }),
-      providesTags: ["events"],
+      providesTags: ["group-event-reservations"],
     }),
 
-    getUserGroupEventReservation: builder.query({
-      query: (email) => ({
-        url: `/reservations/events/individual/user/${email}`,
+    getUserGroupEventReservation: builder.query<
+      IncomingQueryType<IEventTeamReservation>,
+      IEventReservationParams
+    >({
+      query: (params) => ({
+        url: `/reservations/events/individual/user`,
         method: "GET",
+        params,
       }),
-      providesTags: ["events"],
+      providesTags: ["individual-event-reservations"],
     }),
     createIndividualEventReservation: builder.mutation<any, any>({
       query: (payload) => ({
@@ -34,7 +48,7 @@ const eventApi = eventApiSlice.injectEndpoints({
         method: "POST",
         body: payload,
       }),
-      invalidatesTags: ["events"],
+      invalidatesTags: ["events", "individual-event-reservations"],
     }),
     createGroupEventReservation: builder.mutation<any, any>({
       query: (payload) => ({
@@ -42,7 +56,7 @@ const eventApi = eventApiSlice.injectEndpoints({
         method: "POST",
         body: payload,
       }),
-      invalidatesTags: ["events"],
+      invalidatesTags: ["events", "group-event-reservations"],
     }),
   }),
 });
@@ -51,4 +65,6 @@ export const {
   useGetEventsQuery,
   useCreateGroupEventReservationMutation,
   useCreateIndividualEventReservationMutation,
+  useGetUserGroupEventReservationQuery,
+  useGetUserIndividualEventReservationQuery,
 } = eventApi;

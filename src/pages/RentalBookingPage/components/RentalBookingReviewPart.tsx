@@ -154,6 +154,7 @@ const RentalBookingReviewPart = ({
       });
     }
   }, [isSuccess, isError]);
+  console.log(rentalData);
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-5 gap-7">
@@ -210,8 +211,18 @@ const RentalBookingReviewPart = ({
                     {slot}
                   </div>
                   <MdDeleteOutline
-                    className="size-5 cursor-pointer"
-                    onClick={() => onSlotDelete(dateSlots.date, slot)}
+                    className={`size-5 ${
+                      rentalData?.slots[0].slots.length > 1
+                        ? "cursor-pointer"
+                        : "cursor-not-allowed"
+                    }`}
+                    onClick={() => {
+                      if (rentalData?.slots[0].slots.length < 2) {
+                        return;
+                      } else {
+                        onSlotDelete(dateSlots.date, slot);
+                      }
+                    }}
                   />
                 </div>
               ))}
@@ -272,16 +283,17 @@ const RentalBookingReviewPart = ({
           </div>
         </div>
       </div>
-      <div>
-        <Form
-          onFinish={onFinish}
-          layout="vertical"
-          className="flex items-end gap-1"
-        >
-          <Form.Item label="Apply Voucher" name="voucher_code" className="m-0">
+      <div className="space-y-2">
+        <p className="text-base">Apply voucher</p>
+        <Form onFinish={onFinish} layout="vertical" className="flex gap-1">
+          <Form.Item
+            name="voucher_code"
+            className="m-0"
+            rules={[{ required: true }]}
+          >
             <Input
               readOnly={data ? true : false}
-              className="py-3 rounded-full w-96"
+              className="py-[7px] rounded-full w-96"
               placeholder="Enter your voucher code"
             />
           </Form.Item>
@@ -290,7 +302,7 @@ const RentalBookingReviewPart = ({
               disabled={data}
               loading={isLoading}
               htmlType="submit"
-              className="primary-btn"
+              className="text-white bg-primary h-full lg:text-lg text-base font-bold px-10 rounded-full"
             >
               Apply
             </Button>

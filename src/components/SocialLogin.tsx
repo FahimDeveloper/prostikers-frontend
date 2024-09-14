@@ -19,7 +19,6 @@ const SocialLogin = () => {
     signInWithPopup(auth, googleProvider).then((data) => {
       const userData = {
         first_name: data.user.displayName,
-        last_name: " ",
         email: data.user.email,
         image: data.user.photoURL || undefined,
         phone: data.user.phoneNumber || undefined,
@@ -40,7 +39,6 @@ const SocialLogin = () => {
       } else {
         const userData = {
           first_name: data.user.displayName,
-          last_name: " ",
           email: data.user.email,
           image: data.user.photoURL || undefined,
           phone: data.user.phoneNumber || undefined,

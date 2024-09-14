@@ -132,7 +132,7 @@ const MembershipCardSection = () => {
     }
   };
   return (
-    <div className="bg-[#F9FBFF]">
+    <div id="membership" className="bg-[#F9FBFF]">
       <Container>
         <div className="lg:py-14 md:py-12 py-10 mt-10 space-y-10">
           <div className="space-y-4 mx-auto text-center">

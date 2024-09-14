@@ -14,9 +14,10 @@ const classApi = classApiSlice.injectEndpoints({
       providesTags: ["classes"],
     }),
     classReservationList: builder.query({
-      query: (email) => ({
-        url: `/reservations/classes/user/${email}`,
+      query: (params) => ({
+        url: `/reservations/classes/user`,
         method: "GET",
+        params,
       }),
       providesTags: ["class-reservation-list"],
     }),

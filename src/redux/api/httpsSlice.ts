@@ -10,7 +10,11 @@ export const authApiSlice = createApi({
 export const eventApiSlice = createApi({
   reducerPath: "eventApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["events"],
+  tagTypes: [
+    "events",
+    "group-event-reservations",
+    "individual-event-reservations",
+  ],
   endpoints: () => ({}),
 });
 
@@ -54,6 +58,8 @@ export const appointmentApiSlice = createApi({
     "group-appointment",
     "one-appointments",
     "one-appointment",
+    "one-appointment-reservations",
+    "group-appointment-reservations",
   ],
   endpoints: () => ({}),
 });

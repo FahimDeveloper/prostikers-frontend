@@ -12,7 +12,7 @@ import { CiBadgeDollar } from "react-icons/ci";
 import { FaUserGraduate } from "react-icons/fa";
 import { IoTimeOutline } from "react-icons/io5";
 import { FaPeopleGroup } from "react-icons/fa6";
-import { collecTimeDuration } from "../../utils/collectTimeDuration";
+import { collectTimeDuration } from "../../utils/collectTimeDuration";
 import moment from "moment";
 
 const AppointmentGroupCard = ({
@@ -103,7 +103,7 @@ const AppointmentGroupCard = ({
             <p className="text-base">Duration :</p>
           </div>
           <p className="text-base font-medium">
-            {collecTimeDuration(
+            {collectTimeDuration(
               data.schedules.start_time,
               data.schedules.end_time
             )}

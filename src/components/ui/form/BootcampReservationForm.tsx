@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, Input, InputNumber } from "antd";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
+import { useEffect } from "react";
 
 const BootcampReservationForm = ({
   form,
@@ -8,6 +11,15 @@ const BootcampReservationForm = ({
   form: any;
   onFinish: any;
 }) => {
+  const user = useSelector(selectCurrentUser);
+  useEffect(() => {
+    form.setFieldsValue({
+      first_name: user?.first_name,
+      last_name: user?.last_name,
+      email: user?.email,
+      phone: user?.phone,
+    });
+  }, [user, form]);
   return (
     <div className="bg-[#F9FBFF] p-16 border border-solid border-[#F9FBFF] rounded-2xl space-y-6">
       <div className="space-y-2">
@@ -47,6 +59,7 @@ const BootcampReservationForm = ({
             rules={[{ required: true }]}
           >
             <Input
+              readOnly
               className="w-full rounded-full p-2"
               placeholder="Type here.."
             />

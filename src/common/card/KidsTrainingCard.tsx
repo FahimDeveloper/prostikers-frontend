@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { IoTimeOutline } from "react-icons/io5";
 import moment from "moment";
-import { collecTimeDuration } from "../../utils/collectTimeDuration";
+import { collectTimeDuration } from "../../utils/collectTimeDuration";
 import { FaUserGraduate } from "react-icons/fa";
 import { CiBadgeDollar } from "react-icons/ci";
 import { Button } from "antd";
@@ -102,7 +102,7 @@ const KidsTrainingCard = ({
             <p className="text-base">Duration :</p>
           </div>
           <p className="text-base font-medium">
-            {collecTimeDuration(
+            {collectTimeDuration(
               data.schedules.start_time,
               data.schedules.end_time
             )}

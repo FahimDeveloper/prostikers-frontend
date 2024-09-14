@@ -42,6 +42,20 @@ h6 {
   @apply btn btn-primary hover:btn-secondary hover:text-white w-full text-white;
 }
 
+.ant-table-wrapper .ant-table-thead > tr > th {
+  @apply bg-[#F1FEFF];
+}
+
+.dashboard-menu {
+  scrollbar-width: thin; /* Firefox: thinner scrollbar */
+  scrollbar-color: #fff #fff; /* Firefox: thumb and track colors */
+}
+
+.dashboard-menu ::selection {
+  background-color: transparent; /* Custom background color for radio group */
+  color: black; /* Custom text color for radio group */
+}
+
 .banner-dot {
   color: white;
   opacity: 0.6;

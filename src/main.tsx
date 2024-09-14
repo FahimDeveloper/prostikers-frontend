@@ -16,6 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       theme={{
         token: {
           colorPrimary: "#0ABAC3",
+          fontFamily: "Manrope",
         },
       }}
     >

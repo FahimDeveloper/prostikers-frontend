@@ -8,7 +8,6 @@ export interface IClass {
   level: string;
   capacity: number;
   price: number;
-  isDeleted: boolean;
   schedules: IClassDay[];
 }
 
@@ -17,4 +16,25 @@ export interface IClassDay {
   active: boolean;
   start_time: string;
   end_time: string;
+}
+
+export interface IClassReservation {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  age: number;
+  class: IClass;
+  street_address: string;
+  voucher_applied: boolean;
+  city: string;
+  state: string;
+  sport: string;
+  class_date: string;
+  zip_code: string;
+  trainer: {
+    _id: string;
+    first_name: string;
+    last_name: string;
+  };
 }

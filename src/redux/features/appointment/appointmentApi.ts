@@ -41,17 +41,21 @@ const appointmentApi = appointmentApiSlice.injectEndpoints({
       }),
       providesTags: ["one-appointment"],
     }),
-    getAppointmentGroupReservations: builder.query({
-      query: (email: string) => ({
-        url: `/reservations/appointments/group/user/${email}`,
+    getUserAppointmentGroupReservationList: builder.query({
+      query: (params) => ({
+        url: `/reservations/appointments/group/user`,
         method: "GET",
+        params,
       }),
+      providesTags: ["group-appointment-reservations"],
     }),
-    getAppointmentOneReservations: builder.query({
-      query: (email: string) => ({
-        url: `/reservations/appointments/one-on-one/user/${email}`,
+    getUserAppointmentOneReservationList: builder.query({
+      query: (params) => ({
+        url: `/reservations/appointments/one-on-one/user`,
         method: "GET",
+        params,
       }),
+      providesTags: ["one-appointment-reservations"],
     }),
     createAppointmentGroupReservation: builder.mutation({
       query: (payload) => ({
@@ -59,7 +63,11 @@ const appointmentApi = appointmentApiSlice.injectEndpoints({
         method: "POST",
         body: payload,
       }),
-      invalidatesTags: ["group-appointments", "group-appointment"],
+      invalidatesTags: [
+        "group-appointments",
+        "group-appointment",
+        "group-appointment-reservations",
+      ],
     }),
     createAppointmentOneOnOneReservation: builder.mutation({
       query: ({ id, payload }) => ({
@@ -67,7 +75,11 @@ const appointmentApi = appointmentApiSlice.injectEndpoints({
         method: "POST",
         body: payload,
       }),
-      invalidatesTags: ["one-appointments", "one-appointment"],
+      invalidatesTags: [
+        "one-appointments",
+        "one-appointment",
+        "one-appointment-reservations",
+      ],
     }),
   }),
 });
@@ -79,4 +91,6 @@ export const {
   useOneAppointmentQuery,
   useCreateAppointmentGroupReservationMutation,
   useCreateAppointmentOneOnOneReservationMutation,
+  useGetUserAppointmentGroupReservationListQuery,
+  useGetUserAppointmentOneReservationListQuery,
 } = appointmentApi;

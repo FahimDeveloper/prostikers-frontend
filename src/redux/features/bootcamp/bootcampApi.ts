@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IBootcamp, IBootcampParams } from "../../../types/bootcamp.types";
+import {
+  IBootcamp,
+  IBootcampParams,
+  IBootcampReservationParams,
+} from "../../../types/bootcamp.types";
 import { IncomingQueryType } from "../../../types/index.types";
 import { bootcampApiSlice } from "../../api/httpsSlice";
 
@@ -13,13 +17,14 @@ const boocampApi = bootcampApiSlice.injectEndpoints({
       }),
       providesTags: ["bootcamps"],
     }),
-    bootcampReservationList: builder.query<
+    getUserbootcampReservationList: builder.query<
       IncomingQueryType<IBootcamp>,
-      IBootcampParams
+      IBootcampReservationParams
     >({
-      query: (email) => ({
-        url: `/reservations/courses/user/${email}`,
+      query: (params) => ({
+        url: `/reservations/courses/user`,
         method: "GET",
+        params,
       }),
       providesTags: ["bootcamp-reservation-list"],
     }),
@@ -34,5 +39,8 @@ const boocampApi = bootcampApiSlice.injectEndpoints({
   }),
 });
 
-export const { useBootcampsQuery, useCreateBootcampReservationMutation } =
-  boocampApi;
+export const {
+  useBootcampsQuery,
+  useCreateBootcampReservationMutation,
+  useGetUserbootcampReservationListQuery,
+} = boocampApi;

@@ -14,35 +14,35 @@ const TopSliderSection = () => {
       description:
         "Harness the power of professional coaching and state-of-the-art facilities at ProStrikers. Our baseball training programs are designed to refine your skills, improve your pitching and batting, and ready you for the big leagues.",
       image: banner1,
-      link: "/rental",
+      link: "/rental-facility",
     },
     {
       title: "Softball Success Starts Here: Power, Precision & Play",
       description:
         "Experience a breakthrough in your softball career with tailored coaching that focuses on enhancing your power hitting and defensive skills. ProStrikers' expert-led training gives you the competitive edge you need to shine.",
       image: banner2,
-      link: "/rental",
+      link: "/rental-facility",
     },
     {
       title: "Cricket Mastery Through Professional Coaching",
       description:
         "Join the ranks of cricket elites by training under the guidance of seasoned pros. ProStrikers offers a comprehensive approach to cricket training, focusing on technical skills, strategic understanding, and mental toughness.",
       image: banner3,
-      link: "/rental",
+      link: "/rental-facility",
     },
     {
       title: "Transform Your Soccer Skills into Championship Wins",
       description:
         "Elevate your soccer prowess with ProStrikers' holistic training programs. From mastering ball control to sharpening your goal-scoring instincts, our dedicated coaches will prepare you to dominate on the field.",
       image: banner4,
-      link: "/rental",
+      link: "/rental-facility",
     },
     {
       title: "Become a Field Hockey Phenomenon",
       description:
         "Step into ProStrikers' training programs to unleash your field hockey potential. Our targeted coaching methods focus on agility, technique, and game intelligence, setting you apart as a leader on the field.",
       image: banner5,
-      link: "/rental",
+      link: "/rental-facility",
     },
   ];
   const settings = {

@@ -10,6 +10,13 @@ const facilityApi = facilityApiSlice.injectEndpoints({
         params,
       }),
     }),
+    getUserFacilityReservations: builder.query<any, any>({
+      query: (params) => ({
+        url: `/reservations/facilities/user`,
+        method: "GET",
+        params,
+      }),
+    }),
     createFacilityReservation: builder.mutation<any, any>({
       query: ({ id, payload }) => ({
         url: `/reservations/facilities/user/create/${id}`,
@@ -20,5 +27,8 @@ const facilityApi = facilityApiSlice.injectEndpoints({
   }),
 });
 
-export const { useRentalFacilityQuery, useCreateFacilityReservationMutation } =
-  facilityApi;
+export const {
+  useRentalFacilityQuery,
+  useCreateFacilityReservationMutation,
+  useGetUserFacilityReservationsQuery,
+} = facilityApi;

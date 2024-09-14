@@ -9,7 +9,14 @@ const paymentApi = paymentApiSlice.injectEndpoints({
         body,
       }),
     }),
+    paymentList: builder.query({
+      query: ({ id, params }) => ({
+        url: `/payments/${id}`,
+        method: "GET",
+        params,
+      }),
+    }),
   }),
 });
 
-export const { usePaymentMutation } = paymentApi;
+export const { usePaymentMutation, usePaymentListQuery } = paymentApi;

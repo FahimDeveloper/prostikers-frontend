@@ -5,7 +5,7 @@ const LazyLoad = (Component: React.FC) => (props: JSX.IntrinsicAttributes) => {
   return (
     <Suspense
       fallback={
-        <div className="h-screen w-full flex justify-center items-center">
+        <div className="h-svh w-full flex justify-center items-center">
           <FaSpinner className="animate-spin size-8 text-primary" />
         </div>
       }
