@@ -14,14 +14,14 @@ const MembershipPayment = () => {
   const { amount, data } = state;
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
-  const [create, { isError, isLoading, isSuccess, error }] =
+  const [create, { data: createData, isError, isLoading, isSuccess, error }] =
     useCreateMembershipMutation();
   useEffect(() => {
     if (isSuccess) {
       Swal.fire({
         title: "Success",
         icon: "success",
-        text: `${data?.message}`,
+        text: `${createData?.message}`,
         iconColor: "#0ABAC3",
         confirmButtonColor: "#0ABAC3",
       });
@@ -32,7 +32,7 @@ const MembershipPayment = () => {
         title: "Oops!..",
         icon: "error",
         text: `${
-          (error as any)?.data?.message || "something went wrong"
+          (error as any)?.createData?.message || "something went wrong"
         }, Don't be afraid, Hopefully your payment already succeeded but our proccess failed. This is your transaction ID [${transactionId}], Contact with support`,
         confirmButtonColor: "#0ABAC3",
       });
