@@ -43,7 +43,11 @@ const MembershipPayment = () => {
     const issueDate = new Date();
     data.issue_date = issueDate.toISOString();
     const expiryDate = new Date(issueDate);
-    expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+    if (data?.plan === "monthly") {
+      expiryDate.setMonth(expiryDate.getMonth() + 1);
+    } else if (data?.plan === "yearly") {
+      expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+    }
     data.expiry_date = expiryDate.toISOString();
     const payload = {
       membership: { ...data },
