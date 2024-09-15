@@ -28,7 +28,7 @@ const eventApi = eventApiSlice.injectEndpoints({
         method: "GET",
         params,
       }),
-      providesTags: ["group-event-reservations"],
+      providesTags: ["individual-event-reservations"],
     }),
 
     getUserGroupEventReservation: builder.query<
@@ -36,11 +36,11 @@ const eventApi = eventApiSlice.injectEndpoints({
       IEventReservationParams
     >({
       query: (params) => ({
-        url: `/reservations/events/individual/user`,
+        url: `/reservations/events/group/user`,
         method: "GET",
         params,
       }),
-      providesTags: ["individual-event-reservations"],
+      providesTags: ["group-event-reservations"],
     }),
     createIndividualEventReservation: builder.mutation<any, any>({
       query: (payload) => ({
