@@ -5,7 +5,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { useState } from "react";
-import { useGetUserIndividualEventReservationQuery } from "../../../redux/features/event/eventApi";
+import { useGetUserGroupEventReservationQuery } from "../../../redux/features/event/eventApi";
 import { ColumnsType } from "antd/es/table";
 import { IEventTeamReservation } from "../../../types/event.types";
 import { collectDateStatus } from "../../../utils/collectDateStatus";
@@ -15,13 +15,12 @@ const MyGroupEvents = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
   const [sport, setSport] = useState<string | undefined>(undefined);
-  const { data, isLoading, isFetching } =
-    useGetUserIndividualEventReservationQuery({
-      email: user?.email,
-      sport,
-      page,
-      limit,
-    });
+  const { data, isLoading, isFetching } = useGetUserGroupEventReservationQuery({
+    email: user?.email,
+    sport,
+    page,
+    limit,
+  });
   const handlePageChange = (page: number, size: number) => {
     setPage(page);
     setLimit(size);
