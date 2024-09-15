@@ -13,6 +13,20 @@ export type IAppointment = {
   schedules: IAppointmentDaySchedule[];
 };
 
+export type IAppointmentDetail = {
+  _id: string;
+  appointment_name: string;
+  appointment_type: string;
+  sport: string;
+  duration: number;
+  trainer: any;
+  description: string;
+  price: number;
+  enrolled?: number;
+  capacity?: number;
+  schedules: IAppointmentDaySchedule;
+};
+
 type IAppointmentDaySchedule = {
   day: string;
   active: boolean;

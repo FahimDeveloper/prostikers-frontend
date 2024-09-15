@@ -6,7 +6,6 @@ import {
 } from "../../redux/features/auth/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { IAppointment } from "../../types/appointment.types";
 import { Button } from "antd";
 import { CiBadgeDollar } from "react-icons/ci";
 import { FaUserGraduate } from "react-icons/fa";
@@ -14,6 +13,7 @@ import { IoTimeOutline } from "react-icons/io5";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { collectTimeDuration } from "../../utils/collectTimeDuration";
 import moment from "moment";
+import { IAppointmentDetail } from "../../types/appointment.types";
 
 const AppointmentGroupCard = ({
   image,
@@ -21,7 +21,7 @@ const AppointmentGroupCard = ({
   activeDate,
 }: {
   image: any;
-  data: IAppointment;
+  data: IAppointmentDetail;
   activeDate: Date;
 }) => {
   const user = useSelector(selectCurrentUser);
