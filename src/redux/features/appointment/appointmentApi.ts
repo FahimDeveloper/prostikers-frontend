@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   IAppointment,
+  IAppointmentDetail,
   IAppointmentParams,
 } from "../../../types/appointment.types";
 import { IncomingQueryType } from "../../../types/index.types";
@@ -8,7 +9,10 @@ import { appointmentApiSlice } from "../../api/httpsSlice";
 
 const appointmentApi = appointmentApiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    groupAppointments: builder.query<IncomingQueryType<IAppointment>, any>({
+    groupAppointments: builder.query<
+      IncomingQueryType<IAppointmentDetail>,
+      any
+    >({
       query: (params) => ({
         url: `/schedule/appointments/group/by-query-date`,
         method: "GET",
