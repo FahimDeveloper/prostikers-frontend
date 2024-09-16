@@ -26,11 +26,11 @@ export const collectDateStatus = (
   if (!training_start_date) {
     if (equalDates(currentDate, trainingEndDate)) {
       return "today";
+    } else if (compareDates(trainingEndDate, currentDate)) {
+      return "upcoming";
+    } else if (currentDate > trainingEndDate) {
+      return "completed";
     }
-  } else if (compareDates(trainingEndDate, currentDate)) {
-    return "upcoming";
-  } else if (currentDate > trainingEndDate) {
-    return "completed";
   }
 
   if (training_start_date) {
