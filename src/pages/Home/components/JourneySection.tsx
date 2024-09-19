@@ -113,7 +113,7 @@ const JourneySection = () => {
             })}
           </Slider>
         </div>
-        <Link to="/rental" className="inline-block">
+        <Link to="/rental-facility" className="inline-block">
           <button className="primary-btn">Book now</button>
         </Link>
       </div>
