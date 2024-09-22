@@ -13,7 +13,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { collectTimeSlots } from "../utils/collectBookingTimeSlots";
 import toast from "react-hot-toast";
 
-const BookingTimeSlots = ({
+const FaciltiyBookingTimeSlots = ({
   activeDate,
   training,
   slotsCartQuery,
@@ -21,6 +21,7 @@ const BookingTimeSlots = ({
   selectSlots,
   setSelectSlots,
   slotsBookedQuery,
+  lane,
 }: {
   activeDate: Date;
   training: any;
@@ -29,6 +30,7 @@ const BookingTimeSlots = ({
   addToCart: any;
   selectSlots: any;
   setSelectSlots: any;
+  lane: string | undefined;
 }) => {
   const [create, { isLoading: createLoading, isSuccess, isError, error }] =
     addToCart;
@@ -41,10 +43,16 @@ const BookingTimeSlots = ({
   const token = useSelector(selectCurrentToken);
   const navigate = useNavigate();
   const location = useLocation();
+  const date = new Date();
   const day = useMemo(() => {
-    if (activeDate < new Date()) {
+    if (
+      activeDate.getDate() < date.getDate() &&
+      activeDate.getMonth() <= date.getMonth()
+    ) {
+      console.log("hello");
       return;
     } else {
+      console.log("hello");
       return training?.schedules?.find(
         (schedule: any) =>
           schedule.day ===
@@ -55,7 +63,12 @@ const BookingTimeSlots = ({
 
   const slots = useMemo(() => {
     if (day && day.active) {
-      return createTimeSlots(day.start_time, day.end_time, training.duration);
+      return createTimeSlots(
+        day.start_time,
+        day.end_time,
+        training.duration,
+        lane
+      );
     }
     return [];
   }, [day, training.duration]);
@@ -80,15 +93,15 @@ const BookingTimeSlots = ({
       setTimeSlot(value);
       setSlotIndex(index);
       create({
-        id: `${training._id}${date}${value.split(" ").join("")}`,
+        id: `${training._id}${date}${value.split(" ").join("")}${lane}`,
         training: training._id,
         user: user?._id,
         date,
         time_slot: value,
+        lane,
       });
     }
   };
-
   useEffect(() => {
     if (isSuccess) {
       toast.success("success");
@@ -96,7 +109,7 @@ const BookingTimeSlots = ({
       const dateSlotIndex = selectSlots.findIndex(
         (slots: any) =>
           slots.date.toISOString().split("T")[0] ===
-          activeDate.toISOString().split("T")[0]
+            activeDate.toISOString().split("T")[0] && slots.lane === lane
       );
       if (dateSlotIndex !== -1) {
         selectSlots[dateSlotIndex].slots.push(timeSlot);
@@ -104,7 +117,7 @@ const BookingTimeSlots = ({
       } else {
         setSelectSlots([
           ...selectSlots,
-          { date: activeDate, slots: [timeSlot] },
+          { date: activeDate, slots: [timeSlot], lane: lane },
         ]);
       }
     }
@@ -119,26 +132,38 @@ const BookingTimeSlots = ({
     }
   }, [isSuccess, isError, error]);
 
-  const cartSlots = collectTimeSlots(slotsCartData?.results);
-  const bookedSlots = collectTimeSlots(slotsBookedData?.results);
+  const cartSlots = collectTimeSlots(slotsCartData?.results, lane);
+  const bookedSlots = collectTimeSlots(slotsBookedData?.results, lane);
   const unavailableSlots = [...cartSlots, ...bookedSlots];
-
+  console.log(selectSlots);
   return (
     <>
       {slots?.length > 0 ? (
         <div className="grid grid-cols-5 gap-1">
-          {slots.map((slot, index) => (
+          {(
+            slots as [
+              {
+                lane: string;
+                slots: string[];
+              }
+            ]
+          )[0].slots?.map((slot: string, index: number) => (
             <button
               disabled={
                 createLoading ||
                 slotsCartLoading ||
                 slotsBookedLoading ||
-                unavailableSlots.includes(slot) ||
+                unavailableSlots.find(
+                  (unAvailable) =>
+                    unAvailable.lane === lane &&
+                    unAvailable.slots.includes(slot)
+                ) ||
                 selectSlots.find(
                   (slots: any) =>
                     slots.date.toISOString().split("T")[0] ===
                       activeDate.toISOString().split("T")[0] &&
-                    slots.slots.includes(slot)
+                    slots.slots.includes(slot) &&
+                    slots.lane === lane
                 )
               }
               key={index}
@@ -152,10 +177,15 @@ const BookingTimeSlots = ({
                   (slots: any) =>
                     slots.date.toISOString().split("T")[0] ===
                       activeDate.toISOString().split("T")[0] &&
+                    slots.lane === lane &&
                     slots.slots.includes(slot)
                 )
                   ? "bg-primary text-white"
-                  : unavailableSlots.includes(slot)
+                  : unavailableSlots.find(
+                      (unAvailable) =>
+                        unAvailable.lane === lane &&
+                        unAvailable.slots.includes(slot)
+                    )
                   ? "bg-gray-100"
                   : "bg-white"
               }`}
@@ -167,7 +197,12 @@ const BookingTimeSlots = ({
                 <p className="text-xs font-medium">
                   {!selectSlots.find((slots: any) =>
                     slots.slots.includes(slot)
-                  ) && unavailableSlots.includes(slot)
+                  ) &&
+                  unavailableSlots.find(
+                    (unAvailable) =>
+                      unAvailable.lane === lane &&
+                      unAvailable.slots.includes(slot)
+                  )
                     ? "Unavailable"
                     : slot}
                 </p>
@@ -184,4 +219,4 @@ const BookingTimeSlots = ({
   );
 };
 
-export default BookingTimeSlots;
+export default FaciltiyBookingTimeSlots;

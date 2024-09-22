@@ -16,13 +16,13 @@ import {
 import { useOneAppointmentQuery } from "../../../redux/features/appointment/appointmentApi";
 import toast from "react-hot-toast";
 import DateSlider from "../../../components/DateSlider";
-import BookingTimeSlots from "../../../components/BookingTimeSlots";
 import { IoCalendarOutline } from "react-icons/io5";
 import moment from "moment";
 import { MdDeleteOutline } from "react-icons/md";
 import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm";
 import { Button, Form, Input } from "antd";
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
+import OneTrainingBookingTimeSlots from "../../../components/OneTrainingBookingTimeSlots";
 
 const HockeyOneTrainingReservation = () => {
   const { id } = useParams();
@@ -192,7 +192,7 @@ const HockeyOneTrainingReservation = () => {
             <DateSlider activeDate={activeDate} setActiveDate={setActiveDate} />
           </div>
           {appointment?.results && (
-            <BookingTimeSlots
+            <OneTrainingBookingTimeSlots
               activeDate={activeDate}
               training={appointment?.results}
               slotsCartQuery={slotsCartQuery}

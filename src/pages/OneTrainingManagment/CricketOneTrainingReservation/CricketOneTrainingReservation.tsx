@@ -18,11 +18,11 @@ import toast from "react-hot-toast";
 import { IoCalendarOutline } from "react-icons/io5";
 import moment from "moment";
 import { MdDeleteOutline } from "react-icons/md";
-import BookingTimeSlots from "../../../components/BookingTimeSlots";
 import DateSlider from "../../../components/DateSlider";
 import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm";
 import { Button, Form, Input } from "antd";
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
+import OneTrainingBookingTimeSlots from "../../../components/OneTrainingBookingTimeSlots";
 
 const CricketOneTrainingReservation = () => {
   const { id } = useParams();
@@ -193,7 +193,7 @@ const CricketOneTrainingReservation = () => {
             <DateSlider activeDate={activeDate} setActiveDate={setActiveDate} />
           </div>
           {appointment?.results && (
-            <BookingTimeSlots
+            <OneTrainingBookingTimeSlots
               activeDate={activeDate}
               training={appointment?.results}
               slotsCartQuery={slotsCartQuery}

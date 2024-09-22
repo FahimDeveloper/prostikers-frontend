@@ -107,3 +107,9 @@ export const userApiSlice = createApi({
   baseQuery: baseQueryWithRefreshToken,
   endpoints: () => ({}),
 });
+
+export const addonApislice = createApi({
+  reducerPath: "addonApi",
+  baseQuery: baseQueryWithRefreshToken,
+  endpoints: () => ({}),
+});

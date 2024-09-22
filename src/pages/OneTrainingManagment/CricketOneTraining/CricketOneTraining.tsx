@@ -57,7 +57,7 @@ const CricketOneTraining = () => {
         <GallerySection title="Cricket One on One Training" gallery={gallery} />
         <div className="space-y-5">
           <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
-            CPersonalized Cricket Coaching
+            Personalized Cricket Coaching
           </h2>
           <p className="md:text-lg text-base md:leading-7 sm:leading-6 leading-5 text-[#929292] text-justify">
             Elevate your cricket game with individualized attention from

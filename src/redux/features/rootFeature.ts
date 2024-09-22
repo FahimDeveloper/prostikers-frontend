@@ -3,6 +3,7 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/authSlice";
 import { combineReducers } from "@reduxjs/toolkit";
 import {
+  addonApislice,
   appointmentApiSlice,
   authApiSlice,
   bootcampApiSlice,
@@ -43,6 +44,7 @@ export const rootReducers = combineReducers({
   [clientApiSlice.reducerPath]: clientApiSlice.reducer,
   [voucherApiSlice.reducerPath]: voucherApiSlice.reducer,
   [userApiSlice.reducerPath]: userApiSlice.reducer,
+  [addonApislice.reducerPath]: addonApislice.reducer,
 });
 
 export const rootMiddlewares = [
@@ -60,4 +62,5 @@ export const rootMiddlewares = [
   clientApiSlice.middleware,
   voucherApiSlice.middleware,
   userApiSlice.middleware,
+  addonApislice.middleware,
 ];

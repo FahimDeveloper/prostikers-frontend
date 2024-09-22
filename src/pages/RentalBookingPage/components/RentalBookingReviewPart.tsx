@@ -10,6 +10,8 @@ import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useDeleteBookingSlotMutation } from "../../../redux/features/slotBooking/slotBookingApi";
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
+import { useGetSportAddonsQuery } from "../../../redux/features/addon/addonApi";
+import { IAddon } from "../../../types/addon.types";
 
 const RentalBookingReviewPart = ({
   addons,
@@ -33,8 +35,10 @@ const RentalBookingReviewPart = ({
   const [use, { data, isLoading, isSuccess, isError, error }] =
     useVoucherMutation();
   const [deleteSlot] = useDeleteBookingSlotMutation();
+  const { data: addonsData } = useGetSportAddonsQuery({ sport: "cricket" });
+  console.log(addonsData);
 
-  const onSlotDelete = (date: any, slot: any) => {
+  const onSlotDelete = (date: any, lane: string, slot: string) => {
     Swal.fire({
       title: "Are you sure?",
       icon: "info",
@@ -45,21 +49,29 @@ const RentalBookingReviewPart = ({
       if (result.isConfirmed) {
         const slotId = `${bookingData?.training}${
           date.toISOString().split("T")[0]
-        }${slot.split(" ").join("")}`;
+        }${slot.split(" ").join("")}${lane}`;
         deleteSlot(slotId)
           .unwrap()
           .then(() => {
             toast.success("Deleted successfully");
             const updatedSlots = rentalData?.slots
               ?.map((slots: any) => {
-                if (slots.date === date && slots.slots.length > 1) {
+                if (
+                  slots.date === date &&
+                  slots.lane === lane &&
+                  slots.slots.length > 1
+                ) {
                   return {
                     ...slots,
                     slots: slots.slots.filter(
                       (oldSlot: string) => oldSlot !== slot
                     ),
                   };
-                } else if (slots.date === date && slots.slots.length == 1) {
+                } else if (
+                  slots.date === date &&
+                  slots.lane === lane &&
+                  slots.slots.length == 1
+                ) {
                   return null;
                 }
                 return slots;
@@ -83,7 +95,7 @@ const RentalBookingReviewPart = ({
         id: addons?.length,
         name: "Coaching",
         price: 50,
-        hour: 1,
+        hours: 1,
       },
     ]);
   };
@@ -94,7 +106,7 @@ const RentalBookingReviewPart = ({
         id: addons?.length,
         name: "Coaching",
         price: value * 50,
-        hour: value,
+        hours: value,
       },
     ]);
   };
@@ -154,7 +166,6 @@ const RentalBookingReviewPart = ({
       });
     }
   }, [isSuccess, isError]);
-  console.log(rentalData);
   return (
     <div className="space-y-5">
       <div className="grid grid-cols-5 gap-7">
@@ -175,7 +186,7 @@ const RentalBookingReviewPart = ({
                 <h4 className="text-lg text-secondary font-medium">
                   Professional Coaching
                 </h4>
-                <p className="text-sm text-primary font-semibold">+$50/hour</p>
+                <p className="text-sm text-primary font-semibold">+$50/hours</p>
               </div>
             </div>
             <div className="text-end">
@@ -188,6 +199,34 @@ const RentalBookingReviewPart = ({
               </Button>
             </div>
           </div>
+          {(addonsData?.results as IAddon)?.addons?.map((addon, index) => (
+            <div key={index} className="grid grid-cols-3 items-end">
+              <div className="flex gap-5 col-span-2 items-center">
+                <img
+                  src={addon.addon_image}
+                  className="size-16 rounded-xl"
+                  alt={addon.addon_title}
+                />
+                <div className="space-y-2">
+                  <h4 className="text-lg text-secondary font-medium">
+                    {addon.addon_title}
+                  </h4>
+                  <p className="text-sm text-primary font-semibold">
+                    +${addon.addon_price}/hours
+                  </p>
+                </div>
+              </div>
+              <div className="text-end">
+                <Button
+                  onClick={onClick}
+                  disabled={addons?.length > 0 ? true : false}
+                  className="bg-secondary px-4 h-8 text-white"
+                >
+                  + Add
+                </Button>
+              </div>
+            </div>
+          ))}
         </div>
         <div className="col-span-2 p-7 rounded-2xl border border-solid border-[#F2F2F2] space-y-5">
           <h3 className="text-[#063232] text-lg font-medium text-center p-5 bg-[#F6FFFF]">
@@ -212,15 +251,19 @@ const RentalBookingReviewPart = ({
                   </div>
                   <MdDeleteOutline
                     className={`size-5 ${
+                      rentalData?.slots.length > 1 ||
                       rentalData?.slots[0].slots.length > 1
                         ? "cursor-pointer"
                         : "cursor-not-allowed"
                     }`}
                     onClick={() => {
-                      if (rentalData?.slots[0].slots.length < 2) {
+                      if (
+                        rentalData?.slots.length < 2 &&
+                        rentalData?.slots[0].slots.length < 2
+                      ) {
                         return;
                       } else {
-                        onSlotDelete(dateSlots.date, slot);
+                        onSlotDelete(dateSlots.date, dateSlots.lane, slot);
                       }
                     }}
                   />
@@ -245,9 +288,9 @@ const RentalBookingReviewPart = ({
             <div className="flex justify-between items-center px-2">
               <p>{addons.name}</p>
               <p>
-                Hour:{" "}
+                Hours:{" "}
                 <InputNumber
-                  value={addons.hour}
+                  value={addons.hours}
                   min={1}
                   onChange={(value) => onChange(value)}
                   className="w-16"

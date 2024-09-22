@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Select } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DateSlider from "../../../components/DateSlider";
 import { useRentalFacilityQuery } from "../../../redux/features/facility/facilityApi";
-import BookingTimeSlots from "../../../components/BookingTimeSlots";
 import moment from "moment";
 import { IoCalendarOutline } from "react-icons/io5";
 import { MdDeleteOutline } from "react-icons/md";
@@ -19,6 +18,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { Link } from "react-router-dom";
 import { ImSpinner } from "react-icons/im";
+import FaciltiyBookingTimeSlots from "../../../components/FacilityBookingTimeSlots";
 
 const RentalBooking = () => {
   const user = useSelector(selectCurrentUser);
@@ -33,17 +33,25 @@ const RentalBooking = () => {
     { facility: facilityCage },
     { skip: facilityCage ? false : true }
   );
-  const slotsCartQuery = useGetBookingSlotsQuery(
-    {
-      training: facility?.results._id,
-      date: activeDate.toISOString().split("T")[0],
-    },
-    { skip: user && facility?.results?._id ? false : true }
-  );
+  const [lane, setLane] = useState<string | undefined>(undefined);
+  useEffect(() => {
+    if (facility?.results?._id) {
+      setLane(facility?.results?.lanes[0]);
+    }
+  }, [facility]);
   const slotsBookedQuery = useFacilityBookedSlotsQuery(
     {
       training: facility?.results._id,
       date: activeDate.toISOString().split("T")[0],
+      lane: lane,
+    },
+    { skip: user && facility?.results?._id ? false : true }
+  );
+  const slotsCartQuery = useGetBookingSlotsQuery(
+    {
+      training: facility?.results._id,
+      date: activeDate.toISOString().split("T")[0],
+      lane: lane,
     },
     { skip: user && facility?.results?._id ? false : true }
   );
@@ -51,7 +59,7 @@ const RentalBooking = () => {
     setFacilityCage(value);
   };
 
-  const onDelete = (date: any, slot: any) => {
+  const onDelete = (date: any, slot: string, slot_lane: string) => {
     Swal.fire({
       title: "Are you sure?",
       icon: "info",
@@ -62,14 +70,18 @@ const RentalBooking = () => {
       if (result.isConfirmed) {
         const slotId = `${facility?.results._id}${
           date.toISOString().split("T")[0]
-        }${slot.split(" ").join("")}`;
+        }${slot.split(" ").join("")}${slot_lane}`;
         deleteSlot(slotId)
           .unwrap()
           .then(() => {
             toast.success("Deleted successfully");
             const updatedSlots = selectSlots
               ?.map((slots: any) => {
-                if (slots.date === date && slots.slots.length > 1) {
+                if (
+                  slots.date === date &&
+                  slots.lane === slot_lane &&
+                  slots.slots.length > 1
+                ) {
                   return {
                     ...slots,
                     slots: slots.slots.filter(
@@ -127,6 +139,15 @@ const RentalBooking = () => {
       </div>
       {facility?.results._id && (
         <div className="space-y-4">
+          <div className="flex gap-5">
+            {facility?.results?.lanes.map((lane: string) => (
+              <>
+                <Button onClick={() => setLane(lane)} type="primary">
+                  {lane}
+                </Button>
+              </>
+            ))}
+          </div>
           <h3 className="text-xl font-semibold text-[#07133D]">
             Booking Date and Time
           </h3>
@@ -145,7 +166,7 @@ const RentalBooking = () => {
                 Unavailable
               </div>
             </div>
-            <div>Facility lane: {facility.results.lane}</div>
+            {/* <div>Facility lane: {facility.results.lane}</div> */}
             <div className="flex gap-1">
               Per slot fee:
               <span className="font-medium">${facility.results.price}</span>
@@ -158,7 +179,7 @@ const RentalBooking = () => {
             <DateSlider activeDate={activeDate} setActiveDate={setActiveDate} />
           </div>
           {facility?.results && (
-            <BookingTimeSlots
+            <FaciltiyBookingTimeSlots
               activeDate={activeDate}
               training={facility?.results}
               slotsCartQuery={slotsCartQuery}
@@ -166,6 +187,7 @@ const RentalBooking = () => {
               addToCart={createCartBooking}
               selectSlots={selectSlots}
               setSelectSlots={setSelectSlots}
+              lane={lane || facility?.results?.lanes[0]}
             />
           )}
         </div>
@@ -212,6 +234,9 @@ const RentalBooking = () => {
                       </span>
                     </div>
                     <div className="text-sm font-medium text-secondary">
+                      {dateSlots.lane}
+                    </div>
+                    <div className="text-sm font-medium text-secondary">
                       {slot}
                     </div>
                     <div className="text-sm font-medium text-secondary">
@@ -219,7 +244,9 @@ const RentalBooking = () => {
                     </div>
                     <MdDeleteOutline
                       className="size-5 cursor-pointer"
-                      onClick={() => onDelete(dateSlots.date, slot)}
+                      onClick={() =>
+                        onDelete(dateSlots.date, slot, dateSlots.lane)
+                      }
                     />
                   </div>
                 ))}
