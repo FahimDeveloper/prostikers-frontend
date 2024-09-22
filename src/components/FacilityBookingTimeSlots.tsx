@@ -10,10 +10,10 @@ import {
   selectCurrentUser,
 } from "../redux/features/auth/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
-import { collectTimeSlots } from "../utils/collectBookingTimeSlots";
+import { collectBookingTimeSlots } from "../utils/collectBookingTimeSlots";
 import toast from "react-hot-toast";
 
-const FaciltiyBookingTimeSlots = ({
+const FacilityBookingTimeSlots = ({
   activeDate,
   training,
   slotsCartQuery,
@@ -49,10 +49,8 @@ const FaciltiyBookingTimeSlots = ({
       activeDate.getDate() < date.getDate() &&
       activeDate.getMonth() <= date.getMonth()
     ) {
-      console.log("hello");
       return;
     } else {
-      console.log("hello");
       return training?.schedules?.find(
         (schedule: any) =>
           schedule.day ===
@@ -132,10 +130,9 @@ const FaciltiyBookingTimeSlots = ({
     }
   }, [isSuccess, isError, error]);
 
-  const cartSlots = collectTimeSlots(slotsCartData?.results, lane);
-  const bookedSlots = collectTimeSlots(slotsBookedData?.results, lane);
+  const cartSlots = collectBookingTimeSlots(slotsCartData?.results, lane);
+  const bookedSlots = collectBookingTimeSlots(slotsBookedData?.results, lane);
   const unavailableSlots = [...cartSlots, ...bookedSlots];
-  console.log(selectSlots);
   return (
     <>
       {slots?.length > 0 ? (
@@ -219,4 +216,4 @@ const FaciltiyBookingTimeSlots = ({
   );
 };
 
-export default FaciltiyBookingTimeSlots;
+export default FacilityBookingTimeSlots;

@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { Link } from "react-router-dom";
 import { ImSpinner } from "react-icons/im";
-import FaciltiyBookingTimeSlots from "../../../components/FacilityBookingTimeSlots";
+import FacilityBookingTimeSlots from "../../../components/FacilityBookingTimeSlots";
 
 const RentalBooking = () => {
   const user = useSelector(selectCurrentUser);
@@ -179,7 +179,7 @@ const RentalBooking = () => {
             <DateSlider activeDate={activeDate} setActiveDate={setActiveDate} />
           </div>
           {facility?.results && (
-            <FaciltiyBookingTimeSlots
+            <FacilityBookingTimeSlots
               activeDate={activeDate}
               training={facility?.results}
               slotsCartQuery={slotsCartQuery}

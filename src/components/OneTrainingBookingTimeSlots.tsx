@@ -10,7 +10,7 @@ import {
   selectCurrentUser,
 } from "../redux/features/auth/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
-import { collectTimeSlots } from "../utils/collectBookingTimeSlots";
+import { collectBookingTimeSlots } from "../utils/collectBookingTimeSlots";
 import toast from "react-hot-toast";
 
 const OneTrainingBookingTimeSlots = ({
@@ -122,8 +122,8 @@ const OneTrainingBookingTimeSlots = ({
     }
   }, [isSuccess, isError, error]);
 
-  const cartSlots = collectTimeSlots(slotsCartData?.results);
-  const bookedSlots = collectTimeSlots(slotsBookedData?.results);
+  const cartSlots = collectBookingTimeSlots(slotsCartData?.results);
+  const bookedSlots = collectBookingTimeSlots(slotsBookedData?.results);
   const unavailableSlots = [...cartSlots, ...bookedSlots];
   return (
     <>
