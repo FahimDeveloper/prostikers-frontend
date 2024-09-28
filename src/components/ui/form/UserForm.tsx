@@ -15,6 +15,7 @@ import {
 } from "antd";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -31,22 +32,23 @@ type TProp = {
   onFinish: any;
   form: any;
   loading: boolean;
-  fileList: any;
-  setFileList: any;
 };
 
-const UserForm = ({
-  form,
-  record,
-  onFinish,
-  loading,
-  fileList,
-  setFileList,
-}: TProp) => {
+const UserForm = ({ form, record, onFinish, loading }: TProp) => {
   const [previewImage, setPreviewImage] = useState("");
   const [previewOpen, setPreviewOpen] = useState(false);
-  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
+
+  const beforeUpload = (file: FileType) => {
+    if (file.size > 5242880) {
+      Swal.fire({
+        title: "Oops!..",
+        icon: "error",
+        text: `Image size too large, please use less than 5MB`,
+        confirmButtonColor: "#0ABAC3",
+      });
+      return Upload.LIST_IGNORE;
+    }
+    return false;
   };
 
   const handlePreview = async (file: UploadFile) => {
@@ -87,15 +89,7 @@ const UserForm = ({
       ],
       date_of_birth: record?.date_of_birth ? dayjs(record?.date_of_birth) : "",
     });
-    setFileList([
-      {
-        uid: "-1",
-        name: record?.image,
-        status: "done",
-        url: record?.image,
-      },
-    ]);
-  }, [record, form, setFileList]);
+  }, [record, form]);
 
   return (
     <>
@@ -116,12 +110,10 @@ const UserForm = ({
             <Upload
               listType="picture-card"
               className="justify-center"
-              fileList={fileList}
-              onChange={handleChange}
               onPreview={handlePreview}
-              beforeUpload={() => false}
+              beforeUpload={beforeUpload}
             >
-              {fileList.length < 1 && "+ Upload"}
+              {"+ Upload"}
             </Upload>
           </Form.Item>
           <p className="text-[#3A394B] text-sm">Upload Image</p>
@@ -229,11 +221,7 @@ const UserForm = ({
         </div>
         <div className="flex justify-end">
           <Form.Item className="m-0">
-            <Button
-              htmlType="submit"
-              loading={loading}
-              className="primary-btn-2"
-            >
+            <Button htmlType="submit" loading={loading} className="primary-btn">
               Update
             </Button>
           </Form.Item>

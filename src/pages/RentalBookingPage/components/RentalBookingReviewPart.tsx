@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, Input, InputNumber } from "antd";
-import coach from "../../../assets/images/coaches/coach_addon.png";
 import { IoCalendarOutline } from "react-icons/io5";
 import moment from "moment";
 import { MdDeleteOutline } from "react-icons/md";
@@ -35,8 +34,9 @@ const RentalBookingReviewPart = ({
   const [use, { data, isLoading, isSuccess, isError, error }] =
     useVoucherMutation();
   const [deleteSlot] = useDeleteBookingSlotMutation();
-  const { data: addonsData } = useGetSportAddonsQuery({ sport: "cricket" });
-  console.log(addonsData);
+  const { data: addonsData } = useGetSportAddonsQuery({
+    sport: rentalData.sport,
+  });
 
   const onSlotDelete = (date: any, lane: string, slot: string) => {
     Swal.fire({
@@ -89,33 +89,36 @@ const RentalBookingReviewPart = ({
     use(values);
   };
 
-  const onClick = () => {
+  const onAddAddon = (values: any) => {
     setAddons([
+      ...addons,
       {
         id: addons?.length,
-        name: "Coaching",
-        price: 50,
+        image: values.addon_image,
+        name: values.addon_title,
+        price: values.addon_price,
         hours: 1,
       },
     ]);
   };
 
-  const onChange = (value: number) => {
-    setAddons([
-      {
-        id: addons?.length,
-        name: "Coaching",
-        price: value * 50,
-        hours: value,
-      },
-    ]);
+  const onHourChange = (value: number, id: number) => {
+    setAddons(
+      addons.map((addon: any) =>
+        addon.id === id ? { ...addon, hours: value } : addon
+      )
+    );
+  };
+
+  const onAddonDelete = (id: number) => {
+    setAddons(addons.filter((addon: any) => addon.id !== id));
   };
 
   const slotsPrice = rentalData?.slots.reduce((total: number, booking: any) => {
     return total + booking.slots.length * rentalData?.price;
   }, 0);
   const addonsPrice = addons.reduce((total: number, addon: any) => {
-    return total + addon.price;
+    return total + addon.price * addon.hours;
   }, 0);
 
   if (membership?.price) {
@@ -179,26 +182,6 @@ const RentalBookingReviewPart = ({
               add-on for more details and to add it to your booking.
             </p>
           </div>
-          <div className="grid grid-cols-3 items-end">
-            <div className="flex gap-5 col-span-2 items-center">
-              <img src={coach} className="size-16 rounded-xl" alt="coach" />
-              <div className="space-y-2">
-                <h4 className="text-lg text-secondary font-medium">
-                  Professional Coaching
-                </h4>
-                <p className="text-sm text-primary font-semibold">+$50/hours</p>
-              </div>
-            </div>
-            <div className="text-end">
-              <Button
-                onClick={onClick}
-                disabled={addons?.length > 0 ? true : false}
-                className="bg-secondary px-4 h-8 text-white"
-              >
-                + Add
-              </Button>
-            </div>
-          </div>
           {(addonsData?.results as IAddon)?.addons?.map((addon, index) => (
             <div key={index} className="grid grid-cols-3 items-end">
               <div className="flex gap-5 col-span-2 items-center">
@@ -218,8 +201,12 @@ const RentalBookingReviewPart = ({
               </div>
               <div className="text-end">
                 <Button
-                  onClick={onClick}
-                  disabled={addons?.length > 0 ? true : false}
+                  onClick={() => onAddAddon(addon)}
+                  disabled={
+                    addons.find((a: any) => a.name === addon.addon_title)
+                      ? true
+                      : false
+                  }
                   className="bg-secondary px-4 h-8 text-white"
                 >
                   + Add
@@ -284,21 +271,25 @@ const RentalBookingReviewPart = ({
               />
             </div>
           )}
-          {addons?.map((addons: any) => (
+          {addons?.map((addon: any) => (
             <div className="flex justify-between items-center px-2">
-              <p>{addons.name}</p>
+              <img
+                src={addon.image}
+                alt={addon.name}
+                className="size-16 rounded-xl"
+              />
               <p>
                 Hours:{" "}
                 <InputNumber
-                  value={addons.hours}
+                  value={addon.hours}
                   min={1}
-                  onChange={(value) => onChange(value)}
+                  onChange={(value) => onHourChange(value, addon.id)}
                   className="w-16"
                 />
               </p>
-              <p>${addons.price}</p>
+              <p>${addon.hours * addon.price}</p>
               <MdDeleteOutline
-                onClick={() => setAddons([])}
+                onClick={() => onAddonDelete(addon.id)}
                 className="size-5 cursor-pointer"
               />
             </div>

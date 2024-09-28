@@ -6,7 +6,7 @@ export interface IFacilitySchedule {
   duration: number;
   description: string;
   price: number;
-  lane: string;
+  lanes: [string];
   schedules: Array<IFacilityDaySchedule>;
 }
 
@@ -30,6 +30,14 @@ export interface IFacilityReservation {
   sport: string;
   zip_code: string;
   bookings: IFacilityBookings[];
+  addons: IAddon[];
+}
+
+export interface IAddon {
+  name: string;
+  hours: number;
+  image: string;
+  price: number;
 }
 
 export interface IFacilityBookings {

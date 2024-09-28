@@ -8,6 +8,7 @@ import { ColumnsType } from "antd/es/table";
 import { IAppointmentOneReservation } from "../../../types/appointment.types";
 import moment from "moment";
 import { Select } from "antd";
+import DetailsMyOneAppointmentReservationModal from "../../../components/ui/modal/DetailsMyOneAppointmentReservationModal";
 
 const MyOneOnOneAppointments = () => {
   const user = useSelector(selectCurrentUser);
@@ -110,6 +111,16 @@ const MyOneOnOneAppointments = () => {
         <p className="font-medium text-sm leading-5 text-[#151515]">
           ${record.appointment.price}
         </p>
+      ),
+    },
+    {
+      width: 90,
+      align: "center",
+      title: "Details",
+      dataIndex: "_id",
+      key: "_id",
+      render: (_, record) => (
+        <DetailsMyOneAppointmentReservationModal record={record} />
       ),
     },
     // {

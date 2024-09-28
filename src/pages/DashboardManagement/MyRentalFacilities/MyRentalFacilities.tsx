@@ -8,6 +8,7 @@ import { ColumnsType } from "antd/es/table";
 import { useGetUserFacilityReservationsQuery } from "../../../redux/features/facility/facilityApi";
 import { IFacilityReservation } from "../../../types/facility.types";
 import moment from "moment";
+import DetailsMyFacilityReservationModal from "../../../components/ui/modal/DetailsMyFacilityReservationModal";
 
 const MyRentalFacilities = () => {
   const user = useSelector(selectCurrentUser);
@@ -97,6 +98,16 @@ const MyRentalFacilities = () => {
         <p className="font-medium text-sm leading-5 text-[#151515]">
           ${record.facility.price}
         </p>
+      ),
+    },
+    {
+      width: 90,
+      align: "center",
+      title: "Details",
+      dataIndex: "_id",
+      key: "_id",
+      render: (_, record) => (
+        <DetailsMyFacilityReservationModal record={record} />
       ),
     },
     // {

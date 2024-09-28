@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Modal, UploadFile } from "antd";
+import { Button, Modal } from "antd";
 import UserForm from "../form/UserForm";
 import { CiEdit } from "react-icons/ci";
 import Swal from "sweetalert2";
@@ -10,7 +10,6 @@ import { useUpdateClientMutation } from "../../../redux/features/client/clientAp
 
 const UpdateUserInfoModal = ({ record }: { record: IUser }) => {
   const [open, setModalOpen] = useState(false);
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [form] = useForm();
   const [update, { data, isLoading, isSuccess, isError, error }] =
     useUpdateClientMutation();
@@ -38,7 +37,6 @@ const UpdateUserInfoModal = ({ record }: { record: IUser }) => {
       });
       form.resetFields();
       setModalOpen(false);
-      setFileList([]);
     }
     if (isError) {
       Swal.fire({
@@ -69,8 +67,6 @@ const UpdateUserInfoModal = ({ record }: { record: IUser }) => {
         <div className="my-5">
           <UserForm
             record={record}
-            fileList={fileList}
-            setFileList={setFileList}
             form={form}
             onFinish={onFinish}
             loading={isLoading}

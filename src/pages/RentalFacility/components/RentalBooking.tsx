@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Select } from "antd";
+import { Button, Radio, Select } from "antd";
 import { useEffect, useState } from "react";
 import DateSlider from "../../../components/DateSlider";
 import { useRentalFacilityQuery } from "../../../redux/features/facility/facilityApi";
@@ -60,6 +60,7 @@ const RentalBooking = () => {
   };
 
   const onDelete = (date: any, slot: string, slot_lane: string) => {
+    console.log(slot, slot_lane);
     Swal.fire({
       title: "Are you sure?",
       icon: "info",
@@ -88,7 +89,11 @@ const RentalBooking = () => {
                       (oldSlot: string) => oldSlot !== slot
                     ),
                   };
-                } else if (slots.date === date && slots.slots.length == 1) {
+                } else if (
+                  slots.date === date &&
+                  slots.lane === slot_lane &&
+                  slots.slots.length == 1
+                ) {
                   return null;
                 }
                 return slots;
@@ -139,14 +144,26 @@ const RentalBooking = () => {
       </div>
       {facility?.results._id && (
         <div className="space-y-4">
+          <h3 className="text-xl font-semibold text-[#07133D]">Select Lane</h3>
           <div className="flex gap-5">
-            {facility?.results?.lanes.map((lane: string) => (
-              <>
-                <Button onClick={() => setLane(lane)} type="primary">
-                  {lane}
-                </Button>
-              </>
-            ))}
+            <Radio.Group
+              onChange={(e) => setLane(e.target.value)}
+              value={lane}
+              className="w-full"
+            >
+              <div className="w-full flex flex-col gap-2">
+                {facility?.results?.lanes.map((lane: string) => (
+                  <div className="w-full bg-gray-100 px-2 py-2 rounded-lg">
+                    <Radio
+                      value={lane}
+                      className="w-full font-medium capitalize"
+                    >
+                      {lane}
+                    </Radio>
+                  </div>
+                ))}
+              </div>
+            </Radio.Group>
           </div>
           <h3 className="text-xl font-semibold text-[#07133D]">
             Booking Date and Time
