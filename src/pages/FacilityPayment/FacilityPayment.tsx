@@ -66,6 +66,7 @@ const FacilityPayment = () => {
         confirmButtonColor: "#0ABAC3",
         iconColor: "#0ABAC3",
       });
+      sessionStorage.clear();
       navigate("/");
     }
     if (isError) {

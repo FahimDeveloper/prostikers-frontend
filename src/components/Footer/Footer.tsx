@@ -40,8 +40,11 @@ const Footer = () => {
             <nav>
               <ul className="list-none flex md:flex-nowrap flex-wrap justify-center text-lg font-medium items-center md:gap-7 gap-3">
                 <li>
-                  <Link to="/rental" className="no-underline text-white px-1">
-                    Rental
+                  <Link
+                    to="/rental-facility"
+                    className="no-underline text-white px-1"
+                  >
+                    Rental Facility
                   </Link>
                 </li>
                 <li>
@@ -58,11 +61,8 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/programs/tten-league"
-                    className="no-underline text-white px-1"
-                  >
-                    League
+                  <Link to="/events" className="no-underline text-white px-1">
+                    Events
                   </Link>
                 </li>
                 <li>
@@ -70,11 +70,18 @@ const Footer = () => {
                     Shop
                   </Link>
                 </li>
+                <li>
+                  <Link to="/blogs" className="no-underline text-white px-1">
+                    Blogs
+                  </Link>
+                </li>
               </ul>
             </nav>
-            <button className="btn btn-info capitalize px-10 text-lg">
-              get started
-            </button>
+            <Link to="/rental-facility" className="block">
+              <button className="btn btn-info capitalize px-10 text-lg">
+                get started
+              </button>
+            </Link>
           </div>
           <div className="flex items-center justify-between">
             <div className="text-white w-80 space-y-4 hidden md:block">

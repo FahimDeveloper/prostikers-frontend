@@ -9,7 +9,7 @@ const MembershipSection = ({ data }: { data: IUser }) => {
   useEffect(() => {
     const expiry = new Date(data?.expiry_date as Date);
     const currentDate = new Date();
-    if (currentDate > expiry) {
+    if (currentDate.getDate() > expiry.getDate()) {
       setRenew(true);
     } else {
       setRenew(false);
@@ -44,7 +44,9 @@ const MembershipSection = ({ data }: { data: IUser }) => {
       ) : (
         <div className="flex gap-5 items-center">
           <p>You don't have any membership</p>
-          <Button type="primary">Buy membership</Button>
+          <Link to="/membership">
+            <Button type="primary">Buy membership</Button>
+          </Link>
         </div>
       )}
     </div>

@@ -27,8 +27,12 @@ const RentalMembership = () => {
           plan: plan,
           price: price,
         };
+        sessionStorage.setItem(
+          "membership-info",
+          JSON.stringify(membershipData)
+        );
         navigate("/rental-booking", {
-          state: { slotsData: state.slotsData, membershipData: membershipData },
+          state: { facilityInfo: state?.facilityInfo },
         });
       } else if (plan === "yearly") {
         const membershipData = {
@@ -36,8 +40,12 @@ const RentalMembership = () => {
           plan: plan,
           price: price,
         };
+        sessionStorage.setItem(
+          "membership-info",
+          JSON.stringify(membershipData)
+        );
         navigate("/rental-booking", {
-          state: { slotsData: state.slotsData, membershipData: membershipData },
+          state: { facilityInfo: state?.facilityInfo },
         });
       }
     } else if (membership === "individual_pro_unlimited") {
@@ -47,8 +55,12 @@ const RentalMembership = () => {
           plan: plan,
           price: price,
         };
+        sessionStorage.setItem(
+          "membership-info",
+          JSON.stringify(membershipData)
+        );
         navigate("/rental-booking", {
-          state: { slotsData: state.slotsData, membershipData: membershipData },
+          state: { facilityInfo: state?.facilityInfo },
         });
       } else if (plan === "yearly") {
         const membershipData = {
@@ -56,8 +68,12 @@ const RentalMembership = () => {
           plan: plan,
           price: price,
         };
+        sessionStorage.setItem(
+          "membership-info",
+          JSON.stringify(membershipData)
+        );
         navigate("/rental-booking", {
-          state: { slotsData: state.slotsData, membershipData: membershipData },
+          state: { facilityInfo: state?.facilityInfo },
         });
       }
     } else if (membership === "youth_training_membership") {
@@ -66,8 +82,9 @@ const RentalMembership = () => {
         plan: "monthly",
         price: price,
       };
+      sessionStorage.setItem("membership-info", JSON.stringify(membershipData));
       navigate("/rental-booking", {
-        state: { slotsData: state.slotsData, membershipData: membershipData },
+        state: { facilityInfo: state?.facilityInfo },
       });
     }
   };
@@ -610,7 +627,10 @@ const RentalMembership = () => {
             />
           </div>
           <div className="text-center">
-            <Link to="/rental-booking" state={{ slotsData: state.slotsData }}>
+            <Link
+              to="/rental-booking"
+              state={{ facilityInfo: state.facilityInfo }}
+            >
               <Button className="rounded-full px-6 h-12 text-base">
                 Skip Membership
               </Button>

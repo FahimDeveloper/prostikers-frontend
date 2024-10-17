@@ -7,6 +7,7 @@ const RentalBookingSteps = ({
   form,
   onFinish,
   current,
+  rentalInfo,
   setCurrent,
   addons,
   setAddons,
@@ -22,6 +23,7 @@ const RentalBookingSteps = ({
   setCurrent: any;
   addons: any;
   setAddons: any;
+  rentalInfo: any;
   bookingData: any;
   membershipData: any;
   setTotalPrice: any;
@@ -36,6 +38,7 @@ const RentalBookingSteps = ({
           addons={addons}
           setAddons={setAddons}
           bookingData={bookingData}
+          rentalInfo={rentalInfo}
           membershipData={membershipData}
           setVoucherApplied={setVoucherApplied}
           setTotalPrice={setTotalPrice}

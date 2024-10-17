@@ -13,29 +13,34 @@ const RentalBookingPage = () => {
   const [current, setCurrent] = useState(0);
   useCreateFacilityReservationMutation();
   const { state } = useLocation();
+  const sessionSlotsData = sessionStorage.getItem("rental-facility-slots");
+  const sessionMembershipData = sessionStorage.getItem("membership-info");
+  const slotsData = JSON.parse(sessionSlotsData as string);
+  const membershipData = JSON.parse(sessionMembershipData as string);
   const [addons, setAddons] = useState([]);
   const [form] = useForm();
   const onFinish = () => {
     const bookings: any = [];
-    state?.slotsData?.slots.forEach((dateSlots: any) =>
-      dateSlots.slots.forEach((slot: string) =>
+    slotsData?.forEach((dateSlots: any) =>
+      dateSlots.slots.forEach((slot: string) => {
+        const date = new Date(dateSlots.date);
         bookings.push({
-          date: dateSlots.date.toISOString().split("T")[0],
+          date: date.toISOString().split("T")[0],
           time_slot: slot,
-          training: state?.slotsData.training,
-        })
-      )
+          training: state?.facilityInfo?.training,
+        });
+      })
     );
     form.validateFields().then((values: any) => {
       values.bookings = bookings;
-      values.facility = state?.slotsData.training;
+      values.facility = state?.facilityInfo.training;
       values.addons = addons;
       values.voucher_applied = voucherApplied;
       navigate("/facility-payment", {
         state: {
           data: values,
           amount: totalPrice,
-          membershipData: state?.membershipData,
+          membershipData: membershipData,
         },
       });
     });
@@ -43,7 +48,7 @@ const RentalBookingPage = () => {
 
   useEffect(() => {
     form.setFieldsValue({
-      sport: state?.slotsData.sport,
+      sport: state?.facilityInfo.sport,
     });
   }, [form, state]);
   return (
@@ -57,8 +62,9 @@ const RentalBookingPage = () => {
           setAddons={setAddons}
           current={current}
           setCurrent={setCurrent}
-          bookingData={state?.slotsData}
-          membershipData={state?.membershipData}
+          bookingData={slotsData}
+          rentalInfo={state.facilityInfo}
+          membershipData={membershipData}
           totalPrice={totalPrice}
           setTotalPrice={setTotalPrice}
         />

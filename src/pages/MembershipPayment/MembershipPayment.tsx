@@ -32,7 +32,7 @@ const MembershipPayment = () => {
         title: "Oops!..",
         icon: "error",
         text: `${
-          (error as any)?.createData?.message || "something went wrong"
+          (error as any)?.data?.message || "something went wrong"
         }, Don't be afraid, Hopefully your payment already succeeded but our proccess failed. This is your transaction ID [${transactionId}], Contact with support`,
         confirmButtonColor: "#0ABAC3",
       });

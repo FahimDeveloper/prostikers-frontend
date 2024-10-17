@@ -16,12 +16,13 @@ import {
 } from "../../../redux/features/slotBooking/slotBookingApi";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ImSpinner } from "react-icons/im";
 import FacilityBookingTimeSlots from "../../../components/FacilityBookingTimeSlots";
 
 const RentalBooking = () => {
   const user = useSelector(selectCurrentUser);
+  const navigate = useNavigate();
   const [deleteSlot] = useDeleteBookingSlotMutation();
   const [activeDate, setActiveDate] = useState(new Date());
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
@@ -60,7 +61,6 @@ const RentalBooking = () => {
   };
 
   const onDelete = (date: any, slot: string, slot_lane: string) => {
-    console.log(slot, slot_lane);
     Swal.fire({
       title: "Are you sure?",
       icon: "info",
@@ -105,9 +105,26 @@ const RentalBooking = () => {
       }
     });
   };
+
   const totalPrice = selectSlots.reduce((total, facilitySlots) => {
     return total + facilitySlots.slots.length * facility?.results.price;
   }, 0);
+
+  const onNavigate = () => {
+    sessionStorage.setItem(
+      "rental-facility-slots",
+      JSON.stringify(selectSlots)
+    );
+    navigate("/rental-membership", {
+      state: {
+        facilityInfo: {
+          training: facility?.results._id,
+          price: facility?.results.price,
+          sport: facility?.results.sport,
+        },
+      },
+    });
+  };
   return (
     <div className="bg-[#F9FAFB] py-10 rounded-2xl space-y-6 px-5">
       <div className="space-y-3">
@@ -272,20 +289,9 @@ const RentalBooking = () => {
           </div>
           <div className="flex justify-between">
             <p className="text-2xl font-bold">US${totalPrice}</p>
-            <Link
-              to="/rental-membership"
-              state={{
-                slotsData: {
-                  training: facility?.results._id,
-                  slots: selectSlots,
-                  price: facility?.results.price,
-                  sport: facility?.results.sport,
-                },
-              }}
-              className="block"
-            >
-              <Button className="primary-btn-2">Book now</Button>
-            </Link>
+            <Button onClick={onNavigate} className="primary-btn-2">
+              Book now
+            </Button>
           </div>
         </div>
       )}

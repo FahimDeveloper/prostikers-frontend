@@ -19,6 +19,7 @@ const RentalBookingReviewPart = ({
   membershipData,
   setVoucherApplied,
   setTotalPrice,
+  rentalInfo,
   totalPrice,
 }: {
   addons: any;
@@ -28,17 +29,25 @@ const RentalBookingReviewPart = ({
   setTotalPrice: any;
   setVoucherApplied: any;
   totalPrice: any;
+  rentalInfo: any;
 }) => {
   const [rentalData, setRentalData] = useState(bookingData);
   const [membership, setMemberhips] = useState(membershipData);
   const [use, { data, isLoading, isSuccess, isError, error }] =
     useVoucherMutation();
+
   const [deleteSlot] = useDeleteBookingSlotMutation();
   const { data: addonsData } = useGetSportAddonsQuery({
-    sport: rentalData.sport,
+    sport: rentalInfo?.sport,
   });
 
+  const deleteMembership = () => {
+    setMemberhips({});
+    sessionStorage.removeItem("membership-info");
+  };
+
   const onSlotDelete = (date: any, lane: string, slot: string) => {
+    const rentalDate = new Date(date);
     Swal.fire({
       title: "Are you sure?",
       icon: "info",
@@ -47,14 +56,14 @@ const RentalBookingReviewPart = ({
       cancelButtonColor: "#d33",
     }).then((result) => {
       if (result.isConfirmed) {
-        const slotId = `${bookingData?.training}${
-          date.toISOString().split("T")[0]
+        const slotId = `${rentalInfo?.training}${
+          rentalDate?.toISOString().split("T")[0]
         }${slot.split(" ").join("")}${lane}`;
         deleteSlot(slotId)
           .unwrap()
           .then(() => {
             toast.success("Deleted successfully");
-            const updatedSlots = rentalData?.slots
+            const updatedSlots = rentalData
               ?.map((slots: any) => {
                 if (
                   slots.date === date &&
@@ -77,7 +86,11 @@ const RentalBookingReviewPart = ({
                 return slots;
               })
               .filter(Boolean);
-            setRentalData({ ...rentalData, slots: updatedSlots });
+            setRentalData(updatedSlots);
+            sessionStorage.setItem(
+              "rental-facility-slots",
+              JSON.stringify(updatedSlots)
+            );
           })
           .catch((error: any) => toast.error(`${error.data.message}`));
       }
@@ -114,8 +127,8 @@ const RentalBookingReviewPart = ({
     setAddons(addons.filter((addon: any) => addon.id !== id));
   };
 
-  const slotsPrice = rentalData?.slots.reduce((total: number, booking: any) => {
-    return total + booking.slots.length * rentalData?.price;
+  const slotsPrice = rentalData?.reduce((total: number, booking: any) => {
+    return total + booking.slots.length * rentalInfo?.price;
   }, 0);
   const addonsPrice = addons.reduce((total: number, addon: any) => {
     return total + addon.price * addon.hours;
@@ -219,8 +232,8 @@ const RentalBookingReviewPart = ({
           <h3 className="text-[#063232] text-lg font-medium text-center p-5 bg-[#F6FFFF]">
             Booking Summary
           </h3>
-          <p>Per slot price: ${rentalData?.price}</p>
-          {rentalData?.slots.map((dateSlots: any, index: number) => (
+          <p>Per slot price: ${rentalInfo?.price}</p>
+          {rentalData?.map((dateSlots: any, index: number) => (
             <div className="space-y-2" key={index}>
               {dateSlots.slots.map((slot: string, index: number) => (
                 <div
@@ -238,15 +251,14 @@ const RentalBookingReviewPart = ({
                   </div>
                   <MdDeleteOutline
                     className={`size-5 ${
-                      rentalData?.slots.length > 1 ||
-                      rentalData?.slots[0].slots.length > 1
+                      rentalData?.length > 1 || rentalData[0]?.slots.length > 1
                         ? "cursor-pointer"
                         : "cursor-not-allowed"
                     }`}
                     onClick={() => {
                       if (
-                        rentalData?.slots.length < 2 &&
-                        rentalData?.slots[0].slots.length < 2
+                        rentalData?.length < 2 &&
+                        rentalData[0]?.slots.length < 2
                       ) {
                         return;
                       } else {
@@ -261,12 +273,12 @@ const RentalBookingReviewPart = ({
           {membership?.price && (
             <div className="flex justify-between items-start px-2">
               <div className="space-y-2">
-                <p className="capitalize">{membership?.package}</p>
+                <p className="capitalize">{membership?.package_name}</p>
                 <p className="capitalize">{membership?.plan}</p>
               </div>
               <p>price: ${membership?.price}</p>
               <MdDeleteOutline
-                onClick={() => setMemberhips({})}
+                onClick={deleteMembership}
                 className="size-5 cursor-pointer"
               />
             </div>
