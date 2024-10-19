@@ -101,9 +101,9 @@ const CricketGroupTrainingReservation = LazyLoad(
       )
   )
 );
-const RentalMembership = LazyLoad(
-  lazy(() => import("../pages/RentalMembership/RentalMembership"))
-);
+// const RentalMembership = LazyLoad(
+//   lazy(() => import("../pages/RentalMembership/RentalMembership"))
+// );
 const RentalBookingPage = LazyLoad(
   lazy(() => import("../pages/RentalBookingPage/RentalBookingPage"))
 );
@@ -629,14 +629,14 @@ export const router = createBrowserRouter([
         path: "/rental-facility",
         element: <RentalFacility />,
       },
-      {
-        path: "/rental-membership",
-        element: (
-          <PrivetRoute>
-            <RentalMembership />
-          </PrivetRoute>
-        ),
-      },
+      // {
+      //   path: "/rental-membership",
+      //   element: (
+      //     <PrivetRoute>
+      //       <RentalMembership />
+      //     </PrivetRoute>
+      //   ),
+      // },
       {
         path: "/rental-booking",
         element: (

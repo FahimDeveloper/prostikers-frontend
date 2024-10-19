@@ -12,10 +12,6 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const [open, setOpen] = useState(false);
   const user = useSelector(selectCurrentUser);
-  // const dispatch = useAppDispatch();
-  // const logout = () => {
-  //   dispatch(loggedOutUser());
-  // };
   return (
     <div className="fixed w-full z-50 lg:top-5 top-4">
       <div className="sm:px-14 px-5">

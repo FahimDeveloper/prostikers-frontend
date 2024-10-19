@@ -53,7 +53,7 @@ const BaseBallOneTraining = () => {
   };
   return (
     <Container>
-      <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto space-y-10">
+      <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto space-y-8">
         <GallerySection
           title="Baseball One on One Training"
           gallery={gallery}

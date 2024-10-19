@@ -42,6 +42,13 @@ const KidsTrainingCard = ({
           navigate("/login", { state: { from: location } });
         }
       });
+    } else if (!user?.verified) {
+      Swal.fire({
+        title: "Email Verification",
+        text: "Please verify your email address before any processing. We already send you a verification email when you sign up, check your email",
+        icon: "info",
+        confirmButtonColor: "#0ABAC3",
+      });
     } else {
       navigate(`${data._id}`, {
         state: {

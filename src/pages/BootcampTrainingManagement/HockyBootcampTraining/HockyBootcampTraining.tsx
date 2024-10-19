@@ -53,17 +53,19 @@ const HockyBootcampTraining = () => {
   };
   return (
     <Container>
-      <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto space-y-10">
+      <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto space-y-8">
         <GallerySection title="Hockey Training Bootcamps" gallery={gallery} />
         <div className="space-y-5">
           <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
-            Specialized Hockey Skill Development
+            Unleash Your Potential: Join the Elite Field Hockey Bootcamp
           </h2>
           <p className="md:text-lg text-base md:leading-7 sm:leading-6 leading-5 text-[#929292] text-justify">
-            Master the art of field hockey with our specialized one-on-one
-            coaching. ProStrikers offers personalized guidance to refine your
-            stick work, tactical play, and game sense, ensuring you dominate the
-            field with skill and strategy.
+            Transform your field hockey skills in our dynamic Field Hockey
+            Bootcamps. Dive into intense training sessions that cover every
+            aspect of the game, from refining stick skills and enhancing passing
+            accuracy to mastering shooting techniques and defensive tactics.
+            Develop into an agile, strategically sharp player, ready to take on
+            any challenge.
           </p>
         </div>
         <div className="space-y-5">

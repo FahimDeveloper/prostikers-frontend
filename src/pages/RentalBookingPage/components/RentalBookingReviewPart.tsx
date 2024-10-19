@@ -16,7 +16,6 @@ const RentalBookingReviewPart = ({
   addons,
   setAddons,
   bookingData,
-  membershipData,
   setVoucherApplied,
   setTotalPrice,
   rentalInfo,
@@ -25,14 +24,13 @@ const RentalBookingReviewPart = ({
   addons: any;
   setAddons: any;
   bookingData: any;
-  membershipData: any;
   setTotalPrice: any;
   setVoucherApplied: any;
   totalPrice: any;
   rentalInfo: any;
 }) => {
   const [rentalData, setRentalData] = useState(bookingData);
-  const [membership, setMemberhips] = useState(membershipData);
+  // const [membership, setMemberhips] = useState(membershipData);
   const [use, { data, isLoading, isSuccess, isError, error }] =
     useVoucherMutation();
 
@@ -41,10 +39,10 @@ const RentalBookingReviewPart = ({
     sport: rentalInfo?.sport,
   });
 
-  const deleteMembership = () => {
-    setMemberhips({});
-    sessionStorage.removeItem("membership-info");
-  };
+  // const deleteMembership = () => {
+  //   setMemberhips({});
+  //   sessionStorage.removeItem("membership-info");
+  // };
 
   const onSlotDelete = (date: any, lane: string, slot: string) => {
     const rentalDate = new Date(date);
@@ -134,32 +132,45 @@ const RentalBookingReviewPart = ({
     return total + addon.price * addon.hours;
   }, 0);
 
-  if (membership?.price) {
-    const some = slotsPrice + addonsPrice + membership?.price;
-    if (data) {
-      const { discount_type, discount_value } = data.results;
-      if (discount_type === "amount") {
-        setTotalPrice(some - discount_value);
-      } else if (discount_type === "percentage") {
-        const decimal = parseFloat(discount_value) / 100;
-        setTotalPrice(some - some * decimal);
-      }
-    } else {
-      setTotalPrice(some);
+  // if (membership?.price) {
+  //   const some = slotsPrice + addonsPrice + membership?.price;
+  //   if (data) {
+  //     const { discount_type, discount_value } = data.results;
+  //     if (discount_type === "amount") {
+  //       setTotalPrice(some - discount_value);
+  //     } else if (discount_type === "percentage") {
+  //       const decimal = parseFloat(discount_value) / 100;
+  //       setTotalPrice(some - some * decimal);
+  //     }
+  //   } else {
+  //     setTotalPrice(some);
+  //   }
+  // } else {
+  //   const some = slotsPrice + addonsPrice;
+  //   if (data) {
+  //     const { discount_type, discount_value } = data.results;
+  //     if (discount_type === "amount") {
+  //       setTotalPrice(some - discount_value);
+  //     } else if (discount_type === "percentage") {
+  //       const decimal = parseFloat(discount_value) / 100;
+  //       setTotalPrice(some - some * decimal);
+  //     }
+  //   } else {
+  //     setTotalPrice(some);
+  //   }
+  // }
+
+  const some = slotsPrice + addonsPrice;
+  if (data) {
+    const { discount_type, discount_value } = data.results;
+    if (discount_type === "amount") {
+      setTotalPrice(some - discount_value);
+    } else if (discount_type === "percentage") {
+      const decimal = parseFloat(discount_value) / 100;
+      setTotalPrice(some - some * decimal);
     }
   } else {
-    const some = slotsPrice + addonsPrice;
-    if (data) {
-      const { discount_type, discount_value } = data.results;
-      if (discount_type === "amount") {
-        setTotalPrice(some - discount_value);
-      } else if (discount_type === "percentage") {
-        const decimal = parseFloat(discount_value) / 100;
-        setTotalPrice(some - some * decimal);
-      }
-    } else {
-      setTotalPrice(some);
-    }
+    setTotalPrice(some);
   }
 
   useEffect(() => {
@@ -270,7 +281,7 @@ const RentalBookingReviewPart = ({
               ))}
             </div>
           ))}
-          {membership?.price && (
+          {/* {membership?.price && (
             <div className="flex justify-between items-start px-2">
               <div className="space-y-2">
                 <p className="capitalize">{membership?.package_name}</p>
@@ -282,7 +293,7 @@ const RentalBookingReviewPart = ({
                 className="size-5 cursor-pointer"
               />
             </div>
-          )}
+          )} */}
           {addons?.map((addon: any) => (
             <div className="flex justify-between items-center px-2">
               <img

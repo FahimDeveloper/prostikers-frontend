@@ -115,7 +115,7 @@ const RentalBooking = () => {
       "rental-facility-slots",
       JSON.stringify(selectSlots)
     );
-    navigate("/rental-membership", {
+    navigate("/rental-booking", {
       state: {
         facilityInfo: {
           training: facility?.results._id,

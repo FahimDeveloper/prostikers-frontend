@@ -91,6 +91,24 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
     });
   }, [record, form]);
 
+  const validateUSPhoneNumber = (_: any, value: string) => {
+    const phoneNumberRegex =
+      /^(?:\+1\s*?)?(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]?\d{4}$/;
+    const hasCountryCode = /^\+1/.test(value);
+    if (!hasCountryCode) {
+      return Promise.reject(
+        new Error("Please Enter number with the country code (+1)")
+      );
+    }
+    if (value && !phoneNumberRegex.test(value)) {
+      return Promise.reject(
+        new Error("Please enter a valid USA phone number.")
+      );
+    }
+
+    return Promise.resolve();
+  };
+
   return (
     <>
       <Form
@@ -166,9 +184,12 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
               className="w-full m-0"
               name="phone"
               label="Phone"
-              rules={[{ required: true }]}
+              rules={[
+                { required: true, message: "" },
+                { validator: validateUSPhoneNumber },
+              ]}
             >
-              <Input placeholder="Enter your phone" />
+              <Input prefix={"USA"} placeholder="Enter your phone number" />
             </Form.Item>
             <Form.Item
               className="w-full m-0"

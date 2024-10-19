@@ -56,17 +56,20 @@ const SoftballKidsTraining = () => {
   };
   return (
     <Container>
-      <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto">
+      <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto space-y-8">
         <GallerySection title="Kids Softball Training" gallery={gallery} />
         <div className="space-y-5">
           <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
-            Customized Softball Training
+            Kickstart Your Child's Softball Journey: Fun-Filled Training with
+            ProStrikers!
           </h2>
           <p className="md:text-lg text-base md:leading-7 sm:leading-6 leading-5 text-[#929292] text-justify">
-            Unlock your potential on the diamond with our personalized Softball
-            Training sessions. Work on your pitching, improve your batting
-            average, or sharpen your fielding skills with coaches who understand
-            the intricacies of the game and how to bring out your best.
+            Kickstart your child's softball adventure with ProStriker's Kids
+            Softball Training. Our engaging program teaches the fundamentals of
+            hitting, throwing, and fielding through dynamic and enjoyable
+            drills. Each session helps your child build essential skills like
+            hand-eye coordination and teamwork while fostering a lasting
+            enthusiasm for softball.
           </p>
         </div>
         <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-5 gap-y-5">

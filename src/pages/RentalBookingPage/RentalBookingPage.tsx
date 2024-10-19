@@ -14,9 +14,9 @@ const RentalBookingPage = () => {
   useCreateFacilityReservationMutation();
   const { state } = useLocation();
   const sessionSlotsData = sessionStorage.getItem("rental-facility-slots");
-  const sessionMembershipData = sessionStorage.getItem("membership-info");
   const slotsData = JSON.parse(sessionSlotsData as string);
-  const membershipData = JSON.parse(sessionMembershipData as string);
+  // const sessionMembershipData = sessionStorage.getItem("membership-info");
+  // const membershipData = JSON.parse(sessionMembershipData as string);
   const [addons, setAddons] = useState([]);
   const [form] = useForm();
   const onFinish = () => {
@@ -40,7 +40,7 @@ const RentalBookingPage = () => {
         state: {
           data: values,
           amount: totalPrice,
-          membershipData: membershipData,
+          // membershipData: membershipData,
         },
       });
     });
@@ -64,7 +64,7 @@ const RentalBookingPage = () => {
           setCurrent={setCurrent}
           bookingData={slotsData}
           rentalInfo={state.facilityInfo}
-          membershipData={membershipData}
+          // membershipData={membershipData}
           totalPrice={totalPrice}
           setTotalPrice={setTotalPrice}
         />

@@ -4,8 +4,10 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import { Button } from "antd";
+import { Button, Checkbox } from "antd";
 import { useState } from "react";
+import TermsCondition from "../../TermsCondition";
+import PrivacyPolicy from "../../PrivacyPolicy";
 
 export default function CheckoutForm({
   amount,
@@ -20,6 +22,7 @@ export default function CheckoutForm({
 }) {
   const stripe = useStripe();
   const elements = useElements();
+  const [agree, setAgree] = useState(false);
 
   const [message, setMessage] = useState("");
   const [paymentLoading, setPaymentLoading] = useState(false);
@@ -63,6 +66,8 @@ export default function CheckoutForm({
     setPaymentLoading(false);
   };
 
+  console.log(message);
+
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       {clientSecret && (
@@ -73,15 +78,30 @@ export default function CheckoutForm({
           }}
         />
       )}
-      <Button
-        className="primary-btn-2 w-full"
-        htmlType="submit"
-        loading={isLoading || paymentLoading}
-        disabled={paymentLoading || isLoading || !stripe || !elements}
-      >
-        Pay $ {amount}
-      </Button>
-      {message && <div id="payment-message">{message}</div>}
+      <div className="space-y-3">
+        <Checkbox onChange={() => setAgree(!agree)}>
+          <div className="flex gap-2">
+            <p className="text-sm text-secondary">I agree with</p>
+            <TermsCondition>
+              <p className="text-primary cursor-pointer">Terms of service</p>
+            </TermsCondition>
+            <p>&</p>
+            <PrivacyPolicy>
+              <p className="text-primary cursor-pointer">Privacy policy</p>
+            </PrivacyPolicy>
+          </div>
+        </Checkbox>
+        <Button
+          className="primary-btn-2 w-full"
+          htmlType="submit"
+          loading={isLoading || paymentLoading}
+          disabled={
+            !agree || paymentLoading || isLoading || !stripe || !elements
+          }
+        >
+          Pay $ {amount}
+        </Button>
+      </div>
     </form>
   );
 }

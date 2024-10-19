@@ -53,7 +53,7 @@ const HockyOneTraining = () => {
   };
   return (
     <Container>
-      <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto">
+      <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto space-y-8">
         <GallerySection
           title="Field Hockey One on One Training"
           gallery={gallery}

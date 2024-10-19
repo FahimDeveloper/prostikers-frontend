@@ -2,8 +2,13 @@ export interface IBootcamp {
   _id: string;
   course_name: string;
   sport: string;
-  trainer: string;
+  trainer: {
+    _id: string;
+    first_name: string;
+    last_name: string;
+  };
   capacity: number;
+  enrolled: number;
   description: string;
   start_date: string;
   end_date: string;

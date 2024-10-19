@@ -138,7 +138,7 @@ const ResetPassword = () => {
                 ? "Invalid link"
                 : "Link Already Expired"}
             </h2>
-            <Link to="/login" className="block">
+            <Link to="/" className="block">
               <Button className="primary-btn w-full">Go Back</Button>
             </Link>
           </div>

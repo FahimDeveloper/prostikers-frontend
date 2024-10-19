@@ -14,6 +14,25 @@ const GroupTrainingGeneralForm = ({ form }: any) => {
       phone: user?.phone,
     });
   }, [user, form]);
+
+  const validateUSPhoneNumber = (_: any, value: string) => {
+    const phoneNumberRegex =
+      /^(?:\+1\s*?)?(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]?\d{4}$/;
+    const hasCountryCode = /^\+1/.test(value);
+    if (!hasCountryCode) {
+      return Promise.reject(
+        new Error("Please Enter number with the country code (+1)")
+      );
+    }
+    if (value && !phoneNumberRegex.test(value)) {
+      return Promise.reject(
+        new Error("Please enter a valid USA phone number.")
+      );
+    }
+
+    return Promise.resolve();
+  };
+
   return (
     <div className="space-y-5">
       <div className="space-y-2">
@@ -62,10 +81,14 @@ const GroupTrainingGeneralForm = ({ form }: any) => {
             label="Phone"
             name="phone"
             className="m-0"
-            rules={[{ required: true }]}
+            rules={[
+              { required: true, message: "" },
+              { validator: validateUSPhoneNumber },
+            ]}
           >
             <Input
               className="w-full rounded-full p-2"
+              prefix={"USA"}
               placeholder="Type here.."
             />
           </Form.Item>

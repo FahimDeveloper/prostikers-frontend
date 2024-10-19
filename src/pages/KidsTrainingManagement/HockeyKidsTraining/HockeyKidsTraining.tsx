@@ -57,17 +57,19 @@ const HockeyKidsTraining = () => {
   };
   return (
     <Container>
-      <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto">
+      <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto space-y-8">
         <GallerySection title="Field Hockey kids Training" gallery={gallery} />
         <div className="space-y-5">
           <h2 className="font-semibold lg:text-[56px] md:text-[45px] text-[26px] lg:leading-[68px] md:leading-[50px] leading-9">
-            Specialized Hockey Skill Development
+            Stick Stars: Kids Field Hockey Training
           </h2>
           <p className="md:text-lg text-base md:leading-7 sm:leading-6 leading-5 text-[#929292] text-justify">
-            Master the art of field hockey with our specialized one-on-one
-            coaching. ProStrikers offers personalized guidance to refine your
-            stick work, tactical play, and game sense, ensuring you dominate the
-            field with skill and strategy.
+            Elevate your child's field hockey skills with ProStrikers’ Junior
+            Field Hockey Training. Our program provides a fun and engaging
+            environment for young athletes to learn the fundamentals of stick
+            control, dribbling, passing, and goalkeeping. Watch your child's
+            confidence, coordination, and teamwork flourish as they develop a
+            love for the sport.
           </p>
         </div>
         <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-5 gap-y-5">

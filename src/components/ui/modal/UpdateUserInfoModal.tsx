@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Modal } from "antd";
 import UserForm from "../form/UserForm";
@@ -7,10 +8,13 @@ import { useEffect, useState } from "react";
 import { useForm } from "antd/es/form/Form";
 import { IUser } from "../../../types/user.types";
 import { useUpdateClientMutation } from "../../../redux/features/client/clientApi";
+import { updateUserInfo } from "../../../redux/features/auth/authSlice";
+import { useAppDispatch } from "../../../hooks/useAppHooks";
 
 const UpdateUserInfoModal = ({ record }: { record: IUser }) => {
   const [open, setModalOpen] = useState(false);
   const [form] = useForm();
+  const dispatch = useAppDispatch();
   const [update, { data, isLoading, isSuccess, isError, error }] =
     useUpdateClientMutation();
   const onFinish = (values: any) => {
@@ -35,6 +39,7 @@ const UpdateUserInfoModal = ({ record }: { record: IUser }) => {
         timer: 1500,
         iconColor: "#0ABAC3",
       });
+      dispatch(updateUserInfo(data?.results));
       form.resetFields();
       setModalOpen(false);
     }

@@ -12,8 +12,9 @@ import {
   selectCurrentUser,
 } from "../../redux/features/auth/authSlice";
 import Swal from "sweetalert2";
+import { IBootcamp } from "../../types/bootcamp.types";
 
-const BootcampCard = ({ image, data }: { image: any; data: any }) => {
+const BootcampCard = ({ image, data }: { image: any; data: IBootcamp }) => {
   const user = useSelector(selectCurrentUser);
   const location = useLocation();
   const token = useSelector(selectCurrentToken);
@@ -33,6 +34,13 @@ const BootcampCard = ({ image, data }: { image: any; data: any }) => {
           navigate("/login", { state: { from: location } });
         }
       });
+    } else if (!user?.verified) {
+      Swal.fire({
+        title: "Email Verification",
+        text: "Please verify your email address before any processing. We already send you a verification email when you sign up, check your email",
+        icon: "info",
+        confirmButtonColor: "#0ABAC3",
+      });
     } else {
       navigate(`${data._id}`, {
         state: {
@@ -45,87 +53,91 @@ const BootcampCard = ({ image, data }: { image: any; data: any }) => {
     }
   };
   return (
-    <div className="space-y-3 p-2 border border-solid border-[#F8F8F8] rounded-md shadow-md">
-      <div className="relative">
-        <img src={image} className="w-full rounded-md" alt="card image" />
-        <span className="bg-white px-3 capitalize rounded-full text-base font-medium text-[#333] absolute top-2 left-1">
-          {data?.sport}
-        </span>
-      </div>
-      <h3 className="font-semibold text-xl text-[#07133D]">{data?.title}</h3>
-      <div className="space-y-4 px-2">
-        <div className="space-y-2">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 min-w-28">
-              <CiCalendar className="size-5" />
-              <p className="text-base">Start Date :</p>
-            </div>
-            <p className="text-base font-medium">
-              {moment(data?.start_date).format("dddd, MMMM Do YYYY")}
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 min-w-28">
-              <CiCalendar className="size-5" />
-              <p className="text-base">End Date :</p>
-            </div>
-            <p className="text-base font-medium">
-              {moment(data?.end_date).format("dddd, MMMM Do YYYY")}
-            </p>
-          </div>
+    <div className="p-2 border border-solid border-[#F8F8F8] rounded-md shadow-md flex flex-col justify-between gap-3">
+      <div className="space-y-3">
+        <div className="relative">
+          <img src={image} className="w-full rounded-md" alt="card image" />
+          <span className="bg-white px-3 capitalize rounded-full text-base font-medium text-[#333] absolute top-2 left-1">
+            {data?.sport}
+          </span>
         </div>
-        <div className="space-y-2">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 min-w-28">
-              <IoTimeOutline className="size-5" />
-              <p className="text-base">Start Time :</p>
+        <h3 className="font-semibold text-xl text-[#07133D]">
+          {data?.course_name}
+        </h3>
+        <div className="space-y-4 px-2">
+          <div className="space-y-2">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 min-w-28">
+                <CiCalendar className="size-5" />
+                <p className="text-base">Start Date :</p>
+              </div>
+              <p className="text-base font-medium">
+                {moment(data?.start_date).format("dddd, MMMM Do YYYY")}
+              </p>
             </div>
-            <p className="text-base font-medium">
-              {moment(data?.start_time).format("h:mm a")}
-            </p>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 min-w-28">
+                <CiCalendar className="size-5" />
+                <p className="text-base">End Date :</p>
+              </div>
+              <p className="text-base font-medium">
+                {moment(data?.end_date).format("dddd, MMMM Do YYYY")}
+              </p>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 min-w-28">
-              <IoTimeOutline className="size-5" />
-              <p className="text-base">End Time :</p>
+          <div className="space-y-2">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 min-w-28">
+                <IoTimeOutline className="size-5" />
+                <p className="text-base">Start Time :</p>
+              </div>
+              <p className="text-base font-medium">
+                {moment(data?.start_time).format("h:mm a")}
+              </p>
             </div>
-            <p className="text-base font-medium">
-              {moment(data?.end_time).format("h:mm a")}
-            </p>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 min-w-28">
+                <IoTimeOutline className="size-5" />
+                <p className="text-base">End Time :</p>
+              </div>
+              <p className="text-base font-medium">
+                {moment(data?.end_time).format("h:mm a")}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="space-y-2">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 min-w-28">
-              <TbUsers className="size-5" />
-              <p className="text-base">Capacity :</p>
+          <div className="space-y-2">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 min-w-28">
+                <TbUsers className="size-5" />
+                <p className="text-base">Capacity :</p>
+              </div>
+              <p className="text-base font-medium">{data?.capacity}</p>
             </div>
-            <p className="text-base font-medium">{data?.capacity}</p>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 min-w-28">
+                <TbUsers className="size-5" />
+                <p className="text-base">Enrolled :</p>
+              </div>
+              <p className="text-base font-medium">{data?.enrolled}</p>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 min-w-28">
-              <TbUsers className="size-5" />
-              <p className="text-base">Enrolled :</p>
+          <div className="space-y-2">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 min-w-28">
+                <FaUserGraduate className="size-5" />
+                <p className="text-base">Trainer :</p>
+              </div>
+              <p className="text-base font-medium">
+                {data?.trainer.first_name} {data?.trainer.last_name}
+              </p>
             </div>
-            <p className="text-base font-medium">{data?.enrolled}</p>
-          </div>
-        </div>
-        <div className="space-y-2">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 min-w-28">
-              <FaUserGraduate className="size-5" />
-              <p className="text-base">Trainer :</p>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 min-w-28">
+                <CiBadgeDollar className="size-5" />
+                <p className="text-base">Fee :</p>
+              </div>
+              <p className="text-base font-medium">$ {data?.price}</p>
             </div>
-            <p className="text-base font-medium">
-              {data?.trainer.first_name} {data?.trainer.last_name}
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 min-w-28">
-              <CiBadgeDollar className="size-5" />
-              <p className="text-base">Fee :</p>
-            </div>
-            <p className="text-base font-medium">$ {data?.price}</p>
           </div>
         </div>
       </div>
