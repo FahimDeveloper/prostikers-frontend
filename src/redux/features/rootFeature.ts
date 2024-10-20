@@ -7,6 +7,7 @@ import {
   appointmentApiSlice,
   authApiSlice,
   bootcampApiSlice,
+  cancellationApiSlice,
   classApiSlice,
   clientApiSlice,
   eventApiSlice,
@@ -45,6 +46,7 @@ export const rootReducers = combineReducers({
   [voucherApiSlice.reducerPath]: voucherApiSlice.reducer,
   [userApiSlice.reducerPath]: userApiSlice.reducer,
   [addonApislice.reducerPath]: addonApislice.reducer,
+  [cancellationApiSlice.reducerPath]: cancellationApiSlice.reducer,
 });
 
 export const rootMiddlewares = [
@@ -63,4 +65,5 @@ export const rootMiddlewares = [
   voucherApiSlice.middleware,
   userApiSlice.middleware,
   addonApislice.middleware,
+  cancellationApiSlice.middleware,
 ];

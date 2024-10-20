@@ -30,9 +30,7 @@ const GroupTrainingTeamDetailsForm = ({ form, formData }: any) => {
       );
     }
     if (value && !phoneNumberRegex.test(value)) {
-      return Promise.reject(
-        new Error("Please enter a valid USA phone number.")
-      );
+      return Promise.reject(new Error("Please enter a valid USA number"));
     }
 
     return Promise.resolve();

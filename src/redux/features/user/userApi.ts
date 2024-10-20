@@ -9,7 +9,15 @@ const userApi = userApiSlice.injectEndpoints({
         body: payload,
       }),
     }),
+    changePassword: builder.mutation({
+      query: ({ id, payload }) => ({
+        url: `/auth/user/${id}/change-password`,
+        method: "POST",
+        body: payload,
+      }),
+    }),
   }),
 });
 
-export const { useCreateMembershipMutation } = userApi;
+export const { useCreateMembershipMutation, useChangePasswordMutation } =
+  userApi;

@@ -4,6 +4,7 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+import VerifyUser from "../pages/VerifyUser/VerifyUser";
 const Dashboard = LazyLoad(
   lazy(() => import("../pages/DashboardManagement/Dashboard/Dashboard"))
 );
@@ -540,6 +541,10 @@ export const router = createBrowserRouter([
             <VerifyCode />
           </ProtectAuthRoute>
         ),
+      },
+      {
+        path: "/user/verify/:token",
+        element: <VerifyUser />,
       },
       {
         path: "/registration",

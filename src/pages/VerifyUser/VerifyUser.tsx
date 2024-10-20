@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, useParams } from "react-router-dom";
-import { useLinkVerifyQuery } from "../../redux/features/auth/authApi";
+import { useVerifyUserQuery } from "../../redux/features/auth/authApi";
 import { FaSpinner } from "react-icons/fa";
 import { Button } from "antd";
 import { useEffect } from "react";
@@ -17,11 +17,13 @@ const VerifyUser = () => {
     isSuccess: isVerifySuccess,
     isError: isVerifyError,
     error: verifyError,
-  } = useLinkVerifyQuery({
+  } = useVerifyUserQuery({
     token,
   });
   useEffect(() => {
-    dispatch(updateUserInfo(data?.results));
+    if (isVerifySuccess) {
+      dispatch(updateUserInfo(data?.results));
+    }
   }, [isVerifySuccess]);
   return (
     <>
@@ -36,8 +38,8 @@ const VerifyUser = () => {
             <h2 className="text-center font-poppins font-medium text-4xl leading-[46px] text-[#043E41]">
               {data?.message}
             </h2>
-            <Link to="/" className="block">
-              <Button className="primary-btn w-full">Go Back</Button>
+            <Link to="/" className="block text-center">
+              <Button className="primary-btn">Go Back</Button>
             </Link>
           </div>
         </div>
@@ -45,15 +47,28 @@ const VerifyUser = () => {
       {isVerifyError && (
         <div className="h-svh flex items-center justify-center w-full">
           <div className="space-y-5">
-            <h2 className="text-center font-poppins font-medium text-4xl leading-[46px] text-[#043E41]">
-              {(verifyError as any)?.data?.message === "jwt malformed"
-                ? "Invalid link"
-                : (verifyError as any)?.data?.message === "jwt expired"
-                ? "Link Already Expired"
-                : (verifyError as any)?.data?.message}
-            </h2>
-            <Link to="/" className="block">
-              <Button className="primary-btn w-full">Go Back</Button>
+            <div className="">
+              {(verifyError as any)?.data?.message === "jwt expired" ? (
+                <div className="space-y-3">
+                  <h3 className="text-center font-poppins font-medium text-4xl leading-[46px] text-[#043E41]">
+                    Link is already expired
+                  </h3>
+                  <p className="w-[500px] text-center text-base">
+                    You did not complete your verification bitween 30 days since
+                    sign up. Link is already expired. Please contact with
+                    support.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <h3 className="text-center font-poppins font-medium text-4xl leading-[46px] text-[#043E41]">
+                    Invalid link
+                  </h3>
+                </>
+              )}
+            </div>
+            <Link to="/" className="block text-center">
+              <Button className="primary-btn">Go Back</Button>
             </Link>
           </div>
         </div>

@@ -3,6 +3,9 @@ import { IUser } from "../../../../types/user.types";
 import { Button } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CancellationPolicy from "../../../../components/CancellationPolicy";
+import { MdOutlineInfo } from "react-icons/md";
+import MembershipCancellationModal from "../../../../components/ui/modal/MembershipCancellationModal";
 
 const MembershipSection = ({ data }: { data: IUser }) => {
   const [renew, setRenew] = useState(false);
@@ -17,7 +20,14 @@ const MembershipSection = ({ data }: { data: IUser }) => {
   }, [data]);
   return (
     <div className="space-y-5">
-      <h3 className="text-xl text-[#006166] font-medium">Membership Details</h3>
+      <div className="flex items-center gap-3">
+        <h3 className="text-xl text-[#006166] font-medium">
+          Membership Details
+        </h3>
+        <CancellationPolicy>
+          <MdOutlineInfo className="size-5 text-sky-400 cursor-pointer" />
+        </CancellationPolicy>
+      </div>
       {data?.membership ? (
         <div className="px-8 py-10 flex justify-between items-center bg-[#F5FFFF] border border-solid rounded-2xl border-[#BDFCFF]">
           <div className="space-y-2">
@@ -35,10 +45,18 @@ const MembershipSection = ({ data }: { data: IUser }) => {
             </div>
           </div>
           <div className="flex gap-5">
-            {renew && <Button type="primary">Renew Now</Button>}
-            <Link to="/membership">
-              <Button type="default">Upgrade Now</Button>
-            </Link>
+            {renew ? (
+              <Link to="/membership">
+                <Button type="primary">Renew Now</Button>
+              </Link>
+            ) : (
+              <div className="flex flex-col gap-3 items-center">
+                <Link to="/membership">
+                  <Button type="default">Upgrade Now</Button>
+                </Link>
+                <MembershipCancellationModal />
+              </div>
+            )}
           </div>
         </div>
       ) : (

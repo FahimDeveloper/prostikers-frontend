@@ -6,7 +6,12 @@ const CancellationPolicy = ({ children }: any) => {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <div onClick={() => setOpen(true)}>{children}</div>
+      <div
+        onClick={() => setOpen(true)}
+        className="flex justify-center items-center"
+      >
+        {children}
+      </div>
       <Modal
         width={1200}
         footer={[

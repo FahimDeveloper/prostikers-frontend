@@ -57,11 +57,10 @@ const authApi = authApiSlice.injectEndpoints({
         body: credentials,
       }),
     }),
-    changePassword: builder.mutation({
-      query: ({ id, payload }) => ({
-        url: `/auth/user/${id}/change-password`,
-        method: "POST",
-        body: payload,
+    verifyUser: builder.query({
+      query: ({ token }) => ({
+        url: `/auth/user/verify/${token}`,
+        method: "GET",
       }),
     }),
   }),
@@ -76,5 +75,5 @@ export const {
   useResetPasswordMutation,
   useVerifyCodeMutation,
   useContinueWithSocialMutation,
-  useChangePasswordMutation,
+  useVerifyUserQuery,
 } = authApi;

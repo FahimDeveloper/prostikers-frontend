@@ -49,6 +49,23 @@ const Registration = () => {
     delete values.confirm_password;
     registration(values);
   };
+
+  const validateUSPhoneNumber = (_: any, value: string) => {
+    const phoneNumberRegex =
+      /^(?:\+1\s*?)?(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]?\d{4}$/;
+    const hasCountryCode = /^\+1/.test(value);
+    if (!hasCountryCode) {
+      return Promise.reject(
+        new Error("Please Enter number with the country code (+1)")
+      );
+    }
+    if (value && !phoneNumberRegex.test(value)) {
+      return Promise.reject(new Error("Please enter a valid USA number"));
+    }
+
+    return Promise.resolve();
+  };
+
   return (
     <div className="w-full min-h-svh py-10 flex flex-col justify-center gap-5 items-center">
       <h2 className="text-center font-poppins font-medium text-4xl leading-[46px] text-[#043E41]">
@@ -92,7 +109,10 @@ const Registration = () => {
           <div className="grid grid-cols-2 gap-3">
             <Form.Item
               name="phone"
-              rules={[{ required: true, message: "Please " }]}
+              rules={[
+                { required: true, message: "" },
+                { validator: validateUSPhoneNumber },
+              ]}
               label="Phone"
               className="m-0"
             >
