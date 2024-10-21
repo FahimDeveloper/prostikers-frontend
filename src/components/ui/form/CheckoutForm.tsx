@@ -5,9 +5,10 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { Button, Checkbox } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TermsCondition from "../../TermsCondition";
 import PrivacyPolicy from "../../PrivacyPolicy";
+import Swal from "sweetalert2";
 
 export default function CheckoutForm({
   amount,
@@ -24,7 +25,7 @@ export default function CheckoutForm({
   const elements = useElements();
   const [agree, setAgree] = useState(false);
 
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState<string | undefined>(undefined);
   const [paymentLoading, setPaymentLoading] = useState(false);
 
   const handleSubmit = async (e: any) => {
@@ -53,7 +54,6 @@ export default function CheckoutForm({
 
     const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
     if (paymentIntent?.status === "succeeded") {
-      setMessage("Payment already succeeded.");
       onSubmit();
       setPaymentLoading(false);
       return;
@@ -66,7 +66,15 @@ export default function CheckoutForm({
     setPaymentLoading(false);
   };
 
-  console.log(message);
+  useEffect(() => {
+    if (message) {
+      Swal.fire({
+        title: "Payment Error",
+        text: message,
+        icon: "error",
+      });
+    }
+  }, [message]);
 
   return (
     <form
