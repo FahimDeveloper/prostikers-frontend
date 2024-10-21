@@ -10,6 +10,7 @@ import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm
 import { Button, Form, Input } from "antd";
 import Swal from "sweetalert2";
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
+import moment from "moment";
 
 const CricketGroupTrainingReservation = () => {
   const { id } = useParams();
@@ -95,6 +96,21 @@ const CricketGroupTrainingReservation = () => {
               excellence.
             </p>
           </div>
+          <div className="flex justify-between gap-3 flex-wrap">
+            <h4 className="text-lg font-medium">
+              Appointment - {state.data.appointment_name}
+            </h4>
+            <p>Day - {state.data.schedules.day}</p>
+            <p>
+              Start Time -{" "}
+              {moment(state.data.schedules.start_time).format("h:mm a")}
+            </p>
+            <p>
+              End Time -{" "}
+              {moment(state.data.schedules.end_time).format("h:mm a")}
+            </p>
+            <p className="font-medium">Price - ${state.data.price}</p>
+          </div>
           <div className="space-y-2">
             {data?.results && (
               <div className="flex justify-end gap-5">
@@ -135,7 +151,7 @@ const CricketGroupTrainingReservation = () => {
                 >
                   <Input
                     readOnly={data ? true : false}
-                    className="py-[7px] rounded-full w-96"
+                    className="sm:py-[7px] py-1 rounded-full md:w-96 sm:w-72 w-48"
                     placeholder="Enter your voucher code"
                   />
                 </Form.Item>

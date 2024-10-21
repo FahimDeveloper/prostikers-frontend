@@ -75,7 +75,7 @@ const AppointmentGroupCard = ({
       </h3>
       <div className="space-y-3 px-2">
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 md:min-w-28 sm:min-w-max min-w-28">
             <FaPeopleGroup className="size-5" />
             <p className="text-base">Capacity :</p>
           </div>
@@ -83,14 +83,14 @@ const AppointmentGroupCard = ({
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 md:min-w-28 sm:min-w-max min-w-28">
             <FaPeopleGroup className="size-5" />
             <p className="text-base">Enrolled :</p>
           </div>
           <p className="text-base font-medium capitalize">{data?.enrolled}</p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 md:min-w-28 sm:min-w-max min-w-28">
             <IoTimeOutline className="size-5" />
             <p className="text-base">Time :</p>
           </div>
@@ -105,7 +105,7 @@ const AppointmentGroupCard = ({
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 md:min-w-28 sm:min-w-max min-w-28">
             <IoTimeOutline className="size-5" />
             <p className="text-base">Duration :</p>
           </div>
@@ -117,7 +117,7 @@ const AppointmentGroupCard = ({
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 md:min-w-28 sm:min-w-max min-w-28">
             <FaUserGraduate className="size-5" />
             <p className="text-base">Trainer :</p>
           </div>
@@ -126,7 +126,7 @@ const AppointmentGroupCard = ({
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 md:min-w-28 sm:min-w-max min-w-28">
             <CiBadgeDollar className="size-5" />
             <p className="text-base">Fee :</p>
           </div>

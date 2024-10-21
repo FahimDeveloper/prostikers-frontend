@@ -29,7 +29,7 @@ const MembershipSection = ({ data }: { data: IUser }) => {
         </CancellationPolicy>
       </div>
       {data?.membership ? (
-        <div className="px-8 py-10 flex justify-between items-center bg-[#F5FFFF] border border-solid rounded-2xl border-[#BDFCFF]">
+        <div className="px-8 py-10 flex justify-between flex-wrap gap-5 items-center bg-[#F5FFFF] border border-solid rounded-2xl border-[#BDFCFF]">
           <div className="space-y-2">
             <p className="text-2xl text-[#06494D] font-extrabold capitalize">
               {data?.package_name}

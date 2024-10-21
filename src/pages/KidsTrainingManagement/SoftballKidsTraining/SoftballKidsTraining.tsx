@@ -116,7 +116,7 @@ const SoftballKidsTraining = () => {
                         </p>
                       </div>
                     ) : (
-                      <div className="grid grid-cols-2 gap-5">
+                      <div className="grid sm:grid-cols-2 gap-5">
                         {classes?.results.map((training, index) => {
                           return (
                             <KidsTrainingCard

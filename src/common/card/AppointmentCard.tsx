@@ -62,14 +62,14 @@ const AppointmentCard = ({
       </h3>
       <div className="space-y-3 px-2">
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 sm:min-w-28 min-w-24">
             <IoTimeOutline className="size-5" />
             <p className="text-base">Duration :</p>
           </div>
           <p className="text-base font-medium">{data?.duration} minutes</p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 sm:min-w-28 min-w-24">
             <FaUserGraduate className="size-5" />
             <p className="text-base">Trainer :</p>
           </div>
@@ -78,7 +78,7 @@ const AppointmentCard = ({
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 sm:min-w-28 min-w-24">
             <CiBadgeDollar className="size-5" />
             <p className="text-base">Fee :</p>
           </div>

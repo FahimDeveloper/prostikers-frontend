@@ -19,6 +19,7 @@ import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { ImSpinner } from "react-icons/im";
 import FacilityBookingTimeSlots from "../../../components/FacilityBookingTimeSlots";
+import { CiClock1 } from "react-icons/ci";
 
 const RentalBooking = () => {
   const user = useSelector(selectCurrentUser);
@@ -126,7 +127,7 @@ const RentalBooking = () => {
     });
   };
   return (
-    <div className="bg-[#F9FAFB] py-10 rounded-2xl space-y-6 px-5">
+    <div className="bg-[#F9FAFB] sm:py-10 rounded-2xl space-y-6 sm:px-5 py-7 px-3">
       <div className="space-y-3">
         <h3 className="text-xl font-semibold text-[#07133D]">
           Select Facility Type
@@ -185,8 +186,8 @@ const RentalBooking = () => {
           <h3 className="text-xl font-semibold text-[#07133D]">
             Booking Date and Time
           </h3>
-          <div className="flex justify-between">
-            <div className="flex gap-x-5 items-center">
+          <div className="flex justify-between gap-3 flex-wrap">
+            <div className="flex flex-wrap sm:gap-x-5 gap-3 items-center">
               <div className="flex gap-x-2 items-center">
                 <span className="size-3 rounded-full border border-solid border-gray-300"></span>
                 Available
@@ -200,7 +201,6 @@ const RentalBooking = () => {
                 Unavailable
               </div>
             </div>
-            {/* <div>Facility lane: {facility.results.lane}</div> */}
             <div className="flex gap-1">
               Per slot fee:
               <span className="font-medium">${facility.results.price}</span>
@@ -253,7 +253,7 @@ const RentalBooking = () => {
               <p>${totalPrice}</p>
             </div>
           </div>
-          <div className="space-y-2">
+          <div className="sm:block hidden space-y-2">
             {selectSlots.map((dateSlots, index) => (
               <div className="space-y-2" key={index}>
                 {dateSlots.slots.map((slot: string, index: number) => (
@@ -261,7 +261,7 @@ const RentalBooking = () => {
                     key={index}
                     className="flex justify-between items-center bg-white p-3"
                   >
-                    <div className="flex gap-5 items-center">
+                    <div className="flex gap-3 items-center">
                       <IoCalendarOutline className="size-4" />
                       <span className="text-sm font-medium text-secondary">
                         {moment(dateSlots.date).format("D-MMM-YYYY")}
@@ -270,8 +270,11 @@ const RentalBooking = () => {
                     <div className="text-sm font-medium text-secondary">
                       {dateSlots.lane}
                     </div>
-                    <div className="text-sm font-medium text-secondary">
-                      {slot}
+                    <div className="flex gap-2 items-center">
+                      <CiClock1 className="size-4" />
+                      <span className="text-sm font-medium text-secondary">
+                        {slot}
+                      </span>
                     </div>
                     <div className="text-sm font-medium text-secondary">
                       ${facility?.results?.price}
@@ -287,8 +290,53 @@ const RentalBooking = () => {
               </div>
             ))}
           </div>
-          <div className="flex justify-between">
-            <p className="text-2xl font-bold">US${totalPrice}</p>
+          <div className="sm:hidden block space-y-2">
+            {selectSlots.map((dateSlots, index) => (
+              <div className="space-y-2" key={index}>
+                {dateSlots.slots.map((slot: string, index: number) => (
+                  <div
+                    key={index}
+                    className="flex justify-between gap-5 flex-wrap items-center bg-white p-3"
+                  >
+                    <div className="space-y-2">
+                      <div className="flex gap-3 items-center">
+                        <IoCalendarOutline className="size-4" />
+                        <span className="text-sm font-medium text-secondary">
+                          {moment(dateSlots.date).format("D-MMM-YYYY")}
+                        </span>
+                      </div>
+                      <div className="text-sm font-medium text-secondary">
+                        Lane - {dateSlots.lane}
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex gap-2 items-center">
+                        <CiClock1 className="size-4" />
+                        <span className="text-sm font-medium text-secondary">
+                          {slot}
+                        </span>
+                      </div>
+                      <div className="text-sm font-medium text-secondary">
+                        Price - ${facility?.results?.price}
+                      </div>
+                    </div>
+                    <div className="text-end">
+                      <MdDeleteOutline
+                        className="size-5 cursor-pointer"
+                        onClick={() =>
+                          onDelete(dateSlots.date, slot, dateSlots.lane)
+                        }
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-between items-center">
+            <p className="lg:text-2xl sm:text-xl text-lg sm:font-bold font-semibold">
+              US${totalPrice}
+            </p>
             <Button onClick={onNavigate} className="primary-btn-2">
               Book now
             </Button>

@@ -1,5 +1,4 @@
-import { HiOutlineUserCircle } from "react-icons/hi";
-import { IoCartOutline } from "react-icons/io5";
+// import { HiOutlineUserCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import logo from "../../assets/icons/logo.svg";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
@@ -74,28 +73,30 @@ const Header = () => {
               </li>
             </ul>
           </nav>
-          {!user ? (
-            <Link to="/login" className="block no-underline">
-              <div className="bg-[#EAFFFF] cursor-pointer border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-center gap-3 py-2 px-5">
-                Login
-              </div>
-            </Link>
-          ) : (
-            <div className="lg:flex items-center gap-5 hidden">
-              <div className="flex items-center gap-2 text-md cursor-pointer">
-                <IoCartOutline className="size-6" /> Cart
-              </div>
-              <Link to="/dashboard" className="block no-underline">
-                <div className="bg-[#EAFFFF] border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-evenly gap-3 py-2 px-2 w-28">
-                  <img src={user?.image} className="size-8 rounded-full" />
-                  <p className="font-medium text-base">Account</p>
+          <div className="lg:block hidden">
+            {!user ? (
+              <Link to="/login" className="block no-underline">
+                <div className="bg-[#EAFFFF] cursor-pointer border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-center gap-3 py-2 px-5">
+                  Login
                 </div>
               </Link>
-            </div>
-          )}
+            ) : (
+              <div className="lg:flex items-center gap-5">
+                {/* <div className="flex items-center gap-2 text-md cursor-pointer">
+                <IoCartOutline className="size-6" /> Cart
+              </div> */}
+                <Link to="/dashboard" className="block no-underline">
+                  <div className="bg-[#EAFFFF] border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-evenly gap-3 py-2 px-2 w-28">
+                    <img src={user?.image} className="size-8 rounded-full" />
+                    <p className="font-medium text-base">Account</p>
+                  </div>
+                </Link>
+              </div>
+            )}
+          </div>
 
           <div className="flex gap-5 lg:hidden">
-            <IoCartOutline className="size-7" />
+            {/* <IoCartOutline className="size-7" /> */}
             <HiOutlineBars3BottomRight
               className="size-7"
               onClick={() => setOpen(true)}
@@ -141,7 +142,7 @@ const Header = () => {
                       <IoIosArrowForward className="size-4" />
                     </Link>
                   </li>
-                  <li className="py-3">
+                  <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3">
                     <Link
                       onClick={() => setOpen(false)}
                       to="/programs/events"
@@ -173,10 +174,28 @@ const Header = () => {
                   </li>
                 </ul>
               </nav>
-              <div className="bg-[#EAFFFF] cursor-pointer font-semibold text-lg border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-center gap-3 py-2 px-5">
-                <HiOutlineUserCircle className="size-8" />
-                Account
-              </div>
+              {!user ? (
+                <Link
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="block no-underline"
+                >
+                  <div className="bg-[#EAFFFF] cursor-pointer text-lg border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-center gap-3 py-2 px-5">
+                    Login
+                  </div>
+                </Link>
+              ) : (
+                <Link
+                  to="/dashboard"
+                  className="block no-underline"
+                  onClick={() => setOpen(false)}
+                >
+                  <div className="bg-[#EAFFFF] cursor-pointer font-semibold text-lg border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-center gap-3 py-2 px-5">
+                    <img src={user?.image} className="size-8 rounded-full" />
+                    <p className="font-semibold text-lg">Account</p>
+                  </div>
+                </Link>
+              )}
             </Modal>
           </div>
         </div>

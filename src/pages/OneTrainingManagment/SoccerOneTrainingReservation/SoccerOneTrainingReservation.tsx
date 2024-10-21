@@ -216,9 +216,9 @@ const SoccerOneTrainingReservation = () => {
                     {dateSlots.slots.map((slot: string, index: number) => (
                       <div
                         key={index}
-                        className="flex justify-between items-center bg-white p-3"
+                        className="flex justify-between gap-3 flex-wrap items-center bg-white p-3"
                       >
-                        <div className="flex gap-5 items-center">
+                        <div className="flex gap-1 items-center">
                           <IoCalendarOutline className="size-4" />
                           <span className="text-sm font-medium text-secondary">
                             {moment(dateSlots.date).format("D-MMM-YYYY")}
@@ -283,7 +283,7 @@ const SoccerOneTrainingReservation = () => {
                 >
                   <Input
                     readOnly={data ? true : false}
-                    className="py-[7px] rounded-full w-96"
+                    className="sm:py-[7px] py-1 rounded-full md:w-96 sm:w-72 w-48"
                     placeholder="Enter your voucher code"
                   />
                 </Form.Item>

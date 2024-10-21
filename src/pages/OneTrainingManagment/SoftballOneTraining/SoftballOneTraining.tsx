@@ -99,11 +99,11 @@ const SoftballOneTraining = () => {
                         </p>
                       </div>
                     ) : (
-                      <div className="grid grid-cols-2 gap-5">
-                        {appointments?.results.map((bootcamp, index) => {
+                      <div className="grid sm:grid-cols-2 gap-5">
+                        {appointments?.results.map((training, index) => {
                           return (
                             <AppointmentCard
-                              data={bootcamp}
+                              data={training}
                               key={index}
                               image={softball}
                             />

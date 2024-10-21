@@ -59,14 +59,12 @@ const EventCard = ({ event, index }: { event: any; index: number }) => {
           <p className="text-[#787878] lg:text-lg leading-6">
             {event.description}
           </p>
-          {moment(event.registration_end).isBefore(moment().startOf("day")) ||
+          {moment(event.registration_end).isBefore(moment(), "day") ||
           event.registration >= event.allowed_registrations ? (
             <Button disabled={true} className="primary-btn md:w-auto w-full">
               Registration closed
             </Button>
-          ) : moment(event.registration_start).isAfter(
-              moment().startOf("day")
-            ) ? (
+          ) : moment(event.registration_start).isAfter(moment(), "day") ? (
             <Button disabled={true} className="primary-btn md:w-auto w-full">
               Open {moment(event.registration_start).format("MMMM Do YYYY")}
             </Button>

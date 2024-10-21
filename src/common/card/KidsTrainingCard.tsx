@@ -74,7 +74,7 @@ const KidsTrainingCard = ({
       </h3>
       <div className="space-y-3 px-2">
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 md:min-w-28 min-w-24">
             <FaPeopleGroup className="size-5" />
             <p className="text-base">Capacity :</p>
           </div>
@@ -82,14 +82,14 @@ const KidsTrainingCard = ({
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 md:min-w-28 min-w-24">
             <FaPeopleGroup className="size-5" />
             <p className="text-base">Enrolled :</p>
           </div>
           <p className="text-base font-medium capitalize">{data?.enrolled}</p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 md:min-w-28 min-w-24">
             <IoTimeOutline className="size-5" />
             <p className="text-base">Time :</p>
           </div>
@@ -104,7 +104,7 @@ const KidsTrainingCard = ({
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 md:min-w-28 min-w-24">
             <IoTimeOutline className="size-5" />
             <p className="text-base">Duration :</p>
           </div>
@@ -116,7 +116,7 @@ const KidsTrainingCard = ({
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 md:min-w-28 min-w-24">
             <FaUserGraduate className="size-5" />
             <p className="text-base">Trainer :</p>
           </div>
@@ -125,7 +125,7 @@ const KidsTrainingCard = ({
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 min-w-28">
+          <div className="flex items-center gap-2 md:min-w-28 min-w-24">
             <CiBadgeDollar className="size-5" />
             <p className="text-base">Fee :</p>
           </div>
@@ -140,7 +140,7 @@ const KidsTrainingCard = ({
           onClick={() => navigate("/membership")}
           className="bg-secondary btn text-base text-white w-full"
         >
-          Monthly Subscription
+          Monthly Subs..
         </Button>
       </div>
     </div>

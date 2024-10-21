@@ -195,10 +195,10 @@ const RentalBookingReviewPart = ({
   }, [isSuccess, isError]);
   return (
     <div className="space-y-5">
-      <div className="grid grid-cols-5 gap-7">
-        <div className="col-span-3 p-7 rounded-2xl border border-solid border-[#F2F2F2] space-y-7">
+      <div className="grid lg:grid-cols-5 grid-cols-1 gap-7">
+        <div className="sm:col-span-3 sm:p-7 p-5 rounded-2xl border border-solid border-[#F2F2F2] space-y-7">
           <div className="space-y-2">
-            <h2 className="text-2xl text-secondary font-semibold">
+            <h2 className="sm:text-2xl text-xl text-secondary font-semibold">
               Customize Your Practice Session
             </h2>
             <p className="text-base text-[#4B4B4B]">
@@ -211,11 +211,11 @@ const RentalBookingReviewPart = ({
               <div className="flex gap-5 col-span-2 items-center">
                 <img
                   src={addon.addon_image}
-                  className="size-16 rounded-xl"
+                  className="sm:size-16 size-14 rounded-xl"
                   alt={addon.addon_title}
                 />
                 <div className="space-y-2">
-                  <h4 className="text-lg text-secondary font-medium">
+                  <h4 className="sm:text-lg text-base text-secondary font-medium">
                     {addon.addon_title}
                   </h4>
                   <p className="text-sm text-primary font-semibold">
@@ -239,7 +239,7 @@ const RentalBookingReviewPart = ({
             </div>
           ))}
         </div>
-        <div className="col-span-2 p-7 rounded-2xl border border-solid border-[#F2F2F2] space-y-5">
+        <div className="sm:col-span-2 sm:p-7 p-5 rounded-2xl border border-solid border-[#F2F2F2] space-y-5">
           <h3 className="text-[#063232] text-lg font-medium text-center p-5 bg-[#F6FFFF]">
             Booking Summary
           </h3>
@@ -249,9 +249,9 @@ const RentalBookingReviewPart = ({
               {dateSlots.slots.map((slot: string, index: number) => (
                 <div
                   key={index}
-                  className="flex justify-between items-center bg-white py-3 px-2"
+                  className="flex justify-between gap-2 flex-wrap items-center bg-white py-3 px-2"
                 >
-                  <div className="flex gap-5 items-center">
+                  <div className="flex xl:gap-5 gap-3 items-center">
                     <IoCalendarOutline className="size-4" />
                     <span className="text-sm font-medium text-secondary">
                       {moment(dateSlots.date).format("D-MMM-YYYY")}
@@ -260,23 +260,26 @@ const RentalBookingReviewPart = ({
                   <div className="text-sm font-medium text-secondary">
                     {slot}
                   </div>
-                  <MdDeleteOutline
-                    className={`size-5 ${
-                      rentalData?.length > 1 || rentalData[0]?.slots.length > 1
-                        ? "cursor-pointer"
-                        : "cursor-not-allowed"
-                    }`}
-                    onClick={() => {
-                      if (
-                        rentalData?.length < 2 &&
-                        rentalData[0]?.slots.length < 2
-                      ) {
-                        return;
-                      } else {
-                        onSlotDelete(dateSlots.date, dateSlots.lane, slot);
-                      }
-                    }}
-                  />
+                  <div className="flex justify-end">
+                    <MdDeleteOutline
+                      className={`size-5 ${
+                        rentalData?.length > 1 ||
+                        rentalData[0]?.slots.length > 1
+                          ? "cursor-pointer"
+                          : "cursor-not-allowed"
+                      }`}
+                      onClick={() => {
+                        if (
+                          rentalData?.length < 2 &&
+                          rentalData[0]?.slots.length < 2
+                        ) {
+                          return;
+                        } else {
+                          onSlotDelete(dateSlots.date, dateSlots.lane, slot);
+                        }
+                      }}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -295,11 +298,11 @@ const RentalBookingReviewPart = ({
             </div>
           )} */}
           {addons?.map((addon: any) => (
-            <div className="flex justify-between items-center px-2">
+            <div className="flex justify-between items-center sm:px-2">
               <img
                 src={addon.image}
                 alt={addon.name}
-                className="size-16 rounded-xl"
+                className="sm:size-16 size-12 rounded-xl"
               />
               <p>
                 Hours:{" "}
@@ -307,7 +310,7 @@ const RentalBookingReviewPart = ({
                   value={addon.hours}
                   min={1}
                   onChange={(value) => onHourChange(value, addon.id)}
-                  className="w-16"
+                  className="sm:w-16 w-14"
                 />
               </p>
               <p>${addon.hours * addon.price}</p>
@@ -319,16 +322,18 @@ const RentalBookingReviewPart = ({
           ))}
           {data?.results && (
             <div className="flex justify-between">
-              <p className="text-secondary text-base">Voucher Applied</p>
-              <p className="text-secondary text-base capitalize">
+              <p className="text-secondary sm:text-base text-base">
+                Voucher Applied
+              </p>
+              <p className="sm:block hidden text-secondary text-base capitalize">
                 {data?.results.discount_type}
               </p>
               {data?.results.discount_type === "amount" ? (
-                <p className="text-secondary text-lg">
+                <p className="text-secondary sm:text-lg text-base">
                   -${data?.results.discount_value}
                 </p>
               ) : (
-                <p className="text-secondary text-lg">
+                <p className="text-secondary sm:text-lg text-base">
                   -{data?.results.discount_value}%
                 </p>
               )}
@@ -350,7 +355,7 @@ const RentalBookingReviewPart = ({
           >
             <Input
               readOnly={data ? true : false}
-              className="py-[7px] rounded-full w-96"
+              className="sm:py-[7px] rounded-full md:w-96 sm:w-60 w-48"
               placeholder="Enter your voucher code"
             />
           </Form.Item>
@@ -359,7 +364,7 @@ const RentalBookingReviewPart = ({
               disabled={data}
               loading={isLoading}
               htmlType="submit"
-              className="text-white bg-primary h-full lg:text-lg text-base font-bold px-10 rounded-full"
+              className="text-white bg-primary h-full lg:text-lg text-base font-bold sm:px-10 px-5 rounded-full"
             >
               Apply
             </Button>

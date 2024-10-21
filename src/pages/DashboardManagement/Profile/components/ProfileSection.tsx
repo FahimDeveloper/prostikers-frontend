@@ -30,9 +30,9 @@ const ProfileSection = ({ data }: { data: IUser }) => {
   };
   return (
     <div className="space-y-7">
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-4 items-center">
         <img className="size-40 rounded-full object-cover" src={data?.image} />
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-end items-center flex-wrap">
           <UpdateUserInfoModal record={data} />
           <ChangePasswordModal />
           <Button onClick={showConfirm} className="flex gap-2 items-center">

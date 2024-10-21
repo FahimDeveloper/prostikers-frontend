@@ -92,7 +92,7 @@ const JoinAsIndividualRegistration = () => {
               team that matches your skill level and competitive spirit.
             </p>
           </div>
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between gap-4 items-center flex-wrap">
             <h4 className="text-lg font-medium">
               Event - {state.data.event_name}
             </h4>
@@ -143,7 +143,7 @@ const JoinAsIndividualRegistration = () => {
                 >
                   <Input
                     readOnly={data ? true : false}
-                    className="py-[7px] rounded-full w-96"
+                    className="sm:py-[7px] py-1 rounded-full md:w-96 sm:w-80 w-48"
                     placeholder="Enter your voucher code"
                   />
                 </Form.Item>
@@ -152,7 +152,7 @@ const JoinAsIndividualRegistration = () => {
                     disabled={data}
                     loading={isLoading}
                     htmlType="submit"
-                    className="text-white bg-primary h-full lg:text-lg text-base font-bold px-10 rounded-full"
+                    className="text-white bg-primary h-full lg:text-lg text-base font-bold sm:px-10 px-5 rounded-full"
                   >
                     Apply
                   </Button>

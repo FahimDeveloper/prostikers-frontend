@@ -40,7 +40,7 @@ const LeagueTeamGeneralForm = ({ form }: { form: any }) => {
         </p>
       </div>
       <Form form={form} layout="vertical">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid sm:grid-cols-2 gap-4">
           <Form.Item
             label="First Name"
             name="first_name"

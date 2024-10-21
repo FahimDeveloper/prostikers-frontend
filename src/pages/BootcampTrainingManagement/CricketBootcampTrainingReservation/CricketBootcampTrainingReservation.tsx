@@ -93,7 +93,7 @@ const CricketBootcampTrainingReservation = () => {
               tactically aware players ready for any challenge.
             </p>
           </div>
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center flex-wrap gap-3">
             <h4 className="text-lg font-medium">
               Bootcamp - {state.data.course_name}
             </h4>
@@ -145,7 +145,7 @@ const CricketBootcampTrainingReservation = () => {
                 >
                   <Input
                     readOnly={data ? true : false}
-                    className="py-[7px] rounded-full w-96"
+                    className="sm:py-[7px] py-1 rounded-full md:w-96 sm:w-72 w-48"
                     placeholder="Enter your voucher code"
                   />
                 </Form.Item>

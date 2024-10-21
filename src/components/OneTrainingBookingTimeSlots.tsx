@@ -135,7 +135,7 @@ const OneTrainingBookingTimeSlots = ({
   return (
     <>
       {slots?.length > 0 ? (
-        <div className="grid grid-cols-5 gap-1">
+        <div className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-1">
           {(slots as string[])?.map((slot: string, index: number) => (
             <button
               disabled={

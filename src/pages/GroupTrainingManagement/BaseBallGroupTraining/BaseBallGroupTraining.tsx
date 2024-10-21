@@ -114,12 +114,12 @@ const BaseBallGroupTraining = () => {
                         </p>
                       </div>
                     ) : (
-                      <div className="grid grid-cols-2 gap-5">
-                        {appointments?.results.map((bootcamp, index) => {
+                      <div className="grid sm:grid-cols-2 gap-5">
+                        {appointments?.results.map((training, index) => {
                           return (
                             <AppointmentGroupCard
                               activeDate={activeDate}
-                              data={bootcamp}
+                              data={training}
                               key={index}
                               image={baseball}
                             />

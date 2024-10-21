@@ -8,3 +8,27 @@ export const baseUrl = {
     ? import.meta.env.VITE_APP_LIVE_AUTH_REFRESH_URL
     : import.meta.env.VITE_APP_TEST_AUTH_REFRESH_URL,
 };
+
+export const configKey = {
+  APIKEY: production
+    ? import.meta.env.VITE_APP_LIVE_APIKEY
+    : import.meta.env.VITE_APP_LIVE_APIKEY,
+  AUTHDOMAIN: production
+    ? import.meta.env.VITE_APP_LIVE_AUTHDOMAIN
+    : import.meta.env.VITE_APP_TEST_AUTHDOMAIN,
+  PROJECTID: production
+    ? import.meta.env.VITE_APP_LIVE_PROJECTID
+    : import.meta.env.VITE_APP_TEST_PROJECTID,
+  STORAGEBUCKET: production
+    ? import.meta.env.VITE_APP_LIVE_STORAGEBUCKET
+    : import.meta.env.VITE_APP_TEST_STORAGEBUCKET,
+  MESSAGINGSENDERID: production
+    ? import.meta.env.VITE_APP_LIVE_MESSAGINGSENDERID
+    : import.meta.env.VITE_APP_TEST_MESSAGINGSENDERID,
+  APPID: production
+    ? import.meta.env.VITE_APP_LIVE_APPID
+    : import.meta.env.VITE_APP_TEST_APPID,
+  STIPE_PUBLIC: production
+    ? import.meta.env.VITE_APP_LIVE_STRIPE_KEY
+    : import.meta.env.VITE_APP_TEST_STRIPE_KEY,
+};

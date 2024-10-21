@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FaFacebookSquare } from "react-icons/fa";
+// import { FaFacebookSquare } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup } from "firebase/auth";
 import Swal from "sweetalert2";
-import { auth, facebookProvider, googleProvider } from "../../firebase.config";
+import { auth, googleProvider } from "../../firebase.config";
 import { useContinueWithSocialMutation } from "../redux/features/auth/authApi";
 import { useEffect } from "react";
 import { loggedInUser } from "../redux/features/auth/authSlice";
@@ -27,27 +27,27 @@ const SocialLogin = () => {
       create(userData);
     });
   };
-  const onFacebookLogin = () => {
-    signInWithPopup(auth, facebookProvider).then((data) => {
-      if (!data.user.email) {
-        Swal.fire({
-          title: "Oops!..",
-          icon: "error",
-          text: "Facebook account does not have an email address. We need email address",
-        });
-        return;
-      } else {
-        const userData = {
-          first_name: data.user.displayName,
-          email: data.user.email,
-          image: data.user.photoURL || undefined,
-          phone: data.user.phoneNumber || undefined,
-          provider: "facebook",
-        };
-        create(userData);
-      }
-    });
-  };
+  // const onFacebookLogin = () => {
+  //   signInWithPopup(auth, facebookProvider).then((data) => {
+  //     if (!data.user.email) {
+  //       Swal.fire({
+  //         title: "Oops!..",
+  //         icon: "error",
+  //         text: "Facebook account does not have an public email address. We need email address",
+  //       });
+  //       return;
+  //     } else {
+  //       const userData = {
+  //         first_name: data.user.displayName,
+  //         email: data.user.email,
+  //         image: data.user.photoURL || undefined,
+  //         phone: data.user.phoneNumber || undefined,
+  //         provider: "facebook",
+  //       };
+  //       create(userData);
+  //     }
+  //   });
+  // };
   useEffect(() => {
     if (isSuccess) {
       Swal.fire({
@@ -79,7 +79,7 @@ const SocialLogin = () => {
         <FcGoogle className="size-7" />
         <span className="text-base text-[#111827]">Google</span>
       </Button>
-      <Button
+      {/* <Button
         disabled={isLoading}
         loading={isLoading}
         onClick={onFacebookLogin}
@@ -87,7 +87,7 @@ const SocialLogin = () => {
       >
         <FaFacebookSquare className="size-7 text-blue-600" />
         <span className="text-base text-[#111827]">Facebook</span>
-      </Button>
+      </Button> */}
     </div>
   );
 };

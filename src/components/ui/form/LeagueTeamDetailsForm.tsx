@@ -50,15 +50,16 @@ const LeagueTeamDetailsForm = ({
           Fill out this form to regester for upcoming trainings
         </p>
       </div>
-      <Form form={form} layout="vertical">
+      <Form form={form} layout="vertical" className="space-y-3">
         <Form.Item
+          className="m-0"
           label="Team Name"
           name="team_name"
           rules={[{ required: true }]}
         >
           <Input
             placeholder="Enter your team name"
-            className="w-1/2 rounded-full p-2"
+            className="sm:w-1/2 w-full rounded-full p-2"
           />
         </Form.Item>
         <Form.List name="team">
@@ -67,7 +68,7 @@ const LeagueTeamDetailsForm = ({
               {fields.map(({ key, name, ...restField }, index) => (
                 <div className="space-y-2">
                   <div className="flex items-center gap-3">
-                    <h4 className="font-medium text-lg text-[#7B7B7B]">
+                    <h4 className="font-medium md:text-lg text-base text-[#7B7B7B]">
                       Player
                       {index == 0
                         ? ` ${index + 1} (Team Lead)`
@@ -82,9 +83,10 @@ const LeagueTeamDetailsForm = ({
                   </div>
                   <div
                     key={key}
-                    className="grid grid-cols-5 gap-3 items-center"
+                    className="grid xl:grid-cols-5 md:grid-cols-3 grid-cols-2 sm:gap-3 gap-2 items-center"
                   >
                     <Form.Item
+                      className="m-0"
                       label="First Name"
                       {...restField}
                       name={[name, "first_name"]}
@@ -95,10 +97,11 @@ const LeagueTeamDetailsForm = ({
                       <Input
                         readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
-                        className="w-full rounded-full p-2"
+                        className="w-full rounded-full sm:p-2 p-1"
                       />
                     </Form.Item>
                     <Form.Item
+                      className="m-0"
                       label="Last Name"
                       {...restField}
                       name={[name, "last_name"]}
@@ -107,10 +110,11 @@ const LeagueTeamDetailsForm = ({
                       <Input
                         readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
-                        className="w-full rounded-full p-2"
+                        className="w-full rounded-full sm:p-2 p-1"
                       />
                     </Form.Item>
                     <Form.Item
+                      className="m-0"
                       label="Age"
                       {...restField}
                       name={[name, "age"]}
@@ -121,12 +125,13 @@ const LeagueTeamDetailsForm = ({
                       <InputNumber
                         readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
-                        className="w-full rounded-full p-1"
+                        className="w-full rounded-full sm:p-1"
                         min={0}
                         max={99}
                       />
                     </Form.Item>
                     <Form.Item
+                      className="m-0"
                       label="Email"
                       {...restField}
                       name={[name, "email"]}
@@ -135,10 +140,11 @@ const LeagueTeamDetailsForm = ({
                       <Input
                         readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
-                        className="w-full rounded-full p-2"
+                        className="w-full rounded-full sm:p-2 p-1"
                       />
                     </Form.Item>
                     <Form.Item
+                      className="m-0"
                       label="Contact"
                       {...restField}
                       name={[name, "contact"]}
@@ -151,16 +157,16 @@ const LeagueTeamDetailsForm = ({
                         readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
                         prefix={"USA"}
-                        className="w-full rounded-full p-2"
+                        className="w-full rounded-full sm:p-2 p-1"
                       />
                     </Form.Item>
                   </div>
                 </div>
               ))}
               {fields.length <= 5 && (
-                <Form.Item>
+                <Form.Item className="mt-5">
                   <Button
-                    className="btn bg-[#07133D] hover:bg-[#07133D] text-white text-base font-medium px-5 rounded-full"
+                    className="btn bg-[#07133D] hover:bg-[#07133D] text-white sm:text-base font-medium px-5 rounded-full"
                     onClick={() => add()}
                   >
                     Add Member

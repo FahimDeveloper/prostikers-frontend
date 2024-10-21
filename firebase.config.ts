@@ -4,14 +4,15 @@ import {
   GoogleAuthProvider,
   FacebookAuthProvider,
 } from "firebase/auth";
+import { configKey } from "./src/config";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB6AXtAH6Dl6wErapcRwlfFFKnWesnuGU8",
-  authDomain: "dev-prostrikers.firebaseapp.com",
-  projectId: "dev-prostrikers",
-  storageBucket: "dev-prostrikers.appspot.com",
-  messagingSenderId: "1069381481087",
-  appId: "1:1069381481087:web:1b38cc0d18b9e1e5c2454a",
+  apiKey: configKey.APIKEY,
+  authDomain: configKey.AUTHDOMAIN,
+  projectId: configKey.PROJECTID,
+  storageBucket: configKey.STORAGEBUCKET,
+  messagingSenderId: configKey.MESSAGINGSENDERID,
+  appId: configKey.APPID,
 };
 
 // Initialize Firebase

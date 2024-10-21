@@ -143,7 +143,7 @@ const FacilityBookingTimeSlots = ({
   return (
     <>
       {slots?.length > 0 ? (
-        <div className="grid grid-cols-5 gap-1">
+        <div className="grid md:grid-cols-5 sm:grid-cols-4 grid-cols-2 gap-1">
           {(
             slots as [
               {

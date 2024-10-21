@@ -69,7 +69,11 @@ export default function CheckoutForm({
   console.log(message);
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
+    <form
+      id="payment-form"
+      onSubmit={handleSubmit}
+      className="md:w-[500] sm:w-96 w-[305px] sm:p-14 p-5"
+    >
       {clientSecret && (
         <PaymentElement
           id="payment-element"
@@ -80,14 +84,14 @@ export default function CheckoutForm({
       )}
       <div className="space-y-3">
         <Checkbox onChange={() => setAgree(!agree)}>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <p className="text-sm text-secondary">I agree with</p>
             <TermsCondition>
-              <p className="text-primary cursor-pointer">Terms of service</p>
+              <p className="text-primary cursor-pointer">Terms </p>
             </TermsCondition>
             <p>&</p>
             <PrivacyPolicy>
-              <p className="text-primary cursor-pointer">Privacy policy</p>
+              <p className="text-primary cursor-pointer">policy</p>
             </PrivacyPolicy>
           </div>
         </Checkbox>
