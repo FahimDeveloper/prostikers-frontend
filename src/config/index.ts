@@ -28,7 +28,4 @@ export const configKey = {
   APPID: production
     ? import.meta.env.VITE_APP_LIVE_APPID
     : import.meta.env.VITE_APP_TEST_APPID,
-  STIPE_PUBLIC: production
-    ? import.meta.env.VITE_APP_LIVE_STRIPE_KEY
-    : import.meta.env.VITE_APP_TEST_STRIPE_KEY,
 };
