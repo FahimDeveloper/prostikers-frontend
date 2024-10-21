@@ -206,38 +206,46 @@ const RentalBookingReviewPart = ({
               add-on for more details and to add it to your booking.
             </p>
           </div>
-          {(addonsData?.results as IAddon)?.addons?.map((addon, index) => (
-            <div key={index} className="grid grid-cols-3 items-end">
-              <div className="flex gap-5 col-span-2 items-center">
-                <img
-                  src={addon.addon_image}
-                  className="sm:size-16 size-14 rounded-xl"
-                  alt={addon.addon_title}
-                />
-                <div className="space-y-2">
-                  <h4 className="sm:text-lg text-base text-secondary font-medium">
-                    {addon.addon_title}
-                  </h4>
-                  <p className="text-sm text-primary font-semibold">
-                    +${addon.addon_price}/hours
-                  </p>
+          {addonsData?.results ? (
+            (addonsData?.results?._id as IAddon)?.addons?.map(
+              (addon, index) => (
+                <div key={index} className="grid grid-cols-3 items-end">
+                  <div className="flex gap-5 col-span-2 items-center">
+                    <img
+                      src={addon.addon_image}
+                      className="sm:size-16 size-14 rounded-xl"
+                      alt={addon.addon_title}
+                    />
+                    <div className="space-y-2">
+                      <h4 className="sm:text-lg text-base text-secondary font-medium">
+                        {addon.addon_title}
+                      </h4>
+                      <p className="text-sm text-primary font-semibold">
+                        +${addon.addon_price}/hours
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-end">
+                    <Button
+                      onClick={() => onAddAddon(addon)}
+                      disabled={
+                        addons.find((a: any) => a.name === addon.addon_title)
+                          ? true
+                          : false
+                      }
+                      className="bg-secondary px-4 h-8 text-white"
+                    >
+                      + Add
+                    </Button>
+                  </div>
                 </div>
-              </div>
-              <div className="text-end">
-                <Button
-                  onClick={() => onAddAddon(addon)}
-                  disabled={
-                    addons.find((a: any) => a.name === addon.addon_title)
-                      ? true
-                      : false
-                  }
-                  className="bg-secondary px-4 h-8 text-white"
-                >
-                  + Add
-                </Button>
-              </div>
-            </div>
-          ))}
+              )
+            )
+          ) : (
+            <p className="capitalize text-base text-red-400">
+              {rentalInfo?.sport} rental facility dosen't have any add-ons
+            </p>
+          )}
         </div>
         <div className="sm:col-span-2 sm:p-7 p-5 rounded-2xl border border-solid border-[#F2F2F2] space-y-5">
           <h3 className="text-[#063232] text-lg font-medium text-center p-5 bg-[#F6FFFF]">
