@@ -61,10 +61,10 @@ const FacilitiesSection = () => {
                   index == 0
                     ? "bg-[#EBFAFE] md:top-24"
                     : index == 1
-                    ? "bg-[#FFF2FC] md:top-32"
+                    ? "bg-[#FFF2FC] md:top-28"
                     : index == 2
-                    ? "bg-[#073742] md:top-40"
-                    : "bg-[#FFCFB4] md:top-48"
+                    ? "bg-[#073742] md:top-32"
+                    : "bg-[#FFCFB4] md:top-36"
                 } sticky xl:p-14 sm:p-10 p-6 pt-8 space-y-7 rounded-3xl`}
               >
                 <span
