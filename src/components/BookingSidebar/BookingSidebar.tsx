@@ -114,31 +114,31 @@ const BookingSidebar = () => {
         <ul className="list-none text-[#063232] text-base font-medium space-y-2">
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>Sa</p>
-            <p>9:00 AM - 10:00 PM</p>
+            <p>9:00 AM - 9:00 PM</p>
           </li>
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>Su</p>
-            <p>9:00 AM - 10:00 PM</p>
+            <p>9:00 AM - 9:00 PM</p>
           </li>
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>Mo</p>
-            <p>9:00 AM - 10:00 PM</p>
+            <p>11:00 AM - 9:00 PM</p>
           </li>
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>Tu</p>
-            <p>9:00 AM - 10:00 PM</p>
+            <p>11:00 AM - 9:00 PM</p>
           </li>
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>We</p>
-            <p>9:00 AM - 10:00 PM</p>
+            <p>11:00 AM - 9:00 PM</p>
           </li>
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>Th</p>
-            <p>9:00 AM - 10:00 PM</p>
+            <p>11:00 AM - 9:00 PM</p>
           </li>
           <li className="flex justify-between bg-[#F6FFFF] px-5 py-3">
             <p>Fr</p>
-            <p>9:00 AM - 10:00 PM</p>
+            <p>11:00 AM - 9:00 PM</p>
           </li>
         </ul>
       </div>
