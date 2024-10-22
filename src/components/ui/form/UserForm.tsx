@@ -193,6 +193,7 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
               className="w-full m-0"
               name="date_of_birth"
               label="Date of Birth"
+              rules={[{ required: true }]}
             >
               <DatePicker className="w-full" format={"DD/MM/YYYY"} />
             </Form.Item>

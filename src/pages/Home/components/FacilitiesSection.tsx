@@ -59,12 +59,12 @@ const FacilitiesSection = () => {
                 key={index}
                 className={`${
                   index == 0
-                    ? "bg-[#EBFAFE] top-24"
+                    ? "bg-[#EBFAFE] md:top-24"
                     : index == 1
-                    ? "bg-[#FFF2FC] top-32"
+                    ? "bg-[#FFF2FC] md:top-32"
                     : index == 2
-                    ? "bg-[#073742] top-40"
-                    : "bg-[#FFCFB4] top-48"
+                    ? "bg-[#073742] md:top-40"
+                    : "bg-[#FFCFB4] md:top-48"
                 } sticky xl:p-14 sm:p-10 p-6 pt-8 space-y-7 rounded-3xl`}
               >
                 <span
@@ -84,7 +84,7 @@ const FacilitiesSection = () => {
                   <img
                     loading="lazy"
                     src={facilty.image}
-                    className="w-full lg:h-full max-h-[400px] md:min-h-80 object-fill rounded-2xl lg:order-2 md:order-1"
+                    className="w-full lg:h-full md:max-h-[480px] object-fill rounded-2xl lg:order-2 md:order-1"
                     alt="facility image"
                   />
                   <div className="xl:space-y-9 lg:order-1 md:order-2 sm:space-y-6 space-y-4">
