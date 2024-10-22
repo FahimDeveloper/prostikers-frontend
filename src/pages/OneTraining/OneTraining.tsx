@@ -51,7 +51,7 @@ const OneTraining = () => {
         ],
       },
       {
-        title: "Field Hockey Training",
+        title: "Softball Training",
         image: training5,
         link: "softball",
         description: [
