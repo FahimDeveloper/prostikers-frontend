@@ -84,7 +84,7 @@ const FacilitiesSection = () => {
                   <img
                     loading="lazy"
                     src={facilty.image}
-                    className="w-full lg:h-full max-h-[400px] min-h-80 object-fill rounded-2xl lg:order-2 md:order-1"
+                    className="w-full lg:h-full max-h-[400px] md:min-h-80 object-fill rounded-2xl lg:order-2 md:order-1"
                     alt="facility image"
                   />
                   <div className="xl:space-y-9 lg:order-1 md:order-2 sm:space-y-6 space-y-4">
@@ -97,7 +97,7 @@ const FacilitiesSection = () => {
                           : index == 2
                           ? "text-[#FFFFFF]"
                           : "text-[#351A0A]"
-                      } text-bold xl:text-[40px] md:text-4xl text-2xl md:leading-[48px] leading-6`}
+                      } text-bold xl:text-[40px] md:text-4xl text-2xl md:leading-[48px] leading-8`}
                     >
                       {facilty.title}
                     </h3>

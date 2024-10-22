@@ -67,16 +67,16 @@ const Registration = () => {
   };
 
   return (
-    <div className="w-full min-h-svh py-10 flex flex-col justify-center gap-5 items-center">
-      <h2 className="text-center font-poppins font-medium text-4xl leading-[46px] text-[#043E41]">
+    <div className="w-full min-h-svh sm:py-24 pt-24 pb-12 flex flex-col justify-center sm:gap-5 gap-3 items-center">
+      <h2 className="text-center font-poppins font-medium sm:text-4xl text-3xl leading-[46px] text-[#043E41]">
         Welcome to ProStrikers
       </h2>
-      <div className="w-[480px] space-y-3">
+      <div className="md:w-[480px] sm:w-96 w-80 space-y-3">
         <h3 className="text-center font-poppins text-2xl font-medium text-[#022B2D]">
           Create your account
         </h3>
         <Form onFinish={onFinish} layout="vertical" className="space-y-4">
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid sm:grid-cols-2 gap-3">
             <Form.Item
               name="first_name"
               rules={[
@@ -106,7 +106,7 @@ const Registration = () => {
               />
             </Form.Item>
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid sm:grid-cols-2 gap-3">
             <Form.Item
               name="phone"
               rules={[
@@ -190,13 +190,11 @@ const Registration = () => {
               <div className="flex gap-2">
                 <p className="text-sm text-secondary">I agree with</p>
                 <TermsCondition>
-                  <p className="text-primary cursor-pointer">
-                    Terms of service
-                  </p>
+                  <p className="text-primary cursor-pointer">Terms</p>
                 </TermsCondition>
                 <p>&</p>
                 <PrivacyPolicy>
-                  <p className="text-primary cursor-pointer">Privacy policy</p>
+                  <p className="text-primary cursor-pointer">policy</p>
                 </PrivacyPolicy>
               </div>
             </Checkbox>
