@@ -127,9 +127,13 @@ const BootcampCard = ({ image, data }: { image: any; data: IBootcamp }) => {
                 <FaUserGraduate className="size-5" />
                 <p className="text-base">Trainer :</p>
               </div>
-              <p className="text-base font-medium">
-                {data?.trainer.first_name} {data?.trainer.last_name}
-              </p>
+              {data?.trainer ? (
+                <p className="text-base font-medium">
+                  {data?.trainer.first_name} {data?.trainer.last_name}
+                </p>
+              ) : (
+                <p className="text-base font-medium">Trainer Missing</p>
+              )}
             </div>
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2 min-w-28">
