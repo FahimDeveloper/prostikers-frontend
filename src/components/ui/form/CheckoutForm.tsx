@@ -47,7 +47,7 @@ export default function CheckoutForm({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: "https://www.youtube.com/",
+        return_url: "https://prostrikers.com",
       },
       redirect: "if_required",
     });

@@ -242,7 +242,7 @@ const RentalBookingReviewPart = ({
             ))
           ) : isFetching ? (
             <div className="flex items-center justify-center h-16">
-              <FaSpinner className="size-5" />
+              <FaSpinner className="size-6 animate-spin text-primary" />
             </div>
           ) : (
             <p className="capitalize text-base text-red-400">
