@@ -12,7 +12,7 @@ export const baseUrl = {
 export const configKey = {
   APIKEY: production
     ? import.meta.env.VITE_APP_LIVE_APIKEY
-    : import.meta.env.VITE_APP_LIVE_APIKEY,
+    : import.meta.env.VITE_APP_TEST_APIKEY,
   AUTHDOMAIN: production
     ? import.meta.env.VITE_APP_LIVE_AUTHDOMAIN
     : import.meta.env.VITE_APP_TEST_AUTHDOMAIN,

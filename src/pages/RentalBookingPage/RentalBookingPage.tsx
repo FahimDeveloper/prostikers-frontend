@@ -27,6 +27,7 @@ const RentalBookingPage = () => {
         bookings.push({
           date: date.toISOString().split("T")[0],
           time_slot: slot,
+          lane: dateSlots.lane,
           training: state?.facilityInfo?.training,
         });
       })
