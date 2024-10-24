@@ -11,6 +11,7 @@ import { useDeleteBookingSlotMutation } from "../../../redux/features/slotBookin
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
 import { useGetSportAddonsQuery } from "../../../redux/features/addon/addonApi";
 import { IAddon } from "../../../types/addon.types";
+import { FaSpinner } from "react-icons/fa6";
 
 const RentalBookingReviewPart = ({
   addons,
@@ -35,7 +36,7 @@ const RentalBookingReviewPart = ({
     useVoucherMutation();
 
   const [deleteSlot] = useDeleteBookingSlotMutation();
-  const { data: addonsData } = useGetSportAddonsQuery({
+  const { data: addonsData, isFetching } = useGetSportAddonsQuery({
     sport: rentalInfo?.sport,
   });
 
@@ -206,41 +207,43 @@ const RentalBookingReviewPart = ({
               add-on for more details and to add it to your booking.
             </p>
           </div>
-          {addonsData?.results ? (
-            (addonsData?.results?._id as IAddon)?.addons?.map(
-              (addon, index) => (
-                <div key={index} className="grid grid-cols-3 items-end">
-                  <div className="flex gap-5 col-span-2 items-center">
-                    <img
-                      src={addon.addon_image}
-                      className="sm:size-16 size-14 rounded-xl"
-                      alt={addon.addon_title}
-                    />
-                    <div className="space-y-2">
-                      <h4 className="sm:text-lg text-base text-secondary font-medium">
-                        {addon.addon_title}
-                      </h4>
-                      <p className="text-sm text-primary font-semibold">
-                        +${addon.addon_price}/hours
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-end">
-                    <Button
-                      onClick={() => onAddAddon(addon)}
-                      disabled={
-                        addons.find((a: any) => a.name === addon.addon_title)
-                          ? true
-                          : false
-                      }
-                      className="bg-secondary px-4 h-8 text-white"
-                    >
-                      + Add
-                    </Button>
+          {addonsData?.results?._id ? (
+            (addonsData?.results as IAddon)?.addons?.map((addon, index) => (
+              <div key={index} className="grid grid-cols-3 items-end">
+                <div className="flex gap-5 col-span-2 items-center">
+                  <img
+                    src={addon.addon_image}
+                    className="sm:size-16 size-14 rounded-xl"
+                    alt={addon.addon_title}
+                  />
+                  <div className="space-y-2">
+                    <h4 className="sm:text-lg text-base text-secondary font-medium">
+                      {addon.addon_title}
+                    </h4>
+                    <p className="text-sm text-primary font-semibold">
+                      +${addon.addon_price}/hours
+                    </p>
                   </div>
                 </div>
-              )
-            )
+                <div className="text-end">
+                  <Button
+                    onClick={() => onAddAddon(addon)}
+                    disabled={
+                      addons.find((a: any) => a.name === addon.addon_title)
+                        ? true
+                        : false
+                    }
+                    className="bg-secondary px-4 h-8 text-white"
+                  >
+                    + Add
+                  </Button>
+                </div>
+              </div>
+            ))
+          ) : isFetching ? (
+            <div className="flex items-center justify-center h-16">
+              <FaSpinner className="size-5" />
+            </div>
           ) : (
             <p className="capitalize text-base text-red-400">
               {rentalInfo?.sport} rental facility dosen't have any add-ons
