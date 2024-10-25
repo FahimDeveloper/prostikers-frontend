@@ -6,10 +6,15 @@ import { FaSpinner } from "react-icons/fa";
 import { Button } from "antd";
 import { useEffect } from "react";
 import { useAppDispatch } from "../../hooks/useAppHooks";
-import { updateUserInfo } from "../../redux/features/auth/authSlice";
+import {
+  selectCurrentUser,
+  updateUserInfo,
+} from "../../redux/features/auth/authSlice";
+import { useSelector } from "react-redux";
 
 const VerifyUser = () => {
   const { token } = useParams();
+  const user = useSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
   const {
     data,
@@ -18,6 +23,7 @@ const VerifyUser = () => {
     isError: isVerifyError,
     error: verifyError,
   } = useVerifyUserQuery({
+    email: user?.email,
     token,
   });
   useEffect(() => {

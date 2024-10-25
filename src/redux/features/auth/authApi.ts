@@ -58,8 +58,8 @@ const authApi = authApiSlice.injectEndpoints({
       }),
     }),
     verifyUser: builder.query({
-      query: ({ token }) => ({
-        url: `/auth/user/verify/${token}`,
+      query: ({ token, email }) => ({
+        url: `/auth/${email}/verify/${token}`,
         method: "GET",
       }),
     }),

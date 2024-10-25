@@ -544,7 +544,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/user/verify/:token",
-        element: <VerifyUser />,
+        element: (
+          <PrivetRoute>
+            <VerifyUser />
+          </PrivetRoute>
+        ),
       },
       {
         path: "/registration",
