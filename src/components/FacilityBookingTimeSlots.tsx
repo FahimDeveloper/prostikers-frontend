@@ -172,7 +172,7 @@ const FacilityBookingTimeSlots = ({
               }
               key={index}
               onClick={() => onSelect(slot, index)}
-              className={`border border-solid rounded-md border-gray-200 h-12 px-1 disabled:cursor-not-allowed text-center ${
+              className={`border border-solid rounded-md border-gray-200 h-12 px-1 disabled:cursor-not-allowed text-center text-black ${
                 createLoading || slotsCartLoading || slotsBookedLoading
                   ? "cursor-not-allowed"
                   : "cursor-pointer"

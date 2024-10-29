@@ -15,7 +15,7 @@ const DateSlider = ({
   useEffect(() => {
     const updateDateCount = () => {
       const screenWidth = window.innerWidth;
-      if (screenWidth <= 425) {
+      if (screenWidth <= 435) {
         setDateCount(3);
       } else if (screenWidth <= 768) {
         setDateCount(5);

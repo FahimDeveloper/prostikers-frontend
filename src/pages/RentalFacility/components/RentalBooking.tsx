@@ -36,11 +36,13 @@ const RentalBooking = () => {
     { skip: facilityCage ? false : true }
   );
   const [lane, setLane] = useState<string | undefined>(undefined);
+
   useEffect(() => {
     if (facility?.results?._id) {
       setLane(facility?.results?.lanes[0]);
     }
   }, [facility]);
+
   const slotsBookedQuery = useFacilityBookedSlotsQuery(
     {
       training: facility?.results._id,
@@ -126,7 +128,6 @@ const RentalBooking = () => {
       },
     });
   };
-  console.log(selectSlots);
   return (
     <div className="bg-[#F9FAFB] sm:py-10 rounded-2xl space-y-6 sm:px-5 py-7 px-3">
       <div className="space-y-3">
