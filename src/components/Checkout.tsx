@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { usePaymentMutation } from "../redux/features/payment/paymentApi";
 import Swal from "sweetalert2";
 import { FaSpinner } from "react-icons/fa";
+import { configKey } from "../config";
 
 const Checkout = ({
   amount,
@@ -21,7 +22,7 @@ const Checkout = ({
   onSubmit: any;
   setTransactionId: any;
 }) => {
-  const stripePromise = loadStripe(import.meta.env.VITE_APP_TEST_STRIPE_KEY);
+  const stripePromise = loadStripe(configKey.STRIPE_KEY);
   const [clientSecret, setClientSecret] = useState("");
   const [create, { isLoading: createLoading }] = usePaymentMutation(undefined);
   useEffect(() => {
