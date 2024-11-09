@@ -21,16 +21,19 @@ import { ImSpinner } from "react-icons/im";
 import FacilityBookingTimeSlots from "../../../components/FacilityBookingTimeSlots";
 import { CiClock1 } from "react-icons/ci";
 
-const RentalBooking = () => {
+const RentalBooking = ({
+  facilityCage,
+  setFacilityCage,
+}: {
+  facilityCage: string | undefined;
+  setFacilityCage: any;
+}) => {
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const [deleteSlot] = useDeleteBookingSlotMutation();
   const [activeDate, setActiveDate] = useState(new Date());
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
   const createCartBooking = useAddToCartSlotMutation();
-  const [facilityCage, setFacilityCage] = useState<string | undefined>(
-    undefined
-  );
   const { data: facility, isFetching } = useRentalFacilityQuery(
     { facility: facilityCage },
     { skip: facilityCage ? false : true }
@@ -140,20 +143,20 @@ const RentalBooking = () => {
           className="w-full h-9 rounded-full"
           options={[
             {
-              label: "Cricket Cage",
-              value: "cricket cage",
+              label: "Baseball Cage",
+              value: "baseball cage",
             },
             {
               label: "Soccer Cage",
               value: "soccer cage",
             },
             {
-              label: "Baseball Cage",
-              value: "baseball cage",
-            },
-            {
               label: "Softball Cage",
               value: "softball cage",
+            },
+            {
+              label: "Cricket Cage",
+              value: "cricket cage",
             },
             {
               label: "Hockey Cage",
