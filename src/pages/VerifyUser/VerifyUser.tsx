@@ -1,21 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, useParams } from "react-router-dom";
 import { useVerifyUserQuery } from "../../redux/features/auth/authApi";
 import { FaSpinner } from "react-icons/fa";
 import { Button } from "antd";
-import { useEffect } from "react";
-import { useAppDispatch } from "../../hooks/useAppHooks";
-import {
-  selectCurrentUser,
-  updateUserInfo,
-} from "../../redux/features/auth/authSlice";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 import { useSelector } from "react-redux";
 
 const VerifyUser = () => {
   const { token } = useParams();
   const user = useSelector(selectCurrentUser);
-  const dispatch = useAppDispatch();
   const {
     data,
     isLoading: isVerifyLoading,
@@ -26,11 +19,6 @@ const VerifyUser = () => {
     email: user?.email,
     token,
   });
-  useEffect(() => {
-    if (isVerifySuccess) {
-      dispatch(updateUserInfo(data?.results));
-    }
-  }, [isVerifySuccess]);
   return (
     <>
       {isVerifyLoading && (
