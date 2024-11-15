@@ -8,11 +8,8 @@ type IState = {
     last_name: string;
     image: string;
     email: string;
-    password: string;
     role: string;
     phone: string;
-    verified: boolean;
-    provider: string;
   };
   token: null | string;
 };

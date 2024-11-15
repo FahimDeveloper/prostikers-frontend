@@ -14,8 +14,6 @@ import {
   useFacilityBookedSlotsQuery,
   useGetBookingSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { ImSpinner } from "react-icons/im";
 import FacilityBookingTimeSlots from "../../../components/FacilityBookingTimeSlots";
@@ -28,7 +26,6 @@ const RentalBooking = ({
   facilityCage: string | undefined;
   setFacilityCage: any;
 }) => {
-  const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const [deleteSlot] = useDeleteBookingSlotMutation();
   const [activeDate, setActiveDate] = useState(new Date());
@@ -52,7 +49,7 @@ const RentalBooking = ({
       date: activeDate.toISOString().split("T")[0],
       lane: lane,
     },
-    { skip: user && facility?.results?._id ? false : true }
+    { skip: facility?.results?._id ? false : true }
   );
   const slotsCartQuery = useGetBookingSlotsQuery(
     {
@@ -60,7 +57,7 @@ const RentalBooking = ({
       date: activeDate.toISOString().split("T")[0],
       lane: lane,
     },
-    { skip: user && facility?.results?._id ? false : true }
+    { skip: facility?.results?._id ? false : true }
   );
   const onChange = (value: string) => {
     setFacilityCage(value);
