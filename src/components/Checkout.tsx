@@ -37,6 +37,7 @@ const Checkout = ({
           icon: "error",
           title: "Oops...",
           text: `${err.message || "Something went wrong"}`,
+          confirmButtonColor: "#0ABAC3",
         });
       });
   }, []);

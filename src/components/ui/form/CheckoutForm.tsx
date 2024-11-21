@@ -72,7 +72,9 @@ export default function CheckoutForm({
         title: "Payment Error",
         text: message,
         icon: "error",
+        confirmButtonColor: "#0ABAC3",
       });
+      setMessage(undefined);
     }
   }, [message]);
 
