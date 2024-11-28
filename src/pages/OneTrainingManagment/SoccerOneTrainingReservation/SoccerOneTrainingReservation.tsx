@@ -3,7 +3,12 @@
 import BannerSection from "../../../common/BannerSection";
 import Container from "../../../components/Container";
 import soccerBanner from "../../../assets/images/programsBanner/soccer-banner.webp";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  useBlocker,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useForm } from "antd/es/form/Form";
 import Swal from "sweetalert2";
@@ -23,6 +28,7 @@ import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm
 import { Button, Form, Input } from "antd";
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
 import OneTrainingBookingTimeSlots from "../../../components/OneTrainingBookingTimeSlots";
+import RouteBlocker from "../../../utils/RouteBlocker";
 
 const SoccerOneTrainingReservation = () => {
   const { id } = useParams();
@@ -36,6 +42,10 @@ const SoccerOneTrainingReservation = () => {
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
   const [form] = useForm();
   const { state } = useLocation();
+  const [block, setBlock] = useState(false);
+  const [process, setProcess] = useState(false);
+  const blocker = useBlocker(block);
+  const [formData, setFormData] = useState({});
   const location = state?.from?.pathname || "/";
   const { data: appointment } = useOneAppointmentQuery(id, {
     skip: id ? false : true,
@@ -74,7 +84,7 @@ const SoccerOneTrainingReservation = () => {
   }
 
   const onFinish = (values: any) => {
-    values.trainer = state.trainer._id;
+    values.trainer = state.trainer?._id;
     values.appointment = id;
     const bookings: any = [];
     selectSlots?.forEach((dateSlots) =>
@@ -88,15 +98,22 @@ const SoccerOneTrainingReservation = () => {
     );
     values.bookings = bookings;
     values.voucher_applied = voucherApplied;
-    navigate("/one-appointment-payment", {
-      state: {
-        data: values,
-        location: location,
-        amount: totalPrice,
-      },
-    });
+    setFormData(values);
+    setProcess(true);
+    setBlock(false);
   };
 
+  useEffect(() => {
+    if (process) {
+      navigate("/one-appointment-payment", {
+        state: {
+          data: formData,
+          amount: totalPrice,
+          location: location,
+        },
+      });
+    }
+  }, [process]);
   const onVoucherFinish = (values: any) => {
     (values.voucher_type = "appointment"), use(values);
   };
@@ -132,6 +149,9 @@ const SoccerOneTrainingReservation = () => {
                 return slots;
               })
               .filter(Boolean);
+            if (updatedSlots.length == 0) {
+              setBlock(false);
+            }
             setSelectSlots(updatedSlots);
           })
           .catch((error) => toast.error(`${error.data.message}`));
@@ -197,6 +217,7 @@ const SoccerOneTrainingReservation = () => {
               addToCart={createCartBooking}
               selectSlots={selectSlots}
               setSelectSlots={setSelectSlots}
+              setBlock={setBlock}
             />
           )}
           {selectSlots.length > 0 && (
@@ -304,6 +325,7 @@ const SoccerOneTrainingReservation = () => {
             <TrainingGeneralForm form={form} onFinish={onFinish} />
           )}
         </div>
+        <RouteBlocker block={block} blocker={blocker} />
       </Container>
     </>
   );

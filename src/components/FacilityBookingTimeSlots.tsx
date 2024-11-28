@@ -22,6 +22,7 @@ const FacilityBookingTimeSlots = ({
   setSelectSlots,
   slotsBookedQuery,
   lane,
+  setBlock,
 }: {
   activeDate: Date;
   training: any;
@@ -31,6 +32,7 @@ const FacilityBookingTimeSlots = ({
   selectSlots: any;
   setSelectSlots: any;
   lane: string | undefined;
+  setBlock: any;
 }) => {
   const [create, { isLoading: createLoading, isSuccess, isError, error }] =
     addToCart;
@@ -103,6 +105,7 @@ const FacilityBookingTimeSlots = ({
   useEffect(() => {
     if (isSuccess) {
       toast.success("success");
+      setBlock(true);
       setSlotIndex(null);
       const dateSlotIndex = selectSlots.findIndex(
         (slots: any) =>

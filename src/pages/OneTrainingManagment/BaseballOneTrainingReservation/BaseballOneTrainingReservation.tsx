@@ -3,7 +3,12 @@
 import BannerSection from "../../../common/BannerSection";
 import Container from "../../../components/Container";
 import baseballBanner from "../../../assets/images/programsBanner/baseball-banner.webp";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  useBlocker,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useForm } from "antd/es/form/Form";
 import Swal from "sweetalert2";
@@ -23,6 +28,7 @@ import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
 import { Button, Form, Input } from "antd";
 import OneTrainingBookingTimeSlots from "../../../components/OneTrainingBookingTimeSlots";
+import RouteBlocker from "../../../utils/RouteBlocker";
 
 const BaseballOneTrainingReservation = () => {
   const { id } = useParams();
@@ -34,6 +40,10 @@ const BaseballOneTrainingReservation = () => {
   const [deleteSlot] = useDeleteBookingSlotMutation();
   const [activeDate, setActiveDate] = useState(new Date());
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
+  const [block, setBlock] = useState(false);
+  const [process, setProcess] = useState(false);
+  const blocker = useBlocker(block);
+  const [formData, setFormData] = useState({});
   const [form] = useForm();
   const { state } = useLocation();
   const location = state?.from?.pathname || "/";
@@ -74,7 +84,7 @@ const BaseballOneTrainingReservation = () => {
   }
 
   const onFinish = (values: any) => {
-    values.trainer = state.trainer._id;
+    values.trainer = state.trainer?._id;
     values.appointment = id;
     const bookings: any = [];
     selectSlots?.forEach((dateSlots) =>
@@ -88,14 +98,22 @@ const BaseballOneTrainingReservation = () => {
     );
     values.bookings = bookings;
     values.voucher_applied = voucherApplied;
-    navigate("/one-appointment-payment", {
-      state: {
-        data: values,
-        amount: totalPrice,
-        location: location,
-      },
-    });
+    setFormData(values);
+    setProcess(true);
+    setBlock(false);
   };
+
+  useEffect(() => {
+    if (process) {
+      navigate("/one-appointment-payment", {
+        state: {
+          data: formData,
+          amount: totalPrice,
+          location: location,
+        },
+      });
+    }
+  }, [process]);
 
   const onVoucherFinish = (values: any) => {
     (values.voucher_type = "appointment"), use(values);
@@ -132,6 +150,9 @@ const BaseballOneTrainingReservation = () => {
                 return slots;
               })
               .filter(Boolean);
+            if (updatedSlots.length == 0) {
+              setBlock(false);
+            }
             setSelectSlots(updatedSlots);
           })
           .catch((error) => toast.error(`${error.data.message}`));
@@ -201,6 +222,7 @@ const BaseballOneTrainingReservation = () => {
               addToCart={createCartBooking}
               selectSlots={selectSlots}
               setSelectSlots={setSelectSlots}
+              setBlock={setBlock}
             />
           )}
           {selectSlots.length > 0 && (
@@ -308,6 +330,7 @@ const BaseballOneTrainingReservation = () => {
             <TrainingGeneralForm form={form} onFinish={onFinish} />
           )}
         </div>
+        <RouteBlocker block={block} blocker={blocker} />
       </Container>
     </>
   );

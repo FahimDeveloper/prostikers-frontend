@@ -1,10 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useState } from "react";
 import Container from "../../components/Container";
 import RentalBookingSteps from "../../components/ui/steps/RentalBookingSteps";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useBlocker, useLocation, useNavigate } from "react-router-dom";
 import { useCreateFacilityReservationMutation } from "../../redux/features/facility/facilityApi";
+import RouteBlocker from "../../utils/RouteBlocker";
 
 const RentalBookingPage = () => {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -13,6 +15,10 @@ const RentalBookingPage = () => {
   const [current, setCurrent] = useState(0);
   useCreateFacilityReservationMutation();
   const { state } = useLocation();
+  const [process, setProcess] = useState(false);
+  const [formData, setFormData] = useState({});
+  const [block, setBlock] = useState(true);
+  const blocker = useBlocker(block);
   const sessionSlotsData = sessionStorage.getItem("rental-facility-slots");
   const slotsData = JSON.parse(sessionSlotsData as string);
   // const sessionMembershipData = sessionStorage.getItem("membership-info");
@@ -37,15 +43,23 @@ const RentalBookingPage = () => {
       values.facility = state?.facilityInfo.training;
       values.addons = addons;
       values.voucher_applied = voucherApplied;
+      setFormData(values);
+      setBlock(false);
+      setProcess(true);
+    });
+  };
+
+  useEffect(() => {
+    if (process) {
       navigate("/facility-payment", {
         state: {
-          data: values,
+          data: formData,
           amount: totalPrice,
           // membershipData: membershipData,
         },
       });
-    });
-  };
+    }
+  }, [process]);
 
   useEffect(() => {
     form.setFieldsValue({
@@ -70,6 +84,7 @@ const RentalBookingPage = () => {
           setTotalPrice={setTotalPrice}
         />
       </div>
+      <RouteBlocker blocker={blocker} block={block} />
     </Container>
   );
 };

@@ -8,7 +8,7 @@ const EventsSection = () => {
   });
   return (
     <>
-      {data?.results.length && (
+      {data?.results?.length != undefined && data?.results?.length > 0 && (
         <Container>
           <div className="lg:py-14 md:py-12 py-10 space-y-10">
             <div className="space-y-4 text-center">

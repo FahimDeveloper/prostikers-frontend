@@ -4,7 +4,12 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
-import VerifyUser from "../pages/VerifyUser/VerifyUser";
+const VerifyUser = LazyLoad(
+  lazy(() => import("../pages/VerifyUser/VerifyUser"))
+);
+const BlackFridayMembership = LazyLoad(
+  lazy(() => import("../pages/BlackFridayMembership/BlackFridayMembership"))
+);
 const Dashboard = LazyLoad(
   lazy(() => import("../pages/DashboardManagement/Dashboard/Dashboard"))
 );
@@ -509,6 +514,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/black-friday/membership",
+        element: <BlackFridayMembership />,
       },
       {
         path: "/login",

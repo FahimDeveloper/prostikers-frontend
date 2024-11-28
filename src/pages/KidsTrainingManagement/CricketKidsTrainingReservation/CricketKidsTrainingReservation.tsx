@@ -38,7 +38,7 @@ const CricketKidsTrainingReservation = () => {
   }
 
   const onFinish = (values: any) => {
-    values.trainer = state.trainer._id;
+    values.trainer = state.trainer?._id;
     values.class = id;
     values.class_date = state.date;
     values.voucher_applied = voucherApplied;

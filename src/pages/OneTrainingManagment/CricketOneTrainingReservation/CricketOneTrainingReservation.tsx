@@ -6,7 +6,12 @@ import cricketBanner from "../../../assets/images/programsBanner/cricket-banner.
 import { useEffect, useState } from "react";
 import { useForm } from "antd/es/form/Form";
 import Swal from "sweetalert2";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  useBlocker,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import {
   useAddToCartSlotMutation,
   useDeleteBookingSlotMutation,
@@ -23,6 +28,7 @@ import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm
 import { Button, Form, Input } from "antd";
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
 import OneTrainingBookingTimeSlots from "../../../components/OneTrainingBookingTimeSlots";
+import RouteBlocker from "../../../utils/RouteBlocker";
 
 const CricketOneTrainingReservation = () => {
   const { id } = useParams();
@@ -37,6 +43,10 @@ const CricketOneTrainingReservation = () => {
   const [form] = useForm();
   const { state } = useLocation();
   const location = state?.from?.pathname || "/";
+  const [block, setBlock] = useState(false);
+  const [process, setProcess] = useState(false);
+  const blocker = useBlocker(block);
+  const [formData, setFormData] = useState({});
   const { data: appointment } = useOneAppointmentQuery(id, {
     skip: id ? false : true,
   });
@@ -74,7 +84,7 @@ const CricketOneTrainingReservation = () => {
   }
 
   const onFinish = (values: any) => {
-    values.trainer = state.trainer._id;
+    values.trainer = state.trainer?._id;
     values.appointment = id;
     values.voucher_applied = voucherApplied;
     const bookings: any = [];
@@ -88,14 +98,22 @@ const CricketOneTrainingReservation = () => {
       )
     );
     values.bookings = bookings;
-    navigate("/one-appointment-payment", {
-      state: {
-        data: values,
-        location: location,
-        amount: totalPrice,
-      },
-    });
+    setFormData(values);
+    setProcess(true);
+    setBlock(false);
   };
+
+  useEffect(() => {
+    if (process) {
+      navigate("/one-appointment-payment", {
+        state: {
+          data: formData,
+          amount: totalPrice,
+          location: location,
+        },
+      });
+    }
+  }, [process]);
 
   const onDelete = (date: any, slot: any) => {
     Swal.fire({
@@ -128,6 +146,9 @@ const CricketOneTrainingReservation = () => {
                 return slots;
               })
               .filter(Boolean);
+            if (updatedSlots.length == 0) {
+              setBlock(false);
+            }
             setSelectSlots(updatedSlots);
           })
           .catch((error) => toast.error(`${error.data.message}`));
@@ -201,6 +222,7 @@ const CricketOneTrainingReservation = () => {
               addToCart={createCartBooking}
               selectSlots={selectSlots}
               setSelectSlots={setSelectSlots}
+              setBlock={setBlock}
             />
           )}
           {selectSlots.length > 0 && (
@@ -308,6 +330,7 @@ const CricketOneTrainingReservation = () => {
             <TrainingGeneralForm form={form} onFinish={onFinish} />
           )}
         </div>
+        <RouteBlocker block={block} blocker={blocker} />
       </Container>
     </>
   );

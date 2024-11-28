@@ -1,5 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Radio, Select } from "antd";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */ import {
+  Button,
+  Radio,
+  Select,
+} from "antd";
 import { useEffect, useState } from "react";
 import DateSlider from "../../../components/DateSlider";
 import { useRentalFacilityQuery } from "../../../redux/features/facility/facilityApi";
@@ -14,11 +18,11 @@ import {
   useFacilityBookedSlotsQuery,
   useGetBookingSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
-import { useNavigate } from "react-router-dom";
+import { useBlocker, useNavigate } from "react-router-dom";
 import { ImSpinner } from "react-icons/im";
 import FacilityBookingTimeSlots from "../../../components/FacilityBookingTimeSlots";
 import { CiClock1 } from "react-icons/ci";
-
+import RouteBlocker from "../../../utils/RouteBlocker";
 const RentalBooking = ({
   facilityCage,
   setFacilityCage,
@@ -30,19 +34,20 @@ const RentalBooking = ({
   const [deleteSlot] = useDeleteBookingSlotMutation();
   const [activeDate, setActiveDate] = useState(new Date());
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
+  const [block, setBlock] = useState(false);
+  const [process, setProcess] = useState(false);
+  const blocker = useBlocker(block);
   const createCartBooking = useAddToCartSlotMutation();
   const { data: facility, isFetching } = useRentalFacilityQuery(
     { facility: facilityCage },
     { skip: facilityCage ? false : true }
   );
   const [lane, setLane] = useState<string | undefined>(undefined);
-
   useEffect(() => {
     if (facility?.results?._id) {
       setLane(facility?.results?.lanes[0]);
     }
   }, [facility]);
-
   const slotsBookedQuery = useFacilityBookedSlotsQuery(
     {
       training: facility?.results._id,
@@ -62,7 +67,6 @@ const RentalBooking = ({
   const onChange = (value: string) => {
     setFacilityCage(value);
   };
-
   const onDelete = (date: any, slot: string, slot_lane: string) => {
     Swal.fire({
       title: "Are you sure?",
@@ -102,13 +106,15 @@ const RentalBooking = ({
                 return slots;
               })
               .filter(Boolean);
+            if (updatedSlots.length == 0) {
+              setBlock(false);
+            }
             setSelectSlots(updatedSlots);
           })
           .catch((error) => toast.error(`${error.data.message}`));
       }
     });
   };
-
   const totalPrice = selectSlots.reduce((total, facilitySlots) => {
     return total + facilitySlots.slots.length * facility?.results.price;
   }, 0);
@@ -128,6 +134,18 @@ const RentalBooking = ({
       },
     });
   };
+
+  const onProcess = () => {
+    setBlock(false);
+    setProcess(true);
+  };
+
+  useEffect(() => {
+    if (process) {
+      onNavigate();
+    }
+  }, [process]);
+
   return (
     <div className="bg-[#F9FAFB] sm:py-10 rounded-2xl space-y-6 sm:px-5 py-7 px-3">
       <div className="space-y-3">
@@ -224,6 +242,7 @@ const RentalBooking = ({
               selectSlots={selectSlots}
               setSelectSlots={setSelectSlots}
               lane={lane || facility?.results?.lanes[0]}
+              setBlock={setBlock}
             />
           )}
         </div>
@@ -339,12 +358,13 @@ const RentalBooking = ({
             <p className="lg:text-2xl sm:text-xl text-lg sm:font-bold font-semibold">
               US${totalPrice}
             </p>
-            <Button onClick={onNavigate} className="primary-btn-2">
+            <Button onClick={onProcess} className="primary-btn-2">
               Book now
             </Button>
           </div>
         </div>
       )}
+      <RouteBlocker block={block} blocker={blocker} />
     </div>
   );
 };

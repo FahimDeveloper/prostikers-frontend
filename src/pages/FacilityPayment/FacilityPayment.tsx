@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useLocation, useNavigate } from "react-router-dom";
+import { useBlocker, useLocation, useNavigate } from "react-router-dom";
 import Checkout from "../../components/Checkout";
 import { useCreateFacilityReservationMutation } from "../../redux/features/facility/facilityApi";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
+import RouteBlocker from "../../utils/RouteBlocker";
 
 const FacilityPayment = () => {
   const { state } = useLocation();
@@ -16,6 +17,8 @@ const FacilityPayment = () => {
   const user = useSelector(selectCurrentUser);
   const [create, { data: createData, isLoading, isSuccess, isError, error }] =
     useCreateFacilityReservationMutation();
+  const [block, setBlock] = useState(true);
+  const blocker = useBlocker(block);
   const onSubmit = () => {
     // if (membershipData) {
     //   const membership = { ...membershipData };
@@ -54,6 +57,7 @@ const FacilityPayment = () => {
       },
     };
     create({ id: user?._id, payload: payload });
+    setBlock(false);
   };
   useEffect(() => {
     if (isSuccess) {
@@ -88,6 +92,7 @@ const FacilityPayment = () => {
           onSubmit={onSubmit}
         />
       )}
+      <RouteBlocker block={block} blocker={blocker} />
     </div>
   );
 };

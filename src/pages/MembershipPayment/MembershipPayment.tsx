@@ -11,7 +11,7 @@ import { useCreateMembershipMutation } from "../../redux/features/user/userApi";
 const MembershipPayment = () => {
   const { state } = useLocation();
   const [transactionId, setTransactionId] = useState("");
-  const { amount, data } = state;
+  const { amount, data, month } = state;
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const [create, { data: createData, isError, isLoading, isSuccess, error }] =
@@ -44,7 +44,11 @@ const MembershipPayment = () => {
     data.issue_date = issueDate.toISOString();
     const expiryDate = new Date(issueDate);
     if (data?.plan === "monthly") {
-      expiryDate.setMonth(expiryDate.getMonth() + 1);
+      if (month) {
+        expiryDate.setMonth(expiryDate.getMonth() + month);
+      } else {
+        expiryDate.setMonth(expiryDate.getMonth() + 1);
+      }
     } else if (data?.plan === "yearly") {
       expiryDate.setFullYear(expiryDate.getFullYear() + 1);
     }

@@ -38,7 +38,7 @@ const SoftballGroupTrainingReservation = () => {
   }
 
   const onFinish = (values: any) => {
-    values.trainer = state.trainer._id;
+    values.trainer = state.trainer?._id;
     values.appointment = id;
     values.appointment_date = state.date;
     values.voucher_applied = voucherApplied;
