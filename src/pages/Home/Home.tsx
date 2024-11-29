@@ -20,16 +20,18 @@ const Home = () => {
   useEffect(() => {
     const updateDateCount = () => {
       const screenWidth = window.innerWidth;
-      if (screenWidth <= 1536) {
+      if (screenWidth > 1536) {
+        setWidth(1000);
+      } else if (screenWidth > 1280) {
         setWidth(800);
-      } else if (screenWidth <= 1280) {
+      } else if (screenWidth > 1024) {
         setWidth(700);
-      } else if (screenWidth <= 1024) {
+      } else if (screenWidth > 768) {
         setWidth(600);
-      } else if (screenWidth <= 768) {
+      } else if (screenWidth > 640) {
         setWidth(500);
       } else {
-        setWidth(400);
+        setWidth(350);
       }
     };
 
