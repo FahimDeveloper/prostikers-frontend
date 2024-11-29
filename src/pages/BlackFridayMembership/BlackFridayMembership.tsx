@@ -71,139 +71,147 @@ const BlackFridayMembership = () => {
             </p>
           </div>
           <div className="space-y-2">
-            <h3 className="sm:text-xl text-lg text-center">
+            <h3 className="sm:text-xl text-lg">
               01.Pro Individual Membership - Monthly Membership for batting
               cages
             </h3>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                Buy a monthly membership and save 50% on your first month as a
-                Special Black Friday Deal.
-              </p>
-            </div>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                Normal Membership Price -
-                <span className="text-red-500">$150</span> After Discount Price
-                - <span className="text-red-500">$75</span>
-              </p>
-            </div>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                A minimum membership commitment of 4 months is required purchase
-                this offer
-              </p>
-            </div>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                Offer valid till 01st of December 2024.
-              </p>
-            </div>
+            <ul className="list-none membership-list">
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  Buy a monthly membership and save 50% on your first month as a
+                  Special Black Friday Deal.
+                </p>
+              </li>
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  Normal Membership Price -
+                  <span className="text-red-500">$150</span> After Discount
+                  Price - <span className="text-red-500">$75</span>
+                </p>
+              </li>
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  A minimum membership commitment of 4 months is required
+                  purchase this offer
+                </p>
+              </li>
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  Offer valid till 01st of December 2024.
+                </p>
+              </li>
+            </ul>
           </div>
           <div className="space-y-2">
-            <h3 className="sm:text-xl text-lg text-center">
+            <h3 className="sm:text-xl text-lg">
               02. Pro Unlimited Individual Membership - Monthly Membership for
               batting cages
             </h3>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                Buy a monthly membership and save 50% on your first month as a
-                Special Black Friday Deal.
-              </p>
-            </div>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                Normal Membership Price -
-                <span className="text-red-500">$450</span> After Discount Price
-                - <span className="text-red-500">$225</span>
-              </p>
-            </div>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                A minimum membership commitment of 4 months is required purchase
-                this offer.
-              </p>
-            </div>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                Offer valid till 01st of December 2024.
-              </p>
-            </div>
+            <ul className="list-none membership-list">
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  Buy a monthly membership and save 50% on your first month as a
+                  Special Black Friday Deal.
+                </p>
+              </li>
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  Normal Membership Price -
+                  <span className="text-red-500">$450</span> After Discount
+                  Price - <span className="text-red-500">$225</span>
+                </p>
+              </li>
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  A minimum membership commitment of 4 months is required
+                  purchase this offer.
+                </p>
+              </li>
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  Offer valid till 01st of December 2024.
+                </p>
+              </li>
+            </ul>
           </div>
           <div className="space-y-2">
-            <h3 className="sm:text-xl text-lg text-center">
+            <h3 className="sm:text-xl text-lg">
               03. Pro Individual Membership - Yearly Membership for batting
               cages
             </h3>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                Buy yearly membership and get 03 months free as a Special Black
-                Friday Deal.
-              </p>
-            </div>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                Normal Membership Price -
-                <span className="text-red-500">$1800</span> After Discount Price
-                - <span className="text-red-500">$1350</span>
-              </p>
-            </div>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                Offer valid till 01st of December 2024.
-              </p>
-            </div>
+            <ul className="list-none membership-list">
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  Buy yearly membership and get 03 months free as a Special
+                  Black Friday Deal.
+                </p>
+              </li>
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  Normal Membership Price -
+                  <span className="text-red-500">$1800</span> After Discount
+                  Price - <span className="text-red-500">$1350</span>
+                </p>
+              </li>
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  Offer valid till 01st of December 2024.
+                </p>
+              </li>
+            </ul>
           </div>
           <div className="space-y-2">
-            <h3 className="sm:text-xl text-lg text-center">
+            <h3 className="sm:text-xl text-lg">
               04. Pro Unlimited Individual Membership - Yearly Membership for
               batting cages
             </h3>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                Buy yearly membership and get 03 months free as a Special Black
-                Friday Deal.
-              </p>
-            </div>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                Normal Membership Price -
-                <span className="text-red-500">$5400</span> After Discount Price
-                - <span className="text-red-500">$4050</span>
-              </p>
-            </div>
-            <div className="flex items-center justify-center gap-5">
-              <IoIosCheckmarkCircle className="text-primary" />
-              <p className="sm:text-lg text-base text-gray-500">
-                Offer valid till 01st of December 2024.
-              </p>
-            </div>
+            <ul className="list-none membership-list">
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  Buy yearly membership and get 03 months free as a Special
+                  Black Friday Deal.
+                </p>
+              </li>
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  Normal Membership Price -
+                  <span className="text-red-500">$5400</span> After Discount
+                  Price - <span className="text-red-500">$4050</span>
+                </p>
+              </li>
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  Offer valid till 01st of December 2024.
+                </p>
+              </li>
+            </ul>
           </div>
           <div className="space-y-8">
-            <div className="w-[350px] mx-auto bg-[#07133D] p-3 rounded-full flex items-center justify-between">
+            <div className="sm:w-[350px] w-[310px] mx-auto bg-[#07133D] sm:p-3 p-2 rounded-full flex items-center justify-between">
               <div
                 onClick={() => handleChangePackage("monthly")}
                 className={`${
                   plan === "monthly"
                     ? "bg-[#F6FFFF]"
                     : "text-white hover:text-black"
-                } px-5 btn w-auto rounded-full hover:bg-[#F6FFFF]`}
+                } sm:px-5 px-3 btn w-auto rounded-full hover:bg-[#F6FFFF]`}
               >
                 Monthly
-                <div className="bg-[#D9FFFF] text-black text-xs px-3 py-1 rounded-2xl">
+                <div className="bg-[#D9FFFF] text-black text-xs sm:px-3 px-2 py-1 rounded-2xl">
                   50% Off
                 </div>
               </div>
@@ -213,10 +221,10 @@ const BlackFridayMembership = () => {
                   plan === "yearly"
                     ? "bg-[#F6FFFF]"
                     : "text-white hover:text-black"
-                } btn rounded-full px-5 hover:bg-[#F6FFFF]`}
+                } btn rounded-full sm:px-5 px-3 hover:bg-[#F6FFFF]`}
               >
                 Yearly
-                <div className="bg-[#D9FFFF] text-black text-xs px-3 py-1 rounded-2xl">
+                <div className="bg-[#D9FFFF] text-black text-xs sm:px-3 px-2 py-1 rounded-2xl">
                   3 month Off
                 </div>
               </div>

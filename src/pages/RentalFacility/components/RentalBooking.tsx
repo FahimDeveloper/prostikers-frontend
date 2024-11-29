@@ -120,6 +120,7 @@ const RentalBooking = ({
   }, 0);
 
   const onNavigate = () => {
+    setBlock(false);
     sessionStorage.setItem(
       "rental-facility-slots",
       JSON.stringify(selectSlots)
