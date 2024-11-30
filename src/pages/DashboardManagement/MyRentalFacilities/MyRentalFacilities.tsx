@@ -91,7 +91,19 @@ const MyRentalFacilities = () => {
     {
       width: 140,
       align: "center",
-      title: "Facility Per Slot Fee",
+      title: "Facility First Slot Fee",
+      dataIndex: "_id",
+      key: "_id",
+      render: (_, record) => (
+        <p className="font-medium text-sm leading-5 text-[#151515]">
+          ${record.facility.ini_price}
+        </p>
+      ),
+    },
+    {
+      width: 140,
+      align: "center",
+      title: "Facility Base Slot Fee",
       dataIndex: "_id",
       key: "_id",
       render: (_, record) => (

@@ -72,7 +72,7 @@ const RentalBookingSteps = ({
         direction="horizontal"
         size="default"
       />
-      <div className="sm:px-5">{steps[current].content}</div>
+      <div className="">{steps[current].content}</div>
       {current === steps.length - 1 && (
         <div className="ms-5">
           <Checkbox onChange={() => setAgree(!agree)}>

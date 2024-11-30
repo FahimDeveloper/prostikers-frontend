@@ -8,7 +8,7 @@ import { Navigate, useLocation } from "react-router-dom";
 
 const ProtectAuthRoute = ({ children }: { children: ReactElement }) => {
   const location = useLocation();
-  const from = location.state?.from.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectCurrentToken);
   return (

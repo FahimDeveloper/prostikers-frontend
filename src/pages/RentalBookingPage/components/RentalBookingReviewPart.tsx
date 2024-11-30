@@ -108,6 +108,7 @@ const RentalBookingReviewPart = ({
         id: addons?.length,
         image: values.addon_image,
         name: values.addon_title,
+        ini_price: values.addon_ini_price,
         price: values.addon_price,
         hours: 1,
       },
@@ -127,10 +128,20 @@ const RentalBookingReviewPart = ({
   };
 
   const slotsPrice = rentalData?.reduce((total: number, booking: any) => {
-    return total + booking.slots.length * rentalInfo?.price;
+    if (booking.slots.length > 1) {
+      const firstSlotPrice = rentalInfo?.ini_price;
+      const remainingSlotsPrice =
+        (booking.slots.length - 1) * rentalInfo?.price;
+      return total + firstSlotPrice + remainingSlotsPrice;
+    } else {
+      return total + booking.slots.length * rentalInfo?.ini_price;
+    }
   }, 0);
+
   const addonsPrice = addons.reduce((total: number, addon: any) => {
-    return total + addon.price * addon.hours;
+    const firstHourPrice = addon.ini_price;
+    const remainingHoursPrice = (addon.hours - 1) * addon.price;
+    return total + firstHourPrice + remainingHoursPrice;
   }, 0);
 
   // if (membership?.price) {
@@ -221,7 +232,10 @@ const RentalBookingReviewPart = ({
                       {addon.addon_title}
                     </h4>
                     <p className="text-sm text-primary font-semibold">
-                      +${addon.addon_price}/hours
+                      First hour ${addon.addon_ini_price}
+                    </p>
+                    <p className="text-sm text-primary font-semibold">
+                      Base +${addon.addon_price}/hours
                     </p>
                   </div>
                 </div>
@@ -250,17 +264,18 @@ const RentalBookingReviewPart = ({
             </p>
           )}
         </div>
-        <div className="sm:col-span-2 sm:p-7 p-5 rounded-2xl border border-solid border-[#F2F2F2] space-y-5">
+        <div className="sm:col-span-2 sm:p-7 py-4 px-3 rounded-2xl border border-solid border-[#F2F2F2] space-y-5">
           <h3 className="text-[#063232] text-lg font-medium text-center p-5 bg-[#F6FFFF]">
             Booking Summary
           </h3>
-          <p>Per slot price: ${rentalInfo?.price}</p>
+          <p>First slot fee: ${rentalInfo?.ini_price}</p>
+          <p>Base fee: ${rentalInfo?.price}</p>
           {rentalData?.map((dateSlots: any, index: number) => (
             <div className="space-y-2" key={index}>
               {dateSlots.slots.map((slot: string, index: number) => (
                 <div
                   key={index}
-                  className="flex justify-between gap-2 flex-wrap items-center bg-white py-3 px-2"
+                  className="flex justify-between gap-2 flex-wrap items-center bg-white py-3 sm:px-2"
                 >
                   <div className="flex xl:gap-5 gap-3 items-center">
                     <IoCalendarOutline className="size-4" />
@@ -308,29 +323,39 @@ const RentalBookingReviewPart = ({
               />
             </div>
           )} */}
-          {addons?.map((addon: any) => (
-            <div className="flex justify-between items-center sm:px-2">
-              <img
-                src={addon.image}
-                alt={addon.name}
-                className="sm:size-16 size-12 rounded-xl"
-              />
-              <p>
-                Hours:{" "}
-                <InputNumber
-                  value={addon.hours}
-                  min={1}
-                  onChange={(value) => onHourChange(value, addon.id)}
-                  className="sm:w-16 w-14"
+          {addons?.map((addon: any) => {
+            const totalAddonPrice =
+              addon.hours > 1
+                ? addon.ini_price + (addon.hours - 1) * addon.price
+                : addon.ini_price;
+            return (
+              <div
+                className="flex justify-between items-center sm:px-2"
+                key={addon.id}
+              >
+                <img
+                  src={addon.image}
+                  alt={addon.name}
+                  className="sm:size-16 size-12 rounded-xl"
                 />
-              </p>
-              <p>${addon.hours * addon.price}</p>
-              <MdDeleteOutline
-                onClick={() => onAddonDelete(addon.id)}
-                className="size-5 cursor-pointer"
-              />
-            </div>
-          ))}
+                <p>
+                  Hours:
+                  <InputNumber
+                    value={addon.hours}
+                    min={1}
+                    onChange={(value) => onHourChange(value, addon.id)}
+                    className="sm:w-16 w-14"
+                  />
+                </p>
+                <p>${totalAddonPrice}</p>
+                <MdDeleteOutline
+                  onClick={() => onAddonDelete(addon.id)}
+                  className="size-5 cursor-pointer"
+                />
+              </div>
+            );
+          })}
+
           {data?.results && (
             <div className="flex justify-between">
               <p className="text-secondary sm:text-base text-base">

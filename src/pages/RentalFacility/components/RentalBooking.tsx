@@ -115,8 +115,16 @@ const RentalBooking = ({
       }
     });
   };
+
   const totalPrice = selectSlots.reduce((total, facilitySlots) => {
-    return total + facilitySlots.slots.length * facility?.results.price;
+    if (facilitySlots.slots.length > 1) {
+      const firstSlotPrice = facility?.results?.ini_price;
+      const remainingSlotsPrice =
+        (facilitySlots.slots.length - 1) * facility?.results.price;
+      return total + firstSlotPrice + remainingSlotsPrice;
+    } else {
+      return total + facilitySlots.slots.length * facility?.results?.ini_price;
+    }
   }, 0);
 
   const onNavigate = () => {
@@ -130,6 +138,7 @@ const RentalBooking = ({
         facilityInfo: {
           training: facility?.results._id,
           price: facility?.results.price,
+          ini_price: facility?.results.ini_price,
           sport: facility?.results.sport,
         },
       },
@@ -183,7 +192,7 @@ const RentalBooking = ({
       </div>
       {facility?.results._id && (
         <div className="space-y-4">
-          <h3 className="text-xl font-semibold text-[#07133D]">Select Lane</h3>
+          <h3 className="text-xl font-semibold text-[#07133D]">Select Area</h3>
           <div className="flex gap-5">
             <Radio.Group
               onChange={(e) => setLane(e.target.value)}
@@ -223,7 +232,11 @@ const RentalBooking = ({
               </div>
             </div>
             <div className="flex gap-1">
-              Per slot fee:
+              First slot fee:
+              <span className="font-medium">${facility.results.ini_price}</span>
+            </div>
+            <div className="flex gap-1">
+              Base fee:
               <span className="font-medium">${facility.results.price}</span>
             </div>
           </div>
@@ -299,7 +312,10 @@ const RentalBooking = ({
                       </span>
                     </div>
                     <div className="text-sm font-medium text-secondary">
-                      ${facility?.results?.price}
+                      $
+                      {index > 0
+                        ? facility?.results?.price
+                        : facility?.results?.ini_price}
                     </div>
                     <MdDeleteOutline
                       className="size-5 cursor-pointer"

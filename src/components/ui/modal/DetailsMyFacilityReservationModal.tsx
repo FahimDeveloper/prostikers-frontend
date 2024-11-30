@@ -68,7 +68,13 @@ const DetailsMyFacilityReservationModal = ({
       title: "Price",
       dataIndex: "price",
       key: "price",
-      render: (text, record) => text * record.price,
+      render: (text, record) => {
+        const totalPrice =
+          record.hours > 1
+            ? record.ini_price + (record.hours - 1) * text
+            : record.ini_price;
+        return totalPrice;
+      },
     },
     {
       title: "Image",
@@ -117,7 +123,7 @@ const DetailsMyFacilityReservationModal = ({
           <Descriptions.Item label="Price">
             ${record.facility.price}
           </Descriptions.Item>
-          <Descriptions.Item label="Lanes">
+          <Descriptions.Item label="Area">
             <div className="flex gap-2 flex-wrap">
               {record.facility.lanes.map((lane) => {
                 return (
