@@ -128,11 +128,11 @@ const RentalBookingReviewPart = ({
   };
 
   const slotsPrice = rentalData?.reduce((total: number, booking: any) => {
-    if (booking.slots.length > 1) {
-      const firstSlotPrice = rentalInfo?.ini_price;
-      const remainingSlotsPrice =
-        (booking.slots.length - 1) * rentalInfo?.price;
-      return total + firstSlotPrice + remainingSlotsPrice;
+    if (booking.slots.length > 2) {
+      const baseSlotPrice = rentalInfo?.ini_price;
+      const additionalSlotPrice =
+        (booking.slots.length - 2) * rentalInfo?.price;
+      return total + baseSlotPrice * 2 + additionalSlotPrice;
     } else {
       return total + booking.slots.length * rentalInfo?.ini_price;
     }
@@ -140,8 +140,8 @@ const RentalBookingReviewPart = ({
 
   const addonsPrice = addons.reduce((total: number, addon: any) => {
     const firstHourPrice = addon.ini_price;
-    const remainingHoursPrice = (addon.hours - 1) * addon.price;
-    return total + firstHourPrice + remainingHoursPrice;
+    const additionalHourPrice = (addon.hours - 1) * addon.price;
+    return total + firstHourPrice + additionalHourPrice;
   }, 0);
 
   // if (membership?.price) {
@@ -235,7 +235,7 @@ const RentalBookingReviewPart = ({
                       First hour ${addon.addon_ini_price}
                     </p>
                     <p className="text-sm text-primary font-semibold">
-                      Base +${addon.addon_price}/hours
+                      additional +${addon.addon_price}/hours
                     </p>
                   </div>
                 </div>

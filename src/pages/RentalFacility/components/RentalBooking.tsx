@@ -74,6 +74,7 @@ const RentalBooking = ({
       showCancelButton: true,
       confirmButtonColor: "#0ABAC3",
       cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
         const slotId = `${facility?.results._id}${
@@ -117,11 +118,11 @@ const RentalBooking = ({
   };
 
   const totalPrice = selectSlots.reduce((total, facilitySlots) => {
-    if (facilitySlots.slots.length > 1) {
-      const firstSlotPrice = facility?.results?.ini_price;
-      const remainingSlotsPrice =
-        (facilitySlots.slots.length - 1) * facility?.results.price;
-      return total + firstSlotPrice + remainingSlotsPrice;
+    if (facilitySlots.slots.length > 2) {
+      const baseSlotPrice = facility?.results?.ini_price;
+      const additionalSlotPrice =
+        (facilitySlots.slots.length - 2) * facility?.results.price;
+      return total + baseSlotPrice * 2 + additionalSlotPrice;
     } else {
       return total + facilitySlots.slots.length * facility?.results?.ini_price;
     }
@@ -172,8 +173,8 @@ const RentalBooking = ({
               value: "baseball cage",
             },
             {
-              label: "Soccer Cage",
-              value: "soccer cage",
+              label: "Soccer",
+              value: "soccer",
             },
             {
               label: "Softball Cage",
@@ -184,8 +185,8 @@ const RentalBooking = ({
               value: "cricket cage",
             },
             {
-              label: "Hockey Cage",
-              value: "hockey cage",
+              label: "Hockey",
+              value: "hockey",
             },
           ]}
         />
@@ -216,6 +217,9 @@ const RentalBooking = ({
           <h3 className="text-xl font-semibold text-[#07133D]">
             Booking Date and Time
           </h3>
+          <p className="text-base font-medium">
+            Information - {facility?.results?.description}
+          </p>
           <div className="flex justify-between gap-3 flex-wrap">
             <div className="flex flex-wrap sm:gap-x-5 gap-3 items-center">
               <div className="flex gap-x-2 items-center">
@@ -232,11 +236,11 @@ const RentalBooking = ({
               </div>
             </div>
             <div className="flex gap-1">
-              First slot fee:
+              Base slot fee:
               <span className="font-medium">${facility.results.ini_price}</span>
             </div>
             <div className="flex gap-1">
-              Base fee:
+              Additional slot fee:
               <span className="font-medium">${facility.results.price}</span>
             </div>
           </div>
@@ -313,7 +317,7 @@ const RentalBooking = ({
                     </div>
                     <div className="text-sm font-medium text-secondary">
                       $
-                      {index > 0
+                      {index > 1
                         ? facility?.results?.price
                         : facility?.results?.ini_price}
                     </div>

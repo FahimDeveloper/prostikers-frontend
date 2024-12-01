@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "antd";
-import moment from "moment";
+import moment from "moment-timezone";
 import { CiBadgeDollar, CiCalendar } from "react-icons/ci";
 import { FaUserGraduate } from "react-icons/fa";
 import { IoTimeOutline } from "react-icons/io5";
@@ -14,6 +14,7 @@ import {
 import Swal from "sweetalert2";
 import { IBootcamp } from "../../types/bootcamp.types";
 
+const californiaTimeZone = "America/Los_Angeles";
 const BootcampCard = ({ image, data }: { image: any; data: IBootcamp }) => {
   const user = useSelector(selectCurrentUser);
   const location = useLocation();
@@ -85,7 +86,9 @@ const BootcampCard = ({ image, data }: { image: any; data: IBootcamp }) => {
                 <p className="text-base">Start Time :</p>
               </div>
               <p className="text-base font-medium">
-                {moment(data?.start_time).format("h:mm a")}
+                {moment(data?.start_time)
+                  .tz(californiaTimeZone)
+                  .format("h:mm a")}
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -94,7 +97,7 @@ const BootcampCard = ({ image, data }: { image: any; data: IBootcamp }) => {
                 <p className="text-base">End Time :</p>
               </div>
               <p className="text-base font-medium">
-                {moment(data?.end_time).format("h:mm a")}
+                {moment(data?.end_time).tz(californiaTimeZone).format("h:mm a")}
               </p>
             </div>
           </div>
