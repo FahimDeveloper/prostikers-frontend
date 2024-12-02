@@ -128,18 +128,17 @@ const RentalBookingReviewPart = ({
   };
 
   const slotsPrice = rentalData?.reduce((total: number, booking: any) => {
-    if (booking.slots.length > 2) {
-      const baseSlotPrice = rentalInfo?.ini_price;
-      const additionalSlotPrice =
-        (booking.slots.length - 2) * rentalInfo?.price;
-      return total + baseSlotPrice * 2 + additionalSlotPrice;
+    if (rentalData.length > 1) {
+      return total + booking.slots.length * rentalInfo?.price;
+    } else if (booking.slots.length > 1) {
+      return total + booking.slots.length * rentalInfo?.price;
     } else {
       return total + booking.slots.length * rentalInfo?.ini_price;
     }
   }, 0);
 
   const addonsPrice = addons.reduce((total: number, addon: any) => {
-    const firstHourPrice = addon.ini_price;
+    const firstHourPrice = addon?.ini_price;
     const additionalHourPrice = (addon.hours - 1) * addon.price;
     return total + firstHourPrice + additionalHourPrice;
   }, 0);
@@ -235,7 +234,7 @@ const RentalBookingReviewPart = ({
                       First hour ${addon.addon_ini_price}
                     </p>
                     <p className="text-sm text-primary font-semibold">
-                      additional +${addon.addon_price}/hours
+                      Additional ${addon.addon_price}/hours
                     </p>
                   </div>
                 </div>
@@ -268,8 +267,6 @@ const RentalBookingReviewPart = ({
           <h3 className="text-[#063232] text-lg font-medium text-center p-5 bg-[#F6FFFF]">
             Booking Summary
           </h3>
-          <p>First slot fee: ${rentalInfo?.ini_price}</p>
-          <p>Base fee: ${rentalInfo?.price}</p>
           {rentalData?.map((dateSlots: any, index: number) => (
             <div className="space-y-2" key={index}>
               {dateSlots.slots.map((slot: string, index: number) => (

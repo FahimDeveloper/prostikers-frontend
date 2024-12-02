@@ -118,11 +118,10 @@ const RentalBooking = ({
   };
 
   const totalPrice = selectSlots.reduce((total, facilitySlots) => {
-    if (facilitySlots.slots.length > 2) {
-      const baseSlotPrice = facility?.results?.ini_price;
-      const additionalSlotPrice =
-        (facilitySlots.slots.length - 2) * facility?.results.price;
-      return total + baseSlotPrice * 2 + additionalSlotPrice;
+    if (selectSlots.length > 1) {
+      return total + facilitySlots.slots.length * facility?.results?.price;
+    } else if (facilitySlots.slots.length > 1) {
+      return total + facilitySlots.slots.length * facility?.results?.price;
     } else {
       return total + facilitySlots.slots.length * facility?.results?.ini_price;
     }
@@ -220,28 +219,18 @@ const RentalBooking = ({
           <p className="text-base font-medium">
             Information - {facility?.results?.description}
           </p>
-          <div className="flex justify-between gap-3 flex-wrap">
-            <div className="flex flex-wrap sm:gap-x-5 gap-3 items-center">
-              <div className="flex gap-x-2 items-center">
-                <span className="size-3 rounded-full border border-solid border-gray-300"></span>
-                Available
-              </div>
-              <div className="flex gap-x-2 items-center">
-                <span className="size-3 rounded-full bg-primary border border-solid border-gray-300"></span>
-                Selected
-              </div>
-              <div className="flex gap-x-2 items-center">
-                <span className="size-3 rounded-full border bg-gray-100 border-solid border-gray-300"></span>
-                Unavailable
-              </div>
+          <div className="flex flex-wrap sm:gap-x-5 gap-3 items-center">
+            <div className="flex gap-x-2 items-center">
+              <span className="size-3 rounded-full border border-solid border-gray-300"></span>
+              Available
             </div>
-            <div className="flex gap-1">
-              Base slot fee:
-              <span className="font-medium">${facility.results.ini_price}</span>
+            <div className="flex gap-x-2 items-center">
+              <span className="size-3 rounded-full bg-primary border border-solid border-gray-300"></span>
+              Selected
             </div>
-            <div className="flex gap-1">
-              Additional slot fee:
-              <span className="font-medium">${facility.results.price}</span>
+            <div className="flex gap-x-2 items-center">
+              <span className="size-3 rounded-full border bg-gray-100 border-solid border-gray-300"></span>
+              Unavailable
             </div>
           </div>
           <div className="space-y-2">
@@ -317,7 +306,9 @@ const RentalBooking = ({
                     </div>
                     <div className="text-sm font-medium text-secondary">
                       $
-                      {index > 1
+                      {selectSlots.length > 1
+                        ? facility?.results?.price
+                        : dateSlots?.slots?.length > 1
                         ? facility?.results?.price
                         : facility?.results?.ini_price}
                     </div>
@@ -359,7 +350,12 @@ const RentalBooking = ({
                         </span>
                       </div>
                       <div className="text-sm font-medium text-secondary">
-                        Price - ${facility?.results?.price}
+                        Price - $
+                        {selectSlots.length > 1
+                          ? facility?.results?.price
+                          : dateSlots?.slots?.length > 1
+                          ? facility?.results?.price
+                          : facility?.results?.ini_price}
                       </div>
                     </div>
                     <div className="text-end">
