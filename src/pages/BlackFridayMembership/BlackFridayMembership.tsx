@@ -101,7 +101,7 @@ const BlackFridayMembership = () => {
               <li className="flex gap-2 sm:justify-center sm:items-center">
                 <IoIosCheckmarkCircle className="text-primary size-5" />
                 <p className="sm:text-lg text-base text-gray-500">
-                  Offer valid till 01st of December 2024.
+                  Offer valid till 7th of December 2024.
                 </p>
               </li>
             </ul>
@@ -137,7 +137,7 @@ const BlackFridayMembership = () => {
               <li className="flex gap-2 sm:justify-center sm:items-center">
                 <IoIosCheckmarkCircle className="text-primary size-5" />
                 <p className="sm:text-lg text-base text-gray-500">
-                  Offer valid till 01st of December 2024.
+                  Offer valid till 7th of December 2024.
                 </p>
               </li>
             </ul>
@@ -166,7 +166,7 @@ const BlackFridayMembership = () => {
               <li className="flex gap-2 sm:justify-center sm:items-center">
                 <IoIosCheckmarkCircle className="text-primary size-5" />
                 <p className="sm:text-lg text-base text-gray-500">
-                  Offer valid till 01st of December 2024.
+                  Offer valid till 7th of December 2024.
                 </p>
               </li>
             </ul>
@@ -195,7 +195,7 @@ const BlackFridayMembership = () => {
               <li className="flex gap-2 sm:justify-center sm:items-center">
                 <IoIosCheckmarkCircle className="text-primary size-5" />
                 <p className="sm:text-lg text-base text-gray-500">
-                  Offer valid till 01st of December 2024.
+                  Offer valid till 7th of December 2024.
                 </p>
               </li>
             </ul>
