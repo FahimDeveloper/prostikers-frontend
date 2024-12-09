@@ -23,9 +23,8 @@ const BootcampCard = ({ image, data }: { image: any; data: IBootcamp }) => {
   const onClick = () => {
     if (!user && !token) {
       Swal.fire({
-        title: "Login First",
-        text: "You need to login for bootcamp registration",
-        icon: "info",
+        title: "Welcome Back!",
+        text: "To proceed, Please log in to your account. for bootcamp registration",
         showCancelButton: true,
         confirmButtonColor: "#0ABAC3",
         cancelButtonColor: "#d33",

@@ -45,7 +45,7 @@ const Login = () => {
         </h2>
         <div className="md:w-[480px] sm:w-96 w-80 px-2 space-y-3">
           <h3 className="text-center font-poppins text-2xl font-medium text-[#022B2D]">
-            Login first to your account
+            Login to your account
           </h3>
           <Form onFinish={onFinish} layout="vertical" className="space-y-4">
             <Form.Item

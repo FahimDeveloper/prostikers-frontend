@@ -161,7 +161,13 @@ const BootcampReservationForm = ({
             </div>
           </Checkbox>
           <Form.Item className="flex justify-end">
-            <Button disabled={!agree} htmlType="submit" className="primary-btn">
+            <Button
+              type="primary"
+              size="large"
+              disabled={!agree}
+              htmlType="submit"
+              className="primary-btn"
+            >
               Proceed
             </Button>
           </Form.Item>

@@ -45,11 +45,16 @@ const FacilitiesSection = () => {
           <h2 className="lg:text-[56px] md:text-[45px] text-3xl font-semibold lg:leading-[67px] md:leading-[50px]">
             Tailored Training & Top-Tier Facilities
           </h2>
-          <p className="text-[#929292] md:text-lg lg:leading-7 md:leading-6 leading-5 md:w-[600px] w-full mx-auto">
-            At ProStrikers, we offer more than just practice sessions. From
-            professional coaching and custom training programs to our
-            state-of-the-art facilities, we provide everything you need to excel
-            in your sport of choice.
+          <p className="text-[#929292] md:text-lg lg:leading-7 md:leading-6 leading-5 w-full mx-auto">
+            At Prostrikers, we offer a comprehensive 360° solution for athletes,
+            featuring state-of-the-art facilities and top-tier equipment in our
+            rental cages and open arena. Our services include professional
+            coaching, boot camps, and personalized training programs at the
+            Prostrikers Academy. We cater to a wide range of sports, including
+            baseball, softball, cricket, field hockey, and soccer. In addition,
+            we host exciting tournaments, such as T10 leagues, providing
+            athletes with competitive opportunities to showcase their skills. We
+            provide everything you need to excel in your sport of choice.
           </p>
         </div>
         <div className="space-y-5">

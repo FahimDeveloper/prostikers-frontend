@@ -7,9 +7,9 @@ import ProtectAuthRoute from "./ProtectAuthRoute";
 const VerifyUser = LazyLoad(
   lazy(() => import("../pages/VerifyUser/VerifyUser"))
 );
-const BlackFridayMembership = LazyLoad(
-  lazy(() => import("../pages/BlackFridayMembership/BlackFridayMembership"))
-);
+// const BlackFridayMembership = LazyLoad(
+//   lazy(() => import("../pages/BlackFridayMembership/BlackFridayMembership"))
+// );
 const Dashboard = LazyLoad(
   lazy(() => import("../pages/DashboardManagement/Dashboard/Dashboard"))
 );
@@ -515,10 +515,10 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      {
-        path: "/black-friday/membership",
-        element: <BlackFridayMembership />,
-      },
+      // {
+      //   path: "/black-friday/membership",
+      //   element: <BlackFridayMembership />,
+      // },
       {
         path: "/login",
         element: (

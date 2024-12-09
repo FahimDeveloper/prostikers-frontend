@@ -236,7 +236,13 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
         </div>
         <div className="flex justify-end">
           <Form.Item className="m-0">
-            <Button htmlType="submit" loading={loading} className="primary-btn">
+            <Button
+              type="primary"
+              size="large"
+              htmlType="submit"
+              loading={loading}
+              className="primary-btn"
+            >
               Update
             </Button>
           </Form.Item>

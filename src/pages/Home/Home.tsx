@@ -7,39 +7,35 @@ import JourneySection from "./components/JourneySection";
 import TopSliderSection from "./components/TopSliderSection";
 import TestimonialSection from "./components/TestimonialSection";
 import BlogSection from "./components/BlogSection";
-import promotion from "../../assets/images/promotions/black-friday.webp";
-import { useEffect, useState } from "react";
-import { Modal } from "antd";
-import { Link } from "react-router-dom";
 
 const Home = () => {
-  const [running, setRunning] = useState(true);
-  const [width, setWidth] = useState(1000); // Default count is 7
+  // const [running, setRunning] = useState(true);
+  // const [width, setWidth] = useState(1000); // Default count is 7
 
   // Update dateCount based on screen width
-  useEffect(() => {
-    const updateDateCount = () => {
-      const screenWidth = window.innerWidth;
-      if (screenWidth > 1536) {
-        setWidth(1000);
-      } else if (screenWidth > 1280) {
-        setWidth(800);
-      } else if (screenWidth > 1024) {
-        setWidth(700);
-      } else if (screenWidth > 768) {
-        setWidth(600);
-      } else if (screenWidth > 640) {
-        setWidth(500);
-      } else {
-        setWidth(350);
-      }
-    };
+  // useEffect(() => {
+  //   const updateDateCount = () => {
+  //     const screenWidth = window.innerWidth;
+  //     if (screenWidth > 1536) {
+  //       setWidth(1000);
+  //     } else if (screenWidth > 1280) {
+  //       setWidth(800);
+  //     } else if (screenWidth > 1024) {
+  //       setWidth(700);
+  //     } else if (screenWidth > 768) {
+  //       setWidth(600);
+  //     } else if (screenWidth > 640) {
+  //       setWidth(500);
+  //     } else {
+  //       setWidth(350);
+  //     }
+  //   };
 
-    updateDateCount(); // Set initial date count
-    window.addEventListener("resize", updateDateCount); // Listen for resize events
+  //   updateDateCount(); // Set initial date count
+  //   window.addEventListener("resize", updateDateCount); // Listen for resize events
 
-    return () => window.removeEventListener("resize", updateDateCount); // Clean up listener
-  }, []);
+  //   return () => window.removeEventListener("resize", updateDateCount); // Clean up listener
+  // }, []);
 
   const questionData = [
     {
@@ -94,10 +90,10 @@ const Home = () => {
     },
   ];
   // const blackFriday = sessionStorage.getItem("black-friday");
-  const onCancel = () => {
-    // sessionStorage.setItem("black-friday", "inactive");
-    setRunning(false);
-  };
+  // const onCancel = () => {
+  //   // sessionStorage.setItem("black-friday", "inactive");
+  //   setRunning(false);
+  // };
   // useEffect(() => {
   //   if (blackFriday !== "inactive") {
   //     setRunning(true);
@@ -105,7 +101,7 @@ const Home = () => {
   // }, [blackFriday]);
   return (
     <>
-      <Modal
+      {/* <Modal
         title="Black Friday Sale"
         open={running}
         footer={null}
@@ -122,7 +118,7 @@ const Home = () => {
             alt="promotion"
           />
         </Link>
-      </Modal>
+      </Modal> */}
       <TopSliderSection />
       <FeaturedSection />
       <JourneySection />

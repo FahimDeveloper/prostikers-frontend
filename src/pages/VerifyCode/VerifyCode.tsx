@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
@@ -116,6 +117,8 @@ const VerifyCode = () => {
               </Form.Item>
               <Form.Item>
                 <Button
+                  type="primary"
+                  size="large"
                   loading={isLoading || otpVerifyLoading}
                   className="primary-btn w-full"
                   htmlType="submit"
@@ -136,7 +139,13 @@ const VerifyCode = () => {
                 : "Link Already Expired"}
             </h2>
             <Link to="/" className="block">
-              <Button className="primary-btn w-full">Go Back</Button>
+              <Button
+                type="primary"
+                size="large"
+                className="primary-btn w-full"
+              >
+                Go Back
+              </Button>
             </Link>
           </div>
         </div>

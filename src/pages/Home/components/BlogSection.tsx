@@ -17,13 +17,15 @@ const BlogSection = () => {
                 Media
               </h4>
               <h2 className="lg:text-[56px] md:text-[45px] text-3xl font-semibold lg:leading-[67px] md:leading-[50px]">
-                Latest from out ProStrikers
+                Latest updates from ProStrikers
               </h2>
-              <p className="text-[#929292] md:text-lg lg:leading-7 md:leading-6 leading-5 md:w-[700px] w-full mx-auto">
-                Join an esteemed network of over 50,000 professionals who trust
-                ProStrikers for their training needs. Our expert-recommended
-                programs and facilities are designed to help you achieve peak
-                performance.
+              <p className="text-[#929292] md:text-lg lg:leading-7 md:leading-6 leading-5 md:w-[1000px] w-full mx-auto">
+                Welcome to the ProStrikers Blog! Stay up to date with the latest
+                topics, news, and updates from our world-class facilities. Be
+                the first to know about new training programs, expert tips, and
+                upcoming events. For even more content, follow us on Facebook,
+                Instagram, and YouTube to keep ahead of the game and stay
+                connected with all things ProStrikers.
               </p>
             </div>
             <div className="space-y-10">

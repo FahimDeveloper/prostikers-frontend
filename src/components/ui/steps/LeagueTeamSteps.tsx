@@ -83,12 +83,19 @@ const LeagueTeamSteps = ({
       )}
       <div className="flex justify-end gap-2">
         {current > 0 && (
-          <Button className="primary-btn" onClick={() => prev()}>
+          <Button
+            type="primary"
+            size="large"
+            className="primary-btn"
+            onClick={() => prev()}
+          >
             Back
           </Button>
         )}
         {current === steps.length - 1 && (
           <Button
+            type="primary"
+            size="large"
             disabled={!agree}
             className="primary-btn"
             onClick={() => onFinish()}

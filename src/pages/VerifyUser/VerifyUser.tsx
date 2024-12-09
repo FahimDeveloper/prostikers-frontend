@@ -33,7 +33,9 @@ const VerifyUser = () => {
               {data?.message}
             </h2>
             <Link to="/" className="block text-center">
-              <Button className="primary-btn">Go Back</Button>
+              <Button type="primary" size="large" className="primary-btn">
+                Go Back
+              </Button>
             </Link>
           </div>
         </div>
@@ -62,7 +64,9 @@ const VerifyUser = () => {
               )}
             </div>
             <Link to="/" className="block text-center">
-              <Button className="primary-btn">Go Back</Button>
+              <Button type="primary" size="large" className="primary-btn">
+                Go Back
+              </Button>
             </Link>
           </div>
         </div>

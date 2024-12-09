@@ -63,18 +63,7 @@ const DetailsMyFacilityReservationModal = ({
       title: "Hours",
       dataIndex: "hours",
       key: "hours",
-    },
-    {
-      title: "Price",
-      dataIndex: "price",
-      key: "price",
-      render: (text, record) => {
-        const totalPrice =
-          record.hours > 1
-            ? record.ini_price + (record.hours - 1) * text
-            : record.ini_price;
-        return totalPrice;
-      },
+      render: (text: number) => <p>{text} hours</p>,
     },
     {
       title: "Image",

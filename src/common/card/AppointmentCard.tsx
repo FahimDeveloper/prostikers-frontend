@@ -26,9 +26,8 @@ const AppointmentCard = ({
   const onClick = () => {
     if (!user && !token) {
       Swal.fire({
-        title: "Login First",
-        text: "You need to login",
-        icon: "info",
+        title: "Welcome Back!",
+        text: "To proceed, Please log in to your account.",
         showCancelButton: true,
         confirmButtonColor: "#0ABAC3",
         cancelButtonColor: "#d33",

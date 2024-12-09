@@ -26,8 +26,10 @@ h6 {
   @apply text-secondary;
 }
 
+/* sm:btn sm:btn-primary */
+
 .primary-btn {
-  @apply btn btn-primary text-white lg:text-xl sm:text-lg text-base font-bold px-10 h-5 rounded-full;
+  @apply text-white lg:text-lg sm:text-base text-sm sm:font-bold font-semibold sm:px-10 px-6 sm:h-12 rounded-full;
 }
 
 .primary-btn-2 {

@@ -64,7 +64,7 @@ const RentalBookingSteps = ({
   };
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
   return (
-    <div className="bg-[#F9FBFF] xl:p-16 md:p-12 sm:p-8 p-4 border border-solid border-[#F9FBFF] rounded-2xl space-y-6">
+    <div className="bg-[#F9FBFF] xl:p-16 md:p-12 sm:p-8 border border-solid border-[#F9FBFF] rounded-2xl space-y-6">
       <Steps
         current={current}
         items={items}
@@ -91,12 +91,19 @@ const RentalBookingSteps = ({
       )}
       <div className="flex justify-end gap-2">
         {current > 0 && (
-          <Button className="primary-btn" onClick={() => prev()}>
+          <Button
+            type="primary"
+            size="large"
+            className="primary-btn"
+            onClick={() => prev()}
+          >
             Back
           </Button>
         )}
         {current === steps.length - 1 && (
           <Button
+            type="primary"
+            size="large"
             disabled={!agree}
             className="primary-btn"
             onClick={() => onFinish()}
@@ -105,7 +112,12 @@ const RentalBookingSteps = ({
           </Button>
         )}
         {current < steps.length - 1 && (
-          <Button className="primary-btn" onClick={() => next()}>
+          <Button
+            type="primary"
+            size="large"
+            className="primary-btn"
+            onClick={() => next()}
+          >
             Next
           </Button>
         )}

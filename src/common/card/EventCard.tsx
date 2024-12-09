@@ -17,9 +17,8 @@ const EventCard = ({ event, index }: { event: any; index: number }) => {
   const onClick = () => {
     if (!user && !token) {
       Swal.fire({
-        title: "Login First",
-        text: "You need to login for event registration",
-        icon: "info",
+        title: "Welcome Back!",
+        text: "To proceed, Please log in to your account. for event registration",
         showCancelButton: true,
         confirmButtonColor: "#0ABAC3",
         cancelButtonColor: "#d33",
@@ -61,17 +60,32 @@ const EventCard = ({ event, index }: { event: any; index: number }) => {
           </p>
           {moment(event.registration_end).isBefore(moment(), "day") ||
           event.registration >= event.allowed_registrations ? (
-            <Button disabled={true} className="primary-btn md:w-auto w-full">
+            <Button
+              type="primary"
+              size="large"
+              disabled={true}
+              className="primary-btn md:w-auto w-full"
+            >
               Registration closed
             </Button>
           ) : moment(event.registration_start).isAfter(moment(), "day") ? (
-            <Button disabled={true} className="primary-btn md:w-auto w-full">
+            <Button
+              type="primary"
+              size="large"
+              disabled={true}
+              className="primary-btn md:w-auto w-full"
+            >
               Open {moment(event.registration_start).format("MMMM Do YYYY")}
             </Button>
           ) : (
-            <button onClick={onClick} className="primary-btn md:w-auto w-full">
+            <Button
+              type="primary"
+              size="large"
+              onClick={onClick}
+              className="primary-btn md:w-auto w-full"
+            >
               Register now
-            </button>
+            </Button>
           )}
         </div>
       </div>

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Form, Input, InputNumber } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import { IoCalendarOutline } from "react-icons/io5";
 import moment from "moment";
 import { MdDeleteOutline } from "react-icons/md";
@@ -110,7 +110,7 @@ const RentalBookingReviewPart = ({
         name: values.addon_title,
         ini_price: values.addon_ini_price,
         price: values.addon_price,
-        hours: 1,
+        hours: 0.5,
       },
     ]);
   };
@@ -138,9 +138,9 @@ const RentalBookingReviewPart = ({
   }, 0);
 
   const addonsPrice = addons.reduce((total: number, addon: any) => {
-    const firstHourPrice = addon?.ini_price;
-    const additionalHourPrice = (addon.hours - 1) * addon.price;
-    return total + firstHourPrice + additionalHourPrice;
+    const firstThirtyMinutes = addon?.ini_price;
+    const additionalThirtyMunitesPrice = (addon.hours / 0.5 - 1) * addon.price;
+    return total + firstThirtyMinutes + additionalThirtyMunitesPrice;
   }, 0);
 
   // if (membership?.price) {
@@ -231,10 +231,10 @@ const RentalBookingReviewPart = ({
                       {addon.addon_title}
                     </h4>
                     <p className="text-sm text-primary font-semibold">
-                      First hour ${addon.addon_ini_price}
+                      First 30 min ${addon.addon_ini_price}
                     </p>
                     <p className="text-sm text-primary font-semibold">
-                      Additional ${addon.addon_price}/hours
+                      Additional ${addon.addon_price}/(30 minutes)
                     </p>
                   </div>
                 </div>
@@ -322,8 +322,8 @@ const RentalBookingReviewPart = ({
           )} */}
           {addons?.map((addon: any) => {
             const totalAddonPrice =
-              addon.hours > 1
-                ? addon.ini_price + (addon.hours - 1) * addon.price
+              addon.hours > 0.5
+                ? addon.ini_price + (addon.hours / 0.5 - 1) * addon.price
                 : addon.ini_price;
             return (
               <div
@@ -333,15 +333,55 @@ const RentalBookingReviewPart = ({
                 <img
                   src={addon.image}
                   alt={addon.name}
-                  className="sm:size-16 size-12 rounded-xl"
+                  className="sm:size-14 size-12 rounded-xl"
                 />
                 <p>
-                  Hours:
-                  <InputNumber
-                    value={addon.hours}
-                    min={1}
+                  <Select
                     onChange={(value) => onHourChange(value, addon.id)}
-                    className="sm:w-16 w-14"
+                    className="2xl:w-24 sm:w-36 w-28"
+                    defaultValue={0.5}
+                    options={[
+                      {
+                        value: 0.5,
+                        label: "30 minutes",
+                      },
+                      {
+                        value: 1,
+                        label: "1 hour",
+                      },
+                      {
+                        value: 1.5,
+                        label: "1.5 hour",
+                      },
+                      {
+                        value: 2,
+                        label: "2 hours",
+                      },
+                      {
+                        value: 2.5,
+                        label: "2.5 hours",
+                      },
+                      {
+                        value: 3,
+                        label: "3 hours",
+                      },
+                      {
+                        value: 3.5,
+                        label: "3.5 hours",
+                      },
+                      {
+                        value: 4,
+                        label: "4 hours",
+                      },
+                      {
+                        value: 4.5,
+                        label: "4.5 hours",
+                      },
+                      {
+                        value: 5,
+                        label: "5 hours",
+                      },
+                    ]}
                   />
                 </p>
                 <p>${totalAddonPrice}</p>

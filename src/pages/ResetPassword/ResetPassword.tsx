@@ -118,6 +118,8 @@ const ResetPassword = () => {
               </Form.Item>
               <Form.Item>
                 <Button
+                  type="primary"
+                  size="large"
                   loading={isLoading}
                   className="primary-btn w-full"
                   htmlType="submit"
@@ -139,7 +141,13 @@ const ResetPassword = () => {
                 : "Link Already Expired"}
             </h2>
             <Link to="/" className="block">
-              <Button className="primary-btn w-full">Go Back</Button>
+              <Button
+                type="primary"
+                size="large"
+                className="primary-btn w-full"
+              >
+                Go Back
+              </Button>
             </Link>
           </div>
         </div>

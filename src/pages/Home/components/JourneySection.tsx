@@ -9,6 +9,7 @@ import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import { GoArrowLeft, GoArrowRight, GoDotFill } from "react-icons/go";
 import Container from "../../../components/Container";
+import { Button } from "antd";
 
 const JourneySection = () => {
   const programsData = [
@@ -114,7 +115,9 @@ const JourneySection = () => {
           </Slider>
         </div>
         <Link to="/rental-facility" className="inline-block">
-          <button className="primary-btn">Book now</button>
+          <Button type="primary" size="large" className="primary-btn">
+            Book now
+          </Button>
         </Link>
       </div>
     </Container>
