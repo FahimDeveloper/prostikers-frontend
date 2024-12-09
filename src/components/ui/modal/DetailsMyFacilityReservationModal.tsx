@@ -63,7 +63,9 @@ const DetailsMyFacilityReservationModal = ({
       title: "Hours",
       dataIndex: "hours",
       key: "hours",
-      render: (text: number) => <p>{text} hours</p>,
+      render: (text: number) => (
+        <p>{text === 0.5 ? "30 minutes" : `${text} hour(s)`}</p>
+      ),
     },
     {
       title: "Image",
