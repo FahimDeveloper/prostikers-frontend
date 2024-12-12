@@ -37,12 +37,12 @@ const ForgetPassword = () => {
     send(values);
   };
   return (
-    <div className="w-[480px] h-svh mx-auto flex flex-col justify-center gap-7 items-center">
-      <h2 className="text-center font-poppins font-medium text-4xl leading-[46px] text-[#043E41]">
+    <div className="md:w-[480px] sm:w-96 w-auto sm:px-16 px-5 h-svh mx-auto flex flex-col justify-center sm:gap-7 gap-3 items-center">
+      <h2 className="text-center font-poppins font-medium md:text-4xl text-3xl leading-[46px] text-[#043E41]">
         Prostrikers Validations
       </h2>
       <div className="space-y-5 w-full">
-        <h3 className="text-center text-lg text-[#022B2D]">
+        <h3 className="text-center sm:text-lg text-base text-[#022B2D]">
           Enter your valid email address
         </h3>
         <Form
