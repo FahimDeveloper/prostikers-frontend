@@ -7,7 +7,6 @@ import training2 from "../../assets/images/training/group-training.webp";
 import training3 from "../../assets/images/training/kids-training.webp";
 import training4 from "../../assets/images/training/bootcamp-training.webp";
 import coach2 from "../../assets/images/coaches/mark-fields.webp";
-import coach3 from "../../assets/images/coaches/shehan.webp";
 import softballBanner from "../../assets/images/programsBanner/softball-banner.webp";
 
 const SportSoftball = () => {
@@ -48,11 +47,6 @@ const SportSoftball = () => {
         name: "Mark Fields",
         designation: "Softball and baseball coach",
         image: coach2,
-      },
-      {
-        name: "Shehan Jayasooriya",
-        designation: "Batting Consultant",
-        image: coach3,
       },
     ],
   };

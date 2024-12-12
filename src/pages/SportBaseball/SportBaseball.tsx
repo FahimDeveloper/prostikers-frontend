@@ -6,11 +6,9 @@ import training3 from "../../assets/images/training/kids-training.webp";
 import training4 from "../../assets/images/training/bootcamp-training.webp";
 import coach1 from "../../assets/images/coaches/leon-lee.webp";
 import coach2 from "../../assets/images/coaches/mark-fields.webp";
-import coach7 from "../../assets/images/coaches/Kavindu.webp";
-import coach9 from "../../assets/images/coaches/zia-shahzad-min.webp";
 import BannerSection from "../../common/BannerSection";
 import QuestionSection from "../../common/QuestionSection";
-import baseballBanner from "../..//assets/images/programsBanner/baseball-banner.webp";
+import baseballBanner from "../../assets/images/programsBanner/baseball-banner.webp";
 
 const SportBaseball = () => {
   const programData = {
@@ -55,16 +53,6 @@ const SportBaseball = () => {
         name: "Mark Fields",
         designation: "Softball and baseball coach",
         image: coach2,
-      },
-      {
-        name: "Kavindu Dhanapala",
-        designation: "Head Coach",
-        image: coach7,
-      },
-      {
-        name: "Zia Shahzad",
-        designation: "Elite Coach / US major league player",
-        image: coach9,
       },
     ],
   };

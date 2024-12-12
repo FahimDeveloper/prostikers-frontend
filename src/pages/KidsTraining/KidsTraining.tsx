@@ -6,6 +6,7 @@ import training1 from "../../assets/images/training/cricket-training.webp";
 import training2 from "../../assets/images/training/baseball-training.webp";
 import training3 from "../../assets/images/training/soccer-training.webp";
 import training4 from "../../assets/images/training/soft-training.webp";
+import training5 from "../../assets/images/training/hocky-training.webp";
 
 const KidsTraining = () => {
   const trainingData = {
@@ -32,6 +33,11 @@ const KidsTraining = () => {
         title: "Softball Training",
         image: training4,
         link: "softball",
+      },
+      {
+        title: "Field Hockey Training",
+        image: training5,
+        link: "hockey",
       },
     ],
   };

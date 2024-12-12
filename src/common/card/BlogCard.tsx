@@ -14,15 +14,15 @@ const BlogCard = ({ blog }: any) => {
         />
       </div>
       <div className="md:space-y-3 space-y-2">
-        <h3 className="font-semibold md:text-[32px] md:leading-[38px] text-2xl text-[#07133D]">
+        <h3 className="font-semibold md:text-[32px] md:leading-[38px] text-2xl text-[#07133D] truncate">
           {blog.title}
         </h3>
         <p className="md:text-lg text-md text-[#737373]">
-          {blog.description.slice(0, 70)}..
+          {blog.description.slice(0, 75)}..
         </p>
       </div>
       <Link
-        to={blog.link}
+        to={`/blogs/${blog._id}`}
         className="text-primary text-base flex items-center gap-1 font-medium no-underline"
       >
         Read More <FiArrowRight />

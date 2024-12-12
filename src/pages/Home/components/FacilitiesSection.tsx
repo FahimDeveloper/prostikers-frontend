@@ -45,11 +45,16 @@ const FacilitiesSection = () => {
           <h2 className="lg:text-[56px] md:text-[45px] text-3xl font-semibold lg:leading-[67px] md:leading-[50px]">
             Tailored Training & Top-Tier Facilities
           </h2>
-          <p className="text-[#929292] md:text-lg lg:leading-7 md:leading-6 leading-5 md:w-[600px] w-full mx-auto">
-            At ProStrikers, we offer more than just practice sessions. From
-            professional coaching and custom training programs to our
-            state-of-the-art facilities, we provide everything you need to excel
-            in your sport of choice.
+          <p className="text-[#929292] md:text-lg lg:leading-7 md:leading-6 leading-5 w-full mx-auto">
+            At Prostrikers, we offer a comprehensive 360° solution for athletes,
+            featuring state-of-the-art facilities and top-tier equipment in our
+            rental cages and open arena. Our services include professional
+            coaching, boot camps, and personalized training programs at the
+            Prostrikers Academy. We cater to a wide range of sports, including
+            baseball, softball, cricket, field hockey, and soccer. In addition,
+            we host exciting tournaments, such as T10 leagues, providing
+            athletes with competitive opportunities to showcase their skills. We
+            provide everything you need to excel in your sport of choice.
           </p>
         </div>
         <div className="space-y-5">
@@ -59,12 +64,12 @@ const FacilitiesSection = () => {
                 key={index}
                 className={`${
                   index == 0
-                    ? "bg-[#EBFAFE] top-24"
+                    ? "bg-[#EBFAFE] md:top-24"
                     : index == 1
-                    ? "bg-[#FFF2FC] top-32"
+                    ? "bg-[#FFF2FC] md:top-28"
                     : index == 2
-                    ? "bg-[#073742] top-40"
-                    : "bg-[#FFCFB4] top-48"
+                    ? "bg-[#073742] md:top-32"
+                    : "bg-[#FFCFB4] md:top-36"
                 } sticky xl:p-14 sm:p-10 p-6 pt-8 space-y-7 rounded-3xl`}
               >
                 <span
@@ -84,7 +89,7 @@ const FacilitiesSection = () => {
                   <img
                     loading="lazy"
                     src={facilty.image}
-                    className="w-full lg:h-full max-h-[400px] min-h-80 object-fill rounded-2xl lg:order-2 md:order-1"
+                    className="w-full lg:h-full md:max-h-[480px] object-fill rounded-2xl lg:order-2 md:order-1"
                     alt="facility image"
                   />
                   <div className="xl:space-y-9 lg:order-1 md:order-2 sm:space-y-6 space-y-4">
@@ -97,7 +102,7 @@ const FacilitiesSection = () => {
                           : index == 2
                           ? "text-[#FFFFFF]"
                           : "text-[#351A0A]"
-                      } text-bold xl:text-[40px] md:text-4xl text-2xl md:leading-[48px] leading-6`}
+                      } text-bold xl:text-[40px] md:text-4xl text-2xl md:leading-[48px] leading-8`}
                     >
                       {facilty.title}
                     </h3>

@@ -2,6 +2,290 @@
 import { createBrowserRouter } from "react-router-dom";
 import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
+import PrivetRoute from "./PrivetRoute";
+import ProtectAuthRoute from "./ProtectAuthRoute";
+const VerifyUser = LazyLoad(
+  lazy(() => import("../pages/VerifyUser/VerifyUser"))
+);
+// const BlackFridayMembership = LazyLoad(
+//   lazy(() => import("../pages/BlackFridayMembership/BlackFridayMembership"))
+// );
+const Dashboard = LazyLoad(
+  lazy(() => import("../pages/DashboardManagement/Dashboard/Dashboard"))
+);
+const Profile = LazyLoad(
+  lazy(() => import("../pages/DashboardManagement/Profile/Profile"))
+);
+const MyClasses = LazyLoad(
+  lazy(() => import("../pages/DashboardManagement/MyClasses/MyClasses"))
+);
+const MyRentalFacilities = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/DashboardManagement/MyRentalFacilities/MyRentalFacilities"
+      )
+  )
+);
+const MyBootcamps = LazyLoad(
+  lazy(() => import("../pages/DashboardManagement/MyBootcamps/MyBootcamps"))
+);
+const MyGroupAppointments = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/DashboardManagement/MyGroupAppointments/MyGroupAppointments"
+      )
+  )
+);
+const MyOneOnOneAppointments = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/DashboardManagement/MyOneOnOneAppointments/MyOneOnOneAppointments"
+      )
+  )
+);
+const MyGroupEvents = LazyLoad(
+  lazy(() => import("../pages/DashboardManagement/MyGroupEvents/MyGroupEvents"))
+);
+const MyIndividualEvents = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/DashboardManagement/MyIndividualEvents/MyIndividualEvents"
+      )
+  )
+);
+const MembershipPayment = LazyLoad(
+  lazy(() => import("../pages/MembershipPayment/MembershipPayment"))
+);
+const KidsTrainingPayment = LazyLoad(
+  lazy(() => import("../pages/KidsTrainingPayment/KidsTrainingPayment"))
+);
+const Blogs = LazyLoad(lazy(() => import("../pages/Blogs/Blogs")));
+const SingleBlog = LazyLoad(
+  lazy(() => import("../pages/SingleBlog/SingleBlog"))
+);
+const BaseballGroupTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/BaseballGroupTrainingReservation/BaseballGroupTrainingReservation"
+      )
+  )
+);
+const SoccerGroupTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/SoccerGroupTrainingReservation/SoccerGroupTrainingReservation"
+      )
+  )
+);
+const HockeyGroupTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/HockeyGroupTrainingReservation/HockeyGroupTrainingReservation"
+      )
+  )
+);
+const SoftballGroupTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/SoftballGroupTrainingReservation/SoftballGroupTrainingReservation"
+      )
+  )
+);
+const CricketGroupTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/GroupTrainingManagement/CricketGroupTrainingReservation/CricketGroupTrainingReservation"
+      )
+  )
+);
+// const RentalMembership = LazyLoad(
+//   lazy(() => import("../pages/RentalMembership/RentalMembership"))
+// );
+const RentalBookingPage = LazyLoad(
+  lazy(() => import("../pages/RentalBookingPage/RentalBookingPage"))
+);
+const BaseballOneTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/OneTrainingManagment/BaseballOneTrainingReservation/BaseballOneTrainingReservation"
+      )
+  )
+);
+const CricketOneTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/OneTrainingManagment/CricketOneTrainingReservation/CricketOneTrainingReservation"
+      )
+  )
+);
+const SoccerOneTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/OneTrainingManagment/SoccerOneTrainingReservation/SoccerOneTrainingReservation"
+      )
+  )
+);
+const HockeyOneTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/OneTrainingManagment/HockeyOneTrainingReservation/HockeyOneTrainingReservation"
+      )
+  )
+);
+const ResetPassword = LazyLoad(
+  lazy(() => import("../pages/ResetPassword/ResetPassword"))
+);
+const VerifyCode = LazyLoad(
+  lazy(() => import("../pages/VerifyCode/VerifyCode"))
+);
+const ForgetPassword = LazyLoad(
+  lazy(() => import("../pages/FogetPassword/ForgetPassword"))
+);
+const BootcampPayment = LazyLoad(
+  lazy(() => import("../pages/BootcampPayment/BootcampPayment"))
+);
+const GroupAppointmentPayment = LazyLoad(
+  lazy(() => import("../pages/GroupAppointmentPayment/GroupAppointmentPayment"))
+);
+const OneOnOneAppointmentPayment = LazyLoad(
+  lazy(
+    () =>
+      import("../pages/OneOnOneAppointmentPayment/OneOnOneAppointmentPayment")
+  )
+);
+const FacilityPayment = LazyLoad(
+  lazy(() => import("../pages/FacilityPayment/FacilityPayment"))
+);
+const EventGroupPayment = LazyLoad(
+  lazy(() => import("../pages/EventGroupPayment/EventGroupPayment"))
+);
+const EventIndividualPayment = LazyLoad(
+  lazy(() => import("../pages/EventIndividualPayment/EventIndividualPayment"))
+);
+const BaseballKidsTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/BaseballKidsTrainingReservation/BaseballKidsTrainingReservation"
+      )
+  )
+);
+const CricketKidsTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/CricketKidsTrainingReservation/CricketKidsTrainingReservation"
+      )
+  )
+);
+const SoccerKidsTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/SoccerKidsTrainingReservation/SoccerKidsTrainingReservation"
+      )
+  )
+);
+const HockeyKidsTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/HockeyKidsTrainingReservation/HockeyKidsTrainingReservation"
+      )
+  )
+);
+const SoftballKidsTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/KidsTrainingManagement/SoftballKidsTrainingReservation/SoftballKidsTrainingReservation"
+      )
+  )
+);
+const Login = LazyLoad(lazy(() => import("../pages/Login/Login")));
+const Registration = LazyLoad(
+  lazy(() => import("../pages/Registration/Registration"))
+);
+const EventOutlet = LazyLoad(
+  lazy(() => import("../pages/Event/components/EventOutlet"))
+);
+const JoinAsIndividual = LazyLoad(
+  lazy(
+    () => import("../pages/EventManagement/JoinAsIndividual/JoinAsIndividual")
+  )
+);
+const JoinAsTeam = LazyLoad(
+  lazy(() => import("../pages/EventManagement/JoinAsTeam/JoinAsTeam"))
+);
+const JoinAsIndividualRegistration = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/EventManagement/JoinAsIndividualRegistration/JoinAsIndividualRegistration"
+      )
+  )
+);
+const JoinAsTeamRegistration = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/EventManagement/JoinAsTeamRegistration/JoinAsTeamRegistration"
+      )
+  )
+);
+const BaseBallBootcampTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/BaseBallBootcampTrainingReservation/BaseBallBootcampTrainingReservation"
+      )
+  )
+);
+const CricketBootcampTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/CricketBootcampTrainingReservation/CricketBootcampTrainingReservation"
+      )
+  )
+);
+const SoccerBootcampTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/SoccerBootcampTrainingReservation/SoccerBootcampTrainingReservation"
+      )
+  )
+);
+const HockeyBootcampTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/HockeyBootcampTrainingReservation/HockeyBootcampTrainingReservation"
+      )
+  )
+);
+const SoftballBootcampTrainingReservation = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/BootcampTrainingManagement/SoftballBootcampTrainingReservation/SoftballBootcampTrainingReservation"
+      )
+  )
+);
 const KidsTrainingOutlet = LazyLoad(
   lazy(() => import("../pages/KidsTraining/components/KidsTrainingOutlet"))
 );
@@ -18,7 +302,9 @@ const Home = LazyLoad(lazy(() => import("../pages/Home/Home")));
 const Membership = LazyLoad(
   lazy(() => import("../pages/Membership/Membership"))
 );
-const Rental = LazyLoad(lazy(() => import("../pages/Rental/Rental")));
+const RentalFacility = LazyLoad(
+  lazy(() => import("../pages/RentalFacility/RentalFacility"))
+);
 const About = LazyLoad(lazy(() => import("../pages/About/About")));
 const Contact = LazyLoad(lazy(() => import("../pages/Contact/Contact")));
 const Academy = LazyLoad(lazy(() => import("../pages/Academy/Academy")));
@@ -49,9 +335,7 @@ const KidsTraining = LazyLoad(
 const BootcampTraining = LazyLoad(
   lazy(() => import("../pages/BootcampTraining/BootcampTraining"))
 );
-const TtenLeague = LazyLoad(
-  lazy(() => import("../pages/TtenLeague/TtenLeague"))
-);
+const Event = LazyLoad(lazy(() => import("../pages/Event/Event")));
 const BaseBallOneTraining = LazyLoad(
   lazy(
     () =>
@@ -231,6 +515,118 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+      // {
+      //   path: "/black-friday/membership",
+      //   element: <BlackFridayMembership />,
+      // },
+      {
+        path: "/login",
+        element: (
+          <ProtectAuthRoute>
+            <Login />
+          </ProtectAuthRoute>
+        ),
+      },
+      {
+        path: "/forget-password",
+        element: (
+          <ProtectAuthRoute>
+            <ForgetPassword />
+          </ProtectAuthRoute>
+        ),
+      },
+      {
+        path: "/reset-password/:id/:token",
+        element: (
+          <ProtectAuthRoute>
+            <ResetPassword />
+          </ProtectAuthRoute>
+        ),
+      },
+      {
+        path: "/reset-password/:id/:token/verify",
+        element: (
+          <ProtectAuthRoute>
+            <VerifyCode />
+          </ProtectAuthRoute>
+        ),
+      },
+      {
+        path: "/user/verify/:token",
+        element: <VerifyUser />,
+      },
+      {
+        path: "/registration",
+        element: (
+          <ProtectAuthRoute>
+            <Registration />
+          </ProtectAuthRoute>
+        ),
+      },
+      {
+        path: "/facility-payment",
+        element: (
+          <PrivetRoute>
+            <FacilityPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/event-group-payment",
+        element: (
+          <PrivetRoute>
+            <EventGroupPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/event-individual-payment",
+        element: (
+          <PrivetRoute>
+            <EventIndividualPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/bootcamp-payment",
+        element: (
+          <PrivetRoute>
+            <BootcampPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/group-appointment-payment",
+        element: (
+          <PrivetRoute>
+            <GroupAppointmentPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/one-appointment-payment",
+        element: (
+          <PrivetRoute>
+            <OneOnOneAppointmentPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/class-payment",
+        element: (
+          <PrivetRoute>
+            <KidsTrainingPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/membership-payment",
+        element: (
+          <PrivetRoute>
+            <MembershipPayment />
+          </PrivetRoute>
+        ),
+      },
       {
         path: "/coming-soon",
         element: <ComingSoon />,
@@ -244,8 +640,24 @@ export const router = createBrowserRouter([
         element: <Shop />,
       },
       {
-        path: "/rental",
-        element: <Rental />,
+        path: "/rental-facility",
+        element: <RentalFacility />,
+      },
+      // {
+      //   path: "/rental-membership",
+      //   element: (
+      //     <PrivetRoute>
+      //       <RentalMembership />
+      //     </PrivetRoute>
+      //   ),
+      // },
+      {
+        path: "/rental-booking",
+        element: (
+          <PrivetRoute>
+            <RentalBookingPage />
+          </PrivetRoute>
+        ),
       },
       {
         path: "/about",
@@ -258,6 +670,14 @@ export const router = createBrowserRouter([
       {
         path: "/academy",
         element: <Academy />,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />,
+      },
+      {
+        path: "/blogs/:id",
+        element: <SingleBlog />,
       },
       {
         path: "/sport/baseball",
@@ -307,6 +727,46 @@ export const router = createBrowserRouter([
             path: "softball",
             element: <SoftballOneTraining />,
           },
+          {
+            path: "baseball/:id",
+            element: (
+              <PrivetRoute>
+                <BaseballOneTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "cricket/:id",
+            element: (
+              <PrivetRoute>
+                <CricketOneTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "soccer/:id",
+            element: (
+              <PrivetRoute>
+                <SoccerOneTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "hockey/:id",
+            element: (
+              <PrivetRoute>
+                <HockeyOneTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "softball/:id",
+            element: (
+              <PrivetRoute>
+                <SoftballGroupTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
         ],
       },
       {
@@ -336,6 +796,46 @@ export const router = createBrowserRouter([
           {
             path: "softball",
             element: <SoftballGroupTraining />,
+          },
+          {
+            path: "baseball/:id",
+            element: (
+              <PrivetRoute>
+                <BaseballGroupTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "cricket/:id",
+            element: (
+              <PrivetRoute>
+                <CricketGroupTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "soccer/:id",
+            element: (
+              <PrivetRoute>
+                <SoccerGroupTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "hockey/:id",
+            element: (
+              <PrivetRoute>
+                <HockeyGroupTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "softball/:id",
+            element: (
+              <PrivetRoute>
+                <SoftballGroupTrainingReservation />
+              </PrivetRoute>
+            ),
           },
         ],
       },
@@ -367,6 +867,46 @@ export const router = createBrowserRouter([
             path: "softball",
             element: <SoftballKidsTraining />,
           },
+          {
+            path: "baseball/:id",
+            element: (
+              <PrivetRoute>
+                <BaseballKidsTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "cricket/:id",
+            element: (
+              <PrivetRoute>
+                <CricketKidsTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "soccer/:id",
+            element: (
+              <PrivetRoute>
+                <SoccerKidsTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "hockey/:id",
+            element: (
+              <PrivetRoute>
+                <HockeyKidsTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "softball/:id",
+            element: (
+              <PrivetRoute>
+                <SoftballKidsTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
         ],
       },
       {
@@ -397,11 +937,155 @@ export const router = createBrowserRouter([
             path: "softball",
             element: <SoftballBootcampTraining />,
           },
+          {
+            path: "baseball/:id",
+            element: (
+              <PrivetRoute>
+                <BaseBallBootcampTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "cricket/:id",
+            element: (
+              <PrivetRoute>
+                <CricketBootcampTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "soccer/:id",
+            element: (
+              <PrivetRoute>
+                <SoccerBootcampTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "hockey/:id",
+            element: (
+              <PrivetRoute>
+                <HockeyBootcampTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "softball/:id",
+            element: (
+              <PrivetRoute>
+                <SoftballBootcampTrainingReservation />
+              </PrivetRoute>
+            ),
+          },
         ],
       },
       {
-        path: "/programs/tten-league",
-        element: <TtenLeague />,
+        path: "/programs/events",
+        element: <EventOutlet />,
+        children: [
+          {
+            path: "/programs/events",
+            element: <Event />,
+          },
+          {
+            path: "individual",
+            element: <JoinAsIndividual />,
+          },
+          {
+            path: "group",
+            element: <JoinAsTeam />,
+          },
+          {
+            path: "individual/:id",
+            element: (
+              <PrivetRoute>
+                <JoinAsIndividualRegistration />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "group/:id",
+            element: (
+              <PrivetRoute>
+                <JoinAsTeamRegistration />
+              </PrivetRoute>
+            ),
+          },
+        ],
+      },
+      {
+        path: "/dashboard",
+        element: (
+          <PrivetRoute>
+            <Dashboard />
+          </PrivetRoute>
+        ),
+        children: [
+          {
+            path: "/dashboard",
+            element: (
+              <PrivetRoute>
+                <Profile />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-classes",
+            element: (
+              <PrivetRoute>
+                <MyClasses />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-group-appointments",
+            element: (
+              <PrivetRoute>
+                <MyGroupAppointments />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-one-on-one-appointments",
+            element: (
+              <PrivetRoute>
+                <MyOneOnOneAppointments />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-rental-facilities",
+            element: (
+              <PrivetRoute>
+                <MyRentalFacilities />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-bootcamps",
+            element: (
+              <PrivetRoute>
+                <MyBootcamps />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-individual-events",
+            element: (
+              <PrivetRoute>
+                <MyIndividualEvents />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-team-events",
+            element: (
+              <PrivetRoute>
+                <MyGroupEvents />
+              </PrivetRoute>
+            ),
+          },
+        ],
       },
       {
         path: "/franchise",

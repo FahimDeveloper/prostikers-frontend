@@ -42,7 +42,7 @@ const BootcampTraining = () => {
         ],
       },
       {
-        title: "Hockey Training",
+        title: "Field Hockey Training",
         image: training4,
         link: "hockey",
         description: [
@@ -55,8 +55,8 @@ const BootcampTraining = () => {
         image: training5,
         link: "softball",
         description: [
-          "Pro Development: Train with the Best Softball Coaches",
-          "Fast-Track Your Skills: Action-Packed Softball Training",
+          "Enhance Your Softball Performance: Join Prostrikers' High-Impact Boot Camp",
+          "Step Up Your Softball Game: Accelerate Your Progress at Prostrikers' Training Program",
         ],
       },
     ],
