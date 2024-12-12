@@ -7,7 +7,6 @@ const clientApi = clientApiSlice.injectEndpoints({
         url: `/users/${id}`,
         method: "GET",
       }),
-      providesTags: ["client"],
     }),
     updateClient: builder.mutation({
       query: ({ id, payload }) => ({
@@ -15,7 +14,6 @@ const clientApi = clientApiSlice.injectEndpoints({
         method: "PATCH",
         body: payload,
       }),
-      invalidatesTags: ["client"],
     }),
   }),
 });

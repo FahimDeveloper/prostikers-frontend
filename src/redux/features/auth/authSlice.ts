@@ -1,16 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
+import { IUser } from "../../../types/user.types";
 
 type IState = {
-  user: null | {
-    _id: string;
-    first_name: string;
-    last_name: string;
-    image: string;
-    email: string;
-    role: string;
-    phone: string;
-  };
+  user: null | IUser;
   token: null | string;
 };
 

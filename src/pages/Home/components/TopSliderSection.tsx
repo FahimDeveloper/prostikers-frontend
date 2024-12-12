@@ -97,7 +97,7 @@ const TopSliderSection = () => {
           return (
             <div key={index}>
               <div
-                className="min-h-svh flex md:items-center items-end rounded-b-3xl"
+                className="min-h-svh flex lg:items-center sm:items-end items-center rounded-b-3xl"
                 style={{
                   backgroundImage: `url(${slide.image})`,
                   backgroundPosition: "bottom right",

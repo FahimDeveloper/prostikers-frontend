@@ -11,7 +11,13 @@ import { useUpdateClientMutation } from "../../../redux/features/client/clientAp
 import { updateUserInfo } from "../../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../../hooks/useAppHooks";
 
-const UpdateUserInfoModal = ({ record }: { record: IUser }) => {
+const UpdateUserInfoModal = ({
+  record,
+  type,
+}: {
+  record: IUser | null;
+  type?: "text" | "link" | "default" | "primary" | "dashed" | undefined;
+}) => {
   const [open, setModalOpen] = useState(false);
   const [form] = useForm();
   const dispatch = useAppDispatch();
@@ -57,9 +63,10 @@ const UpdateUserInfoModal = ({ record }: { record: IUser }) => {
   };
   return (
     <>
-      <Button type="default" onClick={() => setModalOpen(true)}>
+      <Button type={type ? type : "default"} onClick={() => setModalOpen(true)}>
         Edit <CiEdit />
       </Button>
+
       <Modal
         width={800}
         footer={null}

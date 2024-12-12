@@ -46,7 +46,7 @@ const ProfileSection = ({ data }: { data: IUser }) => {
           <h3 className="text-xl text-[#006166] font-medium">
             Personal Details
           </h3>
-          <div className="flex gap-10 flex-wrap">
+          <div className="flex md:gap-10 gap-5 flex-wrap">
             <div className="space-y-1">
               <p className="text-sm font-medium text-gray-500">First Name</p>
               <p className="text-lg text-black">
@@ -83,13 +83,19 @@ const ProfileSection = ({ data }: { data: IUser }) => {
         </div>
         <div className="space-y-3">
           <h3 className="text-xl text-[#006166] font-medium">Address</h3>
-          <div className="flex gap-10 flex-wrap">
+          <div className="flex md:gap-10 gap-5 flex-wrap">
             <div className="space-y-1">
               <p className="text-sm font-medium text-gray-500">
                 Street Address
               </p>
               <p className="text-lg text-black">
                 {data?.street_address || "Not Provided"}
+              </p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-sm font-medium text-gray-500">Postal Code</p>
+              <p className="text-lg text-black">
+                {data?.zip_code || "Not Provided"}
               </p>
             </div>
             <div className="space-y-1">
@@ -116,7 +122,7 @@ const ProfileSection = ({ data }: { data: IUser }) => {
           <h3 className="text-xl text-[#006166] font-medium">
             Contact Details
           </h3>
-          <div className="flex gap-10 flex-wrap">
+          <div className="flex md:gap-10 gap-5 flex-wrap">
             <div className="space-y-1">
               <p className="text-sm font-medium text-gray-500">Phone Number</p>
               <p className="text-lg text-black">

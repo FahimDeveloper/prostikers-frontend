@@ -5,6 +5,7 @@ import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
 import TermsCondition from "../../TermsCondition";
 import PrivacyPolicy from "../../PrivacyPolicy";
+import { calculateAge } from "../../../utils/calculateAge";
 
 const LeagueIndividualForm = ({
   form,
@@ -21,6 +22,11 @@ const LeagueIndividualForm = ({
       last_name: user?.last_name,
       email: user?.email,
       phone: user?.phone,
+      street_address: user?.street_address,
+      city: user?.city,
+      state: user?.state,
+      zip_code: user?.zip_code,
+      age: calculateAge(user?.date_of_birth as string),
     });
   }, [user, form]);
 

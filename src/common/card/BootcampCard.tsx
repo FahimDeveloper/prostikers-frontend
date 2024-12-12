@@ -65,7 +65,9 @@ const BootcampCard = ({ image, data }: { image: any; data: IBootcamp }) => {
                 <p className="text-base">Start Date :</p>
               </div>
               <p className="text-base font-medium">
-                {moment(data?.start_date).format("ddd, MMM Do YYYY")}
+                {moment
+                  .tz(data?.start_date, californiaTimeZone)
+                  .format("ddd, MMM Do YYYY")}
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -74,7 +76,9 @@ const BootcampCard = ({ image, data }: { image: any; data: IBootcamp }) => {
                 <p className="text-base">End Date :</p>
               </div>
               <p className="text-base font-medium">
-                {moment(data?.end_date).format("ddd, MMM Do YYYY")}
+                {moment
+                  .tz(data?.end_date, californiaTimeZone)
+                  .format("ddd, MMM Do YYYY")}
               </p>
             </div>
           </div>

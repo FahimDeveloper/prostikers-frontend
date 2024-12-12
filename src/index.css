@@ -330,3 +330,7 @@ h6 {
 .promotion-1 .ant-modal-content {
   @apply px-[10px] pb-1;
 }
+
+.swal2-container {
+  z-index: 9999;
+}

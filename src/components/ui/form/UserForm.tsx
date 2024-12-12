@@ -79,6 +79,7 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
       state: record?.state,
       city: record?.city,
       street_address: record?.street_address,
+      zip_code: record?.zip_code,
       image: record?.image && [
         {
           uid: "-1",
@@ -131,7 +132,7 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
         </div>
         <div className="space-y-4">
           <p className="font-medium text-base">Personal Details</p>
-          <div className="grid grid-cols-3 gap-x-5 gap-y-3">
+          <div className="grid grid-cols-2 sm:gap-x-5 gap-x-2 gap-y-3">
             <Form.Item
               name="first_name"
               label="First Name"
@@ -148,6 +149,18 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
             >
               <Input placeholder="Enter last name" />
             </Form.Item>
+
+            <Form.Item
+              className="w-full m-0 col-span-2"
+              name="email"
+              label="Email"
+              rules={[{ required: true }]}
+            >
+              <Input
+                readOnly={record?.email ? true : false}
+                placeholder="Enter your email"
+              />
+            </Form.Item>
             <Form.Item
               name="gender"
               label="Gender"
@@ -160,17 +173,6 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
                   { label: "Male", value: "male" },
                   { label: "Female", value: "female" },
                 ]}
-              />
-            </Form.Item>
-            <Form.Item
-              className="w-full m-0"
-              name="email"
-              label="Email"
-              rules={[{ required: true }]}
-            >
-              <Input
-                readOnly={record?.email ? true : false}
-                placeholder="Enter your email"
               />
             </Form.Item>
             <Form.Item
@@ -223,6 +225,14 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
               rules={[{ required: true }]}
             >
               <Input placeholder="Enter your city" />
+            </Form.Item>
+            <Form.Item
+              className="w-full m-0"
+              name="zip_code"
+              label="Zip/Postal Code"
+              rules={[{ required: true }]}
+            >
+              <Input placeholder="Enter your postal code" />
             </Form.Item>
             <Form.Item
               className="w-full m-0 col-span-2"
