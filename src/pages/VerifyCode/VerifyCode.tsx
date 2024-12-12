@@ -86,12 +86,12 @@ const VerifyCode = () => {
         </div>
       )}
       {isVerifySuccess && (
-        <div className="w-[480px] h-svh mx-auto flex flex-col justify-center gap-8 items-center">
-          <h2 className="text-center w-full font-poppins font-medium text-4xl leading-[46px] text-[#043E41]">
+        <div className="md:w-[480px] sm:w-96 w-auto sm:px-16 px-5 h-svh mx-auto flex flex-col justify-center sm:gap-7 gap-3 items-center">
+          <h2 className="text-center font-poppins font-medium md:text-4xl text-3xl leading-[46px] text-[#043E41]">
             OTP Verification
           </h2>
           <div className="space-y-5">
-            <h3 className="text-center w-full mx-auto text-lg text-[#022B2D]">
+            <h3 className="text-center w-full mx-auto sm:text-lg text-base text-[#022B2D]">
               We have sent a verification code to your email address
             </h3>
             <Form
