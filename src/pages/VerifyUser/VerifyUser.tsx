@@ -3,12 +3,9 @@ import { Link, useParams } from "react-router-dom";
 import { useVerifyUserQuery } from "../../redux/features/auth/authApi";
 import { FaSpinner } from "react-icons/fa";
 import { Button } from "antd";
-import { selectCurrentUser } from "../../redux/features/auth/authSlice";
-import { useSelector } from "react-redux";
 
 const VerifyUser = () => {
   const { token } = useParams();
-  const user = useSelector(selectCurrentUser);
   const {
     data,
     isLoading: isVerifyLoading,
@@ -16,7 +13,6 @@ const VerifyUser = () => {
     isError: isVerifyError,
     error: verifyError,
   } = useVerifyUserQuery({
-    email: user?.email,
     token,
   });
   return (
