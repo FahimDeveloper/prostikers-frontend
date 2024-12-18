@@ -10,6 +10,13 @@ const VerifyUser = LazyLoad(
 // const BlackFridayMembership = LazyLoad(
 //   lazy(() => import("../pages/BlackFridayMembership/BlackFridayMembership"))
 // );
+
+const ChristmasSpecialMembership = LazyLoad(
+  lazy(
+    () =>
+      import("../pages/ChristmasSpecialMembership/ChristmasSpecialMembership")
+  )
+);
 const Dashboard = LazyLoad(
   lazy(() => import("../pages/DashboardManagement/Dashboard/Dashboard"))
 );
@@ -519,6 +526,10 @@ export const router = createBrowserRouter([
       //   path: "/black-friday/membership",
       //   element: <BlackFridayMembership />,
       // },
+      {
+        path: "/christmas-special/membership",
+        element: <ChristmasSpecialMembership />,
+      },
       {
         path: "/login",
         element: (
