@@ -9,7 +9,7 @@ const ChristmasMembershipSection = () => {
   const handleChangePackage = (value: string) => {
     setPlan(value);
   };
-  const handleMembership = (membership: string, price?: number) => {
+  const handleMembership = (membership: string, price: number | string) => {
     if (membership === "individual_pro") {
       if (plan === "monthly") {
         const membershipData = {
@@ -18,7 +18,7 @@ const ChristmasMembershipSection = () => {
           plan: plan,
         };
         navigate("/membership-payment", {
-          state: { data: membershipData, amount: price, month: 4 },
+          state: { data: membershipData, amount: Number(price), month: 4 },
         });
       } else if (plan === "yearly") {
         const membershipData = {
@@ -27,7 +27,7 @@ const ChristmasMembershipSection = () => {
           plan: plan,
         };
         navigate("/membership-payment", {
-          state: { data: membershipData, amount: price },
+          state: { data: membershipData, amount: Number(price) },
         });
       }
     } else if (membership === "individual_pro_unlimited") {
@@ -38,7 +38,7 @@ const ChristmasMembershipSection = () => {
           plan: plan,
         };
         navigate("/membership-payment", {
-          state: { data: membershipData, amount: price, month: 4 },
+          state: { data: membershipData, amount: Number(price), month: 4 },
         });
       } else if (plan === "yearly") {
         const membershipData = {
@@ -47,7 +47,7 @@ const ChristmasMembershipSection = () => {
           plan: plan,
         };
         navigate("/membership-payment", {
-          state: { data: membershipData, amount: price },
+          state: { data: membershipData, amount: Number(price) },
         });
       }
     }
@@ -124,7 +124,7 @@ const ChristmasMembershipSection = () => {
                 <p className="sm:text-lg text-base text-gray-500">
                   Normal Membership Price -
                   <span className="text-red-500">$450</span> After Discount
-                  Price - <span className="text-red-500">$337</span>
+                  Price - <span className="text-red-500">$337.50</span>
                 </p>
               </li>
               <li className="flex gap-2 sm:justify-center sm:items-center">
@@ -353,7 +353,7 @@ const ChristmasMembershipSection = () => {
                   </div>
                   <button
                     onClick={() =>
-                      handleMembership("individual_pro_unlimited", 1687)
+                      handleMembership("individual_pro_unlimited", "1687.50")
                     }
                     className="membership-btn"
                   >

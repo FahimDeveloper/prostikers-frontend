@@ -12,7 +12,7 @@ const ChristmasCagePackSection = () => {
     setPack(value);
   };
   const user = useAppSelector(selectCurrentUser);
-  const handleMembership = (cage: string, price?: number) => {
+  const handleMembership = (cage: string, price: number | string) => {
     if (cage === "five_cage") {
       const bundleCredit = {
         package: "5 (1-Hour) Cage Pass Pack",
@@ -22,7 +22,7 @@ const ChristmasCagePackSection = () => {
         active: true,
       };
       navigate("/bundle-cage-payment", {
-        state: { data: bundleCredit, amount: price },
+        state: { data: bundleCredit, amount: Number(price) },
       });
     } else if (cage === "ten_cage") {
       const bundleCredit = {
@@ -33,7 +33,7 @@ const ChristmasCagePackSection = () => {
         active: true,
       };
       navigate("/bundle-cage-payment", {
-        state: { data: bundleCredit, amount: price },
+        state: { data: bundleCredit, amount: Number(price) },
       });
     }
   };
@@ -414,7 +414,7 @@ const ChristmasCagePackSection = () => {
                   </div>
                 </div>
                 <button
-                  onClick={() => handleMembership("five_cage", 303)}
+                  onClick={() => handleMembership("five_cage", "303.75")}
                   className="membership-btn"
                 >
                   Choose Cage Pack
