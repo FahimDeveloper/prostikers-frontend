@@ -9,36 +9,39 @@ const Dashboard = () => {
   const location = useLocation();
   const options = [
     {
-      label: "My Profile Info",
+      label: "Profile Info",
       value: "/dashboard",
     },
+    // {
+    //   label: "Bundle Credit Packs",
+    //   value: "/dashboard/my-bundle-credit-packs",
+    // },
     {
-      label: "My Classes",
-      value: "/dashboard/my-classes",
-    },
-    {
-      label: "My One Appointments",
-      value: "/dashboard/my-one-on-one-appointments",
-    },
-    {
-      label: "My Group Appointments",
-      value: "/dashboard/my-group-appointments",
-    },
-    {
-      label: "My Rental Facilities",
-
+      label: "Rental Facilities",
       value: "/dashboard/my-rental-facilities",
     },
     {
-      label: "My Bootcamps",
+      label: "Classes",
+      value: "/dashboard/my-classes",
+    },
+    {
+      label: "One Appointments",
+      value: "/dashboard/my-one-on-one-appointments",
+    },
+    {
+      label: "Group Appointments",
+      value: "/dashboard/my-group-appointments",
+    },
+    {
+      label: "Bootcamps",
       value: "/dashboard/my-bootcamps",
     },
     {
-      label: "My Individual Events",
+      label: "Individual Events",
       value: "/dashboard/my-individual-events",
     },
     {
-      label: "My Team Events",
+      label: "Team Events",
       value: "/dashboard/my-team-events",
     },
   ];

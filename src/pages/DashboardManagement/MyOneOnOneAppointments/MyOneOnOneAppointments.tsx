@@ -83,11 +83,15 @@ const MyOneOnOneAppointments = () => {
       align: "center",
       dataIndex: "trainer",
       key: "trainer",
-      render: (text) => (
-        <p className="font-medium text-sm leading-5 text-[#151515] capitalize">
-          {text !== null ? `${text.first_name} ${text.last_name}` : "Not Found"}
-        </p>
-      ),
+      render: (text) => {
+        return (
+          <p className="font-medium text-sm leading-5 text-[#151515] capitalize">
+            {text !== null
+              ? `${text?.first_name} ${text?.last_name}`
+              : "Not Found"}
+          </p>
+        );
+      },
     },
     {
       width: 170,

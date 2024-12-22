@@ -59,7 +59,7 @@ const MyRentalFacilities = () => {
       key: "_id",
       render: (_, record) => (
         <p className="font-medium text-sm leading-5 text-[#151515] capitalize">
-          {record?.facility.facility_name}
+          {record?.facility?.facility_name}
         </p>
       ),
     },
@@ -89,30 +89,6 @@ const MyRentalFacilities = () => {
       ),
     },
     {
-      width: 140,
-      align: "center",
-      title: "Facility First Slot Fee",
-      dataIndex: "_id",
-      key: "_id",
-      render: (_, record) => (
-        <p className="font-medium text-sm leading-5 text-[#151515]">
-          ${record.facility.ini_price}
-        </p>
-      ),
-    },
-    {
-      width: 140,
-      align: "center",
-      title: "Facility Base Slot Fee",
-      dataIndex: "_id",
-      key: "_id",
-      render: (_, record) => (
-        <p className="font-medium text-sm leading-5 text-[#151515]">
-          ${record.facility.price}
-        </p>
-      ),
-    },
-    {
       width: 90,
       align: "center",
       title: "Details",
@@ -122,31 +98,6 @@ const MyRentalFacilities = () => {
         <DetailsMyFacilityReservationModal record={record} />
       ),
     },
-    // {
-    //   width: 80,
-    //   align: "center",
-    //   fixed: "right",
-    //   title: "Action",
-    //   dataIndex: "action",
-    //   key: "action",
-    //   render: (_, record) => {
-    //     const items = [
-    //       {
-    //         key: "1",
-    //         label: <UpdateClassReservationModal record={record} />,
-    //       },
-    //       {
-    //         key: "2",
-    //         label: <DeleteClassReservationPopup id={record?._id} />,
-    //       },
-    //     ];
-    //     return (
-    //       <Dropdown menu={{ items }}>
-    //         <BsThreeDots className="size-5 cursor-pointer" />
-    //       </Dropdown>
-    //     );
-    //   },
-    // },
   ];
   return (
     <div className="lg:pb-14 md:pb-12 pb-10 space-y-5">

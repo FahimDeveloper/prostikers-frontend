@@ -188,31 +188,6 @@ const MyClasses = () => {
         </p>
       ),
     },
-    // {
-    //   width: 80,
-    //   align: "center",
-    //   fixed: "right",
-    //   title: "Action",
-    //   dataIndex: "action",
-    //   key: "action",
-    //   render: (_, record) => {
-    //     const items = [
-    //       {
-    //         key: "1",
-    //         label: <UpdateClassReservationModal record={record} />,
-    //       },
-    //       {
-    //         key: "2",
-    //         label: <DeleteClassReservationPopup id={record?._id} />,
-    //       },
-    //     ];
-    //     return (
-    //       <Dropdown menu={{ items }}>
-    //         <BsThreeDots className="size-5 cursor-pointer" />
-    //       </Dropdown>
-    //     );
-    //   },
-    // },
   ];
   return (
     <div className="lg:pb-14 md:pb-12 pb-10 space-y-5">

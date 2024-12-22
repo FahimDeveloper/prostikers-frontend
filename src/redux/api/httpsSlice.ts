@@ -123,3 +123,10 @@ export const addonApislice = createApi({
   baseQuery: baseQueryWithRefreshToken,
   endpoints: () => ({}),
 });
+
+export const purchasedBundlePackageApiSlice = createApi({
+  reducerPath: "bundlePackageApi",
+  baseQuery: baseQueryWithRefreshToken,
+  tagTypes: ["packages"],
+  endpoints: () => ({}),
+});

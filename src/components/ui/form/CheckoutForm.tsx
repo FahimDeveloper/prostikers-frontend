@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import TermsCondition from "../../TermsCondition";
 import PrivacyPolicy from "../../PrivacyPolicy";
 import Swal from "sweetalert2";
+import stripe_logo from "../../../assets/icons/stripe.png";
 
 export default function CheckoutForm({
   amount,
@@ -82,8 +83,12 @@ export default function CheckoutForm({
     <form
       id="payment-form"
       onSubmit={handleSubmit}
-      className="md:w-[500] sm:w-96 w-[305px] sm:p-14 p-5"
+      className="md:w-[500] sm:w-96 w-[305px] sm:px-14 sm:py-8 p-5"
     >
+      <div className="text-center">
+        <img src={stripe_logo} className="h-12" alt="stripe logo" />
+        <p className="text-base">Secured from stripe</p>
+      </div>
       {clientSecret && (
         <PaymentElement
           id="payment-element"

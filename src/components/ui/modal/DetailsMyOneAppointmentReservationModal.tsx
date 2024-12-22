@@ -67,34 +67,36 @@ const DetailsMyOneAppointmentReservationModal = ({
       >
         <Descriptions title="Customer Info" bordered column={2}>
           <Descriptions.Item label="First Name">
-            {record.first_name}
+            {record?.first_name}
           </Descriptions.Item>
           <Descriptions.Item label="Last Name">
-            {record.last_name}
+            {record?.last_name}
           </Descriptions.Item>
-          <Descriptions.Item label="Email">{record.email}</Descriptions.Item>
-          <Descriptions.Item label="Phone">{record.phone}</Descriptions.Item>
-          <Descriptions.Item label="Age">{record.age}</Descriptions.Item>
+          <Descriptions.Item label="Email">{record?.email}</Descriptions.Item>
+          <Descriptions.Item label="Phone">{record?.phone}</Descriptions.Item>
+          <Descriptions.Item label="Age">{record?.age}</Descriptions.Item>
         </Descriptions>
 
         <Divider />
 
         <Descriptions title="Appointment Info" bordered column={2}>
           <Descriptions.Item label="Appointment Name">
-            {record.appointment.appointment_name}
+            {record?.appointment.appointment_name}
           </Descriptions.Item>
-          <Descriptions.Item label="Sport">{record.sport}</Descriptions.Item>
+          <Descriptions.Item label="Sport">{record?.sport}</Descriptions.Item>
           <Descriptions.Item label="Trainer">
-            {record.trainer.first_name} {record.trainer.last_name}
+            {record?.trainer !== null
+              ? `${record?.trainer.first_name} ${record?.trainer.last_name}`
+              : "Not Found"}
           </Descriptions.Item>
           <Descriptions.Item label="Duration">
-            {record.appointment.duration} mins
+            {record?.appointment.duration} mins
           </Descriptions.Item>
           <Descriptions.Item label="Description" span={2}>
-            {record.appointment.description}
+            {record?.appointment.description}
           </Descriptions.Item>
           <Descriptions.Item label="Price">
-            ${record.appointment.price}
+            ${record?.appointment.price}
           </Descriptions.Item>
         </Descriptions>
 
@@ -102,12 +104,12 @@ const DetailsMyOneAppointmentReservationModal = ({
 
         <Descriptions title="Address" bordered column={2}>
           <Descriptions.Item label="Street Address">
-            {record.street_address}
+            {record?.street_address}
           </Descriptions.Item>
-          <Descriptions.Item label="City">{record.city}</Descriptions.Item>
-          <Descriptions.Item label="State">{record.state}</Descriptions.Item>
+          <Descriptions.Item label="City">{record?.city}</Descriptions.Item>
+          <Descriptions.Item label="State">{record?.state}</Descriptions.Item>
           <Descriptions.Item label="Zip Code">
-            {record.zip_code}
+            {record?.zip_code}
           </Descriptions.Item>
         </Descriptions>
 
@@ -116,7 +118,7 @@ const DetailsMyOneAppointmentReservationModal = ({
         <Table
           title={() => <h3 className="text-base font-bold">Bookings</h3>}
           columns={bookingColumns}
-          dataSource={record.bookings}
+          dataSource={record?.bookings}
           pagination={false}
           rowKey="date"
         />

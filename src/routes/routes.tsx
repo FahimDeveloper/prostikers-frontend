@@ -4,6 +4,7 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+import BundleCagePayment from "../pages/BundleCagePayment/BundleCagePayment";
 const VerifyUser = LazyLoad(
   lazy(() => import("../pages/VerifyUser/VerifyUser"))
 );
@@ -619,6 +620,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <OneOnOneAppointmentPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/bundle-cage-payment",
+        element: (
+          <PrivetRoute>
+            <BundleCagePayment />
           </PrivetRoute>
         ),
       },
