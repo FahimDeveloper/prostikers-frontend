@@ -166,6 +166,13 @@ const ChristmasMembershipSection = () => {
               <li className="flex gap-2 sm:justify-center sm:items-center">
                 <IoIosCheckmarkCircle className="text-primary size-5" />
                 <p className="sm:text-lg text-base text-gray-500">
+                  All annual memberships require minimum commitment of 03
+                  months.
+                </p>
+              </li>
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
                   Offer valid till 31th of December 2024.
                 </p>
               </li>
@@ -190,6 +197,13 @@ const ChristmasMembershipSection = () => {
                   Normal Membership Price -
                   <span className="text-red-500">$5400</span> After Discount
                   Price - <span className="text-red-500">$4590</span>
+                </p>
+              </li>
+              <li className="flex gap-2 sm:justify-center sm:items-center">
+                <IoIosCheckmarkCircle className="text-primary size-5" />
+                <p className="sm:text-lg text-base text-gray-500">
+                  All annual memberships require minimum commitment of 03
+                  months.
                 </p>
               </li>
               <li className="flex gap-2 sm:justify-center sm:items-center">
@@ -413,6 +427,13 @@ const ChristmasMembershipSection = () => {
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                           <p>Inclusive of a complimentary pitching machine</p>
                         </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Annual memberships require minimum commitment of 03
+                            months.
+                          </p>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -475,6 +496,13 @@ const ChristmasMembershipSection = () => {
                         <li className="flex gap-2">
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                           <p>Inclusive of a complimentary pitching machine.</p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Annual memberships require minimum commitment of 03
+                            months.
+                          </p>
                         </li>
                       </ul>
                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">

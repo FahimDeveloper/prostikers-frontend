@@ -52,7 +52,7 @@ const MyRentalFacilities = () => {
       },
     },
     {
-      width: 240,
+      width: 100,
       align: "center",
       title: "Facility Name",
       dataIndex: "_id",
@@ -64,7 +64,7 @@ const MyRentalFacilities = () => {
       ),
     },
     {
-      width: 120,
+      width: 80,
       align: "center",
       title: "Sport",
       dataIndex: "sport",
@@ -77,19 +77,20 @@ const MyRentalFacilities = () => {
       sorter: (a, b) => a.sport.localeCompare(b.sport),
     },
     {
-      width: 170,
+      width: 120,
       align: "center",
       title: "Issue Date",
       dataIndex: "createdAt",
       key: "createdAt",
       render: (text) => (
         <p className="font-medium text-sm leading-5 text-[#151515]">
-          {moment(text).format("MMMM Do YYYY")}
+          {moment(text).format("ddd MMM Do YYYY")}
         </p>
       ),
     },
     {
-      width: 90,
+      fixed: "right",
+      width: 60,
       align: "center",
       title: "Details",
       dataIndex: "_id",
@@ -101,8 +102,8 @@ const MyRentalFacilities = () => {
   ];
   return (
     <div className="lg:pb-14 md:pb-12 pb-10 space-y-5">
-      <div className="flex justify-between items-end">
-        <div>
+      <div className="flex sm:flex-nowrap flex-wrap justify-between items-end">
+        <div className="space-y-1">
           <h2 className="font-semibold text-[28px] leading-9 text-[#111827]">
             Rental Facility Reservations
           </h2>
@@ -110,40 +111,42 @@ const MyRentalFacilities = () => {
             Total {data?.count || 0} reservations
           </p>
         </div>
-        <Select
-          className="w-36"
-          showSearch
-          defaultValue={"all"}
-          optionFilterProp="children"
-          onChange={onFilterChange}
-          filterOption={filterOption}
-          options={[
-            {
-              label: "All Sport",
-              value: "all",
-            },
-            {
-              label: "Cricket",
-              value: "cricket",
-            },
-            {
-              label: "Soccer",
-              value: "soccer",
-            },
-            {
-              label: "Baseball",
-              value: "baseball",
-            },
-            {
-              label: "Softball",
-              value: "softball",
-            },
-            {
-              label: "Field Hockey",
-              value: "field hockey",
-            },
-          ]}
-        />
+        <div className="w-full flex justify-end">
+          <Select
+            className="sm:w-36 w-44"
+            showSearch
+            defaultValue={"all"}
+            optionFilterProp="children"
+            onChange={onFilterChange}
+            filterOption={filterOption}
+            options={[
+              {
+                label: "All Sport",
+                value: "all",
+              },
+              {
+                label: "Cricket",
+                value: "cricket",
+              },
+              {
+                label: "Soccer",
+                value: "soccer",
+              },
+              {
+                label: "Baseball",
+                value: "baseball",
+              },
+              {
+                label: "Softball",
+                value: "softball",
+              },
+              {
+                label: "Field Hockey",
+                value: "field hockey",
+              },
+            ]}
+          />
+        </div>
       </div>
       <DataTable
         columns={columns}

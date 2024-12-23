@@ -4,7 +4,19 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
-import BundleCagePayment from "../pages/BundleCagePayment/BundleCagePayment";
+const MyBundleCreditPacks = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/DashboardManagement/MyBundleCreditPacks/MyBundleCreditPacks"
+      )
+  )
+);
+
+const BundleCagePayment = LazyLoad(
+  lazy(() => import("../pages/BundleCagePayment/BundleCagePayment"))
+);
+
 const VerifyUser = LazyLoad(
   lazy(() => import("../pages/VerifyUser/VerifyUser"))
 );
@@ -1046,6 +1058,14 @@ export const router = createBrowserRouter([
             element: (
               <PrivetRoute>
                 <Profile />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-bundle-credit-packs",
+            element: (
+              <PrivetRoute>
+                <MyBundleCreditPacks />
               </PrivetRoute>
             ),
           },

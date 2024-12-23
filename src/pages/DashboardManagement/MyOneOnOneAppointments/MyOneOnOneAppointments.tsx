@@ -118,7 +118,8 @@ const MyOneOnOneAppointments = () => {
       ),
     },
     {
-      width: 90,
+      fixed: "right",
+      width: 50,
       align: "center",
       title: "Details",
       dataIndex: "_id",
@@ -155,8 +156,8 @@ const MyOneOnOneAppointments = () => {
   ];
   return (
     <div className="lg:pb-14 md:pb-12 pb-10 space-y-5">
-      <div className="flex justify-between items-end">
-        <div>
+      <div className="flex sm:flex-nowrap flex-wrap justify-between items-end">
+        <div className="space-y-1">
           <h2 className="font-semibold text-[28px] leading-9 text-[#111827]">
             Appointment One On One Reservations
           </h2>
@@ -164,40 +165,42 @@ const MyOneOnOneAppointments = () => {
             Total {data?.count || 0} reservations
           </p>
         </div>
-        <Select
-          className="w-36"
-          showSearch
-          defaultValue={"all"}
-          optionFilterProp="children"
-          onChange={onFilterChange}
-          filterOption={filterOption}
-          options={[
-            {
-              label: "All Sport",
-              value: "all",
-            },
-            {
-              label: "Cricket",
-              value: "cricket",
-            },
-            {
-              label: "Soccer",
-              value: "soccer",
-            },
-            {
-              label: "Baseball",
-              value: "baseball",
-            },
-            {
-              label: "Softball",
-              value: "softball",
-            },
-            {
-              label: "Field Hockey",
-              value: "field hockey",
-            },
-          ]}
-        />
+        <div className="w-full flex justify-end">
+          <Select
+            className="sm:w-36 w-44"
+            showSearch
+            defaultValue={"all"}
+            optionFilterProp="children"
+            onChange={onFilterChange}
+            filterOption={filterOption}
+            options={[
+              {
+                label: "All Sport",
+                value: "all",
+              },
+              {
+                label: "Cricket",
+                value: "cricket",
+              },
+              {
+                label: "Soccer",
+                value: "soccer",
+              },
+              {
+                label: "Baseball",
+                value: "baseball",
+              },
+              {
+                label: "Softball",
+                value: "softball",
+              },
+              {
+                label: "Field Hockey",
+                value: "field hockey",
+              },
+            ]}
+          />
+        </div>
       </div>
       <DataTable
         columns={columns}

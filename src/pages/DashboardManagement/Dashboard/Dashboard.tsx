@@ -12,10 +12,10 @@ const Dashboard = () => {
       label: "Profile Info",
       value: "/dashboard",
     },
-    // {
-    //   label: "Bundle Credit Packs",
-    //   value: "/dashboard/my-bundle-credit-packs",
-    // },
+    {
+      label: "Bundle Credit Packs",
+      value: "/dashboard/my-bundle-credit-packs",
+    },
     {
       label: "Rental Facilities",
       value: "/dashboard/my-rental-facilities",
