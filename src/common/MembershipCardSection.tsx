@@ -348,6 +348,13 @@ const MembershipCardSection = () => {
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                           <p>Inclusive of a complimentary pitching machine</p>
                         </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Annual memberships require minimum commitment of 03
+                            months.
+                          </p>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -397,6 +404,13 @@ const MembershipCardSection = () => {
                         <li className="flex gap-2">
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                           <p>Inclusive of a complimentary pitching machine.</p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Annual memberships require minimum commitment of 03
+                            months.
+                          </p>
                         </li>
                       </ul>
                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
@@ -474,6 +488,7 @@ const MembershipCardSection = () => {
               </div>
             )}
             <Collapse
+              defaultActiveKey={["1"]}
               style={panelStyle}
               items={[
                 {
@@ -521,34 +536,29 @@ const MembershipCardSection = () => {
                               <li className="flex gap-2">
                                 <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                                 <p>
+                                  This is a month to month based economic
+                                  membership.
+                                </p>
+                              </li>
+                              <li className="flex gap-2">
+                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                <p>
+                                  Exclusive monthly bundle pack including 04
+                                  training session passes.
+                                </p>
+                              </li>
+                              <li className="flex gap-2">
+                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                <p>
                                   Easily book your preferred time slots with
                                   adjustable options
                                 </p>
                               </li>
                               <li className="flex gap-2">
                                 <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                                <p>Enjoy exclusive discounts and perks</p>
-                              </li>
-                              <li className="flex gap-2">
-                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                                 <p>
-                                  Get discounted rates on specialized training
-                                  sessions
-                                </p>
-                              </li>
-                              <li className="flex gap-2">
-                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                                <p>
-                                  Choose between monthly or annual billing
-                                  options for maximum flexibility
-                                </p>
-                              </li>
-                              <li className="flex gap-2">
-                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                                <p>
-                                  Host your next corporate event with us,
-                                  offering your team a unique and dynamic
-                                  experience
+                                  Enjoy $40 off from regular training session
+                                  rate.
                                 </p>
                               </li>
                             </ul>
@@ -576,34 +586,29 @@ const MembershipCardSection = () => {
                               <li className="flex gap-2">
                                 <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                                 <p>
+                                  This is a month to month based economic
+                                  membership.
+                                </p>
+                              </li>
+                              <li className="flex gap-2">
+                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                <p>
+                                  Exclusive monthly bundle pack including 04
+                                  training session passes.
+                                </p>
+                              </li>
+                              <li className="flex gap-2">
+                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                <p>
                                   Easily book your preferred time slots with
                                   adjustable options
                                 </p>
                               </li>
                               <li className="flex gap-2">
                                 <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                                <p>Enjoy exclusive discounts and perks</p>
-                              </li>
-                              <li className="flex gap-2">
-                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                                 <p>
-                                  Get discounted rates on specialized training
-                                  sessions
-                                </p>
-                              </li>
-                              <li className="flex gap-2">
-                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                                <p>
-                                  Choose between monthly or annual billing
-                                  options for maximum flexibility
-                                </p>
-                              </li>
-                              <li className="flex gap-2">
-                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                                <p>
-                                  Host your next corporate event with us,
-                                  offering your team a unique and dynamic
-                                  experience
+                                  Enjoy $40 off from regular training session
+                                  rate.
                                 </p>
                               </li>
                             </ul>

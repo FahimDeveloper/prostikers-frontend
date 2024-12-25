@@ -3,6 +3,7 @@ import banner from "../../assets/images/membership/membership-banner.webp";
 import QuestionSection from "../../common/QuestionSection";
 import MembershipFamilySection from "./components/MembershipFamilySection";
 import BannerSection from "../../common/BannerSection";
+import MembershipCreditPackSection from "./components/MembershipCreditPackSection";
 
 const Membership = () => {
   const questionData = [
@@ -62,6 +63,7 @@ const Membership = () => {
       <BannerSection image={banner} title="membership" />
       <MembershipFamilySection />
       <MembershipCardSection />
+      <MembershipCreditPackSection />
       <QuestionSection data={questionData} />
     </div>
   );

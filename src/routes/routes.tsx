@@ -4,12 +4,32 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+const MyBundleCreditPacks = LazyLoad(
+  lazy(
+    () =>
+      import(
+        "../pages/DashboardManagement/MyBundleCreditPacks/MyBundleCreditPacks"
+      )
+  )
+);
+
+const BundleCagePayment = LazyLoad(
+  lazy(() => import("../pages/BundleCagePayment/BundleCagePayment"))
+);
+
 const VerifyUser = LazyLoad(
   lazy(() => import("../pages/VerifyUser/VerifyUser"))
 );
 // const BlackFridayMembership = LazyLoad(
 //   lazy(() => import("../pages/BlackFridayMembership/BlackFridayMembership"))
 // );
+
+const ChristmasSpecialMembership = LazyLoad(
+  lazy(
+    () =>
+      import("../pages/ChristmasSpecialMembership/ChristmasSpecialMembership")
+  )
+);
 const Dashboard = LazyLoad(
   lazy(() => import("../pages/DashboardManagement/Dashboard/Dashboard"))
 );
@@ -520,6 +540,10 @@ export const router = createBrowserRouter([
       //   element: <BlackFridayMembership />,
       // },
       {
+        path: "/christmas-special/membership",
+        element: <ChristmasSpecialMembership />,
+      },
+      {
         path: "/login",
         element: (
           <ProtectAuthRoute>
@@ -608,6 +632,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <OneOnOneAppointmentPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/bundle-cage-payment",
+        element: (
+          <PrivetRoute>
+            <BundleCagePayment />
           </PrivetRoute>
         ),
       },
@@ -1026,6 +1058,14 @@ export const router = createBrowserRouter([
             element: (
               <PrivetRoute>
                 <Profile />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-bundle-credit-packs",
+            element: (
+              <PrivetRoute>
+                <MyBundleCreditPacks />
               </PrivetRoute>
             ),
           },

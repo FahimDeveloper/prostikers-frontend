@@ -15,6 +15,7 @@ import {
   facilityReservationCartApiSlice,
   paymentApiSlice,
   postApiSlice,
+  purchasedBundlePackageApiSlice,
   slotBookingApiSlice,
   trainerApiSlice,
   userApiSlice,
@@ -47,6 +48,8 @@ export const rootReducers = combineReducers({
   [userApiSlice.reducerPath]: userApiSlice.reducer,
   [addonApislice.reducerPath]: addonApislice.reducer,
   [cancellationApiSlice.reducerPath]: cancellationApiSlice.reducer,
+  [purchasedBundlePackageApiSlice.reducerPath]:
+    purchasedBundlePackageApiSlice.reducer,
 });
 
 export const rootMiddlewares = [
@@ -66,4 +69,5 @@ export const rootMiddlewares = [
   userApiSlice.middleware,
   addonApislice.middleware,
   cancellationApiSlice.middleware,
+  purchasedBundlePackageApiSlice.middleware,
 ];

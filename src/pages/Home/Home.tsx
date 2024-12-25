@@ -7,10 +7,14 @@ import JourneySection from "./components/JourneySection";
 import TopSliderSection from "./components/TopSliderSection";
 import TestimonialSection from "./components/TestimonialSection";
 import BlogSection from "./components/BlogSection";
+import { useState } from "react";
+import { Modal } from "antd";
+import { Link } from "react-router-dom";
+import promotion from "../../assets/images/promotions/christmasHolidy.png";
 
 const Home = () => {
-  // const [running, setRunning] = useState(true);
-  // const [width, setWidth] = useState(1000); // Default count is 7
+  const [running, setRunning] = useState(true);
+  // const [width, setWidth] = useState(1000);
 
   // Update dateCount based on screen width
   // useEffect(() => {
@@ -90,10 +94,10 @@ const Home = () => {
     },
   ];
   // const blackFriday = sessionStorage.getItem("black-friday");
-  // const onCancel = () => {
-  //   // sessionStorage.setItem("black-friday", "inactive");
-  //   setRunning(false);
-  // };
+  const onCancel = () => {
+    // sessionStorage.setItem("black-friday", "inactive");
+    setRunning(false);
+  };
   // useEffect(() => {
   //   if (blackFriday !== "inactive") {
   //     setRunning(true);
@@ -101,24 +105,24 @@ const Home = () => {
   // }, [blackFriday]);
   return (
     <>
-      {/* <Modal
-        title="Black Friday Sale"
+      <Modal
+        title="Christmas Holiday Deals"
         open={running}
         footer={null}
         onCancel={onCancel}
         centered
-        width={width}
+        width={800}
         maskClosable={false}
         className="promotion-1"
       >
-        <Link to="/black-friday/membership">
+        <Link to="/christmas-special/membership">
           <img
             src={promotion}
             className="md:size-full max-w-full min-h-72 object-cover"
             alt="promotion"
           />
         </Link>
-      </Modal> */}
+      </Modal>
       <TopSliderSection />
       <FeaturedSection />
       <JourneySection />

@@ -67,6 +67,26 @@ const PrivacyPolicy = ({ children }: any) => {
           </div>
           <div className="space-y-2">
             <h4 className="font-bold text-[#6B6B6B] text-lg">
+              Financial Data & Payment Security
+            </h4>
+            <p className="leading-5 font-medium">
+              We do not collect, store, or process any financial data from our
+              clients. This includes, but is not limited to, bank account
+              numbers, credit card details, and transaction history. Any
+              financial transactions related to our services are securely
+              handled by third-party payment processors, and we do not have
+              access to or retain any such information.
+            </p>
+            <p className="leading-5 font-medium">
+              In the event of any breach or financial fraud, the third-party
+              service provider handling the transaction will be solely liable.
+              We recommend reviewing the privacy policies and terms of service
+              of the third-party provider for more information on their security
+              practices and liability coverage.
+            </p>
+          </div>
+          <div className="space-y-2">
+            <h4 className="font-bold text-[#6B6B6B] text-lg">
               Web browser cookies
             </h4>
             <p className="leading-5 font-medium">

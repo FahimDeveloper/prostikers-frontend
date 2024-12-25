@@ -10,6 +10,7 @@ const DateSlider = ({
   setActiveDate: any;
 }) => {
   const [dateCount, setDateCount] = useState(7); // Default count is 7
+  const [isPreviousDisabled, setIsPreviousDisabled] = useState(false);
 
   // Update dateCount based on screen width
   useEffect(() => {
@@ -24,11 +25,17 @@ const DateSlider = ({
       }
     };
 
-    updateDateCount(); // Set initial date count
-    window.addEventListener("resize", updateDateCount); // Listen for resize events
+    updateDateCount();
+    window.addEventListener("resize", updateDateCount);
 
-    return () => window.removeEventListener("resize", updateDateCount); // Clean up listener
+    return () => window.removeEventListener("resize", updateDateCount);
   }, []);
+
+  useEffect(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    setIsPreviousDisabled(activeDate.toDateString() === today.toDateString());
+  }, [activeDate]);
 
   const getDayName = (date: Date) => {
     return date.toLocaleDateString("en-US", { weekday: "short" });
@@ -46,7 +53,11 @@ const DateSlider = ({
   };
 
   const handleSelect = (date: Date) => {
-    setActiveDate(date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (date >= today) {
+      setActiveDate(date);
+    }
   };
 
   const handleNext = () => {
@@ -56,33 +67,46 @@ const DateSlider = ({
   };
 
   const handlePrevious = () => {
-    const newDate = new Date(activeDate);
-    newDate.setDate(activeDate.getDate() - 1);
-    setActiveDate(newDate);
+    if (!isPreviousDisabled) {
+      const newDate = new Date(activeDate);
+      newDate.setDate(activeDate.getDate() - 1);
+      setActiveDate(newDate);
+    }
   };
 
   return (
     <div className="flex justify-between w-full items-center gap-1">
       <IoMdArrowDropleft
-        className="sm:size-1/3 size-1/2 cursor-pointer text-[#323232]"
+        className={`sm:size-1/3 size-1/2 text-[#323232] ${
+          isPreviousDisabled
+            ? "opacity-50 cursor-not-allowed"
+            : "cursor-pointer"
+        }`}
         onClick={handlePrevious}
       />
-      {getDates().map((date, index) => (
-        <div
-          key={index}
-          className={`text-center space-y-1 w-full py-2 px-4 cursor-pointer rounded transition-all ${
-            date.toDateString() === activeDate.toDateString()
-              ? "bg-primary text-[#EAFFFF]"
-              : "bg-[#EAFFFF] text-primary hover:bg-primary hover:text-[#EAFFFF]"
-          }`}
-          onClick={() => handleSelect(date)}
-        >
-          <div className="text-sm font-medium">{getDayName(date)}</div>
-          <div className="md:text-xl sm:text-lg text-base font-extrabold ">
-            {date.getDate()}
+      {getDates().map((date, index) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const isPastDate = date < today;
+        return (
+          <div
+            key={index}
+            className={`text-center space-y-1 w-full py-2 px-4 rounded transition-all ${
+              date.toDateString() === activeDate.toDateString()
+                ? "bg-primary text-[#EAFFFF]"
+                : isPastDate
+                ? "bg-[#EAFFFF] text-primary opacity-50 cursor-not-allowed"
+                : "bg-[#EAFFFF] text-primary hover:bg-primary hover:text-[#EAFFFF] cursor-pointer"
+            }`}
+            onClick={() => !isPastDate && handleSelect(date)}
+          >
+            <div className="text-sm font-medium">{getDayName(date)}</div>
+            <div className="md:text-xl sm:text-lg text-base font-extrabold ">
+              {date.getDate()}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
       <IoMdArrowDropright
         className="sm:size-1/3 size-1/2 cursor-pointer text-[#323232]"
         onClick={handleNext}
