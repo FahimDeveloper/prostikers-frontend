@@ -17,6 +17,7 @@ import {
   postApiSlice,
   purchasedBundlePackageApiSlice,
   slotBookingApiSlice,
+  storeApiSlice,
   trainerApiSlice,
   userApiSlice,
   voucherApiSlice,
@@ -50,6 +51,7 @@ export const rootReducers = combineReducers({
   [cancellationApiSlice.reducerPath]: cancellationApiSlice.reducer,
   [purchasedBundlePackageApiSlice.reducerPath]:
     purchasedBundlePackageApiSlice.reducer,
+  [storeApiSlice.reducerPath]: storeApiSlice.reducer,
 });
 
 export const rootMiddlewares = [
@@ -70,4 +72,5 @@ export const rootMiddlewares = [
   addonApislice.middleware,
   cancellationApiSlice.middleware,
   purchasedBundlePackageApiSlice.middleware,
+  storeApiSlice.middleware,
 ];

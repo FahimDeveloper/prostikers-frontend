@@ -3,3 +3,8 @@ export type IncomingQueryType<T> = {
   count?: number;
   results: T[];
 };
+
+export type IncomingSingleQueryType<T> = {
+  message: string;
+  results: T;
+};

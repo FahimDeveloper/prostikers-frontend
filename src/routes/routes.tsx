@@ -4,6 +4,9 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+const ProductPage = LazyLoad(
+  lazy(() => import("../pages/ProductPage/ProductPage"))
+);
 const MyBundleCreditPacks = LazyLoad(
   lazy(
     () =>
@@ -670,6 +673,10 @@ export const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop />,
+      },
+      {
+        path: "/shop/products/:id",
+        element: <ProductPage />,
       },
       {
         path: "/rental-facility",
