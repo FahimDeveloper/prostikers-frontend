@@ -19,13 +19,12 @@ import {
   useOneTrainingBookedSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
 import { useOneAppointmentQuery } from "../../../redux/features/appointment/appointmentApi";
-import toast from "react-hot-toast";
 import { IoCalendarOutline } from "react-icons/io5";
 import moment from "moment";
 import { MdDeleteOutline } from "react-icons/md";
 import DateSlider from "../../../components/DateSlider";
 import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
 import OneTrainingBookingTimeSlots from "../../../components/OneTrainingBookingTimeSlots";
 import RouteBlocker from "../../../utils/RouteBlocker";
@@ -40,6 +39,7 @@ const CricketOneTrainingReservation = () => {
     useVoucherMutation();
   const [activeDate, setActiveDate] = useState(new Date());
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
+  const [messageApi, contextHolder] = message.useMessage();
   const [form] = useForm();
   const { state } = useLocation();
   const location = state?.from?.pathname || "/";
@@ -130,7 +130,10 @@ const CricketOneTrainingReservation = () => {
         deleteSlot(slotId)
           .unwrap()
           .then(() => {
-            toast.success("Deleted successfully");
+            messageApi.open({
+              type: "success",
+              content: "Success",
+            });
             const updatedSlots = selectSlots
               ?.map((slots: any) => {
                 if (slots.date === date && slots.slots.length > 1) {
@@ -151,7 +154,12 @@ const CricketOneTrainingReservation = () => {
             }
             setSelectSlots(updatedSlots);
           })
-          .catch((error) => toast.error(`${error.data.message}`));
+          .catch((error) =>
+            messageApi.open({
+              type: "error",
+              content: `${error.data.message}`,
+            })
+          );
       }
     });
   };
@@ -189,6 +197,7 @@ const CricketOneTrainingReservation = () => {
 
   return (
     <>
+      {contextHolder}
       <BannerSection
         title="Cricket One on One Training"
         image={cricketBanner}
