@@ -16,7 +16,6 @@ import { MdDeleteOutline } from "react-icons/md";
 import { IoCalendarOutline } from "react-icons/io5";
 import moment from "moment";
 import DateSlider from "../../../components/DateSlider";
-import toast from "react-hot-toast";
 import {
   useAddToCartSlotMutation,
   useDeleteBookingSlotMutation,
@@ -25,7 +24,7 @@ import {
 } from "../../../redux/features/slotBooking/slotBookingApi";
 import { useOneAppointmentQuery } from "../../../redux/features/appointment/appointmentApi";
 import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
 import OneTrainingBookingTimeSlots from "../../../components/OneTrainingBookingTimeSlots";
 import RouteBlocker from "../../../utils/RouteBlocker";
@@ -40,6 +39,7 @@ const SoftballOneTrainingReservation = () => {
     useVoucherMutation();
   const [activeDate, setActiveDate] = useState(new Date());
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
+  const [messageApi, contextHolder] = message.useMessage();
   const [form] = useForm();
   const [block, setBlock] = useState(false);
   const [process, setProcess] = useState(false);
@@ -134,7 +134,10 @@ const SoftballOneTrainingReservation = () => {
         deleteSlot(slotId)
           .unwrap()
           .then(() => {
-            toast.success("Deleted successfully");
+            messageApi.open({
+              type: "success",
+              content: "Success",
+            });
             const updatedSlots = selectSlots
               ?.map((slots: any) => {
                 if (slots.date === date && slots.slots.length > 1) {
@@ -155,7 +158,12 @@ const SoftballOneTrainingReservation = () => {
             }
             setSelectSlots(updatedSlots);
           })
-          .catch((error) => toast.error(`${error.data.message}`));
+          .catch((error) =>
+            messageApi.open({
+              type: "error",
+              content: `${error.data.message}`,
+            })
+          );
       }
     });
   };
@@ -189,6 +197,7 @@ const SoftballOneTrainingReservation = () => {
 
   return (
     <>
+      {contextHolder}
       <BannerSection
         title="Softball One on One Training"
         image={softballBanner}

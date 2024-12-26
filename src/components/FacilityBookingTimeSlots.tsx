@@ -11,7 +11,7 @@ import {
 } from "../redux/features/auth/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { collectBookingTimeSlots } from "../utils/collectBookingTimeSlots";
-import toast from "react-hot-toast";
+import { message } from "antd";
 
 const FacilityBookingTimeSlots = ({
   activeDate,
@@ -41,6 +41,7 @@ const FacilityBookingTimeSlots = ({
     slotsBookedQuery;
   const [timeSlot, setTimeSlot] = useState("");
   const [slotIndex, setSlotIndex] = useState<number | null>(null);
+  const [messageApi, contextHolder] = message.useMessage();
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectCurrentToken);
   const navigate = useNavigate();
@@ -103,7 +104,10 @@ const FacilityBookingTimeSlots = ({
   };
   useEffect(() => {
     if (isSuccess) {
-      toast.success("success");
+      messageApi.open({
+        type: "success",
+        content: "success",
+      });
       setBlock(true);
       setSlotIndex(null);
       const dateSlotIndex = selectSlots.findIndex(
@@ -137,6 +141,7 @@ const FacilityBookingTimeSlots = ({
   const unavailableSlots = [...cartSlots, ...bookedSlots];
   return (
     <>
+      {contextHolder}
       {slots?.length > 0 ? (
         <div className="grid md:grid-cols-5 sm:grid-cols-4 grid-cols-2 gap-1">
           {(
