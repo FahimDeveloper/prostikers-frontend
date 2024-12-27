@@ -42,3 +42,17 @@ export interface IStoreProductsParams {
   limit: number;
   page: number;
 }
+
+export type TCart = {
+  cart_id: string;
+  id: string;
+  name: string;
+  thumbnail: string;
+  price: number;
+  color: {
+    color_name: string;
+    color_code: string;
+  };
+  size: string;
+  count: number;
+};

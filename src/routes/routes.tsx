@@ -4,6 +4,8 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+import ViewCart from "../pages/ViewCart/ViewCart";
+import ShopCheckOut from "../pages/ShopCheckOut/ShopCheckOut";
 const ProductPage = LazyLoad(
   lazy(() => import("../pages/ProductPage/ProductPage"))
 );
@@ -673,6 +675,14 @@ export const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop />,
+      },
+      {
+        path: "/cart",
+        element: <ViewCart />,
+      },
+      {
+        path: "/checkout",
+        element: <ShopCheckOut />,
       },
       {
         path: "/shop/products/:id",

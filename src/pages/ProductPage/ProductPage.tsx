@@ -1,16 +1,18 @@
 import { useParams } from "react-router-dom";
 import { useGetStoreSingleProductsQuery } from "../../redux/features/store/storeApi";
 import Container from "../../components/Container";
-import { Button, Rate, Tooltip } from "antd";
+import { Button, message, Rate, Tooltip } from "antd";
 import { FaSpinner } from "react-icons/fa6";
-import { FaMinus, FaPlus } from "react-icons/fa";
 import ProductGallery from "./components/ProductGallery";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { GoPlus } from "react-icons/go";
+import { HiMinus } from "react-icons/hi2";
 
 const ProductPage = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetStoreSingleProductsQuery({ id });
+  const [messageApi, contextHolder] = message.useMessage();
   const [selectedColor, setSelectedColor] = useState<{
     color_code: string;
     color_name: string;
@@ -131,21 +133,19 @@ const ProductPage = () => {
 
   const handleAddToCart = () => {
     if (selectedColor !== null && selectedSize !== null) {
-      // Create the product object to add to the cart
       const cartItem = {
-        id: data?.results?._id, // Product ID
-        name: data?.results?.name, // Product Name
-        thumbnail: data?.results?.thumbnail, // Thumbnail Image
-        price: price, // Current price (based on selection)
-        color: selectedColor, // Selected color
-        size: selectedSize, // Selected size
-        count: count, // Quantity to add
+        cart_id: crypto.randomUUID(),
+        id: data?.results?._id,
+        name: data?.results?.name,
+        thumbnail: data?.results?.thumbnail,
+        price: price,
+        color: selectedColor,
+        size: selectedSize,
+        count: count,
       };
 
-      // Retrieve the cart from localStorage
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-      // Check if the product with the selected color and size exists in the cart
       const existingIndex = cart.findIndex(
         (item: any) =>
           item.id === cartItem.id &&
@@ -154,22 +154,20 @@ const ProductPage = () => {
       );
 
       if (existingIndex > -1) {
-        // Update the count of the existing item
         cart[existingIndex].count += cartItem.count;
+        messageApi.open({
+          type: "success",
+          content: "Update cart item",
+        });
       } else {
-        // Add the new item to the cart
+        messageApi.open({
+          type: "success",
+          content: "Add new cart item",
+        });
         cart.push(cartItem);
       }
-
-      // Save the updated cart to localStorage
       localStorage.setItem("cart", JSON.stringify(cart));
-
-      Swal.fire({
-        icon: "success",
-        title: "Added to Cart",
-        text: "Product added to your cart successfully.",
-        confirmButtonColor: "#0ABAC3",
-      });
+      window.dispatchEvent(new Event("cartUpdated"));
     } else {
       Swal.fire({
         icon: "info",
@@ -182,6 +180,7 @@ const ProductPage = () => {
 
   return (
     <Container>
+      {contextHolder}
       {isLoading && (
         <div className="h-screen flex justify-center items-center">
           <FaSpinner className="text-primary size-7 animate-spin" />
@@ -255,14 +254,14 @@ const ProductPage = () => {
                 </div>
               </div>
               <div className="pt-3 border-solid border-0 border-t border-gray-300 flex gap-2">
-                <div className="flex w-36 items-center justify-between rounded-full px-5 bg-[#F2F4F8]">
-                  <FaMinus
-                    className="size-4 opacity-80 cursor-pointer h-full"
+                <div className="flex w-48 items-center justify-between rounded-full bg-[#F2F4F8]">
+                  <HiMinus
+                    className="size-5 opacity-80 cursor-pointer h-full px-4"
                     onClick={handleDecrement}
                   />
-                  <span className="text-lg font-medium">{count}</span>
-                  <FaPlus
-                    className="size-4 opacity-80 cursor-pointer h-full"
+                  <span className="text-lg font-normal">{count}</span>
+                  <GoPlus
+                    className="size-5 opacity-80 cursor-pointer h-full px-4"
                     onClick={handleIncrement}
                   />
                 </div>
@@ -280,7 +279,7 @@ const ProductPage = () => {
         </div>
       ) : (
         <div className="h-screen flex justify-center items-center">
-          <p className="text-xl font-semibold">Product not availabe</p>
+          <p className="text-3xl font-medium">Product not availabe</p>
         </div>
       )}
     </Container>

@@ -377,3 +377,7 @@ h6 {
   border-radius: 15px;
   object-fit: cover;
 }
+
+.cart-drawer .ant-drawer-body {
+  @apply px-1 py-2;
+}
