@@ -3,7 +3,6 @@ import { Form, Input, InputNumber } from "antd";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { useEffect } from "react";
-import { calculateAge } from "../../../utils/calculateAge";
 
 const GroupTrainingGeneralForm = ({ form }: any) => {
   const user = useSelector(selectCurrentUser);
@@ -17,7 +16,6 @@ const GroupTrainingGeneralForm = ({ form }: any) => {
       city: user?.city,
       state: user?.state,
       zip_code: user?.zip_code,
-      age: calculateAge(user?.date_of_birth as string),
     });
   }, [user, form]);
 
