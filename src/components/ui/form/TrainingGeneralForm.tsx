@@ -5,7 +5,6 @@ import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
 import TermsCondition from "../../TermsCondition";
 import PrivacyPolicy from "../../PrivacyPolicy";
-import { calculateAge } from "../../../utils/calculateAge";
 
 const TrainingGeneralForm = ({
   form,
@@ -26,7 +25,6 @@ const TrainingGeneralForm = ({
       city: user?.city,
       state: user?.state,
       zip_code: user?.zip_code,
-      age: calculateAge(user?.date_of_birth as string),
     });
   }, [user, form]);
 
