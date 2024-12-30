@@ -6,6 +6,9 @@ import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
 import ViewCart from "../pages/ViewCart/ViewCart";
 import ShopCheckOut from "../pages/ShopCheckOut/ShopCheckOut";
+const ShopPayment = LazyLoad(
+  lazy(() => import("../pages/ShopPayment/ShopPayment"))
+);
 const ProductPage = LazyLoad(
   lazy(() => import("../pages/ProductPage/ProductPage"))
 );
@@ -605,6 +608,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <EventGroupPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/shop-payment",
+        element: (
+          <PrivetRoute>
+            <ShopPayment />
           </PrivetRoute>
         ),
       },

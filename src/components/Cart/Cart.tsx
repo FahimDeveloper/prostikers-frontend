@@ -9,7 +9,7 @@ import { BsCartX } from "react-icons/bs";
 
 const Cart = () => {
   const [open, setOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
+  const [cartquantity, setCartquantity] = useState(0);
   const [cart, setCart] = useState([]);
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
@@ -24,17 +24,17 @@ const Cart = () => {
 
   const getCart = () => JSON.parse(localStorage.getItem("cart") || "[]");
 
-  const updateCartCount = () => {
+  const updateCartquantity = () => {
     const cart = getCart();
-    setCartCount(cart.length);
+    setCartquantity(cart.length);
     setCart(cart);
   };
 
   useEffect(() => {
-    updateCartCount();
+    updateCartquantity();
 
     const handleCartUpdate = () => {
-      updateCartCount();
+      updateCartquantity();
     };
 
     window.addEventListener("cartUpdated", handleCartUpdate);
@@ -45,8 +45,8 @@ const Cart = () => {
   }, []);
 
   const handleDecrement = (cartItem: TCart) => {
-    if (cartItem.count > 1) {
-      cartItem.count--;
+    if (cartItem.quantity > 1) {
+      cartItem.quantity--;
       setCart([...cart]);
       localStorage.setItem("cart", JSON.stringify(cart));
       window.dispatchEvent(new CustomEvent("cartUpdated"));
@@ -54,7 +54,7 @@ const Cart = () => {
   };
 
   const handleIncrement = (cartItem: TCart) => {
-    cartItem.count++;
+    cartItem.quantity++;
     setCart([...cart]);
     localStorage.setItem("cart", JSON.stringify(cart));
     window.dispatchEvent(new CustomEvent("cartUpdated"));
@@ -83,7 +83,7 @@ const Cart = () => {
         onClick={showDrawer}
         className="flex items-center gap-2 text-md cursor-pointer"
       >
-        <Badge count={cartCount}>
+        <Badge count={cartquantity}>
           <IoCartOutline className="size-6" />
         </Badge>
         Cart
@@ -123,9 +123,7 @@ const Cart = () => {
                       alt="product image"
                     />
                     <div className="space-y-1">
-                      <p className="text-sm font-medium">
-                        {item.name} - {item.color?.color_name} - {item.size}
-                      </p>
+                      <p className="text-sm font-medium">{item.name}</p>
                       <div className="flex w-20 items-center justify-between rounded-full box-content h-6 border border-solid border-gray-300">
                         <FaMinus
                           className="size-2 opacity-80 cursor-pointer h-full border-solid border-0 border-e px-2 border-gray-300"
@@ -135,7 +133,7 @@ const Cart = () => {
                           }}
                         />
                         <span className="text-sm font-medium">
-                          {item.count}
+                          {item.quantity}
                         </span>
                         <FaPlus
                           className="size-2 opacity-80 cursor-pointer h-full border-solid border-gray-300 border-0 border-l px-2"
@@ -147,7 +145,7 @@ const Cart = () => {
                       </div>
                       <div className="text-sm font-medium text-primary tracking-widest">
                         <span>
-                          {item.count} <IoIosClose className="size-3" />
+                          {item.quantity} <IoIosClose className="size-3" />
                         </span>
                         ${item.price}
                       </div>
@@ -169,7 +167,7 @@ const Cart = () => {
                 <span className="text-lg font-medium text-primary tracking-widest">
                   $
                   {cart.reduce(
-                    (acc, item: TCart) => acc + item.price * item.count,
+                    (acc, item: TCart) => acc + item.price * item.quantity,
                     0
                   )}
                 </span>

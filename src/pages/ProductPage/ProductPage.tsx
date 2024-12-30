@@ -15,10 +15,10 @@ const ProductPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [selectedColor, setSelectedColor] = useState<{
     color_code: string;
-    color_name: string;
+    name: string;
   } | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [count, setCount] = useState<number>(1);
+  const [quantity, setQuantity] = useState<number>(1);
 
   const uniqueVariationColors = Array.from(
     new Map(
@@ -122,12 +122,12 @@ const ProductPage = () => {
   };
 
   const handleIncrement = () => {
-    setCount(count + 1);
+    setQuantity(quantity + 1);
   };
 
   const handleDecrement = () => {
-    if (count > 1) {
-      setCount(count - 1);
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
     }
   };
 
@@ -136,12 +136,12 @@ const ProductPage = () => {
       const cartItem = {
         cart_id: crypto.randomUUID(),
         id: data?.results?._id,
-        name: data?.results?.name,
+        name: `${data?.results?.name} - ${selectedColor?.name} - ${selectedSize}`,
         thumbnail: data?.results?.thumbnail,
         price: price,
         color: selectedColor,
         size: selectedSize,
-        count: count,
+        quantity,
       };
 
       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -154,7 +154,7 @@ const ProductPage = () => {
       );
 
       if (existingIndex > -1) {
-        cart[existingIndex].count += cartItem.count;
+        cart[existingIndex].quantity += cartItem.quantity;
         messageApi.open({
           type: "success",
           content: "Update cart item",
@@ -220,7 +220,7 @@ const ProductPage = () => {
                 <span className="text-base opacity-60">Select Color</span>
                 <div className="flex gap-2">
                   {finalColors.map((color, index) => (
-                    <Tooltip placement="top" title={color?.color_name}>
+                    <Tooltip placement="top" title={color?.name}>
                       <span
                         onClick={() => onSelectColor(color)}
                         key={index}
@@ -259,7 +259,7 @@ const ProductPage = () => {
                     className="size-5 opacity-80 cursor-pointer h-full px-4"
                     onClick={handleDecrement}
                   />
-                  <span className="text-lg font-normal">{count}</span>
+                  <span className="text-lg font-normal">{quantity}</span>
                   <GoPlus
                     className="size-5 opacity-80 cursor-pointer h-full px-4"
                     onClick={handleIncrement}

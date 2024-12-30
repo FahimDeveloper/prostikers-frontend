@@ -10,7 +10,7 @@ export type TProductResponse = {
   rating: number;
   price: number;
   color: {
-    color_name: string;
+    name: string;
     color_code: string;
   };
   size: string;
@@ -30,7 +30,7 @@ export type TProductResponse = {
 
 export interface IVariation {
   color: {
-    color_name: string;
+    name: string;
     color_code: string;
   };
   size: string;
@@ -50,9 +50,9 @@ export type TCart = {
   thumbnail: string;
   price: number;
   color: {
-    color_name: string;
+    name: string;
     color_code: string;
   };
   size: string;
-  count: number;
+  quantity: number;
 };

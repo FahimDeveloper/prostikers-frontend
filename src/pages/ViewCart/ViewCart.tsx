@@ -14,16 +14,16 @@ const ViewCart = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const getCart = () => JSON.parse(localStorage.getItem("cart") || "[]");
 
-  const updateCartCount = () => {
+  const updateCartquantity = () => {
     const cart = getCart();
     setCart(cart);
   };
 
   useEffect(() => {
-    updateCartCount();
+    updateCartquantity();
 
     const handleCartUpdate = () => {
-      updateCartCount();
+      updateCartquantity();
     };
 
     window.addEventListener("cartUpdated", handleCartUpdate);
@@ -34,8 +34,8 @@ const ViewCart = () => {
   }, []);
 
   const handleDecrement = (cartItem: TCart) => {
-    if (cartItem.count > 1) {
-      cartItem.count--;
+    if (cartItem.quantity > 1) {
+      cartItem.quantity--;
       setCart([...cart]);
       localStorage.setItem("cart", JSON.stringify(cart));
       window.dispatchEvent(new CustomEvent("cartUpdated"));
@@ -43,7 +43,7 @@ const ViewCart = () => {
   };
 
   const handleIncrement = (cartItem: TCart) => {
-    cartItem.count++;
+    cartItem.quantity++;
     setCart([...cart]);
     localStorage.setItem("cart", JSON.stringify(cart));
     window.dispatchEvent(new CustomEvent("cartUpdated"));
@@ -61,7 +61,7 @@ const ViewCart = () => {
   };
 
   const total = cart.reduce(
-    (acc, curr: TCart) => acc + curr.price * curr.count,
+    (acc, curr: TCart) => acc + curr.price * curr.quantity,
     0
   );
 
@@ -88,7 +88,7 @@ const ViewCart = () => {
             </Link>
             <Link to={`/shop/products/${record?.id}`} className="block">
               <h3 className="w-60 text-base font-medium text-start">
-                {record?.name} {record?.color?.color_name} {record?.size}
+                {record?.name}
               </h3>
             </Link>
           </div>
@@ -109,8 +109,8 @@ const ViewCart = () => {
       width: 130,
       title: "QUANTITY",
       align: "center",
-      key: "count",
-      dataIndex: "count",
+      key: "quantity",
+      dataIndex: "quantity",
       render: (text, record) => (
         <>
           <div className="flex w-24 mx-auto items-center justify-between rounded-full box-content h-6 border border-solid border-gray-300">
@@ -141,7 +141,7 @@ const ViewCart = () => {
       dataIndex: "subtotal",
       render: (_, record) => (
         <p className="font-medium text-lg leading-5 text-primary">
-          ${record?.price * record?.count}
+          ${record?.price * record?.quantity}
         </p>
       ),
     },
