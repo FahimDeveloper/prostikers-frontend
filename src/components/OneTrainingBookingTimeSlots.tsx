@@ -46,10 +46,7 @@ const OneTrainingBookingTimeSlots = ({
   const location = useLocation();
   const date = new Date();
   const day = useMemo(() => {
-    if (
-      activeDate.getDate() < date.getDate() &&
-      activeDate.getMonth() <= date.getMonth()
-    ) {
+    if (activeDate.getMonth() > date.getMonth()) {
       return;
     } else {
       return training?.schedules?.find(
@@ -59,7 +56,6 @@ const OneTrainingBookingTimeSlots = ({
       );
     }
   }, [training, activeDate]);
-
   const slots = useMemo(() => {
     if (day && day.active) {
       return createTimeSlots(day.start_time, day.end_time, training.duration);

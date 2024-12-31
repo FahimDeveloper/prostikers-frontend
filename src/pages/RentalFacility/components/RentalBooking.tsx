@@ -55,15 +55,14 @@ const RentalBooking = ({
       date: activeDate.toISOString().split("T")[0],
       lane: lane,
     },
-    { skip: facility?.results?._id ? false : true }
+    { skip: facility?.results?._id && lane !== undefined ? false : true }
   );
   const slotsCartQuery = useGetBookingSlotsQuery(
     {
-      training: facility?.results._id,
       date: activeDate.toISOString().split("T")[0],
       lane: lane,
     },
-    { skip: facility?.results?._id ? false : true }
+    { skip: facility?.results?._id && lane !== undefined ? false : true }
   );
   const onChange = (value: string) => {
     setFacilityCage(value);
@@ -175,6 +174,7 @@ const RentalBooking = ({
           </h3>
           <Select
             onChange={onChange}
+            disabled={selectSlots.length > 0 ? true : false}
             placeholder="Select facility"
             className="w-full h-9 rounded-full"
             options={[

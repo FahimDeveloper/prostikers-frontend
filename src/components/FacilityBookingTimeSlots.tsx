@@ -48,10 +48,7 @@ const FacilityBookingTimeSlots = ({
   const location = useLocation();
   const date = new Date();
   const day = useMemo(() => {
-    if (
-      activeDate.getDate() < date.getDate() &&
-      activeDate.getMonth() <= date.getMonth()
-    ) {
+    if (activeDate.getMonth() > date.getMonth()) {
       return;
     } else {
       return training?.schedules?.find(
@@ -94,7 +91,6 @@ const FacilityBookingTimeSlots = ({
       setSlotIndex(index);
       create({
         id: `${training._id}${date}${value.split(" ").join("")}${lane}`,
-        training: training._id,
         user: user?._id,
         date,
         time_slot: value,
