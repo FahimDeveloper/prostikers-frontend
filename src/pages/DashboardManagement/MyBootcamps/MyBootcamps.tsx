@@ -98,8 +98,8 @@ const MyBootcamps = () => {
       key: "_id",
       render: (_, record) => {
         const status = collectDateStatus(
-          record.course.end_date,
-          record.course.start_date
+          record?.course.end_date,
+          record?.course.start_date
         );
         return (
           <p className="font-medium text-sm leading-5 text-[#151515]">
@@ -130,7 +130,7 @@ const MyBootcamps = () => {
       key: "_id",
       render: (_, record) => (
         <p className="font-medium text-sm leading-5 text-[#151515]">
-          {moment(record.course.start_time).format("h:mm a")}
+          {moment(record?.course.start_time).format("h:mm a")}
         </p>
       ),
     },
@@ -144,8 +144,8 @@ const MyBootcamps = () => {
         return (
           <p className="font-medium text-sm leading-5 text-[#151515]">
             {collectTimeDuration(
-              record.course?.start_time,
-              record.course?.end_time
+              record?.course?.start_time,
+              record?.course?.end_time
             )}
           </p>
         );
@@ -159,7 +159,7 @@ const MyBootcamps = () => {
       key: "_id",
       render: (_, record) => (
         <p className="font-medium text-sm leading-5 text-[#151515]">
-          {moment(record.course.start_date).format("MMMM Do YYYY")}
+          {moment(record?.course.start_date).format("MMMM Do YYYY")}
         </p>
       ),
     },
@@ -171,7 +171,7 @@ const MyBootcamps = () => {
       key: "_id",
       render: (_, record) => (
         <p className="font-medium text-sm leading-5 text-[#151515]">
-          {moment(record.course.end_date).format("MMMM Do YYYY")}
+          {moment(record?.course.end_date).format("MMMM Do YYYY")}
         </p>
       ),
     },
@@ -195,7 +195,7 @@ const MyBootcamps = () => {
       key: "_id",
       render: (_, record) => (
         <p className="font-medium text-sm leading-5 text-[#151515]">
-          ${record.course.price}
+          ${record?.course.price}
         </p>
       ),
     },

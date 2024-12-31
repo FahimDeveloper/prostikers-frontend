@@ -118,7 +118,8 @@ const RentalBookingReviewPart = ({
         name: values.addon_title,
         ini_price: values.addon_ini_price,
         price: values.addon_price,
-        hours: 0.5,
+        type: values.addon_type,
+        hours: values?.addon_type === "half_hourly" ? 0.5 : 1,
       },
     ]);
   };
@@ -146,9 +147,10 @@ const RentalBookingReviewPart = ({
   }, 0);
 
   const addonsPrice = addons.reduce((total: number, addon: any) => {
-    const firstThirtyMinutes = addon?.ini_price;
-    const additionalThirtyMunitesPrice = (addon.hours / 0.5 - 1) * addon.price;
-    return total + firstThirtyMinutes + additionalThirtyMunitesPrice;
+    const hours = addon?.type === "half_hourly" ? 0.5 : 1;
+    const basePrice = addon?.ini_price;
+    const additionalPrice = (addon.hours / hours - 1) * addon.price;
+    return total + basePrice + additionalPrice;
   }, 0);
 
   // if (membership?.price) {
@@ -236,16 +238,26 @@ const RentalBookingReviewPart = ({
                       className="sm:size-16 size-14 rounded-xl"
                       alt={addon.addon_title}
                     />
-                    <div className="space-y-2">
+                    <div className="space-y-1">
                       <h4 className="sm:text-lg text-base text-secondary font-medium">
                         {addon.addon_title}
                       </h4>
-                      <p className="text-sm text-primary font-semibold">
-                        First 30 min ${addon.addon_ini_price}
-                      </p>
-                      <p className="text-sm text-primary font-semibold">
-                        Additional ${addon.addon_price}/(30 minutes)
-                      </p>
+                      <div>
+                        <p className="text-sm text-primary font-semibold">
+                          Add-ons type -{" "}
+                          {addon.addon_type === "half_hourly"
+                            ? "30 minutes"
+                            : "Hourly"}
+                        </p>
+                        <div className="flex gap-x-2 flex-wrap">
+                          <p className="text-sm text-primary font-semibold">
+                            Base Fee - ${addon.addon_ini_price},
+                          </p>
+                          <p className="text-sm text-primary font-semibold">
+                            Additional Fee - ${addon.addon_price}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="text-end">
@@ -331,9 +343,10 @@ const RentalBookingReviewPart = ({
             </div>
           )} */}
             {addons?.map((addon: any) => {
+              const hours = addon?.type === "half_hourly" ? 0.5 : 1;
               const totalAddonPrice =
-                addon.hours > 0.5
-                  ? addon.ini_price + (addon.hours / 0.5 - 1) * addon.price
+                addon.hours > hours
+                  ? addon.ini_price + (addon.hours / hours - 1) * addon.price
                   : addon.ini_price;
               return (
                 <div
@@ -349,49 +362,77 @@ const RentalBookingReviewPart = ({
                     <Select
                       onChange={(value) => onHourChange(value, addon.id)}
                       className="2xl:w-24 sm:w-36 w-28"
-                      defaultValue={0.5}
-                      options={[
-                        {
-                          value: 0.5,
-                          label: "30 minutes",
-                        },
-                        {
-                          value: 1,
-                          label: "1 hour",
-                        },
-                        {
-                          value: 1.5,
-                          label: "1.5 hour",
-                        },
-                        {
-                          value: 2,
-                          label: "2 hours",
-                        },
-                        {
-                          value: 2.5,
-                          label: "2.5 hours",
-                        },
-                        {
-                          value: 3,
-                          label: "3 hours",
-                        },
-                        {
-                          value: 3.5,
-                          label: "3.5 hours",
-                        },
-                        {
-                          value: 4,
-                          label: "4 hours",
-                        },
-                        {
-                          value: 4.5,
-                          label: "4.5 hours",
-                        },
-                        {
-                          value: 5,
-                          label: "5 hours",
-                        },
-                      ]}
+                      defaultValue={addon?.type === "half_hourly" ? 0.5 : 1}
+                      options={
+                        addon?.type === "half_hourly"
+                          ? [
+                              {
+                                value: 0.5,
+                                label: "30 minutes",
+                              },
+                              {
+                                value: 1,
+                                label: "1 hour",
+                              },
+                              {
+                                value: 1.5,
+                                label: "1.5 hour",
+                              },
+                              {
+                                value: 2,
+                                label: "2 hours",
+                              },
+                              {
+                                value: 2.5,
+                                label: "2.5 hours",
+                              },
+                              {
+                                value: 3,
+                                label: "3 hours",
+                              },
+                              {
+                                value: 3.5,
+                                label: "3.5 hours",
+                              },
+                              {
+                                value: 4,
+                                label: "4 hours",
+                              },
+                              {
+                                value: 4.5,
+                                label: "4.5 hours",
+                              },
+                              {
+                                value: 5,
+                                label: "5 hours",
+                              },
+                            ]
+                          : [
+                              {
+                                value: 1,
+                                label: "1 hour",
+                              },
+
+                              {
+                                value: 2,
+                                label: "2 hours",
+                              },
+
+                              {
+                                value: 3,
+                                label: "3 hours",
+                              },
+
+                              {
+                                value: 4,
+                                label: "4 hours",
+                              },
+                              {
+                                value: 5,
+                                label: "5 hours",
+                              },
+                            ]
+                      }
                     />
                   </p>
                   <p>${totalAddonPrice}</p>

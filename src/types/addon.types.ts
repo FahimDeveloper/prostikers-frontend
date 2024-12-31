@@ -7,6 +7,7 @@ export interface IAddon {
   addons: Array<{
     addon_title: string;
     addon_description: string;
+    addon_type: string;
     addon_price: number;
     addon_ini_price: number;
     addon_image: string;

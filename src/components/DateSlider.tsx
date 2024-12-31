@@ -9,10 +9,9 @@ const DateSlider = ({
   activeDate: Date;
   setActiveDate: any;
 }) => {
-  const [dateCount, setDateCount] = useState(7); // Default count is 7
+  const [dateCount, setDateCount] = useState(7);
   const [isPreviousDisabled, setIsPreviousDisabled] = useState(false);
 
-  // Update dateCount based on screen width
   useEffect(() => {
     const updateDateCount = () => {
       const screenWidth = window.innerWidth;

@@ -97,7 +97,7 @@ const MyClasses = () => {
       dataIndex: "_id",
       key: "_id",
       render: (_, record) => {
-        const status = collectDateStatus(record.class_date);
+        const status = collectDateStatus(record?.class_date);
         return (
           <p className="font-medium text-sm leading-5 text-[#151515]">
             {status === "completed" && (
@@ -128,8 +128,8 @@ const MyClasses = () => {
       render: (_, record) => (
         <p className="font-medium text-sm leading-5 text-[#151515]">
           {moment(
-            record.class.schedules.find(
-              (s) => s.day === collectTimeFromSchedule(record.class_date)
+            record?.class.schedules.find(
+              (s) => s.day === collectTimeFromSchedule(record?.class_date)
             )?.start_time
           ).format("h:mm a")}
         </p>
@@ -142,8 +142,8 @@ const MyClasses = () => {
       dataIndex: "_id",
       key: "_id",
       render: (_, record) => {
-        const duration = record.class.schedules.find(
-          (s) => s.day === collectTimeFromSchedule(record.class_date)
+        const duration = record?.class.schedules.find(
+          (s) => s.day === collectTimeFromSchedule(record?.class_date)
         );
         return (
           <p className="font-medium text-sm leading-5 text-[#151515]">
@@ -184,7 +184,7 @@ const MyClasses = () => {
       key: "_id",
       render: (_, record) => (
         <p className="font-medium text-sm leading-5 text-[#151515]">
-          ${record.class.price}
+          ${record?.class.price}
         </p>
       ),
     },
