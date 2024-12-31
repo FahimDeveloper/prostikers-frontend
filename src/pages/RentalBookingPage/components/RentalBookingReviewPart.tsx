@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Form, Input, message, Select } from "antd";
+import { Button, Form, Input, message, Select, Tooltip } from "antd";
 import { IoCalendarOutline } from "react-icons/io5";
 import moment from "moment";
 import { MdDeleteOutline } from "react-icons/md";
@@ -11,6 +11,7 @@ import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
 import { useGetSportAddonsQuery } from "../../../redux/features/addon/addonApi";
 import { IAddon } from "../../../types/addon.types";
 import { FaSpinner } from "react-icons/fa6";
+import { IoMdInformationCircleOutline } from "react-icons/io";
 
 const RentalBookingReviewPart = ({
   addons,
@@ -231,17 +232,25 @@ const RentalBookingReviewPart = ({
             </div>
             {addonsData?.results?._id ? (
               (addonsData?.results as IAddon)?.addons?.map((addon, index) => (
-                <div key={index} className="grid grid-cols-3 items-end">
-                  <div className="flex gap-5 col-span-2 items-center">
+                <div
+                  key={index}
+                  className="flex flex-wrap justify-between items-end"
+                >
+                  <div className="flex sm:gap-5 gap-3 col-span-2 items-center">
                     <img
                       src={addon.addon_image}
                       className="sm:size-16 size-14 rounded-xl"
                       alt={addon.addon_title}
                     />
                     <div className="space-y-1">
-                      <h4 className="sm:text-lg text-base text-secondary font-medium">
-                        {addon.addon_title}
-                      </h4>
+                      <div className="flex items-center gap-2">
+                        <h4 className="sm:text-lg text-base text-secondary font-medium">
+                          {addon.addon_title}
+                        </h4>
+                        <Tooltip title={addon?.addon_description}>
+                          <IoMdInformationCircleOutline className="size-6 text-primary cursor-pointer" />
+                        </Tooltip>
+                      </div>
                       <div>
                         <p className="text-sm text-primary font-semibold">
                           Add-ons type -{" "}
