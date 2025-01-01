@@ -113,7 +113,7 @@ const MyOneOnOneAppointments = () => {
       key: "_id",
       render: (_, record) => (
         <p className="font-medium text-sm leading-5 text-[#151515]">
-          ${record.appointment.price}
+          ${record?.appointment.price}
         </p>
       ),
     },

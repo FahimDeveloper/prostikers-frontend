@@ -59,7 +59,7 @@ const MyRentalFacilities = () => {
       key: "_id",
       render: (_, record) => (
         <p className="font-medium text-sm leading-5 text-[#151515] capitalize">
-          {record?.facility?.facility_name}
+          {record?.facility ? record?.facility?.facility_name : "Not Found"}
         </p>
       ),
     },

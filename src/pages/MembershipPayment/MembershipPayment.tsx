@@ -31,9 +31,7 @@ const MembershipPayment = () => {
       Swal.fire({
         title: "Oops!..",
         icon: "error",
-        text: `${
-          (error as any)?.data?.message || "something went wrong"
-        }, Don't be afraid, Hopefully your payment already succeeded but our proccess failed. This is your transaction ID [${transactionId}], Contact with support`,
+        text: `${(error as any)?.data?.message || "something went wrong"}`,
         confirmButtonColor: "#0ABAC3",
       });
     }

@@ -89,26 +89,26 @@ const DetailsPurchasedBundleCreditPackModal = ({
           <Col xs={24} sm={12}>
             <Descriptions bordered size="small" column={1}>
               <Descriptions.Item label="Package Name">
-                {record.package}
+                {record?.package}
               </Descriptions.Item>
               <Descriptions.Item label="Email">
-                {record.email}
+                {record?.email}
               </Descriptions.Item>
               <Descriptions.Item label="Active">
-                {record.active ? "Yes" : "No"}
+                {record?.active ? "Yes" : "No"}
               </Descriptions.Item>
             </Descriptions>
           </Col>
           <Col xs={24} sm={12}>
             <Descriptions bordered size="small" column={1}>
               <Descriptions.Item label="Validity">
-                {moment(record.validity).format("dddd, MMMM Do YYYY")}
+                {moment(record?.validity).format("dddd, MMMM Do YYYY")}
               </Descriptions.Item>
               <Descriptions.Item label="Total Hours">
-                {record.hours}
+                {record?.hours}
               </Descriptions.Item>
               <Descriptions.Item label="Pitching Machine">
-                {record.piching_machine ? "Available" : "Not Available"}
+                {record?.piching_machine ? "Available" : "Not Available"}
               </Descriptions.Item>
             </Descriptions>
           </Col>
@@ -123,9 +123,9 @@ const DetailsPurchasedBundleCreditPackModal = ({
             </h3>
           )}
           columns={attendanceColumns}
-          dataSource={record.attendance}
+          dataSource={record?.attendance}
           pagination={false}
-          rowKey={(record) => record.date}
+          rowKey={(record) => record?.date}
           size="small"
           scroll={{ x: 600 }} // Horizontal scroll for small screens
         />

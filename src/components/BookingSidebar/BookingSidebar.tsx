@@ -46,7 +46,7 @@ const BookingSidebar = () => {
             <div>
               <p>Field Size</p>
               <ul>
-                <li>Indoor Open Cage – 90 x 36</li>
+                <li>Indoor Open Area – 90 x 36</li>
                 <li>Individual Cage – 90 x 12</li>
               </ul>
             </div>

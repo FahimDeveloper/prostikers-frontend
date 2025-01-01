@@ -98,7 +98,7 @@ const MyGroupAppointments = () => {
       dataIndex: "_id",
       key: "_id",
       render: (_, record) => {
-        const status = collectDateStatus(record.appointment_date);
+        const status = collectDateStatus(record?.appointment_date);
         return (
           <p className="font-medium text-sm leading-5 text-[#151515]">
             {status === "completed" && (
@@ -129,8 +129,8 @@ const MyGroupAppointments = () => {
       render: (_, record) => (
         <p className="font-medium text-sm leading-5 text-[#151515]">
           {moment(
-            record.appointment.schedules.find(
-              (s) => s.day === collectTimeFromSchedule(record.appointment_date)
+            record?.appointment.schedules.find(
+              (s) => s.day === collectTimeFromSchedule(record?.appointment_date)
             )?.start_time
           ).format("h:mm a")}
         </p>
@@ -143,8 +143,8 @@ const MyGroupAppointments = () => {
       dataIndex: "_id",
       key: "_id",
       render: (_, record) => {
-        const duration = record.appointment.schedules.find(
-          (s) => s.day === collectTimeFromSchedule(record.appointment_date)
+        const duration = record?.appointment.schedules.find(
+          (s) => s.day === collectTimeFromSchedule(record?.appointment_date)
         );
         return (
           <p className="font-medium text-sm leading-5 text-[#151515]">
@@ -185,7 +185,7 @@ const MyGroupAppointments = () => {
       key: "_id",
       render: (_, record) => (
         <p className="font-medium text-sm leading-5 text-[#151515]">
-          ${record.appointment.price}
+          ${record?.appointment.price}
         </p>
       ),
     },

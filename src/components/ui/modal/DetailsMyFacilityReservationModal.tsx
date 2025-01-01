@@ -20,6 +20,11 @@ const DetailsMyFacilityReservationModal = ({
       render: (text: string) => moment(text).format("dddd, MMMM Do YYYY"),
     },
     {
+      title: "Lane",
+      dataIndex: "lane",
+      key: "lane",
+    },
+    {
       title: "Time Slot",
       dataIndex: "time_slot",
       key: "time_slot",
@@ -71,7 +76,7 @@ const DetailsMyFacilityReservationModal = ({
       title: "Image",
       dataIndex: "image",
       key: "image",
-      render: (text: string) => <Image width={50} src={text} />,
+      render: (text: string) => <Image width={60} src={text} />,
     },
   ];
 
@@ -81,7 +86,7 @@ const DetailsMyFacilityReservationModal = ({
         Details
       </Button>
       <Modal
-        width={800}
+        width={900}
         footer={null}
         title="Facility Reservation Details"
         centered
@@ -89,57 +94,61 @@ const DetailsMyFacilityReservationModal = ({
         onCancel={() => setModalOpen(false)}
         maskClosable={false}
       >
-        <Descriptions title="Customer Info" bordered column={2}>
+        <Descriptions title="Client Info" bordered column={2}>
           <Descriptions.Item label="First Name">
-            {record.first_name}
+            {record?.first_name}
           </Descriptions.Item>
           <Descriptions.Item label="Last Name">
-            {record.last_name}
+            {record?.last_name}
           </Descriptions.Item>
-          <Descriptions.Item label="Email">{record.email}</Descriptions.Item>
-          <Descriptions.Item label="Phone">{record.phone}</Descriptions.Item>
-          <Descriptions.Item label="Age">{record.age}</Descriptions.Item>
+          <Descriptions.Item label="Phone">{record?.phone}</Descriptions.Item>
+          <Descriptions.Item label="Age">{record?.age}</Descriptions.Item>
+          <Descriptions.Item label="Email">{record?.email}</Descriptions.Item>
         </Descriptions>
 
         <Divider />
 
-        <Descriptions title="Facility Info" bordered column={2}>
-          <Descriptions.Item label="Facility Name">
-            {record.facility.facility_name}
-          </Descriptions.Item>
-          <Descriptions.Item label="Sport">{record.sport}</Descriptions.Item>
-          <Descriptions.Item label="Duration">
-            {record.facility.duration} mins
-          </Descriptions.Item>
-          <Descriptions.Item label="Price">
-            ${record.facility.price}
-          </Descriptions.Item>
-          <Descriptions.Item label="Area">
-            <div className="flex gap-2 flex-wrap">
-              {record.facility.lanes.map((lane) => {
-                return (
-                  <span className="bg-gray-100 px-2 py-1 rounded-md capitalize">
-                    {lane}
-                  </span>
-                );
-              })}
-            </div>
-          </Descriptions.Item>
-          <Descriptions.Item label="Description" span={2}>
-            {record.facility.description}
-          </Descriptions.Item>
-        </Descriptions>
+        {record?.facility ? (
+          <Descriptions title="Facility Info" bordered column={2}>
+            <Descriptions.Item label="Facility Name">
+              {record?.facility?.facility_name}
+            </Descriptions.Item>
+            <Descriptions.Item label="Sport">{record?.sport}</Descriptions.Item>
+            <Descriptions.Item label="Duration">
+              {record?.facility?.duration} mins
+            </Descriptions.Item>
+            <Descriptions.Item label="Price">
+              ${record?.facility?.price}
+            </Descriptions.Item>
+            <Descriptions.Item label="Lanes">
+              <div className="flex gap-2 flex-wrap">
+                {record?.facility?.lanes.map((lane: string) => {
+                  return (
+                    <span className="bg-gray-100 px-2 py-1 rounded-md capitalize">
+                      {lane}
+                    </span>
+                  );
+                })}
+              </div>
+            </Descriptions.Item>
+            <Descriptions.Item label="Description" span={2}>
+              {record?.facility?.description}
+            </Descriptions.Item>
+          </Descriptions>
+        ) : (
+          <div className="text-base font-medium">Facility info not found</div>
+        )}
 
         <Divider />
 
         <Descriptions title="Address" bordered column={2}>
           <Descriptions.Item label="Street Address">
-            {record.street_address}
+            {record?.street_address}
           </Descriptions.Item>
-          <Descriptions.Item label="City">{record.city}</Descriptions.Item>
-          <Descriptions.Item label="State">{record.state}</Descriptions.Item>
+          <Descriptions.Item label="City">{record?.city}</Descriptions.Item>
+          <Descriptions.Item label="State">{record?.state}</Descriptions.Item>
           <Descriptions.Item label="Zip Code">
-            {record.zip_code}
+            {record?.zip_code}
           </Descriptions.Item>
         </Descriptions>
 
@@ -148,20 +157,21 @@ const DetailsMyFacilityReservationModal = ({
         <Table
           title={() => <h3 className="text-base font-bold">Bookings</h3>}
           columns={bookingColumns}
-          dataSource={record.bookings}
+          dataSource={record?.bookings}
           pagination={false}
           rowKey="date"
         />
 
         <Divider />
 
-        <Table
-          title={() => <h3 className="text-base font-bold">Addons</h3>}
-          columns={addonColumns}
-          dataSource={record.addons}
-          pagination={false}
-          rowKey="name"
-        />
+        {record?.addons.length > 0 && (
+          <Table
+            title={() => <h3 className="text-base font-bold">Addons</h3>}
+            columns={addonColumns}
+            dataSource={record?.addons}
+            pagination={false}
+          />
+        )}
       </Modal>
     </>
   );
