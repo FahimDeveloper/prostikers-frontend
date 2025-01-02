@@ -17,6 +17,7 @@
     "@stripe/react-stripe-js": "^2.8.0",
     "@stripe/stripe-js": "^4.4.0",
     "antd": "5.16.4",
+    "country-state-city": "^3.2.1",
     "firebase": "^10.13.1",
     "history": "^5.3.0",
     "lottie-react": "^2.4.0",
@@ -30,6 +31,7 @@
     "react-router-dom": "^6.22.3",
     "react-slick": "^0.30.2",
     "redux-persist": "^6.0.0",
+    "sales-tax": "^2.17.0",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.12.4",
     "swiper": "^11.1.15"
