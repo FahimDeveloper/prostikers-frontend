@@ -37,6 +37,9 @@ export const baseQueryWithRefreshToken: BaseQueryFn<
     if (data.results) {
       api.dispatch(loggedInUser(data.results));
       result = await baseQuery(args, api, extraOptions);
+      if (result?.error?.status === 401) {
+        api.dispatch(loggedOutUser());
+      }
     } else {
       api.dispatch(loggedOutUser());
     }
