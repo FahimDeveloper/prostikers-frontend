@@ -7,40 +7,8 @@ import JourneySection from "./components/JourneySection";
 import TopSliderSection from "./components/TopSliderSection";
 import TestimonialSection from "./components/TestimonialSection";
 import BlogSection from "./components/BlogSection";
-import { useState } from "react";
-import { Modal } from "antd";
-import { Link } from "react-router-dom";
-import promotion from "../../assets/images/promotions/christmasHolidy.png";
 
 const Home = () => {
-  const [running, setRunning] = useState(true);
-  // const [width, setWidth] = useState(1000);
-
-  // Update dateCount based on screen width
-  // useEffect(() => {
-  //   const updateDateCount = () => {
-  //     const screenWidth = window.innerWidth;
-  //     if (screenWidth > 1536) {
-  //       setWidth(1000);
-  //     } else if (screenWidth > 1280) {
-  //       setWidth(800);
-  //     } else if (screenWidth > 1024) {
-  //       setWidth(700);
-  //     } else if (screenWidth > 768) {
-  //       setWidth(600);
-  //     } else if (screenWidth > 640) {
-  //       setWidth(500);
-  //     } else {
-  //       setWidth(350);
-  //     }
-  //   };
-
-  //   updateDateCount(); // Set initial date count
-  //   window.addEventListener("resize", updateDateCount); // Listen for resize events
-
-  //   return () => window.removeEventListener("resize", updateDateCount); // Clean up listener
-  // }, []);
-
   const questionData = [
     {
       title: "What are the hours of operation for ProStrikers?",
@@ -93,36 +61,8 @@ const Home = () => {
         "Yes, our Pro Shop stocks a wide selection of gear for all the sports we support. From beginner equipment to professional-grade gear, we have what you need to play and train at your best.",
     },
   ];
-  // const blackFriday = sessionStorage.getItem("black-friday");
-  const onCancel = () => {
-    // sessionStorage.setItem("black-friday", "inactive");
-    setRunning(false);
-  };
-  // useEffect(() => {
-  //   if (blackFriday !== "inactive") {
-  //     setRunning(true);
-  //   }
-  // }, [blackFriday]);
   return (
     <>
-      <Modal
-        title="Christmas Holiday Deals"
-        open={running}
-        footer={null}
-        onCancel={onCancel}
-        centered
-        width={800}
-        maskClosable={false}
-        className="promotion-1"
-      >
-        <Link to="/christmas-special/membership">
-          <img
-            src={promotion}
-            className="md:size-full max-w-full min-h-72 object-cover"
-            alt="promotion"
-          />
-        </Link>
-      </Modal>
       <TopSliderSection />
       <FeaturedSection />
       <JourneySection />
