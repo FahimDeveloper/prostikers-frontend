@@ -135,6 +135,43 @@ const FacilityBookingTimeSlots = ({
   const cartSlots = collectBookingTimeSlots(slotsCartData?.results, lane);
   const bookedSlots = collectBookingTimeSlots(slotsBookedData?.results, lane);
   const unavailableSlots = [...cartSlots, ...bookedSlots];
+
+  const parseTime = (timeRange: any) => {
+    const [startTime, endTime] = timeRange.split(" - ");
+    const parseSingleTime = (timeStr: string) => {
+      const [time, modifier] = timeStr.split(" ");
+      let [hours, minutes] = time.split(":").map(Number);
+
+      if (modifier === "PM" && hours !== 12) hours += 12;
+      if (modifier === "AM" && hours === 12) hours = 0;
+
+      return hours * 60 + minutes;
+    };
+    return [parseSingleTime(startTime), parseSingleTime(endTime)];
+  };
+
+  const isOverlapping = (slotTimeRange: any, unavailableTimeRange: any) => {
+    const [slotStart, slotEnd] = parseTime(slotTimeRange);
+    const [unavailableStart, unavailableEnd] = parseTime(unavailableTimeRange);
+
+    return slotStart < unavailableEnd && slotEnd > unavailableStart;
+  };
+
+  const isSlotUnavailable = (
+    slot: string,
+    unavailableSlots: any,
+    lane: string
+  ) => {
+    const laneSlots = unavailableSlots.filter(
+      (unavailable: any) => unavailable.lane === lane
+    );
+    return laneSlots.some((laneSlot: any) =>
+      laneSlot.slots.some((unavailableSlot: any) =>
+        isOverlapping(slot, unavailableSlot)
+      )
+    );
+  };
+
   return (
     <>
       {contextHolder}
@@ -153,11 +190,7 @@ const FacilityBookingTimeSlots = ({
                 createLoading ||
                 slotsCartLoading ||
                 slotsBookedLoading ||
-                unavailableSlots.find(
-                  (unAvailable) =>
-                    unAvailable.lane === lane &&
-                    unAvailable.slots.includes(slot)
-                ) ||
+                isSlotUnavailable(slot, unavailableSlots, lane!) ||
                 selectSlots.find(
                   (slots: any) =>
                     slots.date.toISOString().split("T")[0] ===
@@ -181,11 +214,7 @@ const FacilityBookingTimeSlots = ({
                     slots.slots.includes(slot)
                 )
                   ? "bg-primary text-white"
-                  : unavailableSlots.find(
-                      (unAvailable) =>
-                        unAvailable.lane === lane &&
-                        unAvailable.slots.includes(slot)
-                    )
+                  : isSlotUnavailable(slot, unavailableSlots, lane!)
                   ? "bg-gray-100"
                   : "bg-white"
               }`}
@@ -197,12 +226,7 @@ const FacilityBookingTimeSlots = ({
                 <p className="text-xs font-medium">
                   {!selectSlots.find((slots: any) =>
                     slots.slots.includes(slot)
-                  ) &&
-                  unavailableSlots.find(
-                    (unAvailable) =>
-                      unAvailable.lane === lane &&
-                      unAvailable.slots.includes(slot)
-                  )
+                  ) && isSlotUnavailable(slot, unavailableSlots, lane!)
                     ? "Unavailable"
                     : slot}
                 </p>
