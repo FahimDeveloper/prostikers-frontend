@@ -2,29 +2,26 @@ import { Form, Input, Select } from "antd";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../hooks/useAppHooks";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
-import { City, State } from "country-state-city";
+import "react-country-state-city/dist/react-country-state-city.css";
+
+import { GetCity, GetState } from "react-country-state-city";
 
 const ShopCheckoutForm = ({ form }: { form: any }) => {
   const user = useAppSelector(selectCurrentUser);
-  const [states, setStates] = useState<any>([]);
-  const [cities, setCities] = useState<any>([]);
-  const [selectedCountry, setSelectedCountry] = useState(null);
-  const [selectedState, setSelectedState] = useState(null);
-  const [selectedCity, setSelectedCity] = useState(null);
+  const [stateId, setStateId] = useState(0);
+  const countryId = 233;
+
+  const [stateList, setStateList] = useState<any>([]);
+  const [cityList, setCityList] = useState<any>([]);
 
   useEffect(() => {
-    if (selectedCountry) {
-      const stateList = State.getStatesOfCountry(selectedCountry);
-      setStates(stateList);
-    }
-  }, [selectedCountry]);
-
-  useEffect(() => {
-    if (selectedCountry && selectedState) {
-      const cityList = City.getCitiesOfState(selectedCountry, selectedState);
-      setCities(cityList);
-    }
-  }, [selectedState]);
+    GetState(233).then((result) => {
+      setStateList(result);
+    });
+    GetCity(countryId, stateId).then((result) => {
+      setCityList(result);
+    });
+  }, [stateId]);
 
   const validateUSPhoneNumber = (_: any, value: string) => {
     const phoneNumberRegex =
@@ -35,6 +32,12 @@ const ShopCheckoutForm = ({ form }: { form: any }) => {
     }
     return Promise.resolve();
   };
+
+  const filterOption = (
+    input: string,
+    option?: { label: string; value: string }
+  ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
+
   return (
     <Form
       form={form}
@@ -43,7 +46,7 @@ const ShopCheckoutForm = ({ form }: { form: any }) => {
         email: user?.email,
         phone: user?.phone,
         // state: user?.state,
-        // country: user?.country,
+        country: "United States",
         // city: user?.city,
         street_address: user?.street_address,
         zip_code: user?.zip_code,
@@ -57,7 +60,7 @@ const ShopCheckoutForm = ({ form }: { form: any }) => {
         className="m-0"
         rules={[{ required: true }]}
       >
-        <Input className="w-full rounded-full p-2" placeholder="Type here.." />
+        <Input className="w-full" size="large" placeholder="Type here.." />
       </Form.Item>
 
       <Form.Item
@@ -68,7 +71,8 @@ const ShopCheckoutForm = ({ form }: { form: any }) => {
       >
         <Input
           readOnly
-          className="w-full rounded-full p-2"
+          className="w-full"
+          size="large"
           placeholder="Type here.."
         />
       </Form.Item>
@@ -82,26 +86,24 @@ const ShopCheckoutForm = ({ form }: { form: any }) => {
         ]}
       >
         <Input
-          className="w-full rounded-full p-2"
+          className="w-full"
+          size="large"
           prefix={"USA"}
           placeholder="Type here.."
         />
       </Form.Item>
+
       <Form.Item
         className="m-0"
         label="Country"
         name="country"
         rules={[{ required: true }]}
       >
-        <Select
-          onChange={(value) => setSelectedCountry(value)}
-          placeholder="Select your country"
-          options={[
-            {
-              label: "United States",
-              value: "US",
-            },
-          ]}
+        <Input
+          className="w-full"
+          size="large"
+          readOnly
+          placeholder="Enter your country"
         />
       </Form.Item>
       <Form.Item
@@ -111,27 +113,34 @@ const ShopCheckoutForm = ({ form }: { form: any }) => {
         rules={[{ required: true }]}
       >
         <Select
-          onChange={(value) => setSelectedState(value)}
+          showSearch
+          optionFilterProp="children"
+          filterOption={filterOption}
+          onSelect={(_, options: any) => setStateId(options.key)}
+          className="w-full"
+          size="large"
           placeholder="Select your state"
-          options={states.map((state: any) => ({
-            label: state.name,
-            value: state.isoCode,
-          }))}
+          options={stateList?.map((state: any) => {
+            return { label: state.name, value: state.name, key: state.id };
+          })}
         />
       </Form.Item>
       <Form.Item
-        className="m-0"
         label="City"
         name="city"
+        className="m-0"
         rules={[{ required: true }]}
       >
         <Select
-          onChange={(value) => setSelectedCity(value)}
+          showSearch
+          filterOption={filterOption}
+          optionFilterProp="children"
+          className="w-full"
+          size="large"
           placeholder="Select your city"
-          options={cities.map((country: any) => ({
-            label: country.name,
-            value: country.name,
-          }))}
+          options={cityList?.map((city: any) => {
+            return { label: city.name, value: city.name, key: city.id };
+          })}
         />
       </Form.Item>
       <Form.Item
@@ -140,14 +149,14 @@ const ShopCheckoutForm = ({ form }: { form: any }) => {
         className="m-0"
         rules={[{ required: true }]}
       >
-        <Input className="w-full rounded-full p-2" placeholder="Type here.." />
+        <Input className="w-full" size="large" placeholder="Type here.." />
       </Form.Item>
       <Form.Item
         label="Zip/Postal Code"
         name="zip_code"
         rules={[{ required: true }]}
       >
-        <Input className="w-full rounded-full p-2" placeholder="Type here.." />
+        <Input className="w-full" size="large" placeholder="Type here.." />
       </Form.Item>
     </Form>
   );

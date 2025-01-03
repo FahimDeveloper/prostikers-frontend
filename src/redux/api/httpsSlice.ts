@@ -131,9 +131,15 @@ export const purchasedBundlePackageApiSlice = createApi({
   endpoints: () => ({}),
 });
 
-export const storeApiSlice = createApi({
-  reducerPath: "storeApi",
+export const productApiSlice = createApi({
+  reducerPath: "productApi",
   baseQuery: baseQueryWithRefreshToken,
   tagTypes: ["products", "product"],
+  endpoints: () => ({}),
+});
+
+export const categoryApiSlice = createApi({
+  reducerPath: "categoryApi",
+  baseQuery: baseQueryWithRefreshToken,
   endpoints: () => ({}),
 });

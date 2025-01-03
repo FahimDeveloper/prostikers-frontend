@@ -3,30 +3,30 @@ import {
   IncomingSingleQueryType,
 } from "../../../types/index.types";
 import {
-  IStoreProductsParams,
+  IProductsParams,
   TProductResponse,
-} from "../../../types/store.types";
-import { storeApiSlice } from "../../api/httpsSlice";
+} from "../../../types/product.types";
+import { productApiSlice } from "../../api/httpsSlice";
 
-export const storeApi = storeApiSlice.injectEndpoints({
+export const storeApi = productApiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getStoreProducts: builder.query<
+    products: builder.query<
       IncomingQueryType<TProductResponse>,
-      IStoreProductsParams
+      { params: IProductsParams; category_slug: string }
     >({
-      query: (params) => ({
-        url: `/store/products`,
+      query: ({ params, category_slug }) => ({
+        url: `/products/${category_slug}`,
         method: "GET",
         params,
       }),
       providesTags: ["products"],
     }),
-    getStoreSingleProducts: builder.query<
+    product: builder.query<
       IncomingSingleQueryType<TProductResponse>,
       { id: string | undefined }
     >({
       query: ({ id }) => ({
-        url: `/store/products/${id}`,
+        url: `/products/${id}`,
         method: "GET",
       }),
       providesTags: ["product"],
@@ -34,5 +34,4 @@ export const storeApi = storeApiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetStoreProductsQuery, useGetStoreSingleProductsQuery } =
-  storeApi;
+export const { useProductsQuery, useProductQuery } = storeApi;

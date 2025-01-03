@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
-import { TCart } from "../../types/store.types";
+import { TCart } from "../../types/product.types";
 import { Link, useNavigate } from "react-router-dom";
 import { BsCartX } from "react-icons/bs";
 

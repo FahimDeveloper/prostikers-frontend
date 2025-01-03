@@ -17,10 +17,11 @@ import {
   postApiSlice,
   purchasedBundlePackageApiSlice,
   slotBookingApiSlice,
-  storeApiSlice,
+  productApiSlice,
   trainerApiSlice,
   userApiSlice,
   voucherApiSlice,
+  categoryApiSlice,
 } from "../api/httpsSlice";
 
 const persistConfig = {
@@ -51,7 +52,8 @@ export const rootReducers = combineReducers({
   [cancellationApiSlice.reducerPath]: cancellationApiSlice.reducer,
   [purchasedBundlePackageApiSlice.reducerPath]:
     purchasedBundlePackageApiSlice.reducer,
-  [storeApiSlice.reducerPath]: storeApiSlice.reducer,
+  [productApiSlice.reducerPath]: productApiSlice.reducer,
+  [categoryApiSlice.reducerPath]: categoryApiSlice.reducer,
 });
 
 export const rootMiddlewares = [
@@ -72,5 +74,6 @@ export const rootMiddlewares = [
   addonApislice.middleware,
   cancellationApiSlice.middleware,
   purchasedBundlePackageApiSlice.middleware,
-  storeApiSlice.middleware,
+  productApiSlice.middleware,
+  categoryApiSlice.middleware,
 ];

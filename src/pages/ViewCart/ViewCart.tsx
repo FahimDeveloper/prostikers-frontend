@@ -3,7 +3,7 @@ import Container from "../../components/Container";
 import { BsCartX } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { Button, message } from "antd";
-import { TCart } from "../../types/store.types";
+import { TCart } from "../../types/product.types";
 import Table, { ColumnsType } from "antd/es/table";
 import { IoCloseOutline } from "react-icons/io5";
 import { FaMinus, FaPlus } from "react-icons/fa";

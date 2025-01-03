@@ -38,7 +38,7 @@ export interface IVariation {
   stock: number;
 }
 
-export interface IStoreProductsParams {
+export interface IProductsParams {
   limit: number;
   page: number;
 }
@@ -55,4 +55,13 @@ export type TCart = {
   };
   size: string;
   quantity: number;
+};
+
+export type TProduct = {
+  _id: string;
+  name: string;
+  short_description: string;
+  thumbnail: string;
+  regular_price: number;
+  offer_price: number;
 };

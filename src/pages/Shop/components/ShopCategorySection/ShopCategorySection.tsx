@@ -1,45 +1,13 @@
 import Container from "../../../../components/Container";
-import category1 from "../../../../assets/images/shop/category-bat.webp";
-import category2 from "../../../../assets/images/shop/category-gloves.webp";
-import category3 from "../../../../assets/images/shop/category-wearables.webp";
-import category4 from "../../../../assets/images/shop/category-soccer.webp";
-import category5 from "../../../../assets/images/shop/category-helmet.webp";
-import category6 from "../../../../assets/images/shop/category-sports-bag.webp";
 import { Link } from "react-router-dom";
+import { useCategoriesQuery } from "../../../../redux/features/category/categoryApi";
+import { FaSpinner } from "react-icons/fa";
 
 const ShopCategorySection = () => {
-  const categoryData = [
-    {
-      title: "Bats",
-      image: category1,
-      link: "/coming-soon",
-    },
-    {
-      title: "Gloves",
-      image: category2,
-      link: "/coming-soon",
-    },
-    {
-      title: "Wearables",
-      image: category3,
-      link: "/coming-soon",
-    },
-    {
-      title: "Soccer Items",
-      image: category4,
-      link: "/coming-soon",
-    },
-    {
-      title: "Helmets",
-      image: category5,
-      link: "/coming-soon",
-    },
-    {
-      title: "Sports Bags",
-      image: category6,
-      link: "/coming-soon",
-    },
-  ];
+  const { data, isLoading } = useCategoriesQuery({
+    page: 1,
+    limit: 100,
+  });
   return (
     <Container>
       <div className="lg:py-16 md:py-12 py-10 space-y-14">
@@ -64,39 +32,41 @@ const ShopCategorySection = () => {
             </p>
           </article>
         </div>
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
-          {categoryData.map((category, index) => {
-            return (
-              <div
-                className={`${
-                  index === 1 || index === 2 || index === 5
-                    ? "lg:col-span-2"
-                    : "lg:col-span-1"
-                }`}
-              >
-                <Link key={index} to={category.link} className="no-underline">
-                  <div
-                    style={{
-                      backgroundImage: `url(${category.image})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      backgroundRepeat: "no-repeat",
-                    }}
-                    className={`sm:h-80 h-72 rounded-xl p-2`}
-                  >
-                    <h3
-                      className={`font-semibold text-4xl m-5 ${
-                        index === 2 ? "text-black" : "text-white"
-                      }`}
+        {isLoading ? (
+          <div className="h-48 w-full flex justify-center items-center">
+            <FaSpinner className="animate-spin size-8 text-primary" />
+          </div>
+        ) : (
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
+            {data?.results?.map((category, index) => {
+              return (
+                <div
+                  className={`${
+                    index === 1 || index === 2 || index === 5
+                      ? "lg:col-span-2"
+                      : "lg:col-span-1"
+                  }`}
+                >
+                  <Link key={index} to={category.slug} className="no-underline">
+                    <div
+                      style={{
+                        backgroundImage: `url(${category.image})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                      }}
+                      className={`sm:h-80 h-72 rounded-xl p-2`}
                     >
-                      {category.title}
-                    </h3>
-                  </div>
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+                      <h3 className={`font-semibold text-4xl m-5 text-white`}>
+                        {category.name}
+                      </h3>
+                    </div>
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </Container>
   );

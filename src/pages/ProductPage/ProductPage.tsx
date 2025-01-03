@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { useGetStoreSingleProductsQuery } from "../../redux/features/store/storeApi";
 import Container from "../../components/Container";
 import { Button, message, Rate, Tooltip } from "antd";
 import { FaSpinner } from "react-icons/fa6";
@@ -8,10 +7,11 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import { GoPlus } from "react-icons/go";
 import { HiMinus } from "react-icons/hi2";
+import { useProductQuery } from "../../redux/features/product/productApi";
 
 const ProductPage = () => {
   const { id } = useParams();
-  const { data, isLoading } = useGetStoreSingleProductsQuery({ id });
+  const { data, isLoading } = useProductQuery({ id });
   const [messageApi, contextHolder] = message.useMessage();
   const [selectedColor, setSelectedColor] = useState<{
     color_code: string;
