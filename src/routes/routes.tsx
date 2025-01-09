@@ -4,8 +4,15 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
-import ViewCart from "../pages/ViewCart/ViewCart";
-import ShopCheckOut from "../pages/ShopCheckOut/ShopCheckOut";
+const ViewCart = LazyLoad(lazy(() => import("../pages/ViewCart/ViewCart")));
+const ShopCheckOut = LazyLoad(
+  lazy(() => import("../pages/ShopCheckOut/ShopCheckOut"))
+);
+const MyShopPurchase = LazyLoad(
+  lazy(
+    () => import("../pages/DashboardManagement/MyShopPurchase/MyShopPurchase")
+  )
+);
 const ProductsPage = LazyLoad(
   lazy(() => import("../pages/ProductsPage/ProductsPage"))
 );
@@ -696,11 +703,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <ViewCart />,
+        element: (
+          <PrivetRoute>
+            <ViewCart />
+          </PrivetRoute>
+        ),
       },
       {
         path: "/checkout",
-        element: <ShopCheckOut />,
+        element: (
+          <PrivetRoute>
+            <ShopCheckOut />
+          </PrivetRoute>
+        ),
       },
       {
         path: "/shop/products/:id",
@@ -1101,6 +1116,14 @@ export const router = createBrowserRouter([
             element: (
               <PrivetRoute>
                 <MyBundleCreditPacks />
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "my-shop-purchase",
+            element: (
+              <PrivetRoute>
+                <MyShopPurchase />
               </PrivetRoute>
             ),
           },

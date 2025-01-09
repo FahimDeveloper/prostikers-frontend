@@ -220,10 +220,9 @@ const ProductPage = () => {
                 <span className="text-base opacity-60">Select Color</span>
                 <div className="flex gap-2">
                   {finalColors.map((color, index) => (
-                    <Tooltip placement="top" title={color?.name}>
+                    <Tooltip key={index} placement="top" title={color?.name}>
                       <span
                         onClick={() => onSelectColor(color)}
-                        key={index}
                         style={{ backgroundColor: color?.color_code }}
                         className={`size-7 cursor-pointer rounded-full border border-solid ${
                           selectedColor?.color_code == color?.color_code
@@ -276,6 +275,10 @@ const ProductPage = () => {
               </div>
             </div>
           </div>
+          <div
+            className="ql-editor"
+            dangerouslySetInnerHTML={{ __html: data?.results?.details }}
+          />
         </div>
       ) : (
         <div className="h-screen flex justify-center items-center">

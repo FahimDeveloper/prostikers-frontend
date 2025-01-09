@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { selectCurrentUser } from "../../redux/features/auth/authSlice";
-import { useCreateMembershipMutation } from "../../redux/features/user/userApi";
 import Swal from "sweetalert2";
 import Checkout from "../../components/Checkout";
+import { usePlaceOrderMutation } from "../../redux/features/order/orderApi";
 
 const ShopPayment = () => {
   const { state } = useLocation();
@@ -13,7 +13,7 @@ const ShopPayment = () => {
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const [create, { data: createData, isError, isLoading, isSuccess, error }] =
-    useCreateMembershipMutation();
+    usePlaceOrderMutation();
   useEffect(() => {
     if (isSuccess) {
       Swal.fire({
@@ -23,6 +23,8 @@ const ShopPayment = () => {
         iconColor: "#0ABAC3",
         confirmButtonColor: "#0ABAC3",
       });
+      localStorage.removeItem("cart");
+      window.dispatchEvent(new CustomEvent("cartUpdated"));
       navigate("/");
     }
     if (isError) {
@@ -38,7 +40,7 @@ const ShopPayment = () => {
   }, [isSuccess, isError]);
   const onSubmit = () => {
     const payload = {
-      orders: { ...data },
+      orders: [...data],
       payment_info: {
         transaction_id: transactionId,
         user: user?._id,

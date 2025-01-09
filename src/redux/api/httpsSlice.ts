@@ -143,3 +143,10 @@ export const categoryApiSlice = createApi({
   baseQuery: baseQueryWithRefreshToken,
   endpoints: () => ({}),
 });
+
+export const orderApiSlice = createApi({
+  reducerPath: "orderApi",
+  baseQuery: baseQueryWithRefreshToken,
+  tagTypes: ["orders"],
+  endpoints: () => ({}),
+});

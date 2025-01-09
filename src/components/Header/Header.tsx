@@ -75,23 +75,23 @@ const Header = () => {
             </ul>
           </nav>
           <div className="lg:block hidden">
-            {!user ? (
-              <Link to="/login" className="block no-underline">
-                <div className="bg-[#EAFFFF] cursor-pointer border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-center gap-3 py-2 px-5">
-                  Login
-                </div>
-              </Link>
-            ) : (
-              <div className="lg:flex items-center gap-5">
-                <Cart />
+            <div className="lg:flex items-center gap-5">
+              <Cart />
+              {!user ? (
+                <Link to="/login" className="block no-underline">
+                  <div className="bg-[#EAFFFF] cursor-pointer border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-center gap-3 py-2 px-5">
+                    Login
+                  </div>
+                </Link>
+              ) : (
                 <Link to="/dashboard" className="block no-underline">
                   <div className="bg-[#EAFFFF] border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-evenly gap-3 py-2 px-2 w-28">
                     <img src={user?.image} className="size-8 rounded-full" />
                     <p className="font-medium text-base">Account</p>
                   </div>
                 </Link>
-              </div>
-            )}
+              )}
+            </div>
           </div>
 
           <div className="flex gap-5 lg:hidden">

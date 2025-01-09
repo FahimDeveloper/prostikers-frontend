@@ -22,9 +22,9 @@ const ProductGallery = ({ gallery }: { gallery: Array<string> }) => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2"
       >
-        {gallery?.map((img) => {
+        {gallery?.map((img, index) => {
           return (
-            <SwiperSlide key={img}>
+            <SwiperSlide key={index}>
               <Image src={img} />
             </SwiperSlide>
           );
@@ -39,9 +39,9 @@ const ProductGallery = ({ gallery }: { gallery: Array<string> }) => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
-        {gallery?.map((img) => {
+        {gallery?.map((img, index) => {
           return (
-            <SwiperSlide key={img}>
+            <SwiperSlide key={index}>
               <img src={img} />
             </SwiperSlide>
           );

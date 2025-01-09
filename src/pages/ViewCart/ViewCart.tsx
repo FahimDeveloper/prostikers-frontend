@@ -6,17 +6,19 @@ import { Button, message } from "antd";
 import { TCart } from "../../types/product.types";
 import Table, { ColumnsType } from "antd/es/table";
 import { IoCloseOutline } from "react-icons/io5";
-import { FaMinus, FaPlus } from "react-icons/fa";
+import { FaMinus, FaPlus, FaSpinner } from "react-icons/fa";
 
 const ViewCart = () => {
   const tableRef = useRef<any>(null);
   const [cart, setCart] = useState([]);
   const [messageApi, contextHolder] = message.useMessage();
   const getCart = () => JSON.parse(localStorage.getItem("cart") || "[]");
+  const [loading, setLoading] = useState(true);
 
   const updateCartquantity = () => {
     const cart = getCart();
     setCart(cart);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -158,74 +160,80 @@ const ViewCart = () => {
   return (
     <Container>
       {contextHolder}
-      <div className="lg:py-14 md:py-12 py-10 sm:space-y-8 space-y-5">
-        {cart.length < 1 ? (
-          <div className="flex flex-col items-center justify-center h-[calc(100vh-120px)] space-y-3">
-            <BsCartX className="size-36 opacity-15" />
-            <h2 className="text-3xl text-secondary font-semibold">
-              Your cart is currently empty.
-            </h2>
-            <p className="text-base text-secondary w-2/3 text-center">
-              Before proceed to checkout you must add some products to your
-              shopping cart. You will find a lot of interesting products on our
-              "Shop" page.
-            </p>
-            <Link to="/shop">
-              <Button>Return shop</Button>
-            </Link>
-          </div>
-        ) : (
-          <div className="grid grid-cols-3 gap-5 mt-16 min-h-[calc(100vh-120px)] relative">
-            <div className="col-span-2">
-              <Table
-                {...props}
-                ref={tableRef}
-                columns={columns}
-                rowKey={(record) => record?.id}
-                dataSource={cart || []}
-              />
+      {loading ? (
+        <div className="h-svh w-full flex justify-center items-center">
+          <FaSpinner className="animate-spin size-8 text-primary" />
+        </div>
+      ) : (
+        <div className="lg:py-14 md:py-12 py-10 sm:space-y-8 space-y-5">
+          {cart.length < 1 ? (
+            <div className="flex flex-col items-center justify-center h-[calc(100vh-120px)] space-y-3">
+              <BsCartX className="size-36 opacity-15" />
+              <h2 className="text-3xl text-secondary font-semibold">
+                Your cart is currently empty.
+              </h2>
+              <p className="text-base text-secondary w-2/3 text-center">
+                Before proceed to checkout you must add some products to your
+                shopping cart. You will find a lot of interesting products on
+                our "Shop" page.
+              </p>
+              <Link to="/shop">
+                <Button>Return shop</Button>
+              </Link>
             </div>
-            {/* <div className="col-span-2">
+          ) : (
+            <div className="grid grid-cols-3 gap-5 mt-16 min-h-[calc(100vh-120px)] relative">
+              <div className="col-span-2">
+                <Table
+                  {...props}
+                  ref={tableRef}
+                  columns={columns}
+                  rowKey={(record) => record?.id}
+                  dataSource={cart || []}
+                />
+              </div>
+              {/* <div className="col-span-2">
               <div className="flex items-center">
                 {cart?.map((cartItem) => {
                   return <div></div>;
                 })}
               </div>
             </div> */}
-            <div className="col-span-1 w-full">
-              <div className="p-6 border-2 border-solid top-24 sticky border-gray-200 rounded-md space-y-5">
-                <h3 className="text-2xl text-secondary uppercase font-semibold">
-                  Cart Totals
-                </h3>
-                <div className="flex justify-between">
-                  <h5 className="text-lg font-medium">Subtotal</h5>
-                  <span className="text-lg text-secondary tracking-widest">
-                    ${total}
-                  </span>
+              <div className="col-span-1 w-full">
+                <div className="p-6 border-2 border-solid top-24 sticky border-gray-200 rounded-md space-y-5">
+                  <h3 className="text-2xl text-secondary uppercase font-semibold">
+                    Cart Totals
+                  </h3>
+                  <div className="flex justify-between">
+                    <h5 className="text-lg font-medium">Subtotal</h5>
+                    <span className="text-lg text-secondary tracking-widest">
+                      ${total}
+                    </span>
+                  </div>
+                  <hr className="opacity-40" />
+                  <div className="flex justify-between">
+                    <h4 className="text-2xl font-semibold text-secondary">
+                      Total
+                    </h4>
+                    <span className="text-2xl text-primary font-bold tracking-widest">
+                      ${total}
+                    </span>
+                  </div>
+                  <Link to="/checkout" className="block">
+                    <Button
+                      type="primary"
+                      size="large"
+                      className="w-full primary-btn-2"
+                    >
+                      Procced to checkout
+                    </Button>
+                  </Link>
                 </div>
-                <hr className="opacity-40" />
-                <div className="flex justify-between">
-                  <h4 className="text-2xl font-semibold text-secondary">
-                    Total
-                  </h4>
-                  <span className="text-2xl text-primary font-bold tracking-widest">
-                    ${total}
-                  </span>
-                </div>
-                <Link to="/checkout" className="block">
-                  <Button
-                    type="primary"
-                    size="large"
-                    className="w-full primary-btn-2"
-                  >
-                    Procced to checkout
-                  </Button>
-                </Link>
               </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </Container>
   );
 };

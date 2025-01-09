@@ -50,6 +50,7 @@ const ShopCheckoutForm = ({ form }: { form: any }) => {
         // city: user?.city,
         street_address: user?.street_address,
         zip_code: user?.zip_code,
+        pickup_point: "Prostrikers zone",
       }}
       layout="vertical"
       className="space-y-3"
@@ -157,6 +158,22 @@ const ShopCheckoutForm = ({ form }: { form: any }) => {
         rules={[{ required: true }]}
       >
         <Input className="w-full" size="large" placeholder="Type here.." />
+      </Form.Item>
+      <Form.Item
+        label="Pickup point"
+        name="pickup_point"
+        rules={[{ required: true }]}
+      >
+        <Select
+          placeholder="Pickup point"
+          size="large"
+          options={[
+            {
+              label: "Prostrikers zone",
+              value: "Prostrikers zone",
+            },
+          ]}
+        />
       </Form.Item>
     </Form>
   );

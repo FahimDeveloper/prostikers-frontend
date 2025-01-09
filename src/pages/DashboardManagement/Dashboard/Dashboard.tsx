@@ -21,6 +21,10 @@ const Dashboard = () => {
       value: "/dashboard/my-rental-facilities",
     },
     {
+      label: "Shop Purchase",
+      value: "/dashboard/my-shop-purchase",
+    },
+    {
       label: "Classes",
       value: "/dashboard/my-classes",
     },

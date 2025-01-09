@@ -48,6 +48,15 @@ h6 {
   @apply bg-[#F1FEFF];
 }
 
+.product-search {
+  @apply rounded-full px-7 h-9 border-none bg-primary text-white text-base;
+}
+
+.product-search:hover {
+  color: #fff !important;
+  background-color: #0ebbbc !important;
+}
+
 .dashboard-menu {
   scrollbar-width: thin; /* Firefox: thinner scrollbar */
   scrollbar-color: #fff #fff; /* Firefox: thumb and track colors */
@@ -380,4 +389,30 @@ h6 {
 
 .cart-drawer .ant-drawer-body {
   @apply px-1 py-2;
+}
+
+.ql-editor ul {
+  padding-left: 0 !important;
+}
+
+.ql-editor ol {
+  padding-left: 0 !important;
+}
+
+.ql-editor h1,
+.ql-editor h2,
+.ql-editor h3,
+.ql-editor h4,
+.ql-editor h5,
+.ql-editor h6 {
+  line-height: 2;
+  color: #253d4e;
+}
+.ql-editor p,
+.ql-editor ul,
+.ql-editor ul li,
+.ql-editor ol,
+.ql-editor ol li {
+  line-height: 1.7;
+  color: #7e7e7e;
 }

@@ -41,6 +41,14 @@ export interface IVariation {
 export interface IProductsParams {
   limit: number;
   page: number;
+  category: string;
+  search?: string;
+  brand?: string;
+  color?: string;
+  size?: string;
+  min_price?: number;
+  max_price?: number;
+  rating?: number;
 }
 
 export type TCart = {
@@ -64,4 +72,5 @@ export type TProduct = {
   thumbnail: string;
   regular_price: number;
   offer_price: number;
+  rating: number;
 };

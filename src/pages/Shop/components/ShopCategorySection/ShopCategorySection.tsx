@@ -47,17 +47,27 @@ const ShopCategorySection = () => {
                       : "lg:col-span-1"
                   }`}
                 >
-                  <Link key={index} to={category.slug} className="no-underline">
+                  <Link
+                    key={index}
+                    to={category.name.split(" ").join("-")}
+                    className="no-underline"
+                  >
                     <div
                       style={{
-                        backgroundImage: `url(${category.image})`,
+                        backgroundImage: `url(${
+                          category.image
+                            ? category.image
+                            : "https://placehold.co/600x400/black/white?text=Category"
+                        })`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
                       }}
                       className={`sm:h-80 h-72 rounded-xl p-2`}
                     >
-                      <h3 className={`font-semibold text-4xl m-5 text-white`}>
+                      <h3
+                        className={`font-semibold text-4xl m-5 text-white capitalize`}
+                      >
                         {category.name}
                       </h3>
                     </div>

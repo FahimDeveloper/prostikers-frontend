@@ -12,10 +12,10 @@ export const storeApi = productApiSlice.injectEndpoints({
   endpoints: (builder) => ({
     products: builder.query<
       IncomingQueryType<TProductResponse>,
-      { params: IProductsParams; category_slug: string }
+      IProductsParams
     >({
-      query: ({ params, category_slug }) => ({
-        url: `/products/${category_slug}`,
+      query: (params) => ({
+        url: `/products/web`,
         method: "GET",
         params,
       }),

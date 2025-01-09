@@ -22,6 +22,7 @@ import {
   userApiSlice,
   voucherApiSlice,
   categoryApiSlice,
+  orderApiSlice,
 } from "../api/httpsSlice";
 
 const persistConfig = {
@@ -54,6 +55,7 @@ export const rootReducers = combineReducers({
     purchasedBundlePackageApiSlice.reducer,
   [productApiSlice.reducerPath]: productApiSlice.reducer,
   [categoryApiSlice.reducerPath]: categoryApiSlice.reducer,
+  [orderApiSlice.reducerPath]: orderApiSlice.reducer,
 });
 
 export const rootMiddlewares = [
@@ -76,4 +78,5 @@ export const rootMiddlewares = [
   purchasedBundlePackageApiSlice.middleware,
   productApiSlice.middleware,
   categoryApiSlice.middleware,
+  orderApiSlice.middleware,
 ];
