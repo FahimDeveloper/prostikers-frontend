@@ -12,7 +12,7 @@ import DataPagination from "../../../common/DataPagination";
 import { useAppSelector } from "../../../hooks/useAppHooks";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 
-const MyShopPurchase = () => {
+const MyShopOrders = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(30);
   const user = useAppSelector(selectCurrentUser);
@@ -182,7 +182,7 @@ const MyShopPurchase = () => {
       <div className="flex sm:flex-nowrap flex-wrap justify-between items-end">
         <div className="space-y-1">
           <h2 className="font-semibold text-nowrap text-[28px] leading-9 text-[#111827]">
-            My Shop Purchase
+            My Shop Orders
           </h2>
           <p className="text-[#838383] font-medium text-lg">
             Total {data?.count || 0} reservations
@@ -240,4 +240,4 @@ const MyShopPurchase = () => {
   );
 };
 
-export default MyShopPurchase;
+export default MyShopOrders;

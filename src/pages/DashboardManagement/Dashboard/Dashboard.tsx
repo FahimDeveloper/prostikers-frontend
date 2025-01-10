@@ -21,8 +21,8 @@ const Dashboard = () => {
       value: "/dashboard/my-rental-facilities",
     },
     {
-      label: "Shop Purchase",
-      value: "/dashboard/my-shop-purchase",
+      label: "Shop Orders",
+      value: "/dashboard/my-shop-orders",
     },
     {
       label: "Classes",

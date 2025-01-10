@@ -1,6 +1,6 @@
 import {
   Checkbox,
-  GetProp,
+  Form,
   InputNumber,
   Radio,
   Slider,
@@ -20,6 +20,7 @@ type TParams = {
   maxPrice: number | undefined;
   minPrice: number | undefined;
   colors: string[] | undefined;
+  form: any;
 };
 
 const ProductsSidebar = ({
@@ -33,149 +34,153 @@ const ProductsSidebar = ({
   maxPrice,
   minPrice,
   colors,
+  form,
 }: TParams) => {
-  const handleBrandChange: GetProp<typeof Checkbox.Group, "onChange"> = (
-    checkedBrands
-  ) => {
-    setBrands(checkedBrands);
+  const handleFormChange = (changedValues: any, allValues: any) => {
+    if (changedValues.brands) setBrands(allValues.brands);
+    if (changedValues.sizes) setSizes(allValues.sizes);
+    if (changedValues.rating !== undefined) setRating(allValues.rating);
+    if (changedValues.minPrice !== undefined) {
+      setMinPrice(allValues.minPrice);
+      form.setFieldsValue({
+        priceRange: [allValues.minPrice, allValues.maxPrice],
+      });
+    }
+    if (changedValues.maxPrice !== undefined) {
+      setMaxPrice(allValues.maxPrice);
+      form.setFieldsValue({
+        priceRange: [allValues.minPrice, allValues.maxPrice],
+      });
+    }
   };
 
-  const handleSizeChange: GetProp<typeof Checkbox.Group, "onChange"> = (
-    checkedSizes
-  ) => {
-    setSizes(checkedSizes);
-  };
   const handlePriceRangeChange = (value: number[]) => {
     setMinPrice(value[0]);
     setMaxPrice(value[1]);
+    form.setFieldsValue({ minPrice: value[0], maxPrice: value[1] });
   };
-  const handleRatingChange = (e: any) => {
-    setRating(e.target.value);
-  };
+
   return (
-    <div className="space-y-1">
-      <div className="space-y-3 border p-4 rounded-md border-solid border-gray-100">
-        <h3 className="text-[#161D25] font-medium text-xl tracking-[0.2px]">
-          Filter Options
-        </h3>
-        <h4 className="font-semibold text-base text-neutral">Rating</h4>
-        <Radio.Group onChange={handleRatingChange}>
-          <Space direction="vertical">
-            <Radio value={4}>
-              <div className="flex items-center gap-2">
-                <IoStar className="text-yellow-400 size-6" />
-                <p className="text-base">4 start or upper</p>
-              </div>
-            </Radio>
-            <Radio value={3}>
-              <div className="flex items-center gap-2">
-                <IoStar className="text-yellow-400 size-6" />
-                <p className="text-base">3 start or upper</p>
-              </div>
-            </Radio>
-            <Radio value={2}>
-              <div className="flex items-center gap-2">
-                <IoStar className="text-yellow-400 size-6" />
-                <p className="text-base">2 start or upper</p>
-              </div>
-            </Radio>
-            <Radio value={1}>
-              <div className="flex items-center gap-2">
-                <IoStar className="text-yellow-400 size-6" />
-                <p className="text-base">1 start or upper</p>
-              </div>
-            </Radio>
-          </Space>
-        </Radio.Group>
-      </div>
-      {summary && (
-        <>
-          <div className="space-y-3 border p-4 rounded-md border-solid border-gray-100">
-            <h4 className="font-semibold text-base text-neutral">
-              Price Range
-            </h4>
+    <Form
+      form={form}
+      layout="vertical"
+      onValuesChange={handleFormChange}
+      initialValues={{
+        priceRange: [0, summary?.max_price || 100],
+        minPrice: minPrice || 0,
+        maxPrice: maxPrice || summary?.max_price || 100,
+        brands: [],
+        sizes: [],
+        rating: null,
+      }}
+    >
+      <div className="space-y-1">
+        <div className="space-y-3 border p-4 rounded-md border-solid border-gray-100">
+          <h3 className="text-[#161D25] font-medium text-xl tracking-[0.2px]">
+            Filter Options
+          </h3>
+          <Form.Item label="Rating" name="rating">
+            <Radio.Group>
+              <Space direction="vertical">
+                {[4, 3, 2, 1].map((value) => (
+                  <Radio key={value} value={value}>
+                    <div className="flex items-center gap-2">
+                      <IoStar className="text-yellow-400 size-6" />
+                      <p className="text-base">{value} star or upper</p>
+                    </div>
+                  </Radio>
+                ))}
+              </Space>
+            </Radio.Group>
+          </Form.Item>
+        </div>
+
+        <div className="space-y-1 border p-4 rounded-md border-solid border-gray-100">
+          <Form.Item label="Price Range" name="priceRange" className="m-0">
             <Slider
+              onChangeComplete={handlePriceRangeChange}
               range
               min={0}
               max={summary?.max_price}
               defaultValue={[0, summary?.max_price]}
-              onChangeComplete={handlePriceRangeChange}
             />
-            <div className="flex justify-between">
-              <InputNumber
-                value={minPrice ? minPrice : 0}
-                min={0}
-                onChange={(value) => setMinPrice(value)}
-              />
-              <InputNumber
-                value={maxPrice ? maxPrice : summary?.max_price}
-                max={summary?.max_price}
-                onChange={(value) => setMaxPrice(value)}
-              />
+          </Form.Item>
+          <div className="flex justify-between">
+            <Form.Item name="minPrice" noStyle>
+              <InputNumber min={0} placeholder="Min Price" />
+            </Form.Item>
+            <Form.Item name="maxPrice" noStyle>
+              <InputNumber min={0} placeholder="Max Price" />
+            </Form.Item>
+          </div>
+        </div>
+
+        {summary && (
+          <>
+            <div className="space-y-3 border p-4 rounded-md border-solid border-gray-100">
+              <Form.Item label="Brands" name="brands">
+                <Checkbox.Group style={{ width: "100%" }}>
+                  <Space direction="vertical">
+                    {summary?.brands.map((brand: string, index: number) => (
+                      <Checkbox
+                        key={index}
+                        value={brand}
+                        className="capitalize"
+                      >
+                        {brand}
+                      </Checkbox>
+                    ))}
+                  </Space>
+                </Checkbox.Group>
+              </Form.Item>
             </div>
-          </div>
-          <div className="space-y-3 border p-4 rounded-md border-solid border-gray-100">
-            <h4 className="font-semibold text-base text-neutral">Brands</h4>
-            <Checkbox.Group
-              style={{ width: "100%" }}
-              onChange={handleBrandChange}
-            >
-              <Space direction="vertical">
-                {summary?.brands.map((brand: string, index: number) => (
-                  <Checkbox key={index} value={brand} className="capitalize">
-                    {brand}
-                  </Checkbox>
-                ))}
-              </Space>
-            </Checkbox.Group>
-          </div>
-          <div className="space-y-3 border p-4 rounded-md border-solid border-gray-100">
-            <h4 className="font-semibold text-base text-neutral">Sizes</h4>
-            <Checkbox.Group
-              style={{ width: "100%" }}
-              onChange={handleSizeChange}
-            >
-              <Space direction="vertical">
-                {summary?.sizes.map((size: string, index: number) => (
-                  <Checkbox key={index} value={size} className="capitalize">
-                    {size}
-                  </Checkbox>
-                ))}
-              </Space>
-            </Checkbox.Group>
-          </div>
-          <div className="space-y-3 border p-4 rounded-md border-solid border-gray-100">
-            <h4 className="font-semibold text-base text-neutral">Colors</h4>
-            <div className="flex flex-wrap gap-3">
-              {summary?.colors.map((color: any, index: number) => (
-                <Tooltip title={color?.name}>
-                  <div
-                    onClick={() =>
-                      setColors((prevColors: any) => {
-                        if (prevColors?.includes(color?.name)) {
-                          return prevColors.filter(
-                            (singleColor: string) => singleColor !== color?.name
-                          );
-                        } else {
-                          return [...prevColors, color?.name];
+            <div className="space-y-3 border p-4 rounded-md border-solid border-gray-100">
+              <Form.Item label="Sizes" name="sizes">
+                <Checkbox.Group style={{ width: "100%" }}>
+                  <Space direction="vertical">
+                    {summary?.sizes.map((size: string, index: number) => (
+                      <Checkbox key={index} value={size} className="capitalize">
+                        {size}
+                      </Checkbox>
+                    ))}
+                  </Space>
+                </Checkbox.Group>
+              </Form.Item>
+            </div>
+            <div className="space-y-3 border p-4 rounded-md border-solid border-gray-100">
+              <Form.Item label="Colors">
+                <div className="flex flex-wrap gap-3">
+                  {summary?.colors.map((color: any, index: number) => (
+                    <Tooltip title={color?.name} key={index}>
+                      <div
+                        onClick={() =>
+                          setColors((prevColors: any) => {
+                            if (prevColors?.includes(color?.name)) {
+                              return prevColors.filter(
+                                (singleColor: string) =>
+                                  singleColor !== color?.name
+                              );
+                            } else {
+                              return [...prevColors, color?.name];
+                            }
+                          })
                         }
-                      })
-                    }
-                    key={index}
-                    style={{ background: color?.color_code }}
-                    className={`p-1 rounded-full cursor-pointer border-solid border-gray-400 ${
-                      colors?.includes(color?.name)
-                        ? "border-2 size-4"
-                        : "border size-5"
-                    }`}
-                  />
-                </Tooltip>
-              ))}
+                        style={{ background: color?.color_code }}
+                        className={`p-1 rounded-full cursor-pointer border-solid border-gray-400 ${
+                          colors?.includes(color?.name)
+                            ? "border-2 size-4"
+                            : "border size-5"
+                        }`}
+                      />
+                    </Tooltip>
+                  ))}
+                </div>
+              </Form.Item>
             </div>
-          </div>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
+    </Form>
   );
 };
 

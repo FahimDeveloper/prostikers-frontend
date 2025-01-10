@@ -7,6 +7,7 @@ import ProductsSidebar from "./components/ProductsSidebar";
 import ProductsPart from "./components/ProductsPart";
 import { Input } from "antd";
 import DataPagination from "../../common/DataPagination";
+import { useForm } from "antd/es/form/Form";
 
 const ProductsPage = () => {
   const [page, setPage] = useState<number>(1);
@@ -18,6 +19,7 @@ const ProductsPage = () => {
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
   const [rating, setRating] = useState<number | undefined>(undefined);
   const [search, setSearch] = useState<string | undefined>(undefined);
+  const [form] = useForm();
   const { slug } = useParams();
   const {
     data: products,
@@ -48,6 +50,12 @@ const ProductsPage = () => {
     } else {
       setSearch(value);
     }
+    setBrands([]);
+    setColors([]);
+    setSizes([]);
+    setMinPrice(0);
+    setRating(undefined);
+    form.resetFields();
   };
 
   return (
@@ -71,6 +79,7 @@ const ProductsPage = () => {
                 maxPrice={maxPrice}
                 minPrice={minPrice}
                 colors={colors}
+                form={form}
               />
             </div>
             <div className="col-span-5">
@@ -87,12 +96,14 @@ const ProductsPage = () => {
                   data={products?.results || []}
                   loading={productsFetching}
                 />
-                <DataPagination
-                  total={products?.count}
-                  page={page}
-                  limit={limit}
-                  onChange={handlePageChange}
-                />
+                {(products?.results || [])?.length > 0 && (
+                  <DataPagination
+                    total={products?.count}
+                    page={page}
+                    limit={limit}
+                    onChange={handlePageChange}
+                  />
+                )}
               </div>
             </div>
           </div>

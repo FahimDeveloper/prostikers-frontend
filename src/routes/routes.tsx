@@ -8,10 +8,8 @@ const ViewCart = LazyLoad(lazy(() => import("../pages/ViewCart/ViewCart")));
 const ShopCheckOut = LazyLoad(
   lazy(() => import("../pages/ShopCheckOut/ShopCheckOut"))
 );
-const MyShopPurchase = LazyLoad(
-  lazy(
-    () => import("../pages/DashboardManagement/MyShopPurchase/MyShopPurchase")
-  )
+const MyShopOrders = LazyLoad(
+  lazy(() => import("../pages/DashboardManagement/MyShopOrders/MyShopOrders"))
 );
 const ProductsPage = LazyLoad(
   lazy(() => import("../pages/ProductsPage/ProductsPage"))
@@ -1120,10 +1118,10 @@ export const router = createBrowserRouter([
             ),
           },
           {
-            path: "my-shop-purchase",
+            path: "my-shop-orders",
             element: (
               <PrivetRoute>
-                <MyShopPurchase />
+                <MyShopOrders />
               </PrivetRoute>
             ),
           },
