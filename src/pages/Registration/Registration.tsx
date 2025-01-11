@@ -12,6 +12,7 @@ import PrivacyPolicy from "../../components/PrivacyPolicy";
 import SocialLogin from "../../components/SocialLogin";
 const Registration = () => {
   const [agree, setAgree] = useState(false);
+  const [save, setSave] = useState(false);
   const dispatch = useAppDispatch();
   const [registration, { data, isLoading, isError, isSuccess, error }] =
     useRegistrationMutation();
@@ -179,20 +180,27 @@ const Registration = () => {
               placeholder="Password"
             />
           </Form.Item>
-          <Form.Item>
-            <Checkbox onChange={() => setAgree(!agree)}>
-              <div className="flex gap-2">
-                <p className="text-sm text-secondary">I agree with</p>
-                <TermsCondition>
-                  <p className="text-primary cursor-pointer">Terms</p>
-                </TermsCondition>
-                <p>&</p>
-                <PrivacyPolicy>
-                  <p className="text-primary cursor-pointer">policy</p>
-                </PrivacyPolicy>
-              </div>
-            </Checkbox>
-          </Form.Item>
+          <div>
+            <Form.Item className="m-0">
+              <Checkbox onChange={() => setAgree(!agree)}>
+                <div className="flex gap-2">
+                  <p className="text-sm text-secondary">I agree with</p>
+                  <TermsCondition>
+                    <p className="text-primary cursor-pointer">Terms</p>
+                  </TermsCondition>
+                  <p>&</p>
+                  <PrivacyPolicy>
+                    <p className="text-primary cursor-pointer">policy</p>
+                  </PrivacyPolicy>
+                </div>
+              </Checkbox>
+            </Form.Item>
+            <Form.Item className="m-0">
+              <Checkbox onChange={() => setSave(!save)}>
+                <p className="text-sm text-secondary">Save information</p>
+              </Checkbox>
+            </Form.Item>
+          </div>
           <Form.Item>
             <Button
               loading={isLoading}

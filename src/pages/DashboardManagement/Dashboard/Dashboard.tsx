@@ -41,11 +41,11 @@ const Dashboard = () => {
       value: "/dashboard/my-bootcamps",
     },
     {
-      label: "Individual Events",
+      label: "Individual Tournaments",
       value: "/dashboard/my-individual-events",
     },
     {
-      label: "Team Events",
+      label: "Team Tournaments",
       value: "/dashboard/my-team-events",
     },
   ];

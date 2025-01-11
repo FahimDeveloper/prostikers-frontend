@@ -61,8 +61,11 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/events" className="no-underline text-white px-1">
-                    Events
+                  <Link
+                    to="/programs/tournaments"
+                    className="no-underline text-white px-1"
+                  >
+                    Tournaments
                   </Link>
                 </li>
                 <li>

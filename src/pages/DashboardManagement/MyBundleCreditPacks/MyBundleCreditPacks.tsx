@@ -154,7 +154,7 @@ const MyBundleCreditPacks = () => {
     <div className="lg:pb-14 md:pb-12 pb-10 space-y-5">
       <div className="flex md:flex-nowrap flex-wrap justify-between items-end gap-2">
         <div className="space-y-1">
-          <h2 className="font-semibold text-[28px] leading-9 text-[#111827]">
+          <h2 className="font-semibold text-nowrap text-[28px] leading-9 text-[#111827]">
             Bundle Pack
           </h2>
           <p className="text-[#838383] font-medium text-lg">

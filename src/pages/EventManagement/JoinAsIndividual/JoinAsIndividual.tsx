@@ -23,7 +23,7 @@ const JoinAsIndividual = () => {
   };
   return (
     <>
-      <BannerSection title="Individual - Events" image={banner} />
+      <BannerSection title="Individual - Tournaments" image={banner} />
       <Container>
         <div className="lg:py-14 md:py-12 py-10 sm:space-y-8 space-y-5">
           <h2 className="font-semibold lg:text-[56px] sm:text-[45px] text-3xl lg:leading-[67px] sm:leading-[50px]">

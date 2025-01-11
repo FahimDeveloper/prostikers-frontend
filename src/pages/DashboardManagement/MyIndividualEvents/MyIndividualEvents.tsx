@@ -52,7 +52,7 @@ const MyIndividualEvents = () => {
     {
       width: 240,
       align: "center",
-      title: "Event Name",
+      title: "Tournament Name",
       dataIndex: "_id",
       key: "_id",
       render: (_, record) => (
@@ -145,7 +145,7 @@ const MyIndividualEvents = () => {
     {
       width: 100,
       align: "center",
-      title: "Event Fee",
+      title: "Fee",
       dataIndex: "_id",
       key: "_id",
       render: (_, record) => (
@@ -184,8 +184,8 @@ const MyIndividualEvents = () => {
     <div className="lg:pb-14 md:pb-12 pb-10 space-y-5">
       <div className="flex sm:flex-nowrap flex-wrap justify-between items-end">
         <div>
-          <h2 className="font-semibold text-[28px] leading-9 text-[#111827]">
-            Event Individual Reservations
+          <h2 className="font-semibold text-nowrap text-[28px] leading-9 text-[#111827]">
+            Tournament Individual Reservations
           </h2>
           <p className="text-[#838383] font-medium text-lg">
             Total {data?.count || 0} reservations

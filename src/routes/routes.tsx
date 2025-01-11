@@ -612,7 +612,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/event-group-payment",
+        path: "/tournaments-group-payment",
         element: (
           <PrivetRoute>
             <EventGroupPayment />
@@ -628,7 +628,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/event-individual-payment",
+        path: "/tournaments-individual-payment",
         element: (
           <PrivetRoute>
             <EventIndividualPayment />
@@ -1060,11 +1060,11 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: "/programs/events",
+        path: "/programs/tournaments",
         element: <EventOutlet />,
         children: [
           {
-            path: "/programs/events",
+            path: "/programs/tournaments",
             element: <Event />,
           },
           {
@@ -1166,7 +1166,7 @@ export const router = createBrowserRouter([
             ),
           },
           {
-            path: "my-individual-events",
+            path: "my-individual-tournaments",
             element: (
               <PrivetRoute>
                 <MyIndividualEvents />
@@ -1174,7 +1174,7 @@ export const router = createBrowserRouter([
             ),
           },
           {
-            path: "my-team-events",
+            path: "my-team-tournaments",
             element: (
               <PrivetRoute>
                 <MyGroupEvents />

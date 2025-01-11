@@ -7,9 +7,9 @@ import training2 from "../../assets/images/t10-league/as-team.webp";
 
 const Event = () => {
   const trainingData = {
-    title: "Join the Thrilling Events",
+    title: "Join the Thrilling Tournaments",
     description:
-      "Compete in the fast-paced and exhilarating Events at ProStrikers. This action-packed format promises high-energy matches and a platform to showcase your cricketing prowess. Join as an individual or as a team and revel in the thrill of short-form cricket at its finest.",
+      "Compete in the fast-paced and exhilarating tournaments at ProStrikers. This action-packed format promises high-energy matches and a platform to showcase your cricketing prowess. Join as an individual or as a team and revel in the thrill of short-form cricket at its finest.",
     programs: [
       {
         title: "Join as Individual",
@@ -66,9 +66,9 @@ const Event = () => {
         "Sure! Remember to wear the right sportswear and shoes for your activity. If you’re unsure or need gear, contact us, or visit our Pro Shop. You can also rent gear from us, but please check availability first. We’re here to help you have a great session!",
     },
     {
-      title: "Do you allow corporate events or parties at your location?",
+      title: "Do you allow corporate tournaments or parties at your location?",
       description:
-        "Absolutely! We’re excited to help you. For a more personalized experience, please feel free to connect with us directly. To ensure a seamless process, we kindly request a notice of at least 24 hours before events or parties. Reach out to our dedicated staff at your earliest convenience to confirm availability and finalize your reservation. We’re eager to make your experience memorable! Contact us - +19168905834",
+        "Absolutely! We’re excited to help you. For a more personalized experience, please feel free to connect with us directly. To ensure a seamless process, we kindly request a notice of at least 24 hours before tournaments or parties. Reach out to our dedicated staff at your earliest convenience to confirm availability and finalize your reservation. We’re eager to make your experience memorable! Contact us - +19168905834",
     },
     {
       title: "What is your cancellation policy for bookings?",
@@ -87,7 +87,7 @@ const Event = () => {
   ];
   return (
     <>
-      <BannerSection title="Events" image={banner} />
+      <BannerSection title="Tournaments" image={banner} />
       <TrainingSection data={trainingData} />
       <QuestionSection data={questionData} />
     </>
