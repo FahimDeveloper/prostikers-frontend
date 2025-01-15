@@ -23,15 +23,20 @@ import {
   useOneTrainingBookedSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
 import { useOneAppointmentQuery } from "../../../redux/features/appointment/appointmentApi";
-import TrainingGeneralForm from "../../../components/ui/form/TrainingGeneralForm";
-import { Button, Form, Input, message } from "antd";
+import { Button, Checkbox, Form, Input, message } from "antd";
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
 import OneTrainingBookingTimeSlots from "../../../components/OneTrainingBookingTimeSlots";
 import RouteBlocker from "../../../utils/RouteBlocker";
+import { useAppSelector } from "../../../hooks/useAppHooks";
+import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
+import TermsCondition from "../../../components/TermsCondition";
+import PrivacyPolicy from "../../../components/PrivacyPolicy";
 
 const SoftballOneTrainingReservation = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [agree, setAgree] = useState(false);
+  const user = useAppSelector(selectCurrentUser);
   const [voucherApplied, setVoucherApplied] = useState(false);
   const createCartBooking = useAddToCartSlotMutation();
   const [deleteSlot] = useDeleteBookingSlotMutation();
@@ -44,7 +49,7 @@ const SoftballOneTrainingReservation = () => {
   const [block, setBlock] = useState(false);
   const [process, setProcess] = useState(false);
   const blocker = useBlocker(block);
-  const [formData, setFormData] = useState({});
+  const [payload, setPayload] = useState({});
   const { state } = useLocation();
   const location = state?.from?.pathname || "/";
   const { data: appointment } = useOneAppointmentQuery(id, {
@@ -83,9 +88,7 @@ const SoftballOneTrainingReservation = () => {
     totalPrice = price;
   }
 
-  const onFinish = (values: any) => {
-    values.trainer = state.trainer?._id;
-    values.appointment = id;
+  const onFinish = () => {
     const bookings: any = [];
     selectSlots?.forEach((dateSlots) =>
       dateSlots.slots.forEach((slot: string) =>
@@ -96,18 +99,25 @@ const SoftballOneTrainingReservation = () => {
         })
       )
     );
-    values.bookings = bookings;
-    values.voucher_applied = voucherApplied;
-    setFormData(values);
-    setProcess(true);
+    const data = {
+      trainer: state.trainer?._id,
+      sport: state?.sport,
+      user: user?._id,
+      email: user?.email,
+      appointment: id,
+      voucher_applied: voucherApplied,
+      bookings: bookings,
+    };
+    setPayload(data);
     setBlock(false);
+    setProcess(true);
   };
 
   useEffect(() => {
     if (process) {
       navigate("/one-appointment-payment", {
         state: {
-          data: formData,
+          data: payload,
           amount: totalPrice,
           location: location,
         },
@@ -241,17 +251,17 @@ const SoftballOneTrainingReservation = () => {
                   Booking Details
                 </h3>
                 <div className="flex gap-1">
-                  <p>Total Price:</p>
+                  <p>Slots Price:</p>
                   <p>${price}</p>
                 </div>
               </div>
               <div className="space-y-2">
                 {selectSlots.map((dateSlots, index) => (
-                  <div className="space-y-2" key={index}>
+                  <div className="space-y-3" key={index}>
                     {dateSlots.slots.map((slot: string, index: number) => (
                       <div
                         key={index}
-                        className="flex justify-between gap-3 flex-wrap items-center bg-white p-3"
+                        className="flex justify-between gap-3 flex-wrap items-center bg-white sm:p-3"
                       >
                         <div className="flex gap-1 items-center">
                           <IoCalendarOutline className="size-4" />
@@ -314,11 +324,11 @@ const SoftballOneTrainingReservation = () => {
                 <Form.Item
                   name="voucher_code"
                   className="m-0"
-                  rules={[{ required: true }]}
+                  rules={[{ required: true, message: "Enter the vouche code" }]}
                 >
                   <Input
                     readOnly={data ? true : false}
-                    className="sm:py-[7px] py-1 rounded-full md:w-96 sm:w-72 w-48"
+                    className="sm:py-[5px] py-1 rounded-full md:w-96 sm:w-72 w-48"
                     placeholder="Enter your voucher code"
                   />
                 </Form.Item>
@@ -327,7 +337,8 @@ const SoftballOneTrainingReservation = () => {
                     disabled={data}
                     loading={isLoading}
                     htmlType="submit"
-                    className="text-white bg-primary h-full lg:text-lg text-base font-bold px-10 rounded-full"
+                    type="primary"
+                    className="text-white bg-primary lg:text-base text-sm font-bold px-7 rounded-full"
                   >
                     Apply
                   </Button>
@@ -336,7 +347,29 @@ const SoftballOneTrainingReservation = () => {
             </div>
           )}
           {selectSlots.length > 0 && (
-            <TrainingGeneralForm form={form} onFinish={onFinish} />
+            <div className="text-end">
+              <Checkbox onChange={() => setAgree(!agree)}>
+                <div className="flex gap-2 flex-wrap">
+                  <p className="text-sm text-secondary">I agree with</p>
+                  <TermsCondition>
+                    <p className="text-primary cursor-pointer">Terms </p>
+                  </TermsCondition>
+                  <p>&</p>
+                  <PrivacyPolicy>
+                    <p className="text-primary cursor-pointer">policy</p>
+                  </PrivacyPolicy>
+                </div>
+              </Checkbox>
+              <Button
+                type="primary"
+                size="large"
+                disabled={!agree}
+                className="primary-btn"
+                onClick={() => onFinish()}
+              >
+                Proceed
+              </Button>
+            </div>
           )}
         </div>
         <RouteBlocker block={block} blocker={blocker} />

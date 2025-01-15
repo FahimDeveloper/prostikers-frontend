@@ -15,7 +15,7 @@ const ShopCheckoutForm = ({ form }: { form: any }) => {
   const [cityList, setCityList] = useState<any>([]);
 
   useEffect(() => {
-    GetState(233).then((result) => {
+    GetState(countryId).then((result) => {
       setStateList(result);
     });
     GetCity(countryId, stateId).then((result) => {
@@ -24,10 +24,9 @@ const ShopCheckoutForm = ({ form }: { form: any }) => {
   }, [stateId]);
 
   const validateUSPhoneNumber = (_: any, value: string) => {
-    const phoneNumberRegex =
-      /^(?:\+1\s*?)?(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]?\d{4}$/;
+    const phoneNumberRegex = /^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)\d{3}[\s.-]?\d{4}$/;
 
-    if (!phoneNumberRegex.test(value)) {
+    if (!phoneNumberRegex.test(value.trim())) {
       return Promise.reject(new Error("Please enter a valid USA phone number"));
     }
     return Promise.resolve();

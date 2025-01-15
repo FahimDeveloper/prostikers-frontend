@@ -41,7 +41,6 @@ const RentalBookingSteps = ({
           setAddons={setAddons}
           bookingData={bookingData}
           rentalInfo={rentalInfo}
-          // membershipData={membershipData}
           setVoucherApplied={setVoucherApplied}
           setTotalPrice={setTotalPrice}
           totalPrice={totalPrice}

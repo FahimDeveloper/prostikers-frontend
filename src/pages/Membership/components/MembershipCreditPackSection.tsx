@@ -16,6 +16,7 @@ const MembershipCreditPackSection = () => {
     if (cage === "five_cage") {
       const bundleCredit = {
         package: "5 (1-Hour) Cage Pass Pack",
+        user: user?._id,
         email: user?.email,
         hours: 5,
         piching_machine: pack === "with_machine" ? true : false,
@@ -27,6 +28,7 @@ const MembershipCreditPackSection = () => {
     } else if (cage === "ten_cage") {
       const bundleCredit = {
         package: "10 (1-Hour) Cage Pass Pack",
+        user: user?._id,
         email: user?.email,
         hours: 10,
         piching_machine: pack === "with_machine" ? true : false,

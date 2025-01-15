@@ -42,11 +42,11 @@ const Dashboard = () => {
     },
     {
       label: "Individual Tournaments",
-      value: "/dashboard/my-individual-events",
+      value: "/dashboard/my-individual-tournaments",
     },
     {
       label: "Team Tournaments",
-      value: "/dashboard/my-team-events",
+      value: "/dashboard/my-team-tournaments",
     },
   ];
   const onChange = ({ target: { value } }: RadioChangeEvent) => {

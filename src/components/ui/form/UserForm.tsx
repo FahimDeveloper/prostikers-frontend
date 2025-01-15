@@ -16,6 +16,7 @@ import {
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { GetCity, GetState } from "react-country-state-city";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -37,6 +38,25 @@ type TProp = {
 const UserForm = ({ form, record, onFinish, loading }: TProp) => {
   const [previewImage, setPreviewImage] = useState("");
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [stateId, setStateId] = useState(0);
+  const countryId = 233;
+
+  const [stateList, setStateList] = useState<any>([]);
+  const [cityList, setCityList] = useState<any>([]);
+
+  const filterOption = (
+    input: string,
+    option?: { label: string; value: string }
+  ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
+
+  useEffect(() => {
+    GetState(countryId).then((result) => {
+      setStateList(result);
+    });
+    GetCity(countryId, stateId).then((result) => {
+      setCityList(result);
+    });
+  }, [stateId]);
 
   const beforeUpload = (file: FileType) => {
     if (file.size > 5242880) {
@@ -74,8 +94,7 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
       email: record?.email,
       gender: record?.gender,
       phone: record?.phone,
-      nationality: record?.nationality,
-      country: record?.country,
+      country: "United States",
       state: record?.state,
       city: record?.city,
       street_address: record?.street_address,
@@ -93,10 +112,9 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
   }, [record, form]);
 
   const validateUSPhoneNumber = (_: any, value: string) => {
-    const phoneNumberRegex =
-      /^(?:\+1\s*?)?(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]?\d{4}$/;
+    const phoneNumberRegex = /^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)\d{3}[\s.-]?\d{4}$/;
 
-    if (!phoneNumberRegex.test(value)) {
+    if (!phoneNumberRegex.test(value.trim())) {
       return Promise.reject(new Error("Please enter a valid USA phone number"));
     }
     return Promise.resolve();
@@ -151,7 +169,7 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
             </Form.Item>
 
             <Form.Item
-              className="w-full m-0 col-span-2"
+              className="w-full m-0"
               name="email"
               label="Email"
               rules={[{ required: true }]}
@@ -196,14 +214,6 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
             </Form.Item>
             <Form.Item
               className="w-full m-0"
-              name="nationality"
-              label="Nationality"
-              rules={[{ required: true }]}
-            >
-              <Input placeholder="Enter your nationality" />
-            </Form.Item>
-            <Form.Item
-              className="w-full m-0"
               name="country"
               label="Country"
               rules={[{ required: true }]}
@@ -216,7 +226,21 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
               label="State"
               rules={[{ required: true }]}
             >
-              <Input placeholder="Enter your state" />
+              <Select
+                showSearch
+                optionFilterProp="children"
+                filterOption={filterOption}
+                onSelect={(_, options: any) => setStateId(options.key)}
+                className="w-full"
+                placeholder="Select your state"
+                options={stateList?.map((state: any) => {
+                  return {
+                    label: state.name,
+                    value: state.name,
+                    key: state.id,
+                  };
+                })}
+              />
             </Form.Item>
             <Form.Item
               className="w-full m-0"
@@ -224,7 +248,16 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
               label="City"
               rules={[{ required: true }]}
             >
-              <Input placeholder="Enter your city" />
+              <Select
+                showSearch
+                filterOption={filterOption}
+                optionFilterProp="children"
+                className="w-full"
+                placeholder="Select your city"
+                options={cityList?.map((city: any) => {
+                  return { label: city.name, value: city.name, key: city.id };
+                })}
+              />
             </Form.Item>
             <Form.Item
               className="w-full m-0"

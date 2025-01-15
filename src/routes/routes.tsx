@@ -612,7 +612,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/tournaments-group-payment",
+        path: "/tournament-group-payment",
         element: (
           <PrivetRoute>
             <EventGroupPayment />
@@ -628,7 +628,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/tournaments-individual-payment",
+        path: "/tournament-individual-payment",
         element: (
           <PrivetRoute>
             <EventIndividualPayment />

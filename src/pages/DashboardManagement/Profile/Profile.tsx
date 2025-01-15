@@ -3,7 +3,6 @@ import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { useClientQuery } from "../../../redux/features/client/clientApi";
 import ProfileSection from "./components/ProfileSection";
 import MembershipSection from "./components/MembershipSection";
-import PaymentSection from "./components/PaymentSection";
 import { FaSpinner } from "react-icons/fa";
 
 const Profile = () => {
@@ -21,7 +20,7 @@ const Profile = () => {
           <MembershipSection data={userData?.results} />
         </>
       )}
-      <PaymentSection />
+      {/* <PaymentSection /> */}
     </div>
   );
 };

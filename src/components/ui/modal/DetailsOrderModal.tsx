@@ -100,11 +100,13 @@ const DetailsOrderModal = ({ record }: { record: TOrder }) => {
           title="Billing Address"
           bordered
           column={2}
-          labelStyle={{
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-            width: "140px",
+          styles={{
+            label: {
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              width: "140px",
+            },
           }}
         >
           <Descriptions.Item label="Street Address" span={2}>

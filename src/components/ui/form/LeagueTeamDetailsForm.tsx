@@ -1,40 +1,28 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Form, Input, InputNumber } from "antd";
-import { useEffect } from "react";
+import { Button, Checkbox, Form, Input, InputNumber } from "antd";
 import { AiOutlineMinusCircle } from "react-icons/ai";
+import { useAppSelector } from "../../../hooks/useAppHooks";
+import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
+import TermsCondition from "../../TermsCondition";
+import PrivacyPolicy from "../../PrivacyPolicy";
+import { useState } from "react";
 
 const LeagueTeamDetailsForm = ({
   form,
-  formData,
+  onFinish,
 }: {
   form: any;
-  formData: any;
+  onFinish: any;
 }) => {
-  useEffect(() => {
-    if (formData) {
-      form.setFieldsValue({
-        team: [
-          {
-            first_name: formData.first_name,
-            last_name: formData.last_name,
-            age: formData.age,
-            email: formData.email,
-            contact: formData.phone,
-          },
-        ],
-      });
-    }
-  }, [formData, form]);
-
+  const user = useAppSelector(selectCurrentUser);
   const validateUSPhoneNumber = (_: any, value: string) => {
-    const phoneNumberRegex =
-      /^(?:\+1\s*?)?(?:\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]?\d{4}$/;
+    const phoneNumberRegex = /^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)\d{3}[\s.-]?\d{4}$/;
 
-    if (!phoneNumberRegex.test(value)) {
+    if (!phoneNumberRegex.test(value.trim())) {
       return Promise.reject(new Error("Please enter a valid USA phone number"));
     }
     return Promise.resolve();
   };
+  const [agree, setAgree] = useState(false);
 
   return (
     <div className="space-y-5">
@@ -44,7 +32,22 @@ const LeagueTeamDetailsForm = ({
           Fill out this form to regester for upcoming trainings
         </p>
       </div>
-      <Form form={form} layout="vertical" className="space-y-3">
+      <Form
+        onFinish={onFinish}
+        form={form}
+        layout="vertical"
+        className="space-y-3"
+        initialValues={{
+          team: [
+            {
+              first_name: user?.first_name,
+              last_name: user?.last_name,
+              email: user?.email,
+              contact: user?.phone,
+            },
+          ],
+        }}
+      >
         <Form.Item
           className="m-0"
           label="Team Name"
@@ -89,9 +92,8 @@ const LeagueTeamDetailsForm = ({
                       ]}
                     >
                       <Input
-                        readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
-                        className="w-full rounded-full sm:p-2 p-1"
+                        className="w-full rounded-full"
                       />
                     </Form.Item>
                     <Form.Item
@@ -102,9 +104,8 @@ const LeagueTeamDetailsForm = ({
                       rules={[{ required: true, message: "Missing last name" }]}
                     >
                       <Input
-                        readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
-                        className="w-full rounded-full sm:p-2 p-1"
+                        className="w-full rounded-full"
                       />
                     </Form.Item>
                     <Form.Item
@@ -112,14 +113,11 @@ const LeagueTeamDetailsForm = ({
                       label="Age"
                       {...restField}
                       name={[name, "age"]}
-                      rules={[
-                        { required: true, message: "Missing date of birth" },
-                      ]}
+                      rules={[{ required: true, message: "Missing Age" }]}
                     >
                       <InputNumber
-                        readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
-                        className="w-full rounded-full sm:p-1"
+                        className="w-full rounded-full"
                         min={0}
                         max={99}
                       />
@@ -134,7 +132,7 @@ const LeagueTeamDetailsForm = ({
                       <Input
                         readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
-                        className="w-full rounded-full sm:p-2 p-1"
+                        className="w-full rounded-full"
                       />
                     </Form.Item>
                     <Form.Item
@@ -148,10 +146,9 @@ const LeagueTeamDetailsForm = ({
                       ]}
                     >
                       <Input
-                        readOnly={index < 1 ? true : false}
                         placeholder="Type here..."
                         prefix={"USA"}
-                        className="w-full rounded-full sm:p-2 p-1"
+                        className="w-full rounded-full"
                       />
                     </Form.Item>
                   </div>
@@ -160,7 +157,9 @@ const LeagueTeamDetailsForm = ({
               {fields.length <= 5 && (
                 <Form.Item className="mt-5">
                   <Button
-                    className="btn bg-[#07133D] hover:bg-[#07133D] text-white sm:text-base font-medium px-5 rounded-full"
+                    color="default"
+                    variant="solid"
+                    className="text-white sm:text-base font-medium px-5 rounded-full"
                     onClick={() => add()}
                   >
                     Add Member
@@ -170,6 +169,29 @@ const LeagueTeamDetailsForm = ({
             </>
           )}
         </Form.List>
+        <div className="text-end">
+          <Checkbox onChange={() => setAgree(!agree)}>
+            <div className="flex gap-2 flex-wrap">
+              <p className="text-sm text-secondary">I agree with</p>
+              <TermsCondition>
+                <p className="text-primary cursor-pointer">Terms </p>
+              </TermsCondition>
+              <p>&</p>
+              <PrivacyPolicy>
+                <p className="text-primary cursor-pointer">policy</p>
+              </PrivacyPolicy>
+            </div>
+          </Checkbox>
+          <Button
+            type="primary"
+            size="large"
+            disabled={!agree}
+            className="primary-btn"
+            htmlType="submit"
+          >
+            Proceed
+          </Button>
+        </div>
       </Form>
     </div>
   );

@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useLocation, useNavigate } from "react-router-dom";
 import Checkout from "../../components/Checkout";
 import Swal from "sweetalert2";
@@ -41,10 +39,9 @@ const BootcampPayment = () => {
       course_data: { ...data },
       payment_info: {
         transaction_id: transactionId,
-        user: user?._id,
         email: user?.email,
         amount: amount,
-        service: "bootcamp",
+        trainer: data?.trainer,
       },
     };
     create(payload);

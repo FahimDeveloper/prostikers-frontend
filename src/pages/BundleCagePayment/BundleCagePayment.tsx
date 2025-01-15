@@ -42,10 +42,8 @@ const BundleCagePayment = () => {
       bundle: { ...data },
       payment_info: {
         transaction_id: transactionId,
-        user: user?._id,
         email: user?.email,
         amount: amount,
-        service: "facility",
       },
     };
     create(payload);

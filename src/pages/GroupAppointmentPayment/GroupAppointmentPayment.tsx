@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useLocation, useNavigate } from "react-router-dom";
 import Checkout from "../../components/Checkout";
 import { useEffect, useState } from "react";
@@ -41,10 +39,9 @@ const GroupAppointmentPayment = () => {
       appointment_data: { ...data },
       payment_info: {
         transaction_id: transactionId,
-        user: user?._id,
+        trainer: data?.trainer,
         email: user?.email,
         amount: amount,
-        service: "appointment",
       },
     };
     create(payload);

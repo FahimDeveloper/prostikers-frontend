@@ -1,3 +1,5 @@
+import { IUser } from "./user.types";
+
 export interface IFacilitySchedule {
   _id: string;
   facility_name: string;
@@ -19,17 +21,10 @@ export interface IFacilityDaySchedule {
 }
 
 export interface IFacilityReservation {
-  first_name: string;
-  last_name: string;
+  user: IUser;
   email: string;
-  phone: string;
-  age: number;
   facility: IFacilitySchedule;
-  street_address: string;
-  city: string;
-  state: string;
   sport: string;
-  zip_code: string;
   bookings: IFacilityBookings[];
   addons: IAddon[];
 }

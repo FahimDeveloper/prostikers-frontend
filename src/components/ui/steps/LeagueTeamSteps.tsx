@@ -2,7 +2,6 @@
 import { Button, Checkbox, Steps } from "antd";
 import { useState } from "react";
 import LeagueTeamGeneralForm from "../form/LeagueTeamGeneralForm";
-import LeagueTeamDetailsForm from "../form/LeagueTeamDetailsForm";
 import TermsCondition from "../../TermsCondition";
 import PrivacyPolicy from "../../PrivacyPolicy";
 
@@ -24,10 +23,10 @@ const LeagueTeamSteps = ({
       title: "General Details",
       content: <LeagueTeamGeneralForm form={form} />,
     },
-    {
-      title: "Team Details",
-      content: <LeagueTeamDetailsForm formData={formData} form={form} />,
-    },
+    // {
+    //   title: "Team Details",
+    //   content: <LeagueTeamDetailsForm formData={formData} form={form} />,
+    // },
   ];
   const next = () => {
     form.validateFields().then((values: any) => {

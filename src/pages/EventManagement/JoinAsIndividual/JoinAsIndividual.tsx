@@ -6,10 +6,11 @@ import { useGetEventsQuery } from "../../../redux/features/event/eventApi";
 import { Select } from "antd";
 import { useState } from "react";
 import EventCard from "../../../common/card/EventCard";
+import { FaSpinner } from "react-icons/fa";
 
 const JoinAsIndividual = () => {
   const [sport, setSport] = useState<string | undefined>(undefined);
-  const { data } = useGetEventsQuery({
+  const { data, isLoading } = useGetEventsQuery({
     limit: 10,
     event_type: "individual",
     sport,
@@ -71,16 +72,28 @@ const JoinAsIndividual = () => {
                 ]}
               />
             </div>
-            {data?.results.length === 0 ? (
-              <div className="h-40 flex justify-center items-center">
-                <p className="text-2xl text-secondary">No events found.</p>
+            {isLoading ? (
+              <div>
+                <div className="h-48 flex justify-center items-center">
+                  <FaSpinner className="size-7 text-primary animate-spin" />
+                </div>
               </div>
             ) : (
-              <div className="space-y-8">
-                {data?.results?.map((event, index) => {
-                  return <EventCard key={index} event={event} index={index} />;
-                })}
-              </div>
+              <>
+                {data?.results.length === 0 ? (
+                  <div className="h-40 flex justify-center items-center">
+                    <p className="text-2xl text-secondary">No events found.</p>
+                  </div>
+                ) : (
+                  <div className="space-y-8">
+                    {data?.results?.map((event, index) => {
+                      return (
+                        <EventCard key={index} event={event} index={index} />
+                      );
+                    })}
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

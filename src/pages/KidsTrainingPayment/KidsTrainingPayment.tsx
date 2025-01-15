@@ -41,10 +41,9 @@ const KidsTrainingPayment = () => {
       class_data: { ...data },
       payment_info: {
         transaction_id: transactionId,
-        user: user?._id,
         email: user?.email,
         amount: amount,
-        service: "class",
+        trainer: data?.trainer,
       },
     };
     create(payload);

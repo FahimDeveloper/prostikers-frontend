@@ -20,40 +20,12 @@ const FacilityPayment = () => {
   const [block, setBlock] = useState(true);
   const blocker = useBlocker(block);
   const onSubmit = () => {
-    // if (membershipData) {
-    //   const membership = { ...membershipData };
-    //   delete membership.price;
-    //   membership.status = true;
-    //   membership.membership = true;
-    //   const issueDate = new Date();
-    //   membership.issue_date = issueDate.toISOString();
-    //   const expiryDate = new Date(issueDate);
-    //   expiryDate.setFullYear(expiryDate.getFullYear() + 1);
-    //   membership.expiry_date = expiryDate.toISOString();
-    //   payload = {
-    //     facility_data: { ...data },
-    //     membership_info: {
-    //       user_id: user?._id,
-    //       membership: membership,
-    //     },
-    //     payment_info: {
-    //       transaction_id: transactionId,
-    //       user: user?._id,
-    //       email: user?.email,
-    //       amount: amount,
-    //       service: "facility",
-    //     },
-    //   };
-    //   create({ id: user?._id, payload: payload });
-    // }
     const payload = {
       facility_data: { ...data },
       payment_info: {
         transaction_id: transactionId,
-        user: user?._id,
         email: user?.email,
         amount: amount,
-        service: "facility",
       },
     };
     create({ id: user?._id, payload: payload });
@@ -68,7 +40,7 @@ const FacilityPayment = () => {
         confirmButtonColor: "#0ABAC3",
         iconColor: "#0ABAC3",
       });
-      sessionStorage.clear();
+      sessionStorage.removeItem("rental-facility-slots");
       navigate("/");
     }
     if (isError) {

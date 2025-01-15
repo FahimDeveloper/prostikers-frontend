@@ -31,6 +31,7 @@ const EventIndividualPayment = () => {
       Swal.fire({
         title: "Oops!..",
         icon: "error",
+        text: `${(error as any)?.data?.message || "something went wrong"}`,
         confirmButtonColor: "#0ABAC3",
       });
     }
@@ -40,10 +41,8 @@ const EventIndividualPayment = () => {
       event_data: { ...data },
       payment_info: {
         transaction_id: transactionId,
-        user: user?._id,
         email: user?.email,
         amount: amount,
-        service: "event",
       },
     };
     create(payload);

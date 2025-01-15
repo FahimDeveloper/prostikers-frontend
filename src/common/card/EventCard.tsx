@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "antd";
-import moment from "moment";
+import moment from "moment-timezone";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
@@ -29,7 +29,7 @@ const EventCard = ({ event, index }: { event: any; index: number }) => {
         }
       });
     } else {
-      navigate(`/programs/events/${event.event_type}/${event._id}`, {
+      navigate(`/programs/tournaments/${event.event_type}/${event._id}`, {
         state: { sport: event.sport, from: location, data: event },
       });
     }
@@ -48,8 +48,11 @@ const EventCard = ({ event, index }: { event: any; index: number }) => {
         } space-y-4`}
       >
         <p className="text-[#595E69] text-base">
-          {moment(event.start_date).format("MMMM Do")} -{" "}
-          {moment(event.end_date).format("MMMM Do YYYY")}
+          {moment(event.start_date).tz("America/Los_Angeles").format("MMMM Do")}{" "}
+          -{" "}
+          {moment(event.end_date)
+            .tz("America/Los_Angeles")
+            .format("MMMM Do YYYY")}
         </p>
         <div className="lg:space-y-6 space-y-4">
           <h3 className="lg:text-[34px] sm:text-[26px] leading-8 text-2xl font-bold lg:leading-10">
@@ -58,7 +61,9 @@ const EventCard = ({ event, index }: { event: any; index: number }) => {
           <p className="text-[#787878] lg:text-lg leading-6">
             {event.description}
           </p>
-          {moment(event.registration_end).isBefore(moment(), "day") ||
+          {moment(event.registration_end)
+            .tz("America/Los_Angeles")
+            .isBefore(moment(), "day") ||
           event.registration >= event.allowed_registrations ? (
             <Button
               type="primary"
@@ -68,14 +73,19 @@ const EventCard = ({ event, index }: { event: any; index: number }) => {
             >
               Registration closed
             </Button>
-          ) : moment(event.registration_start).isAfter(moment(), "day") ? (
+          ) : moment(event.registration_start)
+              .tz("America/Los_Angeles")
+              .isAfter(moment(), "day") ? (
             <Button
               type="primary"
               size="large"
               disabled={true}
               className="primary-btn md:w-auto w-full"
             >
-              Open {moment(event.registration_start).format("MMMM Do YYYY")}
+              Open{" "}
+              {moment(event.registration_start)
+                .tz("America/Los_Angeles")
+                .format("MMMM Do YYYY")}
             </Button>
           ) : (
             <Button

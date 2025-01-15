@@ -32,7 +32,6 @@ const RentalBookingReviewPart = ({
 }) => {
   const [rentalData, setRentalData] = useState(bookingData);
   const [messageApi, contextHolder] = message.useMessage();
-  // const [membership, setMemberhips] = useState(membershipData);
   const [use, { data, isLoading, isSuccess, isError, error }] =
     useVoucherMutation();
 
@@ -40,11 +39,6 @@ const RentalBookingReviewPart = ({
   const { data: addonsData, isFetching } = useGetSportAddonsQuery({
     sport: rentalInfo?.sport,
   });
-
-  // const deleteMembership = () => {
-  //   setMemberhips({});
-  //   sessionStorage.removeItem("membership-info");
-  // };
 
   const onSlotDelete = (date: any, lane: string, slot: string) => {
     const rentalDate = new Date(date);
@@ -153,34 +147,6 @@ const RentalBookingReviewPart = ({
     const additionalPrice = (addon.hours / hours - 1) * addon.price;
     return total + basePrice + additionalPrice;
   }, 0);
-
-  // if (membership?.price) {
-  //   const some = slotsPrice + addonsPrice + membership?.price;
-  //   if (data) {
-  //     const { discount_type, discount_value } = data.results;
-  //     if (discount_type === "amount") {
-  //       setTotalPrice(some - discount_value);
-  //     } else if (discount_type === "percentage") {
-  //       const decimal = parseFloat(discount_value) / 100;
-  //       setTotalPrice(some - some * decimal);
-  //     }
-  //   } else {
-  //     setTotalPrice(some);
-  //   }
-  // } else {
-  //   const some = slotsPrice + addonsPrice;
-  //   if (data) {
-  //     const { discount_type, discount_value } = data.results;
-  //     if (discount_type === "amount") {
-  //       setTotalPrice(some - discount_value);
-  //     } else if (discount_type === "percentage") {
-  //       const decimal = parseFloat(discount_value) / 100;
-  //       setTotalPrice(some - some * decimal);
-  //     }
-  //   } else {
-  //     setTotalPrice(some);
-  //   }
-  // }
 
   const some = slotsPrice + addonsPrice;
   if (data) {
@@ -338,19 +304,6 @@ const RentalBookingReviewPart = ({
                 ))}
               </div>
             ))}
-            {/* {membership?.price && (
-            <div className="flex justify-between items-start px-2">
-              <div className="space-y-2">
-                <p className="capitalize">{membership?.package_name}</p>
-                <p className="capitalize">{membership?.plan}</p>
-              </div>
-              <p>price: ${membership?.price}</p>
-              <MdDeleteOutline
-                onClick={deleteMembership}
-                className="size-5 cursor-pointer"
-              />
-            </div>
-          )} */}
             {addons?.map((addon: any) => {
               const hours = addon?.type === "half_hourly" ? 0.5 : 1;
               const totalAddonPrice =
@@ -452,7 +405,6 @@ const RentalBookingReviewPart = ({
                 </div>
               );
             })}
-
             {data?.results && (
               <div className="flex justify-between">
                 <p className="text-secondary sm:text-base text-base">
@@ -480,33 +432,38 @@ const RentalBookingReviewPart = ({
                 ${totalPrice}
               </p>
             </div>
-          </div>
-        </div>
-        <div className="space-y-2">
-          <p className="text-base">Apply voucher</p>
-          <Form onFinish={onFinish} layout="vertical" className="flex gap-1">
-            <Form.Item
-              name="voucher_code"
-              className="m-0"
-              rules={[{ required: true }]}
-            >
-              <Input
-                readOnly={data ? true : false}
-                className="sm:py-[7px] rounded-full md:w-96 sm:w-60 w-48"
-                placeholder="Enter your voucher code"
-              />
-            </Form.Item>
-            <Form.Item className="m-0">
-              <Button
-                disabled={data}
-                loading={isLoading}
-                htmlType="submit"
-                className="text-white bg-primary h-full lg:text-lg text-base font-bold sm:px-10 px-5 rounded-full"
+            <div className="space-y-2">
+              <p className="text-base">Apply voucher</p>
+              <Form
+                onFinish={onFinish}
+                layout="vertical"
+                className="flex gap-1"
               >
-                Apply
-              </Button>
-            </Form.Item>
-          </Form>
+                <Form.Item
+                  name="voucher_code"
+                  className="m-0 w-full"
+                  rules={[{ required: true }]}
+                >
+                  <Input
+                    readOnly={data ? true : false}
+                    className="sm:py-[5px] rounded-full w-full"
+                    placeholder="Enter your voucher code"
+                  />
+                </Form.Item>
+                <Form.Item className="m-0">
+                  <Button
+                    disabled={data}
+                    loading={isLoading}
+                    htmlType="submit"
+                    type="primary"
+                    className="lg:text-base text-sm font-bold sm:px-8 px-5 rounded-full"
+                  >
+                    Apply
+                  </Button>
+                </Form.Item>
+              </Form>
+            </div>
+          </div>
         </div>
       </div>
     </>

@@ -94,8 +94,8 @@ const MyGroupEvents = () => {
       key: "_id",
       render: (_, record) => {
         const status = collectDateStatus(
-          record?.event.end_date,
-          record?.event.start_date
+          record?.event.start_date,
+          record?.event.end_date
         );
         return (
           <p className="font-medium text-sm leading-5 text-[#151515]">

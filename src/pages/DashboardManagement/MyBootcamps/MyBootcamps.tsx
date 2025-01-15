@@ -98,8 +98,8 @@ const MyBootcamps = () => {
       key: "_id",
       render: (_, record) => {
         const status = collectDateStatus(
-          record?.course.end_date,
-          record?.course.start_date
+          record?.course.start_date,
+          record?.course.end_date
         );
         return (
           <p className="font-medium text-sm leading-5 text-[#151515]">

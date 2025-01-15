@@ -1,3 +1,5 @@
+import { IUser } from "./user.types";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type IAppointment = {
   _id: string;
@@ -61,18 +63,11 @@ export interface IAppointmentGroupReservation {
 }
 
 export interface IAppointmentOneReservation {
-  first_name: string;
-  last_name: string;
+  user: IUser;
   email: string;
-  phone: string;
-  age: number;
   appointment: IAppointment;
-  street_address: string;
   voucher_applied: boolean;
-  city: string;
-  state: string;
   sport: string;
-  zip_code: string;
   trainer: {
     _id: string;
     first_name: string;

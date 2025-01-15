@@ -96,13 +96,14 @@ const DetailsMyFacilityReservationModal = ({
       >
         <Descriptions title="Client Info" bordered column={2}>
           <Descriptions.Item label="First Name">
-            {record?.first_name}
+            {record?.user?.first_name}
           </Descriptions.Item>
           <Descriptions.Item label="Last Name">
-            {record?.last_name}
+            {record?.user?.last_name}
           </Descriptions.Item>
-          <Descriptions.Item label="Phone">{record?.phone}</Descriptions.Item>
-          <Descriptions.Item label="Age">{record?.age}</Descriptions.Item>
+          <Descriptions.Item label="Phone">
+            {record?.user?.phone ? record?.user?.phone : "Not provided"}
+          </Descriptions.Item>
           <Descriptions.Item label="Email">{record?.email}</Descriptions.Item>
         </Descriptions>
 
@@ -120,17 +121,7 @@ const DetailsMyFacilityReservationModal = ({
             <Descriptions.Item label="Price">
               ${record?.facility?.price}
             </Descriptions.Item>
-            <Descriptions.Item label="Lanes">
-              <div className="flex gap-2 flex-wrap">
-                {record?.facility?.lanes.map((lane: string) => {
-                  return (
-                    <span className="bg-gray-100 px-2 py-1 rounded-md capitalize">
-                      {lane}
-                    </span>
-                  );
-                })}
-              </div>
-            </Descriptions.Item>
+
             <Descriptions.Item label="Description" span={2}>
               {record?.facility?.description}
             </Descriptions.Item>
@@ -138,19 +129,6 @@ const DetailsMyFacilityReservationModal = ({
         ) : (
           <div className="text-base font-medium">Facility info not found</div>
         )}
-
-        <Divider />
-
-        <Descriptions title="Address" bordered column={2}>
-          <Descriptions.Item label="Street Address">
-            {record?.street_address}
-          </Descriptions.Item>
-          <Descriptions.Item label="City">{record?.city}</Descriptions.Item>
-          <Descriptions.Item label="State">{record?.state}</Descriptions.Item>
-          <Descriptions.Item label="Zip Code">
-            {record?.zip_code}
-          </Descriptions.Item>
-        </Descriptions>
 
         <Divider />
 

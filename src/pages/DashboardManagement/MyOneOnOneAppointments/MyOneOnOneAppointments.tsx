@@ -119,8 +119,7 @@ const MyOneOnOneAppointments = () => {
     },
     {
       fixed: "right",
-
-      width: 60,
+      width: 90,
       align: "center",
       title: "Details",
       dataIndex: "_id",
