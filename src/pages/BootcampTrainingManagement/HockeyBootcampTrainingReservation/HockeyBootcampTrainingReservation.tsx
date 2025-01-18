@@ -4,7 +4,7 @@ import Container from "../../../components/Container";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button, Checkbox, Descriptions, Form, Input } from "antd";
-import moment from "moment";
+import moment from "moment-timezone";
 import Swal from "sweetalert2";
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
 import TermsCondition from "../../../components/TermsCondition";
@@ -23,7 +23,13 @@ const HockeyBootcampTrainingReservation = () => {
   const [use, { data, isLoading, isError, error, isSuccess }] =
     useVoucherMutation();
 
-  const price = state.data.price;
+  useEffect(() => {
+    if (!state?.data) {
+      navigate("/programs/bootcamp-training/hockey");
+    }
+  }, [state]);
+
+  const price = state?.data.price;
   let totalPrice = 0;
 
   if (data) {
@@ -42,7 +48,7 @@ const HockeyBootcampTrainingReservation = () => {
     const payload = {
       user: user?._id,
       email: user?.email,
-      trainer: state.trainer?._id,
+      trainer: state?.trainer?._id,
       course: id,
       voucher_applied: voucherApplied,
       sport: state?.sport,
@@ -125,31 +131,31 @@ const HockeyBootcampTrainingReservation = () => {
                   label="Bootcamp"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {state.data.course_name}
+                  {state?.data.course_name}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="Trainer"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {state.trainer?.first_name} {state.trainer?.last_name}
+                  {state?.trainer?.first_name} {state?.trainer?.last_name}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="Start Date"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {moment(state.date?.start_date).format("dddd MMMM Do YYYY")}
+                  {moment(state?.date?.start_date).format("dddd MMMM Do YYYY")}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="End Date"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {moment(state.date?.end_date).format("dddd MMMM Do YYYY")}
+                  {moment(state?.date?.end_date).format("dddd MMMM Do YYYY")}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="Sport"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {state.data.sport}
+                  {state?.data.sport}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="Start Time"

@@ -11,7 +11,6 @@ import RouteBlocker from "../../utils/RouteBlocker";
 
 const OneOnOneAppointmentPayment = () => {
   const { state } = useLocation();
-  const { amount, data, location } = state;
   const user = useSelector(selectCurrentUser);
   const [transactionId, setTransactionId] = useState("");
   const navigate = useNavigate();
@@ -19,6 +18,13 @@ const OneOnOneAppointmentPayment = () => {
   const blocker = useBlocker(block);
   const [create, { data: createData, isError, isLoading, isSuccess, error }] =
     useCreateAppointmentOneOnOneReservationMutation();
+
+  useEffect(() => {
+    if (!state?.amount || !state?.data) {
+      navigate("/programs/one-training");
+    }
+  }, [state]);
+
   useEffect(() => {
     if (isSuccess) {
       Swal.fire({
@@ -28,7 +34,7 @@ const OneOnOneAppointmentPayment = () => {
         iconColor: "#0ABAC3",
         confirmButtonColor: "#0ABAC3",
       });
-      navigate(location);
+      navigate(state?.location || "/");
     }
     if (isError) {
       Swal.fire({
@@ -41,12 +47,12 @@ const OneOnOneAppointmentPayment = () => {
   }, [isSuccess, isError, error]);
   const onSubmit = () => {
     const payload = {
-      appointment_data: { ...data },
+      appointment_data: { ...state?.data },
       payment_info: {
         transaction_id: transactionId,
         email: user?.email,
-        amount: amount,
-        trainer: data?.trainer,
+        amount: state?.amount,
+        trainer: state?.data?.trainer,
       },
     };
     create({ id: user?._id, payload });
@@ -54,11 +60,11 @@ const OneOnOneAppointmentPayment = () => {
   };
   return (
     <div className="min-h-svh py-16 flex justify-center items-center">
-      {amount && data && location && (
+      {state?.amount && state?.data && location && (
         <Checkout
           setTransactionId={setTransactionId}
           isLoading={isLoading}
-          amount={amount}
+          amount={state?.amount}
           onSubmit={onSubmit}
         />
       )}

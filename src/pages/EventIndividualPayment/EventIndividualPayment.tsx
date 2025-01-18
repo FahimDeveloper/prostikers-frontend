@@ -13,9 +13,15 @@ const EventIndividualPayment = () => {
   const [transactionId, setTransactionId] = useState("");
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
-  const { amount, data, location } = state;
   const [create, { data: createData, isError, isLoading, isSuccess, error }] =
     useCreateIndividualEventReservationMutation();
+
+  useEffect(() => {
+    if (!state?.amount || !state?.data) {
+      navigate("/programs/tournaments/individual");
+    }
+  }, [state]);
+
   useEffect(() => {
     if (isSuccess) {
       Swal.fire({
@@ -25,7 +31,7 @@ const EventIndividualPayment = () => {
         confirmButtonColor: "#0ABAC3",
         iconColor: "#0ABAC3",
       });
-      navigate(location);
+      navigate(state?.location || "/");
     }
     if (isError) {
       Swal.fire({
@@ -38,22 +44,22 @@ const EventIndividualPayment = () => {
   }, [isSuccess, isError, error]);
   const onSubmit = () => {
     const payload = {
-      event_data: { ...data },
+      event_data: { ...state?.data },
       payment_info: {
         transaction_id: transactionId,
         email: user?.email,
-        amount: amount,
+        amount: state?.amount,
       },
     };
     create(payload);
   };
   return (
     <div className="min-h-svh py-16 flex justify-center items-center">
-      {amount && data && location && (
+      {state?.amount && state?.data && state?.location && (
         <Checkout
           setTransactionId={setTransactionId}
           isLoading={isLoading}
-          amount={amount}
+          amount={state?.amount}
           onSubmit={onSubmit}
         />
       )}

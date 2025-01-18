@@ -4,7 +4,7 @@ import Container from "../../../components/Container";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button, Checkbox, Descriptions, Form, Input } from "antd";
-import moment from "moment";
+import moment from "moment-timezone";
 import Swal from "sweetalert2";
 import { useVoucherMutation } from "../../../redux/features/voucher/voucherApi";
 import TermsCondition from "../../../components/TermsCondition";
@@ -23,7 +23,13 @@ const BaseBallBootcampTrainingReservation = () => {
   const [use, { data, isLoading, isError, error, isSuccess }] =
     useVoucherMutation();
 
-  const price = state?.data?.price;
+  useEffect(() => {
+    if (!state?.data) {
+      navigate("/programs/bootcamp-training/baseball");
+    }
+  }, [state]);
+
+  const price = state?.data?.price || 0;
   let totalPrice = 0;
 
   if (data) {

@@ -9,11 +9,17 @@ import Checkout from "../../components/Checkout";
 const BundleCagePayment = () => {
   const { state } = useLocation();
   const [transactionId, setTransactionId] = useState("");
-  const { amount, data } = state;
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const [create, { data: createData, isError, isLoading, isSuccess, error }] =
     usePurchaseCreditPackMutation();
+
+  useEffect(() => {
+    if (!state?.amount || !state?.data) {
+      navigate("/");
+    }
+  }, [state]);
+
   useEffect(() => {
     if (isSuccess) {
       Swal.fire({
@@ -35,6 +41,7 @@ const BundleCagePayment = () => {
     }
   }, [isSuccess, isError]);
   const onSubmit = () => {
+    const { amount, data } = state;
     const validity = new Date();
     validity.setMonth(validity.getMonth() + 6);
     data.validity = validity.toISOString();
@@ -50,11 +57,11 @@ const BundleCagePayment = () => {
   };
   return (
     <div className="min-h-svh py-16 flex justify-center items-center">
-      {amount && data && location && (
+      {state?.amount && state?.data && (
         <Checkout
           setTransactionId={setTransactionId}
           isLoading={isLoading}
-          amount={amount}
+          amount={state?.amount}
           onSubmit={onSubmit}
         />
       )}

@@ -17,13 +17,19 @@ const JoinAsTeamRegistration = () => {
   const [form] = useForm();
   const { state } = useLocation();
   const user = useAppSelector(selectCurrentUser);
-  const location = state.from.pathname || "/";
+  const location = state?.from.pathname || "/";
   const navigate = useNavigate();
   const [voucherApplied, setVoucherApplied] = useState(false);
   const [use, { data, isLoading, isError, error, isSuccess }] =
     useVoucherMutation();
 
-  const price = state.data.price;
+  useEffect(() => {
+    if (!state?.data) {
+      navigate("/programs/tournaments/group");
+    }
+  }, [state]);
+
+  const price = state?.data.price;
   let totalPrice = 0;
 
   if (data) {
@@ -49,7 +55,7 @@ const JoinAsTeamRegistration = () => {
     values.voucher_applied = voucherApplied;
     values.user = user?._id;
     values.email = user?.email;
-    values.sport = state.sport;
+    values.sport = state?.sport;
     navigate("/tournament-group-payment", {
       state: { data: values, location: location, amount: totalPrice },
     });
@@ -127,25 +133,25 @@ const JoinAsTeamRegistration = () => {
                   label="Tournament"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {state.data.event_name}
+                  {state?.data.event_name}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="Start Date"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {moment(state.data.start_date).format("dddd MMMM Do YYYY")}
+                  {moment(state?.data.start_date).format("dddd MMMM Do YYYY")}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="End Date"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {moment(state.data.end_date).format("dddd MMMM Do YYYY")}
+                  {moment(state?.data.end_date).format("dddd MMMM Do YYYY")}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="Sport"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {state.data.sport}
+                  {state?.data.sport}
                 </Descriptions.Item>
               </Descriptions>
             </div>

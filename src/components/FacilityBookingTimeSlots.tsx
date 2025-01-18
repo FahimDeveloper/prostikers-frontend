@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
@@ -90,7 +88,9 @@ const FacilityBookingTimeSlots = ({
       setTimeSlot(value);
       setSlotIndex(index);
       create({
-        id: `${training._id}${date}${value.split(" ").join("")}${lane}`,
+        id: `${training._id}${date}${value.split(" ").join("")}${lane
+          ?.split(" ")
+          .join("+")}`,
         user: user?._id,
         date,
         time_slot: value,

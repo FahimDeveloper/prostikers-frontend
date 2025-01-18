@@ -11,11 +11,17 @@ import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 const KidsTrainingPayment = () => {
   const { state } = useLocation();
   const [transactionId, setTransactionId] = useState("");
-  const { amount, data, location } = state;
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const [create, { data: createData, isError, isLoading, isSuccess, error }] =
     useCreateClassReservationMutation();
+
+  useEffect(() => {
+    if (!state?.amount || !state?.data) {
+      navigate("/programs/kids-training");
+    }
+  }, [state]);
+
   useEffect(() => {
     if (isSuccess) {
       Swal.fire({
@@ -25,7 +31,7 @@ const KidsTrainingPayment = () => {
         iconColor: "#0ABAC3",
         confirmButtonColor: "#0ABAC3",
       });
-      navigate(location);
+      navigate(state?.location || "/");
     }
     if (isError) {
       Swal.fire({
@@ -38,23 +44,23 @@ const KidsTrainingPayment = () => {
   }, [isSuccess, isError, error]);
   const onSubmit = () => {
     const payload = {
-      class_data: { ...data },
+      class_data: { ...state?.data },
       payment_info: {
         transaction_id: transactionId,
         email: user?.email,
-        amount: amount,
-        trainer: data?.trainer,
+        amount: state?.amount,
+        trainer: state?.data?.trainer,
       },
     };
     create(payload);
   };
   return (
     <div className="min-h-svh py-16 flex justify-center items-center">
-      {amount && data && location && (
+      {state?.amount && state?.data && state?.location && (
         <Checkout
           setTransactionId={setTransactionId}
           isLoading={isLoading}
-          amount={amount}
+          amount={state?.amount}
           onSubmit={onSubmit}
         />
       )}

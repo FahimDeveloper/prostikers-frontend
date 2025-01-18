@@ -11,11 +11,17 @@ import { useCreateMembershipMutation } from "../../redux/features/user/userApi";
 const MembershipPayment = () => {
   const { state } = useLocation();
   const [transactionId, setTransactionId] = useState("");
-  const { amount, data, month } = state;
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const [create, { data: createData, isError, isLoading, isSuccess, error }] =
     useCreateMembershipMutation();
+
+  useEffect(() => {
+    if (!state?.amount || !state?.data) {
+      navigate("/membership");
+    }
+  }, [state]);
+
   useEffect(() => {
     if (isSuccess) {
       Swal.fire({
@@ -25,7 +31,7 @@ const MembershipPayment = () => {
         iconColor: "#0ABAC3",
         confirmButtonColor: "#0ABAC3",
       });
-      navigate("/");
+      navigate("/membership");
     }
     if (isError) {
       Swal.fire({
@@ -37,6 +43,7 @@ const MembershipPayment = () => {
     }
   }, [isSuccess, isError]);
   const onSubmit = () => {
+    const { data, month, amount } = state;
     data.status = true;
     const issueDate = new Date();
     data.issue_date = issueDate.toISOString();
@@ -65,11 +72,11 @@ const MembershipPayment = () => {
   };
   return (
     <div className="min-h-svh py-16 flex justify-center items-center">
-      {amount && data && location && (
+      {state?.amount && state?.data && (
         <Checkout
           setTransactionId={setTransactionId}
           isLoading={isLoading}
-          amount={amount}
+          amount={state?.amount}
           onSubmit={onSubmit}
         />
       )}

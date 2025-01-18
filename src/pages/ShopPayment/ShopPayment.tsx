@@ -9,11 +9,17 @@ import { usePlaceOrderMutation } from "../../redux/features/order/orderApi";
 const ShopPayment = () => {
   const { state } = useLocation();
   const [transactionId, setTransactionId] = useState("");
-  const { amount, data } = state;
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const [create, { data: createData, isError, isLoading, isSuccess, error }] =
     usePlaceOrderMutation();
+
+  useEffect(() => {
+    if (!state?.amount || !state?.data) {
+      navigate("/shop");
+    }
+  }, [state]);
+
   useEffect(() => {
     if (isSuccess) {
       Swal.fire({
@@ -25,7 +31,7 @@ const ShopPayment = () => {
       });
       localStorage.removeItem("cart");
       window.dispatchEvent(new CustomEvent("cartUpdated"));
-      navigate("/");
+      navigate("/shop");
     }
     if (isError) {
       Swal.fire({
@@ -40,12 +46,12 @@ const ShopPayment = () => {
   }, [isSuccess, isError]);
   const onSubmit = () => {
     const payload = {
-      orders: [...data],
+      orders: [...state?.data],
       payment_info: {
         transaction_id: transactionId,
         user: user?._id,
         email: user?.email,
-        amount: amount,
+        amount: state?.amount,
         service: "shop",
       },
     };
@@ -53,11 +59,11 @@ const ShopPayment = () => {
   };
   return (
     <div className="min-h-svh py-16 flex justify-center items-center">
-      {amount && data && location && (
+      {state?.amount && state?.data && (
         <Checkout
           setTransactionId={setTransactionId}
           isLoading={isLoading}
-          amount={amount}
+          amount={state?.amount}
           onSubmit={onSubmit}
         />
       )}

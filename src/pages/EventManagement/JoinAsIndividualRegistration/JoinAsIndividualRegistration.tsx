@@ -23,7 +23,13 @@ const JoinAsIndividualRegistration = () => {
   const [use, { data, isLoading, isError, error, isSuccess }] =
     useVoucherMutation();
 
-  const price = state.data.price;
+  useEffect(() => {
+    if (!state?.data) {
+      navigate("/programs/tournaments/individual");
+    }
+  }, [state]);
+
+  const price = state?.data.price;
   let totalPrice = 0;
 
   if (data) {
@@ -123,25 +129,25 @@ const JoinAsIndividualRegistration = () => {
                   label="Tournament"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {state.data.event_name}
+                  {state?.data.event_name}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="Start Date"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {moment(state.data.start_date).format("dddd MMMM Do YYYY")}
+                  {moment(state?.data.start_date).format("dddd MMMM Do YYYY")}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="End Date"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {moment(state.data.end_date).format("dddd MMMM Do YYYY")}
+                  {moment(state?.data.end_date).format("dddd MMMM Do YYYY")}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="Sport"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {state.data.sport}
+                  {state?.data.sport}
                 </Descriptions.Item>
               </Descriptions>
             </div>

@@ -10,10 +10,16 @@ const GroupAppointmentPayment = () => {
   const { state } = useLocation();
   const [transactionId, setTransactionId] = useState("");
   const user = useSelector(selectCurrentUser);
-  const { amount, data, location } = state;
   const navigate = useNavigate();
   const [create, { data: createData, isError, isLoading, isSuccess, error }] =
     useCreateAppointmentGroupReservationMutation();
+
+  useEffect(() => {
+    if (!state?.amount || !state?.data) {
+      navigate("/programs/group-training");
+    }
+  }, [state]);
+
   useEffect(() => {
     if (isSuccess) {
       Swal.fire({
@@ -23,7 +29,7 @@ const GroupAppointmentPayment = () => {
         iconColor: "#0ABAC3",
         confirmButtonColor: "#0ABAC3",
       });
-      navigate(location);
+      navigate(state?.location || "/");
     }
     if (isError) {
       Swal.fire({
@@ -36,23 +42,23 @@ const GroupAppointmentPayment = () => {
   }, [isSuccess, isError, error]);
   const onSubmit = () => {
     const payload = {
-      appointment_data: { ...data },
+      appointment_data: { ...state?.data },
       payment_info: {
         transaction_id: transactionId,
-        trainer: data?.trainer,
+        trainer: state?.data?.trainer,
         email: user?.email,
-        amount: amount,
+        amount: state?.amount,
       },
     };
     create(payload);
   };
   return (
     <div className="min-h-svh py-16 flex justify-center items-center">
-      {amount && data && location && (
+      {state?.amount && state?.data && state?.location && (
         <Checkout
           setTransactionId={setTransactionId}
           isLoading={isLoading}
-          amount={amount}
+          amount={state?.amount}
           onSubmit={onSubmit}
         />
       )}

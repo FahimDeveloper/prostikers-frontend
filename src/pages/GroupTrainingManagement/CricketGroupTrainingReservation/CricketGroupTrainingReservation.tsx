@@ -25,7 +25,13 @@ const CricketGroupTrainingReservation = () => {
   const [use, { data, isLoading, isError, error, isSuccess }] =
     useVoucherMutation();
 
-  const price = state.data.price;
+  useEffect(() => {
+    if (!state?.data) {
+      navigate("/programs/group-training/cricket");
+    }
+  }, [state]);
+
+  const price = state?.data.price || 0;
   let totalPrice = 0;
 
   if (data) {
@@ -44,9 +50,9 @@ const CricketGroupTrainingReservation = () => {
     const payload = {
       user: user?._id,
       email: user?.email,
-      trainer: state.trainer?._id,
+      trainer: state?.trainer?._id,
       appointment: id,
-      appointment_date: state.date,
+      appointment_date: state?.date,
       voucher_applied: voucherApplied,
       sport: state?.sport,
     };
@@ -129,37 +135,37 @@ const CricketGroupTrainingReservation = () => {
                   label="Appointment"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {state.data.appointment_name}
+                  {state?.data.appointment_name}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="Trainer"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {state.trainer?.first_name} {state.trainer?.last_name}
+                  {state?.trainer?.first_name} {state?.trainer?.last_name}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="Training Date"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {moment(state.date).format("dddd MMMM Do YYYY")}
+                  {moment(state?.date).format("dddd MMMM Do YYYY")}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="Sport"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {state.data.sport}
+                  {state?.data.sport}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="Start Time"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {moment(state.data.schedules.start_time).format("h:mm a")}
+                  {moment(state?.data.schedules.start_time).format("h:mm a")}
                 </Descriptions.Item>
                 <Descriptions.Item
                   label="End Time"
                   className="!px-3 !py-5 sm:text-start text-center"
                 >
-                  {moment(state.data.schedules.end_time).format("h:mm a")}
+                  {moment(state?.data.schedules.end_time).format("h:mm a")}
                 </Descriptions.Item>
               </Descriptions>
             </div>

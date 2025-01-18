@@ -79,7 +79,7 @@ const RentalBooking = ({
       if (result.isConfirmed) {
         const slotId = `${facility?.results._id}${
           date.toISOString().split("T")[0]
-        }${slot.split(" ").join("")}${slot_lane}`;
+        }${slot.split(" ").join("")}${slot_lane.split(" ").join("+")}`;
         deleteSlot(slotId)
           .unwrap()
           .then(() => {

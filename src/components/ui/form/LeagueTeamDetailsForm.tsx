@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input, InputNumber } from "antd";
+import { Button, Checkbox, Form, Input } from "antd";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { useAppSelector } from "../../../hooks/useAppHooks";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
@@ -80,7 +80,7 @@ const LeagueTeamDetailsForm = ({
                   </div>
                   <div
                     key={key}
-                    className="grid xl:grid-cols-5 md:grid-cols-3 grid-cols-2 sm:gap-3 gap-2 items-center"
+                    className="grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 sm:gap-3 gap-2 items-center"
                   >
                     <Form.Item
                       className="m-0"
@@ -106,20 +106,6 @@ const LeagueTeamDetailsForm = ({
                       <Input
                         placeholder="Type here..."
                         className="w-full rounded-full"
-                      />
-                    </Form.Item>
-                    <Form.Item
-                      className="m-0"
-                      label="Age"
-                      {...restField}
-                      name={[name, "age"]}
-                      rules={[{ required: true, message: "Missing Age" }]}
-                    >
-                      <InputNumber
-                        placeholder="Type here..."
-                        className="w-full rounded-full"
-                        min={0}
-                        max={99}
                       />
                     </Form.Item>
                     <Form.Item
