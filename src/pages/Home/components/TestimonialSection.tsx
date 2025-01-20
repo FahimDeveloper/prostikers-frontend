@@ -13,10 +13,9 @@ const TestimonialSection = () => {
               Trusted by 50K Professionals
             </h2>
             <p className="text-[#929292] md:text-lg lg:leading-7 md:leading-6 leading-5 md:w-[700px] w-full mx-auto">
-              Join an esteemed network of over 50,000 professionals who trust
-              ProStrikers for their training needs. Our expert-recommended
-              programs and facilities are designed to help you achieve peak
-              performance.
+              We're proud to have earned the trust and support of our respective
+              clients. Explore their endorsements and discover why they
+              recommend us.
             </p>
           </div>
           {/* nice job reviews */}

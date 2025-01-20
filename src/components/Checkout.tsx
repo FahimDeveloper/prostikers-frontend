@@ -1,10 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Elements } from "@stripe/react-stripe-js";
 import Container from "./Container";
 import CheckoutForm from "./ui/form/CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
-import logo from "../assets/icons/logo.svg";
+import logo from "../assets/icons/login-logo.svg";
 import { useEffect, useState } from "react";
 import { usePaymentMutation } from "../redux/features/payment/paymentApi";
 import Swal from "sweetalert2";

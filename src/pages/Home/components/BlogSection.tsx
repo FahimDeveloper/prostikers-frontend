@@ -25,7 +25,9 @@ const BlogSection = () => {
                 the first to know about new training programs, expert tips, and
                 upcoming events. For even more content, follow us on Facebook,
                 Instagram, and YouTube to keep ahead of the game and stay
-                connected with all things ProStrikers.
+                connected with all things ProStrikers. For even more content,
+                follow us on Facebook, Instagram, and YouTube to keep ahead of
+                the game and stay connected with all things Prostrikers.
               </p>
             </div>
             <div className="space-y-10">

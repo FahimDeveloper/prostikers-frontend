@@ -1,6 +1,6 @@
 // import { HiOutlineUserCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import logo from "../../assets/icons/logo.svg";
+import logo from "../../assets/icons/login-logo.svg";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { Modal } from "antd";
 import { useState } from "react";

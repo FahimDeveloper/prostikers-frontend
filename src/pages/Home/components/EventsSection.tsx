@@ -16,13 +16,12 @@ const EventsSection = () => {
                 Mark Your Calendar
               </h4>
               <h2 className="lg:text-[56px] md:text-[45px] text-3xl font-semibold lg:leading-[67px] md:leading-[50px]">
-                Upcoming Events to Ignite Your Spirit
+                Upcoming Tournaments to Ignite Your Spirit
               </h2>
               <p className="text-[#929292] md:text-lg lg:leading-7 md:leading-6 leading-5 md:w-[700px] w-full mx-auto">
-                Energize your routine with our lineup of events! From elite
-                training camps to our vibrant sports festival, there’s always a
-                new challenge on the horizon. Sign up and showcase your skills,
-                or cheer on fellow athletes.
+                Boost your routine with our events! Join training camps and
+                tournaments. There's always a new challenge. Sign up & show your
+                skills.
               </p>
             </div>
             <div className="space-y-8">

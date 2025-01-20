@@ -126,9 +126,7 @@ const RentalBooking = ({
   };
 
   const totalPrice = selectSlots.reduce((total, facilitySlots) => {
-    if (selectSlots.length > 1) {
-      return total + facilitySlots.slots.length * facility?.results?.price;
-    } else if (facilitySlots.slots.length > 1) {
+    if (facilitySlots.slots.length > 1) {
       return total + facilitySlots.slots.length * facility?.results?.price;
     } else {
       return total + facilitySlots.slots.length * facility?.results?.ini_price;

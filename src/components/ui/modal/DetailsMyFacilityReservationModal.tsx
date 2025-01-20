@@ -12,24 +12,28 @@ const DetailsMyFacilityReservationModal = ({
 }) => {
   const [open, setModalOpen] = useState(false);
 
-  const bookingColumns = [
+  const bookingColumns: ColumnsType<any> = [
     {
+      align: "center",
       title: "Date",
       dataIndex: "date",
       key: "date",
       render: (text: string) => moment(text).format("dddd, MMMM Do YYYY"),
     },
     {
+      align: "center",
       title: "Lane",
       dataIndex: "lane",
       key: "lane",
     },
     {
+      align: "center",
       title: "Time Slot",
       dataIndex: "time_slot",
       key: "time_slot",
     },
     {
+      align: "center",
       title: "Status",
       dataIndex: "date",
       key: "date",
@@ -60,11 +64,13 @@ const DetailsMyFacilityReservationModal = ({
 
   const addonColumns: ColumnsType<IAddon> = [
     {
+      align: "center",
       title: "Addon Name",
       dataIndex: "name",
       key: "name",
     },
     {
+      align: "center",
       title: "Hours",
       dataIndex: "hours",
       key: "hours",
@@ -73,6 +79,7 @@ const DetailsMyFacilityReservationModal = ({
       ),
     },
     {
+      align: "center",
       title: "Image",
       dataIndex: "image",
       key: "image",
@@ -94,12 +101,12 @@ const DetailsMyFacilityReservationModal = ({
         onCancel={() => setModalOpen(false)}
         maskClosable={false}
       >
-        <Descriptions title="Client Info" bordered column={2}>
+        <Descriptions title="Client Info" bordered column={{ xl: 2, xs: 1 }}>
           <Descriptions.Item label="First Name">
             {record?.user?.first_name}
           </Descriptions.Item>
           <Descriptions.Item label="Last Name">
-            {record?.user?.last_name}
+            {record?.user?.last_name ? record?.user?.last_name : "Not provided"}
           </Descriptions.Item>
           <Descriptions.Item label="Phone">
             {record?.user?.phone ? record?.user?.phone : "Not provided"}
@@ -110,24 +117,35 @@ const DetailsMyFacilityReservationModal = ({
         <Divider />
 
         {record?.facility ? (
-          <Descriptions title="Facility Info" bordered column={2}>
-            <Descriptions.Item label="Facility Name">
+          <Descriptions
+            title="Facility Info"
+            bordered
+            column={{ xl: 2, xs: 1 }}
+          >
+            <Descriptions.Item label="Facility Name" span={1}>
               {record?.facility?.facility_name}
             </Descriptions.Item>
-            <Descriptions.Item label="Sport">{record?.sport}</Descriptions.Item>
-            <Descriptions.Item label="Duration">
-              {record?.facility?.duration} mins
-            </Descriptions.Item>
-            <Descriptions.Item label="Price">
-              ${record?.facility?.price}
-            </Descriptions.Item>
-
-            <Descriptions.Item label="Description" span={2}>
-              {record?.facility?.description}
+            <Descriptions.Item label="Sport" span={1}>
+              {record?.sport}
             </Descriptions.Item>
           </Descriptions>
         ) : (
           <div className="text-base font-medium">Facility info not found</div>
+        )}
+
+        <Divider />
+
+        {record?.payment ? (
+          <Descriptions title="Payment Info" bordered column={{ xl: 2, xs: 1 }}>
+            <Descriptions.Item label="Transaction ID" span={1}>
+              {record?.payment?.transaction_id}
+            </Descriptions.Item>
+            <Descriptions.Item label="Pay" span={1}>
+              ${record?.payment?.amount}
+            </Descriptions.Item>
+          </Descriptions>
+        ) : (
+          <div className="text-base font-medium">Payment info not found</div>
         )}
 
         <Divider />
@@ -138,6 +156,8 @@ const DetailsMyFacilityReservationModal = ({
           dataSource={record?.bookings}
           pagination={false}
           rowKey="date"
+          size="small"
+          scroll={{ x: 600 }}
         />
 
         <Divider />
@@ -148,6 +168,8 @@ const DetailsMyFacilityReservationModal = ({
             columns={addonColumns}
             dataSource={record?.addons}
             pagination={false}
+            size="small"
+            scroll={{ x: 600 }}
           />
         )}
       </Modal>

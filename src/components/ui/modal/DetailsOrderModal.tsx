@@ -24,7 +24,21 @@ const DetailsOrderModal = ({ record }: { record: TOrder }) => {
         maskClosable={false}
       >
         {/* Order Information */}
-        <Descriptions title="Order Information" bordered column={2}>
+        <Descriptions
+          title="Order Information"
+          bordered
+          column={{ xl: 2, xs: 1 }}
+          styles={{
+            label: {
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              width: "100px",
+              paddingLeft: "10px",
+              paddingRight: "10px",
+            },
+          }}
+        >
           <Descriptions.Item label="Order ID" span={2}>
             {record.order_id}
           </Descriptions.Item>
@@ -33,7 +47,7 @@ const DetailsOrderModal = ({ record }: { record: TOrder }) => {
           </Descriptions.Item>
           <Descriptions.Item label="Status">{record.status}</Descriptions.Item>
           <Descriptions.Item label="Total Price">
-            {record.total_price}
+            ${record.total_price}
           </Descriptions.Item>
           <Descriptions.Item label="Pickup point">
             {record.pickup_point}
@@ -48,7 +62,21 @@ const DetailsOrderModal = ({ record }: { record: TOrder }) => {
         <Divider />
 
         {/* Product Information */}
-        <Descriptions title="Product Information" bordered column={2}>
+        <Descriptions
+          title="Product Information"
+          bordered
+          column={{ xl: 2, xs: 1 }}
+          styles={{
+            label: {
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              width: "90px",
+              paddingLeft: "10px",
+              paddingRight: "10px",
+            },
+          }}
+        >
           <Descriptions.Item label="Name">
             {record.product.name}
           </Descriptions.Item>
@@ -99,13 +127,15 @@ const DetailsOrderModal = ({ record }: { record: TOrder }) => {
         <Descriptions
           title="Billing Address"
           bordered
-          column={2}
+          column={{ xl: 2, xs: 1 }}
           styles={{
             label: {
               whiteSpace: "nowrap",
               textOverflow: "ellipsis",
               overflow: "hidden",
-              width: "140px",
+              width: "120px",
+              paddingLeft: "10px",
+              paddingRight: "10px",
             },
           }}
         >

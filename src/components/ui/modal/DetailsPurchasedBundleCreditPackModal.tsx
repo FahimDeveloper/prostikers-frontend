@@ -116,6 +116,21 @@ const DetailsPurchasedBundleCreditPackModal = ({
 
         <Divider />
 
+        {record?.payment ? (
+          <Descriptions title="Payment Info" bordered column={2}>
+            <Descriptions.Item label="Transaction ID" span={1}>
+              {record?.payment?.transaction_id}
+            </Descriptions.Item>
+            <Descriptions.Item label="Pay" span={1}>
+              ${record?.payment?.amount}
+            </Descriptions.Item>
+          </Descriptions>
+        ) : (
+          <div className="text-base font-medium">Payment info not found</div>
+        )}
+
+        <Divider />
+
         <Table
           title={() => (
             <h3 className="text-base font-bold" style={{ margin: 0 }}>

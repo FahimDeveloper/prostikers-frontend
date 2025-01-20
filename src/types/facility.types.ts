@@ -27,6 +27,7 @@ export interface IFacilityReservation {
   sport: string;
   bookings: IFacilityBookings[];
   addons: IAddon[];
+  payment: any;
 }
 
 export interface IAddon {

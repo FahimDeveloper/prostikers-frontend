@@ -475,6 +475,13 @@ const MembershipCardSection = () => {
                             your team a unique and dynamic experience
                           </p>
                         </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Annual memberships require minimum commitment of 03
+                            months.
+                          </p>
+                        </li>
                       </ul>
                     </div>
                   </div>

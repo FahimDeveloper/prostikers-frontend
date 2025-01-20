@@ -10,7 +10,7 @@ const BookingSidebar = () => {
     <div className="lg:space-y-9 space-y-8 border border-solid border-gray-300 lg:p-5 p-4 rounded-2xl">
       <div className="space-y-5">
         <h3 className="font-semibold text-2xl leading-5 px-5 py-3 bg-[#F9FAFB] rounded-lg">
-          Informations
+          Information
         </h3>
         <ul className="list-none space-y-4">
           <li className="flex items-center gap-4">

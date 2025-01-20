@@ -7,6 +7,7 @@ export interface IBundleCreditPackResponse {
   attendance: Array<IAttendance>;
   piching_machine: boolean;
   active: boolean;
+  payment: any;
 }
 
 export interface IBundleCreditPackRequest {

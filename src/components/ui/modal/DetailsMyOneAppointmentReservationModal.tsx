@@ -3,6 +3,7 @@ import { IAppointmentOneReservation } from "../../../types/appointment.types";
 import { Button, Descriptions, Divider, Modal, Table } from "antd";
 import { collectDateStatus } from "../../../utils/collectDateStatus";
 import moment from "moment";
+import { ColumnsType } from "antd/es/table";
 
 const DetailsMyOneAppointmentReservationModal = ({
   record,
@@ -11,19 +12,22 @@ const DetailsMyOneAppointmentReservationModal = ({
 }) => {
   const [open, setModalOpen] = useState(false);
 
-  const bookingColumns = [
+  const bookingColumns: ColumnsType<any> = [
     {
+      align: "center",
       title: "Date",
       dataIndex: "date",
       key: "date",
       render: (text: string) => moment(text).format("dddd, MMMM Do YYYY"),
     },
     {
+      align: "center",
       title: "Time Slot",
       dataIndex: "time_slot",
       key: "time_slot",
     },
     {
+      align: "center",
       title: "Status",
       dataIndex: "date",
       key: "date",
@@ -65,7 +69,21 @@ const DetailsMyOneAppointmentReservationModal = ({
         onCancel={() => setModalOpen(false)}
         maskClosable={false}
       >
-        <Descriptions title="Client Info" bordered column={2}>
+        <Descriptions
+          title="Client Info"
+          bordered
+          column={{ xl: 2, xs: 1 }}
+          styles={{
+            label: {
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              width: "90px",
+              paddingLeft: "10px",
+              paddingRight: "10px",
+            },
+          }}
+        >
           <Descriptions.Item label="First Name">
             {record?.user?.first_name}
           </Descriptions.Item>
@@ -80,7 +98,21 @@ const DetailsMyOneAppointmentReservationModal = ({
 
         <Divider />
 
-        <Descriptions title="Appointment Info" bordered column={2}>
+        <Descriptions
+          title="Appointment Info"
+          bordered
+          column={{ xl: 2, xs: 1 }}
+          styles={{
+            label: {
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              width: "120px",
+              paddingLeft: "10px",
+              paddingRight: "10px",
+            },
+          }}
+        >
           <Descriptions.Item label="Appointment Name">
             {record?.appointment.appointment_name}
           </Descriptions.Item>
@@ -109,6 +141,8 @@ const DetailsMyOneAppointmentReservationModal = ({
           dataSource={record?.bookings}
           pagination={false}
           rowKey="date"
+          size="small"
+          scroll={{ x: 600 }}
         />
       </Modal>
     </>
