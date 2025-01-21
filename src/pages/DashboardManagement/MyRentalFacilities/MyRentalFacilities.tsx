@@ -9,6 +9,8 @@ import { useGetUserFacilityReservationsQuery } from "../../../redux/features/fac
 import { IFacilityReservation } from "../../../types/facility.types";
 import moment from "moment";
 import DetailsMyFacilityReservationModal from "../../../components/ui/modal/DetailsMyFacilityReservationModal";
+import PaymentSection from "../../../common/PaymentSection";
+import { useFacilityPaymentsQuery } from "../../../redux/features/payment/paymentApi";
 
 const MyRentalFacilities = () => {
   const user = useSelector(selectCurrentUser);
@@ -158,6 +160,10 @@ const MyRentalFacilities = () => {
         page={page}
         limit={limit}
         total={data?.count || 0}
+      />
+      <PaymentSection
+        paymentsHook={useFacilityPaymentsQuery}
+        title="Facility Resevation/Bundle Credit Payments"
       />
     </div>
   );

@@ -9,6 +9,8 @@ import { IAppointmentOneReservation } from "../../../types/appointment.types";
 import moment from "moment";
 import { Select } from "antd";
 import DetailsMyOneAppointmentReservationModal from "../../../components/ui/modal/DetailsMyOneAppointmentReservationModal";
+import PaymentSection from "../../../common/PaymentSection";
+import { useAppoinmentPaymentsQuery } from "../../../redux/features/payment/paymentApi";
 
 const MyOneOnOneAppointments = () => {
   const user = useSelector(selectCurrentUser);
@@ -212,6 +214,10 @@ const MyOneOnOneAppointments = () => {
         page={page}
         limit={limit}
         total={data?.count || 0}
+      />
+      <PaymentSection
+        paymentsHook={useAppoinmentPaymentsQuery}
+        title="Appointment Payments"
       />
     </div>
   );

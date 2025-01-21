@@ -11,6 +11,8 @@ import { IClassReservation } from "../../../types/class.types";
 import { collectTimeFromSchedule } from "../../../utils/collectTimeFromSchedule";
 import { collectDateStatus } from "../../../utils/collectDateStatus";
 import { collectTimeDuration } from "../../../utils/collectTimeDuration";
+import PaymentSection from "../../../common/PaymentSection";
+import { useClassPaymentsQuery } from "../../../redux/features/payment/paymentApi";
 
 const MyClasses = () => {
   const user = useSelector(selectCurrentUser);
@@ -247,6 +249,10 @@ const MyClasses = () => {
         page={page}
         limit={limit}
         total={data?.count || 0}
+      />
+      <PaymentSection
+        paymentsHook={useClassPaymentsQuery}
+        title="Class Payments"
       />
     </div>
   );

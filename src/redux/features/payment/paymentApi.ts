@@ -9,9 +9,51 @@ const paymentApi = paymentApiSlice.injectEndpoints({
         body,
       }),
     }),
-    paymentList: builder.query({
-      query: ({ id, params }) => ({
-        url: `/payments/${id}`,
+    facilityPayments: builder.query({
+      query: ({ email, params }) => ({
+        url: `/facility/payments/${email}`,
+        method: "GET",
+        params,
+      }),
+    }),
+    membershipPayments: builder.query({
+      query: ({ email, params }) => ({
+        url: `/membership/payments/${email}`,
+        method: "GET",
+        params,
+      }),
+    }),
+    shopPayments: builder.query({
+      query: ({ email, params }) => ({
+        url: `/shop/payments/${email}`,
+        method: "GET",
+        params,
+      }),
+    }),
+    tournamentPayments: builder.query({
+      query: ({ email, params }) => ({
+        url: `/tournament/payments/${email}`,
+        method: "GET",
+        params,
+      }),
+    }),
+    classPayments: builder.query({
+      query: ({ email, params }) => ({
+        url: `/class/payments/${email}`,
+        method: "GET",
+        params,
+      }),
+    }),
+    bootcampPayments: builder.query({
+      query: ({ email, params }) => ({
+        url: `/bootcamp/payments/${email}`,
+        method: "GET",
+        params,
+      }),
+    }),
+    appoinmentPayments: builder.query({
+      query: ({ email, params }) => ({
+        url: `/appointment/payments/${email}`,
         method: "GET",
         params,
       }),
@@ -19,4 +61,13 @@ const paymentApi = paymentApiSlice.injectEndpoints({
   }),
 });
 
-export const { usePaymentMutation, usePaymentListQuery } = paymentApi;
+export const {
+  usePaymentMutation,
+  useAppoinmentPaymentsQuery,
+  useBootcampPaymentsQuery,
+  useClassPaymentsQuery,
+  useFacilityPaymentsQuery,
+  useMembershipPaymentsQuery,
+  useShopPaymentsQuery,
+  useTournamentPaymentsQuery,
+} = paymentApi;

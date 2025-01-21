@@ -9,6 +9,8 @@ import { ColumnsType } from "antd/es/table";
 import { IEventIndividualReservation } from "../../../types/event.types";
 import { collectDateStatus } from "../../../utils/collectDateStatus";
 import moment from "moment";
+import PaymentSection from "../../../common/PaymentSection";
+import { useTournamentPaymentsQuery } from "../../../redux/features/payment/paymentApi";
 
 const MyIndividualEvents = () => {
   const user = useSelector(selectCurrentUser);
@@ -238,6 +240,10 @@ const MyIndividualEvents = () => {
         page={page}
         limit={limit}
         total={data?.count || 0}
+      />
+      <PaymentSection
+        paymentsHook={useTournamentPaymentsQuery}
+        title="Tournament Payments"
       />
     </div>
   );

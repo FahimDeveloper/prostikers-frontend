@@ -11,6 +11,8 @@ import moment from "moment";
 import { collectTimeFromSchedule } from "../../../utils/collectTimeFromSchedule";
 import { collectTimeDuration } from "../../../utils/collectTimeDuration";
 import { Select } from "antd";
+import PaymentSection from "../../../common/PaymentSection";
+import { useAppoinmentPaymentsQuery } from "../../../redux/features/payment/paymentApi";
 
 const MyGroupAppointments = () => {
   const user = useSelector(selectCurrentUser);
@@ -273,6 +275,10 @@ const MyGroupAppointments = () => {
         page={page}
         limit={limit}
         total={data?.count || 0}
+      />
+      <PaymentSection
+        paymentsHook={useAppoinmentPaymentsQuery}
+        title="Appointment Payments"
       />
     </div>
   );

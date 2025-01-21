@@ -10,6 +10,8 @@ import { collectDateStatus } from "../../../utils/collectDateStatus";
 import moment from "moment";
 import { collectTimeDuration } from "../../../utils/collectTimeDuration";
 import { Select } from "antd";
+import PaymentSection from "../../../common/PaymentSection";
+import { useBootcampPaymentsQuery } from "../../../redux/features/payment/paymentApi";
 
 const MyBootcamps = () => {
   const user = useSelector(selectCurrentUser);
@@ -283,6 +285,10 @@ const MyBootcamps = () => {
         page={page}
         limit={limit}
         total={data?.count || 0}
+      />
+      <PaymentSection
+        paymentsHook={useBootcampPaymentsQuery}
+        title="Bootcamp Payments"
       />
     </div>
   );
