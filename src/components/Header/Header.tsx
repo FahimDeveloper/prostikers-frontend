@@ -95,7 +95,7 @@ const Header = () => {
           </div>
 
           <div className="flex gap-5 lg:hidden">
-            {/* <IoCartOutline className="size-7" /> */}
+            <Cart />
             <HiOutlineBars3BottomRight
               className="size-7"
               onClick={() => setOpen(true)}
