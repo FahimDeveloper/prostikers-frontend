@@ -11,6 +11,8 @@ import DataTable from "../../../common/DataTable";
 import DataPagination from "../../../common/DataPagination";
 import { useAppSelector } from "../../../hooks/useAppHooks";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
+import PaymentSection from "../../../common/PaymentSection";
+import { useShopPaymentsQuery } from "../../../redux/features/payment/paymentApi";
 
 const MyShopOrders = () => {
   const [page, setPage] = useState(1);
@@ -178,7 +180,7 @@ const MyShopOrders = () => {
   };
 
   return (
-    <div className="space-y-5">
+    <div className="lg:pb-14 md:pb-12 pb-10 space-y-5">
       <div className="flex sm:flex-nowrap flex-wrap justify-between items-end">
         <div className="space-y-1">
           <h2 className="font-semibold text-nowrap text-[28px] leading-9 text-[#111827]">
@@ -235,6 +237,10 @@ const MyShopOrders = () => {
         page={page}
         limit={limit}
         total={data?.count || 0}
+      />
+      <PaymentSection
+        paymentsHook={useShopPaymentsQuery}
+        title="Shop Payments"
       />
     </div>
   );

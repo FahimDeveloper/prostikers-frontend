@@ -9,6 +9,8 @@ import { useGetUserGroupEventReservationQuery } from "../../../redux/features/ev
 import { ColumnsType } from "antd/es/table";
 import { IEventTeamReservation } from "../../../types/event.types";
 import { collectDateStatus } from "../../../utils/collectDateStatus";
+import PaymentSection from "../../../common/PaymentSection";
+import { useTournamentPaymentsQuery } from "../../../redux/features/payment/paymentApi";
 
 const MyGroupEvents = () => {
   const user = useSelector(selectCurrentUser);
@@ -250,6 +252,10 @@ const MyGroupEvents = () => {
         page={page}
         limit={limit}
         total={data?.count || 0}
+      />
+      <PaymentSection
+        paymentsHook={useTournamentPaymentsQuery}
+        title="Tournament Payments"
       />
     </div>
   );

@@ -9,6 +9,8 @@ import { IBundleCreditPackResponse } from "../../../types/bundle-package.types";
 import moment from "moment";
 import { Select } from "antd";
 import DetailsPurchasedBundleCreditPackModal from "../../../components/ui/modal/DetailsPurchasedBundleCreditPackModal";
+import PaymentSection from "../../../common/PaymentSection";
+import { useFacilityPaymentsQuery } from "../../../redux/features/payment/paymentApi";
 
 const MyBundleCreditPacks = () => {
   const user = useSelector(selectCurrentUser);
@@ -220,6 +222,10 @@ const MyBundleCreditPacks = () => {
         page={page}
         limit={limit}
         total={data?.count || 0}
+      />
+      <PaymentSection
+        paymentsHook={useFacilityPaymentsQuery}
+        title="Facility Resevation/Bundle Credit Payments"
       />
     </div>
   );
