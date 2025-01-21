@@ -62,10 +62,8 @@ const MembershipPayment = () => {
       membership: { ...data },
       payment_info: {
         transaction_id: transactionId,
-        user: user?._id,
         email: user?.email,
         amount: amount,
-        service: "membership",
       },
     };
     create({ id: user?._id, payload: payload });
