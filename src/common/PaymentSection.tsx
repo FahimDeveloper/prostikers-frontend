@@ -1,6 +1,6 @@
 import { ColumnsType } from "antd/es/table";
 import Paragraph from "antd/es/typography/Paragraph";
-import moment from "moment";
+import moment from "moment-timezone";
 import { useState } from "react";
 import DataTable from "./DataTable";
 import DataPagination from "./DataPagination";
@@ -76,7 +76,7 @@ const PaymentSection = ({
       key: "createdAt",
       render: (text) => (
         <p className="font-medium text-sm leading-5 text-[#151515]">
-          {moment(text).format("MMMM ddd Do YYYY")}
+          {moment(text).tz("Los_Angeles").format("MMMM Do YYYY")}
         </p>
       ),
     },
