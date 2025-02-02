@@ -76,7 +76,7 @@ const PaymentSection = ({
       key: "createdAt",
       render: (text) => (
         <p className="font-medium text-sm leading-5 text-[#151515]">
-          {moment(text).tz("Los_Angeles").format("MMMM Do YYYY")}
+          {moment(text).tz("America/Los_Angeles").format("MMMM Do YYYY")}
         </p>
       ),
     },

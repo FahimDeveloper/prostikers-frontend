@@ -97,7 +97,7 @@ const Header = () => {
           <div className="flex gap-5 lg:hidden">
             <Cart />
             <HiOutlineBars3BottomRight
-              className="size-7"
+              className="size-7 cursor-pointer"
               onClick={() => setOpen(true)}
             />
             <Modal

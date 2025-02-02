@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Radio, RadioChangeEvent } from "antd";
+import { Modal } from "antd";
 import Container from "../../../components/Container";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { Link, Outlet } from "react-router-dom";
+import { useState } from "react";
+import { IoIosArrowForward } from "react-icons/io";
+import logo from "../../../assets/icons/login-logo.svg";
+import { AiOutlineBars } from "react-icons/ai";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [open, setOpen] = useState(false);
   const options = [
     {
       label: "Profile Info",
@@ -49,46 +51,43 @@ const Dashboard = () => {
       value: "/dashboard/my-team-tournaments",
     },
   ];
-  const onChange = ({ target: { value } }: RadioChangeEvent) => {
-    navigate(value);
-  };
-  const scrollRef = useRef<any | null>(null);
-  let isDown = false;
-  let startX: any;
-  let scrollLeft: any;
+  // const scrollRef = useRef<any | null>(null);
+  // let isDown = false;
+  // let startX: any;
+  // let scrollLeft: any;
 
-  const handleMouseDown = (e: { pageX: number }) => {
-    isDown = true;
-    scrollRef.current.classList.add("active");
-    startX = e.pageX - scrollRef.current.offsetLeft;
-    scrollLeft = scrollRef.current.scrollLeft;
-  };
+  // const handleMouseDown = (e: { pageX: number }) => {
+  //   isDown = true;
+  //   scrollRef.current.classList.add("active");
+  //   startX = e.pageX - scrollRef.current.offsetLeft;
+  //   scrollLeft = scrollRef.current.scrollLeft;
+  // };
 
-  const handleMouseLeave = () => {
-    isDown = false;
-    scrollRef.current.classList.remove("active");
-  };
+  // const handleMouseLeave = () => {
+  //   isDown = false;
+  //   scrollRef.current.classList.remove("active");
+  // };
 
-  const handleMouseUp = () => {
-    isDown = false;
-    scrollRef.current.classList.remove("active");
-  };
+  // const handleMouseUp = () => {
+  //   isDown = false;
+  //   scrollRef.current.classList.remove("active");
+  // };
 
-  const handleMouseMove = (e: {
-    preventDefault: () => void;
-    pageX: number;
-  }) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 2;
-    scrollRef.current.scrollLeft = scrollLeft - walk;
-  };
+  // const handleMouseMove = (e: {
+  //   preventDefault: () => void;
+  //   pageX: number;
+  // }) => {
+  //   if (!isDown) return;
+  //   e.preventDefault();
+  //   const x = e.pageX - scrollRef.current.offsetLeft;
+  //   const walk = (x - startX) * 2;
+  //   scrollRef.current.scrollLeft = scrollLeft - walk;
+  // };
   return (
-    <div className="min-h-svh mt-32">
+    <div className="min-h-svh mt-28">
       <Container>
-        <div className="space-y-10">
-          <div
+        <div className="space-y-5">
+          {/* <div
             ref={scrollRef}
             onMouseDown={handleMouseDown}
             onMouseLeave={handleMouseLeave}
@@ -104,6 +103,43 @@ const Dashboard = () => {
               buttonStyle="solid"
               size="large"
             />
+          </div> */}
+          <div className="flex gap-5 justify-end">
+            <AiOutlineBars
+              className="size-7 me-5 cursor-pointer"
+              onClick={() => setOpen(true)}
+            />
+            <Modal
+              footer={false}
+              width={400}
+              open={open}
+              onCancel={() => setOpen(false)}
+            >
+              <Link to="/" onClick={() => setOpen(false)}>
+                <img loading="lazy" src={logo} className="w-24" alt="logo" />
+              </Link>
+              <nav className="py-5">
+                <ul className="list-none flex flex-col gap-2 text-lg font-medium">
+                  {options.map((option) => {
+                    return (
+                      <li
+                        key={option.value}
+                        className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3"
+                      >
+                        <Link
+                          onClick={() => setOpen(false)}
+                          to={option.value}
+                          className="no-underline text-[#1C1C1C] flex justify-between items-center"
+                        >
+                          {option.label}
+                          <IoIosArrowForward className="size-4" />
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+            </Modal>
           </div>
           <div>
             <Outlet />

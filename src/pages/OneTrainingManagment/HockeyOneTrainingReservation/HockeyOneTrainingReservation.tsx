@@ -31,8 +31,16 @@ import { useAppSelector } from "../../../hooks/useAppHooks";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import TermsCondition from "../../../components/TermsCondition";
 import PrivacyPolicy from "../../../components/PrivacyPolicy";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
 const HockeyOneTrainingReservation = () => {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+  const [activeDate, setActiveDate] = useState(
+    dayjs().tz("America/Los_Angeles")
+  );
   const { id } = useParams();
   const navigate = useNavigate();
   const [agree, setAgree] = useState(false);
@@ -42,7 +50,6 @@ const HockeyOneTrainingReservation = () => {
   const [use, { data, isLoading, isError, error, isSuccess }] =
     useVoucherMutation();
   const [deleteSlot] = useDeleteBookingSlotMutation();
-  const [activeDate, setActiveDate] = useState(new Date());
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = useForm();
@@ -227,7 +234,7 @@ const HockeyOneTrainingReservation = () => {
           </div>
           <div className="space-y-2">
             <p className="text-lg text-[#07133D] font-medium text-center">
-              {activeDate.toLocaleDateString("en-US", { month: "long" })}
+              {activeDate.format("MMMM")}
             </p>
             <DateSlider activeDate={activeDate} setActiveDate={setActiveDate} />
           </div>
