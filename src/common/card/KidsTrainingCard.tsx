@@ -13,6 +13,7 @@ import { collectTimeDuration } from "../../utils/collectTimeDuration";
 import { FaUserGraduate } from "react-icons/fa";
 import { CiBadgeDollar } from "react-icons/ci";
 import { Button } from "antd";
+import { Dayjs } from "dayjs";
 
 const KidsTrainingCard = ({
   image,
@@ -21,7 +22,7 @@ const KidsTrainingCard = ({
 }: {
   image: any;
   data: any;
-  activeDate: Date;
+  activeDate: Dayjs;
 }) => {
   const user = useSelector(selectCurrentUser);
   const location = useLocation();

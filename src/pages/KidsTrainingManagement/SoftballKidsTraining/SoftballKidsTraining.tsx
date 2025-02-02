@@ -15,11 +15,18 @@ import { useTrainersQuery } from "../../../redux/features/tainer/trainerApi";
 import { useClassesQuery } from "../../../redux/features/class/classApi";
 import KidsTrainingCard from "../../../common/card/KidsTrainingCard";
 import { ImSpinner } from "react-icons/im";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
 const SoftballKidsTraining = () => {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+  const [activeDate, setActiveDate] = useState(
+    dayjs().tz("America/Los_Angeles")
+  );
   const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   const [trainer, setTrainer] = useState<string | undefined>(undefined);
-  const [activeDate, setActiveDate] = useState(new Date());
   const { data: trainerData } = useTrainersQuery(undefined);
   const { data: classes, isFetching } = useClassesQuery({
     trainer,
@@ -91,10 +98,7 @@ const SoftballKidsTraining = () => {
             </div>
             <div className="space-y-2">
               <p className="text-lg text-[#07133D] font-medium text-center">
-                {activeDate.toLocaleDateString("en-US", {
-                  month: "long",
-                  year: "numeric",
-                })}
+                {activeDate.format("MMMM")}
               </p>
               <DateSlider
                 activeDate={activeDate}
