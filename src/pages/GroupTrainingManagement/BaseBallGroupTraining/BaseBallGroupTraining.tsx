@@ -15,11 +15,18 @@ import { useGroupAppointmentsQuery } from "../../../redux/features/appointment/a
 import DateSlider from "../../../components/DateSlider";
 import AppointmentGroupCard from "../../../common/card/AppointmentGroupCard";
 import { ImSpinner } from "react-icons/im";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
 const BaseBallGroupTraining = () => {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+  const [activeDate, setActiveDate] = useState(
+    dayjs().tz("America/Los_Angeles")
+  );
   const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5];
   const [trainer, setTrainer] = useState<string | undefined>(undefined);
-  const [activeDate, setActiveDate] = useState(new Date());
   const { data: trainerData } = useTrainersQuery(undefined);
   const { data: appointments, isFetching } = useGroupAppointmentsQuery({
     trainer,
@@ -89,10 +96,7 @@ const BaseBallGroupTraining = () => {
             </div>
             <div className="space-y-2">
               <p className="text-lg text-[#07133D] font-medium text-center">
-                {activeDate.toLocaleDateString("en-US", {
-                  month: "long",
-                  year: "numeric",
-                })}
+                {activeDate.format("MMMM")}
               </p>
               <DateSlider
                 activeDate={activeDate}

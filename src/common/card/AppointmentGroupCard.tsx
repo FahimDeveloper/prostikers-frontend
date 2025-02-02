@@ -14,6 +14,7 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { collectTimeDuration } from "../../utils/collectTimeDuration";
 import moment from "moment";
 import { IAppointmentDetail } from "../../types/appointment.types";
+import { Dayjs } from "dayjs";
 
 const AppointmentGroupCard = ({
   image,
@@ -22,7 +23,7 @@ const AppointmentGroupCard = ({
 }: {
   image: any;
   data: IAppointmentDetail;
-  activeDate: Date;
+  activeDate: Dayjs;
 }) => {
   const user = useSelector(selectCurrentUser);
   const location = useLocation();
