@@ -23,6 +23,9 @@ import { ImSpinner } from "react-icons/im";
 import FacilityBookingTimeSlots from "../../../components/FacilityBookingTimeSlots";
 import { CiClock1 } from "react-icons/ci";
 import RouteBlocker from "../../../utils/RouteBlocker";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 const RentalBooking = ({
   facilityCage,
   setFacilityCage,
@@ -30,9 +33,13 @@ const RentalBooking = ({
   facilityCage: string | undefined;
   setFacilityCage: any;
 }) => {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
   const navigate = useNavigate();
   const [deleteSlot] = useDeleteBookingSlotMutation();
-  const [activeDate, setActiveDate] = useState(new Date());
+  const [activeDate, setActiveDate] = useState(
+    dayjs().tz("America/Los_Angeles")
+  );
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
   const [block, setBlock] = useState(false);
   const [process, setProcess] = useState(false);
@@ -246,7 +253,7 @@ const RentalBooking = ({
             </div>
             <div className="space-y-2">
               <p className="text-lg text-[#07133D] font-medium text-center">
-                {activeDate.toLocaleDateString("en-US", { month: "long" })}
+                {activeDate.format("MMMM")}
               </p>
               <DateSlider
                 activeDate={activeDate}

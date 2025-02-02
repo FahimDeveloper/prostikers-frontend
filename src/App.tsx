@@ -13,21 +13,16 @@ const App = () => {
   const user = useAppSelector(selectCurrentUser);
   const [visible, setVisible] = useState(false);
   const allProperties: (keyof IUser)[] = [
-    "_id",
     "first_name",
     "last_name",
     "image",
     "gender",
-    "email",
-    "role",
     "phone",
-    "provider",
     "street_address",
     "zip_code",
     "city",
     "state",
     "country",
-    "nationality",
     "date_of_birth",
   ];
   const show = sessionStorage.getItem("show");

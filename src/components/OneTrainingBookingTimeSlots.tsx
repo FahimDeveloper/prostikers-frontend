@@ -12,6 +12,9 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { collectBookingTimeSlots } from "../utils/collectBookingTimeSlots";
 import { message } from "antd";
+import dayjs, { Dayjs } from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
 const OneTrainingBookingTimeSlots = ({
   activeDate,
@@ -23,7 +26,7 @@ const OneTrainingBookingTimeSlots = ({
   slotsBookedQuery,
   setBlock,
 }: {
-  activeDate: Date;
+  activeDate: Dayjs;
   training: any;
   slotsCartQuery: any;
   slotsBookedQuery: any;
@@ -32,6 +35,8 @@ const OneTrainingBookingTimeSlots = ({
   setSelectSlots: any;
   setBlock: any;
 }) => {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
   const [create, { isLoading: createLoading, isSuccess, isError, error }] =
     addToCart;
   const { data: slotsCartData, isLoading: slotsCartLoading } = slotsCartQuery;
@@ -44,15 +49,13 @@ const OneTrainingBookingTimeSlots = ({
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const location = useLocation();
-  const date = new Date();
+  const date = dayjs().tz("America/Los_Angeles");
   const day = useMemo(() => {
-    if (activeDate.getMonth() > date.getMonth()) {
+    if (activeDate.month() < date.month()) {
       return;
     } else {
       return training?.schedules?.find(
-        (schedule: any) =>
-          schedule.day ===
-          activeDate.toLocaleDateString("en-US", { weekday: "long" })
+        (schedule: any) => schedule.day === dayjs(activeDate).format("dddd")
       );
     }
   }, [training, activeDate]);

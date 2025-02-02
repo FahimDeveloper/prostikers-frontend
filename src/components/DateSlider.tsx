@@ -1,13 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
+import dayjs, { Dayjs } from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 import { useState, useEffect } from "react";
+import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const DateSlider = ({
   activeDate,
   setActiveDate,
 }: {
-  activeDate: Date;
-  setActiveDate: any;
+  activeDate: Dayjs;
+  setActiveDate: (date: Dayjs) => void;
 }) => {
   const [dateCount, setDateCount] = useState(7);
   const [isPreviousDisabled, setIsPreviousDisabled] = useState(false);
@@ -26,50 +31,41 @@ const DateSlider = ({
 
     updateDateCount();
     window.addEventListener("resize", updateDateCount);
-
     return () => window.removeEventListener("resize", updateDateCount);
   }, []);
 
   useEffect(() => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    setIsPreviousDisabled(activeDate.toDateString() === today.toDateString());
+    const today = dayjs().tz("America/Los_Angeles").startOf("day");
+    setIsPreviousDisabled(activeDate.isSame(today, "day"));
   }, [activeDate]);
 
-  const getDayName = (date: Date) => {
-    return date.toLocaleDateString("en-US", { weekday: "short" });
+  const getDayName = (date: Dayjs) => {
+    return date.format("ddd"); // "Mon", "Tue", etc.
   };
 
   const getDates = () => {
-    const dates = [];
+    const dates: Dayjs[] = [];
     const half = Math.floor(dateCount / 2);
     for (let i = -half; i <= half; i++) {
-      const date = new Date(activeDate);
-      date.setDate(activeDate.getDate() + i);
-      dates.push(date);
+      dates.push(activeDate.add(i, "day"));
     }
     return dates;
   };
 
-  const handleSelect = (date: Date) => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (date >= today) {
+  const handleSelect = (date: Dayjs) => {
+    const today = dayjs().tz("America/Los_Angeles").startOf("day");
+    if (date.isAfter(today) || date.isSame(today, "day")) {
       setActiveDate(date);
     }
   };
 
   const handleNext = () => {
-    const newDate = new Date(activeDate);
-    newDate.setDate(activeDate.getDate() + 1);
-    setActiveDate(newDate);
+    setActiveDate(activeDate.add(1, "day"));
   };
 
   const handlePrevious = () => {
     if (!isPreviousDisabled) {
-      const newDate = new Date(activeDate);
-      newDate.setDate(activeDate.getDate() - 1);
-      setActiveDate(newDate);
+      setActiveDate(activeDate.subtract(1, "day"));
     }
   };
 
@@ -84,14 +80,14 @@ const DateSlider = ({
         onClick={handlePrevious}
       />
       {getDates().map((date, index) => {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const isPastDate = date < today;
+        const today = dayjs().tz("America/Los_Angeles").startOf("day");
+        const isPastDate = date.isBefore(today, "day");
+
         return (
           <div
             key={index}
             className={`text-center space-y-1 w-full py-2 px-4 rounded transition-all ${
-              date.toDateString() === activeDate.toDateString()
+              date.isSame(activeDate, "day")
                 ? "bg-primary text-[#EAFFFF]"
                 : isPastDate
                 ? "bg-[#EAFFFF] text-primary opacity-50 cursor-not-allowed"
@@ -100,8 +96,8 @@ const DateSlider = ({
             onClick={() => !isPastDate && handleSelect(date)}
           >
             <div className="text-sm font-medium">{getDayName(date)}</div>
-            <div className="md:text-xl sm:text-lg text-base font-extrabold ">
-              {date.getDate()}
+            <div className="md:text-xl sm:text-lg text-base font-extrabold">
+              {date.date()}
             </div>
           </div>
         );
