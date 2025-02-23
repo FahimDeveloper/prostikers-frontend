@@ -390,6 +390,9 @@ h6 {
 .cart-drawer .ant-drawer-body {
   @apply px-1 py-2;
 }
+.facility-payment .ant-modal-content {
+  @apply px-0;
+}
 
 .ql-editor ul {
   padding-left: 0 !important;
@@ -416,3 +419,13 @@ h6 {
   line-height: 1.7;
   color: #7e7e7e;
 }
+
+/* .ant-modal-close {
+  position: fixed !important;
+  top: 20px !important;
+  right: 15px !important;
+  z-index: 1100 !important;
+  background: #f1f1f1 !important;
+  padding: 5px;
+  border-radius: 50%;
+} */

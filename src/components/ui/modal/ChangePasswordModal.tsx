@@ -62,7 +62,6 @@ const ChangePasswordModal = () => {
         centered
         open={open}
         onCancel={() => setModalOpen(false)}
-        maskClosable={false}
       >
         <div className="my-5">
           <ChangePasswordForm

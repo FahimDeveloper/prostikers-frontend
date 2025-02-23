@@ -146,9 +146,6 @@ const CricketGroupTrainingReservation = LazyLoad(
 // const RentalMembership = LazyLoad(
 //   lazy(() => import("../pages/RentalMembership/RentalMembership"))
 // );
-const RentalBookingPage = LazyLoad(
-  lazy(() => import("../pages/RentalBookingPage/RentalBookingPage"))
-);
 const BaseballOneTrainingReservation = LazyLoad(
   lazy(
     () =>
@@ -201,9 +198,6 @@ const OneOnOneAppointmentPayment = LazyLoad(
     () =>
       import("../pages/OneOnOneAppointmentPayment/OneOnOneAppointmentPayment")
   )
-);
-const FacilityPayment = LazyLoad(
-  lazy(() => import("../pages/FacilityPayment/FacilityPayment"))
 );
 const EventGroupPayment = LazyLoad(
   lazy(() => import("../pages/EventGroupPayment/EventGroupPayment"))
@@ -604,14 +598,6 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/facility-payment",
-        element: (
-          <PrivetRoute>
-            <FacilityPayment />
-          </PrivetRoute>
-        ),
-      },
-      {
         path: "/tournament-group-payment",
         element: (
           <PrivetRoute>
@@ -731,14 +717,6 @@ export const router = createBrowserRouter([
       //     </PrivetRoute>
       //   ),
       // },
-      {
-        path: "/rental-booking",
-        element: (
-          <PrivetRoute>
-            <RentalBookingPage />
-          </PrivetRoute>
-        ),
-      },
       {
         path: "/about",
         element: <About />,

@@ -13,8 +13,6 @@ const RouteBlocker = ({ block, blocker }: { block: boolean; blocker: any }) => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       if (block) {
         event.preventDefault();
-      } else {
-        sessionStorage.removeItem("rental-facility-slots");
       }
     };
 
@@ -38,7 +36,6 @@ const RouteBlocker = ({ block, blocker }: { block: boolean; blocker: any }) => {
         if (result.isConfirmed) {
           deleteIt(user?._id);
           blocker.proceed();
-          sessionStorage.removeItem("rental-facility-slots");
         }
       });
     }

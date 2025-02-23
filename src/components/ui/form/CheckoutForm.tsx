@@ -83,7 +83,7 @@ export default function CheckoutForm({
     <form
       id="payment-form"
       onSubmit={handleSubmit}
-      className="md:w-[500] sm:w-96 w-[305px] sm:px-14 sm:py-8 p-5"
+      className="md:w-[500] sm:w-96 w-[275px] sm:px-14 sm:py-8 p-5"
     >
       <div className="text-center">
         <img src={stripe_logo} className="h-12" alt="stripe logo" />

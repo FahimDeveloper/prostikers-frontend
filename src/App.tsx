@@ -5,9 +5,10 @@ import Footer from "./components/Footer/Footer";
 import { useAppSelector } from "./hooks/useAppHooks";
 import { selectCurrentUser } from "./redux/features/auth/authSlice";
 import { useEffect, useState } from "react";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 import UpdateUserInfoModal from "./components/ui/modal/UpdateUserInfoModal";
 import { IUser } from "./types/user.types";
+import logo from "./assets/icons/logo.svg";
 
 const App = () => {
   const user = useAppSelector(selectCurrentUser);
@@ -18,18 +19,34 @@ const App = () => {
     "image",
     "gender",
     "phone",
-    "street_address",
-    "zip_code",
-    "city",
-    "state",
-    "country",
     "date_of_birth",
+    // "country",
+    // "zip_code",
+    // "city",
+    // "state",
+    // "street_address",
   ];
-  const show = sessionStorage.getItem("show");
+  // const show = sessionStorage.getItem("show");
+  // useEffect(() => {
+  //   if (user) {
+  //     const missingProperties = allProperties.filter((key) => !(key in user));
+  //     if (missingProperties.length > 0 && show !== "inActive") {
+  //       setVisible(true);
+  //     } else {
+  //       setVisible(false);
+  //     }
+  //   } else {
+  //     setVisible(false);
+  //   }
+  // }, [user, show]);
+  // const handleRemind = () => {
+  //   setVisible(false);
+  //   sessionStorage.setItem("show", "inActive");
+  // };
   useEffect(() => {
     if (user) {
       const missingProperties = allProperties.filter((key) => !(key in user));
-      if (missingProperties.length > 0 && show !== "inActive") {
+      if (missingProperties.length > 0) {
         setVisible(true);
       } else {
         setVisible(false);
@@ -37,11 +54,7 @@ const App = () => {
     } else {
       setVisible(false);
     }
-  }, [user, show]);
-  const handleRemind = () => {
-    setVisible(false);
-    sessionStorage.setItem("show", "inActive");
-  };
+  }, [user]);
   return (
     <>
       <ScrollRestoration />
@@ -54,18 +67,29 @@ const App = () => {
         open={visible}
         maskClosable={false}
         footer={[
-          <Button onClick={handleRemind}>Remind me later</Button>,
-          <UpdateUserInfoModal record={user} type="primary" />,
+          // <Button onClick={handleRemind}>Remind me later</Button>,
+          <div className="text-center">
+            <UpdateUserInfoModal record={user} type="primary" />
+          </div>,
         ]}
         onOk={() => setVisible(false)}
         onCancel={() => setVisible(false)}
       >
-        <div className="space-y-3">
-          <h3 className="text-xl text-center">Welcome To ProStrikers!</h3>
-          <p className="text-base text-gray-600 text-center">
-            We're excited to have you join our community! Please verify and
-            update your profile information to get the most out of ProStrikers.
-          </p>
+        <div className="space-y-3 text-center">
+          <img loading="lazy" src={logo} className="w-32" alt="logo" />
+          <h3 className="sm:text-xl text-lg">Welcome To ProStrikers!</h3>
+          {user?.verified ? (
+            <p className="sm:text-base text-sm text-gray-600">
+              We're excited to have you join our community! Please update your
+              profile information to get the most out of ProStrikers.
+            </p>
+          ) : (
+            <p className="sm:text-base text-sm text-gray-600">
+              We're excited to have you join our community! We have sent you a
+              verification email. Please complete your verification and update
+              your profile information to get the most out of ProStrikers.
+            </p>
+          )}
         </div>
       </Modal>
       {/* nice job reviews popup */}

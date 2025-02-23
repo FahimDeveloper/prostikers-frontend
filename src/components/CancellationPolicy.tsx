@@ -51,15 +51,42 @@ const CancellationPolicy = ({ children }: any) => {
               Same-Day Booking Cancellation Policy
             </h4>
             <p className="leading-5 font-medium">
-              <span className="font-bold">Full Refund: </span>Cancellations made
-              at least 4 hours before the booking time will result in a full
-              credit refund for both members and non-members.
-            </p>
-            <p className="leading-5 font-medium">
               <span className="font-bold">Unlimited Membership Fine: </span>
               Members with Unlimited Membership will incur a fine on their card
               if a booking is canceled.
             </p>
+            <p className="leading-5 font-medium">
+              <span className="font-bold">Full Refund: </span>Cancellations made
+              at least 4 hours before the booking time will result in a full
+              credit refund for both members and non-members.
+            </p>
+            <ul className="ms-4 space-y-2">
+              <li className="space-y-1">
+                <p className="leading-5 font-medium">
+                  Cancellation within 2 hours will be charged the full amount of
+                  the reservation.
+                </p>
+              </li>
+              <li className="space-y-1">
+                <p className="leading-5 font-medium">
+                  Between 2 to 4 hours members and non members will receive a
+                  refund 50% of the booking payment or membership credit.
+                </p>
+              </li>
+              <li className="space-y-1">
+                <p className="leading-5 font-medium">
+                  Cancellations made at least 4 hours before the booking time
+                  will result in a full credit refund for both members and
+                  non-members.
+                </p>
+              </li>
+              <li className="space-y-1">
+                <p className="leading-5 font-medium">
+                  This applies to all memberships excluding unlimited
+                  membership.
+                </p>
+              </li>
+            </ul>
           </div>
         </div>
       </Modal>

@@ -7,22 +7,6 @@ import GetInMap from "../pages/Contact/components/GetInMap";
 import GetInForm from "../pages/Contact/components/GetInForm";
 import { useNavigate } from "react-router-dom";
 
-// Swal.fire({
-//   title: `Membership Proccess $${price}`,
-//   text: `Are you want to be members of individual pro ${plan}?`,
-//   icon: "info",
-//   showCancelButton: true,
-//   confirmButtonColor: "#0EBBBC",
-//   cancelButtonColor: "#d33",
-//   confirmButtonText: "Yes",
-// }).then((result) => {
-//   if (result.isConfirmed) {
-//     navigate("/membership-payment", {
-//       state: { data: membershipData, amount: price },
-//     });
-//   }
-// });
-
 const MembershipCardSection = () => {
   const [plan, setPlan] = useState("monthly");
   const navigate = useNavigate();
@@ -86,8 +70,9 @@ const MembershipCardSection = () => {
       });
     }
   };
+
   return (
-    <div id="membership" className="bg-[#F9FBFF]">
+    <div className="bg-[#F9FBFF]">
       <Container>
         <div className="lg:py-14 md:py-12 py-10 mt-10 space-y-10">
           <div className="space-y-4 mx-auto text-center">

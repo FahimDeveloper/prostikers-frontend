@@ -1,31 +1,23 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */ import {
-  Button,
-  message,
-  Radio,
-  Select,
-} from "antd";
+import { Radio, Select } from "antd";
 import { useEffect, useState } from "react";
 import DateSlider from "../../../components/DateSlider";
 import { useRentalFacilityQuery } from "../../../redux/features/facility/facilityApi";
-import moment from "moment";
-import { IoCalendarOutline } from "react-icons/io5";
-import { MdDeleteOutline } from "react-icons/md";
-import Swal from "sweetalert2";
 import {
   useAddToCartSlotMutation,
-  useDeleteBookingSlotMutation,
   useFacilityBookedSlotsQuery,
   useGetBookingSlotsQuery,
 } from "../../../redux/features/slotBooking/slotBookingApi";
 import { useBlocker, useNavigate } from "react-router-dom";
 import { ImSpinner } from "react-icons/im";
 import FacilityBookingTimeSlots from "../../../components/FacilityBookingTimeSlots";
-import { CiClock1 } from "react-icons/ci";
 import RouteBlocker from "../../../utils/RouteBlocker";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import RentalBookingReviewPart from "./RentalBookingReviewPart";
+import { useAppSelector } from "../../../hooks/useAppHooks";
+import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
+import FacilityPaymentModal from "../../../components/ui/modal/FacilityPaymentModal";
 const RentalBooking = ({
   facilityCage,
   setFacilityCage,
@@ -35,15 +27,13 @@ const RentalBooking = ({
 }) => {
   dayjs.extend(utc);
   dayjs.extend(timezone);
-  const navigate = useNavigate();
-  const [deleteSlot] = useDeleteBookingSlotMutation();
   const [activeDate, setActiveDate] = useState(
     dayjs().tz("America/Los_Angeles")
   );
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
+  const navigate = useNavigate();
   const [block, setBlock] = useState(false);
-  const [process, setProcess] = useState(false);
-  const [messageApi, contextHolder] = message.useMessage();
+  const [proceed, setProceed] = useState(false);
   const blocker = useBlocker(block);
   const createCartBooking = useAddToCartSlotMutation();
   const { data: facility, isFetching } = useRentalFacilityQuery(
@@ -51,11 +41,7 @@ const RentalBooking = ({
     { skip: facilityCage ? false : true }
   );
   const [lane, setLane] = useState<string | undefined>(undefined);
-  useEffect(() => {
-    if (facility?.results?._id) {
-      setLane(facility?.results?.lanes[0]);
-    }
-  }, [facility]);
+
   const slotsBookedQuery = useFacilityBookedSlotsQuery(
     {
       training: facility?.results._id,
@@ -71,107 +57,69 @@ const RentalBooking = ({
     },
     { skip: facility?.results?._id && lane !== undefined ? false : true }
   );
+  const [addons, setAddons] = useState([]);
+  const user = useAppSelector(selectCurrentUser);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [voucherApplied, setVoucherApplied] = useState(false);
+  const [bookings, setBookings] = useState<Array<any>>([]);
+  const [finalData, setFinalData] = useState<any>({});
+
   const onChange = (value: string) => {
     setFacilityCage(value);
   };
-  const onDelete = (date: any, slot: string, slot_lane: string) => {
-    Swal.fire({
-      title: "Are you sure?",
-      icon: "info",
-      showCancelButton: true,
-      confirmButtonColor: "#0ABAC3",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const slotId = `${facility?.results._id}${
-          date.toISOString().split("T")[0]
-        }${slot.split(" ").join("")}${slot_lane.split(" ").join("+")}`;
-        deleteSlot(slotId)
-          .unwrap()
-          .then(() => {
-            messageApi.open({
-              type: "success",
-              content: "Success",
-            });
-            const updatedSlots = selectSlots
-              ?.map((slots: any) => {
-                if (
-                  slots.date === date &&
-                  slots.lane === slot_lane &&
-                  slots.slots.length > 1
-                ) {
-                  return {
-                    ...slots,
-                    slots: slots.slots.filter(
-                      (oldSlot: string) => oldSlot !== slot
-                    ),
-                  };
-                } else if (
-                  slots.date === date &&
-                  slots.lane === slot_lane &&
-                  slots.slots.length == 1
-                ) {
-                  return null;
-                }
-                return slots;
-              })
-              .filter(Boolean);
-            if (updatedSlots.length == 0) {
-              setBlock(false);
-            }
-            setSelectSlots(updatedSlots);
-          })
-          .catch((error) =>
-            messageApi.open({
-              type: "error",
-              content: `${error.data.message}`,
-            })
-          );
-      }
-    });
-  };
-
-  const totalPrice = selectSlots.reduce((total, facilitySlots) => {
-    if (facilitySlots.slots.length > 1) {
-      return total + facilitySlots.slots.length * facility?.results?.price;
-    } else {
-      return total + facilitySlots.slots.length * facility?.results?.ini_price;
-    }
-  }, 0);
-
-  const onNavigate = () => {
-    setBlock(false);
-    sessionStorage.setItem(
-      "rental-facility-slots",
-      JSON.stringify(selectSlots)
-    );
-    navigate("/rental-booking", {
-      state: {
-        facilityInfo: {
-          training: facility?.results._id,
-          price: facility?.results.price,
-          ini_price: facility?.results.ini_price,
-          sport: facility?.results.sport,
-        },
-      },
-    });
-  };
-
-  const onProcess = () => {
-    setBlock(false);
-    setProcess(true);
-  };
 
   useEffect(() => {
-    if (process) {
-      onNavigate();
+    if (facility?.results?._id) {
+      setLane(facility?.results?.lanes[0]);
     }
-  }, [process]);
+  }, [facility]);
+
+  useEffect(() => {
+    if (selectSlots.length < 1) {
+      setAddons([]);
+    }
+    if (selectSlots.length > 0) {
+      const slotsData: any = [];
+      selectSlots?.forEach((dateSlots: any) =>
+        dateSlots.slots.forEach((slot: string) => {
+          const date = new Date(dateSlots.date);
+          slotsData.push({
+            date: date.toISOString().split("T")[0],
+            time_slot: slot,
+            lane: dateSlots.lane,
+            training: facility?.results?._id,
+          });
+        })
+      );
+      setBookings(slotsData);
+    }
+  }, [selectSlots]);
+
+  useEffect(() => {
+    if (proceed) {
+      navigate("/dashboard/my-rental-facilities");
+    }
+  }, [proceed]);
+
+  const onFinish = () => {
+    const data = {
+      user: user?._id,
+      email: user?.email,
+      bookings,
+      facility: facility?.results?._id,
+      addons,
+      voucher_applied: voucherApplied,
+      sport: facility?.results?.sport,
+    };
+    setFinalData(data);
+  };
+
+  const onProceed = () => {
+    setProceed(true);
+  };
 
   return (
     <>
-      {contextHolder}
       <div className="bg-[#F9FAFB] sm:py-10 rounded-2xl space-y-6 sm:px-5 py-7 px-3">
         <div className="space-y-3">
           <h3 className="text-xl font-semibold text-[#07133D]">
@@ -292,115 +240,26 @@ const RentalBooking = ({
         </>
 
         {selectSlots.length > 0 && (
-          <div className="space-y-5">
-            <div className="flex justify-between">
-              <h3 className="text-xl font-semibold text-secondary">
-                Booking Details
-              </h3>
-              <div className="flex gap-1">
-                <p>Total Price:</p>
-                <p>${totalPrice}</p>
-              </div>
-            </div>
-            <div className="sm:block hidden space-y-2">
-              {selectSlots.map((dateSlots, index) => (
-                <div className="space-y-2" key={index}>
-                  {dateSlots.slots.map((slot: string, index: number) => (
-                    <div
-                      key={index}
-                      className="flex justify-between items-center bg-white p-3"
-                    >
-                      <div className="flex gap-3 items-center">
-                        <IoCalendarOutline className="size-4" />
-                        <span className="text-sm font-medium text-secondary">
-                          {moment(dateSlots.date).format("D-MMM-YYYY")}
-                        </span>
-                      </div>
-                      <div className="text-sm font-medium text-secondary">
-                        {dateSlots.lane}
-                      </div>
-                      <div className="flex gap-2 items-center">
-                        <CiClock1 className="size-4" />
-                        <span className="text-sm font-medium text-secondary">
-                          {slot}
-                        </span>
-                      </div>
-                      <div className="text-sm font-medium text-secondary">
-                        $
-                        {selectSlots.length > 1
-                          ? facility?.results?.price
-                          : dateSlots?.slots?.length > 1
-                          ? facility?.results?.price
-                          : facility?.results?.ini_price}
-                      </div>
-                      <MdDeleteOutline
-                        className="size-5 cursor-pointer"
-                        onClick={() =>
-                          onDelete(dateSlots.date, slot, dateSlots.lane)
-                        }
-                      />
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-            <div className="sm:hidden block space-y-2">
-              {selectSlots.map((dateSlots, index) => (
-                <div className="space-y-2" key={index}>
-                  {dateSlots.slots.map((slot: string, index: number) => (
-                    <div
-                      key={index}
-                      className="flex justify-between gap-5 flex-wrap items-center bg-white p-3"
-                    >
-                      <div className="space-y-2">
-                        <div className="flex gap-3 items-center">
-                          <IoCalendarOutline className="size-4" />
-                          <span className="text-sm font-medium text-secondary">
-                            {moment(dateSlots.date).format("D-MMM-YYYY")}
-                          </span>
-                        </div>
-                        <div className="text-sm font-medium text-secondary">
-                          Lane - {dateSlots.lane}
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="flex gap-2 items-center">
-                          <CiClock1 className="size-4" />
-                          <span className="text-sm font-medium text-secondary">
-                            {slot}
-                          </span>
-                        </div>
-                        <div className="text-sm font-medium text-secondary">
-                          Price - $
-                          {selectSlots.length > 1
-                            ? facility?.results?.price
-                            : dateSlots?.slots?.length > 1
-                            ? facility?.results?.price
-                            : facility?.results?.ini_price}
-                        </div>
-                      </div>
-                      <div className="text-end">
-                        <MdDeleteOutline
-                          className="size-5 cursor-pointer"
-                          onClick={() =>
-                            onDelete(dateSlots.date, slot, dateSlots.lane)
-                          }
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-            <div className="flex justify-between items-center">
-              <p className="lg:text-2xl sm:text-xl text-lg sm:font-bold font-semibold">
-                US${totalPrice}
-              </p>
-              <Button onClick={onProcess} className="primary-btn-2">
-                Book now
-              </Button>
-            </div>
-          </div>
+          <>
+            <RentalBookingReviewPart
+              addons={addons}
+              setAddons={setAddons}
+              facility={facility}
+              bookings={bookings}
+              setSelectSlots={setSelectSlots}
+              selectSlots={selectSlots}
+              setTotalPrice={setTotalPrice}
+              totalPrice={totalPrice}
+              setVoucherApplied={setVoucherApplied}
+            />
+            <FacilityPaymentModal
+              bookings={finalData}
+              amount={totalPrice}
+              onFinish={onFinish}
+              setBlock={setBlock}
+              onProceed={onProceed}
+            />
+          </>
         )}
         <RouteBlocker block={block} blocker={blocker} />
       </div>

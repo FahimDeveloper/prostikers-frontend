@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Checkbox, Steps } from "antd";
-import RentalBookingReviewPart from "../../../pages/RentalBookingPage/components/RentalBookingReviewPart";
+import RentalBookingReviewPart from "../../../pages/RentalFacility/components/RentalBookingReviewPart";
 import GroupTrainingGeneralForm from "../form/GroupTrainingGeneralForm";
 import TermsCondition from "../../TermsCondition";
 import PrivacyPolicy from "../../PrivacyPolicy";

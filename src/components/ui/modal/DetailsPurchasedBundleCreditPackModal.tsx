@@ -80,7 +80,6 @@ const DetailsPurchasedBundleCreditPackModal = ({
         centered
         open={open}
         onCancel={() => setModalOpen(false)}
-        maskClosable={false}
       >
         <Row gutter={[16, 16]}>
           <Col xs={24}>

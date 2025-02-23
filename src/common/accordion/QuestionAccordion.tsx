@@ -22,7 +22,9 @@ const QuestionAccordion = ({ data }: { data: TProp[] }) => {
         <div>
           {item.description.replace("**Click here**", "")}
           <CancellationPolicy>
-            <span className="text-primary cursor-pointer">Click here</span>
+            <span className="text-primary cursor-pointer">
+              View the cancellation policy
+            </span>
           </CancellationPolicy>
         </div>
       ) : (

@@ -67,7 +67,6 @@ const DetailsMyOneAppointmentReservationModal = ({
         centered
         open={open}
         onCancel={() => setModalOpen(false)}
-        maskClosable={false}
       >
         <Descriptions
           title="Client Info"

@@ -50,7 +50,12 @@ const Login = () => {
           <Form onFinish={onFinish} layout="vertical" className="space-y-4">
             <Form.Item
               name="email"
-              rules={[{ required: true, message: "Please input your email!" }]}
+              rules={[
+                {
+                  required: true,
+                  type: "email",
+                },
+              ]}
               label="Email"
               className="m-0"
             >
@@ -60,6 +65,7 @@ const Login = () => {
                 placeholder="Email"
               />
             </Form.Item>
+
             <Form.Item
               name="password"
               rules={[

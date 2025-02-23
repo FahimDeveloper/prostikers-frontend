@@ -1,5 +1,4 @@
-// import { HiOutlineUserCircle } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/icons/login-logo.svg";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { Modal } from "antd";
@@ -12,6 +11,7 @@ import Cart from "../Cart/Cart";
 const Header = () => {
   const [open, setOpen] = useState(false);
   const user = useSelector(selectCurrentUser);
+
   return (
     <div className="fixed w-full z-50 lg:top-5 top-4">
       <div className="sm:px-14 px-5">
@@ -24,54 +24,27 @@ const Header = () => {
           </Link>
           <nav className="lg:block hidden">
             <ul className="list-none flex justify-center text-lg font-medium items-center gap-7">
-              <li>
-                <Link
-                  to="/rental-facility"
-                  className="no-underline text-[#1C1C1C] inline-block"
-                >
-                  Rental Facility
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/membership"
-                  className="no-underline text-[#1C1C1C] inline-block"
-                >
-                  Membership
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/academy"
-                  className="no-underline text-[#1C1C1C] inline-block"
-                >
-                  Academy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/programs/tournaments"
-                  className="no-underline text-[#1C1C1C] inline-block"
-                >
-                  Tournaments
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/shop"
-                  className="no-underline text-[#1C1C1C] inline-block"
-                >
-                  Shop
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/blogs"
-                  className="no-underline text-[#1C1C1C] inline-block"
-                >
-                  Blogs
-                </Link>
-              </li>
+              {[
+                { path: "/rental-facility", label: "Rental Facility" },
+                { path: "/membership", label: "Membership" },
+                { path: "/academy", label: "Academy" },
+                { path: "/programs/tournaments", label: "Tournaments" },
+                { path: "/shop", label: "Shop" },
+                { path: "/blogs", label: "Blogs" },
+              ].map((item) => (
+                <li key={item.path}>
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `no-underline inline-block ${
+                        isActive ? "text-primary" : "text-[#1C1C1C]"
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
           </nav>
           <div className="lg:block hidden">
@@ -111,66 +84,32 @@ const Header = () => {
               </Link>
               <nav className="py-5">
                 <ul className="list-none flex flex-col gap-2 text-lg font-medium">
-                  <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3 \">
-                    <Link
-                      onClick={() => setOpen(false)}
-                      to="/rental-facility"
-                      className="no-underline text-[#1C1C1C] flex justify-between items-center"
+                  {[
+                    { path: "/rental-facility", label: "Rental Facility" },
+                    { path: "/membership", label: "Membership" },
+                    { path: "/academy", label: "Academy" },
+                    { path: "/programs/tournaments", label: "Tournaments" },
+                    { path: "/shop", label: "Shop" },
+                    { path: "/blogs", label: "Blogs" },
+                  ].map((item) => (
+                    <li
+                      key={item.path}
+                      className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3"
                     >
-                      Rental Facility
-                      <IoIosArrowForward className="size-4" />
-                    </Link>
-                  </li>
-                  <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3">
-                    <Link
-                      onClick={() => setOpen(false)}
-                      to="/membership"
-                      className="no-underline text-[#1C1C1C] flex justify-between items-center"
-                    >
-                      Membership
-                      <IoIosArrowForward className="size-4" />
-                    </Link>
-                  </li>
-                  <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3">
-                    <Link
-                      onClick={() => setOpen(false)}
-                      to="/academy"
-                      className="no-underline text-[#1C1C1C] flex justify-between items-center"
-                    >
-                      Academy
-                      <IoIosArrowForward className="size-4" />
-                    </Link>
-                  </li>
-                  <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3">
-                    <Link
-                      onClick={() => setOpen(false)}
-                      to="/programs/tournaments"
-                      className="no-underline text-[#1C1C1C] flex justify-between items-center"
-                    >
-                      Tournaments
-                      <IoIosArrowForward className="size-5" />
-                    </Link>
-                  </li>
-                  <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3">
-                    <Link
-                      onClick={() => setOpen(false)}
-                      to="/shop"
-                      className="no-underline text-[#1C1C1C] flex justify-between items-center"
-                    >
-                      Shop
-                      <IoIosArrowForward className="size-4" />
-                    </Link>
-                  </li>
-                  <li className="border-b border-gray-200 border-solid border-x-0 border-t-0 py-3">
-                    <Link
-                      onClick={() => setOpen(false)}
-                      to="/blogs"
-                      className="no-underline text-[#1C1C1C] flex justify-between items-center"
-                    >
-                      Blogs
-                      <IoIosArrowForward className="size-4" />
-                    </Link>
-                  </li>
+                      <NavLink
+                        onClick={() => setOpen(false)}
+                        to={item.path}
+                        className={({ isActive }) =>
+                          `no-underline flex justify-between items-center ${
+                            isActive ? "text-primary" : "text-[#1C1C1C]"
+                          }`
+                        }
+                      >
+                        {item.label}
+                        <IoIosArrowForward className="size-4" />
+                      </NavLink>
+                    </li>
+                  ))}
                 </ul>
               </nav>
               {!user ? (

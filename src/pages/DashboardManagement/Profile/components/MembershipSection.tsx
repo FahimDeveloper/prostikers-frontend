@@ -6,20 +6,59 @@ import { Link } from "react-router-dom";
 import CancellationPolicy from "../../../../components/CancellationPolicy";
 import { MdOutlineInfo } from "react-icons/md";
 import MembershipCancellationModal from "../../../../components/ui/modal/MembershipCancellationModal";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
 const MembershipSection = ({ data }: { data: IUser }) => {
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
   const [renew, setRenew] = useState(false);
+  const [opneCancel, setOpenCancel] = useState(false);
   useEffect(() => {
-    const expiry = new Date(data?.expiry_date as Date);
-    const currentDate = new Date();
-    if (currentDate.getDate() > expiry.getDate()) {
-      setRenew(true);
-    } else {
-      setRenew(false);
+    const issue = dayjs(data?.issue_date).tz("America/Los_Angeles");
+    const expiry = dayjs(data?.expiry_date).tz("America/Los_Angeles");
+    const currentDate = dayjs().tz("America/Los_Angeles");
+    if (data?.plan === "yearly") {
+      if (currentDate.month() >= expiry.month()) {
+        setRenew(true);
+      } else {
+        setRenew(false);
+      }
+      if (
+        currentDate.isAfter(issue.add(3, "months")) ||
+        currentDate.isSame(issue.add(3, "months"), "day")
+      ) {
+        setOpenCancel(true);
+      }
+    }
+    if (data?.plan === "monthly") {
+      if (currentDate.date() >= expiry.date()) {
+        setRenew(true);
+      } else {
+        setRenew(false);
+      }
     }
   }, [data]);
+
+  const scrollToMembership = () => {
+    if (window.location.hash === "#membership") {
+      const membershipSection = document.getElementById("membership");
+      if (membershipSection) {
+        membershipSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+  useEffect(() => {
+    scrollToMembership();
+    window.addEventListener("hashchange", scrollToMembership);
+    return () => {
+      window.removeEventListener("hashchange", scrollToMembership);
+    };
+  }, []);
+
   return (
-    <div className="space-y-5">
+    <div id="membership" className="space-y-5">
       <div className="flex items-center gap-3">
         <h3 className="text-xl text-[#006166] font-medium">
           Membership Details
@@ -45,18 +84,12 @@ const MembershipSection = ({ data }: { data: IUser }) => {
             </div>
           </div>
           <div className="flex gap-5">
-            {renew ? (
+            {renew && (
               <Link to="/membership">
-                <Button type="primary">Renew Now</Button>
+                <Button type="default">Upgrade Now</Button>
               </Link>
-            ) : (
-              <div className="flex flex-col gap-3 items-center">
-                <Link to="/membership">
-                  <Button type="default">Upgrade Now</Button>
-                </Link>
-                <MembershipCancellationModal />
-              </div>
             )}
+            {opneCancel && <MembershipCancellationModal />}
           </div>
         </div>
       ) : (

@@ -13,7 +13,7 @@ const TopSliderSection = () => {
     {
       title: "Elevate Your Game to Major League Standards",
       description:
-        "Harness the power of professional coaching and state-of-the-art facilities at ProStrikers. Our baseball training programs are designed to refine your skills, improve your pitching and batting, and ready you for the big leagues.",
+        "Rent state-of-the-art batting cages and harness the power of professional coaching. Prepare for the major leagues.",
       image: banner1,
       first_button: "Book A Lane",
       second_button: "Book A Coaching Session",
@@ -23,7 +23,7 @@ const TopSliderSection = () => {
     {
       title: "Softball Success Starts Here: Power, Precision & Play",
       description:
-        "Experience a breakthrough in your softball career with tailored coaching that focuses on enhancing your power hitting and defensive skills. ProStrikers' expert-led training gives you the competitive edge you need to shine.",
+        "“Book our cages today for you or your team to enhance your skill set.ProStrikers expert-led training gives you the competitive edge you need to shine.",
       image: banner2,
       first_button: "Book A Lane",
       second_button: "Book A Coaching Session",
@@ -31,9 +31,9 @@ const TopSliderSection = () => {
       second_link: "/sport/softball",
     },
     {
-      title: "Cricket Mastery Through Professional Coaching",
+      title: "Cricket Mastery through Batting Cage Rentals and coaching",
       description:
-        "Join the ranks of cricket elites by training under the guidance of seasoned pros. ProStrikers offers a comprehensive approach to cricket training, focusing on technical skills, strategic understanding, and mental toughness.",
+        "Join the ranks of cricket elites by training at our ICC standard batting cage rentals and pitching machines",
       image: banner3,
       first_button: "Book A Lane",
       second_button: "Book A Coaching Session",

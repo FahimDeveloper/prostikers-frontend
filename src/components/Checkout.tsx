@@ -38,11 +38,13 @@ const Checkout = ({
           confirmButtonColor: "#0ABAC3",
         });
       });
-  }, []);
+  }, [amount]);
   return (
     <>
       {createLoading ? (
-        <FaSpinner className="size-7 text-primary animate-spin" />
+        <div className="h-96 flex justify-center items-center">
+          <FaSpinner className="size-7 text-primary animate-spin" />
+        </div>
       ) : (
         <div className="flex flex-col gap-5 justify-center items-center">
           <img src={logo} className="w-1/3" alt="logo" />

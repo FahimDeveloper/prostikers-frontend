@@ -38,9 +38,11 @@ const ProgramSection = ({ data }: any) => {
               Tournament
             </h3>
             <div>
-              {data?.programs?.slice(4, 5)?.map((training: any) => {
-                return <ProgramsCard data={training} />;
-              })}
+              {data?.programs
+                ?.slice(4, 5)
+                ?.map((training: any, index: number) => {
+                  return <ProgramsCard data={training} key={index} />;
+                })}
             </div>
           </div>
         )}

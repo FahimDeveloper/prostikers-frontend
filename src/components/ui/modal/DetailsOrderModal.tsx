@@ -21,7 +21,6 @@ const DetailsOrderModal = ({ record }: { record: TOrder }) => {
         centered
         open={open}
         onCancel={() => setModalOpen(false)}
-        maskClosable={false}
       >
         {/* Order Information */}
         <Descriptions

@@ -1,16 +1,15 @@
 // Define valid environment keys
-type TDevelop = "LIVE_PRODUCTION" | "DEVELOPMENT" | "TEST_PRODUCTION";
 
-const version: Record<string, TDevelop> = {
-  local: "DEVELOPMENT",
+const version = {
+  development: "DEVELOPMENT",
   live: "LIVE_PRODUCTION",
   test: "TEST_PRODUCTION",
 };
 
-const activeEnv: TDevelop = version.live;
+const activeEnv = version.development;
 
 const envKeys: Record<
-  TDevelop,
+  string,
   {
     BASE_URL: string;
     FEEDBACK_URL: string;
@@ -40,13 +39,13 @@ const envKeys: Record<
     BASE_URL: import.meta.env.VITE_APP_LOCAL_API_URL,
     FEEDBACK_URL: import.meta.env.VITE_APP_LOCAL_FEEDBACK_API_URL,
     AUTH_REFRESH_URL: import.meta.env.VITE_APP_LOCAL_AUTH_REFRESH_URL,
-    APIKEY: import.meta.env.VITE_APP_LOCAL_APIKEY,
-    AUTHDOMAIN: import.meta.env.VITE_APP_LOCAL_AUTHDOMAIN,
-    PROJECTID: import.meta.env.VITE_APP_LOCAL_PROJECTID,
-    STORAGEBUCKET: import.meta.env.VITE_APP_LOCAL_STORAGEBUCKET,
-    MESSAGINGSENDERID: import.meta.env.VITE_APP_LOCAL_MESSAGINGSENDERID,
-    APPID: import.meta.env.VITE_APP_LOCAL_APPID,
-    STRIPE_KEY: import.meta.env.VITE_APP_LOCAL_STRIPE_KEY,
+    APIKEY: import.meta.env.VITE_APP_TEST_APIKEY,
+    AUTHDOMAIN: import.meta.env.VITE_APP_TEST_AUTHDOMAIN,
+    PROJECTID: import.meta.env.VITE_APP_TEST_PROJECTID,
+    STORAGEBUCKET: import.meta.env.VITE_APP_TEST_STORAGEBUCKET,
+    MESSAGINGSENDERID: import.meta.env.VITE_APP_TEST_MESSAGINGSENDERID,
+    APPID: import.meta.env.VITE_APP_TEST_APPID,
+    STRIPE_KEY: import.meta.env.VITE_APP_TEST_STRIPE_KEY,
   },
   TEST_PRODUCTION: {
     BASE_URL: import.meta.env.VITE_APP_TEST_API_URL,

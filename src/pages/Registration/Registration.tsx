@@ -12,7 +12,7 @@ import PrivacyPolicy from "../../components/PrivacyPolicy";
 import SocialLogin from "../../components/SocialLogin";
 const Registration = () => {
   const [agree, setAgree] = useState(false);
-  const [save, setSave] = useState(false);
+  // const [save, setSave] = useState(false);
   const dispatch = useAppDispatch();
   const [registration, { data, isLoading, isError, isSuccess, error }] =
     useRegistrationMutation();
@@ -140,7 +140,12 @@ const Registration = () => {
           </div>
           <Form.Item
             name="email"
-            rules={[{ required: true, message: "Please enter your email!" }]}
+            rules={[
+              {
+                required: true,
+                type: "email",
+              },
+            ]}
             label="Email"
             className="m-0"
           >
@@ -194,11 +199,11 @@ const Registration = () => {
                 </div>
               </Checkbox>
             </Form.Item>
-            <Form.Item className="m-0">
+            {/* <Form.Item className="m-0">
               <Checkbox onChange={() => setSave(!save)}>
                 <p className="text-sm text-secondary">Save information</p>
               </Checkbox>
-            </Form.Item>
+            </Form.Item> */}
           </div>
           <Form.Item>
             <Button

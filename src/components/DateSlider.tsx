@@ -40,7 +40,7 @@ const DateSlider = ({
   }, [activeDate]);
 
   const getDayName = (date: Dayjs) => {
-    return date.format("ddd"); // "Mon", "Tue", etc.
+    return date.format("ddd");
   };
 
   const getDates = () => {

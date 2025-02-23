@@ -99,9 +99,21 @@ const DetailsMyFacilityReservationModal = ({
         centered
         open={open}
         onCancel={() => setModalOpen(false)}
-        maskClosable={false}
       >
-        <Descriptions title="Client Info" bordered column={{ xl: 2, xs: 1 }}>
+        <Descriptions
+          title="Client Info"
+          bordered
+          column={{ xl: 2, xs: 1 }}
+          styles={{
+            label: {
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              width: "130px",
+              fontWeight: "bold",
+            },
+          }}
+        >
           <Descriptions.Item label="First Name">
             {record?.user?.first_name}
           </Descriptions.Item>
@@ -121,6 +133,15 @@ const DetailsMyFacilityReservationModal = ({
             title="Facility Info"
             bordered
             column={{ xl: 2, xs: 1 }}
+            styles={{
+              label: {
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+                width: "130px",
+                fontWeight: "bold",
+              },
+            }}
           >
             <Descriptions.Item label="Facility Name" span={1}>
               {record?.facility?.facility_name}
@@ -136,7 +157,27 @@ const DetailsMyFacilityReservationModal = ({
         <Divider />
 
         {record?.payment ? (
-          <Descriptions title="Payment Info" bordered column={{ xl: 2, xs: 1 }}>
+          <Descriptions
+            title="Payment Info"
+            bordered
+            column={{ xl: 2, xs: 1 }}
+            styles={{
+              label: {
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+                width: "120px",
+                fontWeight: "bold",
+                paddingLeft: "10px",
+                paddingRight: "10px",
+                textAlign: "center",
+              },
+              content: {
+                paddingLeft: "10px",
+                paddingRight: "10px",
+              },
+            }}
+          >
             <Descriptions.Item label="Transaction ID" span={1}>
               {record?.payment?.transaction_id}
             </Descriptions.Item>

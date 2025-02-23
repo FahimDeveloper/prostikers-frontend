@@ -63,7 +63,7 @@ const LeagueTeamDetailsForm = ({
           {(fields, { add, remove }) => (
             <>
               {fields.map(({ key, name, ...restField }, index) => (
-                <div className="space-y-2">
+                <div className="space-y-2" key={index}>
                   <div className="flex items-center gap-3">
                     <h4 className="font-medium md:text-lg text-base text-[#7B7B7B]">
                       Player

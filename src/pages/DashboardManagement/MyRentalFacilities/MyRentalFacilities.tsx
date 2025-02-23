@@ -79,6 +79,18 @@ const MyRentalFacilities = () => {
       sorter: (a, b) => a.sport.localeCompare(b.sport),
     },
     {
+      width: 80,
+      align: "center",
+      title: "Pay",
+      dataIndex: "payment",
+      key: "payment",
+      render: (text) => (
+        <p className="font-medium text-sm leading-5 text-[#151515] capitalize">
+          ${text.amount}
+        </p>
+      ),
+    },
+    {
       width: 120,
       align: "center",
       title: "Issue Date",

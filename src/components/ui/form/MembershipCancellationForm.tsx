@@ -37,14 +37,6 @@ const MembershipCancellationForm = ({
               label: "Individual pro unlimited",
               value: "individual pro unlimited",
             },
-            {
-              label: "Teams & Organizations",
-              value: "teams & organizations",
-            },
-            {
-              label: "Youth Training Membership",
-              value: "youth training membership",
-            },
           ]}
         />
       </Form.Item>

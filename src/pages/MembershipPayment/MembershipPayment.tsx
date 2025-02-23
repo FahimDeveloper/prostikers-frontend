@@ -31,7 +31,7 @@ const MembershipPayment = () => {
         iconColor: "#0ABAC3",
         confirmButtonColor: "#0ABAC3",
       });
-      navigate("/membership");
+      navigate("/dashboard#membership");
     }
     if (isError) {
       Swal.fire({

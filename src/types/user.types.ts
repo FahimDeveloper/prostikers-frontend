@@ -13,7 +13,6 @@ export interface IUser {
   city?: string;
   state?: string;
   country?: string;
-  nationality?: string;
   date_of_birth?: string;
   membership?: boolean;
   status?: boolean;
@@ -21,4 +20,5 @@ export interface IUser {
   expiry_date?: string | Date;
   package_name?: string;
   plan?: string;
+  verified: boolean;
 }

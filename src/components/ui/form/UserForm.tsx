@@ -87,29 +87,6 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
   };
   dayjs.extend(weekday);
   dayjs.extend(localeData);
-  useEffect(() => {
-    form.setFieldsValue({
-      first_name: record?.first_name,
-      last_name: record?.last_name,
-      email: record?.email,
-      gender: record?.gender,
-      phone: record?.phone,
-      country: "United States",
-      state: record?.state,
-      city: record?.city,
-      street_address: record?.street_address,
-      zip_code: record?.zip_code,
-      image: record?.image && [
-        {
-          uid: "-1",
-          name: record?.image,
-          status: "done",
-          url: record?.image,
-        },
-      ],
-      date_of_birth: record?.date_of_birth ? dayjs(record?.date_of_birth) : "",
-    });
-  }, [record, form]);
 
   const validateUSPhoneNumber = (_: any, value: string) => {
     const phoneNumberRegex = /^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)\d{3}[\s.-]?\d{4}$/;
@@ -127,6 +104,29 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
         layout="vertical"
         onFinish={onFinish}
         className="space-y-5"
+        initialValues={{
+          first_name: record?.first_name,
+          last_name: record?.last_name,
+          email: record?.email,
+          gender: record?.gender,
+          phone: record?.phone,
+          country: "United States",
+          state: record?.state,
+          city: record?.city,
+          street_address: record?.street_address,
+          zip_code: record?.zip_code,
+          image: record?.image && [
+            {
+              uid: "-1",
+              name: record?.image,
+              status: "done",
+              url: record?.image,
+            },
+          ],
+          date_of_birth: record?.date_of_birth
+            ? dayjs(record?.date_of_birth)
+            : "",
+        }}
       >
         <div className="flex flex-col items-center justify-center">
           <Form.Item
@@ -218,14 +218,9 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
               label="Country"
               rules={[{ required: true }]}
             >
-              <Input placeholder="Enter your country" />
+              <Input placeholder="Enter your country" readOnly />
             </Form.Item>
-            <Form.Item
-              className="w-full m-0"
-              name="state"
-              label="State"
-              rules={[{ required: true }]}
-            >
+            <Form.Item className="w-full m-0" name="state" label="State">
               <Select
                 showSearch
                 optionFilterProp="children"
@@ -242,12 +237,7 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
                 })}
               />
             </Form.Item>
-            <Form.Item
-              className="w-full m-0"
-              name="city"
-              label="City"
-              rules={[{ required: true }]}
-            >
+            <Form.Item className="w-full m-0" name="city" label="City">
               <Select
                 showSearch
                 filterOption={filterOption}
@@ -263,7 +253,6 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
               className="w-full m-0"
               name="zip_code"
               label="Zip/Postal Code"
-              rules={[{ required: true }]}
             >
               <Input placeholder="Enter your postal code" />
             </Form.Item>
@@ -271,7 +260,6 @@ const UserForm = ({ form, record, onFinish, loading }: TProp) => {
               className="w-full m-0 col-span-2"
               name="street_address"
               label="Street Address"
-              rules={[{ required: true }]}
             >
               <Input placeholder="Enter your street address" />
             </Form.Item>

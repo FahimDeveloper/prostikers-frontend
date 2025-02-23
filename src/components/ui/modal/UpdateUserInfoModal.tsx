@@ -14,9 +14,11 @@ import { useAppDispatch } from "../../../hooks/useAppHooks";
 const UpdateUserInfoModal = ({
   record,
   type,
+  size,
 }: {
   record: IUser | null;
-  type?: "text" | "link" | "default" | "primary" | "dashed" | undefined;
+  type?: "text" | "link" | "primary" | "dashed";
+  size?: "large" | "middle" | "small";
 }) => {
   const [open, setModalOpen] = useState(false);
   const [form] = useForm();
@@ -46,7 +48,6 @@ const UpdateUserInfoModal = ({
         iconColor: "#0ABAC3",
       });
       dispatch(updateUserInfo(data?.results));
-      form.resetFields();
       setModalOpen(false);
     }
     if (isError) {
@@ -63,8 +64,12 @@ const UpdateUserInfoModal = ({
   };
   return (
     <>
-      <Button type={type ? type : "default"} onClick={() => setModalOpen(true)}>
-        Edit <CiEdit />
+      <Button
+        type={type ? type : "default"}
+        size={size ? size : "middle"}
+        onClick={() => setModalOpen(true)}
+      >
+        Update <CiEdit />
       </Button>
 
       <Modal
@@ -74,7 +79,6 @@ const UpdateUserInfoModal = ({
         centered
         open={open}
         onCancel={onCancle}
-        maskClosable={false}
       >
         <div className="my-5">
           <UserForm

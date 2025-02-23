@@ -43,7 +43,7 @@ const MembershipCancellationModal = () => {
   return (
     <>
       <Button type="primary" danger onClick={() => setModalOpen(true)}>
-        Cancellation
+        Cancel
       </Button>
       <Modal
         width={600}
@@ -52,7 +52,6 @@ const MembershipCancellationModal = () => {
         centered
         open={open}
         onCancel={() => setModalOpen(false)}
-        maskClosable={false}
       >
         <div className="my-5">
           <MembershipCancellationForm
