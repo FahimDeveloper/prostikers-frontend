@@ -24,6 +24,13 @@ const facilityApi = facilityApiSlice.injectEndpoints({
         body: payload,
       }),
     }),
+    confirmFacilityReservation: builder.mutation<any, any>({
+      query: (payload) => ({
+        url: `/reservations/facilities/user/confirm`,
+        method: "POST",
+        body: payload,
+      }),
+    }),
   }),
 });
 
@@ -31,4 +38,5 @@ export const {
   useRentalFacilityQuery,
   useCreateFacilityReservationMutation,
   useGetUserFacilityReservationsQuery,
+  useConfirmFacilityReservationMutation,
 } = facilityApi;

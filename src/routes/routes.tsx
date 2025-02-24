@@ -4,6 +4,7 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+import FacilityTempPayment from "../pages/FacilityTempPayment/FacilityTempPayment";
 const ViewCart = LazyLoad(lazy(() => import("../pages/ViewCart/ViewCart")));
 const ShopCheckOut = LazyLoad(
   lazy(() => import("../pages/ShopCheckOut/ShopCheckOut"))
@@ -588,6 +589,10 @@ export const router = createBrowserRouter([
       {
         path: "/user/verify/:token",
         element: <VerifyUser />,
+      },
+      {
+        path: "/reservation/facilities/payment/:token",
+        element: <FacilityTempPayment />,
       },
       {
         path: "/registration",

@@ -36,6 +36,12 @@ const authApi = authApiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    paymentlinkVerify: builder.query({
+      query: ({ token }) => ({
+        url: `/auth/temp-booking/link-verify/${token}`,
+        method: "GET",
+      }),
+    }),
     sendVerifyCode: builder.mutation({
       query: (credentials) => ({
         url: "/auth/forgot-password/send-code",
@@ -76,4 +82,5 @@ export const {
   useVerifyCodeMutation,
   useContinueWithSocialMutation,
   useVerifyUserQuery,
+  usePaymentlinkVerifyQuery,
 } = authApi;

@@ -102,12 +102,14 @@ const FacilityBookingTimeSlots = ({
 
   const checkTimeAvailable = (slot: string) => {
     const [_, endTime] = slot.split(" - ");
-    const formattedDate = dayjs(activeDate).format("YYYY-MM-DD");
+    const formattedDate = dayjs(activeDate)
+      .tz("America/Los_Angeles")
+      .format("YYYY-MM-DD");
     const slotDateTime = dayjs(
       `${formattedDate} ${endTime}`,
       "YYYY-MM-DD hh:mm A"
-    );
-    const oneHourFromNow = dayjs();
+    ).tz("America/Los_Angeles");
+    const oneHourFromNow = dayjs().tz("America/Los_Angeles");
     return slotDateTime.isBefore(oneHourFromNow);
   };
 
