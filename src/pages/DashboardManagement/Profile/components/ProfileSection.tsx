@@ -73,12 +73,6 @@ const ProfileSection = ({ data }: { data: IUser }) => {
                   : "Not Provided"}
               </p>
             </div>
-            <div className="space-y-1">
-              <p className="text-sm font-medium text-gray-500">Nationality</p>
-              <p className="text-lg text-black">
-                {data?.nationality || "Not Provided"}
-              </p>
-            </div>
           </div>
         </div>
         <div className="space-y-3">

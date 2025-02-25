@@ -301,72 +301,78 @@ const FacilityBookingTimeSlots = ({
   return (
     <>
       {contextHolder}
-      {slots?.length > 0 ? (
-        <div className="grid md:grid-cols-5 sm:grid-cols-4 grid-cols-2 gap-1">
-          {(
-            slots as [
-              {
-                lane: string;
-                slots: string[];
-              }
-            ]
-          )[0].slots?.map((slot: string, index: number) => (
-            <button
-              disabled={
-                createLoading ||
-                slotsCartLoading ||
-                slotsBookedLoading ||
-                isSlotUnavailable(slot, proceedSlots, lane!) ||
-                checkTimeAvailable(slot)
-              }
-              key={index}
-              onClick={() => onSelect(slot, index)}
-              className={`border border-solid rounded-md border-gray-200 h-12 px-1 disabled:cursor-not-allowed text-center text-black ${
-                createLoading || slotsCartLoading || slotsBookedLoading
-                  ? "cursor-not-allowed"
-                  : "cursor-pointer"
-              } ${
-                selectSlots.find(
-                  (slots: any) =>
-                    slots.date.toISOString().split("T")[0] ===
-                      activeDate.toISOString().split("T")[0] &&
-                    slots.lane === lane &&
-                    slots.slots.includes(slot)
-                )
-                  ? "bg-primary text-white"
-                  : isSlotUnavailable(slot, proceedSlots, lane!) ||
+      {
+        <>
+          {slots?.length > 0 ? (
+            <div className="grid md:grid-cols-5 sm:grid-cols-4 grid-cols-2 gap-1">
+              {(
+                slots as [
+                  {
+                    lane: string;
+                    slots: string[];
+                  }
+                ]
+              )[0].slots?.map((slot: string, index: number) => (
+                <button
+                  disabled={
+                    createLoading ||
+                    slotsCartLoading ||
+                    slotsBookedLoading ||
+                    isSlotUnavailable(slot, proceedSlots, lane!) ||
                     checkTimeAvailable(slot)
-                  ? "bg-gray-100"
-                  : "bg-white"
-              }`}
-            >
-              {(createLoading ||
-                slotsCartLoading ||
-                slotsBookedLoading ||
-                deleteLoading) &&
-              index === slotIndex ? (
-                <FaSpinner
-                  className={`animate-spin size-5 ${
-                    deleteLoading ? "text-white" : "text-primary"
+                  }
+                  key={index}
+                  onClick={() => onSelect(slot, index)}
+                  className={`border border-solid rounded-md border-gray-200 h-12 px-1 disabled:cursor-not-allowed text-center text-black ${
+                    createLoading || slotsCartLoading || slotsBookedLoading
+                      ? "cursor-not-allowed"
+                      : "cursor-pointer"
+                  } ${
+                    selectSlots.find(
+                      (slots: any) =>
+                        slots.date.toISOString().split("T")[0] ===
+                          activeDate.toISOString().split("T")[0] &&
+                        slots.lane === lane &&
+                        slots.slots.includes(slot)
+                    )
+                      ? "bg-primary text-white"
+                      : isSlotUnavailable(slot, proceedSlots, lane!) ||
+                        checkTimeAvailable(slot)
+                      ? "bg-gray-100"
+                      : "bg-white"
                   }`}
-                />
-              ) : (
-                <p className="text-xs font-medium">
-                  {!selectSlots.find((slots: any) =>
-                    slots.slots.includes(slot)
-                  ) && isSlotUnavailable(slot, proceedSlots, lane!)
-                    ? "Unavailable"
-                    : slot}
-                </p>
-              )}
-            </button>
-          ))}
-        </div>
-      ) : (
-        <p className="text-2xl h-40 items-center justify-center flex font-semibold">
-          No slot available
-        </p>
-      )}
+                >
+                  {(createLoading ||
+                    slotsCartLoading ||
+                    slotsBookedLoading ||
+                    deleteLoading) &&
+                  index === slotIndex ? (
+                    <FaSpinner
+                      className={`animate-spin size-5 ${
+                        deleteLoading ? "text-white" : "text-primary"
+                      }`}
+                    />
+                  ) : (
+                    <p className="text-xs font-medium">
+                      {!selectSlots.find((slots: any) =>
+                        slots.slots.includes(slot)
+                      ) && isSlotUnavailable(slot, proceedSlots, lane!)
+                        ? "Booked"
+                        : checkTimeAvailable(slot)
+                        ? "Unavailable"
+                        : slot}
+                    </p>
+                  )}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <p className="text-2xl h-40 items-center justify-center flex font-semibold">
+              No slot available
+            </p>
+          )}
+        </>
+      }
     </>
   );
 };

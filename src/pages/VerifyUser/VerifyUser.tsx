@@ -46,7 +46,7 @@ const VerifyUser = () => {
                     Link is already expired
                   </h3>
                   <p className="w-[500px] text-center text-base">
-                    You did not complete your verification bitween 30 days since
+                    You did not complete your verification between 30 days since
                     sign up. Link is already expired. Please contact with
                     support.
                   </p>

@@ -13,6 +13,10 @@ import { IAddon } from "../../../types/addon.types";
 import { FaSpinner } from "react-icons/fa6";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import dayjs from "dayjs";
+import {
+  halfHourlyAddonOptions,
+  hourlyAddonOptions,
+} from "../../../constant/addonOptions";
 
 const RentalBookingReviewPart = ({
   addons,
@@ -132,32 +136,17 @@ const RentalBookingReviewPart = ({
     setAddons(addons.filter((addon: any) => addon.id !== id));
   };
 
-  let slotsPrice: number;
-  if (bookings.length > 1) {
-    slotsPrice = bookings.length * facility?.results?.price;
-  } else {
-    slotsPrice = bookings.length * facility?.results?.ini_price;
-  }
-
-  const addonsPrice = addons.reduce((total: number, addon: any) => {
-    const hours = addon?.type === "half_hourly" ? 0.5 : 1;
-    const basePrice = addon?.ini_price;
-    const additionalPrice = (addon.hours / hours - 1) * addon.price;
-    return total + basePrice + additionalPrice;
-  }, 0);
-
-  const some = slotsPrice + addonsPrice;
-  if (data) {
-    const { discount_type, discount_value } = data.results;
-    if (discount_type === "amount") {
-      setTotalPrice(some - discount_value);
-    } else if (discount_type === "percentage") {
-      const decimal = parseFloat(discount_value) / 100;
-      setTotalPrice(some - some * decimal);
+  useEffect(() => {
+    if (data) {
+      const { discount_type, discount_value } = data.results;
+      if (discount_type === "amount") {
+        setTotalPrice(totalPrice - discount_value);
+      } else if (discount_type === "percentage") {
+        const decimal = parseFloat(discount_value) / 100;
+        setTotalPrice(totalPrice - totalPrice * decimal);
+      }
     }
-  } else {
-    setTotalPrice(some);
-  }
+  }, [data]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -179,75 +168,6 @@ const RentalBookingReviewPart = ({
       });
     }
   }, [isSuccess, isError]);
-
-  const halfHourlyAddonOptions = [
-    {
-      value: 0.5,
-      label: "30 minutes",
-    },
-    {
-      value: 1,
-      label: "1 hour",
-    },
-    {
-      value: 1.5,
-      label: "1.5 hour",
-    },
-    {
-      value: 2,
-      label: "2 hours",
-    },
-    {
-      value: 2.5,
-      label: "2.5 hours",
-    },
-    {
-      value: 3,
-      label: "3 hours",
-    },
-    {
-      value: 3.5,
-      label: "3.5 hours",
-    },
-    {
-      value: 4,
-      label: "4 hours",
-    },
-    {
-      value: 4.5,
-      label: "4.5 hours",
-    },
-    {
-      value: 5,
-      label: "5 hours",
-    },
-  ];
-
-  const hourlyAddonOptions = [
-    {
-      value: 1,
-      label: "1 hour",
-    },
-
-    {
-      value: 2,
-      label: "2 hours",
-    },
-
-    {
-      value: 3,
-      label: "3 hours",
-    },
-
-    {
-      value: 4,
-      label: "4 hours",
-    },
-    {
-      value: 5,
-      label: "5 hours",
-    },
-  ];
 
   return (
     <>
@@ -368,11 +288,24 @@ const RentalBookingReviewPart = ({
             </div>
           ))}
           {addons?.map((addon: any) => {
-            const hours = addon?.type === "half_hourly" ? 0.5 : 1;
-            const totalAddonPrice =
-              addon.hours > hours
-                ? addon.ini_price + (addon.hours / hours - 1) * addon.price
-                : addon.ini_price;
+            let totalAddonPrice = 0;
+            if (addon?.type === "hourly") {
+              const iniPrice = addon?.ini_price;
+              const basePrice = addon?.price;
+              if (addon?.hours < 2) {
+                totalAddonPrice = addon?.hours * iniPrice;
+              } else {
+                totalAddonPrice = addon?.hours * basePrice;
+              }
+            } else {
+              const iniPrice = addon?.ini_price;
+              const basePrice = addon?.price;
+              if (addon?.hours < 1) {
+                totalAddonPrice = iniPrice;
+              } else {
+                totalAddonPrice = addon?.hours * basePrice;
+              }
+            }
             return (
               <div
                 className="flex justify-between items-center sm:px-2"

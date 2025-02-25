@@ -89,7 +89,7 @@ const FacilityTempPayment = () => {
                     Link is already expired
                   </h3>
                   <p className="w-[500px] text-center text-base">
-                    You did not complete your payment bitween duration. Link is
+                    You did not complete your payment between duration. Link is
                     already expired. Please contact with support for furture
                     process.
                   </p>

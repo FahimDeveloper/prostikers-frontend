@@ -95,6 +95,37 @@ const RentalBooking = ({
     }
   }, [selectSlots]);
 
+  const addonsPrice = addons?.reduce((total: number, addon: any) => {
+    if (addon?.type === "hourly") {
+      const iniPrice = addon?.ini_price;
+      const basePrice = addon?.price;
+      if (addon?.hours < 2) {
+        return total + addon?.hours * iniPrice;
+      } else {
+        return total + addon?.hours * basePrice;
+      }
+    } else {
+      const iniPrice = addon?.ini_price;
+      const basePrice = addon?.price;
+      if (addon?.hours < 1) {
+        return total + iniPrice;
+      } else {
+        return total + addon?.hours * basePrice;
+      }
+    }
+  }, 0);
+
+  let slotsPrice: number;
+  if (bookings.length > 1) {
+    slotsPrice = bookings.length * facility?.results?.price;
+  } else {
+    slotsPrice = bookings.length * facility?.results?.ini_price;
+  }
+
+  useEffect(() => {
+    setTotalPrice(slotsPrice + addonsPrice);
+  }, [slotsPrice, addonsPrice]);
+
   useEffect(() => {
     if (proceed) {
       navigate("/dashboard/my-rental-facilities");
