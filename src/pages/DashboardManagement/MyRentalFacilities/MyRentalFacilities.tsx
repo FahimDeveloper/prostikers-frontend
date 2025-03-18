@@ -93,7 +93,7 @@ const MyRentalFacilities = () => {
     {
       width: 120,
       align: "center",
-      title: "Issue Date",
+      title: "Purchase Date",
       dataIndex: "createdAt",
       key: "createdAt",
       render: (text) => (

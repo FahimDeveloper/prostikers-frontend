@@ -30,14 +30,10 @@ const FacilityTempPayment = () => {
 
   const onSubmit = () => {
     const payload = {
-      email: decoded?.email,
-      reservation_id: decoded?.reservation_id,
-      payment_id: decoded?.payment_id,
-      payment_info: {
-        transaction_id: transactionId,
-        amount: decoded?.payment_info?.amount,
-        email: decoded?.payment_info?.email,
-      },
+      email: decoded?.e,
+      reservation_id: decoded?.r,
+      payment_id: decoded?.p,
+      transaction_id: transactionId,
     };
     confirm(payload);
   };

@@ -7,6 +7,7 @@ import TermsCondition from "../TermsCondition";
 import PrivacyPolicy from "../PrivacyPolicy";
 import Container from "../Container";
 import { PiTiktokLogoLight } from "react-icons/pi";
+import LiabilityWaiver from "../LiabilityWaiver";
 const Footer = () => {
   return (
     <div
@@ -123,7 +124,7 @@ const Footer = () => {
                 </a>
               </div>
             </div>
-            <div className="sm:flex items-end sm:gap-10 space-y-5">
+            <div className="sm:flex sm:gap-10">
               <ul className="list-none space-y-2">
                 <li className="text-white font-medium text-lg">Support</li>
                 <Link to="/about" className="no-underline block">
@@ -145,6 +146,11 @@ const Footer = () => {
                     Privacy policy
                   </li>
                 </PrivacyPolicy>
+                <LiabilityWaiver>
+                  <li className="text-[#7C7C7C] cursor-pointer">
+                    Liability Waiver
+                  </li>
+                </LiabilityWaiver>
               </ul>
               <ul className="list-none space-y-2">
                 <li className="text-white font-medium text-lg">Partnership</li>

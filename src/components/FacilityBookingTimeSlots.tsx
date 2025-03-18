@@ -197,7 +197,7 @@ const FacilityBookingTimeSlots = ({
         icon: "info",
         text: `${
           createError?.data?.message.includes("exists")
-            ? "Slot is already Booked"
+            ? "Slot is already Unavailable"
             : createError?.data?.message || "Something went wrong"
         }`,
         confirmButtonColor: "#0ABAC3",
@@ -357,8 +357,6 @@ const FacilityBookingTimeSlots = ({
                       {!selectSlots.find((slots: any) =>
                         slots.slots.includes(slot)
                       ) && isSlotUnavailable(slot, proceedSlots, lane!)
-                        ? "Booked"
-                        : checkTimeAvailable(slot)
                         ? "Unavailable"
                         : slot}
                     </p>

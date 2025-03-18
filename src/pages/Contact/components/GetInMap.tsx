@@ -18,7 +18,7 @@ const GetInMap = () => {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
-      <div className="grid grid-cols-2 items-center">
+      <div className="sm:grid grid-cols-2 items-center">
         <div className="border-s-[1.5px] border-s-slate-400 border-solid ps-2 border-white text-lg leading-6">
           <p>Email</p>
           <p className="text-[#404040]">admin@prostrikers.com</p>

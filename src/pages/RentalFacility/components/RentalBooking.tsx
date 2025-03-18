@@ -82,9 +82,8 @@ const RentalBooking = ({
       const slotsData: any = [];
       selectSlots?.forEach((dateSlots: any) =>
         dateSlots.slots.forEach((slot: string) => {
-          const date = new Date(dateSlots.date);
           slotsData.push({
-            date: date.toISOString().split("T")[0],
+            date: dateSlots.date,
             time_slot: slot,
             lane: dateSlots.lane,
             training: facility?.results?._id,
@@ -227,7 +226,7 @@ const RentalBooking = ({
               </div>
               <div className="flex gap-x-2 items-center">
                 <span className="size-3 rounded-full border bg-gray-100 border-solid border-gray-300"></span>
-                Unavailable
+                Booked
               </div>
             </div>
             <div className="space-y-2">

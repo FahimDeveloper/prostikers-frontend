@@ -16,27 +16,17 @@ const MembershipSection = ({ data }: { data: IUser }) => {
   const [renew, setRenew] = useState(false);
   const [opneCancel, setOpenCancel] = useState(false);
   useEffect(() => {
-    const issue = dayjs(data?.issue_date).tz("America/Los_Angeles");
-    const expiry = dayjs(data?.expiry_date).tz("America/Los_Angeles");
+    if (!data) return;
+
+    const issue = dayjs(data.issue_date).tz("America/Los_Angeles");
+    const expiry = dayjs(data.expiry_date).tz("America/Los_Angeles");
     const currentDate = dayjs().tz("America/Los_Angeles");
-    if (data?.plan === "yearly") {
-      if (currentDate.month() >= expiry.month()) {
-        setRenew(true);
-      } else {
-        setRenew(false);
-      }
-      if (
-        currentDate.isAfter(issue.add(3, "months")) ||
-        currentDate.isSame(issue.add(3, "months"), "day")
-      ) {
-        setOpenCancel(true);
-      }
-    }
-    if (data?.plan === "monthly") {
-      if (currentDate.date() >= expiry.date()) {
-        setRenew(true);
-      } else {
-        setRenew(false);
+
+    if (data.plan === "yearly" || data.plan === "monthly") {
+      setRenew(currentDate.isAfter(expiry, "day"));
+      if (data.plan === "yearly") {
+        const cancelThreshold = issue.add(3, "months");
+        setOpenCancel(currentDate.isAfter(cancelThreshold, "day"));
       }
     }
   }, [data]);
@@ -56,7 +46,6 @@ const MembershipSection = ({ data }: { data: IUser }) => {
       window.removeEventListener("hashchange", scrollToMembership);
     };
   }, []);
-
   return (
     <div id="membership" className="space-y-5">
       <div className="flex items-center gap-3">

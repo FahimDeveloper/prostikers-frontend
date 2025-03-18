@@ -10,6 +10,7 @@ import { useRegistrationMutation } from "../../redux/features/auth/authApi";
 import TermsCondition from "../../components/TermsCondition";
 import PrivacyPolicy from "../../components/PrivacyPolicy";
 import SocialLogin from "../../components/SocialLogin";
+import LiabilityWaiver from "../../components/LiabilityWaiver";
 const Registration = () => {
   const [agree, setAgree] = useState(false);
   // const [save, setSave] = useState(false);
@@ -194,8 +195,12 @@ const Registration = () => {
                   </TermsCondition>
                   <p>&</p>
                   <PrivacyPolicy>
-                    <p className="text-primary cursor-pointer">policy</p>
+                    <p className="text-primary cursor-pointer">Policy</p>
                   </PrivacyPolicy>
+                  <p>&</p>
+                  <LiabilityWaiver>
+                    <p className="text-primary cursor-pointer">Liability</p>
+                  </LiabilityWaiver>
                 </div>
               </Checkbox>
             </Form.Item>

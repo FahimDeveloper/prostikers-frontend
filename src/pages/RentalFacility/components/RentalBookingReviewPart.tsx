@@ -59,7 +59,8 @@ const RentalBookingReviewPart = ({
       cancelButtonColor: "#d33",
     }).then((result) => {
       if (result.isConfirmed) {
-        const slotId = `${facility?.results?._id}${date}${slot
+        const slotDate = date.toISOString().split("T")[0];
+        const slotId = `${facility?.results?._id}${slotDate}${slot
           .split(" ")
           .join("")}${lane?.split(" ").join("+")}`;
         deleteSlot(slotId)
@@ -72,7 +73,7 @@ const RentalBookingReviewPart = ({
             const updatedSlots = selectSlots
               ?.map((slots: any) => {
                 if (
-                  slots.date.toISOString().split("T")[0] === date &&
+                  slots.date.toISOString().split("T")[0] === slotDate &&
                   slots.lane === lane &&
                   slots.slots.length > 1
                 ) {
@@ -83,7 +84,7 @@ const RentalBookingReviewPart = ({
                     ),
                   };
                 } else if (
-                  slots.date.toISOString().split("T")[0] === date &&
+                  slots.date.toISOString().split("T")[0] === slotDate &&
                   slots.lane === lane &&
                   slots.slots.length == 1
                 ) {
