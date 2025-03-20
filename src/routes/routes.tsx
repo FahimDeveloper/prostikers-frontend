@@ -591,7 +591,7 @@ export const router = createBrowserRouter([
         element: <VerifyUser />,
       },
       {
-        path: "/reservation/facilities/payment/:token",
+        path: "/reservation/facilities/payment/:id",
         element: <FacilityTempPayment />,
       },
       {

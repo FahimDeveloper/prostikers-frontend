@@ -46,6 +46,15 @@ const GetInForm = () => {
     setChecked(!checked);
   };
 
+  const validateUSPhoneNumber = (_: any, value: string) => {
+    const phoneNumberRegex = /^(\+1\s?)?(\(?\d{3}\)?[\s.-]?)\d{3}[\s.-]?\d{4}$/;
+
+    if (!phoneNumberRegex.test(value.trim())) {
+      return Promise.reject(new Error("Please enter a valid USA phone number"));
+    }
+    return Promise.resolve();
+  };
+
   return (
     <>
       {contextHolder}
@@ -68,12 +77,15 @@ const GetInForm = () => {
         </Form.Item>
         <Form.Item
           name="phone_number"
-          rules={[{ required: true, type: "number" }]}
-          className="m-0"
+          rules={[
+            { required: true, message: "" },
+            { validator: validateUSPhoneNumber },
+          ]}
         >
           <Input
-            placeholder="Phone Number"
+            prefix={"USA"}
             className="bg-[#FAFFFF] placeholder-[#215757] text-base w-full border-[1px] border-[#D4D4D4] p-3 rounded-md"
+            placeholder="Enter your phone number"
           />
         </Form.Item>
         <Form.Item name="message" rules={[{ required: true }]} className="m-0">

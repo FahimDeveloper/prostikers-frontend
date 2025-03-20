@@ -9,24 +9,28 @@ import Checkout from "../../components/Checkout";
 import { jwtDecode } from "jwt-decode";
 
 const FacilityTempPayment = () => {
-  const { token } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const [transactionId, setTransactionId] = useState("");
   const {
+    data: verifyData,
     isLoading: isVerifyLoading,
     isSuccess: isVerifySuccess,
     isError: isVerifyError,
     error: verifyError,
   } = usePaymentlinkVerifyQuery({
-    token,
+    id,
   });
   const [confirm, { data: confirmData, isError, isLoading, isSuccess, error }] =
     useConfirmFacilityReservationMutation();
 
   const decoded: any = useMemo(
-    () => (token ? jwtDecode(token) : null),
-    [token]
+    () =>
+      verifyData?.results?.token ? jwtDecode(verifyData?.results?.token) : null,
+    [isVerifySuccess]
   );
+
+  console.log(decoded);
 
   const onSubmit = () => {
     const payload = {
@@ -70,7 +74,7 @@ const FacilityTempPayment = () => {
           <Checkout
             setTransactionId={setTransactionId}
             isLoading={isLoading}
-            amount={decoded?.payment_info?.amount}
+            amount={decoded?.a}
             onSubmit={onSubmit}
           />
         </div>
@@ -79,7 +83,7 @@ const FacilityTempPayment = () => {
         <div className="h-svh flex items-center justify-center w-full">
           <div className="space-y-5">
             <div className="">
-              {(verifyError as any)?.data?.message === "jwt expired" ? (
+              {(verifyError as any)?.data?.message === "Expired" ? (
                 <div className="space-y-3">
                   <h3 className="text-center font-poppins font-medium text-4xl leading-[46px] text-[#043E41]">
                     Link is already expired

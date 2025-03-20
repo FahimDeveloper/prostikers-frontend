@@ -37,8 +37,8 @@ const authApi = authApiSlice.injectEndpoints({
       }),
     }),
     paymentlinkVerify: builder.query({
-      query: ({ token }) => ({
-        url: `/auth/temp-booking/link-verify/${token}`,
+      query: ({ id }) => ({
+        url: `/temp-booking/verify/${id}`,
         method: "GET",
       }),
     }),
