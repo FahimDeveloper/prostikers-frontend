@@ -186,7 +186,11 @@ const FacilityBookingTimeSlots = ({
       } else {
         setSelectSlots([
           ...selectSlots,
-          { date: activeDate, slots: [timeSlot], lane: lane },
+          {
+            date: activeDate.format("YYYY-MM-DD"),
+            slots: [timeSlot],
+            lane: lane,
+          },
         ]);
       }
     }
