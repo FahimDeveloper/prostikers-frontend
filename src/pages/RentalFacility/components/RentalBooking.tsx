@@ -83,7 +83,7 @@ const RentalBooking = ({
       selectSlots?.forEach((dateSlots: any) =>
         dateSlots.slots.forEach((slot: string) => {
           slotsData.push({
-            date: dateSlots.date,
+            date: dateSlots.date.format("YYYY-MM-DD"),
             time_slot: slot,
             lane: dateSlots.lane,
             training: facility?.results?._id,

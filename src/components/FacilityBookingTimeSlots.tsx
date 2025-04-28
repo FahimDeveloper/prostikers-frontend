@@ -187,7 +187,7 @@ const FacilityBookingTimeSlots = ({
         setSelectSlots([
           ...selectSlots,
           {
-            date: activeDate.format("YYYY-MM-DD"),
+            date: activeDate,
             slots: [timeSlot],
             lane: lane,
           },
