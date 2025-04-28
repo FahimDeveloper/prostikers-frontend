@@ -28,6 +28,7 @@ const RentalBookingReviewPart = ({
   facility,
   totalPrice,
   bookings,
+  setBlock,
 }: {
   addons: any;
   setAddons: any;
@@ -38,6 +39,7 @@ const RentalBookingReviewPart = ({
   totalPrice: any;
   facility: any;
   bookings: any;
+  setBlock: any;
 }) => {
   dayjs.extend(utc);
   dayjs.extend(timezone);
@@ -59,8 +61,7 @@ const RentalBookingReviewPart = ({
       cancelButtonColor: "#d33",
     }).then((result) => {
       if (result.isConfirmed) {
-        const slotDate = date.toISOString().split("T")[0];
-        const slotId = `${facility?.results?._id}${slotDate}${slot
+        const slotId = `${facility?.results?._id}${date}${slot
           .split(" ")
           .join("")}${lane?.split(" ").join("+")}`;
         deleteSlot(slotId)
@@ -72,8 +73,9 @@ const RentalBookingReviewPart = ({
             });
             const updatedSlots = selectSlots
               ?.map((slots: any) => {
+                console.log(slots);
                 if (
-                  slots.date.toISOString().split("T")[0] === slotDate &&
+                  slots.date.toISOString().split("T")[0] === date &&
                   slots.lane === lane &&
                   slots.slots.length > 1
                 ) {
@@ -84,7 +86,7 @@ const RentalBookingReviewPart = ({
                     ),
                   };
                 } else if (
-                  slots.date.toISOString().split("T")[0] === slotDate &&
+                  slots.date.toISOString().split("T")[0] === date &&
                   slots.lane === lane &&
                   slots.slots.length == 1
                 ) {
@@ -93,6 +95,9 @@ const RentalBookingReviewPart = ({
                 return slots;
               })
               .filter(Boolean);
+            if (updatedSlots.length == 0) {
+              setBlock(false);
+            }
             setSelectSlots(updatedSlots);
           })
           .catch((error) =>

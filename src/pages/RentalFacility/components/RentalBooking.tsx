@@ -281,6 +281,7 @@ const RentalBooking = ({
               setTotalPrice={setTotalPrice}
               totalPrice={totalPrice}
               setVoucherApplied={setVoucherApplied}
+              setBlock={setBlock}
             />
             <FacilityPaymentModal
               bookings={finalData}
