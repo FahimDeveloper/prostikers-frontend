@@ -49,8 +49,9 @@ const ShopCategorySection = () => {
                 >
                   <Link
                     key={index}
-                    to={category.name.split(" ").join("-")}
-                    // to="/coming-soon"
+                    // to={category.name.split(" ").join("-")}
+                    to="/coming-soon"
+                    // to="/shop/products"
                     className="no-underline"
                   >
                     <div

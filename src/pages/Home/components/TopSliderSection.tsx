@@ -23,7 +23,7 @@ const TopSliderSection = () => {
     {
       title: "Softball Success Starts Here: Power, Precision & Play",
       description:
-        "“Book our cages today for you or your team to enhance your skill set.ProStrikers expert-led training gives you the competitive edge you need to shine.",
+        "Book our cages today for you or your team to enhance your skill set.ProStrikers expert-led training gives you the competitive edge you need to shine.",
       image: banner2,
       first_button: "Book A Lane",
       second_button: "Book A Coaching Session",

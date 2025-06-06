@@ -6,6 +6,7 @@ import { GiClick } from "react-icons/gi";
 import GetInMap from "../pages/Contact/components/GetInMap";
 import GetInForm from "../pages/Contact/components/GetInForm";
 import { useNavigate } from "react-router-dom";
+import MembershipConditions from "../components/MembershipConditions";
 
 const MembershipCardSection = () => {
   const [plan, setPlan] = useState("monthly");
@@ -157,6 +158,14 @@ const MembershipCardSection = () => {
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                           <p>Inclusive of a complimentary pitching machine</p>
                         </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <MembershipConditions>
+                            <li className="font-medium cursor-pointer text-sm underline">
+                              Apply Membership Conditions
+                            </li>
+                          </MembershipConditions>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -209,6 +218,14 @@ const MembershipCardSection = () => {
                         <li className="flex gap-2">
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                           <p>Inclusive of a complimentary pitching machine.</p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <MembershipConditions>
+                            <li className="font-medium cursor-pointer text-sm underline">
+                              Apply Membership Conditions
+                            </li>
+                          </MembershipConditions>
                         </li>
                       </ul>
                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
@@ -272,6 +289,14 @@ const MembershipCardSection = () => {
                             Host your next corporate event with us, offering
                             your team a unique and dynamic experience
                           </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <MembershipConditions>
+                            <li className="font-medium cursor-pointer text-sm underline">
+                              Apply Membership Conditions
+                            </li>
+                          </MembershipConditions>
                         </li>
                       </ul>
                     </div>
@@ -340,6 +365,14 @@ const MembershipCardSection = () => {
                             months.
                           </p>
                         </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <MembershipConditions>
+                            <li className="font-medium cursor-pointer text-sm underline">
+                              Apply Membership Conditions
+                            </li>
+                          </MembershipConditions>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -396,6 +429,14 @@ const MembershipCardSection = () => {
                             Annual memberships require minimum commitment of 03
                             months.
                           </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <MembershipConditions>
+                            <li className="font-medium cursor-pointer text-sm underline">
+                              Apply Membership Conditions
+                            </li>
+                          </MembershipConditions>
                         </li>
                       </ul>
                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
@@ -466,6 +507,14 @@ const MembershipCardSection = () => {
                             Annual memberships require minimum commitment of 03
                             months.
                           </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <MembershipConditions>
+                            <li className="font-medium cursor-pointer text-sm underline">
+                              Apply Membership Conditions
+                            </li>
+                          </MembershipConditions>
                         </li>
                       </ul>
                     </div>
@@ -553,6 +602,14 @@ const MembershipCardSection = () => {
                                   rate.
                                 </p>
                               </li>
+                              <li className="flex gap-2">
+                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                <MembershipConditions>
+                                  <li className="font-medium cursor-pointer text-sm underline">
+                                    Apply Membership Conditions
+                                  </li>
+                                </MembershipConditions>
+                              </li>
                             </ul>
                           </div>
                         </div>
@@ -602,6 +659,14 @@ const MembershipCardSection = () => {
                                   Enjoy $40 off from regular training session
                                   rate.
                                 </p>
+                              </li>
+                              <li className="flex gap-2">
+                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                                <MembershipConditions>
+                                  <li className="font-medium cursor-pointer text-sm underline">
+                                    Apply Membership Conditions
+                                  </li>
+                                </MembershipConditions>
                               </li>
                             </ul>
                           </div>

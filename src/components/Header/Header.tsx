@@ -6,7 +6,7 @@ import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 import { useSelector } from "react-redux";
-import Cart from "../Cart/Cart";
+// import Cart from "../Cart/Cart";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -49,7 +49,7 @@ const Header = () => {
           </nav>
           <div className="lg:block hidden">
             <div className="lg:flex items-center gap-5">
-              <Cart />
+              {/* <Cart /> */}
               {!user ? (
                 <Link to="/login" className="block no-underline">
                   <div className="bg-[#EAFFFF] cursor-pointer border border-solid rounded-full text-[#006566] border-[#C0E5E5] flex items-center justify-center gap-3 py-2 px-5">
@@ -68,7 +68,7 @@ const Header = () => {
           </div>
 
           <div className="flex gap-5 lg:hidden">
-            <Cart />
+            {/* <Cart /> */}
             <HiOutlineBars3BottomRight
               className="size-7 cursor-pointer"
               onClick={() => setOpen(true)}

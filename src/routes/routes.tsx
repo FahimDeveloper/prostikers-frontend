@@ -4,7 +4,12 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
-import FacilityTempPayment from "../pages/FacilityTempPayment/FacilityTempPayment";
+const FacilityTempPayment = LazyLoad(
+  lazy(() => import("../pages/FacilityTempPayment/FacilityTempPayment"))
+);
+const ShopifyProducts = LazyLoad(
+  lazy(() => import("../pages/ShopifyProducts/ShopifyProducts"))
+);
 const ViewCart = LazyLoad(lazy(() => import("../pages/ViewCart/ViewCart")));
 const ShopCheckOut = LazyLoad(
   lazy(() => import("../pages/ShopCheckOut/ShopCheckOut"))
@@ -689,6 +694,10 @@ export const router = createBrowserRouter([
       {
         path: "/shop/:slug",
         element: <ProductsPage />,
+      },
+      {
+        path: "/shop/products",
+        element: <ShopifyProducts />,
       },
       {
         path: "/cart",

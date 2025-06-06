@@ -8,6 +8,8 @@ import PrivacyPolicy from "../PrivacyPolicy";
 import Container from "../Container";
 import { PiTiktokLogoLight } from "react-icons/pi";
 import LiabilityWaiver from "../LiabilityWaiver";
+import ShopReturnPolicy from "../ShopReturnPolicy";
+import MembershipConditions from "../MembershipConditions";
 const Footer = () => {
   return (
     <div
@@ -151,6 +153,16 @@ const Footer = () => {
                     Liability Waiver
                   </li>
                 </LiabilityWaiver>
+                <ShopReturnPolicy>
+                  <li className="text-[#7C7C7C] cursor-pointer">
+                    Shop Return Policy
+                  </li>
+                </ShopReturnPolicy>
+                <MembershipConditions>
+                  <li className="text-[#7C7C7C] cursor-pointer">
+                    Membership Conditions
+                  </li>
+                </MembershipConditions>
               </ul>
               <ul className="list-none space-y-2">
                 <li className="text-white font-medium text-lg">Partnership</li>

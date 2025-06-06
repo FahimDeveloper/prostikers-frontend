@@ -22,10 +22,10 @@ const Dashboard = () => {
       label: "Rental Facilities",
       value: "/dashboard/my-rental-facilities",
     },
-    {
-      label: "Shop Orders",
-      value: "/dashboard/my-shop-orders",
-    },
+    // {
+    //   label: "Shop Orders",
+    //   value: "/dashboard/my-shop-orders",
+    // },
     {
       label: "Classes",
       value: "/dashboard/my-classes",
