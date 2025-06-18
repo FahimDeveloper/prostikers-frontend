@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-import Container from "../../components/Container";
 import { FaSpinner } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
-const ShopifyProducts = () => {
+const FeaturedProducts = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const scriptURL =
@@ -234,15 +233,16 @@ const ShopifyProducts = () => {
   }, []);
 
   return (
-    <Container>
+    <div className="space-y-5">
+      <h3 className="text-3xl font-semibold">Featured Products</h3>
       {loading && (
-        <div className="h-svh w-full flex justify-center items-center">
+        <div className="h-96 w-full flex justify-center items-center">
           <FaSpinner className="animate-spin size-8 text-primary" />
         </div>
       )}
-      <div id="collection-component-1746702375982" className={"py-5"} />
-    </Container>
+      <div id="collection-component-1746702375982" />
+    </div>
   );
 };
 
-export default ShopifyProducts;
+export default FeaturedProducts;

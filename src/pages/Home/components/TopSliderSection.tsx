@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Slider from "react-slick";
 import banner1 from "../../../assets/images/home/banners/banner1.webp";
 import banner2 from "../../../assets/images/home/banners/banner2.webp";

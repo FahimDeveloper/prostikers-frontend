@@ -4,11 +4,17 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+const ShopifyShop = LazyLoad(
+  lazy(() => import("../pages/ShopifyShop/ShopifyShop"))
+);
+const ShopView = LazyLoad(
+  lazy(() => import("../pages/ShopifyShop/view/ShopView"))
+);
+// const ProductsView = LazyLoad(
+//   lazy(() => import("../pages/ShopifyShop/view/ProductsView"))
+// );
 const FacilityTempPayment = LazyLoad(
   lazy(() => import("../pages/FacilityTempPayment/FacilityTempPayment"))
-);
-const ShopifyProducts = LazyLoad(
-  lazy(() => import("../pages/ShopifyProducts/ShopifyProducts"))
 );
 const ViewCart = LazyLoad(lazy(() => import("../pages/ViewCart/ViewCart")));
 const ShopCheckOut = LazyLoad(
@@ -17,9 +23,13 @@ const ShopCheckOut = LazyLoad(
 const MyShopOrders = LazyLoad(
   lazy(() => import("../pages/DashboardManagement/MyShopOrders/MyShopOrders"))
 );
-const ProductsPage = LazyLoad(
-  lazy(() => import("../pages/ProductsPage/ProductsPage"))
+const ShopifyProducts = LazyLoad(
+  lazy(() => import("../pages/ShopifyProducts/ShopifyProducts"))
 );
+// const ProductsPage = LazyLoad(
+//   lazy(() => import("../pages/ProductsPage/ProductsPage"))
+// );
+// const Shop = LazyLoad(lazy(() => import("../pages/Shop/Shop")));
 const ShopPayment = LazyLoad(
   lazy(() => import("../pages/ShopPayment/ShopPayment"))
 );
@@ -527,7 +537,6 @@ const Franchise = LazyLoad(lazy(() => import("../pages/Franchise/Franchise")));
 const ComingSoon = LazyLoad(
   lazy(() => import("../pages/ComingSoon/ComingSoon"))
 );
-const Shop = LazyLoad(lazy(() => import("../pages/Shop/Shop")));
 const OneTrainingOutlet = LazyLoad(
   lazy(() => import("../pages/OneTraining/components/OneTrainingOutlet"))
 );
@@ -689,16 +698,34 @@ export const router = createBrowserRouter([
       },
       {
         path: "/shop",
-        element: <Shop />,
+        element: <ShopifyShop />,
+        children: [
+          {
+            path: "/shop",
+            element: <ShopView />,
+          },
+          // {
+          //   path: "/shop/:category",
+          //   element: <ProductsView />,
+          // },
+          {
+            path: "/shop/products",
+            element: <ShopifyProducts />,
+          },
+        ],
       },
-      {
-        path: "/shop/:slug",
-        element: <ProductsPage />,
-      },
-      {
-        path: "/shop/products",
-        element: <ShopifyProducts />,
-      },
+      // {
+      //   path: "/shop",
+      //   element: <Shop />,
+      // },
+      // {
+      //   path: "/shop/:slug",
+      //   element: <ProductsPage />,
+      // },
+      // {
+      //   path: "/shop/products",
+      //   element: <ShopifyProducts />,
+      // },
       {
         path: "/cart",
         element: (

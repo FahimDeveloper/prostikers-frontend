@@ -76,6 +76,16 @@ h6 {
   opacity: 1;
 }
 
+.shop-banner-dot {
+  color: white;
+  opacity: 0.6;
+}
+
+.slick-active .shop-banner-dot {
+  color: #0ebbbc !important;
+  opacity: 1;
+}
+
 .journey-slider-dot {
   color: black;
   opacity: 0.3;
@@ -84,6 +94,14 @@ h6 {
 .slick-active .journey-slider-dot {
   opacity: 1;
 }
+
+/* .shop-category-slider .slick-slide {
+  margin: 0 10px;
+}
+
+.shop-category-slider .slick-list {
+  margin: 0 -10px;
+} */
 
 .journey-slider .slick-track {
   height: 500px;
