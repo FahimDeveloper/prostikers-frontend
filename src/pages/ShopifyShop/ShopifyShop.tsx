@@ -52,7 +52,6 @@ const MegaMenu = () => {
         "Gloves",
         "Protective Gear",
         "Training Gear",
-        "Umpire",
       ],
       promos: [
         {
@@ -84,7 +83,6 @@ const MegaMenu = () => {
         "Gloves",
         "Protective Gear",
         "Training Gear",
-        "Umpire",
       ],
       promos: [
         {
@@ -133,8 +131,7 @@ const MegaMenu = () => {
         "Apparel",
         "Soccer Balls",
         "Player Equipment",
-        "Team & Field Equipment",
-        "Goal Keeper",
+        "Field Equipment",
       ],
       promos: [
         {

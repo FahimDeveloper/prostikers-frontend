@@ -1,9 +1,8 @@
 import Slider from "react-slick";
-import banner1 from "../../../assets/images/home/banners/banner1.webp";
-import banner2 from "../../../assets/images/home/banners/banner2.webp";
-import banner3 from "../../../assets/images/home/banners/banner3.webp";
-import banner4 from "../../../assets/images/home/banners/banner4.webp";
-import banner5 from "../../../assets/images/home/banners/banner5.webp";
+import banner1 from "../../../assets/images/shopify/baseball-slider.jpg";
+import banner2 from "../../../assets/images/shopify/cricket-slider.jpg";
+import banner3 from "../../../assets/images/shopify/soccer-slider.jpg";
+import banner4 from "../../../assets/images/shopify/hockey-slider.jpg";
 import { Link } from "react-router-dom";
 import { GoDotFill } from "react-icons/go";
 import { Button } from "antd";
@@ -18,31 +17,24 @@ const ShopBanner = () => {
       link: "/shop/products",
     },
     {
-      title: "20% Off Franklin Gloves",
+      title: "20% Off Cricket Accessories",
       description:
         "Durable, comfortable, and game ready upgrade your defense today",
       image: banner2,
       link: "/shop/products",
     },
     {
-      title: "20% Off Franklin Gloves",
+      title: "20% Off Soccer Gear",
       description:
         "Durable, comfortable, and game ready upgrade your defense today",
       image: banner3,
       link: "/shop/products",
     },
     {
-      title: "20% Off Franklin Gloves",
+      title: "20% Off Hockey Equipment",
       description:
         "Durable, comfortable, and game ready upgrade your defense today",
       image: banner4,
-      link: "/shop/products",
-    },
-    {
-      title: "20% Off Franklin Gloves",
-      description:
-        "Durable, comfortable, and game ready upgrade your defense today",
-      image: banner5,
       link: "/shop/products",
     },
   ];
@@ -84,8 +76,8 @@ const ShopBanner = () => {
               <div
                 className="max-h-[425px] flex lg:items-center sm:items-end items-center rounded-3xl"
                 style={{
-                  backgroundImage: `url(${slide.image})`,
-                  backgroundPosition: "bottom right",
+                  backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent), url(${slide.image})`,
+                  backgroundPosition: "center right",
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
                 }}
