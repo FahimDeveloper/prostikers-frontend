@@ -14,6 +14,7 @@ const slotBookingApi = slotBookingApiSlice.injectEndpoints({
         "carts",
         "group-training-booked",
         "one-training-booked",
+        "facility-booked",
       ],
     }),
     getBookingSlots: builder.query<any, any>({
