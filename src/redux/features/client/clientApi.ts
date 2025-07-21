@@ -7,6 +7,7 @@ const clientApi = clientApiSlice.injectEndpoints({
         url: `/users/${id}`,
         method: "GET",
       }),
+      keepUnusedDataFor: 0,
     }),
     updateClient: builder.mutation({
       query: ({ id, payload }) => ({

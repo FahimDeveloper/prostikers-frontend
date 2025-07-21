@@ -2,9 +2,16 @@ import { paymentApiSlice } from "../../api/httpsSlice";
 
 const paymentApi = paymentApiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    payment: builder.mutation({
+    paymentIntent: builder.mutation({
       query: (body) => ({
         url: "/stripe-payment/create-payment-intent",
+        method: "POST",
+        body,
+      }),
+    }),
+    createSubscription: builder.mutation({
+      query: (body) => ({
+        url: "/stripe-payment/create-subscription",
         method: "POST",
         body,
       }),
@@ -62,7 +69,8 @@ const paymentApi = paymentApiSlice.injectEndpoints({
 });
 
 export const {
-  usePaymentMutation,
+  usePaymentIntentMutation,
+  useCreateSubscriptionMutation,
   useAppoinmentPaymentsQuery,
   useBootcampPaymentsQuery,
   useClassPaymentsQuery,

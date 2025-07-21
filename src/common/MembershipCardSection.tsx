@@ -6,15 +6,28 @@ import { GiClick } from "react-icons/gi";
 import GetInMap from "../pages/Contact/components/GetInMap";
 import GetInForm from "../pages/Contact/components/GetInForm";
 import { useNavigate } from "react-router-dom";
-import MembershipConditions from "../components/MembershipConditions";
+import { useAppSelector } from "../hooks/useAppHooks";
+import { selectCurrentUser } from "../redux/features/auth/authSlice";
+import { useClientQuery } from "../redux/features/client/clientApi";
 
 const MembershipCardSection = () => {
   const [plan, setPlan] = useState("monthly");
+  const user = useAppSelector(selectCurrentUser);
+  const { data: userData } = useClientQuery(user?._id);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const panelStyle: React.CSSProperties = {
     backgroundColor: "#EDFFFF",
     borderColor: "#ACDFDF",
+  };
+  const isCurrentPlan = (membershipName: string, planType: string) => {
+    return (
+      userData?.results?.status &&
+      userData?.results?.membership &&
+      userData?.results?.package_name?.toLowerCase() ===
+        membershipName.toLowerCase() &&
+      userData?.results?.plan?.toLowerCase() === planType.toLowerCase()
+    );
   };
   const handleChangePackage = (value: string) => {
     setPlan(value);
@@ -158,23 +171,24 @@ const MembershipCardSection = () => {
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                           <p>Inclusive of a complimentary pitching machine</p>
                         </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <MembershipConditions>
-                            <li className="font-medium cursor-pointer text-sm underline">
-                              Apply Membership Conditions
-                            </li>
-                          </MembershipConditions>
-                        </li>
                       </ul>
                     </div>
                   </div>
-                  <button
-                    onClick={() => handleMembership("individual_pro", 150)}
-                    className="membership-btn"
-                  >
-                    Choose Plan
-                  </button>
+                  {isCurrentPlan("individual pro", plan) ? (
+                    <button
+                      className="membership-btn cursor-not-allowed opacity-50"
+                      disabled
+                    >
+                      Current Plan
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleMembership("individual_pro", 150)}
+                      className="membership-btn"
+                    >
+                      Choose Plan
+                    </button>
+                  )}
                 </div>
                 <div className="membership-card">
                   <div className=" space-y-10">
@@ -219,14 +233,6 @@ const MembershipCardSection = () => {
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                           <p>Inclusive of a complimentary pitching machine.</p>
                         </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <MembershipConditions>
-                            <li className="font-medium cursor-pointer text-sm underline">
-                              Apply Membership Conditions
-                            </li>
-                          </MembershipConditions>
-                        </li>
                       </ul>
                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
                         During thursday- Friday 5-8pm limited booking length one
@@ -234,14 +240,23 @@ const MembershipCardSection = () => {
                       </p>
                     </div>
                   </div>
-                  <button
-                    onClick={() =>
-                      handleMembership("individual_pro_unlimited", 450)
-                    }
-                    className="membership-btn"
-                  >
-                    Choose Plan
-                  </button>
+                  {isCurrentPlan("individual pro unlimited", plan) ? (
+                    <button
+                      className="membership-btn cursor-not-allowed opacity-50"
+                      disabled
+                    >
+                      Current Plan
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() =>
+                        handleMembership("individual_pro_unlimited", 450)
+                      }
+                      className="membership-btn"
+                    >
+                      Choose Plan
+                    </button>
+                  )}
                 </div>
                 <div className="membership-card">
                   <div className=" space-y-10">
@@ -289,14 +304,6 @@ const MembershipCardSection = () => {
                             Host your next corporate event with us, offering
                             your team a unique and dynamic experience
                           </p>
-                        </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <MembershipConditions>
-                            <li className="font-medium cursor-pointer text-sm underline">
-                              Apply Membership Conditions
-                            </li>
-                          </MembershipConditions>
                         </li>
                       </ul>
                     </div>
@@ -365,23 +372,25 @@ const MembershipCardSection = () => {
                             months.
                           </p>
                         </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <MembershipConditions>
-                            <li className="font-medium cursor-pointer text-sm underline">
-                              Apply Membership Conditions
-                            </li>
-                          </MembershipConditions>
-                        </li>
                       </ul>
                     </div>
                   </div>
-                  <button
-                    onClick={() => handleMembership("individual_pro", 1500)}
-                    className="membership-btn"
-                  >
-                    Choose Plan
-                  </button>
+
+                  {isCurrentPlan("individual pro", plan) ? (
+                    <button
+                      className="membership-btn cursor-not-allowed opacity-50"
+                      disabled
+                    >
+                      Current Plan
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleMembership("individual_pro", 1500)}
+                      className="membership-btn"
+                    >
+                      Choose Plan
+                    </button>
+                  )}
                 </div>
                 <div className="membership-card">
                   <div className=" space-y-10">
@@ -430,14 +439,6 @@ const MembershipCardSection = () => {
                             months.
                           </p>
                         </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <MembershipConditions>
-                            <li className="font-medium cursor-pointer text-sm underline">
-                              Apply Membership Conditions
-                            </li>
-                          </MembershipConditions>
-                        </li>
                       </ul>
                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
                         During thursday- Friday 5-8pm limited booking length one
@@ -445,14 +446,23 @@ const MembershipCardSection = () => {
                       </p>
                     </div>
                   </div>
-                  <button
-                    onClick={() =>
-                      handleMembership("individual_pro_unlimited", 4500)
-                    }
-                    className="membership-btn"
-                  >
-                    Choose Plan
-                  </button>
+                  {isCurrentPlan("individual pro unlimited", plan) ? (
+                    <button
+                      className="membership-btn cursor-not-allowed opacity-50"
+                      disabled
+                    >
+                      Current Plan
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() =>
+                        handleMembership("individual_pro_unlimited", 4500)
+                      }
+                      className="membership-btn"
+                    >
+                      Choose Plan
+                    </button>
+                  )}
                 </div>
                 <div className="membership-card">
                   <div className=" space-y-10">
@@ -507,14 +517,6 @@ const MembershipCardSection = () => {
                             Annual memberships require minimum commitment of 03
                             months.
                           </p>
-                        </li>
-                        <li className="flex gap-2">
-                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <MembershipConditions>
-                            <li className="font-medium cursor-pointer text-sm underline">
-                              Apply Membership Conditions
-                            </li>
-                          </MembershipConditions>
                         </li>
                       </ul>
                     </div>
@@ -604,11 +606,6 @@ const MembershipCardSection = () => {
                               </li>
                               <li className="flex gap-2">
                                 <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                                <MembershipConditions>
-                                  <li className="font-medium cursor-pointer text-sm underline">
-                                    Apply Membership Conditions
-                                  </li>
-                                </MembershipConditions>
                               </li>
                             </ul>
                           </div>
@@ -659,14 +656,6 @@ const MembershipCardSection = () => {
                                   Enjoy $40 off from regular training session
                                   rate.
                                 </p>
-                              </li>
-                              <li className="flex gap-2">
-                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                                <MembershipConditions>
-                                  <li className="font-medium cursor-pointer text-sm underline">
-                                    Apply Membership Conditions
-                                  </li>
-                                </MembershipConditions>
                               </li>
                             </ul>
                           </div>

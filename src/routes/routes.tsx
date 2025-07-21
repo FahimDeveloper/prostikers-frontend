@@ -4,6 +4,24 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+const FacilityBaseball = LazyLoad(
+  lazy(
+    () =>
+      import("../pages/RentalFacility/view/FacilityBaseball/FacilityBaseball")
+  )
+);
+const FacilitySoccer = LazyLoad(
+  lazy(() => import("../pages/RentalFacility/view/Soccer/FacilitySoccer"))
+);
+const FacilityCricket = LazyLoad(
+  lazy(() => import("../pages/RentalFacility/view/Cricket/FacilityCricket"))
+);
+const FacilitySoftball = LazyLoad(
+  lazy(() => import("../pages/RentalFacility/view/Softball/FacilitySoftball"))
+);
+const FacilityHockey = LazyLoad(
+  lazy(() => import("../pages/RentalFacility/view/Hockey/FacilityHockey"))
+);
 const ShopifyShop = LazyLoad(
   lazy(() => import("../pages/ShopifyShop/ShopifyShop"))
 );
@@ -749,6 +767,26 @@ export const router = createBrowserRouter([
       {
         path: "/rental-facility",
         element: <RentalFacility />,
+      },
+      {
+        path: "/facility/baseball",
+        element: <FacilityBaseball />,
+      },
+      {
+        path: "/facility/cricket",
+        element: <FacilityCricket />,
+      },
+      {
+        path: "/facility/softball",
+        element: <FacilitySoftball />,
+      },
+      {
+        path: "/facility/hockey",
+        element: <FacilityHockey />,
+      },
+      {
+        path: "/facility/soccer",
+        element: <FacilitySoccer />,
       },
       // {
       //   path: "/rental-membership",

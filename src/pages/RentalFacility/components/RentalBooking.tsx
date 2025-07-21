@@ -1,4 +1,4 @@
-import { Radio, Select } from "antd";
+import { Radio } from "antd";
 import { useEffect, useState } from "react";
 import DateSlider from "../../../components/DateSlider";
 import { useRentalFacilityQuery } from "../../../redux/features/facility/facilityApi";
@@ -18,13 +18,7 @@ import RentalBookingReviewPart from "./RentalBookingReviewPart";
 import { useAppSelector } from "../../../hooks/useAppHooks";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import FacilityPaymentModal from "../../../components/ui/modal/FacilityPaymentModal";
-const RentalBooking = ({
-  facilityCage,
-  setFacilityCage,
-}: {
-  facilityCage: string | undefined;
-  setFacilityCage: any;
-}) => {
+const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
   dayjs.extend(utc);
   dayjs.extend(timezone);
   const [activeDate, setActiveDate] = useState(
@@ -63,10 +57,6 @@ const RentalBooking = ({
   const [voucherApplied, setVoucherApplied] = useState(false);
   const [bookings, setBookings] = useState<Array<any>>([]);
   const [finalData, setFinalData] = useState<any>({});
-
-  const onChange = (value: string) => {
-    setFacilityCage(value);
-  };
 
   useEffect(() => {
     if (facility?.results?._id) {
@@ -151,7 +141,7 @@ const RentalBooking = ({
   return (
     <>
       <div className="bg-[#F9FAFB] sm:py-10 rounded-2xl space-y-6 sm:px-5 py-7 px-3">
-        <div className="space-y-3">
+        {/* <div className="space-y-3">
           <h3 className="text-xl font-semibold text-[#07133D]">
             Select Facility Type
           </h3>
@@ -183,7 +173,7 @@ const RentalBooking = ({
               },
             ]}
           />
-        </div>
+        </div> */}
         {facility?.results._id && (
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-[#07133D]">

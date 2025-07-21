@@ -4,7 +4,7 @@ import CheckoutForm from "./ui/form/CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 import logo from "../assets/icons/login-logo.svg";
 import { useEffect, useState } from "react";
-import { usePaymentMutation } from "../redux/features/payment/paymentApi";
+import { usePaymentIntentMutation } from "../redux/features/payment/paymentApi";
 import Swal from "sweetalert2";
 import { FaSpinner } from "react-icons/fa";
 import { configKey } from "../config";
@@ -22,7 +22,8 @@ const Checkout = ({
 }) => {
   const stripePromise = loadStripe(configKey.STRIPE_KEY);
   const [clientSecret, setClientSecret] = useState("");
-  const [create, { isLoading: createLoading }] = usePaymentMutation(undefined);
+  const [create, { isLoading: createLoading }] =
+    usePaymentIntentMutation(undefined);
   useEffect(() => {
     create({ amount: amount })
       .unwrap()

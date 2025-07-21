@@ -57,10 +57,16 @@ const MembershipSection = ({ data }: { data: IUser }) => {
         </CancellationPolicy>
       </div>
       {data?.membership ? (
-        <div className="px-8 py-10 flex justify-between flex-wrap gap-5 items-center bg-[#F5FFFF] border border-solid rounded-2xl border-[#BDFCFF]">
+        <div
+          className={`px-8 py-10 flex justify-between flex-wrap gap-5 items-center ${
+            renew ? "bg-red-50" : "bg-[#F5FFFF]"
+          } border border-solid rounded-2xl ${
+            renew ? "border-red-200" : "border-[#BDFCFF]"
+          }`}
+        >
           <div className="space-y-2">
             <p className="text-2xl text-[#06494D] font-extrabold capitalize">
-              {data?.package_name}
+              {data?.package_name} {renew && " - (Expired)"}
             </p>
             <div className="flex items-center gap-2">
               <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
@@ -68,12 +74,17 @@ const MembershipSection = ({ data }: { data: IUser }) => {
               </p>
               <div className="border-r border-gray-400 border-solid border-l-0 border-t-0 border-b-0 h-4" />
               <p className=" text-sm font-medium text-[#456D6D] tracking-widest">
-                Expire: {moment(data?.expiry_date).format("MMMM Do YYYY")}
+                {renew ? "Expired" : "Expire"}:{" "}
+                {moment(data?.expiry_date).format("MMMM Do YYYY")}
               </p>
             </div>
           </div>
           <div className="flex gap-5">
-            {renew && (
+            {renew ? (
+              <Link to="/membership">
+                <Button type="default">Renew membership</Button>
+              </Link>
+            ) : (
               <Link to="/membership">
                 <Button type="default">Upgrade Now</Button>
               </Link>
