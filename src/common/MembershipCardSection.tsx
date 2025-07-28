@@ -146,7 +146,7 @@ const MembershipCardSection = () => {
                     </div>
                     <div className="space-y-5">
                       <h5 className="font-bold leading-4 text-lg">
-                        Benifits of membership
+                        Benefits of membership
                       </h5>
                       <ul className="text-sm membership-list list-none font-medium space-y-4">
                         <li className="flex gap-2">
@@ -205,7 +205,7 @@ const MembershipCardSection = () => {
                     </div>
                     <div className="space-y-5">
                       <h5 className="font-bold leading-4 text-lg">
-                        Benifits of membership
+                        Benefits of membership
                       </h5>
                       <ul className="text-sm membership-list font-medium list-none space-y-4">
                         <li className="flex gap-2">
@@ -270,7 +270,7 @@ const MembershipCardSection = () => {
                     </div>
                     <div className="space-y-5">
                       <h5 className="font-bold leading-4 text-lg">
-                        Benifits of membership
+                        Benefits of membership
                       </h5>
                       <ul className="text-sm membership-list list-none font-medium space-y-4">
                         <li className="flex gap-2">
@@ -333,7 +333,7 @@ const MembershipCardSection = () => {
                     </div>
                     <div className="space-y-5">
                       <h5 className="font-bold leading-4 text-lg">
-                        Benifits of membership
+                        Benefits of membership
                       </h5>
                       <ul className="text-sm membership-list list-none font-medium space-y-4">
                         <li className="flex gap-2">
@@ -407,12 +407,12 @@ const MembershipCardSection = () => {
                     </div>
                     <div className="space-y-5">
                       <h5 className="font-bold leading-4 text-lg">
-                        Benifits of membership
+                        Benefits of membership
                       </h5>
                       <ul className="text-sm membership-list font-medium list-none space-y-4">
                         <li className="flex gap-2">
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                          <p>Annual membership $5000</p>
+                          <p>Annual membership $4500</p>
                         </li>
                         <li className="flex gap-2">
                           <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
@@ -476,7 +476,7 @@ const MembershipCardSection = () => {
                     </div>
                     <div className="space-y-5">
                       <h5 className="font-bold leading-4 text-lg">
-                        Benifits of membership
+                        Benefits of membership
                       </h5>
                       <ul className="text-sm membership-list list-none font-medium space-y-4">
                         <li className="flex gap-2">
@@ -573,7 +573,7 @@ const MembershipCardSection = () => {
                           </div>
                           <div className="space-y-5">
                             <h5 className="font-bold leading-4 text-lg">
-                              Benifits of membership
+                              Benefits of membership
                             </h5>
                             <ul className="text-sm membership-list list-none font-medium space-y-4">
                               <li className="flex gap-2">
@@ -626,7 +626,7 @@ const MembershipCardSection = () => {
                           </div>
                           <div className="space-y-5">
                             <h5 className="font-bold leading-4 text-lg">
-                              Benifits of membership
+                              Benefits of membership
                             </h5>
                             <ul className="text-sm membership-list list-none font-medium space-y-4">
                               <li className="flex gap-2">

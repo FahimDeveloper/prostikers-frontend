@@ -21,9 +21,8 @@ const GallerySection = ({ title, gallery }: any) => {
               <Image
                 key={index}
                 src={item}
-                className="w-full h-full rounded-2xl"
+                className="w-full sm:!h-[430px] !h-80 object-cover rounded-2xl"
                 alt="galler image"
-                loading="lazy"
               />
             );
           })}
@@ -33,10 +32,9 @@ const GallerySection = ({ title, gallery }: any) => {
               .map((item: any, index: number) => {
                 return (
                   <Image
-                    loading="lazy"
                     key={index}
                     src={item}
-                    className={`w-full h-full rounded-2xl ${
+                    className={`w-full sm:!h-52 !h-40 object-cover object-center rounded-2xl ${
                       index > 3 ? "hidden" : "visible"
                     }`}
                     alt="galler image"

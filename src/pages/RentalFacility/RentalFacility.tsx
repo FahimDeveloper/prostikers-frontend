@@ -5,6 +5,13 @@ import program3 from "../../assets/images/programs/cricket.webp";
 import program4 from "../../assets/images/programs/soccer.webp";
 import program5 from "../../assets/images/programs/hockey.webp";
 import ProgramsCard from "../../common/card/ProgramsCard";
+import GallerySection from "../../common/GallerySection";
+import gallery1 from "../../assets/images/facility/rental/rantal-1.jpg";
+import gallery2 from "../../assets/images/facility/rental/rantal-2.jpg";
+import gallery3 from "../../assets/images/facility/rental/rantal-3.jpg";
+import gallery4 from "../../assets/images/facility/rental/rantal-4.jpg";
+import gallery5 from "../../assets/images/facility/rental/rantal-5.jpg";
+import gallery6 from "../../assets/images/facility/rental/rantal-6.jpg";
 
 const Rental = () => {
   const programsData = [
@@ -34,10 +41,12 @@ const Rental = () => {
       link: "/facility/hockey",
     },
   ];
+  const gallery = [gallery1, gallery2, gallery3, gallery4, gallery5, gallery6];
   return (
     <>
       <Container>
         <div className="lg:py-14 md:py-12 py-10 space-y-10 mt-16">
+          <GallerySection title="Cricket Facility" gallery={gallery} />
           <div className="space-y-4 text-center">
             <h4 className="capitalize text-primary lg:text-2xl text-xl font-semibold leading-7">
               Sports We’ve got Covered
