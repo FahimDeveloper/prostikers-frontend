@@ -6,7 +6,6 @@ import MembershipCheckout from "../../components/MembershipCheckout";
 
 const MembershipPayment = () => {
   const { state } = useLocation();
-  const { data, amount } = state;
   const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   useEffect(() => {
@@ -20,9 +19,9 @@ const MembershipPayment = () => {
       {state?.amount && state?.data && (
         <MembershipCheckout
           email={user?.email!}
-          plan={data?.plan}
-          membership={data?.package_name}
-          amount={amount}
+          plan={state?.data?.plan}
+          membership={state?.data?.package_name}
+          amount={state?.amount}
         />
       )}
     </div>

@@ -6,7 +6,7 @@ const version = {
   test: "TEST_PRODUCTION",
 };
 
-const activeEnv = version.live;
+const activeEnv = version.test;
 
 const envKeys: Record<
   string,
