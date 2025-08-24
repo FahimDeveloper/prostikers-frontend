@@ -21,6 +21,7 @@ const envKeys: Record<
     MESSAGINGSENDERID: string;
     APPID: string;
     STRIPE_KEY: string;
+    WEB_URL: string;
   }
 > = {
   LIVE_PRODUCTION: {
@@ -34,6 +35,7 @@ const envKeys: Record<
     MESSAGINGSENDERID: import.meta.env.VITE_APP_LIVE_MESSAGINGSENDERID,
     APPID: import.meta.env.VITE_APP_LIVE_APPID,
     STRIPE_KEY: import.meta.env.VITE_APP_LIVE_STRIPE_KEY,
+    WEB_URL: import.meta.env.VITE_APP_LIVE_WEB_URL,
   },
   DEVELOPMENT: {
     BASE_URL: import.meta.env.VITE_APP_LOCAL_API_URL,
@@ -46,6 +48,7 @@ const envKeys: Record<
     MESSAGINGSENDERID: import.meta.env.VITE_APP_TEST_MESSAGINGSENDERID,
     APPID: import.meta.env.VITE_APP_TEST_APPID,
     STRIPE_KEY: import.meta.env.VITE_APP_TEST_STRIPE_KEY,
+    WEB_URL: import.meta.env.VITE_APP_LOCAL_WEB_URL,
   },
   TEST_PRODUCTION: {
     BASE_URL: import.meta.env.VITE_APP_TEST_API_URL,
@@ -58,6 +61,7 @@ const envKeys: Record<
     MESSAGINGSENDERID: import.meta.env.VITE_APP_TEST_MESSAGINGSENDERID,
     APPID: import.meta.env.VITE_APP_TEST_APPID,
     STRIPE_KEY: import.meta.env.VITE_APP_TEST_STRIPE_KEY,
+    WEB_URL: import.meta.env.VITE_APP_TEST_WEB_URL,
   },
 };
 
@@ -76,4 +80,5 @@ export const configKey = {
   MESSAGINGSENDERID: envKeys[activeEnv].MESSAGINGSENDERID,
   APPID: envKeys[activeEnv].APPID,
   STRIPE_KEY: envKeys[activeEnv].STRIPE_KEY,
+  REDIRECT_URL: envKeys[activeEnv].WEB_URL,
 };

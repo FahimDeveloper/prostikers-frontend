@@ -4,6 +4,10 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+import ProductsView from "../pages/ShopifyShop/view/ProductsView";
+const MembershipTempPayment = LazyLoad(
+  lazy(() => import("../pages/MembershipTempPayment/MembershipTempPayment"))
+);
 const FacilityBaseball = LazyLoad(
   lazy(
     () =>
@@ -41,18 +45,12 @@ const ShopCheckOut = LazyLoad(
 const MyShopOrders = LazyLoad(
   lazy(() => import("../pages/DashboardManagement/MyShopOrders/MyShopOrders"))
 );
-const ShopifyProducts = LazyLoad(
-  lazy(() => import("../pages/ShopifyProducts/ShopifyProducts"))
-);
 // const ProductsPage = LazyLoad(
 //   lazy(() => import("../pages/ProductsPage/ProductsPage"))
 // );
 // const Shop = LazyLoad(lazy(() => import("../pages/Shop/Shop")));
 const ShopPayment = LazyLoad(
   lazy(() => import("../pages/ShopPayment/ShopPayment"))
-);
-const ProductPage = LazyLoad(
-  lazy(() => import("../pages/ProductPage/ProductPage"))
 );
 const MyBundleCreditPacks = LazyLoad(
   lazy(
@@ -707,6 +705,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/membership/team/payment/:id",
+        element: (
+          <PrivetRoute>
+            <MembershipTempPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
         path: "/coming-soon",
         element: <ComingSoon />,
       },
@@ -722,13 +728,9 @@ export const router = createBrowserRouter([
             path: "/shop",
             element: <ShopView />,
           },
-          // {
-          //   path: "/shop/:category",
-          //   element: <ProductsView />,
-          // },
           {
-            path: "/shop/products",
-            element: <ShopifyProducts />,
+            path: "/shop/products/:id",
+            element: <ProductsView />,
           },
         ],
       },
@@ -760,10 +762,10 @@ export const router = createBrowserRouter([
           </PrivetRoute>
         ),
       },
-      {
-        path: "/shop/products/:id",
-        element: <ProductPage />,
-      },
+      // {
+      //   path: "/shop/products/:id",
+      //   element: <ProductPage />,
+      // },
       {
         path: "/rental-facility",
         element: <RentalFacility />,

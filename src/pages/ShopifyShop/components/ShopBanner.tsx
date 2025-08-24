@@ -14,28 +14,28 @@ const ShopBanner = () => {
       description:
         "Durable, comfortable, and game ready upgrade your defense today",
       image: banner1,
-      link: "/shop/products",
+      link: "#",
     },
     {
       title: "20% Off Cricket Accessories",
       description:
         "Durable, comfortable, and game ready upgrade your defense today",
       image: banner2,
-      link: "/shop/products",
+      link: "#",
     },
     {
       title: "20% Off Soccer Gear",
       description:
         "Durable, comfortable, and game ready upgrade your defense today",
       image: banner3,
-      link: "/shop/products",
+      link: "#",
     },
     {
       title: "20% Off Hockey Equipment",
       description:
         "Durable, comfortable, and game ready upgrade your defense today",
       image: banner4,
-      link: "/shop/products",
+      link: "#",
     },
   ];
   const settings = {
@@ -74,12 +74,9 @@ const ShopBanner = () => {
           return (
             <div key={index}>
               <div
-                className="max-h-[425px] flex lg:items-center sm:items-end items-center rounded-3xl"
+                className="max-h-[450px] flex items-center sm:items-end lg:items-center rounded-3xl bg-no-repeat bg-cover bg-[linear-gradient(to_top,rgba(0,0,0,0.5),transparent)] sm:bg-[position:center_right] bg-[position:center_center]"
                 style={{
                   backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent), url(${slide.image})`,
-                  backgroundPosition: "center right",
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
                 }}
               >
                 <div className="lg:w-[800px] w-full sm:space-y-4 space-y-3 md:px-16 md:mt-40 sm:px-10 px-6 sm:pb-24 pb-16 sm:pt-0 pt-20">
@@ -87,7 +84,7 @@ const ShopBanner = () => {
                     <span className="text-primary text-lg tracking-wider font-semibold">
                       Flash Sale
                     </span>
-                    <h2 className="font-extrabold w-[450px] text-white text-5xl leading-[60px]  tracking-wider">
+                    <h2 className="font-extrabold sm:w-[450px] w-full text-white md:text-5xl text-4xl md:leading-[60px]  tracking-wider">
                       {slide.title}
                     </h2>
                     <p className="font-medium text-lg tracking-wider w-80 text-white ">

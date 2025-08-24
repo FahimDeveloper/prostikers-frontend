@@ -24,7 +24,7 @@ const FeaturedProducts = () => {
       window.ShopifyBuy.UI.onReady(client).then((ui: any) => {
         ui.createComponent("collection", {
           id: "327264305320",
-          node: document.getElementById("collection-component-1746702375982"),
+          node: document.getElementById("collection-component-1754568039176"),
           moneyFormat: "%24%7B%7Bamount%7D%7D",
           options: {
             product: {
@@ -240,7 +240,7 @@ const FeaturedProducts = () => {
           <FaSpinner className="animate-spin size-8 text-primary" />
         </div>
       )}
-      <div id="collection-component-1746702375982" />
+      <div id="collection-component-1754568039176" />
     </div>
   );
 };

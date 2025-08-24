@@ -150,21 +150,21 @@ const MegaMenu = () => {
     },
   ];
 
-  const renderMenuContent = (categories: string[], promos: any[]) => (
+  const renderMenuContent = (categories: string[]) => (
     <div className="fixed left-0 right-0 top-[135px] bg-white shadow-md 2xl:max-w-[1300px] xl:max-w-[1200px] lg:max-w-[1024px] md:max-w-[768px] mx-auto sm:px-10 z-40 p-5 flex gap-6">
       {/* Categories */}
       <div className="w-3/5 flex gap-6 flex-wrap">
         {[0, 1].map((col) => (
           <div key={col}>
-            <ul className="space-y-2 text-gray-700 list-inside text-sm">
+            <ul className="space-y-3 text-gray-700 list-inside text-sm">
               {categories
                 .filter((_, i) => i % 2 === col)
                 .map((item, idx) => (
-                  <Link
-                    to={"/shop/products"}
-                    className="block no-underline text-black"
-                  >
-                    <li key={idx} className="hover:underline cursor-pointer">
+                  <Link to={"#"} className="block no-underline text-black">
+                    <li
+                      key={idx}
+                      className="hover:underline cursor-pointer text-base"
+                    >
                       {item}
                     </li>
                   </Link>
@@ -175,7 +175,7 @@ const MegaMenu = () => {
       </div>
 
       {/* Promo Cards */}
-      <div className="w-2/5 flex gap-4">
+      {/* <div className="w-2/5 flex gap-4">
         {promos.map((promo, idx) => (
           <div
             key={idx}
@@ -186,13 +186,13 @@ const MegaMenu = () => {
             <img src={promo.image} alt="Promo" className="w-16 mt-4" />
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 
   return (
     <div className="mt-24 relative z-10">
-      <div className="bg-[#131B47] text-white sticky top-[90px] z-50 mb-1">
+      <div className="bg-[#131B47] sm:block hidden text-white sticky top-[96px] z-50 mb-1">
         <Container>
           <div className="flex justify-center relative">
             {megaMenuData.map((menu, index) => (
@@ -214,7 +214,7 @@ const MegaMenu = () => {
                     onMouseEnter={() => setOpenIndex(index)}
                     onMouseLeave={() => setOpenIndex(null)}
                   >
-                    {renderMenuContent(menu.categories, menu.promos)}
+                    {renderMenuContent(menu.categories)}
                   </div>
                 )}
               </div>

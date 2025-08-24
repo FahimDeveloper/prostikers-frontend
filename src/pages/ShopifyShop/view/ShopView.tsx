@@ -3,7 +3,6 @@ import CategoryGallery from "../components/CategoryGallery";
 import CategoryShopNow from "../components/CategoryShopNow";
 import CategorySlider from "../components/CategorySlider";
 import ExtraFeatures from "../components/ExtraFeatures";
-import FeaturedProducts from "../components/FeaturedProducts";
 import ShopBanner from "../components/ShopBanner";
 
 const ShopView = () => {
@@ -14,7 +13,7 @@ const ShopView = () => {
         <CategorySlider />
         <CategoryShopNow />
         <CategoryGallery />
-        <FeaturedProducts />
+        {/* <FeaturedProducts /> */}
         <ExtraFeatures />
       </div>
     </Container>

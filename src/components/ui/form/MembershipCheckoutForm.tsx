@@ -8,6 +8,7 @@ import { useState, FormEvent } from "react";
 import Swal from "sweetalert2";
 import stripe_logo from "../../../assets/icons/stripe.png";
 import MembershipConditions from "../../MembershipConditions";
+import { configKey } from "../../../config";
 
 const MembershipCheckoutForm = ({
   amount,
@@ -42,7 +43,7 @@ const MembershipCheckoutForm = ({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: "https://dev.prostrikers.com/dashboard",
+        return_url: configKey.REDIRECT_URL,
       },
     });
 

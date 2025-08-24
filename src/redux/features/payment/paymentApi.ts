@@ -16,6 +16,13 @@ const paymentApi = paymentApiSlice.injectEndpoints({
         body,
       }),
     }),
+    createCustomSubscription: builder.mutation({
+      query: (body) => ({
+        url: "/stripe-payment/create-custom-subscription",
+        method: "POST",
+        body,
+      }),
+    }),
     facilityPayments: builder.query({
       query: ({ email, params }) => ({
         url: `/facility/payments/${email}`,
@@ -78,4 +85,5 @@ export const {
   useMembershipPaymentsQuery,
   useShopPaymentsQuery,
   useTournamentPaymentsQuery,
+  useCreateCustomSubscriptionMutation,
 } = paymentApi;

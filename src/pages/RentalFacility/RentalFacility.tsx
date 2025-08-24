@@ -46,7 +46,7 @@ const Rental = () => {
     <>
       <Container>
         <div className="lg:py-14 md:py-12 py-10 space-y-10 mt-16">
-          <GallerySection title="Cricket Facility" gallery={gallery} />
+          <GallerySection title="Rental Facility" gallery={gallery} />
           <div className="space-y-4 text-center">
             <h4 className="capitalize text-primary lg:text-2xl text-xl font-semibold leading-7">
               Sports We’ve got Covered

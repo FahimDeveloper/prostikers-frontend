@@ -3,6 +3,8 @@ import Slider, { Settings } from "react-slick";
 import { Tooltip } from "antd";
 import { useRef } from "react";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 //cricket icons
 import cricketCap from "../../../assets/images/shopify/cricket-icons/cap.png";
 import cricketBall from "../../../assets/images/shopify/cricket-icons/cricket-ball.png";
@@ -53,7 +55,7 @@ const CategorySlider = () => {
   const previous = () => sliderRef.current?.slickPrev();
 
   const settings: Settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 6,
@@ -61,6 +63,32 @@ const CategorySlider = () => {
     arrows: false,
     draggable: false,
     swipe: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 426,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+    ],
   };
 
   const categories = [
@@ -106,7 +134,9 @@ const CategorySlider = () => {
   return (
     <div className="space-y-5">
       <div className="flex justify-between items-center">
-        <h3 className="font-semibold text-3xl">Browse By Category</h3>
+        <h3 className="font-semibold sm:text-3xl text-2xl">
+          Browse By Category
+        </h3>
         <div className="flex items-center gap-5">
           <div
             onClick={previous}
@@ -122,13 +152,10 @@ const CategorySlider = () => {
           </div>
         </div>
       </div>
-      <div className="shop-category-slider overflow-hidden">
+      <div className="shop-category-slider slider-container overflow-hidden">
         <Slider ref={sliderRef} {...settings}>
           {categories.map((category, index) => (
-            <Link
-              to={"/shop/products"}
-              className="block no-underline text-secondary"
-            >
+            <Link to={"#"} className="block no-underline text-secondary">
               <div key={index} className="cursor-pointer">
                 <div className="bg-[#F0FFFE] border-8 border-solid border-white py-6 px-[10px] rounded-xl text-center">
                   <div className="size-[70px] mx-auto rounded-full bg-[#C7F2F2] flex items-center justify-center">

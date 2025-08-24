@@ -9,37 +9,44 @@ import { Link } from "react-router-dom";
 const CategoryShopNow = () => {
   const categories = [
     {
+      id: "1754568537311",
       name: "Baseball",
       description: "Power Your Game with Premium Baseball Essentials",
       image: baseball,
     },
     {
+      id: "1754568564392",
       name: "Hockey",
       description: "Elevate Your Stick Skills with Pro-Level Gear",
       image: hockey,
     },
     {
+      id: "1754568419074",
       name: "Cricket",
       description: "Step Into the Crease with Confidence",
       image: cricket,
     },
     {
+      id: "1754568647661",
       name: "Softball",
       description: "Complete Softball Equipment",
       image: softball,
     },
     {
+      id: "1754568631791",
       name: "Soccer",
       description: "Kick Off in Style with best Kits and Gear",
       image: soccer,
     },
   ];
   return (
-    <div className="grid grid-cols-12 gap-4">
+    <div className="grid grid-cols-12 gap-4 ">
       {categories.map((category, index) => {
-        let colSpanClass = "col-span-4";
-        if (index === 0) colSpanClass = "col-span-7";
-        else if (index === 1) colSpanClass = "col-span-5";
+        let colSpanClass = "col-span-12 md:col-span-6 lg:col-span-4";
+        if (index === 0)
+          colSpanClass = "col-span-12 md:col-span-12 lg:col-span-7";
+        else if (index === 1)
+          colSpanClass = "col-span-12 md:col-span-6 lg:col-span-5";
 
         return (
           <div key={index} className={`${colSpanClass}`}>
@@ -58,7 +65,7 @@ const CategoryShopNow = () => {
                       {category.description}
                     </p>
                   </div>
-                  <Link className="block" to={"/shop/products"}>
+                  <Link className="block" to={`#`}>
                     <Button type="primary" size="large">
                       Shop Now
                     </Button>

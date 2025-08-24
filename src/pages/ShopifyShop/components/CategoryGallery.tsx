@@ -13,8 +13,8 @@ import { Link } from "react-router-dom";
 const CategoryGallery = () => {
   return (
     <div className="space-y-14">
-      <div className="grid grid-cols-12 gap-10">
-        <div className="col-span-7">
+      <div className="grid grid-cols-12 lg:gap-10 gap-7">
+        <div className="lg:col-span-7 md:col-span-6 col-span-12">
           <div className="grid grid-cols-2 gap-3">
             <img
               src={gloves1}
@@ -35,11 +35,11 @@ const CategoryGallery = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-5 py-3 space-y-3">
+        <div className="lg:col-span-5 md:col-span-6 col-span-12 py-3 space-y-3">
           <span className="text-lg text-primary leading-4 font-medium uppercase tracking-wider">
             Baseball Gloves
           </span>
-          <h3 className="text-[40px] leading-[45px] font-semibold text-secondary">
+          <h3 className="lg:text-[40px] md:text-4xl text-3xl lg:leading-[45px] font-semibold text-secondary">
             Premium Leather, Game-Ready Performance
           </h3>
           <p className="text-[#717171] text-lg tracking-wide">
@@ -52,38 +52,15 @@ const CategoryGallery = () => {
             <li>Strategic padding for impact protection</li>
             <li>Custom fit options available</li>
           </ul>
-          <Link className="block" to={"/shop/products"}>
+          <Link className="block" to={"#"}>
             <Button type="primary" size="large">
               Shop Now
             </Button>
           </Link>
         </div>
       </div>
-      <div className="grid grid-cols-12 gap-10">
-        <div className="col-span-5 py-3 space-y-3">
-          <span className="text-lg text-primary leading-4 font-medium uppercase tracking-wider">
-            Baseball Gloves
-          </span>
-          <h3 className="text-[40px] leading-[45px] font-semibold text-secondary">
-            Premium Leather, Game-Ready Performance
-          </h3>
-          <p className="text-[#717171] text-lg tracking-wide">
-            Step onto the field with confidence in the Rawlings Heart of the
-            Hide Baseball Glove , crafted from top-grain leather for unmatched
-            durability and comfort.
-          </p>
-          <ul className="list-disc list-inside text-lg font-semibold space-y-1">
-            <li>Pro-grade leather for superior feel</li>
-            <li>Strategic padding for impact protection</li>
-            <li>Custom fit options available</li>
-          </ul>
-          <Link className="block" to={"/shop/products"}>
-            <Button type="primary" size="large">
-              Shop Now
-            </Button>
-          </Link>
-        </div>
-        <div className="col-span-7">
+      <div className="grid grid-cols-12 lg:gap-10 gap-7">
+        <div className="lg:col-span-7 md:col-span-6 col-span-12 md:order-2">
           <div className="grid grid-cols-2 gap-3">
             <img
               src={cricket1}
@@ -104,9 +81,32 @@ const CategoryGallery = () => {
             </div>
           </div>
         </div>
+        <div className="lg:col-span-5 md:col-span-6 col-span-12 py-3 space-y-3 md:order-1">
+          <span className="text-lg text-primary leading-4 font-medium uppercase tracking-wider">
+            Baseball Gloves
+          </span>
+          <h3 className="lg:text-[40px] md:text-4xl text-3xl lg:leading-[45px] font-semibold text-secondary">
+            Premium Leather, Game-Ready Performance
+          </h3>
+          <p className="text-[#717171] text-lg tracking-wide">
+            Step onto the field with confidence in the Rawlings Heart of the
+            Hide Baseball Glove , crafted from top-grain leather for unmatched
+            durability and comfort.
+          </p>
+          <ul className="list-disc list-inside text-lg font-semibold space-y-1">
+            <li>Pro-grade leather for superior feel</li>
+            <li>Strategic padding for impact protection</li>
+            <li>Custom fit options available</li>
+          </ul>
+          <Link className="block" to={"#"}>
+            <Button type="primary" size="large">
+              Shop Now
+            </Button>
+          </Link>
+        </div>
       </div>
-      <div className="grid grid-cols-12 gap-10">
-        <div className="col-span-7">
+      <div className="grid grid-cols-12 lg:gap-10 gap-7">
+        <div className="lg:col-span-7 md:col-span-6 col-span-12">
           <div className="grid grid-cols-2 gap-3">
             <img
               src={baseball1}
@@ -127,11 +127,11 @@ const CategoryGallery = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-5 py-3 space-y-3">
+        <div className="lg:col-span-5 md:col-span-6 col-span-12 py-3 space-y-3">
           <span className="text-lg text-primary leading-4 font-medium uppercase tracking-wider">
             Baseball Gloves
           </span>
-          <h3 className="text-[40px] leading-[45px] font-semibold text-secondary">
+          <h3 className="lg:text-[40px] md:text-4xl text-3xl lg:leading-[45px] font-semibold text-secondary">
             Premium Leather, Game-Ready Performance
           </h3>
           <p className="text-[#717171] text-lg tracking-wide">
@@ -144,7 +144,7 @@ const CategoryGallery = () => {
             <li>Strategic padding for impact protection</li>
             <li>Custom fit options available</li>
           </ul>
-          <Link className="block" to={"/shop/products"}>
+          <Link className="block" to={"#"}>
             <Button type="primary" size="large">
               Shop Now
             </Button>

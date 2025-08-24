@@ -4,7 +4,7 @@ import { TfiHeadphoneAlt } from "react-icons/tfi";
 const ExtraFeatures = () => {
   return (
     <div className="bg-[#F0FFFE] py-12 px-5">
-      <div className="grid grid-cols-4 gap-5">
+      <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-5 gap-10">
         <div className="flex justify-center items-center gap-3">
           <TfiHeadphoneAlt className="size-8 text-primary" />
           <div className="space-y-1">

@@ -7,31 +7,31 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { FaSpinner } from "react-icons/fa";
 import { configKey } from "../config";
-import { useCreateSubscriptionMutation } from "../redux/features/payment/paymentApi";
+import { useCreateCustomSubscriptionMutation } from "../redux/features/payment/paymentApi";
 import { useNavigate } from "react-router-dom";
 
 const stripePromise: Promise<Stripe | null> = loadStripe(configKey.STRIPE_KEY);
 
-const MembershipCheckout = ({
+const TempMembershipCheckout = ({
   amount,
   email,
-  plan,
+  team,
   membership,
 }: {
   amount: number;
   email: any;
-  plan: string;
+  team: string;
   membership: any;
 }) => {
   const [clientSecret, setClientSecret] = useState<string>("");
   const [createSetupIntent, { isLoading: intentLoading }] =
-    useCreateSubscriptionMutation();
+    useCreateCustomSubscriptionMutation();
   const navigate = useNavigate();
   useEffect(() => {
     createSetupIntent({
       email: email,
-      membership: membership.split(" ").join("_"),
-      plan: plan,
+      membership: membership,
+      team: team,
     })
       .unwrap()
       .then((data) => {
@@ -87,4 +87,4 @@ const MembershipCheckout = ({
   );
 };
 
-export default MembershipCheckout;
+export default TempMembershipCheckout;
