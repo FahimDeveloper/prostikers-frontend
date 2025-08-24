@@ -1,4 +1,4 @@
-import { Collapse, Modal } from "antd";
+import { Alert, Checkbox, Collapse, Modal } from "antd";
 import { useState } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import Container from "../components/Container";
@@ -9,13 +9,22 @@ import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks/useAppHooks";
 import { selectCurrentUser } from "../redux/features/auth/authSlice";
 import { useClientQuery } from "../redux/features/client/clientApi";
+import MembershipConditions from "../components/MembershipConditions";
 
 const MembershipCardSection = () => {
   const [plan, setPlan] = useState("monthly");
   const user = useAppSelector(selectCurrentUser);
   const { data: userData } = useClientQuery(user?._id);
+  const [membership, setMembership] = useState<{
+    membership: boolean;
+    package_name: string;
+    plan: string;
+  } | null>(null);
+  const [membershipPrice, setMembershipPrice] = useState<number | null>(null);
+  const [agree, setAgree] = useState(false);
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+  const [openOrganizationModal, setOpenOrganizationModal] = useState(false);
+  const [openInfoModal, setOpenInfoModal] = useState(false);
   const panelStyle: React.CSSProperties = {
     backgroundColor: "#EDFFFF",
     borderColor: "#ACDFDF",
@@ -32,7 +41,7 @@ const MembershipCardSection = () => {
   const handleChangePackage = (value: string) => {
     setPlan(value);
   };
-  const handleMembership = (membership: string, price?: number) => {
+  const handleMembership = (membership: string, price: number) => {
     if (membership === "individual_pro") {
       if (plan === "monthly") {
         const membershipData = {
@@ -40,18 +49,18 @@ const MembershipCardSection = () => {
           package_name: "individual pro",
           plan: plan,
         };
-        navigate("/membership-payment", {
-          state: { data: membershipData, amount: price },
-        });
+        setMembershipPrice(price);
+        setMembership(membershipData);
+        setOpenInfoModal(true);
       } else if (plan === "yearly") {
         const membershipData = {
           membership: true,
           package_name: "individual pro",
           plan: plan,
         };
-        navigate("/membership-payment", {
-          state: { data: membershipData, amount: price },
-        });
+        setMembershipPrice(price);
+        setMembership(membershipData);
+        setOpenInfoModal(true);
       }
     } else if (membership === "individual_pro_unlimited") {
       if (plan === "monthly") {
@@ -60,18 +69,18 @@ const MembershipCardSection = () => {
           package_name: "individual pro unlimited",
           plan: plan,
         };
-        navigate("/membership-payment", {
-          state: { data: membershipData, amount: price },
-        });
+        setMembershipPrice(price);
+        setMembership(membershipData);
+        setOpenInfoModal(true);
       } else if (plan === "yearly") {
         const membershipData = {
           membership: true,
           package_name: "individual pro unlimited",
           plan: plan,
         };
-        navigate("/membership-payment", {
-          state: { data: membershipData, amount: price },
-        });
+        setMembershipPrice(price);
+        setMembership(membershipData);
+        setOpenInfoModal(true);
       }
     } else if (membership === "youth_training_membership") {
       const membershipData = {
@@ -79,9 +88,9 @@ const MembershipCardSection = () => {
         package_name: "youth training membership",
         plan: plan,
       };
-      navigate("/membership-payment", {
-        state: { data: membershipData, amount: price },
-      });
+      setMembershipPrice(price);
+      setMembership(membershipData);
+      setOpenInfoModal(true);
     }
   };
 
@@ -309,7 +318,7 @@ const MembershipCardSection = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => setOpen(true)}
+                    onClick={() => setOpenOrganizationModal(true)}
                     className="membership-btn"
                   >
                     Choose Plan
@@ -522,7 +531,7 @@ const MembershipCardSection = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => setOpen(true)}
+                    onClick={() => setOpenOrganizationModal(true)}
                     className="membership-btn"
                   >
                     Choose Plan
@@ -676,28 +685,74 @@ const MembershipCardSection = () => {
             />
           </div>
         </div>
-        <Modal
-          width={1500}
-          title="Contact Us"
-          centered
-          maskClosable={false}
-          footer={false}
-          open={open}
-          onCancel={() => setOpen(false)}
-        >
-          <Container>
-            <div className="py-10 lg:space-y-10 md:space-y-7 space-y-5">
-              <h2 className="font-semibold lg:text-[64px] md:text-5 l text-3xl lg:leading-[74px] md:leading-[50px] leading-9 lg:w-[650px] w-full">
-                Get in touch with our lovely team
-              </h2>
-              <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 items-center">
-                <GetInMap />
-                <GetInForm />
-              </div>
-            </div>
-          </Container>
-        </Modal>
       </Container>
+      <Modal
+        width={1500}
+        title="Contact Us"
+        centered
+        maskClosable={false}
+        footer={false}
+        open={openOrganizationModal}
+        onCancel={() => setOpenOrganizationModal(false)}
+      >
+        <Container>
+          <div className="py-10 lg:space-y-10 md:space-y-7 space-y-5">
+            <h2 className="font-semibold lg:text-[64px] md:text-5 l text-3xl lg:leading-[74px] md:leading-[50px] leading-9 lg:w-[650px] w-full">
+              Get in touch with our lovely team
+            </h2>
+            <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 items-center">
+              <GetInMap />
+              <GetInForm />
+            </div>
+          </div>
+        </Container>
+      </Modal>
+      <Modal
+        okButtonProps={{ disabled: !agree }}
+        okText="Proceed"
+        centered
+        title="Membership Information"
+        open={openInfoModal}
+        onOk={() => {
+          navigate("/membership-payment", {
+            state: { data: membership, amount: membershipPrice },
+          });
+        }}
+        onCancel={() => {
+          setOpenInfoModal(false);
+          setAgree(false);
+          setMembership(null);
+          setMembershipPrice(null);
+        }}
+      >
+        <div className="space-y-2">
+          {membership?.plan === "monthly" ? (
+            <Alert
+              message="Informational Notes"
+              description="Your membership requires a minimum commitment of 3 months. Don’t worry — you’ll only be charged month by month, but the membership cannot be canceled before this commitment period is completed."
+              type="info"
+              showIcon
+            />
+          ) : (
+            <Alert
+              message="Informational Notes"
+              description="Your membership requires a minimum commitment of 3 months. Membership cannot be canceled before this commitment period is completed."
+              type="info"
+              showIcon
+            />
+          )}
+          <Checkbox checked={agree} onChange={() => setAgree(!agree)}>
+            <div className="flex gap-2 flex-wrap">
+              <p className="text-sm text-secondary">I agree with</p>
+              <MembershipConditions>
+                <p className="text-primary cursor-pointer underline">
+                  Membership Conditions
+                </p>
+              </MembershipConditions>
+            </div>
+          </Checkbox>
+        </div>
+      </Modal>
     </div>
   );
 };

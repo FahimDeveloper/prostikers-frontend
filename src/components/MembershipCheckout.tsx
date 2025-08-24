@@ -34,7 +34,7 @@ const MembershipCheckout = ({
       plan: plan,
     })
       .unwrap()
-      .then((data) => {
+      .then((data: any) => {
         if (data?.results?.requiresPayment) {
           setClientSecret(data?.results.clientSecret);
         } else {
@@ -47,7 +47,7 @@ const MembershipCheckout = ({
           navigate("/dashboard#membership");
         }
       })
-      .catch((err) => {
+      .catch((err: any) => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
