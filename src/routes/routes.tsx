@@ -5,8 +5,12 @@ import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
 import ProductsView from "../pages/ShopifyShop/view/ProductsView";
-import MembershipThanks from "../pages/MembershipThanks/MembershipThanks";
-import RentalFacilityThanks from "../pages/RentalFacilityThanks/RentalFacilityThanks";
+const MembershipThanks = LazyLoad(
+  lazy(() => import("../pages/MembershipThanks/MembershipThanks"))
+);
+const RentalFacilityThanks = LazyLoad(
+  lazy(() => import("../pages/RentalFacilityThanks/RentalFacilityThanks"))
+);
 const MembershipTempPayment = LazyLoad(
   lazy(() => import("../pages/MembershipTempPayment/MembershipTempPayment"))
 );

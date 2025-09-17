@@ -326,7 +326,11 @@ const RentalBookingReviewPart = ({
                   <Select
                     onChange={(value) => onHourChange(value, addon.id)}
                     className="2xl:w-24 sm:w-36 w-28"
-                    defaultValue={addon?.type === "half_hourly" ? 0.5 : 1}
+                    defaultValue={
+                      addon?.type === "half_hourly"
+                        ? bookings.length * 0.5 || 0.5
+                        : bookings.length * 1 || 1
+                    }
                     options={
                       addon?.type === "half_hourly"
                         ? halfHourlyAddonOptions.map((option, index) => {
