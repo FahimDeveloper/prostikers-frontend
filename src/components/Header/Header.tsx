@@ -23,8 +23,9 @@ const Header = () => {
             <img loading="lazy" src={logo} className="w-32" alt="logo" />
           </Link>
           <nav className="lg:block hidden">
-            <ul className="list-none flex justify-center text-lg font-medium items-center gap-7">
+            <ul className="list-none flex justify-center text-base font-medium items-center gap-5">
               {[
+                { path: "/", label: "Home" },
                 { path: "/rental-facility", label: "Rental Facility" },
                 { path: "/membership", label: "Membership" },
                 { path: "/academy", label: "Academy" },

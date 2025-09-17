@@ -5,6 +5,8 @@ import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
 import ProductsView from "../pages/ShopifyShop/view/ProductsView";
+import MembershipThanks from "../pages/MembershipThanks/MembershipThanks";
+import RentalFacilityThanks from "../pages/RentalFacilityThanks/RentalFacilityThanks";
 const MembershipTempPayment = LazyLoad(
   lazy(() => import("../pages/MembershipTempPayment/MembershipTempPayment"))
 );
@@ -625,6 +627,14 @@ export const router = createBrowserRouter([
         element: <FacilityTempPayment />,
       },
       {
+        path: "/reservation/facilities/thank-you",
+        element: (
+          <PrivetRoute>
+            <RentalFacilityThanks />
+          </PrivetRoute>
+        ),
+      },
+      {
         path: "/registration",
         element: (
           <ProtectAuthRoute>
@@ -701,6 +711,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <MembershipPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/membership/thank-you",
+        element: (
+          <PrivetRoute>
+            <MembershipThanks />
           </PrivetRoute>
         ),
       },

@@ -42,9 +42,10 @@ const MembershipCheckout = ({
             icon: "success",
             title: "Success",
             text: "Your membership has been activated. The payment will be processed automatically from your billing account.",
-            confirmButtonColor: "#0ABAC3",
+            showConfirmButton: false,
+            timer: 1500,
           });
-          navigate("/dashboard#membership");
+          navigate("/membership/thank-you");
         }
       })
       .catch((err: any) => {

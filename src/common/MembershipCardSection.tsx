@@ -43,45 +43,23 @@ const MembershipCardSection = () => {
   };
   const handleMembership = (membership: string, price: number) => {
     if (membership === "individual_pro") {
-      if (plan === "monthly") {
-        const membershipData = {
-          membership: true,
-          package_name: "individual pro",
-          plan: plan,
-        };
-        setMembershipPrice(price);
-        setMembership(membershipData);
-        setOpenInfoModal(true);
-      } else if (plan === "yearly") {
-        const membershipData = {
-          membership: true,
-          package_name: "individual pro",
-          plan: plan,
-        };
-        setMembershipPrice(price);
-        setMembership(membershipData);
-        setOpenInfoModal(true);
-      }
+      const membershipData = {
+        membership: true,
+        package_name: "individual pro",
+        plan: plan,
+      };
+      setMembershipPrice(price);
+      setMembership(membershipData);
+      setOpenInfoModal(true);
     } else if (membership === "individual_pro_unlimited") {
-      if (plan === "monthly") {
-        const membershipData = {
-          membership: true,
-          package_name: "individual pro unlimited",
-          plan: plan,
-        };
-        setMembershipPrice(price);
-        setMembership(membershipData);
-        setOpenInfoModal(true);
-      } else if (plan === "yearly") {
-        const membershipData = {
-          membership: true,
-          package_name: "individual pro unlimited",
-          plan: plan,
-        };
-        setMembershipPrice(price);
-        setMembership(membershipData);
-        setOpenInfoModal(true);
-      }
+      const membershipData = {
+        membership: true,
+        package_name: "individual pro unlimited",
+        plan: plan,
+      };
+      setMembershipPrice(price);
+      setMembership(membershipData);
+      setOpenInfoModal(true);
     } else if (membership === "youth_training_membership") {
       const membershipData = {
         membership: true,
@@ -113,18 +91,28 @@ const MembershipCardSection = () => {
             </p>
           </div>
           <div className="space-y-8">
-            <div className="w-[295px] mx-auto bg-[#07133D] p-3 rounded-full flex items-center justify-between">
+            <div className="w-60 mx-auto text-lg bg-[#07133D] p-2 rounded-full flex items-center justify-between">
               <div
                 onClick={() => handleChangePackage("monthly")}
                 className={`${
                   plan === "monthly"
                     ? "bg-[#F6FFFF]"
                     : "text-white hover:text-black"
-                } px-10 btn rounded-full hover:bg-[#F6FFFF]`}
+                } px-8 btn rounded-full hover:bg-[#F6FFFF]`}
               >
                 Monthly
               </div>
               <div
+                onClick={() => handleChangePackage("quarterly")}
+                className={`${
+                  plan === "quarterly"
+                    ? "bg-[#F6FFFF]"
+                    : "text-white hover:text-black"
+                } btn rounded-full px-8 hover:bg-[#F6FFFF]`}
+              >
+                Quarterly
+              </div>
+              {/* <div
                 onClick={() => handleChangePackage("yearly")}
                 className={`${
                   plan === "yearly"
@@ -136,7 +124,7 @@ const MembershipCardSection = () => {
                 <div className="bg-[#D9FFFF] text-black text-xs px-3 py-1 rounded-2xl">
                   30% Off
                 </div>
-              </div>
+              </div> */}
             </div>
             {plan === "monthly" ? (
               <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
@@ -312,6 +300,201 @@ const MembershipCardSection = () => {
                           <p>
                             Host your next corporate event with us, offering
                             your team a unique and dynamic experience
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setOpenOrganizationModal(true)}
+                    className="membership-btn"
+                  >
+                    Choose Plan
+                  </button>
+                </div>
+              </div>
+            ) : plan === "quarterly" ? (
+              <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
+                <div className="membership-card">
+                  <div className=" space-y-10">
+                    <div className="space-y-5 h-24 text-center">
+                      <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
+                        The Individual pro
+                      </h3>
+                      <p className="text-mde membershi-list text-primary">
+                        <span className="text-2xl leading-6 font-bold me-1">
+                          $ 450
+                        </span>
+                        /quarter
+                      </p>
+                    </div>
+                    <div className="space-y-5">
+                      <h5 className="font-bold leading-4 text-lg">
+                        Benefits of membership
+                      </h5>
+                      <ul className="text-sm membership-list list-none font-medium space-y-4">
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Enjoy 4 hours of net sessions for just $150 per
+                            month.
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>Bring one additional player for free!</p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            For each additional player, there is a small $10 fee
+                            per hour
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>Inclusive of a complimentary pitching machine</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  {isCurrentPlan("individual pro", plan) ? (
+                    <button
+                      className="membership-btn cursor-not-allowed opacity-50"
+                      disabled
+                    >
+                      Current Plan
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleMembership("individual_pro", 450)}
+                      className="membership-btn"
+                    >
+                      Choose Plan
+                    </button>
+                  )}
+                </div>
+                <div className="membership-card">
+                  <div className=" space-y-10">
+                    <div className="space-y-5 h-24 text-center">
+                      <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
+                        Individual pro unlimited
+                      </h3>
+                      <p className="text-mde membershi-list text-primary">
+                        <span className="text-2xl leading-6 font-bold me-1">
+                          $ 1350
+                        </span>
+                        /quarter
+                      </p>
+                    </div>
+                    <div className="space-y-5">
+                      <h5 className="font-bold leading-4 text-lg">
+                        Benefits of membership
+                      </h5>
+                      <ul className="text-sm membership-list font-medium list-none space-y-4">
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Get an unlimited quarterly membership for only $1350
+                            per quarter
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Bring a friend to your practice sessions at no extra
+                            cost.
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            The membership holder must be present when bringing
+                            guests to play.
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>Inclusive of a complimentary pitching machine.</p>
+                        </li>
+                      </ul>
+                      <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
+                        During thursday- Friday 5-8pm limited booking length one
+                        hour/day Additional player $10/hr
+                      </p>
+                    </div>
+                  </div>
+                  {isCurrentPlan("individual pro unlimited", plan) ? (
+                    <button
+                      className="membership-btn cursor-not-allowed opacity-50"
+                      disabled
+                    >
+                      Current Plan
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() =>
+                        handleMembership("individual_pro_unlimited", 1350)
+                      }
+                      className="membership-btn"
+                    >
+                      Choose Plan
+                    </button>
+                  )}
+                </div>
+                <div className="membership-card">
+                  <div className=" space-y-10">
+                    <div className="space-y-5 h-24 text-center">
+                      <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
+                        Teams & Organizations
+                      </h3>
+                      <p className="text-2xl leading-6 font-bold me-1 text-primary">
+                        Custom Pricing
+                      </p>
+                    </div>
+                    <div className="space-y-5">
+                      <h5 className="font-bold leading-4 text-lg">
+                        Benefits of membership
+                      </h5>
+                      <ul className="text-sm membership-list list-none font-medium space-y-4">
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Easily book your preferred time slots with
+                            adjustable options
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>Enjoy exclusive discounts and perks</p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Get discounted rates on specialized training
+                            sessions
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Choose between monthly or annual billing options for
+                            maximum flexibility
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Host your next corporate event with us, offering
+                            your team a unique and dynamic experience
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Annual memberships require minimum commitment of 03
+                            months.
                           </p>
                         </li>
                       </ul>
