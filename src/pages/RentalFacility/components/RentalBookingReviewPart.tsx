@@ -125,7 +125,10 @@ const RentalBookingReviewPart = ({
         ini_price: values.addon_ini_price,
         price: values.addon_price,
         type: values.addon_type,
-        hours: values?.addon_type === "half_hourly" ? 0.5 : 1,
+        hours:
+          values?.addon_type === "half_hourly"
+            ? 0.5 * bookings.length
+            : 1 * bookings.length,
       },
     ]);
   };

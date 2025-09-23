@@ -117,7 +117,7 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
 
   useEffect(() => {
     if (proceed) {
-      navigate("/dashboard/my-rental-facilities");
+      navigate("/reservation/facilities/thank-you");
     }
   }, [proceed]);
 
