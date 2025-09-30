@@ -26,6 +26,11 @@ h6 {
   @apply text-secondary;
 }
 
+#cleverWaiver_floater {
+  bottom: 5px !important;
+  left: 15px !important;
+}
+
 /* sm:btn sm:btn-primary */
 
 .primary-btn {
@@ -437,13 +442,3 @@ h6 {
   line-height: 1.7;
   color: #7e7e7e;
 }
-
-/* .ant-modal-close {
-  position: fixed !important;
-  top: 20px !important;
-  right: 15px !important;
-  z-index: 1100 !important;
-  background: #f1f1f1 !important;
-  padding: 5px;
-  border-radius: 50%;
-} */
