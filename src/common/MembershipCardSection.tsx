@@ -10,6 +10,7 @@ import { useAppSelector } from "../hooks/useAppHooks";
 import { selectCurrentUser } from "../redux/features/auth/authSlice";
 import { useClientQuery } from "../redux/features/client/clientApi";
 import MembershipConditions from "../components/MembershipConditions";
+import Swal from "sweetalert2";
 
 const MembershipCardSection = () => {
   const [plan, setPlan] = useState("monthly");
@@ -31,7 +32,6 @@ const MembershipCardSection = () => {
   };
   const isCurrentPlan = (membershipName: string, planType: string) => {
     return (
-      userData?.results?.status &&
       userData?.results?.membership &&
       userData?.results?.package_name?.toLowerCase() ===
         membershipName.toLowerCase() &&
@@ -70,6 +70,16 @@ const MembershipCardSection = () => {
       setMembership(membershipData);
       setOpenInfoModal(true);
     }
+  };
+
+  const onBlock = () => {
+    Swal.fire({
+      title: "Membership Renewal Info",
+      icon: "info",
+      showCloseButton: true,
+      showConfirmButton: false,
+      text: "You cannot upgrade your membership, current one is inactive for due payment, please renew to continue enjoying benefits or upgrade membership.",
+    });
   };
 
   return (
@@ -178,6 +188,10 @@ const MembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
+                  ) : userData?.results?.status !== true ? (
+                    <button onClick={onBlock} className="membership-btn">
+                      Choose Plan
+                    </button>
                   ) : (
                     <button
                       onClick={() => handleMembership("individual_pro", 150)}
@@ -243,6 +257,10 @@ const MembershipCardSection = () => {
                       disabled
                     >
                       Current Plan
+                    </button>
+                  ) : userData?.results?.status !== true ? (
+                    <button onClick={onBlock} className="membership-btn">
+                      Choose Plan
                     </button>
                   ) : (
                     <button
@@ -366,6 +384,10 @@ const MembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
+                  ) : userData?.results?.status !== true ? (
+                    <button onClick={onBlock} className="membership-btn">
+                      Choose Plan
+                    </button>
                   ) : (
                     <button
                       onClick={() => handleMembership("individual_pro", 450)}
@@ -431,6 +453,10 @@ const MembershipCardSection = () => {
                       disabled
                     >
                       Current Plan
+                    </button>
+                  ) : userData?.results?.status !== true ? (
+                    <button onClick={onBlock} className="membership-btn">
+                      Choose Plan
                     </button>
                   ) : (
                     <button
@@ -575,6 +601,10 @@ const MembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
+                  ) : userData?.results?.status !== true ? (
+                    <button onClick={onBlock} className="membership-btn">
+                      Choose Plan
+                    </button>
                   ) : (
                     <button
                       onClick={() => handleMembership("individual_pro", 1500)}
@@ -644,6 +674,10 @@ const MembershipCardSection = () => {
                       disabled
                     >
                       Current Plan
+                    </button>
+                  ) : userData?.results?.status !== true ? (
+                    <button onClick={onBlock} className="membership-btn">
+                      Choose Plan
                     </button>
                   ) : (
                     <button
@@ -751,17 +785,36 @@ const MembershipCardSection = () => {
                               </span>
                               /month
                             </p>
-                            <button
-                              onClick={() =>
-                                handleMembership(
-                                  "youth_training_membership",
-                                  160
-                                )
-                              }
-                              className="membership-btn"
-                            >
-                              Choose Plan
-                            </button>
+                            {isCurrentPlan(
+                              "youth training membership",
+                              plan
+                            ) ? (
+                              <button
+                                className="membership-btn cursor-not-allowed opacity-50"
+                                disabled
+                              >
+                                Current Plan
+                              </button>
+                            ) : userData?.results?.status !== true ? (
+                              <button
+                                onClick={onBlock}
+                                className="membership-btn"
+                              >
+                                Choose Plan
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() =>
+                                  handleMembership(
+                                    "youth_training_membership",
+                                    160
+                                  )
+                                }
+                                className="membership-btn"
+                              >
+                                Choose Plan
+                              </button>
+                            )}
                           </div>
                           <div className="space-y-5">
                             <h5 className="font-bold leading-4 text-lg">
@@ -852,14 +905,27 @@ const MembershipCardSection = () => {
                             </ul>
                           </div>
                         </div>
-                        <button
-                          onClick={() =>
-                            handleMembership("youth_training_membership", 160)
-                          }
-                          className="membership-btn"
-                        >
-                          Choose Plan
-                        </button>
+                        {isCurrentPlan("youth training membership", plan) ? (
+                          <button
+                            className="membership-btn cursor-not-allowed opacity-50"
+                            disabled
+                          >
+                            Current Plan
+                          </button>
+                        ) : userData?.results?.status !== true ? (
+                          <button onClick={onBlock} className="membership-btn">
+                            Choose Plan
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() =>
+                              handleMembership("youth_training_membership", 160)
+                            }
+                            className="membership-btn"
+                          >
+                            Choose Plan
+                          </button>
+                        )}
                       </div>
                     </>
                   ),
