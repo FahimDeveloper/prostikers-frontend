@@ -442,3 +442,12 @@ h6 {
   line-height: 1.7;
   color: #7e7e7e;
 }
+
+selector {
+  white-space: normal !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+}

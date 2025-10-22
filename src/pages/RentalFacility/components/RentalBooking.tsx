@@ -15,9 +15,10 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import RentalBookingReviewPart from "./RentalBookingReviewPart";
-import { useAppSelector } from "../../../hooks/useAppHooks";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import FacilityPaymentModal from "../../../components/ui/modal/FacilityPaymentModal";
+import { useClientQuery } from "../../../redux/features/client/clientApi";
+import { useSelector } from "react-redux";
 const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
   dayjs.extend(utc);
   dayjs.extend(timezone);
@@ -28,6 +29,7 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
   const navigate = useNavigate();
   const [block, setBlock] = useState(false);
   const [proceed, setProceed] = useState(false);
+  const [isUnlimited, setIsUnlimited] = useState(true);
   const blocker = useBlocker(block);
   const createCartBooking = useAddToCartSlotMutation();
   const { data: facility, isFetching } = useRentalFacilityQuery(
@@ -39,30 +41,50 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
   const slotsBookedQuery = useFacilityBookedSlotsQuery(
     {
       training: facility?.results._id,
-      date: activeDate.toISOString().split("T")[0],
+      date: activeDate.format("YYYY-MM-DD"),
       lane: lane,
     },
     { skip: facility?.results?._id && lane !== undefined ? false : true }
   );
   const slotsCartQuery = useGetBookingSlotsQuery(
     {
-      date: activeDate.toISOString().split("T")[0],
+      date: activeDate.format("YYYY-MM-DD"),
       lane: lane,
     },
     { skip: facility?.results?._id && lane !== undefined ? false : true }
   );
+  const user = useSelector(selectCurrentUser);
+  const { data: userData } = useClientQuery(user?._id);
   const [addons, setAddons] = useState([]);
-  const user = useAppSelector(selectCurrentUser);
   const [totalPrice, setTotalPrice] = useState(0);
   const [voucherApplied, setVoucherApplied] = useState(false);
   const [bookings, setBookings] = useState<Array<any>>([]);
-  const [finalData, setFinalData] = useState<any>({});
+  const [sessionCredit, setSessionCredit] = useState(0);
+  const [machineCredit, setMachineCredit] = useState(0);
 
   useEffect(() => {
     if (facility?.results?._id) {
       setLane(facility?.results?.lanes[0]);
     }
   }, [facility]);
+
+  useEffect(() => {
+    if (userData?.credit_balance) {
+      if (
+        userData?.results?.credit_balance?.session_credit !== "unlimited" &&
+        userData?.results?.credit_balance?.machine_credit !== "unlimited"
+      ) {
+        setSessionCredit(
+          Number(userData?.results?.credit_balance?.session_credit)
+        );
+        setMachineCredit(
+          Number(userData?.results?.credit_balance?.machine_credit)
+        );
+      } else {
+        setIsUnlimited(true);
+      }
+    }
+  }, [userData]);
 
   useEffect(() => {
     if (selectSlots.length < 1) {
@@ -120,19 +142,6 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
       navigate("/reservation/facilities/thank-you");
     }
   }, [proceed]);
-
-  const onFinish = () => {
-    const data = {
-      user: user?._id,
-      email: user?.email,
-      bookings,
-      facility: facility?.results?._id,
-      addons,
-      voucher_applied: voucherApplied,
-      sport: facility?.results?.sport,
-    };
-    setFinalData(data);
-  };
 
   const onProceed = () => {
     setProceed(true);
@@ -272,13 +281,18 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
               totalPrice={totalPrice}
               setVoucherApplied={setVoucherApplied}
               setBlock={setBlock}
+              sessionCredit={sessionCredit}
+              machineCredit={machineCredit}
+              isUnlimited={isUnlimited}
             />
             <FacilityPaymentModal
-              bookings={finalData}
+              bookings={bookings}
               amount={totalPrice}
-              onFinish={onFinish}
               setBlock={setBlock}
               onProceed={onProceed}
+              addons={addons}
+              voucherApplied={voucherApplied}
+              facility={facility}
             />
           </>
         )}

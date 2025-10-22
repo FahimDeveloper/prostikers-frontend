@@ -21,4 +21,8 @@ export interface IUser {
   package_name?: string;
   plan?: string;
   verified: boolean;
+  credit_balance?: {
+    machine_credit: string;
+    session_credit: string;
+  };
 }

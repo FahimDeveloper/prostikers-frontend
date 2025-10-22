@@ -135,6 +135,15 @@ const MembershipSection = ({ data }: { data: IUser }) => {
                   {moment(data?.expiry_date).format("MMMM Do YYYY")}
                 </p>
               </div>
+              <div className="flex items-center gap-2">
+                <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
+                  Machine Credit : {data?.credit_balance?.machine_credit || 0}
+                </p>
+                <div className="border-r border-gray-400 border-solid border-l-0 border-t-0 border-b-0 h-4" />
+                <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
+                  Session Credit : {data?.credit_balance?.session_credit || 0}
+                </p>
+              </div>
             </div>
             <div className="flex gap-5">
               {renew ? (

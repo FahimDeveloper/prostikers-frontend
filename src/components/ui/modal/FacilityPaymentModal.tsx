@@ -7,31 +7,40 @@ import Swal from "sweetalert2";
 import Checkout from "../../Checkout";
 import TermsCondition from "../../TermsCondition";
 import PrivacyPolicy from "../../PrivacyPolicy";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 const FacilityPaymentModal = ({
   bookings,
   amount,
-  onFinish,
   setBlock,
   onProceed,
+  facility,
+  addons,
+  voucherApplied,
 }: {
   bookings: any;
   amount: number;
-  onFinish: any;
   setBlock: any;
   onProceed: any;
+  facility: any;
+  addons: any;
+  voucherApplied: any;
 }) => {
   const [open, setOpen] = useState(false);
   const [agree, setAgree] = useState(false);
-  const [transactionId, setTransactionId] = useState("");
+  const [transactionId, setTransactionId] = useState(crypto.randomUUID());
   const user = useSelector(selectCurrentUser);
+  const [modal, contextHolder] = Modal.useModal();
   const [
     create,
     { data: createData, isLoading, isSuccess, isError, error, reset },
   ] = useCreateFacilityReservationMutation();
   const onClick = () => {
-    onFinish();
-    setOpen(true);
+    if (amount > 0) {
+      setOpen(true);
+    } else {
+      confirm();
+    }
   };
   const handleCloseModal = () => {
     reset();
@@ -39,7 +48,15 @@ const FacilityPaymentModal = ({
   };
   const onSubmit = () => {
     const payload = {
-      facility_data: { ...bookings },
+      facility_data: {
+        user: user?._id,
+        email: user?.email,
+        bookings,
+        facility: facility?.results?._id,
+        addons,
+        voucher_applied: voucherApplied,
+        sport: facility?.results?.sport,
+      },
       payment_info: {
         transaction_id: transactionId,
         email: user?.email,
@@ -69,8 +86,21 @@ const FacilityPaymentModal = ({
       });
     }
   }, [isSuccess, isError, error]);
+  const confirm = () => {
+    modal.confirm({
+      title: "Confirm",
+      icon: <ExclamationCircleOutlined />,
+      content: "This booking made from your membership credits. Proceed?",
+      okText: "OK",
+      cancelText: "Cancel",
+      onOk: () => {
+        onSubmit();
+      },
+    });
+  };
   return (
     <>
+      {contextHolder}
       <div className="flex sm:flex-row flex-col sm:items-center items-start justify-end gap-2">
         <Checkbox onChange={() => setAgree(!agree)}>
           <div className="flex gap-2 flex-wrap">
@@ -90,6 +120,7 @@ const FacilityPaymentModal = ({
           disabled={!agree}
           className="primary-btn sm:w-auto w-full"
           onClick={onClick}
+          loading={isLoading}
         >
           Proceed
         </Button>

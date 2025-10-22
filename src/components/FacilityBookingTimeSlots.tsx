@@ -143,13 +143,13 @@ const FacilityBookingTimeSlots = ({
     } else {
       setTimeSlot(slot);
       setSlotIndex(index);
-      const date = activeDate.toISOString().split("T")[0];
+      const date = activeDate.format("YYYY-MM-DD");
       const slotId = `${training._id}${date}${slot.split(" ").join("")}${lane
         ?.split(" ")
         .join("+")}`;
       const isBooked = selectSlots.some(
         (slots: any) =>
-          slots.date.toISOString().split("T")[0] === date &&
+          slots.date.format("YYYY-MM-DD") === date &&
           slots.lane === lane &&
           slots.slots.includes(slot)
       );
@@ -177,8 +177,8 @@ const FacilityBookingTimeSlots = ({
       setSlotIndex(null);
       const dateSlotIndex = selectSlots.findIndex(
         (slots: any) =>
-          slots.date.toISOString().split("T")[0] ===
-            activeDate.toISOString().split("T")[0] && slots.lane === lane
+          slots.date.format("YYYY-MM-DD") === activeDate.format("YYYY-MM-DD") &&
+          slots.lane === lane
       );
       if (dateSlotIndex !== -1) {
         selectSlots[dateSlotIndex].slots.push(timeSlot);
@@ -334,8 +334,8 @@ const FacilityBookingTimeSlots = ({
                   } ${
                     selectSlots.find(
                       (slots: any) =>
-                        slots.date.toISOString().split("T")[0] ===
-                          activeDate.toISOString().split("T")[0] &&
+                        slots.date.format("YYYY-MM-DD") ===
+                          activeDate.format("YYYY-MM-DD") &&
                         slots.lane === lane &&
                         slots.slots.includes(slot)
                     )

@@ -27,7 +27,7 @@ const UpdateUserInfoModal = ({
     useUpdateClientMutation();
   const onFinish = (values: any) => {
     const formData = new FormData();
-    if (values.image[0].originFileObj) {
+    if (values?.image && values.image[0].originFileObj) {
       formData.append("image", values.image[0].originFileObj);
       delete values.image;
       formData.append("data", JSON.stringify(values));
