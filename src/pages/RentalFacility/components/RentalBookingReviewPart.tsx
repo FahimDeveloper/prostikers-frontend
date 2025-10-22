@@ -73,41 +73,39 @@ const RentalBookingReviewPart = ({
 
   useEffect(() => {
     if (isUnlimited) {
-      // Track used free time per date
       const usedFreeHours: Record<string, number> = {};
 
       const updatedBookings = bookings.map((slot: any) => {
-        const slotCredit = facility?.results?.duration === 30 ? 0.5 : 1;
-        const isPeak = isPeakHour(slot.date, slot.time_slot);
         const durationHr = facility?.results?.duration === 30 ? 0.5 : 1;
+        const slotCredit = durationHr;
+        const date = slot.date;
+        const peak = isPeakHour(date, slot.time_slot);
         let price = 0;
+        let usedCredit = 0;
+        if (peak) {
+          const alreadyUsed = usedFreeHours[date] || 0;
+          const remainingFree = Math.max(1 - alreadyUsed, 0);
+          const freeUsed = Math.min(remainingFree, durationHr);
+          const chargeable = durationHr - freeUsed;
+          usedFreeHours[date] = alreadyUsed + freeUsed;
 
-        if (isPeak) {
-          const alreadyUsed = usedFreeHours[slot.date] || 0;
-
-          if (alreadyUsed < 1) {
-            const freeRemaining = Math.max(1 - alreadyUsed, 0);
-            const freeUsed = Math.min(freeRemaining, durationHr);
-            const chargeable = durationHr - freeUsed;
-            usedFreeHours[slot.date] = alreadyUsed + freeUsed;
-
-            // If exceeds 1 hour free limit, charge remaining portion
-            if (chargeable > 0) {
-              price = facility?.results?.price * chargeable;
-            }
+          if (chargeable > 0) {
+            price = facility?.results?.price * chargeable;
           } else {
-            price = facility?.results?.price;
+            usedCredit = slotCredit;
           }
+        } else {
+          // Outside 5–8 PM always charged
+          price = facility?.results?.price;
         }
 
-        return { ...slot, price, usedCredit: price === 0 ? slotCredit : 0 };
+        return { ...slot, price, usedCredit };
       });
 
       setDisplayBookings(updatedBookings);
       return;
     }
 
-    // Default non-unlimited logic below
     let remainingCredit = sessionCredit;
     const updatedBookings = bookings.map((slot: any) => {
       const slotCredit = facility?.results?.duration === 30 ? 0.5 : 1;
@@ -126,6 +124,7 @@ const RentalBookingReviewPart = ({
 
       return { ...slot, price, usedCredit };
     });
+
     setDisplayBookings(updatedBookings);
   }, [bookings, sessionCredit, facility, isUnlimited]);
 

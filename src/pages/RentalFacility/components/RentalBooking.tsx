@@ -29,7 +29,7 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
   const navigate = useNavigate();
   const [block, setBlock] = useState(false);
   const [proceed, setProceed] = useState(false);
-  const [isUnlimited, setIsUnlimited] = useState(true);
+  const [isUnlimited, setIsUnlimited] = useState(false);
   const blocker = useBlocker(block);
   const createCartBooking = useAddToCartSlotMutation();
   const { data: facility, isFetching } = useRentalFacilityQuery(
@@ -69,7 +69,7 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
   }, [facility]);
 
   useEffect(() => {
-    if (userData?.credit_balance) {
+    if (userData?.results?.credit_balance) {
       if (
         userData?.results?.credit_balance?.session_credit !== "unlimited" &&
         userData?.results?.credit_balance?.machine_credit !== "unlimited"
