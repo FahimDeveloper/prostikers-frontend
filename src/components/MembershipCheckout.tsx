@@ -2,7 +2,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import Container from "./Container";
 import MembershipCheckoutForm from "./ui/form/MembershipCheckoutForm";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
-import logo from "../assets/icons/login-logo.svg";
+import logo from "../assets/icons/logo.png";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { FaSpinner } from "react-icons/fa";

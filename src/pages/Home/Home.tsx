@@ -7,6 +7,7 @@ import JourneySection from "./components/JourneySection";
 import TopSliderSection from "./components/TopSliderSection";
 import TestimonialSection from "./components/TestimonialSection";
 import BlogSection from "./components/BlogSection";
+import GiftCardSection from "./components/GiftCardSection";
 
 const Home = () => {
   const questionData = [
@@ -66,6 +67,7 @@ const Home = () => {
       <TopSliderSection />
       <FeaturedSection />
       <JourneySection />
+      <GiftCardSection />
       <FacilitiesSection />
       <MembershipCardSection />
       <EventsSection />

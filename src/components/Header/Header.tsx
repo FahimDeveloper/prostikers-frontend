@@ -1,5 +1,5 @@
 import { NavLink, Link } from "react-router-dom";
-import logo from "../../assets/icons/login-logo.svg";
+import logo from "../../assets/icons/logo.png";
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { Modal } from "antd";
 import { useState } from "react";

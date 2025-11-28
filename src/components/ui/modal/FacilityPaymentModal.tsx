@@ -17,6 +17,9 @@ const FacilityPaymentModal = ({
   facility,
   addons,
   voucherApplied,
+  remeningCredit,
+  usedCredit,
+  isUnlimited,
 }: {
   bookings: any;
   amount: number;
@@ -25,6 +28,9 @@ const FacilityPaymentModal = ({
   facility: any;
   addons: any;
   voucherApplied: any;
+  remeningCredit: any;
+  usedCredit: any;
+  isUnlimited: any;
 }) => {
   const [open, setOpen] = useState(false);
   const [agree, setAgree] = useState(false);
@@ -35,13 +41,7 @@ const FacilityPaymentModal = ({
     create,
     { data: createData, isLoading, isSuccess, isError, error, reset },
   ] = useCreateFacilityReservationMutation();
-  const onClick = () => {
-    if (amount > 0) {
-      setOpen(true);
-    } else {
-      confirm();
-    }
-  };
+
   const handleCloseModal = () => {
     reset();
     setOpen(false);
@@ -87,16 +87,22 @@ const FacilityPaymentModal = ({
     }
   }, [isSuccess, isError, error]);
   const confirm = () => {
-    modal.confirm({
-      title: "Confirm",
-      icon: <ExclamationCircleOutlined />,
-      content: "This booking made from your membership credits. Proceed?",
-      okText: "OK",
-      cancelText: "Cancel",
-      onOk: () => {
-        onSubmit();
-      },
-    });
+    if (!isUnlimited && usedCredit !== 0) {
+      modal.confirm({
+        title: "Confirm",
+        icon: <ExclamationCircleOutlined />,
+        content: `This booking Credits Used: ${usedCredit} Remaining Credits: ${remeningCredit} from your membership credits. Proceed?`,
+        okText: "OK",
+        cancelText: "Cancel",
+        onOk: () => {
+          if (amount > 0) {
+            setOpen(true);
+          } else {
+            onSubmit();
+          }
+        },
+      });
+    }
   };
   return (
     <>
@@ -119,7 +125,7 @@ const FacilityPaymentModal = ({
           size="large"
           disabled={!agree}
           className="primary-btn sm:w-auto w-full"
-          onClick={onClick}
+          onClick={confirm}
           loading={isLoading}
         >
           Proceed

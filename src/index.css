@@ -421,6 +421,14 @@ h6 {
   padding-left: 0 !important;
 }
 
+/* for gift card radio button */
+.gift-card
+  :where(.css-dev-only-do-not-override-1fbjldr).ant-radio-button-wrapper:not(
+    :first-child
+  )::before {
+  width: 0 !important;
+}
+
 .ql-editor ol {
   padding-left: 0 !important;
 }

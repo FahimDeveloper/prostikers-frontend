@@ -4,7 +4,7 @@ import Container from "../../../components/Container";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import logo from "../../../assets/icons/login-logo.svg";
+import logo from "../../../assets/icons/logo.png";
 import { AiOutlineBars } from "react-icons/ai";
 
 const Dashboard = () => {

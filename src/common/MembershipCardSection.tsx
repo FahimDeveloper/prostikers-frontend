@@ -247,8 +247,8 @@ const MembershipCardSection = () => {
                         </li>
                       </ul>
                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
-                        During thursday- Friday 5-8pm limited booking length one
-                        hour/day Additional player $10/hr
+                        During Wednesday - Friday 5-8 pm Maximum booking length
+                        1 hour/day Additional player $10/hr
                       </p>
                     </div>
                   </div>
@@ -445,8 +445,8 @@ const MembershipCardSection = () => {
                         </li>
                       </ul>
                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
-                        During thursday- Friday 5-8pm limited booking length one
-                        hour/day Additional player $10/hr
+                        During Wednesday - Friday 5-8 pm Maximum booking length
+                        1 hour/day Additional player $10/hr
                       </p>
                     </div>
                   </div>
@@ -668,8 +668,8 @@ const MembershipCardSection = () => {
                         </li>
                       </ul>
                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
-                        During thursday- Friday 5-8pm limited booking length one
-                        hour/day Additional player $10/hr
+                        During Wednesday - Friday 5-8 pm Maximum booking length
+                        1 hour/day Additional player $10/hr
                       </p>
                     </div>
                   </div>

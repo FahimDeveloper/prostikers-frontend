@@ -149,3 +149,9 @@ export const orderApiSlice = createApi({
   tagTypes: ["orders"],
   endpoints: () => ({}),
 });
+
+export const giftCardApiSlice = createApi({
+  reducerPath: "giftCardApi",
+  baseQuery: baseQueryWithRefreshToken,
+  endpoints: () => ({}),
+});

@@ -1,6 +1,6 @@
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import { Button, Form, Input, message, Select, Tooltip } from "antd";
+import { Button, Form, Input, message, Modal, Select, Tooltip } from "antd";
 import { IoCalendarOutline } from "react-icons/io5";
 import moment from "moment";
 import { MdDeleteOutline } from "react-icons/md";
@@ -17,6 +17,7 @@ import {
   halfHourlyAddonOptions,
   hourlyAddonOptions,
 } from "../../../constant/addonOptions";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 interface Props {
   addons: any;
@@ -32,6 +33,8 @@ interface Props {
   sessionCredit: number; // session credit for bookings
   machineCredit: number; // machine credit for addons
   isUnlimited: boolean;
+  setRemeningCredit: any;
+  setUsedCredit: any;
 }
 
 const RentalBookingReviewPart = ({
@@ -48,11 +51,15 @@ const RentalBookingReviewPart = ({
   sessionCredit,
   machineCredit,
   isUnlimited,
+  setRemeningCredit,
+  setUsedCredit,
 }: Props) => {
   dayjs.extend(utc);
   dayjs.extend(timezone);
 
   const [messageApi, contextHolder] = message.useMessage();
+  const [allow, setAllow] = useState(false);
+  const [modal, modalContextHolder] = Modal.useModal();
   const [use, { data, isLoading, isSuccess, isError, error }] =
     useVoucherMutation();
   const [deleteSlot] = useDeleteBookingSlotMutation();
@@ -68,7 +75,11 @@ const RentalBookingReviewPart = ({
     const day = date.format("dddd");
     const [startTime] = timeSlot.split(" - ");
     const hour = moment(startTime, ["h:mm A"]).hour();
-    return (day === "Thursday" || day === "Friday") && hour >= 17 && hour < 20;
+    return (
+      (day === "Wednesday" || day === "Thursday" || day === "Friday") &&
+      hour >= 17 &&
+      hour < 20
+    );
   };
 
   useEffect(() => {
@@ -78,27 +89,87 @@ const RentalBookingReviewPart = ({
       const updatedBookings = bookings.map((slot: any) => {
         const durationHr = facility?.results?.duration === 30 ? 0.5 : 1;
         const slotCredit = durationHr;
+
         const date = slot.date;
         const peak = isPeakHour(date, slot.time_slot);
+
         let price = 0;
         let usedCredit = 0;
+
         if (peak) {
           const alreadyUsed = usedFreeHours[date] || 0;
           const remainingFree = Math.max(1 - alreadyUsed, 0);
-          const freeUsed = Math.min(remainingFree, durationHr);
-          const chargeable = durationHr - freeUsed;
-          usedFreeHours[date] = alreadyUsed + freeUsed;
 
-          if (chargeable > 0) {
-            price = facility?.results?.price * chargeable;
-          } else {
+          if (remainingFree >= durationHr) {
             usedCredit = slotCredit;
+            usedFreeHours[date] = alreadyUsed + durationHr;
+            price = 0;
+          } else if (remainingFree > 0) {
+            usedFreeHours[date] = alreadyUsed + remainingFree;
+            price = facility?.results?.price;
+          } else {
+            if (!allow) {
+              price = facility?.results?.price;
+              modal.confirm({
+                title: "Confirm",
+                icon: <ExclamationCircleOutlined />,
+                content:
+                  "You are trying to book more then 1 hour on peak time. Slot price will charged you. Proceed?",
+                okText: "OK",
+                cancelText: "Cancel",
+                onOk: () => {
+                  setAllow(true);
+                },
+                onCancel: () => {
+                  const slotId = `${
+                    facility?.results?._id
+                  }${date}${slot?.time_slot.split(" ").join("")}${slot.lane
+                    ?.split(" ")
+                    .join("+")}`;
+                  deleteSlot(slotId)
+                    .unwrap()
+                    .then(() => {
+                      const updatedSlots = selectSlots
+                        ?.map((slots: any) => {
+                          if (
+                            slots.date.format("YYYY-MM-DD") === date &&
+                            slots.slots.length > 1
+                          ) {
+                            return {
+                              ...slots,
+                              slots: slots.slots.filter(
+                                (oldSlot: string) => oldSlot !== slot?.time_slot
+                              ),
+                            };
+                          } else if (
+                            slots.date.format("YYYY-MM-DD") === date &&
+                            slots.slots.length == 1
+                          ) {
+                            return null;
+                          }
+                          return slots;
+                        })
+                        .filter(Boolean);
+                      if (updatedSlots.length == 0) setBlock(false);
+                      setSelectSlots(updatedSlots);
+                    })
+                    .catch((error) =>
+                      messageApi.open({
+                        type: "error",
+                        content: `${error.data.message}`,
+                      })
+                    );
+                },
+              });
+            } else {
+              price = facility?.results?.price;
+            }
           }
         } else {
-          // Outside 5–8 PM always charged
-          price = facility?.results?.price;
+          usedCredit = slotCredit;
+          price = 0;
         }
-
+        setUsedCredit(usedCredit);
         return { ...slot, price, usedCredit };
       });
 
@@ -117,11 +188,12 @@ const RentalBookingReviewPart = ({
         usedCredit = slotCredit;
         remainingCredit -= slotCredit;
       } else if (remainingCredit > 0) {
-        price = price - price * (remainingCredit / slotCredit);
+        price = facility?.results?.price;
         usedCredit = remainingCredit;
         remainingCredit = 0;
       }
-
+      setUsedCredit(sessionCredit - remainingCredit);
+      setRemeningCredit(remainingCredit);
       return { ...slot, price, usedCredit };
     });
 
@@ -318,6 +390,7 @@ const RentalBookingReviewPart = ({
 
   return (
     <>
+      {modalContextHolder}
       {contextHolder}
       <div className="space-y-5">
         {/* Addon Selection */}
@@ -416,7 +489,7 @@ const RentalBookingReviewPart = ({
                 </div>
                 <div className="text-sm sm:block hidden font-medium text-secondary">
                   {slot.price === 0
-                    ? `${slot.usedCredit?.toFixed(2)} credit`
+                    ? `${slot?.usedCredit} credit`
                     : `$${slot.price}`}
                 </div>
                 <div className="text-sm font-medium text-secondary">

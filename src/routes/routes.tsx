@@ -4,6 +4,12 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+const GiftCardPayment = LazyLoad(
+  lazy(() => import("../pages/GiftCardPayment/GiftCardPayment"))
+);
+const GiftCard = LazyLoad(
+  lazy(() => import("../pages/GiftCardPage/GiftCardPage"))
+);
 const MembershipThanks = LazyLoad(
   lazy(() => import("../pages/MembershipThanks/MembershipThanks"))
 );
@@ -34,12 +40,12 @@ const FacilityHockey = LazyLoad(
 const ShopifyShop = LazyLoad(
   lazy(() => import("../pages/ShopifyShop/ShopifyShop"))
 );
-const ShopView = LazyLoad(
-  lazy(() => import("../pages/ShopifyShop/view/ShopView"))
-);
-const ProductsView = LazyLoad(
-  lazy(() => import("../pages/ShopifyShop/view/ProductsView"))
-);
+// const ShopView = LazyLoad(
+//   lazy(() => import("../pages/ShopifyShop/view/ShopView"))
+// );
+// const ProductsView = LazyLoad(
+//   lazy(() => import("../pages/ShopifyShop/view/ProductsView"))
+// );
 const FacilityTempPayment = LazyLoad(
   lazy(() => import("../pages/FacilityTempPayment/FacilityTempPayment"))
 );
@@ -590,6 +596,14 @@ export const router = createBrowserRouter([
       //   element: <ChristmasSpecialMembership />,
       // },
       {
+        path: "/black-friday/gift-cards",
+        element: <GiftCard />,
+      },
+      {
+        path: "/black-friday/gift-cards/payment",
+        element: <GiftCardPayment />,
+      },
+      {
         path: "/login",
         element: (
           <ProtectAuthRoute>
@@ -744,20 +758,20 @@ export const router = createBrowserRouter([
       {
         path: "/shop",
         element: <ShopifyShop />,
-        children: [
-          {
-            path: "/shop",
-            element: <ShopView />,
-          },
-          {
-            path: "/shop/:slug/:id",
-            element: <ProductsView />,
-          },
-          {
-            path: "/shop/coming-soon",
-            element: <ComingSoon />,
-          },
-        ],
+        // children: [
+        //   {
+        //     path: "/shop",
+        //     element: <ShopView />,
+        //   },
+        //   {
+        //     path: "/shop/:slug/:id",
+        //     element: <ProductsView />,
+        //   },
+        //   {
+        //     path: "/shop/coming-soon",
+        //     element: <ComingSoon />,
+        //   },
+        // ],
       },
       // {
       //   path: "/shop",

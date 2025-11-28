@@ -5,6 +5,8 @@ import ProfileSection from "./components/ProfileSection";
 import MembershipSection from "./components/MembershipSection";
 import { FaSpinner } from "react-icons/fa";
 
+import QrCodeView from "./components/QrCodeView";
+
 const Profile = () => {
   const user = useSelector(selectCurrentUser);
   const { data: userData, isLoading } = useClientQuery(user?._id);
@@ -17,6 +19,7 @@ const Profile = () => {
       ) : (
         <>
           <ProfileSection data={userData?.results} />
+          <QrCodeView email={userData?.results?.email} />
           <MembershipSection data={userData?.results} />
         </>
       )}
