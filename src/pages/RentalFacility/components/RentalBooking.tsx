@@ -57,7 +57,7 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
   const { data: userData } = useClientQuery(user?._id);
   const [addons, setAddons] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [remeningCredit, setRemeningCredit] = useState(0);
+  const [remainingCredit, setRemainingCredit] = useState(0);
   const [usedCredit, setUsedCredit] = useState(0);
   const [voucherApplied, setVoucherApplied] = useState(false);
   const [bookings, setBookings] = useState<Array<any>>([]);
@@ -141,6 +141,7 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
 
   useEffect(() => {
     if (proceed) {
+      setBlock(false);
       navigate("/reservation/facilities/thank-you");
     }
   }, [proceed]);
@@ -286,8 +287,9 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
               sessionCredit={sessionCredit}
               machineCredit={machineCredit}
               isUnlimited={isUnlimited}
-              setRemeningCredit={setRemeningCredit}
+              setRemainingCredit={setRemainingCredit}
               setUsedCredit={setUsedCredit}
+              membershipStatus={userData?.results?.status}
             />
             <FacilityPaymentModal
               bookings={bookings}
@@ -297,7 +299,7 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
               addons={addons}
               voucherApplied={voucherApplied}
               facility={facility}
-              remeningCredit={remeningCredit}
+              remainingCredit={remainingCredit}
               usedCredit={usedCredit}
               isUnlimited={isUnlimited}
             />

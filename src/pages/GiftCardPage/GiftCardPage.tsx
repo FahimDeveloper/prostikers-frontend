@@ -69,7 +69,7 @@ const GiftCard = () => {
 
   const onSubmit = (values: any) => {
     values.use_for = category;
-    values.amount = selectedPrice * 0.8;
+    values.amount = selectedPrice;
     values.code = `PS25-${generateShortUniqueCode()}`;
     values.gift_for =
       giftOption == "me" ? values.owner_email : values.recipient_email;

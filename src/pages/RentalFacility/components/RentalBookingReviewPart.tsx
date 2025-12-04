@@ -30,11 +30,12 @@ interface Props {
   totalPrice: number;
   bookings: any;
   setBlock: any;
-  sessionCredit: number; // session credit for bookings
-  machineCredit: number; // machine credit for addons
+  sessionCredit: number;
+  machineCredit: number;
   isUnlimited: boolean;
-  setRemeningCredit: any;
+  setRemainingCredit: any;
   setUsedCredit: any;
+  membershipStatus: boolean;
 }
 
 const RentalBookingReviewPart = ({
@@ -51,8 +52,9 @@ const RentalBookingReviewPart = ({
   sessionCredit,
   machineCredit,
   isUnlimited,
-  setRemeningCredit,
+  setRemainingCredit,
   setUsedCredit,
+  membershipStatus,
 }: Props) => {
   dayjs.extend(utc);
   dayjs.extend(timezone);
@@ -83,13 +85,32 @@ const RentalBookingReviewPart = ({
   };
 
   useEffect(() => {
+    if (!membershipStatus) {
+      console.log("no membership");
+      const updatedBookings = bookings.map((slot: any) => {
+        const price =
+          bookings.length === 1
+            ? facility?.results?.ini_price
+            : facility?.results?.price;
+
+        return {
+          ...slot,
+          price,
+          usedCredit: 0,
+        };
+      });
+
+      setDisplayBookings(updatedBookings);
+      return;
+    }
+
+    // status = true -> continue original behaviour
     if (isUnlimited) {
       const usedFreeHours: Record<string, number> = {};
 
       const updatedBookings = bookings.map((slot: any) => {
         const durationHr = facility?.results?.duration === 30 ? 0.5 : 1;
         const slotCredit = durationHr;
-
         const date = slot.date;
         const peak = isPeakHour(date, slot.time_slot);
 
@@ -109,12 +130,12 @@ const RentalBookingReviewPart = ({
             price = facility?.results?.price;
           } else {
             if (!allow) {
-              price = facility?.results?.price;
+              price = 45;
               modal.confirm({
                 title: "Confirm",
                 icon: <ExclamationCircleOutlined />,
                 content:
-                  "You are trying to book more then 1 hour on peak time. Slot price will charged you. Proceed?",
+                  "You are trying to book more then 1 hour on peak time. Extra $45 price will charged you for . Proceed?",
                 okText: "OK",
                 cancelText: "Cancel",
                 onOk: () => {
@@ -126,6 +147,7 @@ const RentalBookingReviewPart = ({
                   }${date}${slot?.time_slot.split(" ").join("")}${slot.lane
                     ?.split(" ")
                     .join("+")}`;
+
                   deleteSlot(slotId)
                     .unwrap()
                     .then(() => {
@@ -150,6 +172,7 @@ const RentalBookingReviewPart = ({
                           return slots;
                         })
                         .filter(Boolean);
+
                       if (updatedSlots.length == 0) setBlock(false);
                       setSelectSlots(updatedSlots);
                     })
@@ -162,7 +185,7 @@ const RentalBookingReviewPart = ({
                 },
               });
             } else {
-              price = facility?.results?.price;
+              price = 45;
             }
           }
         } else {
@@ -177,10 +200,15 @@ const RentalBookingReviewPart = ({
       return;
     }
 
+    // non-unlimited (normal) credit logic
     let remainingCredit = sessionCredit;
+    const isSingleBooking = bookings.length === 1;
     const updatedBookings = bookings.map((slot: any) => {
       const slotCredit = facility?.results?.duration === 30 ? 0.5 : 1;
-      let price = facility?.results?.price;
+      let price = isSingleBooking
+        ? facility?.results?.ini_price
+        : facility?.results?.price;
+
       let usedCredit = 0;
 
       if (remainingCredit >= slotCredit) {
@@ -188,30 +216,50 @@ const RentalBookingReviewPart = ({
         usedCredit = slotCredit;
         remainingCredit -= slotCredit;
       } else if (remainingCredit > 0) {
-        price = facility?.results?.price;
         usedCredit = remainingCredit;
         remainingCredit = 0;
       }
       setUsedCredit(sessionCredit - remainingCredit);
-      setRemeningCredit(remainingCredit);
+      setRemainingCredit(remainingCredit);
       return { ...slot, price, usedCredit };
     });
 
     setDisplayBookings(updatedBookings);
-  }, [bookings, sessionCredit, facility, isUnlimited]);
+  }, [
+    bookings,
+    sessionCredit,
+    facility,
+    isUnlimited,
+    membershipStatus,
+    allow,
+    deleteSlot,
+    selectSlots,
+    modal,
+    messageApi,
+    setBlock,
+    setSelectSlots,
+  ]);
 
   useEffect(() => {
+    if (!membershipStatus) {
+      const updatedAddons = addons.map((addon: any) => {
+        const price = addon.ini_price + addon.price * addon.hours;
+        return { ...addon, price };
+      });
+
+      setDisplayAddons(updatedAddons);
+      return;
+    }
+
     if (isUnlimited) {
-      // Track free hour usage per date for addons too
       const usedFreeHours: Record<string, number> = {};
 
       const updatedAddons = addons.map((addon: any) => {
-        // Try to map addon hours to bookings date/time
         const firstSlot = bookings[0];
         const date = firstSlot?.date;
         const timeSlot = firstSlot?.time_slot;
-
         const isPeak = date && timeSlot && isPeakHour(date, timeSlot);
+
         let price = 0;
 
         if (isPeak) {
@@ -219,10 +267,11 @@ const RentalBookingReviewPart = ({
           const freeRemaining = Math.max(1 - alreadyUsed, 0);
           const freeUsed = Math.min(freeRemaining, addon.hours);
           const chargeable = addon.hours - freeUsed;
+
           usedFreeHours[date] = alreadyUsed + freeUsed;
 
           if (chargeable > 0) {
-            price = addon.ini_price + addon.price * chargeable; // charge for remaining
+            price = addon.ini_price + addon.price * chargeable;
           }
         }
 
@@ -233,7 +282,6 @@ const RentalBookingReviewPart = ({
       return;
     }
 
-    // Default non-unlimited logic below
     let remainingCredit = machineCredit;
     const updatedAddons = addons.map((addon: any) => {
       const addonUnitCredit = addon?.type === "half_hourly" ? 1 : 1;
@@ -261,9 +309,8 @@ const RentalBookingReviewPart = ({
     });
 
     setDisplayAddons(updatedAddons);
-  }, [addons, machineCredit, isUnlimited, bookings]);
+  }, [addons, machineCredit, isUnlimited, bookings, membershipStatus]);
 
-  // Update total price whenever bookings or addons change
   useEffect(() => {
     const bookingsPrice = displayBookings.reduce((acc, b) => acc + b.price, 0);
     const addonsPrice = displayAddons.reduce((acc, a) => acc + a.price, 0);

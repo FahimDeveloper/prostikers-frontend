@@ -1,6 +1,7 @@
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
 import promotion from "../../../assets/images/promotions/popup-promotion-2.jpg";
+import { Link } from "react-router-dom";
 
 const BlackFridayMembershipModal = () => {
   const [open, setOpen] = useState(false);
@@ -27,13 +28,19 @@ const BlackFridayMembershipModal = () => {
       footer={null}
       closable={true}
       centered
-      width={800}
+      width={500}
     >
-      <img
-        src={promotion}
-        alt="Black Friday"
-        className="w-full pt-5 rounded-md"
-      />
+      <Link
+        to="/black-friday/membership"
+        onClick={handleClose}
+        className="block"
+      >
+        <img
+          src={promotion}
+          alt="Black Friday"
+          className="w-full h-full pt-5 rounded-md"
+        />
+      </Link>
     </Modal>
   );
 };

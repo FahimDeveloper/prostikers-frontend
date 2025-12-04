@@ -8,11 +8,15 @@ import { MdOutlineInfo } from "react-icons/md";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import AddMoreCreditModal from "../../../../components/ui/modal/AddMoreCreditModal";
 
 const MembershipSection = ({ data }: { data: IUser }) => {
   dayjs.extend(utc);
   dayjs.extend(timezone);
   const [renew, setRenew] = useState(false);
+  const [isUnlimited, setIsUnlimited] = useState(false);
+  const [sessionCredit, setSessionCredit] = useState<number | null>(null);
+  const [machineCredit, setMachineCredit] = useState<number | null>(null);
   const [membership, setMembership] = useState<{
     package_name: string;
     plan: string;
@@ -31,6 +35,20 @@ const MembershipSection = ({ data }: { data: IUser }) => {
       //   const cancelThreshold = issue.add(3, "months");
       //   setOpenCancel(currentDate.isAfter(cancelThreshold, "day"));
       // }
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (data?.credit_balance) {
+      if (
+        data?.credit_balance?.session_credit !== "unlimited" &&
+        data?.credit_balance?.machine_credit !== "unlimited"
+      ) {
+        setSessionCredit(Number(data?.credit_balance?.session_credit));
+        setMachineCredit(Number(data?.credit_balance?.machine_credit));
+      } else {
+        setIsUnlimited(true);
+      }
     }
   }, [data]);
 
@@ -101,7 +119,6 @@ const MembershipSection = ({ data }: { data: IUser }) => {
     setMembership(membershipData);
     setOpenInfoModal(true);
   };
-  console.log(membership, membershipPrice);
   return (
     <>
       <div id="membership" className="space-y-5">
@@ -135,15 +152,28 @@ const MembershipSection = ({ data }: { data: IUser }) => {
                   {moment(data?.expiry_date).format("MMMM Do YYYY")}
                 </p>
               </div>
-              <div className="flex items-center gap-2">
-                <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
-                  Machine Credit : {data?.credit_balance?.machine_credit || 0}
-                </p>
-                <div className="border-r border-gray-400 border-solid border-l-0 border-t-0 border-b-0 h-4" />
-                <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
-                  Session Credit : {data?.credit_balance?.session_credit || 0}
-                </p>
-              </div>
+              {!isUnlimited ? (
+                <div className="flex items-center gap-2">
+                  <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
+                    Session Credit :{" "}
+                    {sessionCredit !== null ? sessionCredit : 0}
+                  </p>
+                  <div className="border-r border-gray-400 border-solid border-l-0 border-t-0 border-b-0 h-4" />
+                  <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
+                    Addons Credit : {machineCredit !== null ? machineCredit : 0}
+                  </p>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
+                    Session Credit : {data?.credit_balance?.session_credit}
+                  </p>
+                  <div className="border-r border-gray-400 border-solid border-l-0 border-t-0 border-b-0 h-4" />
+                  <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
+                    Addons Credit : {data?.credit_balance?.session_credit}
+                  </p>
+                </div>
+              )}
             </div>
             <div className="flex gap-5">
               {renew ? (
@@ -156,6 +186,9 @@ const MembershipSection = ({ data }: { data: IUser }) => {
                 </Link>
               )}
               {/* {opneCancel && <MembershipCancellationModal />} */}
+              {!isUnlimited && sessionCredit !== null && sessionCredit < 1 && (
+                <AddMoreCreditModal credits={data?.credit_balance!} />
+              )}
             </div>
           </div>
         ) : (

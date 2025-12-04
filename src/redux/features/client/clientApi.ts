@@ -7,6 +7,7 @@ const clientApi = clientApiSlice.injectEndpoints({
         url: `/users/${id}`,
         method: "GET",
       }),
+      providesTags: ["client"],
       keepUnusedDataFor: 0,
     }),
     updateClient: builder.mutation({
@@ -15,8 +16,18 @@ const clientApi = clientApiSlice.injectEndpoints({
         method: "PATCH",
         body: payload,
       }),
+      invalidatesTags: ["client"],
+    }),
+    addCredit: builder.mutation({
+      query: ({ id, payload }) => ({
+        url: `/users/add-credit/${id}`,
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["client"],
     }),
   }),
 });
 
-export const { useClientQuery, useUpdateClientMutation } = clientApi;
+export const { useClientQuery, useUpdateClientMutation, useAddCreditMutation } =
+  clientApi;

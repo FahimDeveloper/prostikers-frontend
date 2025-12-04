@@ -26,7 +26,7 @@ const BlackFridayGiftModal = () => {
       footer={null}
       closable={true}
       centered
-      width={800}
+      width={500}
     >
       <Link
         to="/black-friday/gift-cards"
@@ -36,7 +36,7 @@ const BlackFridayGiftModal = () => {
         <img
           src={promotion}
           alt="Black Friday"
-          className="w-full pt-5 rounded-md"
+          className="w-full h-full pt-5 rounded-md"
         />
       </Link>
     </Modal>

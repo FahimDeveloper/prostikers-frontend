@@ -17,7 +17,7 @@ const FacilityPaymentModal = ({
   facility,
   addons,
   voucherApplied,
-  remeningCredit,
+  remainingCredit,
   usedCredit,
   isUnlimited,
 }: {
@@ -28,7 +28,7 @@ const FacilityPaymentModal = ({
   facility: any;
   addons: any;
   voucherApplied: any;
-  remeningCredit: any;
+  remainingCredit: any;
   usedCredit: any;
   isUnlimited: any;
 }) => {
@@ -91,7 +91,7 @@ const FacilityPaymentModal = ({
       modal.confirm({
         title: "Confirm",
         icon: <ExclamationCircleOutlined />,
-        content: `This booking Credits Used: ${usedCredit} Remaining Credits: ${remeningCredit} from your membership credits. Proceed?`,
+        content: `This booking Credits Used: ${usedCredit} Remaining Credits: ${remainingCredit} from your membership credits. Proceed?`,
         okText: "OK",
         cancelText: "Cancel",
         onOk: () => {
@@ -102,6 +102,8 @@ const FacilityPaymentModal = ({
           }
         },
       });
+    } else {
+      setOpen(true);
     }
   };
   return (

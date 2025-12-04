@@ -35,11 +35,7 @@ const ForceUpdateModal = () => {
       centered
       open={visible}
       maskClosable={false}
-      footer={[
-        <div className="text-center">
-          <UpdateUserInfoModal record={user} type="primary" size="large" />
-        </div>,
-      ]}
+      footer={null}
       onOk={() => setVisible(false)}
       onCancel={() => setVisible(false)}
     >
@@ -47,15 +43,19 @@ const ForceUpdateModal = () => {
         <img loading="lazy" src={logo} className="w-32" alt="logo" />
         <h3 className="sm:text-xl text-lg">Welcome To ProStrikers!</h3>
         {user?.verified ? (
-          <p className="sm:text-base text-sm text-gray-600">
-            We're excited to have you join our community! Please update your
-            profile information to get the most out of ProStrikers.
-          </p>
+          <div className="space-y-3">
+            <p className="sm:text-base text-sm text-gray-600">
+              We're excited to have you join our community! Please update your
+              profile information to get the most out of ProStrikers.
+            </p>
+            <div className="text-center">
+              <UpdateUserInfoModal record={user} type="primary" size="large" />
+            </div>
+          </div>
         ) : (
           <p className="sm:text-base text-sm text-gray-600">
             We're excited to have you join our community! We have sent you a
-            verification email. Please complete your verification and update
-            your profile information to get the most out of ProStrikers.
+            verification email. Please complete your verification.
           </p>
         )}
       </div>

@@ -1,4 +1,4 @@
-import MembershipCardSection from "../../common/MembershipCardSection";
+// import MembershipCardSection from "../../common/MembershipCardSection";
 import QuestionSection from "../../common/QuestionSection";
 import EventsSection from "./components/EventsSection";
 import FacilitiesSection from "./components/FacilitiesSection";
@@ -8,6 +8,7 @@ import TopSliderSection from "./components/TopSliderSection";
 import TestimonialSection from "./components/TestimonialSection";
 import BlogSection from "./components/BlogSection";
 import GiftCardSection from "./components/GiftCardSection";
+import MembershipCardSection from "../../common/MembershipCardSection";
 
 const Home = () => {
   const questionData = [

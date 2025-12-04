@@ -138,7 +138,7 @@ const MembershipCardSection = () => {
             </div>
             {plan === "monthly" ? (
               <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
-                <div className="membership-card">
+                {/* <div className="membership-card">
                   <div className=" space-y-10">
                     <div className="space-y-5 h-24 text-center">
                       <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
@@ -274,6 +274,179 @@ const MembershipCardSection = () => {
                       Choose Plan
                     </button>
                   )}
+                </div> */}
+                <div className="membership-card">
+                  <div className=" space-y-10">
+                    <div className="space-y-5 h-24 text-center">
+                      <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
+                        The Individual pro
+                      </h3>
+                      <div className="space-y-2">
+                        <p className="text-mde membershi-list text-primary">
+                          <span className="text-2xl leading-6 font-bold me-1">
+                            $ 150
+                          </span>
+                          / first month
+                        </p>
+                        <p className="text-mde membershi-list text-primary">
+                          <span className="text-xl text-gray-400 line-through leading-6 font-medium me-1">
+                            $ 150
+                          </span>
+                          <span className="text-2xl leading-6 font-bold me-1">
+                            $ 75
+                          </span>
+                          / second month
+                        </p>
+                      </div>
+                    </div>
+                    <div className="space-y-5">
+                      <h5 className="font-bold leading-4 text-lg">
+                        Benifits of membership
+                      </h5>
+                      <ul className="text-sm membership-list list-none font-medium space-y-4">
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Buy a monthly membership and save 50% on your second
+                            month as a Special Black Friday Deal.
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Enjoy 4 hours of net sessions for just $150 per
+                            month.
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>Bring one additional player for free!</p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            For each additional player, there is a small $10 fee
+                            per hour
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>Inclusive of a complimentary pitching machine</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  {isCurrentPlan("individual pro", plan) ? (
+                    <button
+                      className="membership-btn cursor-not-allowed opacity-50"
+                      disabled
+                    >
+                      Current Plan
+                    </button>
+                  ) : userData?.results?.status &&
+                    userData?.results?.status !== true ? (
+                    <button onClick={onBlock} className="membership-btn">
+                      Choose Plan
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleMembership("individual_pro", 150)}
+                      className="membership-btn"
+                    >
+                      Choose Plan
+                    </button>
+                  )}
+                </div>
+                <div className="membership-card">
+                  <div className=" space-y-10">
+                    <div className="space-y-5 h-24 text-center">
+                      <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
+                        Individual pro unlimited
+                      </h3>
+                      <div className="space-y-2">
+                        <p className="text-mde membershi-list text-primary">
+                          <span className="text-2xl leading-6 font-bold me-1">
+                            $ 450
+                          </span>
+                          / first month
+                        </p>
+                        <p className="text-mde membershi-list text-primary">
+                          <span className="text-xl text-gray-400 line-through leading-6 font-medium me-1">
+                            $ 450
+                          </span>
+                          <span className="text-2xl leading-6 font-bold me-1">
+                            $ 225
+                          </span>
+                          / second month
+                        </p>
+                      </div>
+                    </div>
+                    <div className="space-y-5">
+                      <h5 className="font-bold leading-4 text-lg">
+                        Benifits of membership
+                      </h5>
+                      <ul className="text-sm membership-list font-medium list-none space-y-4">
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Buy a monthly membership and save 50% on your second
+                            month as a Special Black Friday Deal.
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Get an unlimited monthly membership for only $450
+                            per month
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Bring a friend to your practice sessions at no extra
+                            cost.
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            The membership holder must be present when bringing
+                            guests to play.
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>Inclusive of a complimentary pitching machine.</p>
+                        </li>
+                      </ul>
+                      <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
+                        During thursday- Friday 5-8pm limited booking length one
+                        hour/day Additional player $10/hr
+                      </p>
+                    </div>
+                  </div>
+                  {isCurrentPlan("individual pro unlimited", plan) ? (
+                    <button
+                      className="membership-btn cursor-not-allowed opacity-50"
+                      disabled
+                    >
+                      Current Plan
+                    </button>
+                  ) : userData?.results?.status &&
+                    userData?.results?.status !== true ? (
+                    <button onClick={onBlock} className="membership-btn">
+                      Choose Plan
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() =>
+                        handleMembership("individual_pro_unlimited", 450)
+                      }
+                      className="membership-btn"
+                    >
+                      Choose Plan
+                    </button>
+                  )}
                 </div>
                 <div className="membership-card">
                   <div className=" space-y-10">
@@ -335,7 +508,7 @@ const MembershipCardSection = () => {
               </div>
             ) : plan === "quarterly" ? (
               <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
-                <div className="membership-card">
+                {/* <div className="membership-card">
                   <div className=" space-y-10">
                     <div className="space-y-5 h-24 text-center">
                       <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
@@ -466,6 +639,157 @@ const MembershipCardSection = () => {
                     <button
                       onClick={() =>
                         handleMembership("individual_pro_unlimited", 1350)
+                      }
+                      className="membership-btn"
+                    >
+                      Choose Plan
+                    </button>
+                  )}
+                </div> */}
+                <div className="membership-card">
+                  <div className=" space-y-10">
+                    <div className="space-y-5 h-24 text-center">
+                      <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
+                        The Individual pro
+                      </h3>
+                      <p className="text-mde membershi-list text-primary">
+                        <span className="text-xl text-gray-400 line-through leading-6 font-medium me-1">
+                          $ 450
+                        </span>
+                        <span className="text-2xl leading-6 font-bold me-1">
+                          $ 375
+                        </span>
+                        / quaterly
+                      </p>
+                    </div>
+                    <div className="space-y-5">
+                      <h5 className="font-bold leading-4 text-lg">
+                        Benifits of membership
+                      </h5>
+                      <ul className="text-sm membership-list list-none font-medium space-y-4">
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Buy Quarterly membership and get 1 and half months
+                            free as a Special Black Friday Deal.
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Enjoy 4 hours of net sessions for just $150 per
+                            month.
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>Bring one additional player for free!</p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            For each additional player, there is a small $10 fee
+                            per hour
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>Inclusive of a complimentary pitching machine</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  {isCurrentPlan("individual pro", plan) ? (
+                    <button
+                      className="membership-btn cursor-not-allowed opacity-50"
+                      disabled
+                    >
+                      Current Plan
+                    </button>
+                  ) : userData?.results?.status &&
+                    userData?.results?.status !== true ? (
+                    <button onClick={onBlock} className="membership-btn">
+                      Choose Plan
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleMembership("individual_pro", 375)}
+                      className="membership-btn"
+                    >
+                      Choose Plan
+                    </button>
+                  )}
+                </div>
+                <div className="membership-card">
+                  <div className=" space-y-10">
+                    <div className="space-y-5 h-24 text-center">
+                      <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
+                        Individual pro unlimited
+                      </h3>
+                      <p className="text-mde membershi-list text-primary">
+                        <span className="text-xl text-gray-400 line-through leading-6 font-medium me-1">
+                          $ 1350
+                        </span>
+                        <span className="text-2xl leading-6 font-bold me-1">
+                          $ 1125
+                        </span>
+                        / quarterly
+                      </p>
+                    </div>
+                    <div className="space-y-5">
+                      <h5 className="font-bold leading-4 text-lg">
+                        Benifits of membership
+                      </h5>
+                      <ul className="text-sm membership-list font-medium list-none space-y-4">
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Buy unlimited Quarterly membership and get 1 and
+                            half months free as a Special Black Friday Deal.
+                          </p>
+                        </li>
+
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            Bring a friend to your practice sessions at no extra
+                            cost.
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>
+                            The membership holder must be present when bringing
+                            guests to play.
+                          </p>
+                        </li>
+                        <li className="flex gap-2">
+                          <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
+                          <p>Inclusive of a complimentary pitching machine.</p>
+                        </li>
+                      </ul>
+                      <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
+                        During wednesday- Friday 5-8pm limited booking length
+                        one hour/day Additional player $10/hr
+                      </p>
+                    </div>
+                  </div>
+                  {isCurrentPlan("individual pro unlimited", plan) ? (
+                    <button
+                      className="membership-btn cursor-not-allowed opacity-50"
+                      disabled
+                    >
+                      Current Plan
+                    </button>
+                  ) : userData?.results?.status &&
+                    userData?.results?.status !== true ? (
+                    <button onClick={onBlock} className="membership-btn">
+                      Choose Plan
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() =>
+                        handleMembership("individual_pro_unlimited", 1125)
                       }
                       className="membership-btn"
                     >
@@ -855,9 +1179,6 @@ const MembershipCardSection = () => {
                                   Enjoy $40 off from regular training session
                                   rate.
                                 </p>
-                              </li>
-                              <li className="flex gap-2">
-                                <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
                               </li>
                             </ul>
                           </div>

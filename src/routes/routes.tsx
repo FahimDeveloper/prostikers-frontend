@@ -4,6 +4,12 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+const CreditPayment = LazyLoad(
+  lazy(() => import("../pages/CreditPayment/CreditPayment"))
+);
+const BlackFridayMembership = LazyLoad(
+  lazy(() => import("../pages/BlackFridayMembership/BlackFridayMembership"))
+);
 const GiftCardPayment = LazyLoad(
   lazy(() => import("../pages/GiftCardPayment/GiftCardPayment"))
 );
@@ -587,10 +593,10 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      // {
-      //   path: "/black-friday/membership",
-      //   element: <BlackFridayMembership />,
-      // },
+      {
+        path: "/black-friday/membership",
+        element: <BlackFridayMembership />,
+      },
       // {
       //   path: "/christmas-special/membership",
       //   element: <ChristmasSpecialMembership />,
@@ -664,6 +670,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <EventGroupPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/credit-payment",
+        element: (
+          <PrivetRoute>
+            <CreditPayment />
           </PrivetRoute>
         ),
       },

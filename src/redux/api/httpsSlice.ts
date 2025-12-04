@@ -103,6 +103,7 @@ export const clientApiSlice = createApi({
   reducerPath: "clientApi",
   baseQuery: baseQueryWithRefreshToken,
   endpoints: () => ({}),
+  tagTypes: ["client"],
 });
 
 export const voucherApiSlice = createApi({
