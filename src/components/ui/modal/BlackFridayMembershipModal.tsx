@@ -1,6 +1,6 @@
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
-import promotion from "../../../assets/images/promotions/popup-promotion-2.jpg";
+import promotion from "../../../assets/images/promotions/popup-promotion-3.jpg";
 import { Link } from "react-router-dom";
 
 const BlackFridayMembershipModal = () => {

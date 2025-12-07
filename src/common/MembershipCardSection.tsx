@@ -179,6 +179,10 @@ const MembershipCardSection = () => {
                           <p>Inclusive of a complimentary pitching machine</p>
                         </li>
                       </ul>
+                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
+                        During Wednesday- Friday 5-8pm limited booking length
+                        one hour/day Additional player $10/hr
+                      </p>
                     </div>
                   </div>
                   {isCurrentPlan("individual pro", plan) ? (
@@ -334,6 +338,10 @@ const MembershipCardSection = () => {
                           <p>Inclusive of a complimentary pitching machine</p>
                         </li>
                       </ul>
+                      <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
+                        During Wednesday- Friday 5-8pm limited booking length
+                        one hour/day Additional player $10/hr
+                      </p>
                     </div>
                   </div>
                   {isCurrentPlan("individual pro", plan) ? (
@@ -420,8 +428,8 @@ const MembershipCardSection = () => {
                         </li>
                       </ul>
                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
-                        During thursday- Friday 5-8pm limited booking length one
-                        hour/day Additional player $10/hr
+                        During Wednesday- Friday 5-8pm limited booking length
+                        one hour/day Additional player $10/hr
                       </p>
                     </div>
                   </div>
@@ -549,6 +557,10 @@ const MembershipCardSection = () => {
                           <p>Inclusive of a complimentary pitching machine</p>
                         </li>
                       </ul>
+                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
+                        During Wednesday- Friday 5-8pm limited booking length
+                        one hour/day Additional player $10/hr
+                      </p>
                     </div>
                   </div>
 
@@ -697,6 +709,10 @@ const MembershipCardSection = () => {
                           <p>Inclusive of a complimentary pitching machine</p>
                         </li>
                       </ul>
+                      <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
+                        During Wednesday- Friday 5-8pm limited booking length
+                        one hour/day Additional player $10/hr
+                      </p>
                     </div>
                   </div>
                   {isCurrentPlan("individual pro", plan) ? (
@@ -769,7 +785,7 @@ const MembershipCardSection = () => {
                         </li>
                       </ul>
                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
-                        During wednesday- Friday 5-8pm limited booking length
+                        During Wednesday- Friday 5-8pm limited booking length
                         one hour/day Additional player $10/hr
                       </p>
                     </div>
@@ -919,6 +935,10 @@ const MembershipCardSection = () => {
                           </p>
                         </li>
                       </ul>
+                      <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
+                        During Wednesday- Friday 5-8pm limited booking length
+                        one hour/day Additional player $10/hr
+                      </p>
                     </div>
                   </div>
 

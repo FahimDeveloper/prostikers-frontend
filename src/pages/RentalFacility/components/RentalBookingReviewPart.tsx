@@ -51,7 +51,6 @@ const RentalBookingReviewPart = ({
   setBlock,
   sessionCredit,
   machineCredit,
-  isUnlimited,
   setRemainingCredit,
   setUsedCredit,
   membershipStatus,
@@ -93,41 +92,41 @@ const RentalBookingReviewPart = ({
             ? facility?.results?.ini_price
             : facility?.results?.price;
 
-        return {
-          ...slot,
-          price,
-          usedCredit: 0,
-        };
+        return { ...slot, price, usedCredit: 0 };
       });
-
       setDisplayBookings(updatedBookings);
       return;
     }
 
-    // status = true -> continue original behaviour
-    if (isUnlimited) {
-      const usedFreeHours: Record<string, number> = {};
+    const usedFreeHours: Record<string, number> = {};
+    let remainingCredit = sessionCredit;
+    const isSingleBooking = bookings.length === 1;
 
-      const updatedBookings = bookings.map((slot: any) => {
-        const durationHr = facility?.results?.duration === 30 ? 0.5 : 1;
-        const slotCredit = durationHr;
-        const date = slot.date;
-        const peak = isPeakHour(date, slot.time_slot);
+    const updatedBookings = bookings.map((slot: any) => {
+      const durationHr = facility?.results?.duration === 30 ? 0.5 : 1;
+      const slotCredit = durationHr;
+      const date = slot.date;
+      const peak = isPeakHour(date, slot.time_slot);
 
-        let price = 0;
-        let usedCredit = 0;
+      let price = isSingleBooking
+        ? facility?.results?.ini_price
+        : facility?.results?.price;
+      let usedCredit = 0;
 
+      if (remainingCredit >= slotCredit) {
         if (peak) {
           const alreadyUsed = usedFreeHours[date] || 0;
           const remainingFree = Math.max(1 - alreadyUsed, 0);
 
-          if (remainingFree >= durationHr) {
+          if (remainingFree >= slotCredit) {
             usedCredit = slotCredit;
-            usedFreeHours[date] = alreadyUsed + durationHr;
+            usedFreeHours[date] = alreadyUsed + slotCredit;
             price = 0;
           } else if (remainingFree > 0) {
+            usedCredit = remainingFree;
+            remainingCredit -= remainingFree;
+            price = facility?.results?.price; // charge extra for remaining
             usedFreeHours[date] = alreadyUsed + remainingFree;
-            price = facility?.results?.price;
           } else {
             if (!allow) {
               price = 45;
@@ -135,12 +134,10 @@ const RentalBookingReviewPart = ({
                 title: "Confirm",
                 icon: <ExclamationCircleOutlined />,
                 content:
-                  "You are trying to book more then 1 hour on peak time. Extra $45 price will charged you for . Proceed?",
+                  "You are trying to book more than 1 hour on peak time. Extra $45 will be charged. Proceed?",
                 okText: "OK",
                 cancelText: "Cancel",
-                onOk: () => {
-                  setAllow(true);
-                },
+                onOk: () => setAllow(true),
                 onCancel: () => {
                   const slotId = `${
                     facility?.results?._id
@@ -165,7 +162,7 @@ const RentalBookingReviewPart = ({
                             };
                           } else if (
                             slots.date.format("YYYY-MM-DD") === date &&
-                            slots.slots.length == 1
+                            slots.slots.length === 1
                           ) {
                             return null;
                           }
@@ -173,7 +170,7 @@ const RentalBookingReviewPart = ({
                         })
                         .filter(Boolean);
 
-                      if (updatedSlots.length == 0) setBlock(false);
+                      if (updatedSlots.length === 0) setBlock(false);
                       setSelectSlots(updatedSlots);
                     })
                     .catch((error) =>
@@ -192,33 +189,12 @@ const RentalBookingReviewPart = ({
           usedCredit = slotCredit;
           price = 0;
         }
-        setUsedCredit(usedCredit);
-        return { ...slot, price, usedCredit };
-      });
-
-      setDisplayBookings(updatedBookings);
-      return;
-    }
-
-    // non-unlimited (normal) credit logic
-    let remainingCredit = sessionCredit;
-    const isSingleBooking = bookings.length === 1;
-    const updatedBookings = bookings.map((slot: any) => {
-      const slotCredit = facility?.results?.duration === 30 ? 0.5 : 1;
-      let price = isSingleBooking
-        ? facility?.results?.ini_price
-        : facility?.results?.price;
-
-      let usedCredit = 0;
-
-      if (remainingCredit >= slotCredit) {
-        price = 0;
-        usedCredit = slotCredit;
-        remainingCredit -= slotCredit;
+        remainingCredit -= usedCredit;
       } else if (remainingCredit > 0) {
         usedCredit = remainingCredit;
         remainingCredit = 0;
       }
+
       setUsedCredit(sessionCredit - remainingCredit);
       setRemainingCredit(remainingCredit);
       return { ...slot, price, usedCredit };
@@ -229,7 +205,6 @@ const RentalBookingReviewPart = ({
     bookings,
     sessionCredit,
     facility,
-    isUnlimited,
     membershipStatus,
     allow,
     deleteSlot,
@@ -242,61 +217,50 @@ const RentalBookingReviewPart = ({
 
   useEffect(() => {
     if (!membershipStatus) {
+      // Non-members pay normal price
       const updatedAddons = addons.map((addon: any) => {
-        const price = addon.ini_price + addon.price * addon.hours;
-        return { ...addon, price };
-      });
-
-      setDisplayAddons(updatedAddons);
-      return;
-    }
-
-    if (isUnlimited) {
-      const usedFreeHours: Record<string, number> = {};
-
-      const updatedAddons = addons.map((addon: any) => {
-        const firstSlot = bookings[0];
-        const date = firstSlot?.date;
-        const timeSlot = firstSlot?.time_slot;
-        const isPeak = date && timeSlot && isPeakHour(date, timeSlot);
-
         let price = 0;
-
-        if (isPeak) {
-          const alreadyUsed = usedFreeHours[date] || 0;
-          const freeRemaining = Math.max(1 - alreadyUsed, 0);
-          const freeUsed = Math.min(freeRemaining, addon.hours);
-          const chargeable = addon.hours - freeUsed;
-
-          usedFreeHours[date] = alreadyUsed + freeUsed;
-
-          if (chargeable > 0) {
-            price = addon.ini_price + addon.price * chargeable;
-          }
+        if (addon.type === "half_hourly") {
+          price = addon.hours < 1 ? addon.ini_price : addon.price * addon.hours;
+        } else {
+          price = addon.hours < 2 ? addon.ini_price : addon.price * addon.hours;
         }
-
         return { ...addon, price };
       });
-
       setDisplayAddons(updatedAddons);
       return;
     }
 
     let remainingCredit = machineCredit;
+
     const updatedAddons = addons.map((addon: any) => {
       const addonUnitCredit = addon?.type === "half_hourly" ? 1 : 1;
-      let totalCreditNeeded = addon.hours * addonUnitCredit;
+      const totalCreditNeeded = addon.hours * addonUnitCredit;
+      let usedCredit = 0;
       let price = 0;
 
-      if (remainingCredit >= totalCreditNeeded) {
-        price = 0;
-        remainingCredit -= totalCreditNeeded;
-      } else if (remainingCredit > 0) {
-        const creditCoveredHours = remainingCredit / addonUnitCredit;
-        const coveredPrice =
-          addon.ini_price + (addon.hours - creditCoveredHours) * addon.price;
-        price = coveredPrice;
-        remainingCredit = 0;
+      if (remainingCredit > 0) {
+        if (remainingCredit >= totalCreditNeeded) {
+          usedCredit = totalCreditNeeded;
+          remainingCredit -= usedCredit;
+          price = 0;
+        } else {
+          usedCredit = remainingCredit;
+          remainingCredit = 0;
+          const creditCoveredHours = usedCredit / addonUnitCredit;
+          const remainingHours = addon.hours - creditCoveredHours;
+          if (addon.type === "half_hourly") {
+            price =
+              remainingHours < 1
+                ? addon.ini_price
+                : addon.price * remainingHours;
+          } else {
+            price =
+              remainingHours < 2
+                ? addon.ini_price
+                : addon.price * remainingHours;
+          }
+        }
       } else {
         if (addon.type === "half_hourly") {
           price = addon.hours < 1 ? addon.ini_price : addon.price * addon.hours;
@@ -309,7 +273,7 @@ const RentalBookingReviewPart = ({
     });
 
     setDisplayAddons(updatedAddons);
-  }, [addons, machineCredit, isUnlimited, bookings, membershipStatus]);
+  }, [addons, machineCredit, membershipStatus]);
 
   useEffect(() => {
     const bookingsPrice = displayBookings.reduce((acc, b) => acc + b.price, 0);
