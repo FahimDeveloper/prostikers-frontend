@@ -71,17 +71,25 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
   }, [facility]);
 
   useEffect(() => {
-    if (userData?.results?.credit_balance) {
+    const hasMembership = userData?.results?.membership;
+    const packageName = userData?.results?.package_name;
+
+    if (
+      hasMembership &&
+      (packageName === "individual pro" ||
+        packageName === "individual pro unlimited")
+    ) {
+      const sessionCreditValue =
+        userData?.results?.credit_balance?.session_credit;
+      const machineCreditValue =
+        userData?.results?.credit_balance?.machine_credit;
+
       if (
-        userData?.results?.credit_balance?.session_credit !== "unlimited" &&
-        userData?.results?.credit_balance?.machine_credit !== "unlimited"
+        sessionCreditValue !== "unlimited" &&
+        machineCreditValue !== "unlimited"
       ) {
-        setSessionCredit(
-          Number(userData?.results?.credit_balance?.session_credit)
-        );
-        setMachineCredit(
-          Number(userData?.results?.credit_balance?.machine_credit)
-        );
+        setSessionCredit(Number(sessionCreditValue));
+        setMachineCredit(Number(machineCreditValue));
       } else {
         setIsUnlimited(true);
       }

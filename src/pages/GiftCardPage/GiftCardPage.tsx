@@ -242,7 +242,7 @@ const GiftCard = () => {
           <div className="flex items-center gap-2 mb-3">
             <TagOutlined className="text-blue-600 text-xl" />
             <h2 className="text-lg font-semibold">
-              Limited-Time Offers (Nov 29 — Dec 7 Only)
+              Limited-Time Offers (Until January 5th 2026)
             </h2>
           </div>
 

@@ -32,7 +32,7 @@ const MembershipCheckout = ({
       email: email,
       membership: membership.split(" ").join("_"),
       plan: plan,
-      isBlackFriday: true,
+      isBlackFriday: false,
     })
       .unwrap()
       .then((data: any) => {

@@ -53,6 +53,7 @@ const RentalBookingReviewPart = ({
   machineCredit,
   setRemainingCredit,
   setUsedCredit,
+  isUnlimited,
   membershipStatus,
 }: Props) => {
   dayjs.extend(utc);
@@ -83,129 +84,248 @@ const RentalBookingReviewPart = ({
     );
   };
 
+  // useEffect(() => {
+  //   if (!membershipStatus) {
+  //     const updatedBookings = bookings.map((slot: any) => {
+  //       const price =
+  //         bookings.length === 1
+  //           ? facility?.results?.ini_price
+  //           : facility?.results?.price;
+  //       return { ...slot, price, usedCredit: 0 };
+  //     });
+  //     setDisplayBookings(updatedBookings);
+  //     return;
+  //   }
+
+  //   const usedFreeHours: Record<string, number> = {};
+  //   let remainingCredit = sessionCredit;
+
+  //   const updatedBookings = bookings.map((slot: any) => {
+  //     const durationHr = facility?.results?.duration === 30 ? 0.5 : 1;
+  //     const slotCredit = durationHr;
+  //     const date = slot.date;
+  //     const peak = isPeakHour(date, slot.time_slot);
+
+  //     let price =
+  //       bookings.length === 1
+  //         ? facility?.results?.ini_price
+  //         : facility?.results?.price;
+  //     let usedCredit = 0;
+
+  //     if (!isUnlimited && remainingCredit > 0) {
+  //       if (remainingCredit >= slotCredit) {
+  //         usedCredit = slotCredit;
+  //         remainingCredit -= slotCredit;
+  //       } else {
+  //         usedCredit = remainingCredit;
+  //         remainingCredit = 0;
+  //       }
+  //     } else if (isUnlimited) {
+  //       usedCredit = slotCredit;
+  //     }
+
+  //     if (peak) {
+  //       const alreadyUsed = usedFreeHours[date] || 0;
+  //       const remainingFree = Math.max(1 - alreadyUsed, 0);
+
+  //       if (remainingFree >= slotCredit) {
+  //         usedFreeHours[date] = alreadyUsed + slotCredit;
+  //         price = 0;
+  //       } else if (remainingFree > 0) {
+  //         usedFreeHours[date] = alreadyUsed + remainingFree;
+  //         price = isUnlimited ? 0 : facility?.results?.price;
+  //       } else {
+  //         price = 45;
+  //         if (!allow) {
+  //           modal.confirm({
+  //             title: "Confirm",
+  //             icon: <ExclamationCircleOutlined />,
+  //             content:
+  //               "You are trying to book more than 1 hour on peak time. Extra $45 will be charged. Proceed?",
+  //             okText: "OK",
+  //             cancelText: "Cancel",
+  //             onOk: () => setAllow(true),
+  //             onCancel: () => {
+  //               const slotId = `${
+  //                 facility?.results?._id
+  //               }${date}${slot?.time_slot.split(" ").join("")}${slot.lane
+  //                 ?.split(" ")
+  //                 .join("+")}`;
+  //               deleteSlot(slotId)
+  //                 .unwrap()
+  //                 .then(() => {
+  //                   const updatedSlots = selectSlots
+  //                     ?.map((slots: any) => {
+  //                       if (
+  //                         slots.date.format("YYYY-MM-DD") === date &&
+  //                         slots.slots.length > 1
+  //                       ) {
+  //                         return {
+  //                           ...slots,
+  //                           slots: slots.slots.filter(
+  //                             (oldSlot: string) => oldSlot !== slot?.time_slot
+  //                           ),
+  //                         };
+  //                       } else if (
+  //                         slots.date.format("YYYY-MM-DD") === date &&
+  //                         slots.slots.length === 1
+  //                       ) {
+  //                         return null;
+  //                       }
+  //                       return slots;
+  //                     })
+  //                     .filter(Boolean);
+  //                   if (updatedSlots.length === 0) setBlock(false);
+  //                   setSelectSlots(updatedSlots);
+  //                 })
+  //                 .catch((error) =>
+  //                   messageApi.open({
+  //                     type: "error",
+  //                     content: `${error.data.message}`,
+  //                   })
+  //                 );
+  //             },
+  //           });
+  //         }
+  //       }
+  //     } else if (!isUnlimited && remainingCredit < slotCredit) {
+  //       price =
+  //         bookings.length === 1
+  //           ? facility?.results?.ini_price
+  //           : facility?.results?.price;
+  //     } else if (isUnlimited) {
+  //       price = 0;
+  //     }
+
+  //     setUsedCredit(sessionCredit - remainingCredit);
+  //     setRemainingCredit(remainingCredit);
+
+  //     return { ...slot, price, usedCredit };
+  //   });
+
+  //   setDisplayBookings(updatedBookings);
+  // }, [
+  //   bookings,
+  //   sessionCredit,
+  //   facility,
+  //   membershipStatus,
+  //   isUnlimited,
+  //   allow,
+  //   deleteSlot,
+  //   selectSlots,
+  //   modal,
+  //   messageApi,
+  //   setBlock,
+  //   setSelectSlots,
+  // ]);
+
   useEffect(() => {
     if (!membershipStatus) {
-      console.log("no membership");
+      // Non-members: normal price
       const updatedBookings = bookings.map((slot: any) => {
         const price =
           bookings.length === 1
             ? facility?.results?.ini_price
             : facility?.results?.price;
-
         return { ...slot, price, usedCredit: 0 };
       });
       setDisplayBookings(updatedBookings);
       return;
     }
 
-    const usedFreeHours: Record<string, number> = {};
+    const usedPeakHours: Record<string, number> = {};
     let remainingCredit = sessionCredit;
-    const isSingleBooking = bookings.length === 1;
 
     const updatedBookings = bookings.map((slot: any) => {
       const durationHr = facility?.results?.duration === 30 ? 0.5 : 1;
-      const slotCredit = durationHr;
       const date = slot.date;
       const peak = isPeakHour(date, slot.time_slot);
 
-      let price = isSingleBooking
-        ? facility?.results?.ini_price
-        : facility?.results?.price;
       let usedCredit = 0;
+      let price =
+        bookings.length === 1
+          ? facility?.results?.ini_price
+          : facility?.results?.price;
 
-      if (remainingCredit >= slotCredit) {
-        if (peak) {
-          const alreadyUsed = usedFreeHours[date] || 0;
-          const remainingFree = Math.max(1 - alreadyUsed, 0);
+      if (peak) {
+        // --- Peak-hour free max 1 hour per day ---
+        const alreadyUsedPeak = usedPeakHours[date] || 0;
+        const remainingPeakFree = Math.max(1 - alreadyUsedPeak, 0);
+        const freeThisSlot = Math.min(durationHr, remainingPeakFree);
+        usedPeakHours[date] = alreadyUsedPeak + freeThisSlot;
 
-          if (remainingFree >= slotCredit) {
-            usedCredit = slotCredit;
-            usedFreeHours[date] = alreadyUsed + slotCredit;
-            price = 0;
-          } else if (remainingFree > 0) {
-            usedCredit = remainingFree;
-            remainingCredit -= remainingFree;
-            price = facility?.results?.price; // charge extra for remaining
-            usedFreeHours[date] = alreadyUsed + remainingFree;
-          } else {
-            if (!allow) {
-              price = 45;
-              modal.confirm({
-                title: "Confirm",
-                icon: <ExclamationCircleOutlined />,
-                content:
-                  "You are trying to book more than 1 hour on peak time. Extra $45 will be charged. Proceed?",
-                okText: "OK",
-                cancelText: "Cancel",
-                onOk: () => setAllow(true),
-                onCancel: () => {
-                  const slotId = `${
-                    facility?.results?._id
-                  }${date}${slot?.time_slot.split(" ").join("")}${slot.lane
-                    ?.split(" ")
-                    .join("+")}`;
+        if (isUnlimited) {
+          // Unlimited users: 1 hour free
+          usedCredit = freeThisSlot;
+        } else {
+          // Non-unlimited: use credit up to remainingPeakFree
+          const creditToUse = Math.min(remainingCredit, freeThisSlot);
+          usedCredit = creditToUse;
+          remainingCredit -= creditToUse;
+        }
 
-                  deleteSlot(slotId)
-                    .unwrap()
-                    .then(() => {
-                      const updatedSlots = selectSlots
-                        ?.map((slots: any) => {
-                          if (
-                            slots.date.format("YYYY-MM-DD") === date &&
-                            slots.slots.length > 1
-                          ) {
-                            return {
-                              ...slots,
-                              slots: slots.slots.filter(
-                                (oldSlot: string) => oldSlot !== slot?.time_slot
-                              ),
-                            };
-                          } else if (
-                            slots.date.format("YYYY-MM-DD") === date &&
-                            slots.slots.length === 1
-                          ) {
-                            return null;
-                          }
-                          return slots;
-                        })
-                        .filter(Boolean);
+        const leftoverHours = durationHr - usedCredit;
 
-                      if (updatedSlots.length === 0) setBlock(false);
-                      setSelectSlots(updatedSlots);
-                    })
-                    .catch((error) =>
-                      messageApi.open({
-                        type: "error",
-                        content: `${error.data.message}`,
-                      })
-                    );
-                },
-              });
-            } else {
-              price = 45;
-            }
+        if (leftoverHours > 0) {
+          // Extra peak-hour portion: charge $45 + modal
+          price = 45;
+          if (!allow) {
+            modal.confirm({
+              title: "Confirm",
+              icon: <ExclamationCircleOutlined />,
+              content:
+                "You are trying to book more than 1 hour on peak time. Extra $45 will be charged. Proceed?",
+              okText: "OK",
+              cancelText: "Cancel",
+              onOk: () => setAllow(true),
+              onCancel: () => {
+                const slotId = `${
+                  facility?.results?._id
+                }${date}${slot?.time_slot.split(" ").join("")}${slot.lane
+                  ?.split(" ")
+                  .join("+")}`;
+                deleteSlot(slotId).unwrap();
+              },
+            });
           }
         } else {
-          usedCredit = slotCredit;
           price = 0;
         }
-        remainingCredit -= usedCredit;
-      } else if (remainingCredit > 0) {
-        usedCredit = remainingCredit;
-        remainingCredit = 0;
+      } else {
+        if (isUnlimited) {
+          usedCredit = durationHr;
+          price = 0;
+        } else {
+          if (remainingCredit >= durationHr) {
+            usedCredit = durationHr;
+            remainingCredit -= durationHr;
+            price = 0;
+          } else if (remainingCredit > 0) {
+            usedCredit = remainingCredit;
+            remainingCredit = 0;
+            price = (durationHr - usedCredit) * facility?.results?.price;
+          } else {
+            usedCredit = 0;
+            price =
+              bookings.length === 1
+                ? facility?.results?.ini_price
+                : facility?.results?.price;
+          }
+        }
       }
 
-      setUsedCredit(sessionCredit - remainingCredit);
-      setRemainingCredit(remainingCredit);
       return { ...slot, price, usedCredit };
     });
 
+    setUsedCredit(sessionCredit - remainingCredit);
+    setRemainingCredit(remainingCredit);
     setDisplayBookings(updatedBookings);
   }, [
     bookings,
     sessionCredit,
     facility,
     membershipStatus,
+    isUnlimited,
     allow,
     deleteSlot,
     selectSlots,
@@ -217,16 +337,27 @@ const RentalBookingReviewPart = ({
 
   useEffect(() => {
     if (!membershipStatus) {
-      // Non-members pay normal price
       const updatedAddons = addons.map((addon: any) => {
-        let price = 0;
-        if (addon.type === "half_hourly") {
-          price = addon.hours < 1 ? addon.ini_price : addon.price * addon.hours;
-        } else {
-          price = addon.hours < 2 ? addon.ini_price : addon.price * addon.hours;
-        }
-        return { ...addon, price };
+        const price =
+          addon.type === "half_hourly"
+            ? addon.hours < 1
+              ? addon.ini_price
+              : addon.price * addon.hours
+            : addon.hours < 2
+            ? addon.ini_price
+            : addon.price * addon.hours;
+        return { ...addon, price, usedCredit: 0 };
       });
+      setDisplayAddons(updatedAddons);
+      return;
+    }
+
+    if (isUnlimited) {
+      const updatedAddons = addons.map((addon: any) => ({
+        ...addon,
+        price: 0,
+        usedCredit: 0,
+      }));
       setDisplayAddons(updatedAddons);
       return;
     }
@@ -239,41 +370,42 @@ const RentalBookingReviewPart = ({
       let usedCredit = 0;
       let price = 0;
 
-      if (remainingCredit > 0) {
-        if (remainingCredit >= totalCreditNeeded) {
-          usedCredit = totalCreditNeeded;
-          remainingCredit -= usedCredit;
-          price = 0;
-        } else {
-          usedCredit = remainingCredit;
-          remainingCredit = 0;
-          const creditCoveredHours = usedCredit / addonUnitCredit;
-          const remainingHours = addon.hours - creditCoveredHours;
-          if (addon.type === "half_hourly") {
-            price =
-              remainingHours < 1
-                ? addon.ini_price
-                : addon.price * remainingHours;
-          } else {
-            price =
-              remainingHours < 2
-                ? addon.ini_price
-                : addon.price * remainingHours;
-          }
-        }
+      if (remainingCredit >= totalCreditNeeded) {
+        // Full credit covers addon
+        usedCredit = totalCreditNeeded;
+        remainingCredit -= usedCredit;
+        price = 0;
+      } else if (remainingCredit > 0) {
+        // Partial credit
+        usedCredit = remainingCredit;
+        remainingCredit = 0;
+        const creditCoveredHours = usedCredit / addonUnitCredit;
+        const remainingHours = addon.hours - creditCoveredHours;
+
+        price =
+          addon.type === "half_hourly"
+            ? remainingHours < 1
+              ? addon.ini_price
+              : addon.price * remainingHours
+            : remainingHours < 2
+            ? addon.ini_price
+            : addon.price * remainingHours;
       } else {
-        if (addon.type === "half_hourly") {
-          price = addon.hours < 1 ? addon.ini_price : addon.price * addon.hours;
-        } else {
-          price = addon.hours < 2 ? addon.ini_price : addon.price * addon.hours;
-        }
+        price =
+          addon.type === "half_hourly"
+            ? addon.hours < 1
+              ? addon.ini_price
+              : addon.price * addon.hours
+            : addon.hours < 2
+            ? addon.ini_price
+            : addon.price * addon.hours;
       }
 
-      return { ...addon, price };
+      return { ...addon, price, usedCredit };
     });
 
     setDisplayAddons(updatedAddons);
-  }, [addons, machineCredit, membershipStatus]);
+  }, [addons, machineCredit, membershipStatus, isUnlimited]);
 
   useEffect(() => {
     const bookingsPrice = displayBookings.reduce((acc, b) => acc + b.price, 0);

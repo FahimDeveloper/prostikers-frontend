@@ -45,7 +45,7 @@ const MembershipSection = ({ data }: { data: IUser }) => {
         data?.credit_balance?.machine_credit !== "unlimited"
       ) {
         setSessionCredit(Number(data?.credit_balance?.session_credit));
-        setMachineCredit(Number(data?.credit_balance?.machine_credit));
+        setMachineCredit(Number(data?.credit_balance?.machine_credit ?? 0));
       } else {
         setIsUnlimited(true);
       }
@@ -155,22 +155,21 @@ const MembershipSection = ({ data }: { data: IUser }) => {
               {!isUnlimited ? (
                 <div className="flex items-center gap-2">
                   <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
-                    Session Credit :{" "}
-                    {sessionCredit !== null ? sessionCredit : 0}
+                    Session Credit: {sessionCredit ?? 0}
                   </p>
-                  <div className="border-r border-gray-400 border-solid border-l-0 border-t-0 border-b-0 h-4" />
+                  <div className="border-r border-gray-400 h-4" />
                   <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
-                    Addons Credit : {machineCredit !== null ? machineCredit : 0}
+                    Addons Credit: {machineCredit ?? 0}
                   </p>
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
                   <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
-                    Session Credit : {data?.credit_balance?.session_credit}
+                    Session Credit: {data?.credit_balance?.session_credit ?? 0}
                   </p>
-                  <div className="border-r border-gray-400 border-solid border-l-0 border-t-0 border-b-0 h-4" />
+                  <div className="border-r border-gray-400 h-4" />
                   <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
-                    Addons Credit : {data?.credit_balance?.session_credit}
+                    Addons Credit: {data?.credit_balance?.machine_credit ?? 0}
                   </p>
                 </div>
               )}

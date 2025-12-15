@@ -254,8 +254,8 @@ const FacilityBookingTimeSlots = ({
     }
   }, [deleteSuccess, isDeleteError]);
 
-  const cartSlots = collectBookingTimeSlots(slotsCartData?.results, lane);
-  const bookedSlots = collectBookingTimeSlots(slotsBookedData?.results, lane);
+  const cartSlots = collectBookingTimeSlots(slotsCartData?.results);
+  const bookedSlots = collectBookingTimeSlots(slotsBookedData?.results);
   const proceedSlots = [...cartSlots, ...bookedSlots];
 
   const parseTime = (timeRange: any) => {
@@ -289,9 +289,14 @@ const FacilityBookingTimeSlots = ({
     );
     const selectedSlotList = selectedLane ? selectedLane.slots : [];
 
-    const laneSlots = unavailableSlots.filter(
-      (unavailable: any) => unavailable.lane === lane
-    );
+    // const laneSlots = unavailableSlots.filter(
+    //   (unavailable: any) => unavailable.lane === lane
+    // );
+
+    const laneSlots = unavailableSlots.filter((unavailable: any) => {
+      if (lane === "Open Arena") return true;
+      return unavailable.lane === lane || unavailable.lane === "Open Arena";
+    });
 
     return laneSlots.some((laneSlot: any) =>
       laneSlot.slots.some(

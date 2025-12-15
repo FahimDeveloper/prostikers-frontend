@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Modal } from "antd";
-import promotion from "../../../assets/images/promotions/popup-promotion-1.jpg";
+import promotion from "../../../assets/images/promotions/holiday-gift.webp";
 import { Link } from "react-router-dom";
 
 const BlackFridayGiftModal = () => {
@@ -28,11 +28,7 @@ const BlackFridayGiftModal = () => {
       centered
       width={500}
     >
-      <Link
-        to="/black-friday/gift-cards"
-        onClick={handleClose}
-        className="block"
-      >
+      <Link to="/holiday/gift-cards" onClick={handleClose} className="block">
         <img
           src={promotion}
           alt="Black Friday"

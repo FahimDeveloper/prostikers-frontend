@@ -52,11 +52,11 @@ const GiftCardSection = () => {
               Prostrikers Gift Cards
             </span>
             <h3 className="lg:text-[40px] md:text-4xl text-3xl lg:leading-[45px] font-semibold text-secondary">
-              Black Friday Gift Cards – 20% Bonus Value
+              Holiday Gift Cards – 20% Bonus Value
             </h3>
             <p className="text-[#717171] text-lg tracking-wide">
               Give the perfect gift with instant-use cards. Easy, flexible, and
-              ideal for every athlete this Black Friday. Let them pick exactly
+              ideal for every athlete this Holiday Season. Let them pick exactly
               what they want from their favorite sport.
             </p>
             <ul className="list-disc list-inside text-base space-y-2 text-[#717171]">

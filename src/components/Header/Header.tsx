@@ -28,10 +28,11 @@ const Header = () => {
                 { path: "/", label: "Home" },
                 { path: "/rental-facility", label: "Rental Facility" },
                 { path: "/membership", label: "Membership" },
+                { path: "/youth-membership", label: "Youth Membership" },
                 { path: "/academy", label: "Academy" },
                 { path: "/programs/tournaments", label: "Tournaments" },
                 { path: "/shop", label: "Shop" },
-                { path: "/blogs", label: "Blogs" },
+                // { path: "/blogs", label: "Blogs" },
               ].map((item) => (
                 <li key={item.path}>
                   <NavLink
@@ -88,10 +89,11 @@ const Header = () => {
                   {[
                     { path: "/rental-facility", label: "Rental Facility" },
                     { path: "/membership", label: "Membership" },
+                    { path: "/youth-membership", label: "Youth Membership" },
                     { path: "/academy", label: "Academy" },
                     { path: "/programs/tournaments", label: "Tournaments" },
                     { path: "/shop", label: "Shop" },
-                    { path: "/blogs", label: "Blogs" },
+                    // { path: "/blogs", label: "Blogs" },
                   ].map((item) => (
                     <li
                       key={item.path}

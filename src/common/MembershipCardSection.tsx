@@ -1,8 +1,7 @@
-import { Alert, Checkbox, Collapse, Modal } from "antd";
+import { Alert, Checkbox, Modal } from "antd";
 import { useState } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import Container from "../components/Container";
-import { GiClick } from "react-icons/gi";
 import GetInMap from "../pages/Contact/components/GetInMap";
 import GetInForm from "../pages/Contact/components/GetInForm";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +10,7 @@ import { selectCurrentUser } from "../redux/features/auth/authSlice";
 import { useClientQuery } from "../redux/features/client/clientApi";
 import MembershipConditions from "../components/MembershipConditions";
 import Swal from "sweetalert2";
+// import { GiClick } from "react-icons/gi";
 
 const MembershipCardSection = () => {
   const [plan, setPlan] = useState("monthly");
@@ -26,10 +26,10 @@ const MembershipCardSection = () => {
   const navigate = useNavigate();
   const [openOrganizationModal, setOpenOrganizationModal] = useState(false);
   const [openInfoModal, setOpenInfoModal] = useState(false);
-  const panelStyle: React.CSSProperties = {
-    backgroundColor: "#EDFFFF",
-    borderColor: "#ACDFDF",
-  };
+  // const panelStyle: React.CSSProperties = {
+  //   backgroundColor: "#EDFFFF",
+  //   borderColor: "#ACDFDF",
+  // };
   const isCurrentPlan = (membershipName: string, planType: string) => {
     return (
       userData?.results?.membership &&
@@ -138,7 +138,7 @@ const MembershipCardSection = () => {
             </div>
             {plan === "monthly" ? (
               <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
-                {/* <div className="membership-card">
+                <div className="membership-card">
                   <div className=" space-y-10">
                     <div className="space-y-5 h-24 text-center">
                       <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
@@ -179,7 +179,7 @@ const MembershipCardSection = () => {
                           <p>Inclusive of a complimentary pitching machine</p>
                         </li>
                       </ul>
-                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
+                      <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
                         During Wednesday- Friday 5-8pm limited booking length
                         one hour/day Additional player $10/hr
                       </p>
@@ -278,8 +278,8 @@ const MembershipCardSection = () => {
                       Choose Plan
                     </button>
                   )}
-                </div> */}
-                <div className="membership-card">
+                </div>
+                {/* <div className="membership-card">
                   <div className=" space-y-10">
                     <div className="space-y-5 h-24 text-center">
                       <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
@@ -455,7 +455,7 @@ const MembershipCardSection = () => {
                       Choose Plan
                     </button>
                   )}
-                </div>
+                </div> */}
                 <div className="membership-card">
                   <div className=" space-y-10">
                     <div className="space-y-5 h-24 text-center">
@@ -516,7 +516,7 @@ const MembershipCardSection = () => {
               </div>
             ) : plan === "quarterly" ? (
               <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
-                {/* <div className="membership-card">
+                <div className="membership-card">
                   <div className=" space-y-10">
                     <div className="space-y-5 h-24 text-center">
                       <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
@@ -557,7 +557,7 @@ const MembershipCardSection = () => {
                           <p>Inclusive of a complimentary pitching machine</p>
                         </li>
                       </ul>
-                       <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
+                      <p className="text-sm membershi-list bg-[#F5FFFF] p-3 text-[#073D3E]">
                         During Wednesday- Friday 5-8pm limited booking length
                         one hour/day Additional player $10/hr
                       </p>
@@ -657,8 +657,8 @@ const MembershipCardSection = () => {
                       Choose Plan
                     </button>
                   )}
-                </div> */}
-                <div className="membership-card">
+                </div>
+                {/* <div className="membership-card">
                   <div className=" space-y-10">
                     <div className="space-y-5 h-24 text-center">
                       <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
@@ -812,7 +812,7 @@ const MembershipCardSection = () => {
                       Choose Plan
                     </button>
                   )}
-                </div>
+                </div> */}
                 <div className="membership-card">
                   <div className=" space-y-10">
                     <div className="space-y-5 h-24 text-center">
@@ -1106,7 +1106,7 @@ const MembershipCardSection = () => {
                 </div>
               </div>
             )}
-            <Collapse
+            {/* <Collapse
               defaultActiveKey={["1"]}
               style={panelStyle}
               items={[
@@ -1280,7 +1280,7 @@ const MembershipCardSection = () => {
                   ),
                 },
               ]}
-            />
+            /> */}
           </div>
         </div>
       </Container>

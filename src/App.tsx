@@ -5,7 +5,6 @@ import ForceUpdateModal from "./components/ui/modal/ForceUpdateModal";
 import WaiverSign from "./components/WaiverSign";
 import EmitrrChat from "./components/EmitrrChat";
 import BlackFridayGiftModal from "./components/ui/modal/BlackFridayGiftModal";
-import BlackFridayMembershipModal from "./components/ui/modal/BlackFridayMembershipModal";
 
 const App = () => {
   return (
@@ -19,7 +18,7 @@ const App = () => {
       <WaiverSign />
       <EmitrrChat />
       <BlackFridayGiftModal />
-      <BlackFridayMembershipModal />
+      {/* <BlackFridayMembershipModal /> */}
       <div className="nj-engage" data-position="left"></div>
     </>
   );

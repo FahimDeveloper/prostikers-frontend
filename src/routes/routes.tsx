@@ -4,12 +4,15 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+const YouthMembership = LazyLoad(
+  lazy(() => import("../pages/YouthMembership/YouthMembership"))
+);
 const CreditPayment = LazyLoad(
   lazy(() => import("../pages/CreditPayment/CreditPayment"))
 );
-const BlackFridayMembership = LazyLoad(
-  lazy(() => import("../pages/BlackFridayMembership/BlackFridayMembership"))
-);
+// const BlackFridayMembership = LazyLoad(
+//   lazy(() => import("../pages/BlackFridayMembership/BlackFridayMembership"))
+// );
 const GiftCardPayment = LazyLoad(
   lazy(() => import("../pages/GiftCardPayment/GiftCardPayment"))
 );
@@ -593,20 +596,20 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      {
-        path: "/black-friday/membership",
-        element: <BlackFridayMembership />,
-      },
+      // {
+      //   path: "/black-friday/membership",
+      //   element: <BlackFridayMembership />,
+      // },
       // {
       //   path: "/christmas-special/membership",
       //   element: <ChristmasSpecialMembership />,
       // },
       {
-        path: "/black-friday/gift-cards",
+        path: "/holiday/gift-cards",
         element: <GiftCard />,
       },
       {
-        path: "/black-friday/gift-cards/payment",
+        path: "/holiday/gift-cards/payment",
         element: <GiftCardPayment />,
       },
       {
@@ -768,6 +771,10 @@ export const router = createBrowserRouter([
       {
         path: "/membership",
         element: <Membership />,
+      },
+      {
+        path: "/youth-membership",
+        element: <YouthMembership />,
       },
       {
         path: "/shop",
