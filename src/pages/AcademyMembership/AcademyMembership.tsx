@@ -1,9 +1,9 @@
 import BannerSection from "../../common/BannerSection";
 import QuestionSection from "../../common/QuestionSection";
 import banner from "../../assets/images/trainingsBanner/youth-training-banner.webp";
-import YouthMembershipCardSection from "./components/YouthMembershipCardSection";
+import AcademyMembershipCardSection from "./components/AcademyMembershipCardSection";
 
-const YouthMembership = () => {
+const AcademyMembership = () => {
   const questionData = [
     {
       title: "What are the hours of operation for ProStrikers?",
@@ -58,11 +58,11 @@ const YouthMembership = () => {
   ];
   return (
     <div className="lg:py-16 py-14 lg:mt-10 mt-9 mx-auto">
-      <BannerSection image={banner} title="Youth Training Membership" />
-      <YouthMembershipCardSection />
+      <BannerSection image={banner} title="Academy Membership" />
+      <AcademyMembershipCardSection />
       <QuestionSection data={questionData} />
     </div>
   );
 };
 
-export default YouthMembership;
+export default AcademyMembership;

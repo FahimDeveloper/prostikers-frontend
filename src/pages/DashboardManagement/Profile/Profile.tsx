@@ -9,7 +9,10 @@ import QrCodeView from "./components/QrCodeView";
 
 const Profile = () => {
   const user = useSelector(selectCurrentUser);
-  const { data: userData, isLoading } = useClientQuery(user?._id);
+  const { data: userData, isLoading } = useClientQuery(user?._id, {
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+  });
   return (
     <div className="lg:pb-14 md:pb-12 pb-10 space-y-10">
       {isLoading ? (

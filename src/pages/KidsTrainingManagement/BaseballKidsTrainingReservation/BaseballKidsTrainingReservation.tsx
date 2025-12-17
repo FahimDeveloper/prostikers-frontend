@@ -11,11 +11,17 @@ import TermsCondition from "../../../components/TermsCondition";
 import PrivacyPolicy from "../../../components/PrivacyPolicy";
 import { useAppSelector } from "../../../hooks/useAppHooks";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
+import { useClientQuery } from "../../../redux/features/client/clientApi";
 
 const BaseballKidsTrainingReservation = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const user = useAppSelector(selectCurrentUser);
+  const [sessionCredit, setSessionCredit] = useState(0);
+  const { data: userData } = useClientQuery(user?._id, {
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+  });
   const [agree, setAgree] = useState(false);
   const { state } = useLocation();
   const location = state?.from?.pathname || "/";
@@ -44,6 +50,17 @@ const BaseballKidsTrainingReservation = () => {
     totalPrice = price;
   }
 
+  useEffect(() => {
+    const hasMembership = userData?.results?.membership;
+    const packageName = userData?.results?.package_name;
+
+    if (hasMembership && packageName === "youth training membership") {
+      const sessionCreditValue =
+        userData?.results?.credit_balance?.session_credit;
+      setSessionCredit(Number(sessionCreditValue));
+    }
+  }, [userData]);
+
   const onFinish = () => {
     const payload = {
       user: user?._id,
@@ -56,7 +73,11 @@ const BaseballKidsTrainingReservation = () => {
     };
 
     navigate("/class-payment", {
-      state: { data: payload, location: location, amount: totalPrice },
+      state: {
+        data: payload,
+        location: location,
+        amount: sessionCredit == 0 ? totalPrice : 0,
+      },
     });
   };
 
@@ -186,10 +207,17 @@ const BaseballKidsTrainingReservation = () => {
                 </div>
               )}
               <div className="flex justify-end">
-                <div className="flex gap-2 items-center">
-                  <p className="font-medium">Total Price:</p>
-                  <p className="text-lg font-medium">${totalPrice}</p>
-                </div>
+                {sessionCredit == 0 ? (
+                  <div className="flex gap-2 items-center">
+                    <p className="font-medium">Total Price:</p>
+                    <p className="text-lg font-medium">${totalPrice}</p>
+                  </div>
+                ) : (
+                  <div className="flex gap-2 items-center">
+                    <p className="font-medium">Session Credit will charge:</p>
+                    <p className="text-lg font-medium">1</p>
+                  </div>
+                )}
               </div>
             </div>
             {state?.data && (
@@ -213,7 +241,7 @@ const BaseballKidsTrainingReservation = () => {
                   </Form.Item>
                   <Form.Item className="m-0">
                     <Button
-                      disabled={data}
+                      disabled={sessionCredit !== 0 || data}
                       loading={isLoading}
                       htmlType="submit"
                       type="primary"

@@ -14,6 +14,7 @@ import { FaUserGraduate } from "react-icons/fa";
 import { CiBadgeDollar } from "react-icons/ci";
 import { Button } from "antd";
 import { Dayjs } from "dayjs";
+import { useEffect, useState } from "react";
 
 const KidsTrainingCard = ({
   image,
@@ -24,6 +25,7 @@ const KidsTrainingCard = ({
   data: any;
   activeDate: Dayjs;
 }) => {
+  const [isMember, setIsMember] = useState(false);
   const user = useSelector(selectCurrentUser);
   const location = useLocation();
   const token = useSelector(selectCurrentToken);
@@ -54,6 +56,14 @@ const KidsTrainingCard = ({
       });
     }
   };
+  useEffect(() => {
+    if (
+      user?.membership &&
+      user?.package_name === "youth training membership"
+    ) {
+      setIsMember(true);
+    }
+  }, [user]);
   return (
     <div className="space-y-3 p-2 border border-solid border-[#F8F8F8] rounded-md shadow-md">
       <div className="relative">
@@ -129,16 +139,18 @@ const KidsTrainingCard = ({
           <p className="text-base font-medium">${data?.price}</p>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-2">
-        <Button onClick={onClick} className="primary-btn-2 w-full">
+      <div className="flex gap-2 w-full">
+        <Button onClick={onClick} className="primary-btn-2 flex-1">
           Day Pass
         </Button>
-        <Button
-          onClick={() => navigate("/membership")}
-          className="bg-secondary btn text-base text-white w-full"
-        >
-          Monthly Subs..
-        </Button>
+        {!isMember && (
+          <Button
+            onClick={() => navigate("/academy-membership")}
+            className="bg-secondary btn text-base text-white flex-1"
+          >
+            Membership
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -3,27 +3,39 @@ import { Modal, Button } from "antd";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
-const CREDIT_PRICE = 37.5;
+const NORMAL_CREDIT_PRICE = 37.5;
+const ACADEMY_CREDIT_PRICE = 40;
 
 export default function AddMoreCreditModal({
   credits,
+  package_name,
 }: {
-  credits: { session_credit: string; machine_credit: string };
+  credits: { session_credit: string; machine_credit?: string };
+  package_name: string;
 }) {
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
 
-  const totalPrice = (quantity * CREDIT_PRICE).toFixed(2);
+  let totalPrice;
+  if (package_name === "youth training membership") {
+    totalPrice = (quantity * ACADEMY_CREDIT_PRICE).toFixed(2);
+  } else {
+    totalPrice = (quantity * NORMAL_CREDIT_PRICE).toFixed(2);
+  }
 
   const increase = () => setQuantity((prev) => (prev < 4 ? prev + 1 : 4));
   const decrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
   const handleOk = () => {
     const currentMachine = Number(credits.machine_credit) || 0;
-    const newMachine = currentMachine + quantity;
-
-    const finalMachine = newMachine > 4 ? 4 : newMachine;
+    let newMachine = currentMachine;
+    let finalMachine;
+    if (package_name === "youth training membership") {
+      newMachine = currentMachine;
+    } else {
+      finalMachine = newMachine > 4 ? 4 : newMachine;
+    }
 
     navigate("/credit-payment", {
       state: {

@@ -8,7 +8,7 @@ import {
   selectCurrentUser,
 } from "../redux/features/auth/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
-import { collectBookingTimeSlots } from "../utils/collectBookingTimeSlots";
+import { collectFacilityBookingTimeSlots } from "../utils/collectBookingTimeSlots";
 import { message } from "antd";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
@@ -254,8 +254,8 @@ const FacilityBookingTimeSlots = ({
     }
   }, [deleteSuccess, isDeleteError]);
 
-  const cartSlots = collectBookingTimeSlots(slotsCartData?.results);
-  const bookedSlots = collectBookingTimeSlots(slotsBookedData?.results);
+  const cartSlots = collectFacilityBookingTimeSlots(slotsCartData?.results);
+  const bookedSlots = collectFacilityBookingTimeSlots(slotsBookedData?.results);
   const proceedSlots = [...cartSlots, ...bookedSlots];
 
   const parseTime = (timeRange: any) => {

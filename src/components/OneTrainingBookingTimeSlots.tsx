@@ -10,7 +10,7 @@ import {
   selectCurrentUser,
 } from "../redux/features/auth/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
-import { collectBookingTimeSlots } from "../utils/collectBookingTimeSlots";
+import { collectTrainingBookingTimeSlots } from "../utils/collectBookingTimeSlots";
 import { message } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -127,8 +127,8 @@ const OneTrainingBookingTimeSlots = ({
     }
   }, [isSuccess, isError, error]);
 
-  const cartSlots = collectBookingTimeSlots(slotsCartData?.results);
-  const bookedSlots = collectBookingTimeSlots(slotsBookedData?.results);
+  const cartSlots = collectTrainingBookingTimeSlots(slotsCartData?.results);
+  const bookedSlots = collectTrainingBookingTimeSlots(slotsBookedData?.results);
   const unavailableSlots = [...cartSlots, ...bookedSlots];
   return (
     <>

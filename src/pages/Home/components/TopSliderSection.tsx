@@ -4,8 +4,7 @@ import banner2 from "../../../assets/images/home/banners/banner2.webp";
 import banner3 from "../../../assets/images/home/banners/banner3.webp";
 import banner4 from "../../../assets/images/home/banners/banner4.webp";
 import banner5 from "../../../assets/images/home/banners/banner5.webp";
-import promotion1 from "../../../assets/images/home/banners/promotion-1.jpg";
-import promotion2 from "../../../assets/images/home/banners/promotion-2.jpg";
+import promotion from "../../../assets/images/home/banners/promotion.webp";
 import { Link } from "react-router-dom";
 import { GoDotFill } from "react-icons/go";
 import { Button } from "antd";
@@ -13,14 +12,14 @@ const TopSliderSection = () => {
   const bannerData = [
     {
       promotion: true,
-      image: promotion1,
+      image: promotion,
       link: "https://shop.prostrikers.com",
     },
-    {
-      promotion: true,
-      image: promotion2,
-      link: "https://shop.prostrikers.com",
-    },
+    // {
+    //   promotion: true,
+    //   image: promotion2,
+    //   link: "https://shop.prostrikers.com",
+    // },
     {
       promotion: false,
       title: "Elevate Your Game to Major League Standards",
@@ -121,7 +120,7 @@ const TopSliderSection = () => {
                 <div
                   className={`
     min-h-svh
-    ${index === 0 ? "bg-primary" : "bg-[#38363B]"}
+    ${index === 0 ? "bg-[#000435]" : "bg-primary"}
     flex lg:items-center sm:items-end items-center rounded-b-3xl
     bg-no-repeat
     ${

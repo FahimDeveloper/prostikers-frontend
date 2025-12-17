@@ -9,7 +9,7 @@ import Container from "../../../components/Container";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 
-const YouthMembershipCardSection = () => {
+const AcademyMembershipCardSection = () => {
   const [plan, setPlan] = useState("monthly");
   const user = useAppSelector(selectCurrentUser);
   const { data: userData } = useClientQuery(user?._id);
@@ -114,9 +114,9 @@ const YouthMembershipCardSection = () => {
               <div className="grid grid-cols-2 gap-10 items-center py-5">
                 <div className="space-y-5 text-center">
                   <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
-                    Youth Training Membership
+                    Academy Membership
                   </h3>
-                  <p className="text-mde membershi-list text-primary">
+                  <p className="text-base text-primary">
                     <span className="text-2xl leading-6 font-bold me-1">
                       $ 160
                     </span>
@@ -179,13 +179,16 @@ const YouthMembershipCardSection = () => {
               <div className="grid grid-cols-2 gap-10 items-center py-5">
                 <div className="space-y-5 text-center">
                   <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
-                    Youth Training Membership
+                    Academy Membership
                   </h3>
-                  <p className="text-mde membershi-list text-primary">
+                  <p className="text-base text-primary">
                     <span className="text-2xl leading-6 font-bold me-1">
                       $ 480
                     </span>
                     /month
+                  </p>
+                  <p className="text-lg font-medium text-primary">
+                    1 month extra
                   </p>
                   {isCurrentPlan("youth training membership", plan) ? (
                     <button
@@ -238,7 +241,7 @@ const YouthMembershipCardSection = () => {
                     </li>
                     <li className="flex gap-2">
                       <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
-                      <p>Enjoy $40 off from regular training session rate.</p>
+                      <p>Enjoy 1 Month Free (a $160 Value).</p>
                     </li>
                   </ul>
                 </div>
@@ -247,9 +250,9 @@ const YouthMembershipCardSection = () => {
               <div className="grid grid-cols-2 gap-10 items-center py-5">
                 <div className="space-y-5 text-center">
                   <h3 className="2xl:text-3xl sm:text-[26px] text-2xl leading-9">
-                    Youth Training Membership
+                    Academy Membership
                   </h3>
-                  <p className="text-mde membershi-list text-primary">
+                  <p className="text-base membershi-list text-primary">
                     <span className="text-2xl leading-6 font-bold me-1">
                       $ 160
                     </span>
@@ -279,9 +282,6 @@ const YouthMembershipCardSection = () => {
                   )}
                 </div>
                 <div className="space-y-5">
-                  <h5 className="font-bold leading-4 text-lg">
-                    Benefits of membership
-                  </h5>
                   <ul className="text-sm membership-list list-none font-medium space-y-4">
                     <li className="flex gap-2">
                       <IoIosCheckmarkCircle className="size-5 text-[#0EBBBC]" />
@@ -362,4 +362,4 @@ const YouthMembershipCardSection = () => {
   );
 };
 
-export default YouthMembershipCardSection;
+export default AcademyMembershipCardSection;

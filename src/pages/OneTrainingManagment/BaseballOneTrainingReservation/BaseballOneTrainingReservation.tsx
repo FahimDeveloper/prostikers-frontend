@@ -34,6 +34,7 @@ import PrivacyPolicy from "../../../components/PrivacyPolicy";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import { useClientQuery } from "../../../redux/features/client/clientApi";
 
 const BaseballOneTrainingReservation = () => {
   dayjs.extend(utc);
@@ -45,6 +46,12 @@ const BaseballOneTrainingReservation = () => {
   const navigate = useNavigate();
   const [agree, setAgree] = useState(false);
   const user = useAppSelector(selectCurrentUser);
+  const [sessionCredit, setSessionCredit] = useState(0);
+  const { data: userData } = useClientQuery(user?._id, {
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+  });
+
   const createCartBooking = useAddToCartSlotMutation();
   const [voucherApplied, setVoucherApplied] = useState(false);
   const [use, { data, isLoading, isError, error, isSuccess }] =
@@ -77,9 +84,19 @@ const BaseballOneTrainingReservation = () => {
     { skip: appointment ? false : true }
   );
 
-  const price = selectSlots.reduce((total, selectSlots) => {
-    return total + selectSlots.slots.length * appointment?.results.price;
-  }, 0);
+  const totalSelectedSlots = selectSlots.reduce(
+    (total, d) => total + d.slots.length,
+    0
+  );
+
+  const freeSlots = Math.min(sessionCredit, totalSelectedSlots);
+  const paidSlots = totalSelectedSlots - freeSlots;
+
+  // const price = selectSlots.reduce((total, selectSlots) => {
+  //   return total + selectSlots.slots.length * appointment?.results.price;
+  // }, 0);
+
+  const price = paidSlots * appointment?.results?.price;
 
   let totalPrice = 0;
 
@@ -94,6 +111,17 @@ const BaseballOneTrainingReservation = () => {
   } else {
     totalPrice = price;
   }
+
+  useEffect(() => {
+    const hasMembership = userData?.results?.membership;
+    const packageName = userData?.results?.package_name;
+
+    if (hasMembership && packageName === "youth training membership") {
+      const sessionCreditValue =
+        userData?.results?.credit_balance?.session_credit;
+      setSessionCredit(Number(sessionCreditValue));
+    }
+  }, [userData]);
 
   const onFinish = () => {
     const bookings: any = [];
@@ -280,8 +308,11 @@ const BaseballOneTrainingReservation = () => {
                           {slot}
                         </div>
                         <div className="text-sm font-medium text-secondary">
-                          ${appointment?.results?.price}
+                          {index < freeSlots
+                            ? "1 Credit"
+                            : `$${appointment?.results?.price}`}
                         </div>
+
                         <MdDeleteOutline
                           className="size-5 cursor-pointer"
                           onClick={() => onDelete(dateSlots.date, slot)}
@@ -312,6 +343,15 @@ const BaseballOneTrainingReservation = () => {
                   )}
                 </div>
               )}
+              {totalSelectedSlots > 0 && (
+                <div className="flex justify-end gap-3 text-sm text-secondary">
+                  <p>Session Credits Used:</p>
+                  <p>{freeSlots}</p>
+                  <p>Remaining:</p>
+                  <p>{Math.max(sessionCredit - freeSlots, 0)}</p>
+                </div>
+              )}
+
               <div className="flex justify-end">
                 <div className="flex gap-2 items-center">
                   <p className="font-medium">Total Price:</p>

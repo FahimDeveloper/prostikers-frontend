@@ -17,10 +17,10 @@ const TrainingCard = ({ data }: { data: Tprop }) => {
           className="w-full h-60 object-cover rounded-2xl"
         />
         <div className="px-4 space-y-5">
-          <h3 className="text-neutral text-2xl font-bold leading-7 capitalize">
+          <h3 className="text-neutral text-2xl font-bold capitalize">
             {data?.title}
           </h3>
-          <ul className="ms-6 text-[#777777] space-y-2">
+          {/* <ul className="ms-6 text-[#777777] space-y-2">
             {data?.description?.map((des, index) => {
               return (
                 <li key={index} className="leading-6">
@@ -28,13 +28,11 @@ const TrainingCard = ({ data }: { data: Tprop }) => {
                 </li>
               );
             })}
-          </ul>
+          </ul> */}
         </div>
       </div>
-      <Link to={data?.link} className="block p-4">
-        <button className="btn btn-primary text-white text-base w-full">
-          See more
-        </button>
+      <Link to={data?.link} className="block">
+        <button className="primary-btn-2 w-full">See more</button>
       </Link>
     </div>
   );

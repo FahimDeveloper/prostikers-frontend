@@ -4,8 +4,8 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
-const YouthMembership = LazyLoad(
-  lazy(() => import("../pages/YouthMembership/YouthMembership"))
+const AcademyMembership = LazyLoad(
+  lazy(() => import("../pages/AcademyMembership/AcademyMembership"))
 );
 const CreditPayment = LazyLoad(
   lazy(() => import("../pages/CreditPayment/CreditPayment"))
@@ -773,8 +773,8 @@ export const router = createBrowserRouter([
         element: <Membership />,
       },
       {
-        path: "/youth-membership",
-        element: <YouthMembership />,
+        path: "/academy-membership",
+        element: <AcademyMembership />,
       },
       {
         path: "/shop",

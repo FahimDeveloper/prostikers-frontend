@@ -54,7 +54,10 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
     { skip: facility?.results?._id && lane !== undefined ? false : true }
   );
   const user = useSelector(selectCurrentUser);
-  const { data: userData } = useClientQuery(user?._id);
+  const { data: userData } = useClientQuery(user?._id, {
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+  });
   const [addons, setAddons] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [remainingCredit, setRemainingCredit] = useState(0);

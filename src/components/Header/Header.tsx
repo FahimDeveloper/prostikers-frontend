@@ -27,11 +27,11 @@ const Header = () => {
               {[
                 { path: "/", label: "Home" },
                 { path: "/rental-facility", label: "Rental Facility" },
+                { path: "/shop", label: "Shop" },
                 { path: "/membership", label: "Membership" },
-                { path: "/youth-membership", label: "Youth Membership" },
+                { path: "/academy-membership", label: "Academy Membership" },
                 { path: "/academy", label: "Academy" },
                 { path: "/programs/tournaments", label: "Tournaments" },
-                { path: "/shop", label: "Shop" },
                 // { path: "/blogs", label: "Blogs" },
               ].map((item) => (
                 <li key={item.path}>
@@ -88,11 +88,14 @@ const Header = () => {
                 <ul className="list-none flex flex-col gap-2 text-lg font-medium">
                   {[
                     { path: "/rental-facility", label: "Rental Facility" },
+                    { path: "/shop", label: "Shop" },
                     { path: "/membership", label: "Membership" },
-                    { path: "/youth-membership", label: "Youth Membership" },
+                    {
+                      path: "/academy-membership",
+                      label: "Academy Membership",
+                    },
                     { path: "/academy", label: "Academy" },
                     { path: "/programs/tournaments", label: "Tournaments" },
-                    { path: "/shop", label: "Shop" },
                     // { path: "/blogs", label: "Blogs" },
                   ].map((item) => (
                     <li

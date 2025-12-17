@@ -34,6 +34,7 @@ import PrivacyPolicy from "../../../components/PrivacyPolicy";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import { useClientQuery } from "../../../redux/features/client/clientApi";
 
 const HockeyOneTrainingReservation = () => {
   dayjs.extend(utc);
@@ -45,18 +46,24 @@ const HockeyOneTrainingReservation = () => {
   const navigate = useNavigate();
   const [agree, setAgree] = useState(false);
   const user = useAppSelector(selectCurrentUser);
-  const [voucherApplied, setVoucherApplied] = useState(false);
+  const [sessionCredit, setSessionCredit] = useState(0);
+  const { data: userData } = useClientQuery(user?._id, {
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+  });
+
   const createCartBooking = useAddToCartSlotMutation();
+  const [voucherApplied, setVoucherApplied] = useState(false);
   const [use, { data, isLoading, isError, error, isSuccess }] =
     useVoucherMutation();
   const [deleteSlot] = useDeleteBookingSlotMutation();
   const [selectSlots, setSelectSlots] = useState<any[]>([]);
-  const [messageApi, contextHolder] = message.useMessage();
-  const [form] = useForm();
   const [block, setBlock] = useState(false);
   const [process, setProcess] = useState(false);
   const blocker = useBlocker(block);
   const [payload, setPayload] = useState({});
+  const [messageApi, contextHolder] = message.useMessage();
+  const [form] = useForm();
   const { state } = useLocation();
   const location = state?.from?.pathname || "/";
   const { data: appointment } = useOneAppointmentQuery(id, {
@@ -77,9 +84,19 @@ const HockeyOneTrainingReservation = () => {
     { skip: appointment ? false : true }
   );
 
-  const price = selectSlots.reduce((total, selectSlots) => {
-    return total + selectSlots.slots.length * appointment?.results.price;
-  }, 0);
+  const totalSelectedSlots = selectSlots.reduce(
+    (total, d) => total + d.slots.length,
+    0
+  );
+
+  const freeSlots = Math.min(sessionCredit, totalSelectedSlots);
+  const paidSlots = totalSelectedSlots - freeSlots;
+
+  // const price = selectSlots.reduce((total, selectSlots) => {
+  //   return total + selectSlots.slots.length * appointment?.results.price;
+  // }, 0);
+
+  const price = paidSlots * appointment?.results?.price;
 
   let totalPrice = 0;
 
@@ -94,6 +111,17 @@ const HockeyOneTrainingReservation = () => {
   } else {
     totalPrice = price;
   }
+
+  useEffect(() => {
+    const hasMembership = userData?.results?.membership;
+    const packageName = userData?.results?.package_name;
+
+    if (hasMembership && packageName === "youth training membership") {
+      const sessionCreditValue =
+        userData?.results?.credit_balance?.session_credit;
+      setSessionCredit(Number(sessionCreditValue));
+    }
+  }, [userData]);
 
   const onFinish = () => {
     const bookings: any = [];
@@ -279,7 +307,9 @@ const HockeyOneTrainingReservation = () => {
                           {slot}
                         </div>
                         <div className="text-sm font-medium text-secondary">
-                          ${appointment?.results?.price}
+                          {index < freeSlots
+                            ? "1 Credit"
+                            : `$${appointment?.results?.price}`}
                         </div>
                         <MdDeleteOutline
                           className="size-5 cursor-pointer"
@@ -309,6 +339,14 @@ const HockeyOneTrainingReservation = () => {
                       -{data?.results.discount_value}%
                     </p>
                   )}
+                </div>
+              )}
+              {totalSelectedSlots > 0 && (
+                <div className="flex justify-end gap-3 text-sm text-secondary">
+                  <p>Session Credits Used:</p>
+                  <p>{freeSlots}</p>
+                  <p>Remaining:</p>
+                  <p>{Math.max(sessionCredit - freeSlots, 0)}</p>
                 </div>
               )}
               <div className="flex justify-end">

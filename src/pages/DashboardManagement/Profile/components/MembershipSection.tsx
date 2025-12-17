@@ -140,7 +140,10 @@ const MembershipSection = ({ data }: { data: IUser }) => {
           >
             <div className="space-y-2">
               <p className="text-2xl text-[#06494D] font-extrabold capitalize">
-                {data?.package_name} {renew && " - (Expired)"}
+                {data?.package_name == "youth training membership"
+                  ? "Academy Membership"
+                  : data?.package_name}{" "}
+                {renew && " - (Expired)"}
               </p>
               <div className="flex items-center gap-2">
                 <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
@@ -175,7 +178,17 @@ const MembershipSection = ({ data }: { data: IUser }) => {
               )}
             </div>
             <div className="flex gap-5">
-              {renew ? (
+              {data?.package_name == "youth training membership" ? (
+                renew ? (
+                  <Button onClick={memberhipRenew} type="default">
+                    Renew membership
+                  </Button>
+                ) : (
+                  <Link to="/academy-membership">
+                    <Button type="default">Upgrade Now</Button>
+                  </Link>
+                )
+              ) : renew ? (
                 <Button onClick={memberhipRenew} type="default">
                   Renew membership
                 </Button>
@@ -184,9 +197,13 @@ const MembershipSection = ({ data }: { data: IUser }) => {
                   <Button type="default">Upgrade Now</Button>
                 </Link>
               )}
+
               {/* {opneCancel && <MembershipCancellationModal />} */}
               {!isUnlimited && sessionCredit !== null && sessionCredit < 1 && (
-                <AddMoreCreditModal credits={data?.credit_balance!} />
+                <AddMoreCreditModal
+                  credits={data?.credit_balance!}
+                  package_name={data?.package_name!}
+                />
               )}
             </div>
           </div>
