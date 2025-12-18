@@ -9,9 +9,16 @@ const paymentApi = paymentApiSlice.injectEndpoints({
         body,
       }),
     }),
-    createSubscription: builder.mutation({
+    createGeneralSubscription: builder.mutation({
       query: (body) => ({
-        url: "/stripe-payment/create-subscription",
+        url: "/stripe-payment/create-general-subscription",
+        method: "POST",
+        body,
+      }),
+    }),
+    createAcademySubscription: builder.mutation({
+      query: (body) => ({
+        url: "/stripe-payment/create-academy-subscription",
         method: "POST",
         body,
       }),
@@ -77,7 +84,8 @@ const paymentApi = paymentApiSlice.injectEndpoints({
 
 export const {
   usePaymentIntentMutation,
-  useCreateSubscriptionMutation,
+  useCreateGeneralSubscriptionMutation,
+  useCreateAcademySubscriptionMutation,
   useAppoinmentPaymentsQuery,
   useBootcampPaymentsQuery,
   useClassPaymentsQuery,

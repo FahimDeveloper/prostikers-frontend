@@ -65,7 +65,7 @@ const GiftCardSection = () => {
               <li>$200 Gift Card for Only $160</li>
               <li>$500 Gift Card for Only $400</li>
             </ul>
-            <Link className="block" to={"/black-friday/gift-cards"}>
+            <Link className="block" to={"/holiday/gift-cards"}>
               <Button type="primary" size="large">
                 Shop Now
               </Button>

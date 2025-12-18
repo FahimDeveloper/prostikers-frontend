@@ -34,7 +34,6 @@ import PrivacyPolicy from "../../../components/PrivacyPolicy";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import { useClientQuery } from "../../../redux/features/client/clientApi";
 
 const HockeyOneTrainingReservation = () => {
   dayjs.extend(utc);
@@ -46,11 +45,11 @@ const HockeyOneTrainingReservation = () => {
   const navigate = useNavigate();
   const [agree, setAgree] = useState(false);
   const user = useAppSelector(selectCurrentUser);
-  const [sessionCredit, setSessionCredit] = useState(0);
-  const { data: userData } = useClientQuery(user?._id, {
-    refetchOnMountOrArgChange: true,
-    refetchOnFocus: true,
-  });
+  // const [sessionCredit, setSessionCredit] = useState(0);
+  // const { data: userData } = useClientQuery(user?._id, {
+  //   refetchOnMountOrArgChange: true,
+  //   refetchOnFocus: true,
+  // });
 
   const createCartBooking = useAddToCartSlotMutation();
   const [voucherApplied, setVoucherApplied] = useState(false);
@@ -84,19 +83,19 @@ const HockeyOneTrainingReservation = () => {
     { skip: appointment ? false : true }
   );
 
-  const totalSelectedSlots = selectSlots.reduce(
-    (total, d) => total + d.slots.length,
-    0
-  );
+  // const totalSelectedSlots = selectSlots.reduce(
+  //   (total, d) => total + d.slots.length,
+  //   0
+  // );
 
-  const freeSlots = Math.min(sessionCredit, totalSelectedSlots);
-  const paidSlots = totalSelectedSlots - freeSlots;
+  // const freeSlots = Math.min(sessionCredit, totalSelectedSlots);
+  // const paidSlots = totalSelectedSlots - freeSlots;
 
-  // const price = selectSlots.reduce((total, selectSlots) => {
-  //   return total + selectSlots.slots.length * appointment?.results.price;
-  // }, 0);
+  const price = selectSlots.reduce((total, selectSlots) => {
+    return total + selectSlots.slots.length * appointment?.results.price;
+  }, 0);
 
-  const price = paidSlots * appointment?.results?.price;
+  // const price = paidSlots * appointment?.results?.price;
 
   let totalPrice = 0;
 
@@ -112,16 +111,16 @@ const HockeyOneTrainingReservation = () => {
     totalPrice = price;
   }
 
-  useEffect(() => {
-    const hasMembership = userData?.results?.membership;
-    const packageName = userData?.results?.package_name;
+  // useEffect(() => {
+  //   const hasMembership = userData?.results?.membership;
+  //   const packageName = userData?.results?.package_name;
 
-    if (hasMembership && packageName === "youth training membership") {
-      const sessionCreditValue =
-        userData?.results?.credit_balance?.session_credit;
-      setSessionCredit(Number(sessionCreditValue));
-    }
-  }, [userData]);
+  //   if (hasMembership && packageName === "youth training membership") {
+  //     const sessionCreditValue =
+  //       userData?.results?.credit_balance?.session_credit;
+  //     setSessionCredit(Number(sessionCreditValue));
+  //   }
+  // }, [userData]);
 
   const onFinish = () => {
     const bookings: any = [];
@@ -307,10 +306,13 @@ const HockeyOneTrainingReservation = () => {
                           {slot}
                         </div>
                         <div className="text-sm font-medium text-secondary">
+                          {`$${appointment?.results?.price}`}
+                        </div>
+                        {/* <div className="text-sm font-medium text-secondary">
                           {index < freeSlots
                             ? "1 Credit"
                             : `$${appointment?.results?.price}`}
-                        </div>
+                        </div> */}
                         <MdDeleteOutline
                           className="size-5 cursor-pointer"
                           onClick={() => onDelete(dateSlots.date, slot)}
@@ -341,14 +343,14 @@ const HockeyOneTrainingReservation = () => {
                   )}
                 </div>
               )}
-              {totalSelectedSlots > 0 && (
+              {/* {totalSelectedSlots > 0 && (
                 <div className="flex justify-end gap-3 text-sm text-secondary">
                   <p>Session Credits Used:</p>
                   <p>{freeSlots}</p>
                   <p>Remaining:</p>
                   <p>{Math.max(sessionCredit - freeSlots, 0)}</p>
                 </div>
-              )}
+              )} */}
               <div className="flex justify-end">
                 <div className="flex gap-2 items-center">
                   <p className="font-medium">Total Price:</p>

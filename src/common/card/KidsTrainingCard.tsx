@@ -57,10 +57,7 @@ const KidsTrainingCard = ({
     }
   };
   useEffect(() => {
-    if (
-      user?.membership &&
-      user?.package_name === "youth training membership"
-    ) {
+    if (user?.academy_membership?.membership) {
       setIsMember(true);
     }
   }, [user]);

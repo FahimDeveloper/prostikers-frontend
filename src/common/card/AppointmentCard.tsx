@@ -11,7 +11,6 @@ import { Button } from "antd";
 import { CiBadgeDollar } from "react-icons/ci";
 import { FaUserGraduate } from "react-icons/fa";
 import { IoTimeOutline } from "react-icons/io5";
-import { useEffect, useState } from "react";
 
 const AppointmentCard = ({
   image,
@@ -20,7 +19,6 @@ const AppointmentCard = ({
   image: any;
   data: IAppointment;
 }) => {
-  const [isMember, setIsMember] = useState(false);
   const user = useSelector(selectCurrentUser);
   const location = useLocation();
   const token = useSelector(selectCurrentToken);
@@ -50,14 +48,6 @@ const AppointmentCard = ({
       });
     }
   };
-  useEffect(() => {
-    if (
-      user?.membership &&
-      user?.package_name === "youth training membership"
-    ) {
-      setIsMember(true);
-    }
-  }, [user]);
   return (
     <div className="space-y-3 p-2 border border-solid border-[#F8F8F8] rounded-md shadow-md">
       <div className="relative">
@@ -102,14 +92,6 @@ const AppointmentCard = ({
         <Button onClick={onClick} className="primary-btn-2 flex-1">
           Book now
         </Button>
-        {!isMember && (
-          <Button
-            onClick={() => navigate("/academy-membership")}
-            className="bg-secondary btn text-base text-white flex-1"
-          >
-            Membership
-          </Button>
-        )}
       </div>
     </div>
   );

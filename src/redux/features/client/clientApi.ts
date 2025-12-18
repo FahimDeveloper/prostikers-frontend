@@ -18,9 +18,17 @@ const clientApi = clientApiSlice.injectEndpoints({
       }),
       invalidatesTags: ["client"],
     }),
-    addCredit: builder.mutation({
+    addGeneralCredit: builder.mutation({
       query: ({ id, payload }) => ({
-        url: `/users/add-credit/${id}`,
+        url: `/users/add-general-credit/${id}`,
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: ["client"],
+    }),
+    addAcademyCredit: builder.mutation({
+      query: ({ id, payload }) => ({
+        url: `/users/add-academy-credit/${id}`,
         method: "POST",
         body: payload,
       }),
@@ -29,5 +37,9 @@ const clientApi = clientApiSlice.injectEndpoints({
   }),
 });
 
-export const { useClientQuery, useUpdateClientMutation, useAddCreditMutation } =
-  clientApi;
+export const {
+  useClientQuery,
+  useUpdateClientMutation,
+  useAddGeneralCreditMutation,
+  useAddAcademyCreditMutation,
+} = clientApi;

@@ -21,7 +21,7 @@ const AcademyTrainingSection = () => {
   ];
   const youthTrainingData = [
     {
-      title: "Kids Training",
+      title: "Youth Training",
       image: training3,
       link: "/programs/kids-training",
     },
@@ -61,7 +61,7 @@ const AcademyTrainingSection = () => {
         </div>
         <div className="space-y-5">
           <h3 className="text-center font-bold text-4xl leading-[48px]">
-            Youth Training
+            Academy Training
           </h3>
           <div className="grid md:grid-cols-2 gap-7">
             {youthTrainingData.map((training: any, index) => {

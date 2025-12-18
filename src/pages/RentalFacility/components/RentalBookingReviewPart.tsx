@@ -248,17 +248,14 @@ const RentalBookingReviewPart = ({
           : facility?.results?.price;
 
       if (peak) {
-        // --- Peak-hour free max 1 hour per day ---
         const alreadyUsedPeak = usedPeakHours[date] || 0;
         const remainingPeakFree = Math.max(1 - alreadyUsedPeak, 0);
         const freeThisSlot = Math.min(durationHr, remainingPeakFree);
         usedPeakHours[date] = alreadyUsedPeak + freeThisSlot;
 
         if (isUnlimited) {
-          // Unlimited users: 1 hour free
           usedCredit = freeThisSlot;
         } else {
-          // Non-unlimited: use credit up to remainingPeakFree
           const creditToUse = Math.min(remainingCredit, freeThisSlot);
           usedCredit = creditToUse;
           remainingCredit -= creditToUse;
@@ -267,7 +264,6 @@ const RentalBookingReviewPart = ({
         const leftoverHours = durationHr - usedCredit;
 
         if (leftoverHours > 0) {
-          // Extra peak-hour portion: charge $45 + modal
           price = 45;
           if (!allow) {
             modal.confirm({

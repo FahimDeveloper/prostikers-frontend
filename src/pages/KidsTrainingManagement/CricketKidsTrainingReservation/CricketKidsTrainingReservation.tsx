@@ -51,10 +51,9 @@ const CricketKidsTrainingReservation = () => {
   }
 
   useEffect(() => {
-    const hasMembership = userData?.results?.membership;
-    const packageName = userData?.results?.package_name;
+    const hasMembership = userData?.results?.academy_membership?.membership;
 
-    if (hasMembership && packageName === "youth training membership") {
+    if (hasMembership) {
       const sessionCreditValue =
         userData?.results?.credit_balance?.session_credit;
       setSessionCredit(Number(sessionCreditValue));

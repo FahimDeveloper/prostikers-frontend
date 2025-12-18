@@ -1,36 +1,35 @@
 import { Elements } from "@stripe/react-stripe-js";
-import Container from "./Container";
-import MembershipCheckoutForm from "./ui/form/MembershipCheckoutForm";
-import { loadStripe, Stripe } from "@stripe/stripe-js";
-import logo from "../assets/icons/logo.png";
-import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 import { FaSpinner } from "react-icons/fa";
-import { configKey } from "../config";
-import { useNavigate } from "react-router-dom";
-import { useCreateGeneralSubscriptionMutation } from "../redux/features/payment/paymentApi";
+import Container from "../../components/Container";
+import MembershipCheckoutForm from "../../components/ui/form/MembershipCheckoutForm";
+import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import { useCreateAcademySubscriptionMutation } from "../../redux/features/payment/paymentApi";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import logo from "../../assets/icons/logo.png";
+import { Stripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { configKey } from "../../config";
 
 const stripePromise: Promise<Stripe | null> = loadStripe(configKey.STRIPE_KEY);
 
-const MembershipCheckout = ({
-  amount,
-  email,
-  plan,
-  membership,
-}: {
-  amount: number;
-  email: any;
-  plan: string;
-  membership: any;
-}) => {
+const AcademyMembershipPayment = () => {
+  const { state } = useLocation();
+  const user = useSelector(selectCurrentUser);
   const [clientSecret, setClientSecret] = useState<string>("");
-  const [createSetupIntent, { isLoading: intentLoading }] =
-    useCreateGeneralSubscriptionMutation();
   const navigate = useNavigate();
+  const [createSetupIntent, { isLoading: intentLoading }] =
+    useCreateAcademySubscriptionMutation();
   useEffect(() => {
+    if (!state?.amount || !state?.data) {
+      navigate("/academy-membership");
+    }
+    const { package_name, plan } = state?.data;
     createSetupIntent({
-      email: email,
-      membership: membership.split(" ").join("_"),
+      email: user?.email,
+      membership: package_name.split(" ").join("_"),
       plan: plan,
     })
       .unwrap()
@@ -45,7 +44,9 @@ const MembershipCheckout = ({
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate("/membership/thank-you");
+          navigate("/membership/thank-you", {
+            state: { membershipType: "academy" },
+          });
         }
       })
       .catch((err: any) => {
@@ -56,17 +57,16 @@ const MembershipCheckout = ({
           confirmButtonColor: "#0ABAC3",
         });
       });
-  }, [email]);
-
+  }, [state]);
   return (
-    <>
+    <div>
       {intentLoading ? (
         <div className="h-96 flex justify-center items-center">
           <FaSpinner className="size-7 text-primary animate-spin" />
         </div>
       ) : (
-        <div className="flex flex-col gap-5 justify-center items-center">
-          <img src={logo} className="w-1/3" alt="logo" />
+        <div className="flex flex-col justify-center items-center pt-24">
+          <img src={logo} className="h-12" alt="logo" />
           {clientSecret && (
             <Elements
               stripe={stripePromise}
@@ -76,7 +76,7 @@ const MembershipCheckout = ({
             >
               <Container>
                 <MembershipCheckoutForm
-                  amount={amount}
+                  amount={state?.amount}
                   clientSecret={clientSecret}
                 />
               </Container>
@@ -84,8 +84,8 @@ const MembershipCheckout = ({
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
-export default MembershipCheckout;
+export default AcademyMembershipPayment;

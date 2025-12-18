@@ -74,18 +74,13 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
   }, [facility]);
 
   useEffect(() => {
-    const hasMembership = userData?.results?.membership;
-    const packageName = userData?.results?.package_name;
+    const hasMembership = userData?.results?.general_membership?.membership;
 
-    if (
-      hasMembership &&
-      (packageName === "individual pro" ||
-        packageName === "individual pro unlimited")
-    ) {
+    if (hasMembership) {
       const sessionCreditValue =
-        userData?.results?.credit_balance?.session_credit;
+        userData?.results?.general_membership?.credit_balance?.session_credit;
       const machineCreditValue =
-        userData?.results?.credit_balance?.machine_credit;
+        userData?.results?.general_membership?.credit_balance?.machine_credit;
 
       if (
         sessionCreditValue !== "unlimited" &&
@@ -300,7 +295,7 @@ const RentalBooking = ({ facilityCage }: { facilityCage: string }) => {
               isUnlimited={isUnlimited}
               setRemainingCredit={setRemainingCredit}
               setUsedCredit={setUsedCredit}
-              membershipStatus={userData?.results?.status}
+              membershipStatus={userData?.results?.general_membership?.status}
             />
             <FacilityPaymentModal
               bookings={bookings}

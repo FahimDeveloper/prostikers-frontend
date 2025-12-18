@@ -4,11 +4,24 @@ import LazyLoad from "../components/LazyLoad";
 import { lazy } from "react";
 import PrivetRoute from "./PrivetRoute";
 import ProtectAuthRoute from "./ProtectAuthRoute";
+import GeneralCreditPayment from "../pages/GeneralCreditPayment/GeneralCreditPayment";
+import AcademyCreditPayment from "../pages/AcademyCreditPayment/AcademyCreditPayment";
+
+const AcademyMembershipPayment = LazyLoad(
+  lazy(
+    () => import("../pages/AcademyMembershipPayment/AcademyMembershipPayment")
+  )
+);
+const GeneralMembershipPayment = LazyLoad(
+  lazy(
+    () => import("../pages/GeneralMembershipPayment/GeneralMembershipPayment")
+  )
+);
 const AcademyMembership = LazyLoad(
   lazy(() => import("../pages/AcademyMembership/AcademyMembership"))
 );
 const CreditPayment = LazyLoad(
-  lazy(() => import("../pages/CreditPayment/CreditPayment"))
+  lazy(() => import("../pages/GeneralCreditPayment/GeneralCreditPayment"))
 );
 // const BlackFridayMembership = LazyLoad(
 //   lazy(() => import("../pages/BlackFridayMembership/BlackFridayMembership"))
@@ -745,6 +758,38 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <MembershipPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/general-membership-credit-payment",
+        element: (
+          <PrivetRoute>
+            <GeneralCreditPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/academy-membership-credit-payment",
+        element: (
+          <PrivetRoute>
+            <AcademyCreditPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/general-membership-payment",
+        element: (
+          <PrivetRoute>
+            <GeneralMembershipPayment />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/academy-membership-payment",
+        element: (
+          <PrivetRoute>
+            <AcademyMembershipPayment />
           </PrivetRoute>
         ),
       },

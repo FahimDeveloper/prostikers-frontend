@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 import RouteBlocker from "../../utils/RouteBlocker";
-import { Spin } from "antd";
 
 const OneOnOneAppointmentPayment = () => {
   const { state } = useLocation();
@@ -37,8 +36,6 @@ const OneOnOneAppointmentPayment = () => {
   useEffect(() => {
     if (!state?.data) {
       navigate("/programs/one-training");
-    } else if (state?.amount == 0) {
-      onSubmit();
     }
   }, [state]);
 
@@ -69,7 +66,15 @@ const OneOnOneAppointmentPayment = () => {
 
   return (
     <div className="min-h-svh py-16 flex justify-center items-center">
-      {state?.amount &&
+      {state?.amount && state?.data && state?.location && (
+        <Checkout
+          setTransactionId={setTransactionId}
+          isLoading={isLoading}
+          amount={state?.amount}
+          onSubmit={onSubmit}
+        />
+      )}
+      {/* {state?.amount &&
       state?.amount !== 0 &&
       state?.data &&
       state?.location ? (
@@ -81,7 +86,7 @@ const OneOnOneAppointmentPayment = () => {
         />
       ) : (
         isLoading && <Spin size="large" />
-      )}
+      )} */}
       <RouteBlocker block={block} blocker={blocker} />
     </div>
   );

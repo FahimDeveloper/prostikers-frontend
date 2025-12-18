@@ -2,10 +2,11 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import { useClientQuery } from "../../../redux/features/client/clientApi";
 import ProfileSection from "./components/ProfileSection";
-import MembershipSection from "./components/MembershipSection";
 import { FaSpinner } from "react-icons/fa";
 
 import QrCodeView from "./components/QrCodeView";
+import GeneralMembershipSection from "./components/GeneralMembershipSection";
+import AcademyMembershipSection from "./components/AcademyMembershipSection";
 
 const Profile = () => {
   const user = useSelector(selectCurrentUser);
@@ -23,7 +24,14 @@ const Profile = () => {
         <>
           <ProfileSection data={userData?.results} />
           <QrCodeView email={userData?.results?.email} />
-          <MembershipSection data={userData?.results} />
+          <div className="grid grid-cols-2 gap-5">
+            <GeneralMembershipSection
+              data={userData?.results?.general_membership}
+            />
+            <AcademyMembershipSection
+              data={userData?.results?.academy_membership}
+            />
+          </div>
         </>
       )}
       {/* <PaymentSection /> */}

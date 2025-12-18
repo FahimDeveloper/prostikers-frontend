@@ -32,10 +32,11 @@ const MembershipCardSection = () => {
   // };
   const isCurrentPlan = (membershipName: string, planType: string) => {
     return (
-      userData?.results?.membership &&
-      userData?.results?.package_name?.toLowerCase() ===
+      userData?.results?.general_membership?.membership &&
+      userData?.results?.general_membership?.package_name?.toLowerCase() ===
         membershipName.toLowerCase() &&
-      userData?.results?.plan?.toLowerCase() === planType.toLowerCase()
+      userData?.results?.general_membership?.plan?.toLowerCase() ===
+        planType.toLowerCase()
     );
   };
   const handleChangePackage = (value: string) => {
@@ -192,8 +193,8 @@ const MembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
-                  ) : userData?.results?.status &&
-                    userData?.results?.status !== true ? (
+                  ) : userData?.results?.general_membership?.status &&
+                    userData?.results?.general_membership?.status !== true ? (
                     <button onClick={onBlock} className="membership-btn">
                       Choose Plan
                     </button>
@@ -263,8 +264,8 @@ const MembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
-                  ) : userData?.results?.status &&
-                    userData?.results?.status !== true ? (
+                  ) : userData?.results?.general_membership?.status &&
+                    userData?.results?.general_membership?.status !== true ? (
                     <button onClick={onBlock} className="membership-btn">
                       Choose Plan
                     </button>
@@ -351,8 +352,8 @@ const MembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
-                  ) : userData?.results?.status &&
-                    userData?.results?.status !== true ? (
+                  ) : userData?.results?.general_membership?.status &&
+                    userData?.results?.general_membership?.status !== true ? (
                     <button onClick={onBlock} className="membership-btn">
                       Choose Plan
                     </button>
@@ -440,8 +441,8 @@ const MembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
-                  ) : userData?.results?.status &&
-                    userData?.results?.status !== true ? (
+                  ) : userData?.results?.general_membership?.status &&
+                    userData?.results?.general_membership?.status !== true ? (
                     <button onClick={onBlock} className="membership-btn">
                       Choose Plan
                     </button>
@@ -571,8 +572,8 @@ const MembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
-                  ) : userData?.results?.status &&
-                    userData?.results?.status !== true ? (
+                  ) : userData?.results?.general_membership?.status &&
+                    userData?.results?.general_membership?.status !== true ? (
                     <button onClick={onBlock} className="membership-btn">
                       Choose Plan
                     </button>
@@ -642,8 +643,8 @@ const MembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
-                  ) : userData?.results?.status &&
-                    userData?.results?.status !== true ? (
+                  ) : userData?.results?.general_membership?.status &&
+                    userData?.results?.general_membership?.status !== true ? (
                     <button onClick={onBlock} className="membership-btn">
                       Choose Plan
                     </button>
@@ -722,8 +723,8 @@ const MembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
-                  ) : userData?.results?.status &&
-                    userData?.results?.status !== true ? (
+                  ) : userData?.results?.general_membership?.status &&
+                    userData?.results?.general_membership?.status !== true ? (
                     <button onClick={onBlock} className="membership-btn">
                       Choose Plan
                     </button>
@@ -797,8 +798,8 @@ const MembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
-                  ) : userData?.results?.status &&
-                    userData?.results?.status !== true ? (
+                  ) : userData?.results?.general_membership?.status &&
+                    userData?.results?.general_membership?.status !== true ? (
                     <button onClick={onBlock} className="membership-btn">
                       Choose Plan
                     </button>
@@ -949,8 +950,8 @@ const MembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
-                  ) : userData?.results?.status &&
-                    userData?.results?.status !== true ? (
+                  ) : userData?.results?.general_membership?.status &&
+                    userData?.results?.general_membership?.status !== true ? (
                     <button onClick={onBlock} className="membership-btn">
                       Choose Plan
                     </button>
@@ -1024,8 +1025,8 @@ const MembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
-                  ) : userData?.results?.status &&
-                    userData?.results?.status !== true ? (
+                  ) : userData?.results?.general_membership?.status &&
+                    userData?.results?.general_membership?.status !== true ? (
                     <button onClick={onBlock} className="membership-btn">
                       Choose Plan
                     </button>
@@ -1145,8 +1146,8 @@ const MembershipCardSection = () => {
                               >
                                 Current Plan
                               </button>
-                            ) : userData?.results?.status &&
-                              userData?.results?.status !== true ? (
+                            ) : userData?.results?.general_membership?.status &&
+                              userData?.results?.general_membership?.status !== true ? (
                               <button
                                 onClick={onBlock}
                                 className="membership-btn"
@@ -1260,8 +1261,8 @@ const MembershipCardSection = () => {
                           >
                             Current Plan
                           </button>
-                        ) : userData?.results?.status &&
-                          userData?.results?.status !== true ? (
+                        ) : userData?.results?.general_membership?.status &&
+                          userData?.results?.general_membership?.status !== true ? (
                           <button onClick={onBlock} className="membership-btn">
                             Choose Plan
                           </button>
@@ -1312,7 +1313,7 @@ const MembershipCardSection = () => {
         title="Membership Information"
         open={openInfoModal}
         onOk={() => {
-          navigate("/membership-payment", {
+          navigate("/general-membership-payment", {
             state: { data: membership, amount: membershipPrice },
           });
         }}

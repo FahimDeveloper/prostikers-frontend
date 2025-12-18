@@ -4,7 +4,8 @@ import banner2 from "../../../assets/images/home/banners/banner2.webp";
 import banner3 from "../../../assets/images/home/banners/banner3.webp";
 import banner4 from "../../../assets/images/home/banners/banner4.webp";
 import banner5 from "../../../assets/images/home/banners/banner5.webp";
-import promotion from "../../../assets/images/home/banners/promotion.webp";
+import promotion1 from "../../../assets/images/home/banners/gift.webp";
+import promotion2 from "../../../assets/images/home/banners/shop.webp";
 import { Link } from "react-router-dom";
 import { GoDotFill } from "react-icons/go";
 import { Button } from "antd";
@@ -12,14 +13,16 @@ const TopSliderSection = () => {
   const bannerData = [
     {
       promotion: true,
-      image: promotion,
-      link: "https://shop.prostrikers.com",
+      image: promotion1,
+      link: "/holiday/gift-cards",
+      outside: false,
     },
-    // {
-    //   promotion: true,
-    //   image: promotion2,
-    //   link: "https://shop.prostrikers.com",
-    // },
+    {
+      promotion: true,
+      image: promotion2,
+      link: "https://shop.prostrikers.com",
+      outside: true,
+    },
     {
       promotion: false,
       title: "Elevate Your Game to Major League Standards",
@@ -113,7 +116,7 @@ const TopSliderSection = () => {
             <div key={index}>
               <a
                 href={slide.promotion ? slide.link : undefined}
-                target={slide.promotion ? "_blank" : undefined}
+                target={slide.outside ? "_blank" : undefined}
                 rel={slide.promotion ? "noreferrer" : undefined}
                 className="w-full block"
               >

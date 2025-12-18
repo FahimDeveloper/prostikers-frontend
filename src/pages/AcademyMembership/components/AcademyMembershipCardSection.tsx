@@ -24,10 +24,11 @@ const AcademyMembershipCardSection = () => {
   const [openInfoModal, setOpenInfoModal] = useState(false);
   const isCurrentPlan = (membershipName: string, planType: string) => {
     return (
-      userData?.results?.membership &&
-      userData?.results?.package_name?.toLowerCase() ===
+      userData?.results?.academy_membership?.membership &&
+      userData?.results?.academy_membership?.package_name?.toLowerCase() ===
         membershipName.toLowerCase() &&
-      userData?.results?.plan?.toLowerCase() === planType.toLowerCase()
+      userData?.results?.academy_membership?.plan?.toLowerCase() ===
+        planType.toLowerCase()
     );
   };
   const handleChangePackage = (value: string) => {
@@ -129,8 +130,8 @@ const AcademyMembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
-                  ) : userData?.results?.status &&
-                    userData?.results?.status !== true ? (
+                  ) : userData?.results?.academy_membership?.status &&
+                    userData?.results?.academy_membership?.status !== true ? (
                     <button onClick={onBlock} className="membership-btn">
                       Choose Plan
                     </button>
@@ -197,8 +198,8 @@ const AcademyMembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
-                  ) : userData?.results?.status &&
-                    userData?.results?.status !== true ? (
+                  ) : userData?.results?.academy_membership?.status &&
+                    userData?.results?.academy_membership?.status !== true ? (
                     <button onClick={onBlock} className="membership-btn">
                       Choose Plan
                     </button>
@@ -265,8 +266,8 @@ const AcademyMembershipCardSection = () => {
                     >
                       Current Plan
                     </button>
-                  ) : userData?.results?.status &&
-                    userData?.results?.status !== true ? (
+                  ) : userData?.results?.academy_membership?.status &&
+                    userData?.results?.academy_membership?.status !== true ? (
                     <button onClick={onBlock} className="membership-btn">
                       Choose Plan
                     </button>
@@ -319,7 +320,7 @@ const AcademyMembershipCardSection = () => {
         title="Membership Information"
         open={openInfoModal}
         onOk={() => {
-          navigate("/membership-payment", {
+          navigate("/academy-membership-payment", {
             state: { data: membership, amount: membershipPrice },
           });
         }}

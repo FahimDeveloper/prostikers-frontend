@@ -4,15 +4,15 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/features/auth/authSlice";
-import { useAddCreditMutation } from "../../redux/features/client/clientApi";
+import { useAddGeneralCreditMutation } from "../../redux/features/client/clientApi";
 
-const CreditPayment = () => {
+const GeneralCreditPayment = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const user = useSelector(selectCurrentUser);
   const [transactionId, setTransactionId] = useState("");
   const [addCredit, { data, isError, isLoading, isSuccess, error }] =
-    useAddCreditMutation();
+    useAddGeneralCreditMutation();
 
   useEffect(() => {
     if (!state?.amount || !state?.data) {
@@ -65,4 +65,4 @@ const CreditPayment = () => {
   );
 };
 
-export default CreditPayment;
+export default GeneralCreditPayment;

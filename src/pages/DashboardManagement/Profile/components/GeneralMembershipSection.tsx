@@ -1,5 +1,5 @@
 import moment from "moment";
-import { IUser } from "../../../../types/user.types";
+import { ICreditGeneral } from "../../../../types/user.types";
 import { Alert, Button, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,9 +8,9 @@ import { MdOutlineInfo } from "react-icons/md";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import AddMoreCreditModal from "../../../../components/ui/modal/AddMoreCreditModal";
+import AddMoreCreditModal from "../../../../components/ui/modal/AddMoreGeneralMembershipCreditModal";
 
-const MembershipSection = ({ data }: { data: IUser }) => {
+const GeneralMembershipSection = ({ data }: { data: ICreditGeneral }) => {
   dayjs.extend(utc);
   dayjs.extend(timezone);
   const [renew, setRenew] = useState(false);
@@ -124,7 +124,7 @@ const MembershipSection = ({ data }: { data: IUser }) => {
       <div id="membership" className="space-y-5">
         <div className="flex items-center gap-3">
           <h3 className="text-xl text-[#006166] font-medium">
-            Membership Details
+            General Membership Details
           </h3>
           <CancellationPolicy>
             <MdOutlineInfo className="size-5 text-sky-400 cursor-pointer" />
@@ -140,10 +140,7 @@ const MembershipSection = ({ data }: { data: IUser }) => {
           >
             <div className="space-y-2">
               <p className="text-2xl text-[#06494D] font-extrabold capitalize">
-                {data?.package_name == "youth training membership"
-                  ? "Academy Membership"
-                  : data?.package_name}{" "}
-                {renew && " - (Expired)"}
+                {data?.package_name} {renew && " - (Expired)"}
               </p>
               <div className="flex items-center gap-2">
                 <p className="capitalize text-sm font-medium text-[#456D6D] tracking-widest">
@@ -177,18 +174,8 @@ const MembershipSection = ({ data }: { data: IUser }) => {
                 </div>
               )}
             </div>
-            <div className="flex gap-5">
-              {data?.package_name == "youth training membership" ? (
-                renew ? (
-                  <Button onClick={memberhipRenew} type="default">
-                    Renew membership
-                  </Button>
-                ) : (
-                  <Link to="/academy-membership">
-                    <Button type="default">Upgrade Now</Button>
-                  </Link>
-                )
-              ) : renew ? (
+            <div className="flex flex-col gap-3">
+              {renew ? (
                 <Button onClick={memberhipRenew} type="default">
                   Renew membership
                 </Button>
@@ -200,10 +187,7 @@ const MembershipSection = ({ data }: { data: IUser }) => {
 
               {/* {opneCancel && <MembershipCancellationModal />} */}
               {!isUnlimited && sessionCredit !== null && sessionCredit < 1 && (
-                <AddMoreCreditModal
-                  credits={data?.credit_balance!}
-                  package_name={data?.package_name!}
-                />
+                <AddMoreCreditModal credits={data?.credit_balance!} />
               )}
             </div>
           </div>
@@ -244,4 +228,4 @@ const MembershipSection = ({ data }: { data: IUser }) => {
   );
 };
 
-export default MembershipSection;
+export default GeneralMembershipSection;
