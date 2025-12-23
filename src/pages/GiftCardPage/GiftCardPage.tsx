@@ -76,7 +76,7 @@ const GiftCard = () => {
     values.gift_by = values.owner_email;
     delete values.recipient_email;
     delete values.owner_email;
-    navigate("/black-friday/gift-cards/payment", {
+    navigate("/holiday/gift-cards/payment", {
       state: { data: values, amount: selectedPrice * 0.8 },
     });
   };
